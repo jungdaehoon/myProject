@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HanaM.ttf">
+            <string>HanaM</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatePickerView" customModule="cereal" customModuleProvider="target">
+            <connections>
+                <outlet property="pickerView" destination="wkp-Fm-Hty" id="fqN-Kl-iBS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" alpha="0.30000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-T2-Q9s" userLabel="BG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="81t-pd-Zzf">
+                    <rect key="frame" x="0.0" y="401" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyY-Th-wbj">
+                            <rect key="frame" x="10" y="0.0" width="355" height="50"/>
+                            <fontDescription key="fontDescription" name="HanaM" family="Hana" pointSize="16"/>
+                            <state key="normal" title="확인">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="BFT-HM-Itk"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="47x-kZ-Yy3"/>
+                        <constraint firstAttribute="bottom" secondItem="fyY-Th-wbj" secondAttribute="bottom" id="cu2-pb-3tv"/>
+                        <constraint firstItem="fyY-Th-wbj" firstAttribute="top" secondItem="81t-pd-Zzf" secondAttribute="top" id="tuP-e1-3yT"/>
+                        <constraint firstAttribute="trailing" secondItem="fyY-Th-wbj" secondAttribute="trailing" constant="10" id="z5O-kr-L0k"/>
+                        <constraint firstItem="fyY-Th-wbj" firstAttribute="leading" secondItem="81t-pd-Zzf" secondAttribute="leading" constant="10" id="zez-cG-52W"/>
+                    </constraints>
+                </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkp-Fm-Hty" userLabel="Picker View" customClass="PickerView" customModule="cereal" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </pickerView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="rd4-T2-Q9s" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Hre-nv-ke4"/>
+                <constraint firstAttribute="bottom" secondItem="rd4-T2-Q9s" secondAttribute="bottom" id="K4U-Iq-DcF"/>
+                <constraint firstItem="rd4-T2-Q9s" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PZu-DJ-WKg"/>
+                <constraint firstItem="81t-pd-Zzf" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Rhk-Og-1PV"/>
+                <constraint firstItem="rd4-T2-Q9s" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="TPQ-UD-568"/>
+                <constraint firstItem="wkp-Fm-Hty" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="WEm-E1-Vng"/>
+                <constraint firstItem="wkp-Fm-Hty" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="j3h-Fb-PEK"/>
+                <constraint firstAttribute="bottom" secondItem="wkp-Fm-Hty" secondAttribute="bottom" id="mlq-Xi-AjJ"/>
+                <constraint firstItem="wkp-Fm-Hty" firstAttribute="top" secondItem="81t-pd-Zzf" secondAttribute="bottom" id="o8w-JH-OPz"/>
+                <constraint firstItem="81t-pd-Zzf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xXb-ca-6Lm"/>
+            </constraints>
+            <point key="canvasLocation" x="69" y="20"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="wkp-Fm-Hty">
+            <size key="intrinsicContentSize" width="320" height="216"/>
+        </designable>
+    </designables>
+</document>

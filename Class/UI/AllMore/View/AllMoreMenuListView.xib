@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="AllMoreMenuListView" customModule="OkPay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lb8-m7-Gfr" userLabel="Menu View">
+                    <rect key="frame" x="20" y="16" width="335" height="119"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me2-Hf-exj" userLabel="Title">
+                            <rect key="frame" x="0.0" y="8" width="335" height="47"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현금영수증" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYq-w4-FXb">
+                                    <rect key="frame" x="24" y="16" width="69.5" height="19.5"/>
+                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="wYq-w4-FXb" firstAttribute="leading" secondItem="Me2-Hf-exj" secondAttribute="leading" constant="24" id="3jK-Gh-JWG"/>
+                                <constraint firstItem="wYq-w4-FXb" firstAttribute="top" secondItem="Me2-Hf-exj" secondAttribute="top" constant="16" id="9VP-Fe-ZY2"/>
+                                <constraint firstAttribute="height" constant="47" id="iQu-gM-IeU"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bOe-hW-y9j">
+                            <rect key="frame" x="0.0" y="55" width="335" height="56"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="aZp-My-N6Q"/>
+                            </constraints>
+                            <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="bOe-hW-y9j" firstAttribute="leading" secondItem="Lb8-m7-Gfr" secondAttribute="leading" id="AA5-eR-Bra"/>
+                        <constraint firstItem="Me2-Hf-exj" firstAttribute="leading" secondItem="Lb8-m7-Gfr" secondAttribute="leading" id="Mmg-Yv-dyL"/>
+                        <constraint firstItem="bOe-hW-y9j" firstAttribute="top" secondItem="Me2-Hf-exj" secondAttribute="bottom" id="Ual-6W-KQ0"/>
+                        <constraint firstAttribute="trailing" secondItem="Me2-Hf-exj" secondAttribute="trailing" id="ZQm-l6-fe7"/>
+                        <constraint firstAttribute="bottom" secondItem="bOe-hW-y9j" secondAttribute="bottom" constant="8" id="e8c-SQ-Qc2"/>
+                        <constraint firstAttribute="trailing" secondItem="bOe-hW-y9j" secondAttribute="trailing" id="j7p-w7-Vl9"/>
+                        <constraint firstItem="Me2-Hf-exj" firstAttribute="top" secondItem="Lb8-m7-Gfr" secondAttribute="top" constant="8" id="kQ0-AS-oZ0"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Lb8-m7-Gfr" secondAttribute="bottom" id="1cl-Yk-6IW"/>
+                <constraint firstAttribute="height" constant="135" id="KSO-Mi-V89"/>
+                <constraint firstItem="Lb8-m7-Gfr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="QYc-ZD-e8q"/>
+                <constraint firstItem="Lb8-m7-Gfr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ya2-cB-Ub4"/>
+                <constraint firstAttribute="trailing" secondItem="Lb8-m7-Gfr" secondAttribute="trailing" constant="20" id="tij-wb-C4q"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="menuListViewHeight" destination="KSO-Mi-V89" id="I4j-k9-iaY"/>
+                <outlet property="tableView" destination="bOe-hW-y9j" id="Cgp-Mn-TsH"/>
+                <outlet property="tableViewHeight" destination="aZp-My-N6Q" id="nLj-65-yqz"/>
+                <outlet property="titleName" destination="wYq-w4-FXb" id="hax-wF-QnE"/>
+                <outlet property="titleViewHeight" destination="iQu-gM-IeU" id="jNF-ob-uac"/>
+            </connections>
+            <point key="canvasLocation" x="140" y="20"/>
+        </view>
+    </objects>
+</document>

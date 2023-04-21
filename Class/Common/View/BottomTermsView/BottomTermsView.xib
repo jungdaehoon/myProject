@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BottomTermsView" customModule="cereal" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="UgB-Uz-F43" id="iXQ-Gs-oni"/>
+                <outlet property="tableViewHeight" destination="VLv-r0-HFv" id="vpj-oA-aJd"/>
+                <outlet property="titleText" destination="piY-Jy-bIH" id="SWd-iX-5DK"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gt2-BB-1QE">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="d3P-P6-wov"/>
+                    </connections>
+                </button>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hp-Rb-cYM" userLabel="Bottom View">
+                    <rect key="frame" x="0.0" y="450" width="414" height="286"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pG0-Kb-qy5" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="16" width="414" height="56"/>
+                            <subviews>
+                                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHT-dC-Ejb">
+                                    <rect key="frame" x="362" y="8" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="AeW-r2-dZU"/>
+                                        <constraint firstAttribute="height" constant="40" id="KX8-6J-zfn"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="Intro_header_close"/>
+                                    <connections>
+                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="hdh-pU-usK"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="cHT-dC-Ejb" secondAttribute="trailing" constant="12" id="SLG-Dy-3Yc"/>
+                                <constraint firstAttribute="height" constant="56" id="sSO-R3-iDE"/>
+                                <constraint firstItem="cHT-dC-Ejb" firstAttribute="centerY" secondItem="pG0-Kb-qy5" secondAttribute="centerY" id="zrk-mC-l59"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piY-Jy-bIH">
+                            <rect key="frame" x="24" y="72" width="366" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="dgE-ja-Ilz"/>
+                            </constraints>
+                            <string key="text">도전! 만보GO 서비스를 이용하실려면
+이용약관에 동의해주세요</string>
+                            <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="20"/>
+                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UgB-Uz-F43">
+                            <rect key="frame" x="24" y="132" width="366" height="16"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="VLv-r0-HFv"/>
+                            </constraints>
+                            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="hdx-S4-NFD"/>
+                                <outlet property="delegate" destination="-1" id="RZE-Fz-BT4"/>
+                            </connections>
+                        </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukx-Cu-x4k">
+                            <rect key="frame" x="20" y="196" width="374" height="56"/>
+                            <subviews>
+                                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8X-uy-ala">
+                                    <rect key="frame" x="0.0" y="0.0" width="110" height="56"/>
+                                    <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="110" id="U3Z-Gf-URE"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="취소">
+                                        <color key="titleColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="16"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="Qzm-lK-jGb"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LI9-8Y-uh4">
+                                    <rect key="frame" x="118" y="0.0" width="256" height="56"/>
+                                    <color key="backgroundColor" red="1" green="0.32549019610000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="동의">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="16"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="FpI-1P-llY"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="LI9-8Y-uh4" firstAttribute="top" secondItem="ukx-Cu-x4k" secondAttribute="top" id="B27-35-aso"/>
+                                <constraint firstItem="w8X-uy-ala" firstAttribute="leading" secondItem="ukx-Cu-x4k" secondAttribute="leading" id="GE4-RW-nEy"/>
+                                <constraint firstAttribute="bottom" secondItem="LI9-8Y-uh4" secondAttribute="bottom" id="MBm-y8-5yb"/>
+                                <constraint firstAttribute="height" constant="56" id="Mpc-Bs-ykq"/>
+                                <constraint firstAttribute="trailing" secondItem="LI9-8Y-uh4" secondAttribute="trailing" id="Ogb-in-u83"/>
+                                <constraint firstAttribute="bottom" secondItem="w8X-uy-ala" secondAttribute="bottom" id="gkd-x2-8Tv"/>
+                                <constraint firstItem="w8X-uy-ala" firstAttribute="top" secondItem="ukx-Cu-x4k" secondAttribute="top" id="x7u-de-Gos"/>
+                                <constraint firstItem="LI9-8Y-uh4" firstAttribute="leading" secondItem="w8X-uy-ala" secondAttribute="trailing" constant="8" id="yhU-Ff-Qw7"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="piY-Jy-bIH" firstAttribute="leading" secondItem="5hp-Rb-cYM" secondAttribute="leading" constant="24" id="0oj-l3-DmN"/>
+                        <constraint firstItem="piY-Jy-bIH" firstAttribute="top" secondItem="pG0-Kb-qy5" secondAttribute="bottom" id="1gd-bX-x2i"/>
+                        <constraint firstItem="ukx-Cu-x4k" firstAttribute="leading" secondItem="5hp-Rb-cYM" secondAttribute="leading" constant="20" id="3rk-kI-lpg"/>
+                        <constraint firstItem="pG0-Kb-qy5" firstAttribute="top" secondItem="5hp-Rb-cYM" secondAttribute="top" constant="16" id="4td-Dg-OSW"/>
+                        <constraint firstAttribute="trailing" secondItem="ukx-Cu-x4k" secondAttribute="trailing" constant="20" id="5F9-AV-Pn6"/>
+                        <constraint firstAttribute="height" priority="250" constant="334" id="9Mv-0W-iSb"/>
+                        <constraint firstAttribute="bottom" secondItem="ukx-Cu-x4k" secondAttribute="bottom" constant="34" id="9Ru-AD-kcg"/>
+                        <constraint firstItem="ukx-Cu-x4k" firstAttribute="top" secondItem="UgB-Uz-F43" secondAttribute="bottom" constant="48" id="Yhm-Jm-Ei5"/>
+                        <constraint firstItem="UgB-Uz-F43" firstAttribute="top" secondItem="piY-Jy-bIH" secondAttribute="bottom" id="ZNm-00-Nh3"/>
+                        <constraint firstAttribute="trailing" secondItem="UgB-Uz-F43" secondAttribute="trailing" constant="24" id="dfN-wy-CKd"/>
+                        <constraint firstItem="UgB-Uz-F43" firstAttribute="leading" secondItem="5hp-Rb-cYM" secondAttribute="leading" constant="24" id="nr4-5K-iYN"/>
+                        <constraint firstItem="pG0-Kb-qy5" firstAttribute="leading" secondItem="5hp-Rb-cYM" secondAttribute="leading" id="qNF-T0-sok"/>
+                        <constraint firstAttribute="trailing" secondItem="piY-Jy-bIH" secondAttribute="trailing" constant="24" id="s2t-sq-uIo"/>
+                        <constraint firstAttribute="trailing" secondItem="pG0-Kb-qy5" secondAttribute="trailing" id="xiA-K8-wjb"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5hp-Rb-cYM" secondAttribute="trailing" id="2EB-uL-XFI"/>
+                <constraint firstAttribute="trailing" secondItem="gt2-BB-1QE" secondAttribute="trailing" id="BoP-eL-QQM"/>
+                <constraint firstItem="gt2-BB-1QE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EUf-Wi-Z09"/>
+                <constraint firstAttribute="bottom" secondItem="5hp-Rb-cYM" secondAttribute="bottom" id="Vdk-HR-YHA"/>
+                <constraint firstAttribute="bottom" secondItem="gt2-BB-1QE" secondAttribute="bottom" id="Vl7-7h-050"/>
+                <constraint firstItem="gt2-BB-1QE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hKR-UW-Gao"/>
+                <constraint firstItem="5hp-Rb-cYM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mYU-eS-oEd"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="19.565217391304348"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Intro_header_close" width="40" height="40"/>
+    </resources>
+</document>

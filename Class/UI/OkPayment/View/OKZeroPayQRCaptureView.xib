@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OKZeroPayQRCaptureView" customModule="cereal" customModuleProvider="target">
+            <connections>
+                <outlet property="previewView" destination="rKl-Or-60Z" id="f82-RI-9tc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1R-Cw-Hqp" userLabel="Title Bar">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                    <subviews>
+                        <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k4T-PB-nT9">
+                            <rect key="frame" x="0.0" y="8" width="60" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="D8Z-SD-w5M"/>
+                                <constraint firstAttribute="height" constant="40" id="UxY-aX-huY"/>
+                            </constraints>
+                            <color key="tintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="titleBar_back"/>
+                            <connections>
+                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="o2h-oS-fgM"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 결제하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2L-39-I4M">
+                            <rect key="frame" x="155.5" y="18" width="64" height="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="X2L-39-I4M" firstAttribute="centerX" secondItem="g1R-Cw-Hqp" secondAttribute="centerX" id="TG5-2r-7tq"/>
+                        <constraint firstItem="X2L-39-I4M" firstAttribute="centerY" secondItem="g1R-Cw-Hqp" secondAttribute="centerY" id="a2y-KE-AED"/>
+                        <constraint firstItem="k4T-PB-nT9" firstAttribute="leading" secondItem="g1R-Cw-Hqp" secondAttribute="leading" id="aXh-9d-4Kx"/>
+                        <constraint firstItem="k4T-PB-nT9" firstAttribute="centerY" secondItem="g1R-Cw-Hqp" secondAttribute="centerY" id="nH1-eg-ktb"/>
+                        <constraint firstAttribute="height" constant="56" id="s6R-mR-siu"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKl-Or-60Z" userLabel="Preview View">
+                    <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="g1R-Cw-Hqp" secondAttribute="trailing" id="EE6-af-K51"/>
+                <constraint firstItem="g1R-Cw-Hqp" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Pn8-BD-uzX"/>
+                <constraint firstAttribute="trailing" secondItem="rKl-Or-60Z" secondAttribute="trailing" id="Rey-tP-KvD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rKl-Or-60Z" secondAttribute="bottom" id="eRW-QE-jh5"/>
+                <constraint firstItem="g1R-Cw-Hqp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jMw-OE-qaK"/>
+                <constraint firstItem="rKl-Or-60Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="k0s-bj-L9U"/>
+                <constraint firstItem="rKl-Or-60Z" firstAttribute="top" secondItem="g1R-Cw-Hqp" secondAttribute="bottom" id="n8N-9G-b70"/>
+            </constraints>
+            <point key="canvasLocation" x="-48.799999999999997" y="19.340329835082461"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="titleBar_back" width="40" height="40"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

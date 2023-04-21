@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Bold.otf">
+            <string>Pretendard-Bold</string>
+        </array>
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+        <array key="Spoqa Han Sans Bold.ttf">
+            <string>SpoqaHanSans-Bold</string>
+        </array>
+        <array key="Spoqa Han Sans Regular.ttf">
+            <string>SpoqaHanSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServiceErrorPop" customModule="cereal" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시스템 점검중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chb-2g-90M">
+                    <rect key="frame" x="159.66666666666666" y="159" width="108.99999999999997" height="24"/>
+                    <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="20"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="점검 기간 동안 올리고 서비스 이용이 불가하오니, 양해 부탁드립니다." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGV-So-mJn">
+                    <rect key="frame" x="18" y="211" width="392" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="JiM-9O-BJR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- 이용제한 서비스 : 모든 올리고 서비스" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfk-xL-KJL">
+                    <rect key="frame" x="18" y="276" width="392" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="cSn-89-z7C"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSans-Regular" family="SpoqaHanSans" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- 이용제한 기간 : 현 시간 ~ 추후 안내시 까지" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eq3-Yk-aoI">
+                    <rect key="frame" x="18" y="305" width="392" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="Aod-Od-dZd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSans-Regular" family="SpoqaHanSans" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wae-Zx-r04">
+                    <rect key="frame" x="18" y="329" width="392" height="102"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="102" id="F9I-HB-c9K"/>
+                    </constraints>
+                    <string key="text">점검 기간에도 고객님의 정보는 안전하게 보호되며,
+보다 좋은 서비스를 위해 노력하는 올리고가 되겠습니다. 감사합니다.</string>
+                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9t-dg-yaX">
+                    <rect key="frame" x="199" y="441" width="30" height="208"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSans-Bold" family="SpoqaHanSans" pointSize="15"/>
+                    <state key="normal" title="닫기">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="d4o-Oz-8k9"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error img" translatesAutoresizingMaskIntoConstraints="NO" id="9v5-gs-YBB">
+                    <rect key="frame" x="92.666666666666686" y="653" width="243" height="239"/>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="9v5-gs-YBB" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="2iT-6E-tSL"/>
+                <constraint firstAttribute="trailing" secondItem="eq3-Yk-aoI" secondAttribute="trailing" constant="18" id="5U5-9T-pDU"/>
+                <constraint firstItem="Chb-2g-90M" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6aZ-ab-Qkp"/>
+                <constraint firstItem="eq3-Yk-aoI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="8yM-BT-Ug6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qGV-So-mJn" secondAttribute="trailing" constant="18" id="A6v-PF-AcC"/>
+                <constraint firstItem="qGV-So-mJn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AUH-AE-eWl"/>
+                <constraint firstItem="tfk-xL-KJL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="Bed-2U-d15"/>
+                <constraint firstItem="qGV-So-mJn" firstAttribute="top" secondItem="Chb-2g-90M" secondAttribute="bottom" constant="28" id="FFS-8l-8qo"/>
+                <constraint firstItem="tfk-xL-KJL" firstAttribute="top" secondItem="qGV-So-mJn" secondAttribute="bottom" constant="15" id="HQN-rr-zum"/>
+                <constraint firstItem="tfk-xL-KJL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Je7-5V-bEF"/>
+                <constraint firstItem="qGV-So-mJn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="KS5-OF-SER"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="tfk-xL-KJL" secondAttribute="trailing" constant="18" id="Npk-XB-TlC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wae-Zx-r04" secondAttribute="trailing" constant="18" id="VNj-aP-H1P"/>
+                <constraint firstItem="9v5-gs-YBB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Yx1-ch-fGm"/>
+                <constraint firstItem="wae-Zx-r04" firstAttribute="top" secondItem="eq3-Yk-aoI" secondAttribute="bottom" id="asK-GH-rgL"/>
+                <constraint firstItem="9v5-gs-YBB" firstAttribute="top" secondItem="s9t-dg-yaX" secondAttribute="bottom" constant="4" id="bdQ-Fy-94r"/>
+                <constraint firstItem="wae-Zx-r04" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dIv-ed-mD2"/>
+                <constraint firstItem="Chb-2g-90M" firstAttribute="top" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="112" id="dev-vL-31Z"/>
+                <constraint firstItem="s9t-dg-yaX" firstAttribute="top" secondItem="wae-Zx-r04" secondAttribute="bottom" constant="10" id="fsx-uY-bud"/>
+                <constraint firstItem="eq3-Yk-aoI" firstAttribute="top" secondItem="tfk-xL-KJL" secondAttribute="bottom" constant="5" id="kGI-jg-7U8"/>
+                <constraint firstItem="wae-Zx-r04" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="p2d-Qp-goh"/>
+                <constraint firstItem="s9t-dg-yaX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xYk-SE-RUo"/>
+            </constraints>
+            <point key="canvasLocation" x="140" y="19.340329835082461"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="error img" width="243" height="239"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

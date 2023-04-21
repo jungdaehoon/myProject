@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Bold.otf">
+            <string>Pretendard-Bold</string>
+        </array>
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HttpErrorPop" customModule="cereal" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="통신상태가 원활하지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFs-05-9u2">
+                    <rect key="frame" x="67.5" y="112" width="240" height="24"/>
+                    <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="20"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앱 종료 후 다시 실행시켜 주십시오." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsD-pk-ZVS">
+                    <rect key="frame" x="78.5" y="168" width="218" height="19.5"/>
+                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1a-3D-ga7">
+                    <rect key="frame" x="129.5" y="215.5" width="116" height="30"/>
+                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="15"/>
+                    <state key="normal" title=" 이전페이지로 가기 ">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error img" translatesAutoresizingMaskIntoConstraints="NO" id="Cde-zs-gbZ">
+                    <rect key="frame" x="66" y="328" width="243" height="239"/>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="TFs-05-9u2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="112" id="5jY-5n-VNm"/>
+                <constraint firstItem="OsD-pk-ZVS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6ua-6c-e9H"/>
+                <constraint firstItem="I1a-3D-ga7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="EEO-Pu-pRJ"/>
+                <constraint firstItem="OsD-pk-ZVS" firstAttribute="top" secondItem="TFs-05-9u2" secondAttribute="bottom" constant="32" id="JWY-nd-a6i"/>
+                <constraint firstItem="Cde-zs-gbZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Sz3-GI-GFo"/>
+                <constraint firstItem="TFs-05-9u2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VNF-G0-nej"/>
+                <constraint firstItem="TFs-05-9u2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bIb-Rx-t7Q"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Cde-zs-gbZ" secondAttribute="bottom" constant="100" id="oSD-kg-sKa"/>
+                <constraint firstItem="I1a-3D-ga7" firstAttribute="top" secondItem="OsD-pk-ZVS" secondAttribute="bottom" constant="28" id="xlA-uN-TLO"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="error img" width="243" height="239"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

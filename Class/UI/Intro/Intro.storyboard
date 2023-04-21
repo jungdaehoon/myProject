@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V31-Lx-nCF">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Intro View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="IntroViewController" id="Y6W-OH-hqX" customClass="IntroViewController" customModule="cereal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoU-C1-LX6" userLabel="logo Ani View">
+                                <rect key="frame" x="41.666666666666657" y="311" width="310" height="230"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="310" id="5ad-hI-KGS"/>
+                                    <constraint firstAttribute="height" constant="230" id="WpC-t7-W9g"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue2-PM-a6A" userLabel="PermissionInfoView" customClass="PermissionInfoView" customModule="cereal" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ue2-PM-a6A" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="BGI-g2-Bov"/>
+                            <constraint firstItem="Ue2-PM-a6A" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="XKX-CI-B28"/>
+                            <constraint firstAttribute="bottom" secondItem="Ue2-PM-a6A" secondAttribute="bottom" id="dKQ-7y-im2"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ue2-PM-a6A" secondAttribute="trailing" id="hlA-Ip-7jE"/>
+                            <constraint firstItem="qoU-C1-LX6" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="rX5-Ns-eFh"/>
+                            <constraint firstItem="qoU-C1-LX6" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="vR5-E5-DlW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="n55-oC-geA"/>
+                    <connections>
+                        <outlet property="logoView" destination="qoU-C1-LX6" id="DcK-k2-2n0"/>
+                        <outlet property="permissionInfoView" destination="Ue2-PM-a6A" id="hK2-dw-OD1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.1145038167939" y="14.788732394366198"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2yd-Hh-Mqt">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="V31-Lx-nCF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IbL-9B-UhE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="ED9-ff-4YC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qRr-Th-jBc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-744" y="15"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
