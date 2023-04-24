@@ -173,7 +173,14 @@
 		8DC72E6929D6A3420044F021 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC72E6829D6A3420044F021 /* DatePickerViewController.swift */; };
 		8DC72E6B29D6A34B0044F021 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC72E6A29D6A34B0044F021 /* PickerViewViewController.swift */; };
 		8DCB189829F64FDB000645D3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCB189729F64FDB000645D3 /* AdSupport.framework */; };
-		8DD6B6B329EE70EB00E3C68E /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6B229EE70EB00E3C68E /* splash.json */; };
+		8DCB189A29F663DD000645D3 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB189929F663DD000645D3 /* splash.json */; };
+		8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB189C29F6641E000645D3 /* Wallet.storyboard */; };
+		8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */; };
+		8DCB18A529F6641E000645D3 /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */; };
+		8DCB18A629F6641E000645D3 /* CheckMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */; };
+		8DCB18A729F6641E000645D3 /* RestoreWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */; };
+		8DCB18A829F6641E000645D3 /* WalletHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB18A129F6641E000645D3 /* WalletHelper.swift */; };
+		8DCB18A929F6641E000645D3 /* ShowMnemonicViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB18A229F6641E000645D3 /* ShowMnemonicViewcontroller.swift */; };
 		8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */; };
 		8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */; };
 		8DD6B6C329EE900900E3C68E /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6C229EE900900E3C68E /* PickerView.swift */; };
@@ -391,7 +398,14 @@
 		8DC72E6829D6A3420044F021 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		8DC72E6A29D6A34B0044F021 /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
 		8DCB189729F64FDB000645D3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		8DD6B6B229EE70EB00E3C68E /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = splash.json; path = ../../../../../Downloads/splash.json; sourceTree = "<group>"; };
+		8DCB189929F663DD000645D3 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
+		8DCB189C29F6641E000645D3 /* Wallet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
+		8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTestViewController.swift; sourceTree = "<group>"; };
+		8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
+		8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckMnemonicViewController.swift; sourceTree = "<group>"; };
+		8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoreWalletViewController.swift; sourceTree = "<group>"; };
+		8DCB18A129F6641E000645D3 /* WalletHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHelper.swift; sourceTree = "<group>"; };
+		8DCB18A229F6641E000645D3 /* ShowMnemonicViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMnemonicViewcontroller.swift; sourceTree = "<group>"; };
 		8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
 		8DD6B6C229EE900900E3C68E /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
@@ -602,6 +616,7 @@
 			children = (
 				8D205E8229D1346E00F43C99 /* Intro */,
 				8D205E9029D1346E00F43C99 /* Main */,
+				8DCB189B29F6641E000645D3 /* Wallet */,
 				8D205E8029D1346E00F43C99 /* Remittance */,
 				8DA48C9D29E91178007712C6 /* Benefit */,
 				8D205E7E29D1346E00F43C99 /* Home */,
@@ -1113,6 +1128,20 @@
 			path = PickerView;
 			sourceTree = "<group>";
 		};
+		8DCB189B29F6641E000645D3 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				8DCB189C29F6641E000645D3 /* Wallet.storyboard */,
+				8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */,
+				8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */,
+				8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */,
+				8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */,
+				8DCB18A129F6641E000645D3 /* WalletHelper.swift */,
+				8DCB18A229F6641E000645D3 /* ShowMnemonicViewcontroller.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
 		8DDC3DE529D15F65003C4F8F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1162,7 +1191,7 @@
 		8DE325FD29D567BB006E3B69 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				8DD6B6B229EE70EB00E3C68E /* splash.json */,
+				8DCB189929F663DD000645D3 /* splash.json */,
 				8D91E27429E53ACA0015E5E7 /* tabbar_benefit.json */,
 				8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */,
 				8D91E27529E53ACA0015E5E7 /* tabbar_home.json */,
@@ -1314,6 +1343,7 @@
 				8D205F4C29D1346F00F43C99 /* OKZeroPayView.xib in Resources */,
 				8D205E4029D133FB00F43C99 /* LaunchScreen.storyboard in Resources */,
 				8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */,
+				8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */,
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
 				8D205F1F29D1346F00F43C99 /* Assets.xcassets in Resources */,
@@ -1367,7 +1397,7 @@
 				8D205F1029D1346F00F43C99 /* Pretendard-Medium.otf in Resources */,
 				8D205F1529D1346F00F43C99 /* Pretendard-ExtraLight.otf in Resources */,
 				8D205F1929D1346F00F43C99 /* NanumSquareRoundB.ttf in Resources */,
-				8DD6B6B329EE70EB00E3C68E /* splash.json in Resources */,
+				8DCB189A29F663DD000645D3 /* splash.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1461,6 +1491,7 @@
 				8D205F7E29D1346F00F43C99 /* PedometerResponse.swift in Sources */,
 				8D205F7B29D1346F00F43C99 /* ReBankAuthResponse.swift in Sources */,
 				8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */,
+				8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */,
 				8D205F6B29D1346F00F43C99 /* UIControl.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
@@ -1470,6 +1501,7 @@
 				8D55D56729E648AC009C43BF /* KISA_SEED_CBC.c in Sources */,
 				8D205F7129D1346F00F43C99 /* ResponseError.swift in Sources */,
 				8D2FC9E629DC05EC0061821F /* BecomeActiveView.swift in Sources */,
+				8DCB18A929F6641E000645D3 /* ShowMnemonicViewcontroller.swift in Sources */,
 				8D205F7429D1346F00F43C99 /* NetworkManager.swift in Sources */,
 				8DD6B6C329EE900900E3C68E /* PickerView.swift in Sources */,
 				8DBA445229D3FFA700A2E5C1 /* WebMsgModel.swift in Sources */,
@@ -1478,6 +1510,7 @@
 				8D205F8C29D1346F00F43C99 /* SharedDefaults.swift in Sources */,
 				8D205F3829D1346F00F43C99 /* BannerView.swift in Sources */,
 				8D205F3A29D1346F00F43C99 /* BottomLogOutView.swift in Sources */,
+				8DCB18A629F6641E000645D3 /* CheckMnemonicViewController.swift in Sources */,
 				8D205F3D29D1346F00F43C99 /* PointItemView.swift in Sources */,
 				8D205F8D29D1346F00F43C99 /* BaseViewController.swift in Sources */,
 				8D205F2B29D1346F00F43C99 /* PermissionInfoView.swift in Sources */,
@@ -1498,6 +1531,7 @@
 				8D205F6129D1346F00F43C99 /* Int.swift in Sources */,
 				8D205F5F29D1346F00F43C99 /* DataResponse.swift in Sources */,
 				8D205F2529D1346F00F43C99 /* IntroViewController.swift in Sources */,
+				8DCB18A529F6641E000645D3 /* QRReaderViewController.swift in Sources */,
 				8D205F7A29D1346F00F43C99 /* AllMoreResponse.swift in Sources */,
 				8D205F2A29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.swift in Sources */,
 				8DBA445629D41C7600A2E5C1 /* LevelPopView.swift in Sources */,
@@ -1519,6 +1553,7 @@
 				8DBA445429D4176200A2E5C1 /* AlertViewController.swift in Sources */,
 				8D205F8729D1346F00F43C99 /* BottomTermsTableViewCell.swift in Sources */,
 				8D205F5329D1346F00F43C99 /* FinanceViewController.swift in Sources */,
+				8DCB18A729F6641E000645D3 /* RestoreWalletViewController.swift in Sources */,
 				8D205F6729D1346F00F43C99 /* UIImageView.swift in Sources */,
 				8D205F6529D1346F00F43C99 /* UIButton.swift in Sources */,
 				8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */,
@@ -1534,6 +1569,7 @@
 				8D205F3E29D1346F00F43C99 /* TopUserInfoView.swift in Sources */,
 				8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */,
 				8D205F6029D1346F00F43C99 /* NSMutableAttributedString.swift in Sources */,
+				8DCB18A829F6641E000645D3 /* WalletHelper.swift in Sources */,
 				8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */,
 				8D205F3729D1346F00F43C99 /* AllMoreModel.swift in Sources */,
 				8D205F8429D1346F00F43C99 /* KeyChainCustItem.swift in Sources */,

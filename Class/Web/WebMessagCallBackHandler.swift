@@ -246,8 +246,151 @@ class WebMessagCallBackHandler : NSObject  {
             case .callZeroPayCallBack       :
                 self.setZeroPayCB ( body )
                 break
+                /// 지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다.
+            case .getWAddress                :
+                self.setWAddressWalletFile( body )
+                break
+                /// 지갑 : 개인키가져오기 : 지갑에서 개인키를 획득후 전달 합니다.
+            case .checkWInfo                 :
+                self.setPrivateKeyWithWalletFile( body )
+                break
+                /// 지갑 : 생성후 정보 전달 : 지갑생성 후 주소:개인키 전달 합니다.
+            case .createWInfo                :
+                self.setCreateWallet( body )
+                break
+                /// 지갑 : 복구 : 니모닉을 받아 지갑을 복구 하고 주소 전달 합니다.
+            case .restoreWInfo               :
+                self.setRestoreWInfo( body )
+                break
+                /// 지갑 : 복구구문 보기 : 니모닉 정보를 화면에 표시 합니다.
+            case .showWRestoreText           :
+                self.setMnemonicDisplay( body )
+                break
+                /// 지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다.
+            case .readQRInfo                 :
+                self.setQRCodeReadDisplay( body )
+                break
+                /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
+            case .queryWKakao                :break
             default: break
             }
+        }
+    }
+    
+    
+    func setQRCodeReadDisplay( _ body : [Any?] )
+    {
+        let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
+        let vc              = mainStoryboard.instantiateViewController(withIdentifier: "QRReaderViewController") as? QRReaderViewController
+        //vc!.delegate         = self
+        self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
+    }
+        
+        
+    func setMnemonicDisplay( _ body : [Any?] )
+    {
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let _   = body[2] as? [Any]
+        {
+            let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
+            let vc              = mainStoryboard.instantiateViewController(withIdentifier: "ShowMnemonicViewController") as? ShowMnemonicViewController
+            vc!.showNext         = true
+            //vc!.delegate         = self
+            self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
+        }
+    }
+    
+    func setRestoreWInfo( _ body : [Any?] ){
+        
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params   = body[2] as? [Any]
+        {
+            let encInfo         = params[0] as! String
+            let preAddr         = params.count > 1 ? NC.S(params[1] as? String) : ""
+            
+            let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
+            let vc              = mainStoryboard.instantiateViewController(withIdentifier: "RestoreWalletViewController") as? RestoreWalletViewController
+            vc!.encInfo         = encInfo
+            vc!.preAddr         = preAddr
+            //vc!.delegate        = self
+            self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
+        }
+    }
+    
+    
+    func setCreateWallet( _ body : [Any?] ){
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let action      = body[1] as! [Any]
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params   = body[2] as? [Any]
+        {
+            let encInfo = params[0] as! String
+            print ("psg test:checkw  encInfo = \(encInfo) " )
+            let wRet = WalletHelper.sharedInstance.createWallet(self.target!, encInfo: encInfo)
+            print ("psg test:checkw  wRet = \(wRet ?? "nil") " )
+            var encWaddr = ""
+            if let tRet = wRet  {
+                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: tRet)
+            }
+            /// 콜백 데이터 정보를 요청 합니다.
+            self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
+                /// 콜백으로 데이터를 리턴 합니다.
+                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+            }.store(in: &self.viewModel.cancellableSet)
+        }
+    }
+    
+    
+    func setPrivateKeyWithWalletFile( _ body : [Any?] ){
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let action      = body[1] as! [Any]
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params   = body[2] as? [Any]
+        {
+            let encInfo = params[0] as! String
+            print ("psg test:checkw  encInfo = \(encInfo) " )
+            let wRet = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self.target!, encInfo: encInfo)
+            print ("psg test:checkw  wRet = \(wRet ?? "nil") " )
+            var encWaddr = ""
+            if let tRet = wRet  {
+                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: tRet)
+            }
+            
+            /// 콜백 데이터 정보를 요청 합니다.
+            self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
+                /// 콜백으로 데이터를 리턴 합니다.
+                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+            }.store(in: &self.viewModel.cancellableSet)
+        }
+    }
+    
+    
+    func setWAddressWalletFile( _ body : [Any?] ){
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let action      = body[1] as! [Any]
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params   = body[2] as? [Any]
+        {
+            let encInfo = params[0] as! String
+            print ("psg test:getw  encInfo = \(encInfo) " )
+            let wRet = WalletHelper.sharedInstance.checkWAddressWalletFile(self.target!, encInfo: encInfo)
+            print ("psg test:getw  wRet = \(wRet ?? "nil") " )
+            var encWaddr = ""
+            if let tRet = wRet  {
+                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: tRet)
+            }
+            
+            /// 콜백 데이터 정보를 요청 합니다.
+            self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
+                /// 콜백으로 데이터를 리턴 합니다.
+                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+            }.store(in: &self.viewModel.cancellableSet)
         }
     }
     

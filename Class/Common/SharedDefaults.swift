@@ -26,8 +26,8 @@ class SharedDefaults {
     
     /// 계좌 여부 체크 입니다.
     static let SET_ACCOUNT_ENABLED              = "SET_ACCOUNT_ENABLED"
-    /// PUSH 정보로 APP 시작시 URL 정보 입니다.
-    static let APP_START_URL                    = "APP_START_URL"
+    /// 월렛 복구문 정보 입니다.
+    static let WALLET_MNEMONIC                  = "WALLET_MNEMONIC"
     /// 키체인 정보를 읽었는지를 체크 합니다.
     static let IS_KEYCHAIN_READ                 = "IS_KEYCHAIN_READ"
     
@@ -59,16 +59,16 @@ class SharedDefaults {
     }
     
     
-    private var _appStartURLString : String = ""
-    /// 외부에서 URL 정보로 APP 시작시 입니다.
-    var appStartURLString : String {
+    private var _walletMnemonic : String = ""
+    /// 월렛 복구문 입니다.
+    var walletMnemonic : String {
         get {
-            _appStartURLString = defaults.string(forKey: SharedDefaults.APP_START_URL) ?? ""
-            return _appStartURLString
+            _walletMnemonic = defaults.string(forKey: SharedDefaults.WALLET_MNEMONIC) ?? ""
+            return _walletMnemonic
         }
         set {
-            _appStartURLString = newValue
-            defaults.set(_appStartURLString, forKey: SharedDefaults.APP_START_URL)
+            _walletMnemonic = newValue
+            defaults.set(_walletMnemonic, forKey: SharedDefaults.WALLET_MNEMONIC)
         }
     }
     

@@ -142,4 +142,65 @@ enum SCRIPT_MESSAGES : String
  - Date : 2023.03.20
 */
 class WebMsgModel : BaseViewModel {
+    
+    
+    /**
+     Wallet 리턴 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.24
+     - Throws : False
+     - Parameters :
+        - retStr : 리턴 할 데이터 정보 입니다.
+     - returns :
+        - Future<String, Never>
+            >  String : 리턴 할 데이터 정보 입니다.
+     */
+    func getWalletJsonMsg( retStr: String? ) -> Future<String, Never>
+    {
+        return Future<String, Never> { promise in
+            var retJsonStr = ""
+            if let ret = retStr, ret.isValid {
+                retJsonStr = self.getWalletJsonString (true,data: retStr ?? "", msg: "")
+            }
+            else
+            {
+                retJsonStr = self.getWalletJsonString (false,data: "", msg: "No wallet info")
+            }
+            promise(.success(retJsonStr))
+        }
+    }
+    
+    
+    /**
+     Wallet 리턴 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.24
+     - Throws : False
+     - Parameters :
+        - isSuccess : 데이터 여부 입니다.
+        - data : 데이터 정보 입니다.
+        - msg : 데이터가 없는 경우 메세지 정보 입니다.
+     - returns :
+        - Future<String, Never>
+            >  String : 리턴 할 데이터 정보 입니다.
+     */
+    private func getWalletJsonString(_ isSuccess: Bool , data: String, msg: String) -> String {
+        let resultStr   : String        = isSuccess ? "true" :  "false"
+        let dataStr     : String        = isSuccess ? data :  ""
+        let errorStr    : String        = isSuccess ? "" :  msg
+        /// 총 데이터 메세지 입니다.
+        let message     : [String:Any]  = [ "result" : resultStr,
+                                            "data" : dataStr,
+                                            "msg" : errorStr]
+        do {
+            let data =  try JSONSerialization.data(withJSONObject: message, options:.prettyPrinted)
+            if let dataString = String.init(data: data, encoding: .utf8) {
+                return dataString
+            }
+        } catch {
+            return ""
+        }
+        return ""
+    }
+
+    
+    
 }
