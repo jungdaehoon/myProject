@@ -27,8 +27,8 @@ class TabbarViewController: UITabBarController {
     var viewModel                       : BaseViewModel = BaseViewModel()
     /// 하단 탭바 뷰어입니다.
     @IBOutlet weak var baseTabbarView   : BaseTabBarView!
-    /// 로그인 페이지 활성화 여부 입니다.
-    var loginPageDisplay                : Bool = false
+    /// 최초 앱 실행시 로그인 페이지 활성화 여부 입니다.
+    var loginDisplayFirst               : Bool = false
     
     
     
@@ -56,26 +56,107 @@ class TabbarViewController: UITabBarController {
         UITabBar.clearShadow()
         /// 탭바 상단 쉐도우 라인을 추가 합니다.
         tabBar.layer.applyShadow(color: .gray, alpha: 0.2, x: 0, y: 0, blur: 12)
-        /// 백그라운드에서 올라오는 경우 이벤트를 연결 합니다.
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationBackground), name: UIScene.willDeactivateNotification, object: nil)
-        /// PUSH 이벤트 경우 입니다.
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationPush(notification:)), name: Notification.Name.PUSH_EVENT, object: nil)
-        /// DeepLink 이벤트 경우 입니다.
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationDeepLink(notification:)), name: Notification.Name.DEEP_LINK, object: nil)
+        /// 로그아웃 여부를 체크 합니다.
+        BaseViewModel.shared.$logOut.sink { value in
+            /// 로그인 최초 디스플레이 이후에 적용 됩니다.
+            if self.loginDisplayFirst || !value { return }
+            
+            /// 로그인 페이지를 오픈 합니다.
+            self.setDisplayLogin { success in
+                if success
+                {
+                    /// 로그아웃을. false 변경 합니다.
+                    BaseViewModel.shared.logOut = false
+                    /// 탭 인덱스를 기본 홈으로 설정 합니다.
+                    self.selectedIndex          = 2
+                }
+            } puchCompletion: {
+                
+            }
+          
+        }.store(in: &self.viewModel.cancellableSet)
+        
+        /// 딥링크 URL 이벤트 입니다.
+        BaseViewModel.shared.$deepLinkUrl.sink { url in
+            /// 로그인 최초 디스플레이 이후에 적용 됩니다.
+            if self.loginDisplayFirst || !url.isValid { return }
+            if let login = BaseViewModel.loginResponse
+            {
+                if login.islogin!
+                {
+                    /// 해당 URL 로 이동합니다.
+                    if NC.S(url).isValid
+                    {
+                        /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
+                        self.setSelectedIndex(.home,object: url)
+                        BaseViewModel.shared.deepLinkUrl = ""
+                    }
+                }
+                else
+                {
+                    /// 로그인 페이지를 오픈 합니다.
+                    self.setDisplayLogin { success in
+                        /// 딥링크 URL 을 다시 넘깁니다.
+                        BaseViewModel.shared.deepLinkUrl = url
+                    } puchCompletion: {
+                        
+                    }
+
+                }
+            }
+        }.store(in: &self.viewModel.cancellableSet)
+        
+        /// 푸시 URL 링크 입니다.
+        BaseViewModel.shared.$pushUrl.sink { url in
+            /// 로그인 최초 디스플레이 이후에 적용 됩니다.
+            if self.loginDisplayFirst || !url.isValid  { return }
+            if let login = BaseViewModel.loginResponse {
+                if login.islogin!
+                {
+                    /// 해당 URL 로 이동합니다.
+                    if NC.S(url).isValid
+                    {
+                        /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
+                        self.setSelectedIndex( .home, object: url)
+                        /// PUSH 에서 받은 연결 정보를 초기화 합니다.
+                        BaseViewModel.shared.pushUrl = ""
+                    }
+                }
+                else
+                {
+                    /// 로그인 페이지를 오픈 합니다.
+                    self.setDisplayLogin { success in
+                        /// 딥링크 URL 을 다시 넘깁니다.
+                        BaseViewModel.shared.pushUrl = url
+                    } puchCompletion: {
+                        
+                    }
+                }
+            }
+        }.store(in: &self.viewModel.cancellableSet)
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
         /// 로그인 페이지 디스플레이 할지를 체크 합니다.
-        if self.loginPageDisplay
+        if self.loginDisplayFirst
         {
-            self.setLoginDisplay()
+            /// 로그인 페이지를 오픈 합니다.
+            self.setDisplayLogin { success in
+                if success
+                {
+                    /// 로그인 디스플레이를 하지 않도록 합니다.
+                    self.loginDisplayFirst = false
+                }
+            } puchCompletion: {
+                BecomeActiveView().hide()
+            }
         }
         /// 로그인 이후 진입 경우 입니다.
         else
@@ -109,22 +190,31 @@ class TabbarViewController: UITabBarController {
     
     /**
      로그인 페이지 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.27
+     - Date : 2022.04.24
      - Parameters:
         - animation : 디스플레이시 애니 효과 적용 여부 입니다.
+        - completion : 로그인 정상 처리시 여부 콜백 입니다.
+        - puchCompletion : 로그인 페이지 정상 호출시 콜백 입니다.
      - returns :False
      */
-    func setLoginDisplay( animation : Bool = false ){
-        let viewController                      = LoginViewController.init { [self] success in
-            if success
-            {
-                /// 로그인 디스플레이를 하지 않도록 합니다.
-                self.loginPageDisplay = false
-            }
-        }        
-        self.navigationController!.pushViewController(viewController, animated: animation) {            
-            BecomeActiveView().hide()
-        }
+    func setDisplayLogin( animation : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
+        let viewController = LoginViewController.init( completion: completion )
+        self.navigationController!.pushViewController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)
+    }
+    
+    
+    /**
+     Notification 관련 이벤트를 연결 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.23
+     - Parameters:False
+     - Throws : False
+     - returns :False
+     */
+    func setNotification(){
+        /// 백그라운드에서 올라오는 경우 이벤트를 연결 합니다.
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationBackground), name: UIScene.willDeactivateNotification, object: nil)
     }
     
     
@@ -150,66 +240,51 @@ class TabbarViewController: UITabBarController {
     @objc func applicationForeground(){
         BecomeActiveView().hide()
     }
-    
-    
-    /**
-     PUSH 데이터를 받아 호출되는 경우 입니다.
-     - Date : 2023.04.04
-     - Throws:False
-     - returns:False
-     */
-    @objc func notificationPush( notification : Notification ){
-        if let url = notification.object
-        {
-            Slog("url : \(url)")
-            /// 탭 화면을 홈으로 이동하며 PUSH 연동 페이지로 이동합니다.
-            self.setSelectedIndex(2,object: url)
-        }
-    }
-    
-    /**
-     DeepLink Url 데이터를 받아 호출되는 경우 입니다.
-     - Date : 2023.04.04
-     - Throws:False
-     - returns:False
-     */
-    @objc func notificationDeepLink( notification : Notification ){
-        if let url = notification.object
-        {
-            Slog("url : \(url)")
-            /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
-            self.setSelectedIndex(2,object: url)
-        }
-    }
-    
 }
 
 
+/**
+ 텝 별 인덱스 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.04.21
+ */
+enum TAB_STATUS : Int {
+    /// 월렛 탭 인덱스 입니다.
+    case wallet     = 0
+    /// 혜택 탭 인덱스 입니다.
+    case benefit    = 1
+    /// 홈 탭 인덱스 입니다.
+    case home       = 2
+    /// 금융 탭 인덱스 입니다.
+    case finance    = 3
+    /// 전체 탭 인덱스 입니다.
+    case allmenu    = 4    
+}
 
 extension UITabBarController
 {
     /**
      텝 이동시 해당 텝에서 체크 할 데이터를 추가합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.21
+     - Date : 2023.04.24
      - Parameters:
-        - selectedIndex : 이동할 탭 넘버 입니다.
+        - tabIndex      : 이동할 탭 넘버 입니다.
         - object        : 추가할 데이터 입니다.
         - updateCookies : 탭 이동시 쿠키 값을 업로드 할지 여부를 받습니다.
      - returns :False
      */
-    func setSelectedIndex( _ selectedIndex : Int, object : Any? = nil, updateCookies : Bool = false ){
+    func setSelectedIndex( _ tabIndex : TAB_STATUS, object : Any? = nil, updateCookies : Bool = false ){
         if object != nil
         {
-            switch selectedIndex
+            let value = TAB_STATUS(rawValue: selectedIndex)
+            switch value
             {
                 /// 월렛 입니다.
-            case 0 :
+            case .wallet :
                 break;
                 /// 혜택 입니다.
-            case 1 :
+            case .benefit :
                 break;
                 /// 홈 입니다.
-            case 2 :
+            case .home :
                 if let home = self.viewControllers![selectedIndex] as? HomeViewController
                 {
                     if object is String,
@@ -220,12 +295,12 @@ extension UITabBarController
                 }
                 break;
                 /// 금융 입니다.
-            case 3 :
+            case .finance :
                 //let remittance = self.viewControllers![selectedIndex] as! RemittanceViewController
                 //remittance._viewModel.displayData = object
                 break;
                 /// 전체 입니다.
-            case 4 :
+            case .allmenu :
                 break;
             default:break;
             }

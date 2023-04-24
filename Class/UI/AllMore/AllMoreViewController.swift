@@ -53,21 +53,7 @@ class AllMoreViewController: BaseViewController {
         /// 기본 화면을 먼저 디스플레이 합니다.
         self.setDisplayView()
         self.initWebView(self.webDisplayView, target: self)
-        /// 로그아웃 여부를 체크 합니다.
-        self.viewModel.$logOut.sink { value in
-            /// 로그아웃 처리되어 로그인 창을 디스플레이 합니다.
-            if value == true
-            {
-                let viewController                      = LoginViewController.init { [self] success in
-                    if success
-                    {
-                        self.tabBarController!.selectedIndex = 2
-                    }
-                }
-                self.navigationController!.pushViewController(viewController, animated: true, animatedType: .up) {
-                }
-            }
-        }.store(in: &cancellableSet)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

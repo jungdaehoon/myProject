@@ -299,7 +299,7 @@ class NC {
 
     /**
      NIL 체크 후 안내 팝업을 오픈 하며 앱을 강제 종료 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.04.01
+     - Date : 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
      - returns :False
@@ -322,7 +322,7 @@ class NC {
     
     /**
      NIL 체크 후 안내 팝업을 오픈 하며 현 페이지를  종료 하며 이전 페이지로 돌아 갑니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.04.01
+     - Date : 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
      - returns :False
@@ -377,7 +377,7 @@ class NC {
     
     /**
      Int 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.16
+     - Date : 2023.03.16
      - Parameters:
         - object : 체크할 Int 형 데이터 입니다.
      - returns :
@@ -395,7 +395,7 @@ class NC {
     
     /**
      Double 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.16
+     - Date : 2023.03.16
      - Parameters:
         - object : 체크할 Double 형 데이터 입니다.
      - returns :
@@ -413,7 +413,7 @@ class NC {
     
     /**
      String 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.16
+     - Date : 2023.03.16
      - Parameters:
         - object : 체크할 String 형 데이터 입니다.
      - returns :

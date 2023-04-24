@@ -220,12 +220,13 @@ class IntroViewController: BaseViewController {
         if loginEnabled == true
         {
             BecomeActiveView().show()
-            newController.loginPageDisplay      = true
+            newController.loginDisplayFirst      = true
         }
         self.aniView!.stop()
         self.navigationController!.replaceViewController(viewController: newController,animated: false) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                newController.setSelectedIndex(2, object: WebPageConstants.URL_MAIN)                
+                /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                newController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)                
             })
         }
     }

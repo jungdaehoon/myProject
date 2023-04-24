@@ -34,8 +34,7 @@ class AllMoreModel : BaseViewModel{
     var allModeResponse     : AllMoreResponse?    
     /// 만료된 계좌 재인증 데이터를 받습니다.
     var reBankAuthResponse  : ReBankAuthResponse?
-    /// 로그아웃 여부를 가집니다.
-    @Published var logOut   : Bool = false
+    
     
     
     /**

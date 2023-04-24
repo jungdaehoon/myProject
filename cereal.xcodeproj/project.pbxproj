@@ -190,6 +190,7 @@
 		8DE3260529D567C8006E3B69 /* guide_ani_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE3260029D567C8006E3B69 /* guide_ani_1.json */; };
 		8DE3260629D567C8006E3B69 /* guide_ani_0.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE3260129D567C8006E3B69 /* guide_ani_0.json */; };
 		8DE3260729D567C8006E3B69 /* guide_ani_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE3260229D567C8006E3B69 /* guide_ani_2.json */; };
+		8DE5F21C29F285DD003601CB /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE5F21B29F285DD003601CB /* UserNotifications.framework */; };
 		8DF117A129E7996300D7A095 /* NavigationControllerAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF117A029E7996300D7A095 /* NavigationControllerAnimated.swift */; };
 		8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2029DD35E2004E5021 /* LoadingView.swift */; };
 		8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2229DD35EC004E5021 /* LoadingView.xib */; };
@@ -409,6 +410,7 @@
 		8DE3260029D567C8006E3B69 /* guide_ani_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_ani_1.json; sourceTree = "<group>"; };
 		8DE3260129D567C8006E3B69 /* guide_ani_0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_ani_0.json; sourceTree = "<group>"; };
 		8DE3260229D567C8006E3B69 /* guide_ani_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_ani_2.json; sourceTree = "<group>"; };
+		8DE5F21B29F285DD003601CB /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		8DF117A029E7996300D7A095 /* NavigationControllerAnimated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerAnimated.swift; sourceTree = "<group>"; };
 		8DFB9D2029DD35E2004E5021 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8DFB9D2229DD35EC004E5021 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				8DDC3DF629D16730003C4F8F /* libcrypto.a in Frameworks */,
 				8DDC3DF829D16731003C4F8F /* libBSAppIronCrypto-Raonsecure.a in Frameworks */,
 				03A8B402B8ABD84636006B8B /* Pods_cereal.framework in Frameworks */,
+				8DE5F21C29F285DD003601CB /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +468,7 @@
 		56A39BA79224A5FEBAFE11B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DE5F21B29F285DD003601CB /* UserNotifications.framework */,
 				8DDC3DE329D151CF003C4F8F /* libc++.tbd */,
 				8D205F9129D14B8B00F43C99 /* Libs */,
 				FD740F24DF294204F2C066E1 /* Pods_cereal.framework */,

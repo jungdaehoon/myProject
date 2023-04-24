@@ -36,7 +36,7 @@ class PedometerModel : BaseViewModel
     func getPedometer( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<PedometerResponse?,ResponseError>()
-        requst(appExit: true) { error in
+        requst( showLoading: true ) { error in
             self.pedometerResponse = nil
             subject.send(completion: .failure(error))
             return false
@@ -65,7 +65,7 @@ class PedometerModel : BaseViewModel
     func getPedometerReward( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerRewardResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<PedometerRewardResponse?,ResponseError>()
-        requst(appExit: true) { error in
+        requst( showLoading: true ) { error in
             self.pedometerRewardResponse = nil
             subject.send(completion: .failure(error))
             return false
@@ -95,7 +95,7 @@ class PedometerModel : BaseViewModel
     func setPedometerUpdate( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerUpdateResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<PedometerUpdateResponse?,ResponseError>()
-        requst(appExit: true) { error in
+        requst( showLoading: true ) { error in
             self.pedometerRewardResponse = nil
             subject.send(completion: .failure(error))
             return false

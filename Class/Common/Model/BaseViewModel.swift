@@ -86,21 +86,31 @@ enum MENU_LIST : String  {
 
 class BaseViewModel : NSObject {
     private var curCancellable: AnyCancellable?
-    var cancellableSet = Set<AnyCancellable>()
+    var cancellableSet                                      = Set<AnyCancellable>()
+    public static let shared            : BaseViewModel     = BaseViewModel()
+    /// 로그아웃 여부를 가집니다. ( TabbarViewController:viewDidLoad  $logOut 이벤트 입니다.   )
+    @Published public var logOut        : Bool              = false
+    /// 딥링크 URL 정보를 가집니다. ( TabbarViewController:viewDidLoad  $deepLinkUrl 이벤트 입니다.   )
+    @Published public var deepLinkUrl   : String            = ""
+    ///  PUSH URL 정보를 가집니다.
+    @Published public var pushUrl       : String            = ""
     /// 앱 시작시 받는 데이터 입니다.
-    static var appStartResponse     : AppStartResponse? = AppStartResponse()
+    static var appStartResponse         : AppStartResponse? = AppStartResponse()
     /// 로그인 정보를 받습니다.
-    static var loginResponse        : LoginResponse?    = LoginResponse()
-    /// 만보게 약관 동의 여부 데이터를 가집니다.
-    var PTAgreeResponse             : PedometerTermsAgreeResponse?
-    /// 만보게 약관동의를 넘깁니다.
-    var IPTAgreeResponse            : InsertPedometerTermsResponse?
-    /// 로그아웃 데이터를 받습니다.
-    var logoutResponse              : LogOutResponse?
-    /// FCM 토큰 업로드 입니다.
-    var fcmPushResponse             : FcmPushUpdateResponse?
+    static var loginResponse            : LoginResponse?    = LoginResponse()
     /// 앱 실드 데이터를 저장 합니다.
-    var appShield = AppShield()
+    var appShield                       : AppShield         = AppShield()
+    /// 만보게 약관 동의 여부 데이터를 가집니다.
+    var PTAgreeResponse                 : PedometerTermsAgreeResponse?
+    /// 만보게 약관동의를 넘깁니다.
+    var IPTAgreeResponse                : InsertPedometerTermsResponse?
+    /// 로그아웃 데이터를 받습니다.
+    var logoutResponse                  : LogOutResponse?
+    /// FCM 토큰 업로드 입니다.
+    var fcmPushResponse                 : FcmPushUpdateResponse?
+    
+    
+    
     
     
     /**
@@ -147,7 +157,7 @@ class BaseViewModel : NSObject {
                         /// Error 경우 무조건 강제 종료 하는 타입을 받았을 경우 앱을 강제 종료로 합니다.
                         if appExit == true {
                             /// 로그인 요청을 다시 안내하는 팝업을 오픈 합니다.
-                            CMAlertView().setAlertView(detailObject: "고객님의 소중한 개인정보 \n보호를 위해  재로그인 부탁드립니다." as AnyObject, cancelText: "확인") { event in
+                            CMAlertView().setAlertView(detailObject: "일시적으로 문제가 발생했습니다.\n잠시 후에 다시 시도하여 주십시오." as AnyObject, cancelText: "확인") { event in
                                 exit(0)
                             }
                             //self.action = .alert(COMMON_TIMEOUT_ALERT)
@@ -181,7 +191,8 @@ class BaseViewModel : NSObject {
                         DispatchQueue.main.async {
                             /// 로그인 요청을 다시 안내하는 팝업을 오픈 합니다.
                             CMAlertView().setAlertView(detailObject: "고객님의 소중한 개인정보 \n보호를 위해  재로그인 부탁드립니다." as AnyObject, cancelText: "확인") { event in
-                                completion?(value)
+                                /// 로그아웃 여부를 활성화 합니다.
+                                BaseViewModel.shared.logOut = true
                             }
                         }
                         return
@@ -286,7 +297,7 @@ class BaseViewModel : NSObject {
     func getPTTermAgreeCheck() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<PedometerTermsAgreeResponse?,ResponseError>()
-        requst(appExit: true) { error in
+        requst( showLoading: true ) { error in
             
             subject.send(completion: .failure(error))
             return false
@@ -314,7 +325,7 @@ class BaseViewModel : NSObject {
     func setPTTermAgreeCheck() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<InsertPedometerTermsResponse?,ResponseError>()
-        requst(appExit: true) { error in
+        requst( showLoading: true ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -578,5 +589,38 @@ class BaseViewModel : NSObject {
             }
         }
     }
+    
+    
+    /**
+     Deeplink URL 정보를 체크하여 이동 할  URL 정보를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.03.29
+     - Throws : False
+     - returns :
+        - Future<String, Never>
+            >  String : 딥링크 진입 할 URL 정보를 받습니다.
+     */
+    func setDeepLink( deelLinkUrl url: URL ) -> Future<String, Never>
+    {
+        return Future<String, Never> { promise in
+            switch url.scheme {
+                /// 딥링크 타입 입니다.
+            case "cereal":
+                /// 호스트 정보가 movepage 인지를 체크 합니다.
+                if NC.S(url.host) == "movepage"
+                {
+                    /// 이동할 링크 정보를 받습니다.
+                    if let linkUrl = url.queryParameters?["url"],
+                       linkUrl.isValid
+                    {
+                        Slog("deeplink open url : \(linkUrl)")
+                        /// Deeplink 데이터를 넘깁니다.
+                        promise(.success(linkUrl))
+                    }
+                }
+            default: break
+            }
+        }
+    }
+    
 }
 

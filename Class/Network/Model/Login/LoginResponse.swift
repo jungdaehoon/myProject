@@ -21,7 +21,7 @@ struct LoginResponse: BaseResponse {
     /// 세부 응답메세지 입니다.
     var msg             : String?
     /// 로그인 여부를 가집니다.
-    var islogin         : Bool?
+    var islogin         : Bool? = false
     /// 닉네임 변경 여부를 가집니다.
     var nickname_ch     : Bool? { get {
         if let loginInfo = data

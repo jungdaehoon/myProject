@@ -45,7 +45,7 @@ class BottomLogOutView: UIView {
                     custItem!.auto_login                    = false
                     SharedDefaults.setKeyChainCustItem(custItem!)
                     /// 로그아웃 여부를 활성화 합니다.
-                    self.viewModel!.logOut                  = true
+                    BaseViewModel.shared.logOut             = true
                     /// 계좌 여부를 활성화 합니다.
                     SharedDefaults.default.accountEnabled   = false
                 }

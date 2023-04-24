@@ -12,7 +12,7 @@ extension String {
     
     /**
      문자 내부에 Html 문구가 들어있는 경우 해당 문구를 제외 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.10.06
+     - Date : 2023.04.06
      - Parameters:
         - htmlEncodedString : 체크할 문자 정보를 받습니다.
      - Throws : False

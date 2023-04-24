@@ -57,7 +57,7 @@ class RemittanceModel : BaseViewModel{
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()
-        requst(appExit: true) { error in
+        requst( showLoading: true ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {

@@ -222,6 +222,11 @@ class LoginViewController: BaseViewController {
                     self.setAppShield()
                 })
                 alert?.addAlertBtn(btnTitleText: "네", completion: { result in
+                    self.guideView.setZeroPage()
+                    /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                    self.viewModel.getAppMenuList(menuID: .ID_MEM_INTRO).sink { url in
+                        self.view.setDisplayWebView(url, modalPresent: true, titleBarHidden: true)
+                    }.store(in: &self.viewModel.cancellableSet)
                 })
                 alert?.show()
             }
@@ -306,7 +311,12 @@ class LoginViewController: BaseViewController {
                     let code    : LOGIN_CODE    = LOGIN_CODE(rawValue: NC.S(response!.code))!
                     switch code {
                         /// 로그인 체크 코드가 없을 경우 입니다.
-                    case ._code_fail_:break
+                    case ._code_fail_:
+                        /// 비정상 상태로 안내후 종료 합니다.
+                        CMAlertView().setAlertView(detailObject: TEMP_NETWORK_ERR_MSG_DETAIL as AnyObject, cancelText: "확인") { event in
+                            exit(0)
+                        }
+                        break
                         /// 정상 로그인 입니다.
                     case ._code_0000_:
                         /// 정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.
@@ -322,7 +332,7 @@ class LoginViewController: BaseViewController {
                                     if let tabbar = TabBarView.tabbar
                                     {
                                         /// 페이지 종료 완료시 탭인덱스를 기본 메인 홈으로 이동 하며 웹 쿠키를 신규로 업데이트 합니다.
-                                        tabbar.setSelectedIndex(2, object: WebPageConstants.URL_MAIN, updateCookies: true)
+                                        tabbar.setSelectedIndex( .home, object: WebPageConstants.URL_MAIN, updateCookies: true)
                                     }
                                 })
                             }

@@ -8,7 +8,8 @@
 import UIKit
 import Firebase
 import Fabric
-
+import FirebaseMessaging
+import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -27,8 +28,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.sharedSDK().debug = true
         /// FirebaseApp (FCM) 설정관련 연결 입니다.
         FirebaseApp.configure()
+        UNUserNotificationCenter.current().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+          options: authOptions,
+          completionHandler: { _, _ in }
+        )
+
+        application.registerForRemoteNotifications()
+        
+        Messaging.messaging().token { token, error in
+            if let error = error
+            {
+                print("Error fetching FCM registration token: \(error)")
+            }
+            else if let token = token
+            {
+                print("FCM registration token: \(token)")
+                if let custItem = SharedDefaults.getKeyChainCustItem()
+                {
+                    custItem.fcm_token = token
+                    SharedDefaults.setKeyChainCustItem(custItem)
+                }
+            }
+        }
+        
         /// FCM PUSH 정보를 받을 델리게이트 메서드를 연결 합니다.
-        self.setFcmRegister()
+        //self.setFcmRegister()
         /// 탈옥 단말 체크 합니다.
         self.setSecureCheck()
         /// 키체인 사용여부를 체크 합니다.
@@ -42,29 +69,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             {
                 if let startUrl = remoteNotification["url"] as? String {
                     /// PUSH 관련 정보 URL 을 받아 앱 메인에서 디스플레이 하도록 합니다.
-                    SharedDefaults.default.appStartURLString        = startUrl
+                    BaseViewModel.shared.pushUrl = startUrl
                 }
             }
             /// 외부에서 Link 정보를 받아 앱 실행 되는 경우 입니다. ( cereal://movepage?url=URL )
             else if let url = launchOptions[.url] as? URL
             {
-                switch url.scheme {
-                    /// 접근 스킴 타입 입니다.
-                case "cereal":
-                    /// 호스트 정보가 movepage 인지를 체크 합니다.
-                    if NC.S(url.host) == "movepage"
-                    {
-                        /// 이동할 링크 정보를 받습니다.
-                        if let linkUrl = url.queryParameters?["url"], linkUrl.isValid
-                        {
-                            Slog("deeplink open url : \(linkUrl)")
-                        }
-                    }
-                default: break
-                }
+                /// Deeplink 접근할 URL 정보를 요청 합니다.
+                self.viewModel.setDeepLink(deelLinkUrl: url).sink { deeplink in
+                    /// DeepLink 접근할.URL 정보를 받습니다.
+                    BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+                }.store(in: &self.viewModel.cancellableSet)
             }
         }
-        
         return true
     }
 
@@ -76,25 +93,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date : 2023.04.06
      */
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        switch url.scheme {
-            /// 접근 스킴 타입 입니다.
-        case "cereal":
-            /// 호스트 정보가 movepage 인지를 체크 합니다.
-            if NC.S(url.host) == "movepage"
-            {
-                /// 이동할 링크 정보를 받습니다.
-                if let linkUrl = url.queryParameters?["url"],
-                   linkUrl.isValid
-                {
-                    Slog("deeplink open url : \(linkUrl)")
-                    /// Deeplink 데이터를 넘깁니다.
-                    NotificationCenter.default.post(name: Notification.Name.DEEP_LINK, object: linkUrl, userInfo: nil)
-                }
-            }
-        default: break
-        }
+        /// Deeplink 접근할 URL 정보를 요청 합니다.
+        self.viewModel.setDeepLink(deelLinkUrl: url).sink { deeplink in
+            /// DeepLink 접근할.URL 정보를 받습니다.
+            BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+        }.store(in: &self.viewModel.cancellableSet)
+        
         return true
     }
+    
+    
+    /**
+     APNS Device Token 정보를 받습니다.
+     - Date : 2023.04.06
+     */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        var token: String = ""
+        for i in 0..<deviceToken.count {
+            token += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
+            
+        }
+        
+        NSLog("Firebase APNs token retrieved: \(deviceToken)")
+        
+        print("token:\(token)")
+        
+        // With swizzling disabled you must set the APNs token here.
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    
 }
 
 
@@ -103,12 +131,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - APNS 연동 데이터 처리 입니다.
 extension AppDelegate : UNUserNotificationCenterDelegate
 {
+    /**
+     PUSH 적용할 설정 정보를 추가 합니다.
+     - Date : 2023.04.06
+     */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         completionHandler([.alert,.sound,.badge])
     }
     
     
+    /**
+     실시간 PUSH 정보를 처리 합니다.
+     - Date : 2023.04.06
+     */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
     {
         let application = UIApplication.shared
@@ -118,15 +154,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate
         if application.applicationState == .active
         {
             if let url = userInfo["url"] as? String {
-                /// PUSH 데이터를 넘깁니다.
-                NotificationCenter.default.post(name: Notification.Name.PUSH_EVENT, object: url, userInfo: userInfo)
+                BaseViewModel.shared.pushUrl = url
             }
         }
         else
         {
+            /// PUSH 데이터를 넘깁니다.
             if let url = userInfo["url"] as? String {
-                /// PUSH 데이터를 넘깁니다.
-                NotificationCenter.default.post(name: Notification.Name.PUSH_EVENT, object: url, userInfo: userInfo)
+                BaseViewModel.shared.pushUrl = url
             }
         }
         completionHandler()
@@ -145,13 +180,13 @@ extension AppDelegate
      - returns :False
      */
     func setFcmRegister() {
-        UNUserNotificationCenter.current().delegate = self
+        /// 앱 PUSH 사용 허용 여부를 요청 합니다. 
         self.viewModel.isAPNSAuthorization().sink { success in
             if success
             {
                 DispatchQueue.main.async {
-                    //FirebaseApp.configure()
                     Messaging.messaging().delegate = self
+                    UNUserNotificationCenter.current().delegate = self
                     Messaging.messaging().token { token, error in
                         if let error = error
                         {
@@ -215,7 +250,6 @@ extension AppDelegate
             }
         }
     }
-    
 }
 
 
