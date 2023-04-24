@@ -62,8 +62,8 @@
             filePath = "Class/Web/WebMessagCallBackHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1545"
-            endingLineNumber = "1545"
+            startingLineNumber = "1431"
+            endingLineNumber = "1431"
             landmarkName = "setTargetDismiss(_:param:)"
             landmarkType = "7">
             <Locations>
@@ -103,22 +103,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1CA9DD3A-B122-4428-91F8-D9A310FA9201"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/UI/Intro/IntroViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "setAppChecking()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "769A6847-67E6-4EF6-B510-8F91A8889F9F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -142,58 +126,10 @@
             filePath = "cereal/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "setFcmRegister()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4E74E8A9-C14C-4C6E-AC3A-2BFCB2B0DF0B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "cereal/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "messaging(_:didReceiveRegistrationToken:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4E74E8A9-C14C-4C6E-AC3A-2BFCB2B0DF0B - 72215fdce4774ff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.AppDelegate.messaging(_: __C.FIRMessaging, didReceiveRegistrationToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/daehoonchung/Desktop/newProject/cereal/cereal/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "261"
-                  endingLineNumber = "261"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  uuid = "4E74E8A9-C14C-4C6E-AC3A-2BFCB2B0DF0B - 72215fdce4774ff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.AppDelegate.messaging(_: __C.FIRMessaging, didReceiveRegistrationToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/daehoonchung/Desktop/newProject/cereal/cereal/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "261"
-                  endingLineNumber = "261"
-                  offsetFromSymbolStart = "860">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -302,8 +238,8 @@
             filePath = "cereal/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -318,8 +254,8 @@
             filePath = "cereal/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>

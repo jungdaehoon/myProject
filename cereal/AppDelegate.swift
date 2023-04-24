@@ -28,34 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.sharedSDK().debug = true
         /// FirebaseApp (FCM) 설정관련 연결 입니다.
         FirebaseApp.configure()
-        UNUserNotificationCenter.current().delegate = self
-
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-          options: authOptions,
-          completionHandler: { _, _ in }
-        )
-
-        application.registerForRemoteNotifications()
-        
-        Messaging.messaging().token { token, error in
-            if let error = error
-            {
-                print("Error fetching FCM registration token: \(error)")
-            }
-            else if let token = token
-            {
-                print("FCM registration token: \(token)")
-                if let custItem = SharedDefaults.getKeyChainCustItem()
-                {
-                    custItem.fcm_token = token
-                    SharedDefaults.setKeyChainCustItem(custItem)
-                }
-            }
-        }
-        
         /// FCM PUSH 정보를 받을 델리게이트 메서드를 연결 합니다.
-        //self.setFcmRegister()
+        self.setFcmRegister()
         /// 탈옥 단말 체크 합니다.
         self.setSecureCheck()
         /// 키체인 사용여부를 체크 합니다.
@@ -180,12 +154,12 @@ extension AppDelegate
      - returns :False
      */
     func setFcmRegister() {
-        /// 앱 PUSH 사용 허용 여부를 요청 합니다. 
+        /// 앱 PUSH 사용 허용 여부를 요청 합니다.
         self.viewModel.isAPNSAuthorization().sink { success in
             if success
             {
                 DispatchQueue.main.async {
-                    Messaging.messaging().delegate = self
+                    Messaging.messaging().delegate              = self
                     UNUserNotificationCenter.current().delegate = self
                     Messaging.messaging().token { token, error in
                         if let error = error

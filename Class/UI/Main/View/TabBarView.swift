@@ -20,9 +20,9 @@ class TabBarView : UIView
     /// 공통으로 사용되는 Tabbar 입니다. ( MainViewController 에서 TabbarViewController 를 가져 옵니다. )
     static var tabbar                   : TabbarViewController?
     /// 이전 Tab 인덱스 입니다.
-    static var tabBackIndex             : NSInteger   = 0
+    static var tabBackIndex             : Int   = 0
     /// 현 Tab 인덱스 입니다.
-    static var tabSeletedIndex          : NSInteger   = 0
+    static var tabSeletedIndex          : Int   = 0
     
     
     //MARK: - Init
@@ -140,7 +140,7 @@ class TabBarView : UIView
         - pageTag : 활성화될 아이템 넘버 입니다.
      - returns :False
      */
-    func setChangePage( _ pageTag : NSInteger ){
+    func setChangePage( _ pageTag : Int ){
         if let subView = self.viewWithTag(pageTag)
         {
             /// 이전 탭 정보를 넘 깁니다.

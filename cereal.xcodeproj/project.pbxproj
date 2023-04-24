@@ -172,6 +172,7 @@
 		8DBA445C29D428BA00A2E5C1 /* HybridOpenBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBA445A29D428BA00A2E5C1 /* HybridOpenBankViewController.xib */; };
 		8DC72E6929D6A3420044F021 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC72E6829D6A3420044F021 /* DatePickerViewController.swift */; };
 		8DC72E6B29D6A34B0044F021 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC72E6A29D6A34B0044F021 /* PickerViewViewController.swift */; };
+		8DCB189829F64FDB000645D3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCB189729F64FDB000645D3 /* AdSupport.framework */; };
 		8DD6B6B329EE70EB00E3C68E /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6B229EE70EB00E3C68E /* splash.json */; };
 		8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */; };
 		8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */; };
@@ -389,6 +390,7 @@
 		8DBA445A29D428BA00A2E5C1 /* HybridOpenBankViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HybridOpenBankViewController.xib; sourceTree = "<group>"; };
 		8DC72E6829D6A3420044F021 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		8DC72E6A29D6A34B0044F021 /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
+		8DCB189729F64FDB000645D3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8DD6B6B229EE70EB00E3C68E /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = splash.json; path = ../../../../../Downloads/splash.json; sourceTree = "<group>"; };
 		8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				8DDC3DF829D16731003C4F8F /* libBSAppIronCrypto-Raonsecure.a in Frameworks */,
 				03A8B402B8ABD84636006B8B /* Pods_cereal.framework in Frameworks */,
 				8DE5F21C29F285DD003601CB /* UserNotifications.framework in Frameworks */,
+				8DCB189829F64FDB000645D3 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +471,7 @@
 		56A39BA79224A5FEBAFE11B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DCB189729F64FDB000645D3 /* AdSupport.framework */,
 				8DE5F21B29F285DD003601CB /* UserNotifications.framework */,
 				8DDC3DE329D151CF003C4F8F /* libc++.tbd */,
 				8D205F9129D14B8B00F43C99 /* Libs */,
@@ -596,15 +600,15 @@
 		8D205E7A29D1346E00F43C99 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8DA48C9D29E91178007712C6 /* Benefit */,
-				8D205E7E29D1346E00F43C99 /* Home */,
-				8D205E8029D1346E00F43C99 /* Remittance */,
 				8D205E8229D1346E00F43C99 /* Intro */,
 				8D205E9029D1346E00F43C99 /* Main */,
+				8D205E8029D1346E00F43C99 /* Remittance */,
+				8DA48C9D29E91178007712C6 /* Benefit */,
+				8D205E7E29D1346E00F43C99 /* Home */,
+				8D205EC029D1346E00F43C99 /* Finance */,
 				8D205E9A29D1346E00F43C99 /* AllMore */,
 				8D205EAB29D1346E00F43C99 /* Pedometer */,
-				8D205EB129D1346E00F43C99 /* OkPayment */,
-				8D205EC029D1346E00F43C99 /* Finance */,
+				8D205EB129D1346E00F43C99 /* OkZeroPayment */,
 				8D205EC229D1346E00F43C99 /* Login */,
 			);
 			path = UI;
@@ -737,7 +741,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8D205EB129D1346E00F43C99 /* OkPayment */ = {
+		8D205EB129D1346E00F43C99 /* OkZeroPayment */ = {
 			isa = PBXGroup;
 			children = (
 				8D205EB229D1346E00F43C99 /* Model */,
@@ -745,7 +749,7 @@
 				8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */,
 				8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */,
 			);
-			path = OkPayment;
+			path = OkZeroPayment;
 			sourceTree = "<group>";
 		};
 		8D205EB229D1346E00F43C99 /* Model */ = {
@@ -1748,11 +1752,12 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지 등록을 위해 위해 권한이 필요합니다.\n접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Intro;
@@ -1808,11 +1813,12 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지 등록을 위해 위해 권한이 필요합니다.\n접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Intro;

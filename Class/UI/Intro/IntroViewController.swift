@@ -75,81 +75,85 @@ class IntroViewController: BaseViewController {
      */
     func setAppChecking()
     {
-        /// 앱 실드 체크 합니다.
-        self.viewModel.getAppShield().sink { appShield in
-            /// error 이 아닌 경우 정상 처리 합니다.
-            if appShield.error != nil
-            {
-                DispatchQueue.main.async(execute: {
-                    /// 서비스 불가 안내 뷰어를 오픈 합니다.
-                    ServiceErrorPop().show()                    
-                    CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
-                        exit(0)
-                    }
-                })
-            }
-            /// 앱 실드 정상처리 입니다.
-            else
-            {
-                /// 앱 시작시 기본 정보를 요청합니다.
-                self.viewModel.setAppStart().sink { result in
-                    /// 서비스 불가 안내 뷰어를 오픈 합니다.
-                    ServiceErrorPop().show()
-                } receiveValue: { response in
-                    if let data = response!._data
-                    {
-                        /// 버전 정보가 있는지를 체크 합니다.
-                        if let version = data._versionInfo
+        /// 앱 추적 (IDFA) 허용 여부를 요청 합니다.
+        self.viewModel.isTrackingAuthorization().sink { success in
+            /// 앱 실드 체크 합니다.
+            self.viewModel.getAppShield().sink { appShield in
+                /// error 이 아닌 경우 정상 처리 합니다.
+                if appShield.error != nil
+                {
+                    DispatchQueue.main.async(execute: {
+                        /// 서비스 불가 안내 뷰어를 오픈 합니다.
+                        ServiceErrorPop().show()
+                        CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
+                            exit(0)
+                        }
+                    })
+                }
+                /// 앱 실드 정상처리 입니다.
+                else
+                {
+                    /// 앱 시작시 기본 정보를 요청합니다.
+                    self.viewModel.setAppStart().sink { result in
+                        /// 서비스 불가 안내 뷰어를 오픈 합니다.
+                        ServiceErrorPop().show()
+                    } receiveValue: { response in
+                        if let data = response!._data
                         {
-                            /// 서버 버전이 앱 버전보다 높을 경우 업데이트 여부를 체크 합니다.
-                            if version._version! > APP_VERSION
+                            /// 버전 정보가 있는지를 체크 합니다.
+                            if let version = data._versionInfo
                             {
-                                /// 강제 업데이트 여부가 "N" 경우 안내 후 진행 합니다.
-                                if version._compulsion_update == "N"
+                                /// 서버 버전이 앱 버전보다 높을 경우 업데이트 여부를 체크 합니다.
+                                if version._version! > APP_VERSION
                                 {
-                                    /// 업데이트 안내 팝업 입니다.
-                                    let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
-                                    alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
-                                        version._market_url!.openUrl()
-                                        exit(0)
-                                    })
-                                    alert?.addAlertBtn(btnTitleText: "다음에하기", completion: { result in
-                                        /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
-                                        self.permissionInfoView.setOpenView { value in
-                                            /// 접근권한 "확인" 일 경우 입니다.
-                                            if value == true
-                                            {
-                                                self.setOKPayStart()
+                                    /// 강제 업데이트 여부가 "N" 경우 안내 후 진행 합니다.
+                                    if version._compulsion_update == "N"
+                                    {
+                                        /// 업데이트 안내 팝업 입니다.
+                                        let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
+                                        alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
+                                            version._market_url!.openUrl()
+                                            exit(0)
+                                        })
+                                        alert?.addAlertBtn(btnTitleText: "다음에하기", completion: { result in
+                                            /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+                                            self.permissionInfoView.setOpenView { value in
+                                                /// 접근권한 "확인" 일 경우 입니다.
+                                                if value == true
+                                                {
+                                                    self.setOKPayStart()
+                                                }
                                             }
+                                        })
+                                        alert?.show()
+                                        return
+                                    }
+                                    /// 강제 업데이트 입니다.
+                                    else
+                                    {
+                                        CMAlertView().setAlertView(detailObject: version._popup_msg as AnyObject, cancelText: "앱 업데이트") { event in
+                                            version._market_url!.openUrl()
+                                            exit(0)
                                         }
-                                    })
-                                    alert?.show()
+                                    }
                                     return
                                 }
-                                /// 강제 업데이트 입니다.
-                                else
-                                {
-                                    CMAlertView().setAlertView(detailObject: version._popup_msg as AnyObject, cancelText: "앱 업데이트") { event in
-                                        version._market_url!.openUrl()
-                                        exit(0)
-                                    }
-                                }
-                                return
                             }
                         }
-                    }
-                                        
-                    /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
-                    self.permissionInfoView.setOpenView { value in
-                        /// 접근권한 "확인" 일 경우 입니다.
-                        if value == true
-                        {
-                            self.setOKPayStart()
+                                            
+                        /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+                        self.permissionInfoView.setOpenView { value in
+                            /// 접근권한 "확인" 일 경우 입니다.
+                            if value == true
+                            {
+                                self.setOKPayStart()
+                            }
                         }
-                    }
-                }.store(in: &self.cancellableSet)
-            }
-        }.store(in: &self.cancellableSet)
+                    }.store(in: &self.cancellableSet)
+                }
+            }.store(in: &self.cancellableSet)
+        }.store(in: &self.viewModel.cancellableSet)
+        
     }
 
     
@@ -226,7 +230,7 @@ class IntroViewController: BaseViewController {
         self.navigationController!.replaceViewController(viewController: newController,animated: false) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                newController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)                
+                newController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)
             })
         }
     }
