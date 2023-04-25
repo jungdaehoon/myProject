@@ -799,6 +799,8 @@
 		8D205EC229D1346E00F43C99 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				8D9D924229F7B81900F42B8D /* GuideInfoView.swift */,
+				8D9D924329F7B81900F42B8D /* GuideInfoView.xib */,
 				8D9D924129F7B81900F42B8D /* View */,
 				8DDC3DE529D15F65003C4F8F /* Model */,
 				8D205EC329D1346E00F43C99 /* LoginViewController.xib */,
@@ -1104,8 +1106,6 @@
 		8D9D924129F7B81900F42B8D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D9D924229F7B81900F42B8D /* GuideInfoView.swift */,
-				8D9D924329F7B81900F42B8D /* GuideInfoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
