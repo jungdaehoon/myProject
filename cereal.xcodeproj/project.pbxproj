@@ -159,8 +159,8 @@
 		8D91E27A29E53ACB0015E5E7 /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27529E53ACA0015E5E7 /* tabbar_home.json */; };
 		8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */; };
 		8D9A004629DEAD9600424077 /* libnProtectMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */; };
-		8D9D924429F7B81900F42B8D /* GuideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D924229F7B81900F42B8D /* GuideInfoView.swift */; };
-		8D9D924529F7B81900F42B8D /* GuideInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D924329F7B81900F42B8D /* GuideInfoView.xib */; };
+		8D9D924929F7B9F900F42B8D /* GuideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */; };
+		8D9D924A29F7B9F900F42B8D /* GuideInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D924829F7B9F900F42B8D /* GuideInfoView.xib */; };
 		8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA48C9E29E911B3007712C6 /* BenefitViewController.swift */; };
 		8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAAF57A29ED1550000FE02E /* ServiceErrorPop.xib */; };
 		8DAAF57D29ED1550000FE02E /* ServiceErrorPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAAF57B29ED1550000FE02E /* ServiceErrorPop.swift */; };
@@ -384,8 +384,8 @@
 		8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_financial.json; sourceTree = "<group>"; };
 		8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnProtectMobileSDK.a; sourceTree = "<group>"; };
 		8D9A004529DEAD9600424077 /* IxSecureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IxSecureManager.h; sourceTree = "<group>"; };
-		8D9D924229F7B81900F42B8D /* GuideInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideInfoView.swift; sourceTree = "<group>"; };
-		8D9D924329F7B81900F42B8D /* GuideInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideInfoView.xib; sourceTree = "<group>"; };
+		8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideInfoView.swift; sourceTree = "<group>"; };
+		8D9D924829F7B9F900F42B8D /* GuideInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideInfoView.xib; sourceTree = "<group>"; };
 		8DA48C9E29E911B3007712C6 /* BenefitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenefitViewController.swift; sourceTree = "<group>"; };
 		8DAAF57A29ED1550000FE02E /* ServiceErrorPop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceErrorPop.xib; sourceTree = "<group>"; };
 		8DAAF57B29ED1550000FE02E /* ServiceErrorPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceErrorPop.swift; sourceTree = "<group>"; };
@@ -799,9 +799,7 @@
 		8D205EC229D1346E00F43C99 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				8D9D924229F7B81900F42B8D /* GuideInfoView.swift */,
-				8D9D924329F7B81900F42B8D /* GuideInfoView.xib */,
-				8D9D924129F7B81900F42B8D /* View */,
+				8D9D924629F7B9F900F42B8D /* View */,
 				8DDC3DE529D15F65003C4F8F /* Model */,
 				8D205EC329D1346E00F43C99 /* LoginViewController.xib */,
 				8D205EC429D1346E00F43C99 /* LoginViewController.swift */,
@@ -1103,9 +1101,11 @@
 			path = SecureManager;
 			sourceTree = "<group>";
 		};
-		8D9D924129F7B81900F42B8D /* View */ = {
+		8D9D924629F7B9F900F42B8D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */,
+				8D9D924829F7B9F900F42B8D /* GuideInfoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1351,6 +1351,7 @@
 				8D205F4C29D1346F00F43C99 /* OKZeroPayView.xib in Resources */,
 				8D205E4029D133FB00F43C99 /* LaunchScreen.storyboard in Resources */,
 				8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */,
+				8D9D924A29F7B9F900F42B8D /* GuideInfoView.xib in Resources */,
 				8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */,
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
@@ -1388,7 +1389,6 @@
 				8DE3260429D567C8006E3B69 /* guide_up.json in Resources */,
 				8DBA445C29D428BA00A2E5C1 /* HybridOpenBankViewController.xib in Resources */,
 				8D205F4029D1346F00F43C99 /* AllMoreMenuListCell.xib in Resources */,
-				8D9D924529F7B81900F42B8D /* GuideInfoView.xib in Resources */,
 				8D205F8529D1346F00F43C99 /* BottomTermsView.xib in Resources */,
 				8D205F4A29D1346F00F43C99 /* QRBarCodeFullViewController.xib in Resources */,
 				8D205F3B29D1346F00F43C99 /* PointItemView.xib in Resources */,
@@ -1531,7 +1531,6 @@
 				8D205F8029D1346F00F43C99 /* LoginResponse.swift in Sources */,
 				8DF117A129E7996300D7A095 /* NavigationControllerAnimated.swift in Sources */,
 				8D205F6C29D1346F00F43C99 /* UINavigationController.swift in Sources */,
-				8D9D924429F7B81900F42B8D /* GuideInfoView.swift in Sources */,
 				8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */,
 				8D205F7229D1346F00F43C99 /* APIConstant.swift in Sources */,
 				8D205F2329D1346F00F43C99 /* HomeViewController.swift in Sources */,
@@ -1564,6 +1563,7 @@
 				8D205F5329D1346F00F43C99 /* FinanceViewController.swift in Sources */,
 				8DCB18A729F6641E000645D3 /* RestoreWalletViewController.swift in Sources */,
 				8D205F6729D1346F00F43C99 /* UIImageView.swift in Sources */,
+				8D9D924929F7B9F900F42B8D /* GuideInfoView.swift in Sources */,
 				8D205F6529D1346F00F43C99 /* UIButton.swift in Sources */,
 				8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */,
 				8DDC3DE929D15FA6003C4F8F /* LoginModel.swift in Sources */,
