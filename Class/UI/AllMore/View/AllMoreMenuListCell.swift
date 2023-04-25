@@ -99,6 +99,11 @@ class AllMoreMenuListCell: UITableViewCell {
             /// 오른쪽 서브에 문구를 추가 합니다.
             self.subTitle.text      = menuInfo._subTitle!
         }
+        else
+        {
+            /// 추가 정보를 디스플레이 하도록 비 활성화 합니다.
+            self.subTitle.isHidden = true
+        }
                 
         /// 타이틀 오른쪽 디스플레이할 아이콘 문구가 있는지를 체크 합니다.
         if menuInfo._subiCon!.count > 0
@@ -118,6 +123,12 @@ class AllMoreMenuListCell: UITableViewCell {
                 self.typeiConView.backgroundColor = UIColor(red: 255/255, green: 129/255, blue: 37/255, alpha: 1.0)
             }
         }
+        else
+        {
+            /// 타이틀 문구 오른쪽 아이콘을 비 활성화 합니다.
+            self.typeiConView.isHidden  = true
+        }
+        
         
         if menuInfo._title == "이번달 결제"
         {
@@ -160,14 +171,11 @@ class AllMoreMenuListCell: UITableViewCell {
         {
             /// 인증 처리 팝업 입니다.
             self.setZeroPayTermsViewDisplay()
-            
         }
         if self.menuInfo!._title! == "제로페이 상품권"
         {
-            /// 전체 화면 제로페이 상품권 웹 페이지 디스플레이 입니다.
+            self.setDisplayWebView(WebPageConstants.URL_ZERO_PAY_INTRO, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true)
         }
-        
-        
         if self.menuInfo!._title! == "만보Go"
         {
             self.toPedometerPage()

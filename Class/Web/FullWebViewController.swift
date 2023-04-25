@@ -50,6 +50,8 @@ enum FULL_PAGE_TYPE : String {
  - Date : 2023.03.28
 */
 class FullWebViewController: BaseViewController {
+    /// 뷰 모델 입니다.
+    private var viewModel: BaseViewModel { get { return self.baseViewModel }}
     /// 상단 타이틀바 영역 높이를 조정 합니다.
     @IBOutlet weak var titleBarHeight   : NSLayoutConstraint!
     /// 웹 페이지 디스플레이 영역 뷰어 입니다.
@@ -252,7 +254,7 @@ extension FullWebViewController {
     
     /**
      제로페이 WebApp 스키마를 처리 합니다.
-     - Date : 2023.04.19
+     - Date : 2023.04.25
      - Parameters:
         - url : URL 정보 입니다.
      - Throws : False
@@ -263,61 +265,62 @@ extension FullWebViewController {
     func setZeroPay( url : URL, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void ){
         let scheme   = NC.S(url.scheme)
         let event    = NC.S(url.host)
-        /// 제로페이에서 이벤트 발생 체크 합니다.
-        if scheme.contains("webtoapp")
-        {
-            /// 제로페이 진입후 제로페이에서 화면 종료 이벤트 발생 입니다.
-            if NC.S(event).contains("close")
+        /// URL에서 파라미터 정보를 가져 옵니다.
+        self.viewModel.getURLParams(url: url).sink { params in
+            /// 제로페이에서 이벤트 발생 체크 합니다.
+            if scheme.contains("webtoapp")
             {
-                self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {})
-                decisionHandler(.allow, preferences)
-                return
-            }
-            
-            /// 제로페이 상품권으로 결제 요청시 사용자 인증 요청 이벤트 입니다.
-            if NC.S(event).contains("user/v2/auth")
-            {
-                /// 파라미터를 세팅 합니다.
-                let params  = self.getURLParams(url: url)
-                /// 상품권 결제 인증 요청 URL 정보를 세팅 합니다.
-                let linkUrl = self.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params)
-                /// 전체 웹뷰를 호출 합니다.
-                let webview = FullWebViewController.init(pageType: .zeropay_type, titleBarHidden: true, pageURL: linkUrl) { webCBType in
-                    switch webCBType
-                    {
-                    case .scriptCall(let collBackID, _, _):
-                        self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
-                            print(anyData as Any)
-                            print(error as Any)
-                        }
-                    default:break
-                    }
-                }
-                webview.view.backgroundColor = .clear
-                self.navigationController?.pushViewController(webview, animated: true, animatedType: .up)
-                decisionHandler(.allow, preferences)
-                return
-            }
-            
-            
-            /// 제로페이 상품권 구매,환불 선택시 이벤트 입니다.
-            if NC.S(event).contains("transfer/v2/auth")
-            {
-                /// 파라미터를 세팅 합니다.
-                let params          = self.getURLParams(url: url)
-                /// 거래구분 코드 입니다. ( P:구매, C:환불 , M:신용카드구매환불 )
-                if let dealDivCd    = params["dealDivCd"] as? String
+                /// 제로페이 진입후 제로페이에서 화면 종료 이벤트 발생 입니다.
+                if NC.S(event).contains("close")
                 {
-                    var linkUrl = ""
+                    self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {})
+                    decisionHandler(.allow, preferences)
+                    return
+                }
+                
+                /// 제로페이 상품권으로 결제 요청시 사용자 인증 요청 이벤트 입니다.
+                if NC.S(event).contains("user/v2/auth")
+                {
+                    /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
+                    self.viewModel.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params).sink { getUrl in
+                        DispatchQueue.main.async {
+                            /// 전체 웹뷰를 호출 합니다.
+                            let webview = FullWebViewController.init(pageType: .zeropay_type, titleBarHidden: true, pageURL: getUrl) { webCBType in
+                                switch webCBType
+                                {
+                                case .scriptCall(let collBackID, _, _):
+                                    self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
+                                        print(anyData as Any)
+                                        print(error as Any)
+                                    }
+                                default:break
+                                }
+                            }
+                            webview.view.backgroundColor = .clear
+                            self.navigationController?.pushViewController(webview, animated: true, animatedType: .up)
+                        }
+                    }.store(in: &self.baseViewModel.cancellableSet)
+                    decisionHandler(.allow, preferences)
+                    return
+                }
+                
+                
+                /// 제로페이 상품권 구매,환불 선택시 이벤트 입니다.
+                if NC.S(event).contains("transfer/v2/auth")
+                {
+                    /// GET 연결할 메인 URL 입니다.
+                    var mainURL     = ""
+                    /// 거래구분 코드 입니다. ( P:구매, C:환불 , M:신용카드구매환불 )
+                    let dealDivCd   = NC.S(params["dealDivCd"] as? String)
                     switch dealDivCd
                     {
                         /// 구매 입니다.
                         case "P":
-                            linkUrl = self.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_PURCHASE, params: params)
+                            mainURL = WebPageConstants.URL_ZERO_PAY_PURCHASE
                             break
                         /// 환불 입니다.
                         case "C":
-                            linkUrl = self.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_PURCHASE_CANCEL, params: params)
+                            mainURL = WebPageConstants.URL_ZERO_PAY_PURCHASE
                             break
                         /// 신용 카드 구매 환불 입니다.
                         case "M":
@@ -325,183 +328,140 @@ extension FullWebViewController {
                         default:break
                     }
                     
-                    /// 전체 웹뷰를 호출 합니다.
-                    let webview =  FullWebViewController.init(pageType: .zeropay_type, pageURL: linkUrl) { cbType in
-                        switch cbType
-                        {
-                        case .scriptCall(let collBackID, _, _):
-                            self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
-                                print(anyData as Any)
-                                print(error as Any)
+                    /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
+                    self.viewModel.getURLGetType(mainUrl: mainURL, params: params).sink { getUrl in
+                        /// 전체 웹뷰를 호출 합니다.
+                        let webview =  FullWebViewController.init(pageType: .zeropay_type, pageURL: getUrl) { cbType in
+                            switch cbType
+                            {
+                            case .scriptCall(let collBackID, _, _):
+                                self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
+                                    print(anyData as Any)
+                                    print(error as Any)
+                                }
+                            default:break
                             }
-                        default:break
                         }
+                        self.navigationController?.pushViewController(webview, animated: true, animatedType: .up)
+                    }.store(in: &self.baseViewModel.cancellableSet)
+                    decisionHandler(.allow, preferences)
+                    return
+                }
+                
+                
+                /// 이전 히스토리로 이동 이벤트 발생 입니다.
+                if NC.S(event).contains("historyBack")
+                {
+                    if self.webView!.canGoBack
+                    {
+                        self.webView!.goBack()
                     }
-                    self.navigationController?.pushViewController(webview, animated: true, animatedType: .up)
+                    else
+                    {
+                        self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
+                        })
+                    }
+                    decisionHandler(.allow, preferences)
+                    return
+                }
+                
+                
+                /// 외부 사파리 웹페이지로 이동 이벤트 합니다.
+                if NC.S(event).contains("externalLink")
+                {
+                    if params.count > 0
+                    {
+                        let link = NC.S(params["url"] as? String)
+                        if link.isValid { link.openUrl() }
+                    }
+                    decisionHandler(.allow, preferences)
+                    return
+                }
+                
+                
+                /// QRCode 스캔 오픈 요청 이벤트 입니다.
+                if NC.S(event).contains("qrCode")
+                {
+                    /// 파라미터를 세팅 합니다.
+                    var params      = params
+                    /// 제로페이에 데이터 리턴할 콜백 스크립트를 저장 합니다.
+                    var scricptCB   = NC.S(params["callbackUrl"] as? String)
+                    ///  QRCode 스캔 하는 전체 화면 뷰어를 호출 합니다.
+                    OKZeroPayQRCaptureView(completion: { qrCodeCB in
+                        switch qrCodeCB
+                        {
+                            /// QRCdoe 읽기 실패 입니다.
+                            case .qr_fail,.cb_fail :
+                                /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                                params.updateValue("N", forKey: "result")
+                                params.updateValue("", forKey: "qrCode")
+                                DispatchQueue.main.async {
+                                    do
+                                    {
+                                        /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
+                                        if let cbParam = try Utils.toJSONString(params)
+                                        {
+                                            scricptCB += "('\(cbParam)')"
+                                            self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
+                                                print(anyData as Any)
+                                                print(error as Any)
+                                            }
+                                        }
+                                    }catch{
+                                        print("QrCode toJSONString Error")
+                                    }
+                                    OKZeroPayQRCaptureView().hide()
+                                }
+                            /// QRCode 페이지 종료 입니다.
+                            case .close :
+                                OKZeroPayQRCaptureView().hide()
+                            /// QRCode 정보를 넘깁니다
+                            case .qr_success(let qrcode) :
+                                /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                                params.updateValue("Y", forKey: "result")
+                                params.updateValue(NC.S(qrcode), forKey: "qrCode")
+                                DispatchQueue.main.async {
+                                    do
+                                    {
+                                        /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
+                                        if let cbParam = try Utils.toJSONString(params)
+                                        {
+                                            scricptCB += "('\(cbParam)')"
+                                            self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
+                                                print(anyData as Any)
+                                                print(error as Any)
+                                            }
+                                        }
+                                    }catch{
+                                        print("QrCode toJSONString Error")
+                                    }
+                                    OKZeroPayQRCaptureView().hide()
+                                }
+                                break
+                            /// QRCode 인증 정상처리 후 받은 스크립트를 넘깁니다.
+                            case .cb_success( let scricpt ) :
+                                /// 제로페이에 QRCode 데이터를 전송 합니다.
+                                DispatchQueue.main.async {
+                                    self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
+                                        print(anyData as Any)
+                                        print(error as Any)
+                                    }
+                                    OKZeroPayQRCaptureView().hide()
+                                }
+                            default:break
+                        }
+                        decisionHandler(.allow, preferences)
+                        return
+                    }, params: params).show()
+                }
+                else
+                {
                     decisionHandler(.allow, preferences)
                     return
                 }
             }
-            
-            
-            /// 이전 히스토리로 이동 이벤트 발생 입니다.
-            if NC.S(event).contains("historyBack")
-            {
-                if self.webView!.canGoBack
-                {
-                    self.webView!.goBack()
-                }
-                else
-                {
-                    self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
-                    })
-                }
-                decisionHandler(.allow, preferences)
-                return
-            }
-            
-            
-            /// 외부 사파리 웹페이지로 이동 이벤트 합니다.
-            if NC.S(event).contains("externalLink")
-            {
-                /// 파라미터를 세팅 합니다.
-                let params      = self.getURLParams(url: url)
-                if params.count > 0
-                {
-                    let link = NC.S(params["url"] as? String)
-                    if link.count > 0
-                    {
-                        link.openUrl()
-                    }
-                }
-                decisionHandler(.allow, preferences)
-                return
-            }
-            
-            
-            /// QRCode 스캔 오픈 요청 이벤트 입니다.
-            if NC.S(event).contains("qrCode")
-            {
-                /// 파라미터를 세팅 합니다.
-                var params      = self.getURLParams(url: url)
-                /// 제로페이에 데이터 리턴할 콜백 스크립트를 저장 합니다.
-                var scricptCB   = NC.S(params["callbackUrl"] as? String)
-                ///  QRCode 스캔 하는 전체 화면 뷰어를 호출 합니다.
-                OKZeroPayQRCaptureView(completion: { qrCodeCB in
-                    switch qrCodeCB
-                    {
-                        /// QRCdoe 읽기 실패 입니다.
-                        case .qr_fail,.cb_fail :
-                            /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
-                            params.updateValue("N", forKey: "result")
-                            params.updateValue("", forKey: "qrCode")
-                            DispatchQueue.main.async {
-                                do
-                                {
-                                    /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
-                                    if let cbParam = try Utils.toJSONString(params)
-                                    {
-                                        scricptCB += "('\(cbParam)')"
-                                        self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                            print(anyData as Any)
-                                            print(error as Any)
-                                        }
-                                    }
-                                }catch{
-                                    print("QrCode toJSONString Error")
-                                }
-                                OKZeroPayQRCaptureView().hide()
-                            }
-                        /// QRCode 페이지 종료 입니다.
-                        case .close :
-                            OKZeroPayQRCaptureView().hide()
-                        /// QRCode 정보를 넘깁니다
-                        case .qr_success(let qrcode) :
-                            /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
-                            params.updateValue("Y", forKey: "result")
-                            params.updateValue(NC.S(qrcode), forKey: "qrCode")
-                            DispatchQueue.main.async {
-                                do
-                                {
-                                    /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
-                                    if let cbParam = try Utils.toJSONString(params)
-                                    {
-                                        scricptCB += "('\(cbParam)')"
-                                        self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                            print(anyData as Any)
-                                            print(error as Any)
-                                        }
-                                    }
-                                }catch{
-                                    print("QrCode toJSONString Error")
-                                }
-                                OKZeroPayQRCaptureView().hide()
-                            }
-                            break
-                        /// QRCode 인증 정상처리 후 받은 스크립트를 넘깁니다.
-                        case .cb_success( let scricpt ) :
-                            /// 제로페이에 QRCode 데이터를 전송 합니다.
-                            DispatchQueue.main.async {
-                                self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
-                                    print(anyData as Any)
-                                    print(error as Any)
-                                }
-                                OKZeroPayQRCaptureView().hide()
-                            }
-                        default:break
-                    }
-                    decisionHandler(.allow, preferences)
-                }, params: params).show()
-                return
-            }
-        }
-        decisionHandler(.allow, preferences)
-    }
-    
-    
-    /**
-     URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다.
-     - Date : 2023.04.19
-     - Parameters:
-        - url : URL 정보 입니다.
-     - Throws : False
-     - returns :
-        - [String : Any]
-            + 파라미터 정보를 정리하여 리턴 합니다.
-     */
-    func getURLParams( url : URL ) -> [String : Any] {
-        let components                   = URLComponents(string: url.absoluteString)
-        let items                        = components?.queryItems ?? []
-        var params      : [String : Any] = [:]
-        /// 제로페이에서 받은 데이터를 파라미터로 세팅 합니다.
-        for item in items
-        {
-            params.updateValue(item.value as Any, forKey: item.name)
-        }
-        return params
-    }
-    
-    
-    /**
-     GET 방식 URL 파라미터를 설정하여 리턴 합니다.
-     - Date : 2023.04.19
-     - Parameters:
-        - mainUrl : 메인 URL 정보 입니다.
-        - params : GET 방식으로 연결할 파라미터 정보 입니다.
-     - Throws : False
-     - returns :
-        - String
-            + 파라미터 연결된 GET 방식 URL 정보를 넘깁니다.
-     */
-    func getURLGetType( mainUrl : String, params : [String : Any] = [:]) -> String
-    {
-        var getParams = "?"
-        for (key,value) in params
-        {
-            getParams += "\(key)=\(value)&"
-        }
-        getParams.remove(at: getParams.index(before: getParams.endIndex))
-        return mainUrl + getParams
-        
+            decisionHandler(.allow, preferences)
+            return
+        }.store(in: &self.baseViewModel.cancellableSet)
     }
 }

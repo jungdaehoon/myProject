@@ -52,43 +52,16 @@ class BannerView: UIView {
         {
             if result._user_seq_no!.isEmpty
             {
-                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER)
+                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true)
             }
             else
             {
-                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER)
+                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true)
             }
         }
         else
         {
-            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER)
+            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true)
         }
-    }
-    
-    
-    /**
-     링크 기준으로 전체 화면 웹뷰를 디스플레이 합니다.
-     - Date : 2023.03.21
-     - Parameters:
-        - linkUrl : 연결할 페이지 URL 정보 입니다.
-     - Throws : False
-     - returns :False
-     */
-    func setDisplayWebView( _ linkUrl : String = "" ) {        
-        /// 전체 웹뷰를 호출 합니다.
-        let webview =  FullWebViewController.init(pageURL: linkUrl) { cbType in
-            switch cbType
-            {
-            case .urlLink(let url):
-                /// 전체 웹뷰에서 페이지 종료시 전달 하는 정보를 체크 합니다.
-                if url.contains(WebPageConstants.URL_MY_ACCOUNT_LIST)
-                {
-                    self.setDisplayWebView(WebPageConstants.URL_MY_ACCOUNT_LIST)
-                }
-            default:break
-            }            
-        }
-        self.viewController.navigationController?.pushViewController(webview, animated: true)
-    }
-    
+    }    
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import AppTrackingTransparency
+import FirebaseMessaging
 import Combine
 import Photos
 import Contacts
@@ -225,8 +226,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-            >  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
+     - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
+     >  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
      */
     func setAppStart() -> AnyPublisher<AppStartResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]
@@ -234,7 +235,7 @@ class BaseViewModel : NSObject {
                       "appshield_session_id"    : self.appShield.session_id! ,
                       "appshield_token"         : self.appShield.token!]
         let subject             = PassthroughSubject<AppStartResponse?,ResponseError>()
-        requst() { error in            
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -257,8 +258,8 @@ class BaseViewModel : NSObject {
         - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
      - Throws : False
      - returns :
-        - Future<String, Never>
-            >  연동할 URL 정보르 리턴 합니다.
+     - Future<String, Never>
+     >  연동할 URL 정보르 리턴 합니다.
      */
     func getAppMenuList( menuID : MENU_LIST ) -> Future<String, Never>
     {
@@ -292,8 +293,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-            >  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
+     - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
+     >  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
      */
     func getPTTermAgreeCheck() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
@@ -320,8 +321,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
-            >  InsertPedometerTermsResponse : 약관동의 처리 여부를 받습니다.
+     - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
+     >  InsertPedometerTermsResponse : 약관동의 처리 여부를 받습니다.
      */
     func setPTTermAgreeCheck() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
@@ -347,8 +348,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<LogOutResponse?, ResponseError>
-            >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+     - AnyPublisher<LogOutResponse?, ResponseError>
+     >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
      */
     func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
         let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
@@ -376,7 +377,7 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<FcmPushUpdateResponse?, ResponseError>
+     - AnyPublisher<FcmPushUpdateResponse?, ResponseError>
      */
     func setFcmTokenRegister() ->  AnyPublisher<FcmPushUpdateResponse?, ResponseError> {
         let subject             = PassthroughSubject<FcmPushUpdateResponse?,ResponseError>()
@@ -417,8 +418,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.27
      - Throws : False
      - returns :
-        - Future<AppShield, Never>
-            >  AppShield : 앱 실드 정상 여부를 체크 합니다.
+     - Future<AppShield, Never>
+     >  AppShield : 앱 실드 정상 여부를 체크 합니다.
      */
     func getAppShield() -> Future<AppShield, Never>
     {
@@ -456,8 +457,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-        - Future<Bool, Never>
-            >  Bool : 앱 카메라 접근 여부 값을 리턴 합니다.
+     - Future<Bool, Never>
+     >  Bool : 앱 카메라 접근 여부 값을 리턴 합니다.
      */
     func isCameraAuthorization() -> Future<Bool, Never>
     {
@@ -476,8 +477,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.20
      - Throws : False
      - returns :
-        - Future<Bool, Never>
-            >  Bool : 앱 이미지 저장소 접근 여부 값을 리턴 합니다.
+     - Future<Bool, Never>
+     >  Bool : 앱 이미지 저장소 접근 여부 값을 리턴 합니다.
      */
     func isPhotoSaveAuthorization() -> Future<Bool, Never>
     {
@@ -504,15 +505,15 @@ class BaseViewModel : NSObject {
             })
         }
     }
-
+    
     
     /**
      연락처 접근 허용 여부를 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.29
      - Throws : False
      - returns :
-        - Future<Bool, Never>
-            >  Bool : 앱 연락처 접근 여부 값을 리턴 합니다.
+     - Future<Bool, Never>
+     >  Bool : 앱 연락처 접근 여부 값을 리턴 합니다.
      */
     func isContactAuthorization() -> Future<Bool, Never>
     {
@@ -532,8 +533,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-        - Future<Bool, Never>
-            >  Bool : PUSH 사용 인증 여부 값을 리탄합니다.
+     - Future<Bool, Never>
+     >  Bool : PUSH 사용 인증 여부 값을 리탄합니다.
      */
     func isAPNSAuthorization() -> Future<Bool, Never>
     {
@@ -554,8 +555,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.20
      - Throws : False
      - returns :
-        - Future<Bool, Never>
-            >  Bool : 앱 추적 허용 승인 여부 값을 리턴 합니다.
+     - Future<Bool, Never>
+     >  Bool : 앱 추적 허용 승인 여부 값을 리턴 합니다.
      */
     func isTrackingAuthorization() -> Future<Bool, Never>
     {
@@ -597,10 +598,10 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-        - Future<String, Never>
-            >  String : 딥링크 진입 할 URL 정보를 받습니다.
+     - Future<String, Never>
+     >  String : 딥링크 진입 할 URL 정보를 받습니다.
      */
-    func setDeepLink( deelLinkUrl url: URL ) -> Future<String, Never>
+    func getDeepLink( deelLinkUrl url: URL ) -> Future<String, Never>
     {
         return Future<String, Never> { promise in
             switch url.scheme {
@@ -613,12 +614,165 @@ class BaseViewModel : NSObject {
                     if let linkUrl = url.queryParameters?["url"],
                        linkUrl.isValid
                     {
-                        Slog("deeplink open url : \(linkUrl)")
                         /// Deeplink 데이터를 넘깁니다.
                         promise(.success(linkUrl))
                     }
                 }
             default: break
+            }
+        }
+    }
+    
+    
+    /**
+     URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다.
+     - Date : 2023.04.19
+     - Parameters:
+     - url : URL 정보 입니다.
+     - Throws : False
+     - returns :
+     - Future <[String : Any],Naver>
+     + 파라미터 정보를 정리하여 리턴 합니다.
+     */
+    func getURLParams( url : URL ) -> Future<[String : Any], Never>
+    {
+        return Future<[String : Any], Never> { promise in
+            let components                   = URLComponents(string: url.absoluteString)
+            let items                        = components?.queryItems ?? []
+            var params      : [String : Any] = [:]
+            /// 제로페이에서 받은 데이터를 파라미터로 세팅 합니다.
+            for item in items
+            {
+                params.updateValue(item.value as Any, forKey: item.name)
+            }
+            promise(.success(params))
+        }
+    }
+    
+    
+    /**
+     GET 방식 URL 파라미터를 설정하여 리턴 합니다.
+     - Date : 2023.04.19
+     - Parameters:
+        - mainUrl : 메인 URL 정보 입니다.
+        - params : GET 방식으로 연결할 파라미터 정보 입니다.
+     - Throws : False
+     - returns :
+        - Future<String,Never>
+            + 파라미터 연결된 GET 방식 URL 정보를 넘깁니다.
+     */
+    func getURLGetType( mainUrl : String, params : [String : Any] = [:]) -> Future<String, Never>
+    {
+        return Future<String, Never> { promise in
+            var getParams = "?"
+            for (key,value) in params
+            {
+                getParams += "\(key)=\(value)&"
+            }
+            getParams.remove(at: getParams.index(before: getParams.endIndex))
+            promise(.success(mainUrl + getParams))
+        }
+    }
+    
+    
+    /**
+     Session 유지를 위해 쿠키 업데이트 정보를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.25
+     - Parameters:
+        - cookies : 업데이트할 쿠키 정보입니다.
+     - Throws : False
+     - returns :
+        - Future<String, Never>
+            + 업데이트 된 정보를 넘깁니다.
+     */
+    func getJSCookiesString( cookies : [HTTPCookie]? ) -> Future<String, Never>
+    {
+        return Future<String, Never> { promise in
+            var source = String()
+            cookies?.forEach { cookie in
+                source.append("document.cookie = '")
+                source.append("\(cookie.name)=\(cookie.value); path=\(cookie.path); domain=\(cookie.domain);'\n")
+            }
+            promise(.success(source))
+        }
+    }
+    
+    
+    /**
+     FCM PUSH 수신을 등록합니다.
+     - Date : 2023.04.06
+     - Parameters:Fasle
+     - Throws : False
+     - returns :False
+     */
+    func setFcmRegister( appDelegate : AppDelegate ) {
+        /// 앱 PUSH 사용 허용 여부를 요청 합니다.
+        self.isAPNSAuthorization().sink { success in
+            if success
+            {
+                DispatchQueue.main.async {
+                    Messaging.messaging().delegate              = appDelegate
+                    UNUserNotificationCenter.current().delegate = appDelegate
+                    Messaging.messaging().token { token, error in
+                        if let error = error
+                        {
+                            print("Error fetching FCM registration token: \(error)")
+                        }
+                        else if let token = token
+                        {
+                            print("FCM registration token: \(token)")
+                            if let custItem = SharedDefaults.getKeyChainCustItem()
+                            {
+                                custItem.fcm_token = token
+                                SharedDefaults.setKeyChainCustItem(custItem)
+                            }
+                        }
+                    }
+                }
+            }
+        }.store(in: &self.cancellableSet)
+    }
+    
+    
+    /**
+     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱삭제후 설치 . 기존 키체인 내용을 삭제 )
+     - Date : 2023.04.06
+     - Parameters:Fasle
+     - Throws : False
+     - returns :False
+     */
+    func setKeyChainEnabled(){
+        if SharedDefaults.default.isKeychainRead == false
+        {
+            if let _ = SharedDefaults.getKeyChainCustItem()
+            {
+                /// 기존에 저장된 키체인 정보를 전부 삭제 합니다.
+                SharedDefaults.default.keychainWrapper.removeAllKeys()
+                /// 키체인 사용여부를 활성화 합니다.
+                SharedDefaults.default.isKeychainRead = true
+                /// 신규 정보를 세팅 합니다.
+                SharedDefaults.setKeyChainCustItem(KeyChainCustItem())
+            }
+        }
+    }
+    
+    
+    /**
+     탈옥 방지 체크 합니다.
+     - Date : 2023.04.06
+     - Parameters:Fasle
+     - Throws : False
+     - returns :False
+     */
+    func setSecureCheck() {
+        if let secuManager = IxSecureManager.shared() {
+            secuManager.initLicense("AB441C0C1755")
+            secuManager.start()
+            if secuManager.check() {
+                Slog("Problem")
+                exit(0)
+            }else {
+                Slog("Normal")
             }
         }
     }

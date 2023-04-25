@@ -11,6 +11,7 @@ import CryptoSwift
 import web3swift
 import Web3Core
 
+
 class WalletHelper
 {
     static let sharedInstance = WalletHelper()
@@ -260,3 +261,6 @@ class WalletHelper
     }
 
 }
+
+
+

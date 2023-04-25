@@ -20,6 +20,24 @@ extension Notification.Name {
 
 
 /**
+ 텝 별 인덱스 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.04.21
+ */
+enum TAB_STATUS : Int {
+    /// 월렛 탭 인덱스 입니다.
+    case wallet     = 0
+    /// 혜택 탭 인덱스 입니다.
+    case benefit    = 1
+    /// 홈 탭 인덱스 입니다.
+    case home       = 2
+    /// 금융 탭 인덱스 입니다.
+    case finance    = 3
+    /// 전체 탭 인덱스 입니다.
+    case allmenu    = 4
+}
+
+
+/**
  메인 탭바 컨트롤러 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.20
  */
@@ -60,9 +78,8 @@ class TabbarViewController: UITabBarController {
         BaseViewModel.shared.$logOut.sink { value in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !value { return }
-            
             /// 로그인 페이지를 오픈 합니다.
-            self.setDisplayLogin { success in
+            self.setDisplayLogin( animation: true ) { success in
                 if success
                 {
                     /// 로그아웃을. false 변경 합니다.
@@ -73,13 +90,13 @@ class TabbarViewController: UITabBarController {
             } puchCompletion: {
                 
             }
-          
         }.store(in: &self.viewModel.cancellableSet)
         
         /// 딥링크 URL 이벤트 입니다.
         BaseViewModel.shared.$deepLinkUrl.sink { url in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !url.isValid { return }
+            /// 로그인 정보가 있는지를 체크 합니다.
             if let login = BaseViewModel.loginResponse
             {
                 if login.islogin!
@@ -110,6 +127,7 @@ class TabbarViewController: UITabBarController {
         BaseViewModel.shared.$pushUrl.sink { url in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !url.isValid  { return }
+            /// 로그인 정보가 있는지를 체크 합니다.
             if let login = BaseViewModel.loginResponse {
                 if login.islogin!
                 {
@@ -243,22 +261,6 @@ class TabbarViewController: UITabBarController {
 }
 
 
-/**
- 텝 별 인덱스 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.21
- */
-enum TAB_STATUS : Int {
-    /// 월렛 탭 인덱스 입니다.
-    case wallet     = 0
-    /// 혜택 탭 인덱스 입니다.
-    case benefit    = 1
-    /// 홈 탭 인덱스 입니다.
-    case home       = 2
-    /// 금융 탭 인덱스 입니다.
-    case finance    = 3
-    /// 전체 탭 인덱스 입니다.
-    case allmenu    = 4    
-}
 
 extension UITabBarController
 {

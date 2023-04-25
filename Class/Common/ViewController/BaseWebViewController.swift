@@ -15,7 +15,7 @@ var processPool = WKProcessPool()
  */
 
 class BaseWebViewController: UIViewController, WKNavigationDelegate {
-
+    var baseViewModel       : BaseViewModel = BaseViewModel()
     /// 웹 화면 디스플레이 입니다.
     var webView             : WKWebView?
     /// 웹 이벤트에서 주고받을 메세지 핸들러 입니다.
@@ -43,50 +43,47 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     func initWebView( _ view : UIView, target : UIViewController ) {
         /// 웹 메세지 핸들러를 연결 합니다.
         self.messageHandler                 = WebMessagCallBackHandler( webViewController: self )
-        
-        let contentController = WKUserContentController()
-        contentController.removeAllUserScripts()
-        
-        //let cookies = HTTPCookieStorage.shared.cookies
-        let cookies = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl)!)
-        let script = self.getJSCookiesString(cookies: cookies)
-        
-        let cookieScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: false)
-        contentController.addUserScript(cookieScript)
-        
-        let updateScript = WKUserScript(source: "window.webkit.messageHandlers.updateCookies.postMessage(document.cookie);", injectionTime: .atDocumentStart, forMainFrameOnly: false)
-        contentController.addUserScript(updateScript)
-        
-        /// 스크립트를 연결 합니다.
-        for scriptmsg in SCRIPT_MESSAGE_HANDLER_TYPE.allCases {
-            contentController.add(self, name: scriptmsg.rawValue)
-        }
-        self.messageHandler!.config.userContentController = contentController
-        
-        self.webView                        = WKWebView(frame: self.view.frame, configuration: self.messageHandler!.config)
-        self.webView!.uiDelegate            = self
-        self.webView!.navigationDelegate    = self
-        if #available(iOS 14.0, *) {
-            self.webView!.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
-        } else {
-            self.webView!.configuration.preferences.javaScriptEnabled = true
-        }
-        self.webView!.allowsBackForwardNavigationGestures = false
-        self.webView!.evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
-            if error == nil
+        /// 도메인의 쿠키 정보를 가져 옵니다.
+        let cookies                         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl)!)
+        /// 업데이트할 쿠키 스크립트를 요청 합니다.
+        self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
+            let contentController                                   = WKUserContentController()
+            contentController.removeAllUserScripts()
+            let cookieScript                                        = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+            contentController.addUserScript(cookieScript)
+            let updateScript                                        = WKUserScript(source: "window.webkit.messageHandlers.updateCookies.postMessage(document.cookie);", injectionTime: .atDocumentStart, forMainFrameOnly: false)
+            contentController.addUserScript(updateScript)
+            /// 스크립트를 연결 합니다.
+            for scriptmsg in SCRIPT_MESSAGE_HANDLER_TYPE.allCases
             {
-                if let userAgent = result as? String {
-                    self?.webView!.customUserAgent = userAgent + " iOS-Oligo " + "iOS-APP"
+                contentController.add(self, name: scriptmsg.rawValue)
+            }
+            self.messageHandler!.config.userContentController       = contentController
+            self.webView                                            = WKWebView(frame: self.view.frame, configuration: self.messageHandler!.config)
+            self.webView!.uiDelegate                                = self
+            self.webView!.navigationDelegate                        = self
+            if #available(iOS 14.0, *) {
+                self.webView!.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
+            } else {
+                self.webView!.configuration.preferences.javaScriptEnabled = true
+            }
+            self.webView!.allowsBackForwardNavigationGestures       = false
+            self.webView!.evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
+                if error == nil
+                {
+                    if let userAgent = result as? String {
+                        self?.webView!.customUserAgent = userAgent + " iOS-Oligo " + "iOS-APP"
+                    }
                 }
             }
-        }
-        self.webView!.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
-        self.webView!.translatesAutoresizingMaskIntoConstraints = false
-        self.webView!.allowsLinkPreview         = false
-        view.addSubview(self.webView!)
-        view.addConstraintsToFit(self.webView!)
-        self.messageHandler!.webView = self.webView
-        self.messageHandler!.target  = target
+            self.webView!.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
+            self.webView!.translatesAutoresizingMaskIntoConstraints = false
+            self.webView!.allowsLinkPreview                         = false
+            self.messageHandler!.webView                            = self.webView
+            self.messageHandler!.target                             = target
+            view.addSubview(self.webView!)
+            view.addConstraintsToFit(self.webView!)
+        }.store(in: &self.baseViewModel.cancellableSet)
     }
     
     
@@ -190,17 +187,20 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         /// 웹페이지 정상 디스플레이 완료후 쿠키를 업데이트 합니다.
         if self.updateCookies == true
         {
-            self.updateCookies = false
-            let cookies = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
-            let script  = getJSCookiesString(cookies: cookies)
-            self.webView!.evaluateJavaScript(script) { ( anyData , error) in
-                print("updateCookies anyData:\(anyData as Any)")
-                print("updateCookies error:\(error as Any)")
-                print("updateCookies script:\(script)")
-            }
+            self.updateCookies  = false
+            /// 연결 도메인의 쿠키 정보를 가져 옵니다.
+            let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
+            /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
+            self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
+                self.webView!.evaluateJavaScript(script) { ( anyData , error) in
+                    print("updateCookies anyData:\(anyData as Any)")
+                    print("updateCookies error:\(error as Any)")
+                    print("updateCookies script:\(script)")
+                }
+                webView.configuration.userContentController.removeAllUserScripts()
+            }.store(in: &self.baseViewModel.cancellableSet)
         }
         LoadingView.default.hide()
-        webView.configuration.userContentController.removeAllUserScripts()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -319,39 +319,20 @@ extension BaseWebViewController: WKScriptMessageHandler {
         if message.name == "\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies)"
         {
             print("\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies) : \(message.body)")
-            let cookies = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
-            let script  = getJSCookiesString(cookies: cookies)
-            self.webView!.evaluateJavaScript(script) { ( anyData , error) in
-                print("updateCookies anyData:\(anyData as Any)")
-                print("updateCookies error:\(error as Any)")
-                print("updateCookies script:\(script)")
-            }
+            /// 연결 도메인의 쿠키 정보를 가져 옵니다.
+            let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
+            /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
+            self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
+                self.webView!.evaluateJavaScript(script) { ( anyData , error) in
+                    print("updateCookies anyData:\(anyData as Any)")
+                    print("updateCookies error:\(error as Any)")
+                    print("updateCookies script:\(script)")
+                }
+            }.store(in: &self.baseViewModel.cancellableSet)
             return
         }
         /// hybridscript 메세지 이벤트를 넘깁니다.
         messageHandler?.didReceiveMessage(message: message)
-    }
-    
-    
-    /**
-     Session 유지를 위해 쿠키 업데이트 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.28
-     - Parameters:
-        - cookies : 업데이트할 쿠키 정보입니다.
-     - Throws : False
-     - returns :
-        - String
-            + 업데이트 된 정보를 넘깁니다.
-     */
-    func getJSCookiesString( cookies : [HTTPCookie]? ) -> String {
-        var source = String()
-        cookies?.forEach { cookie in
-            source.append("document.cookie = '")
-            source.append("\(cookie.name)=\(cookie.value); path=\(cookie.path); domain=\(cookie.domain);'\n")
-        }
-        print("getJSCookiesString:\(source)")
-        return source
-        
     }
 }
 

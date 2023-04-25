@@ -40,6 +40,7 @@ class WebPageConstants {
     static let URL_POINT_TRANSFER_LIST          = baseURL + "myp/mypPointTransHistory.do"
     /// 결제 페이지 입니다.
     static let URL_TOTAL_PAY_LIST               = baseURL + "all/totalPaymentList.do"
+    
     /// 공지사항 페이지 입니다.
     static let URL_NOTICE_LIST                  = baseURL + "all/noticeList.do"
     /// 이벤트 페이지 입니다.
@@ -66,6 +67,8 @@ class WebPageConstants {
     static let URL_PEDO_RANK                    = baseURL + "myp/mypPedometer.do"
     /// 만보기 서비스 이용안내/개인 정보제공 동의 페이지 입니다. ( ?terms_cd=S001 / ?terms_cd=S002 )
     static let URL_PEDO_TERMS                   = baseURL + "popup/pedometerTermsView.do"
+    /// 재로페이 상품권 페이지 입니다.
+    static let URL_ZERO_PAY_INTRO               = baseURL + "zeropay/giftcard/intro"
     /// 재로페이 상품권으로 결제 인증 요청 입니다.
     static let URL_ZERO_PAY_GIFTCARD_PAYMENT    = baseURL + "zeropay/giftcard/payment.do"
     /// 재로페이 상품권 구매웹뷰 입니다.

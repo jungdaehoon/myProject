@@ -16,7 +16,7 @@ import Combine
  */
 class BaseViewController: BaseWebViewController {
 
-    var baseViewModel : BaseViewModel = BaseViewModel()
+    
     var cancellableSet = Set<AnyCancellable>()
     
     override func viewDidLoad() {

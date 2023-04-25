@@ -152,13 +152,14 @@ extension UIView {
      */
     func setDisplayWebView( _ linkUrl       : String        = "",
                             modalPresent    : Bool          = false,
+                            pageType        : FULL_PAGE_TYPE = .default_type,
                             animatedType    : AnimationType = .up,
                             titleName       : String        = "",
                             titleBarHidden  : Bool          = false,
                             completion      : (( _ value : FULL_WEB_CB ) -> Void )? = nil ) {
         if modalPresent
         {
-            let webview =  FullWebViewController( title: titleName, titleBarHidden: titleBarHidden, pageURL: linkUrl, completion : completion)
+            let webview =  FullWebViewController( pageType: pageType, title: titleName, titleBarHidden: titleBarHidden, pageURL: linkUrl, completion : completion)
             webview.modalPresentationStyle = .overFullScreen
             self.viewController.navigationController!.pushViewController(webview, animated: true, animatedType: animatedType)
         }

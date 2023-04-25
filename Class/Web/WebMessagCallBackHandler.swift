@@ -16,6 +16,7 @@ import ContactsUI
 import AddressBook
 import AddressBookUI
 
+
 /**
  WebMessagCallBackHandler 에서 지원하지 않는 message handler 를 등록하여 처리합니다.
 1. 생성자 호출(init(webView: WKWebView), init(baseView: BaseWebViewController)
@@ -29,7 +30,6 @@ import AddressBookUI
     /// 등록된  message handelr를 모두삭제 합니다.
     @objc optional func removeAll()
 }
-
 
 
 /**
@@ -56,7 +56,6 @@ class WebMessagCallBackHandler : NSObject  {
      - Date : 2023.03.20
      - Parameters:
         - webViewController : 연결 컨트롤 뷰어 입니다.
-        - completion : 연결된 configuration 을 리턴 합니다.
      - Throws : False
      - returns :False
      */
@@ -299,6 +298,7 @@ class WebMessagCallBackHandler : NSObject  {
             self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
         }
     }
+    
     
     func setRestoreWInfo( _ body : [Any?] ){
         
@@ -763,7 +763,10 @@ class WebMessagCallBackHandler : NSObject  {
         let callback        = body[0] as! [Any?]
         if let controller = self.target as? FullWebViewController
         {
-            controller.completion!(.scriptCall(collBackID: callback[0] as! String , message: "", controller: controller))
+            if let completion = controller.completion
+            {
+                completion(.scriptCall(collBackID: callback[0] as! String , message: "", controller: controller))
+            }
         }
     }
     

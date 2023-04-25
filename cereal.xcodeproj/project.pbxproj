@@ -41,11 +41,9 @@
 		8D205F2629D1346F00F43C99 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E8429D1346E00F43C99 /* Intro.storyboard */; };
 		8D205F2729D1346F00F43C99 /* IntroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E8629D1346E00F43C99 /* IntroModel.swift */; };
 		8D205F2829D1346F00F43C99 /* PermissionInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E8829D1346E00F43C99 /* PermissionInfoView.xib */; };
-		8D205F2929D1346F00F43C99 /* GuideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E8929D1346E00F43C99 /* GuideInfoView.swift */; };
 		8D205F2A29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E8A29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.swift */; };
 		8D205F2B29D1346F00F43C99 /* PermissionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E8B29D1346E00F43C99 /* PermissionInfoView.swift */; };
 		8D205F2C29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E8C29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.xib */; };
-		8D205F2D29D1346F00F43C99 /* GuideInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E8D29D1346E00F43C99 /* GuideInfoView.xib */; };
 		8D205F2F29D1346F00F43C99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E9129D1346E00F43C99 /* Main.storyboard */; };
 		8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */; };
 		8D205F3129D1346F00F43C99 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9529D1346E00F43C99 /* TabBarView.swift */; };
@@ -161,6 +159,8 @@
 		8D91E27A29E53ACB0015E5E7 /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27529E53ACA0015E5E7 /* tabbar_home.json */; };
 		8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */; };
 		8D9A004629DEAD9600424077 /* libnProtectMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */; };
+		8D9D924429F7B81900F42B8D /* GuideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D924229F7B81900F42B8D /* GuideInfoView.swift */; };
+		8D9D924529F7B81900F42B8D /* GuideInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D924329F7B81900F42B8D /* GuideInfoView.xib */; };
 		8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA48C9E29E911B3007712C6 /* BenefitViewController.swift */; };
 		8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAAF57A29ED1550000FE02E /* ServiceErrorPop.xib */; };
 		8DAAF57D29ED1550000FE02E /* ServiceErrorPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAAF57B29ED1550000FE02E /* ServiceErrorPop.swift */; };
@@ -262,11 +262,9 @@
 		8D205E8429D1346E00F43C99 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
 		8D205E8629D1346E00F43C99 /* IntroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroModel.swift; sourceTree = "<group>"; };
 		8D205E8829D1346E00F43C99 /* PermissionInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionInfoView.xib; sourceTree = "<group>"; };
-		8D205E8929D1346E00F43C99 /* GuideInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideInfoView.swift; sourceTree = "<group>"; };
 		8D205E8A29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideInfoViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		8D205E8B29D1346E00F43C99 /* PermissionInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionInfoView.swift; sourceTree = "<group>"; };
 		8D205E8C29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideInfoViewCollectionViewCell.xib; sourceTree = "<group>"; };
-		8D205E8D29D1346E00F43C99 /* GuideInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideInfoView.xib; sourceTree = "<group>"; };
 		8D205E9229D1346E00F43C99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarView.swift; sourceTree = "<group>"; };
 		8D205E9529D1346E00F43C99 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -386,6 +384,8 @@
 		8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_financial.json; sourceTree = "<group>"; };
 		8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnProtectMobileSDK.a; sourceTree = "<group>"; };
 		8D9A004529DEAD9600424077 /* IxSecureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IxSecureManager.h; sourceTree = "<group>"; };
+		8D9D924229F7B81900F42B8D /* GuideInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideInfoView.swift; sourceTree = "<group>"; };
+		8D9D924329F7B81900F42B8D /* GuideInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideInfoView.xib; sourceTree = "<group>"; };
 		8DA48C9E29E911B3007712C6 /* BenefitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenefitViewController.swift; sourceTree = "<group>"; };
 		8DAAF57A29ED1550000FE02E /* ServiceErrorPop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceErrorPop.xib; sourceTree = "<group>"; };
 		8DAAF57B29ED1550000FE02E /* ServiceErrorPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceErrorPop.swift; sourceTree = "<group>"; };
@@ -670,8 +670,6 @@
 			children = (
 				8D205E8829D1346E00F43C99 /* PermissionInfoView.xib */,
 				8D205E8B29D1346E00F43C99 /* PermissionInfoView.swift */,
-				8D205E8929D1346E00F43C99 /* GuideInfoView.swift */,
-				8D205E8D29D1346E00F43C99 /* GuideInfoView.xib */,
 				8D205E8A29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.swift */,
 				8D205E8C29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.xib */,
 			);
@@ -725,8 +723,8 @@
 				8D205EA829D1346E00F43C99 /* BannerView.xib */,
 				8D205EA129D1346E00F43C99 /* BottomLogOutView.swift */,
 				8D205EA029D1346E00F43C99 /* BottomLogOutView.xib */,
-				8D205EA229D1346E00F43C99 /* PointItemView.xib */,
 				8D205EA429D1346E00F43C99 /* PointItemView.swift */,
+				8D205EA229D1346E00F43C99 /* PointItemView.xib */,
 				8D205EA529D1346E00F43C99 /* TopUserInfoView.swift */,
 				8D205EA929D1346E00F43C99 /* TopUserInfoView.xib */,
 				8D205EA629D1346E00F43C99 /* AllMoreMenuListView.swift */,
@@ -801,6 +799,7 @@
 		8D205EC229D1346E00F43C99 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				8D9D924129F7B81900F42B8D /* View */,
 				8DDC3DE529D15F65003C4F8F /* Model */,
 				8D205EC329D1346E00F43C99 /* LoginViewController.xib */,
 				8D205EC429D1346E00F43C99 /* LoginViewController.swift */,
@@ -847,7 +846,6 @@
 				8D48BB3629D2D68E00CC4D62 /* View */,
 				8D205E7D29D1346E00F43C99 /* FullWebViewController.swift */,
 				8D205E7C29D1346E00F43C99 /* FullWebViewController.xib */,
-				8D205EE029D1346E00F43C99 /* WebPageConstants.swift */,
 				8D205EE129D1346E00F43C99 /* WebMessagCallBackHandler.swift */,
 			);
 			path = Web;
@@ -1103,6 +1101,15 @@
 			path = SecureManager;
 			sourceTree = "<group>";
 		};
+		8D9D924129F7B81900F42B8D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D9D924229F7B81900F42B8D /* GuideInfoView.swift */,
+				8D9D924329F7B81900F42B8D /* GuideInfoView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8DA48C9D29E91178007712C6 /* Benefit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1114,6 +1121,7 @@
 		8DBA445029D3FF8500A2E5C1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D205EE029D1346E00F43C99 /* WebPageConstants.swift */,
 				8DBA445129D3FFA700A2E5C1 /* WebMsgModel.swift */,
 			);
 			path = Model;
@@ -1377,10 +1385,10 @@
 				8D205F3929D1346F00F43C99 /* BottomLogOutView.xib in Resources */,
 				8D205F5429D1346F00F43C99 /* LoginViewController.xib in Resources */,
 				8D205F9529D14B8B00F43C99 /* XecureKeypad.bundle in Resources */,
-				8D205F2D29D1346F00F43C99 /* GuideInfoView.xib in Resources */,
 				8DE3260429D567C8006E3B69 /* guide_up.json in Resources */,
 				8DBA445C29D428BA00A2E5C1 /* HybridOpenBankViewController.xib in Resources */,
 				8D205F4029D1346F00F43C99 /* AllMoreMenuListCell.xib in Resources */,
+				8D9D924529F7B81900F42B8D /* GuideInfoView.xib in Resources */,
 				8D205F8529D1346F00F43C99 /* BottomTermsView.xib in Resources */,
 				8D205F4A29D1346F00F43C99 /* QRBarCodeFullViewController.xib in Resources */,
 				8D205F3B29D1346F00F43C99 /* PointItemView.xib in Resources */,
@@ -1523,6 +1531,7 @@
 				8D205F8029D1346F00F43C99 /* LoginResponse.swift in Sources */,
 				8DF117A129E7996300D7A095 /* NavigationControllerAnimated.swift in Sources */,
 				8D205F6C29D1346F00F43C99 /* UINavigationController.swift in Sources */,
+				8D9D924429F7B81900F42B8D /* GuideInfoView.swift in Sources */,
 				8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */,
 				8D205F7229D1346F00F43C99 /* APIConstant.swift in Sources */,
 				8D205F2329D1346F00F43C99 /* HomeViewController.swift in Sources */,
@@ -1592,7 +1601,6 @@
 				8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */,
 				8D205F7629D1346F00F43C99 /* SelectAccountListResponse.swift in Sources */,
 				8D205F6D29D1346F00F43C99 /* Float.swift in Sources */,
-				8D205F2929D1346F00F43C99 /* GuideInfoView.swift in Sources */,
 				8D205F6829D1346F00F43C99 /* Double.swift in Sources */,
 				8D205F5929D1346F00F43C99 /* NSLayoutConstraint.swift in Sources */,
 			);

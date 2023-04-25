@@ -58,7 +58,7 @@ class LoadingView: UIView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     로딩 최대 타임 종료시 호출 하여 로딩바 히든 처리 합니다.   ( J.D.H  VER : 1.0.0 )
      - Date : 2023.04.17
      */
     @objc func timerAction() {
