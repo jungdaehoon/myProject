@@ -233,7 +233,7 @@ extension AllMoreMenuListCell
     {
         let viewController = OkPaymentViewController()
         viewController.modalPresentationStyle = .overFullScreen
-        self.viewController.present(viewController, animated: true)
+        self.viewController.navigationController!.pushViewController(viewController, animated: true, animatedType: .up)
     }
     
     
@@ -274,7 +274,7 @@ extension AllMoreMenuListCell
                                 let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
                                 let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
                                 vc?.modalPresentationStyle  = .overFullScreen
-                                self.viewController.navigationController?.pushViewController(vc!, animated: true)
+                                self.viewController.navigationController?.pushViewController(vc!, animated: true, animatedType: .up)
                             }
                         }
                     }
@@ -321,7 +321,7 @@ extension AllMoreMenuListCell
                                 let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
                                 let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
                                 vc?.modalPresentationStyle  = .overFullScreen
-                                self.viewController.navigationController?.pushViewController(vc!, animated: true)
+                                self.viewController.navigationController?.pushViewController(vc!, animated: true, animatedType: .up)
                             }
                         }
                         /// 약관 동의 요청에 실패 하였습니다.

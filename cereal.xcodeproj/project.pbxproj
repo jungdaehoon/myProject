@@ -164,6 +164,7 @@
 		8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA48C9E29E911B3007712C6 /* BenefitViewController.swift */; };
 		8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAAF57A29ED1550000FE02E /* ServiceErrorPop.xib */; };
 		8DAAF57D29ED1550000FE02E /* ServiceErrorPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAAF57B29ED1550000FE02E /* ServiceErrorPop.swift */; };
+		8DAEFAF529F907850057215C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAEFAF429F907850057215C /* UIImage.swift */; };
 		8DBA445229D3FFA700A2E5C1 /* WebMsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA445129D3FFA700A2E5C1 /* WebMsgModel.swift */; };
 		8DBA445429D4176200A2E5C1 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA445329D4176200A2E5C1 /* AlertViewController.swift */; };
 		8DBA445629D41C7600A2E5C1 /* LevelPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA445529D41C7600A2E5C1 /* LevelPopView.swift */; };
@@ -389,6 +390,7 @@
 		8DA48C9E29E911B3007712C6 /* BenefitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenefitViewController.swift; sourceTree = "<group>"; };
 		8DAAF57A29ED1550000FE02E /* ServiceErrorPop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceErrorPop.xib; sourceTree = "<group>"; };
 		8DAAF57B29ED1550000FE02E /* ServiceErrorPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceErrorPop.swift; sourceTree = "<group>"; };
+		8DAEFAF429F907850057215C /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8DBA445129D3FFA700A2E5C1 /* WebMsgModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMsgModel.swift; sourceTree = "<group>"; };
 		8DBA445329D4176200A2E5C1 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		8DBA445529D41C7600A2E5C1 /* LevelPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPopView.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 				8DF117A029E7996300D7A095 /* NavigationControllerAnimated.swift */,
 				8D205EDD29D1346E00F43C99 /* Float.swift */,
 				8D205EDE29D1346E00F43C99 /* UITapGestureRecognizer.swift */,
+				8DAEFAF429F907850057215C /* UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1601,6 +1604,7 @@
 				8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */,
 				8D205F7629D1346F00F43C99 /* SelectAccountListResponse.swift in Sources */,
 				8D205F6D29D1346F00F43C99 /* Float.swift in Sources */,
+				8DAEFAF529F907850057215C /* UIImage.swift in Sources */,
 				8D205F6829D1346F00F43C99 /* Double.swift in Sources */,
 				8D205F5929D1346F00F43C99 /* NSLayoutConstraint.swift in Sources */,
 			);

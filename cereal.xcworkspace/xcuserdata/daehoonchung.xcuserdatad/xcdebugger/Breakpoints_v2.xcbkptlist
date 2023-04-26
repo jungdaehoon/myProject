@@ -14,8 +14,8 @@
             filePath = "Class/Web/FullWebViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "FullWebViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -34,38 +34,6 @@
             endingLineNumber = "160"
             landmarkName = "messaging(_:didReceiveRegistrationToken:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A78DE9B4-0BD1-406D-84D8-89371FD448F6 - b1144382b8e2f283"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.AppDelegate.messaging(_: __C.FIRMessaging, didReceiveRegistrationToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/cereal/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  uuid = "A78DE9B4-0BD1-406D-84D8-89371FD448F6 - b1144382b8e2f283"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.AppDelegate.messaging(_: __C.FIRMessaging, didReceiveRegistrationToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/cereal/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "860">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

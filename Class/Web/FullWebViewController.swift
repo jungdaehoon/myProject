@@ -41,6 +41,8 @@ enum FULL_PAGE_TYPE : String {
     case zeropay_type   = "ZP"
     /// 인증 관련 페이지 입니다.
     case auth_type      = "AUTH"
+    /// 외부 웹페이지 접근으로 내부 도메인을 사용하지 않습니다.
+    case outdside_type  = "OUTSIDE"
 }
 
 
@@ -51,13 +53,17 @@ enum FULL_PAGE_TYPE : String {
 */
 class FullWebViewController: BaseViewController {
     /// 뷰 모델 입니다.
-    private var viewModel: BaseViewModel { get { return self.baseViewModel }}
+    private var viewModel               : BaseViewModel { get { return self.baseViewModel }}
     /// 상단 타이틀바 영역 높이를 조정 합니다.
     @IBOutlet weak var titleBarHeight   : NSLayoutConstraint!
     /// 웹 페이지 디스플레이 영역 뷰어 입니다.
     @IBOutlet weak var webDisplayView   : UIView!
     /// 타이틀 정보 입니다.
     @IBOutlet weak var titleName        : UILabel!
+    /// 뒤로가기 버튼 입니다.
+    @IBOutlet weak var backBtn          : UIButton!
+    /// 종료 버튼 입니다.
+    @IBOutlet weak var closeBtn         : UIButton!
     /// 이벤트를 넘깁니다.
     var completion                      : (( _ webCBType : FULL_WEB_CB ) -> Void )? = nil
     /// 현 페이지 접근한 페이지 타입 입니다.
@@ -70,7 +76,8 @@ class FullWebViewController: BaseViewController {
     var titleBarHidden                  : Bool          = false
     /// 특정 상황에 파라미터를 이전 페이지 리턴 하는 경우 입니다.
     var returnParam                     : String        = ""
-    
+    /// 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
+    var titleBarType                    : Int           = 0
     
     
     // MARK: - init
@@ -78,26 +85,28 @@ class FullWebViewController: BaseViewController {
      전체 웹뷰 초기화 메서드 입니다.
      - Date : 2023.04.12
      - Parameters:
-        - pageType          : 페이지 타입 입니다.
-        - title             : 상단 네비 활성화시 타이틀 문구 입니다.
-        - titleBarHidden    : 타이틀바 활성화 여부 입니다. ( dafault : false )
-        - pageURL           : 연결할 페이지 URL 입니다.
-        - returnParam       : 이전 페이지 그대로 넘겨줄 파라미터 정보 입니다.
-        - completion        : 페이지 종료시 콜백 핸들러 입니다.
+        - pageType      : 상단 네비 활성화시 타이틀 문구 입니다.
+        - titleBarType  : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
+        - pageURL       : 연결할 페이지 URL 입니다.
+        - returnParam   : 이전 페이지 그대로 넘겨줄 파라미터 정보 입니다.
+        - completion    : 페이지 종료시 콜백 핸들러 입니다.
      - Throws : False
      - returns :False
      */
-    init( pageType : FULL_PAGE_TYPE = .default_type,
-          title : String = "",
-          titleBarHidden : Bool = false,
-          pageURL : String = "",
-          returnParam : String = "",
-          completion : (( _ webCBType : FULL_WEB_CB ) -> Void )? = nil ) {
+    init( pageType          : FULL_PAGE_TYPE = .default_type,
+          title             : String = "",
+          titleBarType      : Int = 0,
+          titleBarHidden    : Bool = false,
+          pageURL           : String = "",
+          returnParam       : String = "",
+          completion        : (( _ webCBType : FULL_WEB_CB ) -> Void )? = nil ) {
         super.init(nibName: nil, bundle: nil)
         /// 페이지 타입을 받습니다.
         self.pageType           = pageType
         /// 이벤트 정보를 리턴 하는 콜백입니다.
         self.completion         = completion
+        /// 타이틀바 타입 입니다.
+        self.titleBarType       = titleBarType
         /// 타이틀바 히든 여부를 가집니다.
         self.titleBarHidden     = titleBarHidden
         /// 타이틀 정보를 저장 합니다.
@@ -152,15 +161,27 @@ class FullWebViewController: BaseViewController {
      */
     func setWebViewDisplaya()
     {
-        /// 타이틀바 히든 경우 디스플레이 하지 않도록 합니다.
-        if self.titleBarHidden
+        /// 타이틀바 활성화 하며 뒤로 가기 버튼 입니다.
+        if self.titleBarType == 1
         {
-            self.titleBarHeight.constant = 0
+            self.backBtn.isHidden           = false
+            self.closeBtn.isHidden          = true
+            self.titleName.text             = title
+            self.titleBarHeight.constant    = 56
         }
+        
+        /// 타이틀 활성화 하며 페이지 종료 입니다.
+        if self.titleBarType == 2
+        {
+            self.backBtn.isHidden           = true
+            self.closeBtn.isHidden          = false
+            self.titleName.text             = title
+            self.titleBarHeight.constant    = 56
+        }
+        
         /// 타이틀을 세팅 합니다.
         self.titleName.text = self.titleText
         print("self.pageURL : \(self.pageURL)")
-        //webView?.load(URLRequest(url: URL(string: self.pageURL)!))
         self.loadMainURL(self.pageURL)
     }
     
@@ -285,7 +306,7 @@ extension FullWebViewController {
                     self.viewModel.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params).sink { getUrl in
                         DispatchQueue.main.async {
                             /// 전체 웹뷰를 호출 합니다.
-                            let webview = FullWebViewController.init(pageType: .zeropay_type, titleBarHidden: true, pageURL: getUrl) { webCBType in
+                            let webview = FullWebViewController.init(pageType: .zeropay_type, titleBarType: self.titleBarType, pageURL: getUrl) { webCBType in
                                 switch webCBType
                                 {
                                 case .scriptCall(let collBackID, _, _):
@@ -303,7 +324,6 @@ extension FullWebViewController {
                     decisionHandler(.allow, preferences)
                     return
                 }
-                
                 
                 /// 제로페이 상품권 구매,환불 선택시 이벤트 입니다.
                 if NC.S(event).contains("transfer/v2/auth")

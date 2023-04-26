@@ -44,7 +44,7 @@
                                         <constraint firstAttribute="height" constant="40" id="KX8-6J-zfn"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="Intro_header_close"/>
+                                    <state key="normal" image="header_close"/>
                                     <connections>
                                         <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="hdh-pU-usK"/>
                                     </connections>
@@ -172,6 +172,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Intro_header_close" width="40" height="40"/>
+        <image name="header_close" width="40" height="40"/>
     </resources>
 </document>

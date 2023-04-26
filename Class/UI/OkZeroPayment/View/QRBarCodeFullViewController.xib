@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRBarCodeFullViewController" customModule="QRCodeAndBarcodeReader" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRBarCodeFullViewController" customModule="cereal" customModuleProvider="target">
             <connections>
                 <outlet property="codeImageView" destination="y0q-hc-vkE" id="eeh-vw-UOP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,7 +29,7 @@
                                 <constraint firstAttribute="height" constant="40" id="kYR-UJ-MbB"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="Intro_header_close"/>
+                            <state key="normal" image="header_close"/>
                             <connections>
                                 <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="Fom-Yx-ONx"/>
                             </connections>
@@ -71,6 +71,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Intro_header_close" width="40" height="40"/>
+        <image name="header_close" width="40" height="40"/>
     </resources>
 </document>

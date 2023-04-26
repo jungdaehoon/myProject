@@ -182,7 +182,7 @@ class AllMoreViewController: BaseViewController {
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
             /// 현 버전에서는 사용하지 않습니다.
-            //menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", subiCon: "NEW!", menuType: "rightimg"))
+            menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", subiCon: "NEW!", menuType: "rightimg"))
             menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권",subiCon: "NEW!", menuType: "rightimg"))
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)

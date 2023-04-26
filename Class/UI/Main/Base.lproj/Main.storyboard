@@ -709,7 +709,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="도전!만보GO" id="nex-oO-deO">
-                                        <barButtonItem key="rightBarButtonItem" image="Intro_header_close" width="30" id="7pq-1y-OW7">
+                                        <barButtonItem key="rightBarButtonItem" image="header_close" width="30" id="7pq-1y-OW7">
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="onTappedClose:" destination="hjg-r4-Nnx" id="hxX-4f-jlH"/>
@@ -878,8 +878,8 @@
         </designable>
     </designables>
     <resources>
-        <image name="Intro_header_close" width="40" height="40"/>
         <image name="allMore_Setting" width="40" height="40"/>
+        <image name="header_close" width="40" height="40"/>
         <image name="iconP" width="16" height="16"/>
         <image name="iconStep" width="16" height="16"/>
         <image name="icon_cancel" width="18" height="18"/>

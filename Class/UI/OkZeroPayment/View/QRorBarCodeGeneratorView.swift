@@ -8,17 +8,6 @@
 
 import UIKit
 
-/**
- 코드 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.13
-*/
-enum CODE_TYPE
-{
-    /// 바코드 타입 입니다.
-    case barcode
-    /// QRCode 타입 입니다.
-    case qrcode
-}
 
 
 /**
@@ -28,11 +17,11 @@ enum CODE_TYPE
 class QRorBarCodeGeneratorView: UIView {
 
     /// 화면에 디스플레이할 코드 뷰어 입니다.
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView    : UIImageView!
     /// QR/바코드 정보를 가집니다.
-    var code : String?
+    var code                        : String?
     /// 코드 타입정보를 저장합니다.
-    var type : CODE_TYPE?
+    var type                        : ZEROPAY_CODE_TYPE?
     
     
     
@@ -67,20 +56,23 @@ class QRorBarCodeGeneratorView: UIView {
      - Parameters:
         - codeType : 코드 타입 정보를 받습니다.
         - code : 코드 정보 입니다.
+        - completion : 코드가 정상 적으로 생성되었는지를 리턴 합니다.
      - Throws : False
      - returns :False
      */
-    func setCodeDisplay( _ codeType : CODE_TYPE, code : String = "" )
+    func setCodeDisplay( _ codeType : ZEROPAY_CODE_TYPE,
+                         code : String = "",
+                         completion : (( _ success : Bool ) -> Void)? = nil )
     {
-        self.code = code
-        self.type = codeType
+        self.code       = code
+        self.type       = codeType
         switch codeType {
         case .barcode:
             if let image = self.generateBarcode128(code)
             {
-                self.imageView.image = image
+                self.imageView.image = image.resize(size: self.frame.size)
+                completion!(true)
             }
-            
             break
         case .qrcode:
             self.imageView.tintColor         = .black
@@ -88,6 +80,7 @@ class QRorBarCodeGeneratorView: UIView {
             if let image = self.generateQRCode(code)
             {
                 self.imageView.image = image
+                completion!(true)
             }
             break
         }

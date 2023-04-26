@@ -11,26 +11,6 @@ import AVFoundation
 
 
 /**
- 전체 웹 종료 콜백 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.19
-*/
-enum QRCODE_CB : Equatable {
-    /// QRCode 페이지 시작 입니다.
-    case start
-    /// QRCode 페이지 종료 입니다.
-    case close
-    /// QRCdoe 읽기 실패 입니다.
-    case qr_fail
-    /// 서버 스크립트 요청 실패 입니다.
-    case cb_fail
-    /// QRCode 정보를 넘깁니다
-    case qr_success ( qrcode : String? )
-    /// QRCode 인증 정상처리 후 받은 스크립트를 넘깁니다.
-    case cb_success ( scricpt : String? )
-}
-
-
-/**
  제로페이 QRCode 체크 전체 화면 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.11
 */

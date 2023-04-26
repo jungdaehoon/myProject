@@ -663,7 +663,16 @@ class WebMessagCallBackHandler : NSObject  {
                             controller.present(viewController,animated: true)
                         }
                         return
-                    
+                    case .outdside_type:
+                        /// 상단 타이틀 디스플레이 여부 입니다.
+                        let title           = NC.S(info["title"] as? String)
+                        /// 상단 타이틀 디스플레이 여부 입니다. ( 0 : 타이틀 바 히든, 1 : 뒤로가기 버튼, 2 : 종료 버튼 )
+                        let button          = NC.S( info["button"] as? String )
+                        /// 전체 화면 웹뷰를 오픈 합니다.
+                        let viewController  = FullWebViewController.init( titleBarHidden: true, pageURL: url ) { cbType in
+                        }
+                        self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
+                        return
                     default:
                         break
                     }

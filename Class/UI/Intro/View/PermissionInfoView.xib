@@ -18,7 +18,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PermissionInfoView" customModule="OKPay" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PermissionInfoView" customModule="cereal" customModuleProvider="target">
             <connections>
                 <outlet property="infoView" destination="kcJ-Yy-bkE" id="44e-3X-bB5"/>
                 <outlet property="infoViewTop" destination="iBo-GX-J4r" id="x6H-DV-My0"/>
@@ -40,7 +40,7 @@
                                 <constraint firstAttribute="height" constant="40" id="sL0-7b-C9S"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="Intro_header_close"/>
+                            <state key="normal" image="header_close"/>
                             <connections>
                                 <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="WB2-dw-zLr"/>
                             </connections>
@@ -354,7 +354,7 @@
         <image name="Intro-phonebook" width="40" height="40"/>
         <image name="Intro_Health" width="40" height="40"/>
         <image name="Intro_camera" width="40" height="40"/>
-        <image name="Intro_header_close" width="40" height="40"/>
+        <image name="header_close" width="40" height="40"/>
         <namedColor name="OKColor">
             <color red="1" green="0.32549019607843138" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

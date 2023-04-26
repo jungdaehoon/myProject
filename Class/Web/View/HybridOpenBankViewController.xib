@@ -38,7 +38,7 @@
                                                 <constraint firstAttribute="width" constant="22" id="6xu-3m-fGy"/>
                                                 <constraint firstAttribute="height" constant="22" id="UsS-PN-1Ec"/>
                                             </constraints>
-                                            <state key="normal" image="Intro_header_close"/>
+                                            <state key="normal" image="header_close"/>
                                             <connections>
                                                 <action selector="onTappedClose:" destination="-1" eventType="touchUpInside" id="9on-cN-ygI"/>
                                             </connections>
@@ -123,7 +123,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Intro_header_close" width="40" height="40"/>
+        <image name="header_close" width="40" height="40"/>
         <namedColor name="OKColor">
             <color red="1" green="0.32549019607843138" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

@@ -52,7 +52,7 @@
                         </label>
                         <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ3-zc-beS">
                             <rect key="frame" x="323" y="8" width="40" height="40"/>
-                            <state key="normal" image="Intro_header_close"/>
+                            <state key="normal" image="header_close"/>
                             <connections>
                                 <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="5Ac-hX-hYL"/>
                             </connections>
@@ -328,8 +328,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Intro_header_close" width="40" height="40"/>
         <image name="btn_login_r6" width="6.5" height="6.5"/>
+        <image name="header_close" width="40" height="40"/>
         <image name="login_check_off" width="24" height="24"/>
         <image name="login_check_on" width="24" height="24"/>
         <image name="logoOkLogin" width="160" height="64"/>
