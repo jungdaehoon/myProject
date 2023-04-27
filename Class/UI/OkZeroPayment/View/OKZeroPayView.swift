@@ -39,12 +39,22 @@ class OKZeroPayView: UIView {
     var rectOfInterest                      : CGRect?
     /// 제로페이 결제 할 코드타입을 설정 합니다. ( QRCode 결제 , BarCode 결제 )
     var zeroPayCodeType                     : ZEROPAY_CODE_TYPE = .barcode
+    /// 타이머 활성화 중인지를 체크 합니다.
+    var isTimer                             : Bool = false
+    /// 코드 전체 화면 디스플레이 여부 입니다.
+    var isCodeFullDisplay                   : Bool = false
+    /// 바코드 결제 활성화 여부를 체크 합니다.
+    var isBarCodePayEnabled                 : Bool = false
+    /// QRCode 결제 활성화 여부를 체크 합니다.
+    var isQrCodePayEnabled                  : Bool = false
     /// 전체 프리뷰 화면 입니다.
     @IBOutlet weak var previewView          : UIView!
     /// QR 인식 영역 뷰어 입니다. ( 영역만 가지고 있습니다. )
     @IBOutlet weak var QRintersetView       : UIView!
     /// QR 인식 영역 모서리 라인 이미지 입니다.
     @IBOutlet weak var qrcodeLineImg        : UIImageView!
+    /// 상세 정보 뷰어의 상단 포지션 입니다.
+    @IBOutlet weak var detaileViewTop       : NSLayoutConstraint!
     /// 결제 타입 선택시 선택여부 배경 입니다.
     @IBOutlet weak var payTypeBG            : UILabel!
     /// 결제 타입 배경 왼쪽 위치를 가집니다.
@@ -69,8 +79,18 @@ class OKZeroPayView: UIView {
     @IBOutlet weak var codeTypeInfoText     : UILabel!
     /// 코드 활성화 가능 타임 디스플레이 뷰어 입니다.
     @IBOutlet weak var codeEnabeldTimeView  : UIView!
+    /// 코드 활성화시 타임 디스플레이 뷰어의 넓이 입니다.
+    @IBOutlet weak var codeEnabledTimeWidth : NSLayoutConstraint!
     /// 코드 활성화중 디스플레이할 타임 문구 입니다.
     @IBOutlet weak var codeEnabeldTimeText  : UILabel!
+    /// 코드 전체 화면 배경 뷰어 입니다.
+    @IBOutlet weak var codeFullDisplayViewBG: UIView!
+    /// 코드 전체 화면 입니다.
+    @IBOutlet weak var codeFullDisplayView  : OKZeroPayCodeFullView!
+    /// 코드 전체 화면 높이 입니다.
+    @IBOutlet weak var codeFullHeight       : NSLayoutConstraint!
+    //// 코드 전체 화면 넓이 입니다.
+    @IBOutlet weak var codeFullWidth        : NSLayoutConstraint!
     
     
     //MARK: - Init
@@ -107,11 +127,45 @@ class OKZeroPayView: UIView {
             }
         }.store(in: &self.viewModel.cancellableSet)
 
-        
-        /// QR 코드 정보를 받습니다.
+        /// 스캔한 결제 코드 정보를 받습니다.
         self.viewModel.$qrCodeValue.sink { value in
             if value == .start { return }
         }.store(in: &self.viewModel.cancellableSet)
+                
+        /// 결제코드 활성화시 타임 정보를 받습니다.
+        self.viewModel.$codeTimer.sink { value in
+            switch value
+            {
+            case .ing_time(let timer):
+                /// 코드 활성화 타임 문구 입니다.
+                self.codeEnabeldTimeText.text            = "\(timer!)"
+                /// 코드 전체화면 모드 입니다.
+                if self.isCodeFullDisplay
+                {
+                    if self.zeroPayCodeType == .barcode
+                    {
+                        /// 바코드 타입으로 안내 문구를 변경 합니다.
+                        self.codeFullDisplayView.barCodeTypeInfoText.text    = self.codeTypeInfoText.text
+                        /// qk코드 활성화 타임 문구 입니다.
+                        self.codeFullDisplayView.barCodeEnabeldTimeText.text = self.codeEnabeldTimeText.text
+                    }
+                    else
+                    {
+                        /// 바코드 타입으로 안내 문구를 변경 합니다.
+                        self.codeFullDisplayView.qrCodeTypeInfoText.text    = self.codeTypeInfoText.text
+                        /// QRCode 활성화 타임 문구 입니다.
+                        self.codeFullDisplayView.qrCodeEnabeldTimeText.text = self.codeEnabeldTimeText.text
+                    }
+                }
+                break
+            case .end_time:
+                /// 타임 종료로 코드뷰를 초기화 합니다.
+                self.releaseCodeView()
+                break
+            default:break
+            }
+        }.store(in: &self.viewModel.cancellableSet)
+        
         
         /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
         self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
@@ -175,10 +229,13 @@ class OKZeroPayView: UIView {
      - Date : 2023.04.26
      - Parameters:
         - type : 코드 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
+        - overTime : 타이머 오버 값을 받습니다.
+        - animation : 애니 사용 모드 입니다.
+        - viewEnabled : 화면이동 없이 뷰어만 적용 하는 경우 입니다.
      - Throws : False
      - returns :False
      */
-    func setZeroPayCodeDisplay( type : ZEROPAY_CODE_TYPE, overTime : Bool = false, animation : Bool = true ) {
+    func setZeroPayCodeDisplay( type : ZEROPAY_CODE_TYPE, overTime : Bool = false, animation : Bool = true, viewEnabled : Bool = false ) {
         switch type {
         case .barcode:
             /// 바코드 결제 타입 선택 입니다.
@@ -187,23 +244,39 @@ class OKZeroPayView: UIView {
             self.qrCodeView.isHidden        = true
             /// 바코드 를 디스플레이 합니다.
             self.barCodeView.isHidden       = false
-            /// 바코드 디스플레이로 안내 문구를 바코드 결제 안내로 변경 합니다.
-            self.codeTypeInfoText.text      = overTime == false ? "바코드 결제를 원하시면 하단 버튼을 눌러주세요" : "결제 유효시간이 초과되었습니다"
-            /// 코드 생성 버튼을 디스플레이 합니다.
-            self.codeCreationView.isHidden  = false
-            /// 코드 생성 버튼 문구를 "바코드 생성" 으로 변경 합니다.
-            self.codeCreationBtn.setTitle(overTime == false ? "바코드 생성" : "바코드 재생성", for: .normal)
-            /// 바코드 결제 위치로 선택 배경을 이동합니다.
-            UIView.animate(withDuration:animation == true ? 0.3 : 0.0, delay: 0.0, options: .curveEaseOut) {
-                self.payTypeBGLeft.constant = 4.0
-                self.layoutIfNeeded()
-            } completion: { _ in
-                /// 바코드 결제 위치 이동 완료로 "QR 결제" 폰트를 비활성으로 변경 합니다.
-                self.qrCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-Regular", size: 14.0)
-                self.qrCodePayBtn.setTitleColor(UIColor(hex: 0x666666), for: .normal)
-                /// QR결제 위치 이동 완료로 "바코드 결제" 폰트를 비활성으로 변경 합니다.
-                self.barCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-SemiBold", size: 14.0)
-                self.barCodePayBtn.setTitleColor(UIColor(hex: 0x212121), for: .normal)
+            /// 결제가 활성화 상태 입니다.
+            if self.isBarCodePayEnabled
+            {
+                /// 결제 뷰어를 활성화 합니다.
+                self.setPayViewEnabled(codeType: .barcode)
+            }
+            else
+            {
+                /// 바코드 디스플레이로 안내 문구를 바코드 결제 안내로 변경 합니다.
+                self.codeTypeInfoText.text        = overTime == false ? "바코드 결제를 원하시면 하단 버튼을 눌러주세요" : "결제 유효시간이 초과되었습니다"
+                /// 코드 생성 버튼을 디스플레이 합니다.
+                self.codeCreationView.isHidden    = false
+                /// 코드 생성 버튼 문구를 "바코드 생성" 으로 변경 합니다.
+                self.codeCreationBtn.setTitle(overTime == false ? "바코드 생성" : "바코드 재생성", for: .normal)
+                /// 타이머 디스플레이 하지 않습니다.
+                self.codeEnabledTimeWidth.constant = 0
+            }
+            
+            /// 뷰만 적용이 아닐경우 위치를 변경 합니다.
+            if viewEnabled == false
+            {
+                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                UIView.animate(withDuration:animation == true ? 0.3 : 0.0, delay: 0.0, options: .curveEaseOut) {
+                    self.payTypeBGLeft.constant = 4.0
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                    /// 바코드 결제 위치 이동 완료로 "QR 결제" 폰트를 비활성으로 변경 합니다.
+                    self.qrCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-Regular", size: 14.0)
+                    self.qrCodePayBtn.setTitleColor(UIColor(hex: 0x666666), for: .normal)
+                    /// QR결제 위치 이동 완료로 "바코드 결제" 폰트를 비활성으로 변경 합니다.
+                    self.barCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-SemiBold", size: 14.0)
+                    self.barCodePayBtn.setTitleColor(UIColor(hex: 0x212121), for: .normal)
+                }
             }
             break
         case .qrcode:
@@ -213,25 +286,122 @@ class OKZeroPayView: UIView {
             self.qrCodeView.isHidden        = false
             /// 바코드 뷰어를 히든 합니다.
             self.barCodeView.isHidden       = true
-            /// QRCode 디스플레이로 안내 문구를 QR 결제 안내로 변경 합니다.
-            self.codeTypeInfoText.text      = overTime == false ? "QR 결제를 원하시면 하단 버튼을 눌러주세요" : "결제 유효시간이 초과되었습니다"
-            /// 코드 생성 버튼을 디스플레이 합니다.
-            self.codeCreationView.isHidden  = false
-            /// 코드 생성 버튼 문구를 "QR코드 생성" 으로 변경 합니다.
-            self.codeCreationBtn.setTitle(overTime == false ? "QR코드 생성" : "QR코드 재생성", for: .normal)
-            /// QR결제 위치로 선택 배경을 이동 합니다.
-            UIView.animate(withDuration: animation == true ? 0.3 : 0.0, delay: 0.0, options: .curveEaseOut) {
-                self.payTypeBGLeft.constant = 92.0
-                self.layoutIfNeeded()
-            } completion: { _ in
-                /// QR결제 위치 이동 완료로 "바코드 결제" 폰트를 비활성으로 변경 합니다.
-                self.barCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-Regular", size: 14.0)
-                self.barCodePayBtn.setTitleColor(UIColor(hex: 0x666666), for: .normal)
-                /// QRCode 결제 위치 이동으로 폰트를 활성화 합니다.
-                self.qrCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-SemiBold", size: 14.0)
-                self.qrCodePayBtn.setTitleColor(UIColor(hex: 0x212121), for: .normal)
+            /// 결제가 활성화 상태 입니다.
+            if self.isQrCodePayEnabled
+            {
+                /// 결제 뷰어를 활성화 합니다.
+                self.setPayViewEnabled(codeType: .qrcode)
             }
+            else
+            {
+                /// QRCode 디스플레이로 안내 문구를 QR 결제 안내로 변경 합니다.
+                self.codeTypeInfoText.text        = overTime == false ? "QR 결제를 원하시면 하단 버튼을 눌러주세요" : "결제 유효시간이 초과되었습니다"
+                /// 코드 생성 버튼을 디스플레이 합니다.
+                self.codeCreationView.isHidden    = false
+                /// 코드 생성 버튼 문구를 "QR코드 생성" 으로 변경 합니다.
+                self.codeCreationBtn.setTitle(overTime == false ? "QR코드 생성" : "QR코드 재생성", for: .normal)
+                /// 타이머를 디스플레이 하지 않습니다.
+                self.codeEnabledTimeWidth.constant = 0
+            }
+            
+            /// 뷰만 적용이 아닐경우 위치를 변경 합니다.
+            if viewEnabled == false
+            {
+                /// QR결제 위치로 선택 배경을 이동 합니다.
+                UIView.animate(withDuration: animation == true ? 0.3 : 0.0, delay: 0.0, options: .curveEaseOut) {
+                    self.payTypeBGLeft.constant = 92.0
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                    /// QR결제 위치 이동 완료로 "바코드 결제" 폰트를 비활성으로 변경 합니다.
+                    self.barCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-Regular", size: 14.0)
+                    self.barCodePayBtn.setTitleColor(UIColor(hex: 0x666666), for: .normal)
+                    /// QRCode 결제 위치 이동으로 폰트를 활성화 합니다.
+                    self.qrCodePayBtn.titleLabel!.font = UIFont(name: "Pretendard-SemiBold", size: 14.0)
+                    self.qrCodePayBtn.setTitleColor(UIColor(hex: 0x212121), for: .normal)
+                }
+            }
+            
             break
+        }
+    }
+    
+    
+    /**
+     생성된 결제 코드를 빈값으로 전부 초기화 합니다.
+     - Date : 2023.04.27
+     - Parameters:False
+     - Throws : False
+     - returns :False
+     */
+    func releaseCodeView(){
+        /// 바코드 라운드 컬러를 활성화 컬러로 변경 합니다.
+        self.barCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
+        /// 코드 이미지를 비활성화 합니다.
+        self.barCodeGenerator.imageView.isHidden = true
+        /// 바코드 결제 비활성화 합니다.
+        self.isBarCodePayEnabled                 = false
+        
+        /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
+        self.qrCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
+        /// 코드 이미지를 활성화 합니다.
+        self.qrCodeGenerator.imageView.isHidden = true
+        /// QRCode 결제 비활성화 합니다.
+        self.isQrCodePayEnabled                 = false
+        
+        /// 타이머를 비활성화 합니다.
+        self.isTimer                            = false
+        /// 코드 활성화 타임 문구 입니다.
+        self.codeEnabeldTimeText.text           = ""
+        /// 코드 활성화 타임 뷰어를 히든 합니다.
+        self.codeEnabledTimeWidth.constant      = 0
+        
+        /// 타임 초과로 오버타입을 추가하고 코드 디스플레이 합니다.
+        self.setZeroPayCodeDisplay(type: self.zeroPayCodeType == .qrcode ? .barcode : .qrcode, overTime: true, viewEnabled: true)
+        /// 타임 초과로 오버타입을 추가하고 코드 디스플레이 합니다.
+        self.setZeroPayCodeDisplay(type: self.zeroPayCodeType == .qrcode ? .barcode : .qrcode , overTime: true, viewEnabled: true)
+        /// 코드 전체화면 모드 입니다.
+        if self.isCodeFullDisplay
+        {
+            /// 전체 화면 코드 화면을 종료 합니다.
+            self.closeFullCodeDisplay()
+        }
+    }
+    
+    
+    /**
+     결제타입 뷰어를 활성화 합니다.
+     - Date : 2023.04.27
+     - Parameters:
+        - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
+     - Throws : False
+     - returns :False
+     */
+    func setPayViewEnabled( codeType : ZEROPAY_CODE_TYPE ){
+        if codeType == .barcode
+        {
+            /// 바코드 타입으로 안내 문구를 변경 합니다.
+            self.codeTypeInfoText.text          = "매장에 바코드를 보여주세요"
+            /// 코드생성 버튼 뷰어를 히든처리 합니다.
+            self.codeCreationView.isHidden      = true
+            /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
+            self.codeEnabledTimeWidth.constant  = 49
+            /// 코드 활성화 타임 문구 입니다.
+            self.codeEnabeldTimeText.text       = ""
+            /// 라운드 컬러를 활성화 컬러로 변경 합니다.
+            self.barCodeView.borderColor        = .OKColor
+        }
+        else
+        {
+            /// 바코드 타입으로 안내 문구를 변경 합니다.
+            self.codeTypeInfoText.text          = "매장에 QR코드를 보여주세요"
+            /// 코드생성 버튼 뷰어를 히든처리 합니다.
+            self.codeCreationView.isHidden      = true
+            /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
+            self.codeEnabledTimeWidth.constant  = 49
+            /// 코드 활성화 타임 문구 입니다.
+            self.codeEnabeldTimeText.text       = ""
+            /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
+            self.qrCodeView.borderColor         = .OKColor
         }
     }
     
@@ -249,44 +419,26 @@ class OKZeroPayView: UIView {
         if self.zeroPayCodeType == .barcode
         {
             /// 바코드를 제작 합니다.
-            self.barCodeGenerator.setCodeDisplay(.barcode,code: NC.S(sampleCode)) { success in
+            self.barCodeGenerator.setCodeDisplay(.barcode, code: NC.S(sampleCode)) { success in
                 if success
                 {
-                    /// 바코드 타입으로 안내 문구를 변경 합니다.
-                    self.codeTypeInfoText.text          = "매장에 바코드를 보여주세요"
-                    self.viewModel.isTimeCodeEnabeld().sink { result in
-                        print("isTimeCodeEnabeld completion finished")
-                    } receiveValue: { type in
-                        switch type
-                        {
-                        case .ing_time( let timer):
-                            /// 라운드 컬러를 활성화 컬러로 변경 합니다.
-                            self.barCodeView.borderColor             = .OKColor
-                            /// 코드생성 버튼 뷰어를 히든처리 합니다.
-                            self.codeCreationView.isHidden           = true
-                            /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
-                            self.codeEnabeldTimeView.isHidden        = false
-                            /// 코드 활성화 타임 문구 입니다.
-                            self.codeEnabeldTimeText.text            = "  \(timer!)  "
-                            /// 코드 이미지를 활성화 합니다.
-                            self.barCodeGenerator.imageView.isHidden = false
-                            print("isTimeCodeEnabeld sink timer : \(timer!)")
-                        case .end_time:
-                            /// 라운드 컬러를 활성화 컬러로 변경 합니다.
-                            self.barCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
-                            /// 코드 활성화 타임 뷰어를 히든 합니다.
-                            self.codeEnabeldTimeView.isHidden        = true
-                            /// 타임 초과로 오버타입을 추가하고 코드 디스플레이 합니다.
-                            self.setZeroPayCodeDisplay(type: .barcode, overTime: true)
-                            /// 코드 이미지를 비활성화 합니다.
-                            self.barCodeGenerator.imageView.isHidden = true
-                            /// 코드 활성화 타임 문구 입니다.
-                            self.codeEnabeldTimeText.text           = ""
-                            break
-                        default:break
-                        }
-                    }.store(in: &self.viewModel.cancellableSet)
+                    /// 결제 뷰어를 활성화 합니다.
+                    self.setPayViewEnabled(codeType: .barcode)
+                    /// 바코드 결제를 활성화 합니다.
+                    self.isBarCodePayEnabled            = true
+                    /// 코드 이미지를 활성화 합니다.
+                    self.barCodeGenerator.imageView.isHidden = false
+                    /// 타이머 비활성화 를 체크 합니다.
+                    if !self.isTimer
+                    {
+                        /// 타이머를 활성화 합니다.
+                        self.isTimer = true
+                        /// 코드 타이머 활성화 합니다.
+                        self.viewModel.startCodeTimerEnabeld()
+                    }
                 }
+            } btnEvent: { success in
+                self.openFullCodeDisplay( codeType: .barcode, code : sampleCode )
             }
         }
         else
@@ -295,44 +447,103 @@ class OKZeroPayView: UIView {
             self.qrCodeGenerator.setCodeDisplay(.qrcode,code: NC.S(sampleCode)) { success in
                 if success
                 {
-                    /// 바코드 타입으로 안내 문구를 변경 합니다.
-                    self.codeTypeInfoText.text          = "매장에 QR코드를 보여주세요"
-                    self.viewModel.isTimeCodeEnabeld().sink { result in
-                        print("isTimeCodeEnabeld completion finished")
-                    } receiveValue: { type in
-                        switch type
-                        {
-                        case .ing_time( let timer):
-                            /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
-                            self.qrCodeView.borderColor             = .OKColor
-                            /// 코드생성 버튼 뷰어를 히든처리 합니다.
-                            self.codeCreationView.isHidden          = true
-                            /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
-                            self.codeEnabeldTimeView.isHidden       = false
-                            /// 코드 활성화 타임 문구 입니다.
-                            self.codeEnabeldTimeText.text           = "  \(timer!)  "
-                            /// 코드 이미지를 활성화 합니다.
-                            self.qrCodeGenerator.imageView.isHidden = false
-                            print("isTimeCodeEnabeld sink timer : \(timer!)")
-                        case .end_time:
-                            /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
-                            self.qrCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
-                            /// 코드 활성화 타임 뷰어를 히든 합니다.
-                            self.codeEnabeldTimeView.isHidden       = true
-                            /// 타임 초과로 오버타입을 추가하고 코드 디스플레이 합니다.
-                            self.setZeroPayCodeDisplay(type: .qrcode, overTime: true)
-                            /// 코드 이미지를 활성화 합니다.
-                            self.qrCodeGenerator.imageView.isHidden = true
-                            /// 코드 활성화 타임 문구 입니다.
-                            self.codeEnabeldTimeText.text           = ""
-                            break
-                        default:break
-                        }
-                    }.store(in: &self.viewModel.cancellableSet)
+                    /// 결제 뷰어를 활성화 합니다.
+                    self.setPayViewEnabled(codeType: .qrcode)
+                    /// 코드 이미지를 활성화 합니다.
+                    self.qrCodeGenerator.imageView.isHidden = false
+                    ///  QRCode 결제 활성화 입니다.
+                    self.isQrCodePayEnabled                 = true
+                    /// 타이머 비활성화 를 체크 합니다.
+                    if !self.isTimer
+                    {
+                        /// 타이머를 활성화 합니다.
+                        self.isTimer = true
+                        /// 코드 타이머 활성화 합니다.
+                        self.viewModel.startCodeTimerEnabeld()
+                    }
+                }
+            } btnEvent: { success in
+                self.openFullCodeDisplay( codeType: .qrcode, code: sampleCode )
+            }
+        }
+    }
+    
+    
+    /**
+     결제 코드를 전체 화면 디스플레이 합니다.
+     - Date : 2023.04.27
+     - Parameters:
+        - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
+        - code : 디스플레이 할 코드 정보 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func openFullCodeDisplay( codeType : ZEROPAY_CODE_TYPE, code : String = "" ){
+        /// 전체 화면 디스플레이 여부를 활성화 합니다.
+        self.isCodeFullDisplay = true
+        /// 전체 화면 코드 디스플레이 배경 입니다.
+        self.codeFullDisplayViewBG.isHidden = false
+        /// 디스플레이 가능한 최대 사이즈를 체크 합니다.
+        let maxWidth                        = UIScreen.main.bounds.size.height - 124.0 > 484 ? 484 : UIScreen.main.bounds.size.height - 124.0
+        let maxHeight                       = 243.0
+        /// 코드 영역 화면을 최대 넓이로 수정 합니다.
+        self.codeFullWidth.constant         = maxWidth
+        /// 코드 영역 화면을 최대 높이로 수정 합니다.
+        self.codeFullHeight.constant        = maxHeight
+        /// 변경된 사이즈를 활성화 합니다.
+        self.layoutIfNeeded()
+        /// 전체화면을 활성화 합니다.
+        self.codeFullDisplayView.setDisplayView(codeType: codeType, code: code) { success in
+            if success
+            {
+                /// 바코드 경우 화면을 회전 합니다.
+                if codeType == .barcode
+                {
+                    self.codeFullDisplayView.transform  = self.codeFullDisplayView.transform.rotated(by: .pi/2)
+                }
+                
+                /// QR결제 위치로 선택 배경을 이동 합니다.
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+                    self.detaileViewTop.constant        = 12.0
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                    
                 }
             }
         }
     }
+    
+    
+    /**
+     결제 코드 전체 화면을 종료 합니다.
+     - Date : 2023.04.27
+     - Parameters:False
+     - Throws : False
+     - returns :False
+     */
+    func closeFullCodeDisplay(){
+        /// 전체 화면 디스플레이 여부를 활성화 합니다.
+        self.isCodeFullDisplay                              = false
+        /// 전체 화면 코드 디스플레이 배경 입니다.
+        self.codeFullDisplayViewBG.isHidden                 = true
+        /// 코드 영역 화면을 기본 크기로 변경 합니다.
+        self.codeFullWidth.constant                         = 100
+        /// 코드 영역 화면을 기본 크기로 변경 합니다.
+        self.codeFullHeight.constant                        = 100
+        /// 회전을 원위치 합니다.
+        self.codeFullDisplayView.transform                  = .identity
+        /// 디스플레이 정보를 초기화 합니다.
+        self.codeFullDisplayView.releaseCodeView()
+        /// QR결제 위치로 선택 배경을 이동 합니다.
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+            self.detaileViewTop.constant        = 315.0
+            self.layoutIfNeeded()
+        } completion: { _ in
+            
+        }
+    }
+    
+    
     
     
     //MARK: - 버튼 액션 입니다.
@@ -342,27 +553,31 @@ class OKZeroPayView: UIView {
             switch type {
                 /// 페이지 종료 입니다.
                 case .page_exit:
+                    /// 코드 전체화면 디스플레이 경우 입니다.
+                    if self.isCodeFullDisplay
+                    {
+                        self.closeFullCodeDisplay()
+                        return
+                    }
                     self.viewController.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
                     })
                     break
                 /// 결제 타입 선택버튼 입니다.
                 case .barcode_pay:
-                    self.setZeroPayCodeDisplay( type: .barcode )
+                    /// 바코드 결제 타입을 활성화 합니다.
+                    self.setZeroPayCodeDisplay( type: .barcode, animation: false )
                 case .qrcode_pay:
-                    self.setZeroPayCodeDisplay( type: .qrcode )
+                    /// QR 결제 타입을 활성화 합니다.
+                    self.setZeroPayCodeDisplay( type: .qrcode, animation: false )
                 /// 코드 생성 요청 입니다.
                 case .creation_code:
+                    /// 결제할 코드생성을 디스플레이 합니다.
                     self.setCodeCreationView()
                     break
             }
             
         }
     }
-    
-    
-    
-    
-    
     
 }
 

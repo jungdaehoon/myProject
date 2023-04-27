@@ -26,6 +26,7 @@ class OKZeroPayQRCaptureView: UIView {
     /// 제로페이에서 받은 파라미터 정보를 저장 합니다.
     var params                          : [String:Any] = [:]
     
+    
     //MARK: - Init
     init( completion : (( _ qrcodeCB : QRCODE_CB ) -> Void)? = nil, params: [String:Any] = [:]){
         super.init(frame: UIScreen.main.bounds)

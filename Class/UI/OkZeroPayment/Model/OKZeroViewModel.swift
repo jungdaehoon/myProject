@@ -14,7 +14,7 @@ import Combine
  결제 코드 활성화 타임별 타입 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.26
 */
-enum CODE_ENABLED_TIME {
+enum CODE_ENABLED_TIME : Equatable {
     case start_time
     /// 진행 중인 타임 정보를 넘깁니다.
     case ing_time( timer : String? )
@@ -66,11 +66,22 @@ class OKZeroViewModel : BaseViewModel
     var captureSession          : AVCaptureSession?
     /// 제로페이 QRCode 인증 정보를 받습니다.
     var zeroPayQrCodeResponse   : ZeroPayQRCodeResponse?
-    /// 바코드 인식왼 정보를 가져 옵니다.
+    /// 스캔한 바코드 정보를 가져 옵니다.
     @Published var qrCodeValue  : QRCODE_CB = .start
+    /// 코드 타임진행 상태를 가집니다.
+    @Published var codeTimer    : CODE_ENABLED_TIME = .start_time
     
     
-
+    
+    /**
+     싱글 결제 코드 인식 가능한 타임 여부를 체크 합니다.( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.26
+     - Parameters:False
+     - Throws : False
+     - returns :
+        - Future<CODE_ENABLED_TIME, Never>
+            >  CODE_ENABLED_TIME : 현 인식 가능 타임 정보를 리턴 합니다.
+     */
     func isTimeCodeEnabeld() -> CurrentValueSubject<CODE_ENABLED_TIME,Never>
     {
         /// 네트워크 체킹 여부 값을 리턴 합니다.
@@ -79,7 +90,7 @@ class OKZeroViewModel : BaseViewModel
         let maxtime     = 180
         /// 오버 되는 타임 정보 입니다.
         var overtime    = 0
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
             overtime += 1
             DispatchQueue.main.async {
                 /// 인식가능한 "분" 정보를 설정 합니다.
@@ -101,48 +112,54 @@ class OKZeroViewModel : BaseViewModel
                     return
                 }
                 /// 진행중인 타임 정보를 리턴 합니다.
-                checkTimer.send(.ing_time(timer: displayTime))                
+                checkTimer.send(.ing_time(timer: displayTime))
             }
         })
         return checkTimer
     }
     
+    
+    
     /**
-     코드 인식 가능한 타임 여부를 체크 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.26
+     결제 코드 사용가능 타임을 체크 합니다.( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.27
      - Parameters:False
-     - Throws : False
-     - returns :
-        - Future<CODE_ENABLED_TIME, Never>
-            >  CODE_ENABLED_TIME : 현 인식 가능 타임 정보를 리턴 합니다.
+     - Timer : true
+     - returns :False
      */
-    func isCodeEnabled() -> Future<CODE_ENABLED_TIME?, Never>
+    func startCodeTimerEnabeld()
     {
-        return Future<CODE_ENABLED_TIME?, Never> { promise in
-            /// 최대 타임 입니다.
-            let maxtime     = 180
-            /// 오버 되는 타임 정보 입니다.
-            var overtime    = 0
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in
-                overtime += 1
-                DispatchQueue.main.async {
-                    /// 인식가능한 "분" 정보를 설정 합니다.
-                    let hour        = (maxtime - overtime)/60
-                    /// 인식 가능한 "초" 정보를 설정 합니다.
-                    let min         = (maxtime - overtime)%60
-                    /// 디스플레이할 "초" 정보를 2자리수로 설정 합니다.
-                    let minute      = min < 10 ? "0\(min)" : "\(min)"
-                    /// 최종 디스플레이할 타임 정보를 설정 합니다.
-                    let displayTime = "0\(hour):\(minute)"
-                    print(displayTime)
-                    /// 인식 가능 타임을 종료 합니다.
-                    if maxtime == overtime { promise(.success(.end_time)) }
-                    /// 진행중인 타임 정보를 리턴 합니다.
-                    promise(.success(.ing_time(timer: displayTime)))
+        /// 최대 타임 입니다.
+        let maxtime     = 180
+        /// 오버 되는 타임 정보 입니다.
+        var overtime    = 0
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in
+            overtime += 1
+            DispatchQueue.main.async {
+                /// 인식가능한 "분" 정보를 설정 합니다.
+                let hour        = (maxtime - overtime)/60
+                /// 인식 가능한 "초" 정보를 설정 합니다.
+                let min         = (maxtime - overtime)%60
+                /// 디스플레이할 "초" 정보를 2자리수로 설정 합니다.
+                let minute      = min < 10 ? "0\(min)" : "\(min)"
+                /// 최종 디스플레이할 타임 정보를 설정 합니다.
+                let displayTime = "0\(hour):\(minute)"
+                print(displayTime)
+                
+                /// 인식 가능 타임을 종료 합니다.
+                if maxtime == overtime
+                {
+                    /// 인식 불가능으로 타임을 종료 합니다.
+                    self.codeTimer = .end_time
+                    timer.invalidate()
+                    return
                 }
-            })
-        }
+                /// 진행중인 타임 정보를 리턴 합니다.
+                self.codeTimer = .ing_time(timer: displayTime)
+            }
+        })
     }
+    
     
     /**
      바코드 인식할 세션 연결 입니다.( J.D.H  VER : 1.0.0 )
@@ -224,11 +241,6 @@ class OKZeroViewModel : BaseViewModel
         }
         return subject.eraseToAnyPublisher()
     }
-
-    
-    
-    
-    
 }
 
 

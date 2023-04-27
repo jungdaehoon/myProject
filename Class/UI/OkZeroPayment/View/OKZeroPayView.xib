@@ -31,7 +31,13 @@
                 <outlet property="codeCreationView" destination="btp-cE-4TW" id="TIC-vP-IOe"/>
                 <outlet property="codeEnabeldTimeText" destination="DiY-RM-xRj" id="YjF-oV-hn6"/>
                 <outlet property="codeEnabeldTimeView" destination="TNH-4M-jmc" id="n6K-p4-8LJ"/>
+                <outlet property="codeEnabledTimeWidth" destination="czl-cV-N9s" id="hNQ-3g-Qs5"/>
+                <outlet property="codeFullDisplayView" destination="fD3-5O-nly" id="fq4-cF-bj4"/>
+                <outlet property="codeFullDisplayViewBG" destination="Ycb-4K-PpH" id="aEU-bC-XTK"/>
+                <outlet property="codeFullHeight" destination="Lv3-Uw-0Yq" id="3fO-od-QZ6"/>
+                <outlet property="codeFullWidth" destination="tcZ-rG-F9g" id="lIw-1X-3bz"/>
                 <outlet property="codeTypeInfoText" destination="b8H-IY-QAv" id="TyV-sD-GNW"/>
+                <outlet property="detaileViewTop" destination="5Eh-Uy-fja" id="ajO-Vu-v1n"/>
                 <outlet property="payTypeBG" destination="vBc-RW-aeE" id="tGc-xT-08H"/>
                 <outlet property="payTypeBGLeft" destination="CN2-vU-3m9" id="rcd-aL-wTO"/>
                 <outlet property="previewView" destination="ROE-ca-HMj" id="ltg-xz-LKb"/>
@@ -206,10 +212,10 @@
                                     <color key="textColor" red="0.011764705882352941" green="0.011764705882352941" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNH-4M-jmc">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNH-4M-jmc">
                                     <rect key="frame" x="226.66666666666663" y="0.0" width="0.0" height="22"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiY-RM-xRj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiY-RM-xRj">
                                             <rect key="frame" x="0.0" y="4" width="0.0" height="14"/>
                                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="12"/>
                                             <color key="textColor" name="OKColor"/>
@@ -222,6 +228,7 @@
                                         <constraint firstItem="DiY-RM-xRj" firstAttribute="top" secondItem="TNH-4M-jmc" secondAttribute="top" constant="4" id="MkT-vZ-AGx"/>
                                         <constraint firstAttribute="trailing" secondItem="DiY-RM-xRj" secondAttribute="trailing" id="RVg-FL-rNR"/>
                                         <constraint firstAttribute="height" constant="22" id="cvo-mf-giU"/>
+                                        <constraint firstAttribute="width" id="czl-cV-N9s"/>
                                         <constraint firstItem="DiY-RM-xRj" firstAttribute="leading" secondItem="TNH-4M-jmc" secondAttribute="leading" id="q75-Jo-nqB"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
@@ -250,12 +257,17 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4OH-ag-71V" userLabel="QR Pay Choice Info View">
                             <rect key="frame" x="0.0" y="126" width="390" height="120"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M14-PE-5Nc" userLabel="Bar Code View">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M14-PE-5Nc" userLabel="Bar Code View">
                                     <rect key="frame" x="55" y="18" width="280" height="84"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgq-ue-MsQ" customClass="QRorBarCodeGeneratorView" customModule="cereal" customModuleProvider="target">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgq-ue-MsQ" customClass="QRorBarCodeGeneratorView" customModule="cereal" customModuleProvider="target">
                                             <rect key="frame" x="4" y="4" width="272" height="76"/>
                                             <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -279,7 +291,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rc-ub-TIE" userLabel="QR Code View">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rc-ub-TIE" userLabel="QR Code View">
                                     <rect key="frame" x="135" y="0.0" width="120" height="120"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgz-iH-8ej" customClass="QRorBarCodeGeneratorView" customModule="cereal" customModuleProvider="target">
@@ -383,15 +395,37 @@
                                 <constraint firstItem="tiY-ZP-Ewv" firstAttribute="centerY" secondItem="9V2-qt-cGF" secondAttribute="centerY" id="vbA-ps-jjK"/>
                             </constraints>
                         </view>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-4K-PpH" userLabel="Code Full View">
+                            <rect key="frame" x="0.0" y="16" width="390" height="394"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fD3-5O-nly" customClass="OKZeroPayCodeFullView" customModule="cereal" customModuleProvider="target">
+                                    <rect key="frame" x="145" y="147" width="100" height="100"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="Lv3-Uw-0Yq"/>
+                                        <constraint firstAttribute="width" constant="100" id="tcZ-rG-F9g"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="fD3-5O-nly" firstAttribute="centerX" secondItem="Ycb-4K-PpH" secondAttribute="centerX" id="PLB-GZ-Evd"/>
+                                <constraint firstItem="fD3-5O-nly" firstAttribute="centerY" secondItem="Ycb-4K-PpH" secondAttribute="centerY" id="uSK-xF-yTf"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="P5h-8Q-JTb" firstAttribute="top" secondItem="ohY-IH-v7V" secondAttribute="top" constant="12" id="2AW-wm-rSQ"/>
                         <constraint firstItem="RV8-Sm-K2a" firstAttribute="top" secondItem="44h-hT-cTI" secondAttribute="bottom" constant="24" id="5Hs-sM-Jc4"/>
                         <constraint firstItem="44h-hT-cTI" firstAttribute="centerX" secondItem="ohY-IH-v7V" secondAttribute="centerX" id="77f-VJ-Fln"/>
+                        <constraint firstAttribute="bottom" secondItem="Ycb-4K-PpH" secondAttribute="bottom" constant="36" id="AIp-bm-O1O"/>
                         <constraint firstItem="9V2-qt-cGF" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="GMf-tJ-Avq"/>
+                        <constraint firstItem="Ycb-4K-PpH" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="OcU-Zd-gPK"/>
                         <constraint firstAttribute="trailing" secondItem="4OH-ag-71V" secondAttribute="trailing" id="TAa-f1-f7n"/>
                         <constraint firstItem="RV8-Sm-K2a" firstAttribute="centerX" secondItem="ohY-IH-v7V" secondAttribute="centerX" id="a2Z-Fm-ZWp"/>
+                        <constraint firstItem="Ycb-4K-PpH" firstAttribute="top" secondItem="P5h-8Q-JTb" secondAttribute="bottom" id="aOi-bH-ckP"/>
+                        <constraint firstAttribute="trailing" secondItem="Ycb-4K-PpH" secondAttribute="trailing" id="aY2-fw-Mkr"/>
                         <constraint firstAttribute="trailing" secondItem="9V2-qt-cGF" secondAttribute="trailing" id="dre-1P-MjG"/>
                         <constraint firstItem="4OH-ag-71V" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="oX7-0c-oLR"/>
                         <constraint firstItem="4OH-ag-71V" firstAttribute="top" secondItem="RV8-Sm-K2a" secondAttribute="bottom" constant="8" id="uQ7-Jy-WY7"/>

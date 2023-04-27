@@ -22,7 +22,8 @@ class QRorBarCodeGeneratorView: UIView {
     var code                        : String?
     /// 코드 타입정보를 저장합니다.
     var type                        : ZEROPAY_CODE_TYPE?
-    
+    /// 코드 선택시 이벤트 입니다.
+    var btnEvent                    : (( _ success : Bool ) -> Void)? = nil
     
     
     //MARK: - Init
@@ -57,19 +58,23 @@ class QRorBarCodeGeneratorView: UIView {
         - codeType : 코드 타입 정보를 받습니다.
         - code : 코드 정보 입니다.
         - completion : 코드가 정상 적으로 생성되었는지를 리턴 합니다.
+        - btnEvent : 버튼 이벤트를 리턴 합니다.
      - Throws : False
      - returns :False
      */
     func setCodeDisplay( _ codeType : ZEROPAY_CODE_TYPE,
                          code : String = "",
-                         completion : (( _ success : Bool ) -> Void)? = nil )
+                         completion : (( _ success : Bool ) -> Void)? = nil,
+                         btnEvent : (( _ success : Bool ) -> Void)? = nil)
     {
         self.code       = code
         self.type       = codeType
+        self.btnEvent   = btnEvent
         switch codeType {
         case .barcode:
             if let image = self.generateBarcode128(code)
             {
+                print("setCodeDisplay self.frame.size : \(self.frame.size)")
                 self.imageView.image = image.resize(size: self.frame.size)
                 completion!(true)
             }
@@ -162,23 +167,10 @@ class QRorBarCodeGeneratorView: UIView {
     
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        let codeFullView = QRBarCodeFullViewController()
-        codeFullView.modalPresentationStyle = .overFullScreen
-        switch self.type! {
-        case .barcode:
-            if let image = self.generateBarcode128(self.code!,scale: 10.0)
-            {
-                codeFullView.codeImage = image
-            }
-            break
-        case .qrcode:
-            if let image = self.generateQRCode(self.code!,scale: 10.0)
-            {
-                codeFullView.codeImage = image
-            }
-            break
-        }
-        self.viewController.present(codeFullView, animated: true)
+        if let event = self.btnEvent
+        {
+            event(true)
+        }                
     }
     
     

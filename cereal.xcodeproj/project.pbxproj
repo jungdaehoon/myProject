@@ -71,11 +71,9 @@
 		8D205F4729D1346F00F43C99 /* PedometerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB029D1346E00F43C99 /* PedometerViewController.swift */; };
 		8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB329D1346E00F43C99 /* OKZeroViewModel.swift */; };
 		8D205F4929D1346F00F43C99 /* OKZeroPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB529D1346E00F43C99 /* OKZeroPayView.swift */; };
-		8D205F4A29D1346F00F43C99 /* QRBarCodeFullViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EB629D1346E00F43C99 /* QRBarCodeFullViewController.xib */; };
 		8D205F4B29D1346F00F43C99 /* QRorBarCodeGeneratorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EB729D1346E00F43C99 /* QRorBarCodeGeneratorView.xib */; };
 		8D205F4C29D1346F00F43C99 /* OKZeroPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EB829D1346E00F43C99 /* OKZeroPayView.xib */; };
 		8D205F4D29D1346F00F43C99 /* QRorBarCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB929D1346E00F43C99 /* QRorBarCodeGeneratorView.swift */; };
-		8D205F4E29D1346F00F43C99 /* QRBarCodeFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EBA29D1346E00F43C99 /* QRBarCodeFullViewController.swift */; };
 		8D205F4F29D1346F00F43C99 /* OkPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */; };
 		8D205F5029D1346F00F43C99 /* OkPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */; };
 		8D205F5329D1346F00F43C99 /* FinanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC129D1346E00F43C99 /* FinanceViewController.swift */; };
@@ -143,6 +141,8 @@
 		8D48BB3229D2CC9F00CC4D62 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D48BB2F29D2CC9E00CC4D62 /* KakaoMessageTemplate.framework */; };
 		8D48BB3829D2D6B300CC4D62 /* SecureKeyPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D48BB3729D2D6B300CC4D62 /* SecureKeyPadView.swift */; };
 		8D48BB3A29D2D6B900CC4D62 /* SecureKeyPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D48BB3929D2D6B900CC4D62 /* SecureKeyPadView.xib */; };
+		8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4A3F9A29F9F8A20080B268 /* OKZeroPayCodeFullView.swift */; };
+		8D4A3F9D29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */; };
 		8D51442429D54AE70019943D /* LottieAniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51442329D54AE70019943D /* LottieAniView.swift */; };
 		8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */; };
 		8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */; };
@@ -293,11 +293,9 @@
 		8D205EB029D1346E00F43C99 /* PedometerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerViewController.swift; sourceTree = "<group>"; };
 		8D205EB329D1346E00F43C99 /* OKZeroViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroViewModel.swift; sourceTree = "<group>"; };
 		8D205EB529D1346E00F43C99 /* OKZeroPayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroPayView.swift; sourceTree = "<group>"; };
-		8D205EB629D1346E00F43C99 /* QRBarCodeFullViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRBarCodeFullViewController.xib; sourceTree = "<group>"; };
 		8D205EB729D1346E00F43C99 /* QRorBarCodeGeneratorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRorBarCodeGeneratorView.xib; sourceTree = "<group>"; };
 		8D205EB829D1346E00F43C99 /* OKZeroPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OKZeroPayView.xib; sourceTree = "<group>"; };
 		8D205EB929D1346E00F43C99 /* QRorBarCodeGeneratorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRorBarCodeGeneratorView.swift; sourceTree = "<group>"; };
-		8D205EBA29D1346E00F43C99 /* QRBarCodeFullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRBarCodeFullViewController.swift; sourceTree = "<group>"; };
 		8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OkPaymentViewController.xib; sourceTree = "<group>"; };
 		8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkPaymentViewController.swift; sourceTree = "<group>"; };
 		8D205EC129D1346E00F43C99 /* FinanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +364,8 @@
 		8D48BB2F29D2CC9E00CC4D62 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		8D48BB3729D2D6B300CC4D62 /* SecureKeyPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureKeyPadView.swift; sourceTree = "<group>"; };
 		8D48BB3929D2D6B900CC4D62 /* SecureKeyPadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecureKeyPadView.xib; sourceTree = "<group>"; };
+		8D4A3F9A29F9F8A20080B268 /* OKZeroPayCodeFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayCodeFullView.swift; sourceTree = "<group>"; };
+		8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayCodeFullView.xib; sourceTree = "<group>"; };
 		8D51442329D54AE70019943D /* LottieAniView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAniView.swift; sourceTree = "<group>"; };
 		8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroPayQRCaptureView.swift; sourceTree = "<group>"; };
 		8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OKZeroPayQRCaptureView.xib; sourceTree = "<group>"; };
@@ -778,14 +778,14 @@
 		8D205EB429D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */,
-				8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */,
 				8D205EB529D1346E00F43C99 /* OKZeroPayView.swift */,
 				8D205EB829D1346E00F43C99 /* OKZeroPayView.xib */,
-				8D205EBA29D1346E00F43C99 /* QRBarCodeFullViewController.swift */,
-				8D205EB629D1346E00F43C99 /* QRBarCodeFullViewController.xib */,
 				8D205EB929D1346E00F43C99 /* QRorBarCodeGeneratorView.swift */,
 				8D205EB729D1346E00F43C99 /* QRorBarCodeGeneratorView.xib */,
+				8D4A3F9A29F9F8A20080B268 /* OKZeroPayCodeFullView.swift */,
+				8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */,
+				8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */,
+				8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1356,6 +1356,7 @@
 				8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */,
 				8D9D924A29F7B9F900F42B8D /* GuideInfoView.xib in Resources */,
 				8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */,
+				8D4A3F9D29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib in Resources */,
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
 				8D205F1F29D1346F00F43C99 /* Assets.xcassets in Resources */,
@@ -1393,7 +1394,6 @@
 				8DBA445C29D428BA00A2E5C1 /* HybridOpenBankViewController.xib in Resources */,
 				8D205F4029D1346F00F43C99 /* AllMoreMenuListCell.xib in Resources */,
 				8D205F8529D1346F00F43C99 /* BottomTermsView.xib in Resources */,
-				8D205F4A29D1346F00F43C99 /* QRBarCodeFullViewController.xib in Resources */,
 				8D205F3B29D1346F00F43C99 /* PointItemView.xib in Resources */,
 				8D205F4129D1346F00F43C99 /* BannerView.xib in Resources */,
 				8D205F3229D1346F00F43C99 /* TabBarView.xib in Resources */,
@@ -1502,13 +1502,13 @@
 				8D205F7E29D1346F00F43C99 /* PedometerResponse.swift in Sources */,
 				8D205F7B29D1346F00F43C99 /* ReBankAuthResponse.swift in Sources */,
 				8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */,
+				8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */,
 				8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */,
 				8D205F6B29D1346F00F43C99 /* UIControl.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
 				8D205F8B29D1346F00F43C99 /* Utils.swift in Sources */,
 				8D205F7029D1346F00F43C99 /* WebMessagCallBackHandler.swift in Sources */,
-				8D205F4E29D1346F00F43C99 /* QRBarCodeFullViewController.swift in Sources */,
 				8D55D56729E648AC009C43BF /* KISA_SEED_CBC.c in Sources */,
 				8D205F7129D1346F00F43C99 /* ResponseError.swift in Sources */,
 				8D2FC9E629DC05EC0061821F /* BecomeActiveView.swift in Sources */,
