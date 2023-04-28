@@ -185,6 +185,10 @@
 		8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */; };
 		8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */; };
 		8DD6B6C329EE900900E3C68E /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6C229EE900900E3C68E /* PickerView.swift */; };
+		8DD916B829FB54EF00805A7E /* OKZeroPayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */; };
+		8DD916BA29FB54F800805A7E /* OKZeroPayCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */; };
+		8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD916BB29FB569D00805A7E /* OKZeroPayCardListView.swift */; };
+		8DD916BE29FB56A300805A7E /* OKZeroPayCardListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */; };
 		8DDC3DE429D151DC003C4F8F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDC3DE329D151CF003C4F8F /* libc++.tbd */; };
 		8DDC3DE929D15FA6003C4F8F /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC3DE829D15FA6003C4F8F /* LoginModel.swift */; };
 		8DDC3DEB29D161D3003C4F8F /* AppshieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC3DEA29D161D3003C4F8F /* AppshieldManager.swift */; };
@@ -411,6 +415,10 @@
 		8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
 		8DD6B6C229EE900900E3C68E /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayCardView.swift; sourceTree = "<group>"; };
+		8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayCardView.xib; sourceTree = "<group>"; };
+		8DD916BB29FB569D00805A7E /* OKZeroPayCardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayCardListView.swift; sourceTree = "<group>"; };
+		8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayCardListView.xib; sourceTree = "<group>"; };
 		8DDC3DE029D1503A003C4F8F /* cereal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cereal-Bridging-Header.h"; sourceTree = "<group>"; };
 		8DDC3DE329D151CF003C4F8F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8DDC3DE829D15FA6003C4F8F /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -786,6 +794,10 @@
 				8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */,
 				8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */,
 				8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */,
+				8DD916BB29FB569D00805A7E /* OKZeroPayCardListView.swift */,
+				8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */,
+				8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */,
+				8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1365,6 +1377,7 @@
 				8D205F2029D1346F00F43C99 /* Color.xcassets in Resources */,
 				8D205F4B29D1346F00F43C99 /* QRorBarCodeGeneratorView.xib in Resources */,
 				8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */,
+				8DD916BA29FB54F800805A7E /* OKZeroPayCardView.xib in Resources */,
 				8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */,
 				8D205F1429D1346F00F43C99 /* Pretendard-Thin.otf in Resources */,
 				8D205F3429D1346F00F43C99 /* TabbarCenterView.xib in Resources */,
@@ -1401,6 +1414,7 @@
 				8DE3260529D567C8006E3B69 /* guide_ani_1.json in Resources */,
 				8DE3260729D567C8006E3B69 /* guide_ani_2.json in Resources */,
 				8D205F1129D1346F00F43C99 /* Pretendard-Light.otf in Resources */,
+				8DD916BE29FB56A300805A7E /* OKZeroPayCardListView.xib in Resources */,
 				8D205F0F29D1346F00F43C99 /* Pretendard-Black.otf in Resources */,
 				8D205F1A29D1346F00F43C99 /* NanumSquareRoundR.ttf in Resources */,
 				8D205F1329D1346F00F43C99 /* Pretendard-Bold.otf in Resources */,
@@ -1504,6 +1518,7 @@
 				8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */,
 				8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */,
 				8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */,
+				8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */,
 				8D205F6B29D1346F00F43C99 /* UIControl.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
@@ -1533,6 +1548,7 @@
 				8D205F4629D1346F00F43C99 /* HealthKitManager.swift in Sources */,
 				8D205F8029D1346F00F43C99 /* LoginResponse.swift in Sources */,
 				8DF117A129E7996300D7A095 /* NavigationControllerAnimated.swift in Sources */,
+				8DD916B829FB54EF00805A7E /* OKZeroPayCardView.swift in Sources */,
 				8D205F6C29D1346F00F43C99 /* UINavigationController.swift in Sources */,
 				8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */,
 				8D205F7229D1346F00F43C99 /* APIConstant.swift in Sources */,
@@ -1883,7 +1899,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 1.24.41;
+				MARKETING_VERSION = 1.24.42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고";

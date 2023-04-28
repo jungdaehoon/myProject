@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date : 2023.04.06
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // 시큐온 키패드 HotFix (23.04.10)
         /// 이전 프레임워크를 제거하고, 전달받은 프레임워크로 교체 이후, 아래 코드를 호출합니다.
         (XKConfigure.sharedInstance()! as AnyObject).setTlsCoinfgWithModule(TLS_MODULE_EXTERNAL_0, version: TLS_VERSION_1_2)

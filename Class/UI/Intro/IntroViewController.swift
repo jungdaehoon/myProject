@@ -98,7 +98,7 @@ class IntroViewController: BaseViewController {
                         /// 서비스 불가 안내 뷰어를 오픈 합니다.
                         ServiceErrorPop().show()
                     } receiveValue: { response in
-                        if let data = response!._data
+                        if let data = BaseViewModel.appStartResponse!._data
                         {
                             /// 버전 정보가 있는지를 체크 합니다.
                             if let version = data._versionInfo
@@ -113,7 +113,6 @@ class IntroViewController: BaseViewController {
                                         let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
                                         alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
                                             version._market_url!.openUrl()
-                                            exit(0)
                                         })
                                         alert?.addAlertBtn(btnTitleText: "다음에하기", completion: { result in
                                             /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
@@ -131,10 +130,16 @@ class IntroViewController: BaseViewController {
                                     /// 강제 업데이트 입니다.
                                     else
                                     {
-                                        CMAlertView().setAlertView(detailObject: version._popup_msg as AnyObject, cancelText: "앱 업데이트") { event in
+                                        /// 업데이트 안내 팝업 입니다.
+                                        let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
+                                        alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
                                             version._market_url!.openUrl()
+                                        })
+                                        alert?.addAlertBtn(btnTitleText: "취소", completion: { result in
                                             exit(0)
-                                        }
+                                        })
+                                        alert?.show()
+                                        
                                     }
                                     return
                                 }

@@ -38,6 +38,8 @@
                 <outlet property="codeFullWidth" destination="tcZ-rG-F9g" id="lIw-1X-3bz"/>
                 <outlet property="codeTypeInfoText" destination="b8H-IY-QAv" id="TyV-sD-GNW"/>
                 <outlet property="detaileViewTop" destination="5Eh-Uy-fja" id="ajO-Vu-v1n"/>
+                <outlet property="payCardListTop" destination="dM0-7L-P5E" id="UyV-z5-nOh"/>
+                <outlet property="payCardListView" destination="ndA-ol-1US" id="fJS-Ue-HLz"/>
                 <outlet property="payTypeBG" destination="vBc-RW-aeE" id="tGc-xT-08H"/>
                 <outlet property="payTypeBGLeft" destination="CN2-vU-3m9" id="rcd-aL-wTO"/>
                 <outlet property="previewView" destination="ROE-ca-HMj" id="ltg-xz-LKb"/>
@@ -413,6 +415,10 @@
                                 <constraint firstItem="fD3-5O-nly" firstAttribute="centerY" secondItem="Ycb-4K-PpH" secondAttribute="centerY" id="uSK-xF-yTf"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndA-ol-1US" customClass="OKZeroPayCardListView" customModule="cereal" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="298" width="390" height="148"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -420,14 +426,18 @@
                         <constraint firstItem="RV8-Sm-K2a" firstAttribute="top" secondItem="44h-hT-cTI" secondAttribute="bottom" constant="24" id="5Hs-sM-Jc4"/>
                         <constraint firstItem="44h-hT-cTI" firstAttribute="centerX" secondItem="ohY-IH-v7V" secondAttribute="centerX" id="77f-VJ-Fln"/>
                         <constraint firstAttribute="bottom" secondItem="Ycb-4K-PpH" secondAttribute="bottom" constant="36" id="AIp-bm-O1O"/>
+                        <constraint firstAttribute="bottom" secondItem="ndA-ol-1US" secondAttribute="bottom" id="B04-yd-T4D"/>
+                        <constraint firstAttribute="trailing" secondItem="ndA-ol-1US" secondAttribute="trailing" id="CH8-nL-cnN"/>
                         <constraint firstItem="9V2-qt-cGF" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="GMf-tJ-Avq"/>
                         <constraint firstItem="Ycb-4K-PpH" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="OcU-Zd-gPK"/>
                         <constraint firstAttribute="trailing" secondItem="4OH-ag-71V" secondAttribute="trailing" id="TAa-f1-f7n"/>
                         <constraint firstItem="RV8-Sm-K2a" firstAttribute="centerX" secondItem="ohY-IH-v7V" secondAttribute="centerX" id="a2Z-Fm-ZWp"/>
                         <constraint firstItem="Ycb-4K-PpH" firstAttribute="top" secondItem="P5h-8Q-JTb" secondAttribute="bottom" id="aOi-bH-ckP"/>
                         <constraint firstAttribute="trailing" secondItem="Ycb-4K-PpH" secondAttribute="trailing" id="aY2-fw-Mkr"/>
+                        <constraint firstItem="ndA-ol-1US" firstAttribute="top" secondItem="9V2-qt-cGF" secondAttribute="bottom" constant="16" id="dM0-7L-P5E"/>
                         <constraint firstAttribute="trailing" secondItem="9V2-qt-cGF" secondAttribute="trailing" id="dre-1P-MjG"/>
                         <constraint firstItem="4OH-ag-71V" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="oX7-0c-oLR"/>
+                        <constraint firstItem="ndA-ol-1US" firstAttribute="leading" secondItem="ohY-IH-v7V" secondAttribute="leading" id="qqq-kE-x4p"/>
                         <constraint firstItem="4OH-ag-71V" firstAttribute="top" secondItem="RV8-Sm-K2a" secondAttribute="bottom" constant="8" id="uQ7-Jy-WY7"/>
                         <constraint firstItem="9V2-qt-cGF" firstAttribute="top" secondItem="4OH-ag-71V" secondAttribute="bottom" constant="20" id="vZP-b7-0dQ"/>
                         <constraint firstItem="44h-hT-cTI" firstAttribute="top" secondItem="P5h-8Q-JTb" secondAttribute="bottom" constant="16" id="xXW-He-SUa"/>

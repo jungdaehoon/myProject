@@ -20,6 +20,8 @@ enum CODE_ENABLED_TIME : Equatable {
     case ing_time( timer : String? )
     /// 타임 종료 여부를 넘깁니다.
     case end_time
+    /// 타임 강제 종료 입니다.
+    case exit_time
 }
 
 
@@ -62,6 +64,8 @@ enum QRCODE_CB : Equatable {
 */
 class OKZeroViewModel : BaseViewModel
 {
+    /// 카드 리스트 들입니다.
+    var cards : [String]        = ["OK저축은행","우리은행","광고","국민은행","NH농협"]
     /// 바코드 인식 세션 입니다.
     var captureSession          : AVCaptureSession?
     /// 제로페이 QRCode 인증 정보를 받습니다.
@@ -133,7 +137,7 @@ class OKZeroViewModel : BaseViewModel
         let maxtime     = 180
         /// 오버 되는 타임 정보 입니다.
         var overtime    = 0
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
             overtime += 1
             DispatchQueue.main.async {
                 /// 인식가능한 "분" 정보를 설정 합니다.
@@ -147,7 +151,8 @@ class OKZeroViewModel : BaseViewModel
                 print(displayTime)
                 
                 /// 인식 가능 타임을 종료 합니다.
-                if maxtime == overtime
+                if maxtime == overtime ||
+                    self.codeTimer == .exit_time
                 {
                     /// 인식 불가능으로 타임을 종료 합니다.
                     self.codeTimer = .end_time

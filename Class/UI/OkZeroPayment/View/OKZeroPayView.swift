@@ -41,6 +41,8 @@ class OKZeroPayView: UIView {
     var zeroPayCodeType                     : ZEROPAY_CODE_TYPE = .barcode
     /// 타이머 활성화 중인지를 체크 합니다.
     var isTimer                             : Bool = false
+    /// 카드 전체 화면 디스플레이 여부 입니다.
+    var isCardFullDisplay                   : Bool = false
     /// 코드 전체 화면 디스플레이 여부 입니다.
     var isCodeFullDisplay                   : Bool = false
     /// 바코드 결제 활성화 여부를 체크 합니다.
@@ -92,6 +94,8 @@ class OKZeroPayView: UIView {
     //// 코드 전체 화면 넓이 입니다.
     @IBOutlet weak var codeFullWidth        : NSLayoutConstraint!
     
+    @IBOutlet weak var payCardListTop       : NSLayoutConstraint!
+    @IBOutlet weak var payCardListView      : OKZeroPayCardListView!
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -165,10 +169,14 @@ class OKZeroPayView: UIView {
             default:break
             }
         }.store(in: &self.viewModel.cancellableSet)
-        
-        
+                
         /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
         self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
+        /// 결제 가능 카드 리스트 뷰어를 디스플레이 합니다.
+        self.payCardListView.setDisplay { success in
+            /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
+            self.setCardFullDisplay( display: true )
+        }
     }
     
 
@@ -320,7 +328,6 @@ class OKZeroPayView: UIView {
                     self.qrCodePayBtn.setTitleColor(UIColor(hex: 0x212121), for: .normal)
                 }
             }
-            
             break
         }
     }
@@ -479,8 +486,10 @@ class OKZeroPayView: UIView {
      - returns :False
      */
     func openFullCodeDisplay( codeType : ZEROPAY_CODE_TYPE, code : String = "" ){
+        /// 결제 가능 카드 리스트 뷰어를 히든처리 합니다.
+        self.payCardListView.isHidden       = true
         /// 전체 화면 디스플레이 여부를 활성화 합니다.
-        self.isCodeFullDisplay = true
+        self.isCodeFullDisplay              = true
         /// 전체 화면 코드 디스플레이 배경 입니다.
         self.codeFullDisplayViewBG.isHidden = false
         /// 디스플레이 가능한 최대 사이즈를 체크 합니다.
@@ -522,16 +531,18 @@ class OKZeroPayView: UIView {
      - returns :False
      */
     func closeFullCodeDisplay(){
+        /// 결제 가능 카드 리스트 뷰어를 디스플레이 합니다.
+        self.payCardListView.isHidden               = false
         /// 전체 화면 디스플레이 여부를 활성화 합니다.
-        self.isCodeFullDisplay                              = false
+        self.isCodeFullDisplay                      = false
         /// 전체 화면 코드 디스플레이 배경 입니다.
-        self.codeFullDisplayViewBG.isHidden                 = true
+        self.codeFullDisplayViewBG.isHidden         = true
         /// 코드 영역 화면을 기본 크기로 변경 합니다.
-        self.codeFullWidth.constant                         = 100
+        self.codeFullWidth.constant                 = 100
         /// 코드 영역 화면을 기본 크기로 변경 합니다.
-        self.codeFullHeight.constant                        = 100
+        self.codeFullHeight.constant                = 100
         /// 회전을 원위치 합니다.
-        self.codeFullDisplayView.transform                  = .identity
+        self.codeFullDisplayView.transform          = .identity
         /// 디스플레이 정보를 초기화 합니다.
         self.codeFullDisplayView.releaseCodeView()
         /// QR결제 위치로 선택 배경을 이동 합니다.
@@ -544,6 +555,55 @@ class OKZeroPayView: UIView {
     }
     
     
+    /**
+     결제 카드 리스트 전체 화면을 종료 합니다.
+     - Date : 2023.04.27
+     - Parameters:False
+     - Throws : False
+     - returns :False
+     */
+    func closeFullCardDisplay(){
+        /// 카드 디스플레이 전체 화면 여부를 비활성화 합니다.
+        self.isCardFullDisplay          = false
+        self.payCardListTop.constant    = (self.payCardListView.frame.origin.y * -1) + 48
+        /// QR결제 위치로 선택 배경을 이동 합니다.
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+            self.detaileViewTop.constant        = 315.0
+            self.layoutIfNeeded()
+        } completion: { _ in
+            
+        }
+    }
+    
+    
+    /**
+     결제 카드 리스트 전체 화면을 온오프 합니다.
+     - Date : 2023.04.27
+     - Parameters:
+        - display : 디스플레이 여부 값을 받습니다. ( true : 카드 리스트 전체화면, false : 카드 하단 디스플레이 )
+     - Throws : False
+     - returns :False
+     */
+    func setCardFullDisplay( display : Bool = true ){
+        /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
+        self.isCardFullDisplay                       = display
+        /// 전체화면 활성화 버튼을 온/오프 합니다.
+        self.payCardListView.listEnabledBtn.isHidden = display
+        self.payCardListTop.constant    = (self.payCardListView.frame.origin.y * -1) + 48
+        
+        
+        /// QR결제 위치로 선택 배경을 이동 합니다.
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+            self.detaileViewTop.constant        = display == true ? 12.0 : 315.0
+            if display == false { self.payCardListView.setCardFullClose() }
+            else { self.payCardListView.setCardFullDisplay() }
+            
+            self.layoutIfNeeded()
+        } completion: { _ in
+            
+        }
+    }
+    
     
     
     //MARK: - 버튼 액션 입니다.
@@ -553,11 +613,24 @@ class OKZeroPayView: UIView {
             switch type {
                 /// 페이지 종료 입니다.
                 case .page_exit:
+                    /// 카드 전체화면 디스플레이 경우 입니다.
+                    if self.isCardFullDisplay
+                    {
+                        self.setCardFullDisplay( display: false )
+                        return
+                    }
+                
                     /// 코드 전체화면 디스플레이 경우 입니다.
                     if self.isCodeFullDisplay
                     {
                         self.closeFullCodeDisplay()
                         return
+                    }
+                
+                    /// 타이머가 돌고있을경우 강제종료하고 페이지를 닫습니다.
+                    if self.isTimer
+                    {
+                        self.viewModel.codeTimer = .exit_time
                     }
                     self.viewController.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
                     })
