@@ -145,6 +145,7 @@ extension UIView {
         - modalPresent : 신규 컨트롤러 뷰어로 모달 오픈 할지를 받습니다.
         - animatedType : 모달 팝업시 에니 효과 입니다.
         - titleName : 타이틀 명칭 입니다.
+        - titleBarType  : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
         - titleBarHidden : 타이틀바 디스플레이 여부를 받습니다. ( default false )
         - completion : 콜백 데이터 입니다.
      - Throws : False
@@ -155,11 +156,12 @@ extension UIView {
                             pageType        : FULL_PAGE_TYPE = .default_type,
                             animatedType    : AnimationType = .up,
                             titleName       : String        = "",
+                            titleBarType    : Int           = 2,
                             titleBarHidden  : Bool          = false,
                             completion      : (( _ value : FULL_WEB_CB ) -> Void )? = nil ) {
         if modalPresent
         {
-            let webview =  FullWebViewController( pageType: pageType, title: titleName, titleBarHidden: titleBarHidden, pageURL: linkUrl, completion : completion)
+            let webview =  FullWebViewController( pageType: pageType, title: titleName,titleBarType: titleBarType, titleBarHidden: titleBarHidden, pageURL: linkUrl, completion : completion)
             webview.modalPresentationStyle = .overFullScreen
             self.viewController.navigationController!.pushViewController(webview, animated: true, animatedType: animatedType)
         }

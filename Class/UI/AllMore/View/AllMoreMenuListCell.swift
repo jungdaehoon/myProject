@@ -290,9 +290,33 @@ extension AllMoreMenuListCell
      */
     func toQRZeroPayPage()
     {
-        let viewController = OkPaymentViewController()
-        viewController.modalPresentationStyle = .overFullScreen
-        self.viewController.navigationController!.pushViewController(viewController, animated: true, animatedType: .up)
+        /// 제로페이 선택 안내 팝업 디스플레이 합니다.
+        OKZeroPayTypeBottomView().setDisplay { event in
+            switch event
+            {
+                /// 결제 페이지로 이동 합니다.
+            case .paymeny:
+                let viewController = OkPaymentViewController()
+                viewController.modalPresentationStyle = .overFullScreen
+                self.viewController.navigationController!.pushViewController(viewController, animated: true, animatedType: .up)
+                break
+                /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
+            case .location:
+                /// 제로페이 가맹점 검색 URL 입니다.
+                let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                
+                    /// 제로페이 가맹점 네이버 지도를 요청 합니다.
+                self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                break
+            default:break
+            
+            }
+        }
+        
+        return
+//        let viewController = OkPaymentViewController()
+//        viewController.modalPresentationStyle = .overFullScreen
+//        self.viewController.navigationController!.pushViewController(viewController, animated: true, animatedType: .up)
     }
     
     

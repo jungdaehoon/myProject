@@ -53,7 +53,7 @@ class TopUserInfoView: UIView {
             self.levelText.text     = "Level \(result._user_level!)"
             /// 닉네임 정보를 디스플레이 합니다.
             self.nickNameText.text  = "\(result._nickname!)"
-            /*
+            
             /// 프로필 이미지를 다운로드 합니다.
             let url = URL(string: result._user_img_url!)
             UIImageView.loadImage(from: url!).sink { image in
@@ -61,7 +61,7 @@ class TopUserInfoView: UIView {
                     self.profileImage.image = profileImage
                 }
             }.store(in: &self.viewModel!.cancellableSet)
-             */
+             
         }
         
         

@@ -24,6 +24,8 @@ enum ZEROPAY_BTN_TYPE : Int {
     case qrcode_pay         = 12
     /// 신규 코드 생성 입니다.
     case creation_code      = 13
+    /// 매장 찾기 입니다.
+    case location_search     = 14
 }
 
 
@@ -388,12 +390,6 @@ class OKZeroPayView: UIView {
         {
             /// 바코드 타입으로 안내 문구를 변경 합니다.
             self.codeTypeInfoText.text          = "매장에 바코드를 보여주세요"
-            /// 코드생성 버튼 뷰어를 히든처리 합니다.
-            self.codeCreationView.isHidden      = true
-            /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
-            self.codeEnabledTimeWidth.constant  = 49
-            /// 코드 활성화 타임 문구 입니다.
-            self.codeEnabeldTimeText.text       = ""
             /// 라운드 컬러를 활성화 컬러로 변경 합니다.
             self.barCodeView.borderColor        = .OKColor
         }
@@ -401,15 +397,15 @@ class OKZeroPayView: UIView {
         {
             /// 바코드 타입으로 안내 문구를 변경 합니다.
             self.codeTypeInfoText.text          = "매장에 QR코드를 보여주세요"
-            /// 코드생성 버튼 뷰어를 히든처리 합니다.
-            self.codeCreationView.isHidden      = true
-            /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
-            self.codeEnabledTimeWidth.constant  = 49
-            /// 코드 활성화 타임 문구 입니다.
-            self.codeEnabeldTimeText.text       = ""
             /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
             self.qrCodeView.borderColor         = .OKColor
         }
+        /// 코드생성 버튼 뷰어를 히든처리 합니다.
+        self.codeCreationView.isHidden      = true
+        /// 코드 활성화 타임 뷰어를 디스플레이 합니다.
+        self.codeEnabledTimeWidth.constant  = 49
+        /// 코드 활성화 타임 문구 입니다.
+        self.codeEnabeldTimeText.text       = self.isTimer == true ? self.codeEnabeldTimeText.text : "03:00"
     }
     
     
@@ -646,6 +642,13 @@ class OKZeroPayView: UIView {
                 case .creation_code:
                     /// 결제할 코드생성을 디스플레이 합니다.
                     self.setCodeCreationView()
+                    break
+                case .location_search:
+                /// 제로페이 가맹점 검색 URL 입니다.
+                var urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                
+                    /// 제로페이 가맹점 네이버 지도를 요청 합니다.
+                self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
                     break
             }
             

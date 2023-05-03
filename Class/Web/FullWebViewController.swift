@@ -10,6 +10,13 @@ import UIKit
 import WebKit
 
 
+
+enum FULL_BTN : Int {
+    /// 페이지 아래로 종료 입니다.
+    case page_close = 10
+    /// 페이지 이전 페이지 이동 입니다.
+    case page_back  = 11
+}
 /**
  전체 웹 종료 콜백 입니다.  ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.21
@@ -189,12 +196,30 @@ class FullWebViewController: BaseViewController {
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true, completion: {
-            if self.completion != nil
+        if let type =  FULL_BTN(rawValue: (sender as AnyObject).tag)
+        {
+            switch type
             {
-                self.completion!(.pageClose)
+                case .page_back:
+                self.navigationController?.popViewController(animated: true, animatedType: .right, completion: {
+                        if self.completion != nil
+                        {
+                            self.completion!(.pageClose)
+                        }
+                    })
+                    break
+                case .page_close:
+                    self.navigationController?.popViewController(animated: true, completion: {
+                        if self.completion != nil
+                        {
+                            self.completion!(.pageClose)
+                        }
+                    })
+                    break
             }
-        })        
+        }
+        
+        
     }
 }
 
