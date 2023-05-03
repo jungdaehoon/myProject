@@ -86,8 +86,9 @@ struct result: Codable {
     /// 거래내역 정보입니다.
     var _acc_trans_list         : [acc_trans_list]? { get { return acc_trans_list != nil ? acc_trans_list : [] } }
     /// 오픈뱅킹 사용여부 입니다.
-    var _openbank               : Bool?  { get { return  openbank == nil ? false : openbank } }
-    
+    var _openbank               : Bool?   { get { return  openbank == nil ? false : openbank } }
+    /// 제로페이QR 결제 약관동의 여부 입니다.
+    var _zeropayPaymentYn       : String? { get { return  NC.S(zeropayPaymentYn)  } }
     
     
     /// 추천인 입력 가능여부 입니다.
@@ -148,6 +149,8 @@ struct result: Codable {
     var acc_trans_list          : [acc_trans_list]?
     /// 오픈뱅킹 사용여부 입니다.
     var openbank                : Bool?
+    /// 제로페이QR 결제 약관동의 여부 입니다.
+    var zeropayPaymentYn        : String?
     
 }
 

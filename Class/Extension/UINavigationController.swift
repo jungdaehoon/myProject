@@ -125,6 +125,33 @@ extension UINavigationController : UINavigationControllerExtension {
     }
     
     
+    /**
+     내비게이션 컨트롤로 현 페이지를 종료 합니다.
+     - Date : 2023.04.17
+     - Parameters:
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func popToRootViewController(
+        animated: Bool,
+        animatedType: AnimationType? = .down,
+        completion: @escaping () -> Void)
+    {
+        self.popAnimation = animatedType!
+        popToRootViewController(animated: animated)
+        
+        guard animated, let coordinator = transitionCoordinator else {
+            DispatchQueue.main.async { completion() }
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: nil) { _ in completion() }
+    }
+    
+    
     func popToRootViewController(
         animated: Bool,
         completion: @escaping () -> Void)
@@ -141,18 +168,20 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 이동시 현 페이지를 삭제하고 추가할 페이지로 변경합니다.
-     - Date : 2023.04.12
+     - Date : 2023.05.03
      - Parameters:
         - viewController : 이동할 페이지 입니다.
         - animated : 애니 효과 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
      - Throws : False
      - returns :False
      */
-    func replaceViewController( viewController:UIViewController, animated : Bool = true, completion: @escaping () -> Void ) {
+    func replaceViewController( viewController: UIViewController, animated : Bool = true, animatedType: AnimationType? = .down, completion: @escaping () -> Void ) {
         let vcs                         = self.viewControllers
         var newVcs:[UIViewController]   = vcs
         newVcs.removeLast()
         newVcs.append(viewController)
+        self.popAnimation = animatedType!
         self.setViewControllers(newVcs, animated: animated)
         
         guard animated, let coordinator = transitionCoordinator else {

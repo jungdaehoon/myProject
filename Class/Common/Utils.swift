@@ -429,5 +429,26 @@ class NC {
         //return object!
         return String.init(htmlEncodedString: object!)!
     }
+    
+    
+    /**
+     Bool 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.03
+     - Parameters:
+        - object : 체크할 Bool 형 데이터 입니다.
+     - returns :
+        - Bool Type
+            > 체크된 데이터를 리턴 합니다. 비정상 데이터면 false 정보를 리턴 합니다.
+     */
+    static func B( _ object : Bool? ) -> Bool
+    {
+        if object == nil
+        {
+            return false
+        }
+        //return object!
+        return object!
+    }
+    
 }
 

@@ -603,6 +603,8 @@ class WebMessagCallBackHandler : NSObject  {
                         let title           = NC.S(info["title"] as? String)
                         /// 상단 타이틀 디스플레이 여부 입니다. ( 0 : 타이틀 바 히든, 1 : 뒤로가기 버튼, 2 : 종료 버튼 )
                         let button          = NC.S( info["button"] as? String )
+                        /// 현 페이지 종료 여부를 받습니다.
+                        let ingPageClose    = NC.B( info["ingPageClose"] as? Bool )
                         /// PG 결제에서 사용할 콜백 메서드 입니다.
                         let pg_Callback     = callBacks[0] as! String
                         let linkUrl         = AlamofireAgent.domainUrl + url
@@ -623,23 +625,66 @@ class WebMessagCallBackHandler : NSObject  {
                         /// 전체 화면 모드 입니다.
                         if fullDisplay == true
                         {
+                            /// 컨트롤러 연결 되었는지를 체크 합니다.
                             if let controller = self.target
                             {
+                                /// 네비게이션 타입인지를 체크 합니다.
                                 if let navigation = controller.navigationController
                                 {
-                                    navigation.pushViewController(viewController, animated: true, animatedType: .up)
+                                    /// 현 페이지 종료 여부를 체크 합니다.
+                                    if ingPageClose == true
+                                    {
+                                        navigation.replaceViewController(viewController: viewController, animated: true, animatedType: .up, completion:{})
+                                    }
+                                    else
+                                    {
+                                        navigation.pushViewController(viewController, animated: true, animatedType: .up)
+                                    }
+                                }
+                                else
+                                {
+                                    /// 현 페이지 종료 여부를 체크 합니다.
+                                    if ingPageClose == true
+                                    {
+                                        /// 현 페이지를 종료하고 신규 페이지를 추가 합니다.
+                                        if let pvc = controller.presentingViewController
+                                        {
+                                            controller.dismiss(animated: false) {
+                                                pvc.present(viewController, animated: false) {
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        controller.present(viewController,animated: true)
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        /// 전체 화면 모드가 아는 경우 입니다.
+                        else
+                        {
+                            /// 컨트롤러 연결 여부를 체크 합니다.
+                            if let controller = self.target
+                            {
+                                /// 현 페이지 종료 여부를 체크 합니다.
+                                if ingPageClose == true
+                                {
+                                    /// 현 페이지를 종료하고 신규 페이지를 추가 합니다.
+                                    if let pvc = controller.presentingViewController
+                                    {
+                                        controller.dismiss(animated: false) {
+                                            pvc.present(viewController, animated: false) {
+                                            }
+                                        }
+                                    }
                                 }
                                 else
                                 {
                                     controller.present(viewController,animated: true)
                                 }
-                            }
-                        }
-                        else
-                        {
-                            if let controller = self.target
-                            {
-                                controller.present(viewController,animated: true)
                             }
                         }
                         return
@@ -669,7 +714,7 @@ class WebMessagCallBackHandler : NSObject  {
                         /// 상단 타이틀 디스플레이 여부 입니다. ( 0 : 타이틀 바 히든, 1 : 뒤로가기 버튼, 2 : 종료 버튼 )
                         let button          = NC.S( info["button"] as? String )
                         /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController  = FullWebViewController.init( titleBarHidden: true, pageURL: url ) { cbType in
+                        let viewController  = FullWebViewController.init( title: title, titleBarType: Int( button )!, pageURL: url ) { cbType in
                         }
                         self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
                         return

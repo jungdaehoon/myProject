@@ -87,7 +87,7 @@ class AllMoreMenuListView: UIView {
     func reloadDisplay( _ menus : [AllModeMenuListInfo] = [], viewModel : AllMoreModel? ){
         self.viewModel = viewModel
         /// 디스플레이할 메뉴 정보를 받습니다.
-        self.menus                          = menus
+        self.menus     = menus
         self.tableView.reloadData()
     }
     
@@ -129,8 +129,7 @@ extension AllMoreMenuListView : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllMoreMenuListCell", for: indexPath) as! AllMoreMenuListCell
         let menuInfo : AllModeMenuListInfo = self.menus[indexPath.row]
-        cell.viewModel = self.viewModel
-        cell.setDisplay(menuInfo)
+        cell.setDisplay(menuInfo, viewModel: self.viewModel)
         cell.backgroundColor = .clear
         return cell
     }

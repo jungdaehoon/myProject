@@ -239,7 +239,7 @@ class OKZeroPayView: UIView {
         - type : 코드 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
         - overTime : 타이머 오버 값을 받습니다.
         - animation : 애니 사용 모드 입니다.
-        - viewEnabled : 화면이동 없이 뷰어만 적용 하는 경우 입니다.
+        - viewEnabled : 결제 타입 이동 없이 현 위치 뷰어만 상황별 디스플레이 하는 경우 입니다. ( 주로 현 결제 타입에서 타임 오버 되었을 경우 입니다. )
      - Throws : False
      - returns :False
      */

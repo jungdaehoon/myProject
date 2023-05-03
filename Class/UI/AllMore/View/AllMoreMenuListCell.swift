@@ -64,40 +64,37 @@ class AllMoreMenuListCell: UITableViewCell {
      - Date : 2023.03.07
      - Parameters:
         - menuInfo : 메뉴 리스트 인포 정보 입니다.
+        - viewModel : 뷰 모델을 받습니다.
      - Throws : False
      - returns :False
      */
-    func setDisplay( _ menuInfo : AllModeMenuListInfo )
+    func setDisplay( _ menuInfo : AllModeMenuListInfo, viewModel : AllMoreModel? )
     {
-        
-        
+        /// 모델 정보를 받습니다.
+        self.viewModel = viewModel
         /// 타이틀 정보를 추가 디스플레이 합니다.
-        self.titleName.text = menuInfo._title
+        self.titleName.text = menuInfo.title
         
-        /// 메뉴 타입정보가 있을 경우 디스플레이 합니다
-        if menuInfo._menuType!.count > 0
+        switch menuInfo.menuType
         {
             /// 문구를 디스플레이 합니다.
-            if menuInfo._menuType == "text"
-            {
+            case .text:
                 self.rightImage.isHidden    = true
                 self.rightSubText.isHidden  = false
-            }
             /// 오른쪽 이동 이미지를 디스플레이 합니다.
-            else
-            {
+            case .rightimg:
                 self.rightImage.isHidden    = false
                 self.rightSubText.isHidden  = true
-            }
+            default:break
         }
         
         /// 오른쪽 서브로 디스플레이할 문구가 있는지를 체크 합니다.
-        if menuInfo._subTitle!.count > 0
+        if menuInfo.subTitle!.count > 0
         {
             /// 추가 정보를 디스플레이 하도록 활성화 합니다.
             self.subTitle.isHidden  = false
             /// 오른쪽 서브에 문구를 추가 합니다.
-            self.subTitle.text      = menuInfo._subTitle!
+            self.subTitle.text      = menuInfo.subTitle!
         }
         else
         {
@@ -106,14 +103,14 @@ class AllMoreMenuListCell: UITableViewCell {
         }
                 
         /// 타이틀 오른쪽 디스플레이할 아이콘 문구가 있는지를 체크 합니다.
-        if menuInfo._subiCon!.count > 0
+        if menuInfo.subiCon!.count > 0
         {
             /// 타이틀 문구 오른쪽 아이콘을 활성화 합니다.
             self.typeiConView.isHidden  = false
             /// 타이틀 아이콘의 문구를 추가합니다.
-            self.typeiConText.text      = menuInfo._subiCon!
+            self.typeiConText.text      = menuInfo.subiCon!
             /// 문구를 디스플레이 합니다.
-            if menuInfo._subiCon! == "NEW!"
+            if menuInfo.subiCon! == "NEW!"
             {
                 self.typeiConView.backgroundColor = UIColor(red: 255/255, green: 83/255, blue: 0/255, alpha: 1.0)
             }
@@ -130,7 +127,7 @@ class AllMoreMenuListCell: UITableViewCell {
         }
         
         
-        if menuInfo._title == "이번달 결제"
+        if menuInfo.title == "이번달 결제"
         {
             if let model = self.viewModel
             {
@@ -150,68 +147,130 @@ class AllMoreMenuListCell: UITableViewCell {
     
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        print("title name : \(self.menuInfo!._title!)")
+        print("title name : \(self.menuInfo!.title!)")
         
-        if self.menuInfo!._title! == "이번달 결제"
+        if self.menuInfo!.title! == "이번달 결제"
         {
             /// 결제 페이지는 추후 개발 후 연동 예정 입니다.
             self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
         }
-        
-        if self.menuInfo!._title! == "이번달 적립"
+
+        if self.menuInfo!.title! == "이번달 적립"
         {
             self.setDisplayWebView(WebPageConstants.URL_POINT_TRANSFER_LIST + "?tran_kn=1")
         }
         
-        if self.menuInfo!._title! == "OK마켓"
+        if self.menuInfo!.title! == "OK마켓"
         {
-            self.setDisplayWebView(WebPageConstants.URL_GIFT_LIST)
+            ///  OK마켓 URL 정보를 가져 옵니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_GIFTYCON).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
-        if self.menuInfo!._title! == "제로페이 QR"
+        
+        if self.menuInfo!.title! == "제로페이 QR"
         {
-            /// 인증 처리 팝업 입니다.
-            self.setZeroPayTermsViewDisplay()
+            if let response  = self.viewModel!.allModeResponse,
+               let result    = response.result,
+               result._zeropayPaymentYn == "Y"
+            {
+                /// 제로페이 현장 결제 뷰어로 이동합니다.
+                self.toQRZeroPayPage()
+            }
+            else
+            {
+                /// 인증 처리 팝업 입니다.
+                self.setZeroPayTermsViewDisplay()
+            }
         }
-        if self.menuInfo!._title! == "제로페이 상품권"
+     
+        if self.menuInfo!.title! == "제로페이 상품권"
         {
-            self.setDisplayWebView(WebPageConstants.URL_ZERO_PAY_INTRO, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true)
+            /// 제로페이 상품권 URL 정보를 가져 옵니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
-        if self.menuInfo!._title! == "만보Go"
+        
+        if self.menuInfo!.title! == "만보Go"
         {
             self.toPedometerPage()
         }
-        if self.menuInfo!._title! == "올림pick"
+        
+        if self.menuInfo!.title! == "올림pick"
         {
             self.setDisplayWebView(WebPageConstants.URL_OLIMPICK_LIST)
         }
-        if self.menuInfo!._title! == "친구추천"
+        
+        if self.menuInfo!.title! == "친구추천"
         {
-            self.setDisplayWebView(WebPageConstants.URL_RECOMMEND_USER)
+            /// 친추추천 URL 정보를 가져 옵니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_RECOMMEND_USER).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
-        if self.menuInfo!._title! == "뿌리Go"
+        
+        if self.menuInfo!.title! == "뿌리Go"
         {
             self.setDisplayWebView(WebPageConstants.URL_MY_RELATIONSHIP)
         }
         
-        if self.menuInfo!._title! == "이벤트"
+        if self.menuInfo!.title! == "이벤트"
         {
-            self.setDisplayWebView(WebPageConstants.URL_EVENT_LIST)
+            /// 이벤트 URL 정보를 가져 옵니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_EVENT).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
-        if self.menuInfo!._title! == "고객센터"
-        {
+        
+        if self.menuInfo!.title! == "고객센터"
+        {            
             WebPageConstants.URL_KAKAO_CONTACT.openUrl()
         }
-        if self.menuInfo!._title! == "FAQ"
+        
+        if self.menuInfo!.title! == "FAQ"
         {
-            self.setDisplayWebView(WebPageConstants.URL_FAQ_LIST)
+            /// FAQ URL 정보 입니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_FAQ).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
-        if self.menuInfo!._title! == "서비스안내"
+        
+        if self.menuInfo!.title! == "서비스안내"
         {
-            self.setDisplayWebView(WebPageConstants.URL_POINT_INFO)
+            /// 포인트안내 (서비스안내) URL 입니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_POINT).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
-        if self.menuInfo!._title! == "공지사항"
+        
+        if self.menuInfo!.title! == "공지사항"
         {
-            self.setDisplayWebView(WebPageConstants.URL_NOTICE_LIST)
+            /// 공지사항 URL 입니다.
+            self.viewModel!.getAppMenuList(menuID: .ID_NOTICE).sink(receiveValue: { url in
+                if url.isValid
+                {
+                    self.setDisplayWebView( url )
+                }
+            }).store(in: &self.viewModel!.cancellableSet)
         }
         
     }
@@ -349,7 +408,6 @@ extension AllMoreMenuListCell
      */
     func setOlimpickTermsViewDisplay()
     {
-        //URL_OLIMPICK_LIST
         let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
         BottomTermsView().setDisplay( target: self.viewController, "올림pick 서비스를 이용하실려면\n이용약관에 동의해주세요",
                                      termsList: terms) { value in
@@ -376,7 +434,6 @@ extension AllMoreMenuListCell
      */
     func setZeroPayTermsViewDisplay()
     {
-        //URL_OLIMPICK_LIST
         let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
         BottomTermsView().setDisplay( target: self.viewController, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
                                      termsList: terms) { value in

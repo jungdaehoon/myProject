@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		03A8B402B8ABD84636006B8B /* Pods_cereal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740F24DF294204F2C066E1 /* Pods_cereal.framework */; };
 		8D159EA329EF754000918CC0 /* ZeroPayQRCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */; };
+		8D1C97F42A01DF1000A4BA50 /* BottomBankListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C97F32A01DF1000A4BA50 /* BottomBankListView.swift */; };
+		8D1C97F62A01DF1600A4BA50 /* BottomBankListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1C97F52A01DF1600A4BA50 /* BottomBankListView.xib */; };
+		8D1C97F92A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C97F72A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift */; };
+		8D1C97FA2A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1C97F82A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib */; };
+		8D1C97FC2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C97FB2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift */; };
+		8D1C97FE2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1C97FD2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib */; };
 		8D205E3429D133FA00F43C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E3329D133FA00F43C99 /* AppDelegate.swift */; };
 		8D205E4029D133FB00F43C99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E3E29D133FB00F43C99 /* LaunchScreen.storyboard */; };
 		8D205E4B29D133FC00F43C99 /* cerealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E4A29D133FC00F43C99 /* cerealTests.swift */; };
@@ -198,6 +204,11 @@
 		8DDC3DF929D16731003C4F8F /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDC3DF429D16730003C4F8F /* libssl.a */; };
 		8DDC3DFA29D16731003C4F8F /* libBSAppIron.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDC3DF529D16730003C4F8F /* libBSAppIron.a */; };
 		8DDC3DFD29D1774B003C4F8F /* AppStartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC3DFC29D1774B003C4F8F /* AppStartResponse.swift */; };
+		8DE310532A00F88300DF9653 /* BottomAccountListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE310522A00F88300DF9653 /* BottomAccountListView.swift */; };
+		8DE310552A00F88900DF9653 /* BottomAccountListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE310542A00F88900DF9653 /* BottomAccountListView.xib */; };
+		8DE310582A00FE6700DF9653 /* BottomAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE310572A00FE6700DF9653 /* BottomAccountModel.swift */; };
+		8DE3105B2A01010600DF9653 /* BottomAccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE310592A01010600DF9653 /* BottomAccountListTableViewCell.swift */; };
+		8DE3105C2A01010600DF9653 /* BottomAccountListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE3105A2A01010600DF9653 /* BottomAccountListTableViewCell.xib */; };
 		8DE3260329D567C8006E3B69 /* guide_ani_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE325FE29D567C8006E3B69 /* guide_ani_3.json */; };
 		8DE3260429D567C8006E3B69 /* guide_up.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE325FF29D567C8006E3B69 /* guide_up.json */; };
 		8DE3260529D567C8006E3B69 /* guide_ani_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE3260029D567C8006E3B69 /* guide_ani_1.json */; };
@@ -231,6 +242,12 @@
 		80C3106D529C4F05193371E0 /* Pods-cereal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.release.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.release.xcconfig"; sourceTree = "<group>"; };
 		8CF5385A8BC1A2DBDC899E25 /* Pods-cereal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.debug.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.debug.xcconfig"; sourceTree = "<group>"; };
 		8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeResponse.swift; sourceTree = "<group>"; };
+		8D1C97F32A01DF1000A4BA50 /* BottomBankListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBankListView.swift; sourceTree = "<group>"; };
+		8D1C97F52A01DF1600A4BA50 /* BottomBankListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBankListView.xib; sourceTree = "<group>"; };
+		8D1C97F72A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBankListCollectionViewCell.swift; sourceTree = "<group>"; };
+		8D1C97F82A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBankListCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D1C97FB2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayTypeBottomView.swift; sourceTree = "<group>"; };
+		8D1C97FD2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayTypeBottomView.xib; sourceTree = "<group>"; };
 		8D205E3029D133FA00F43C99 /* cereal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cereal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D205E3329D133FA00F43C99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D205E3F29D133FB00F43C99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -431,6 +448,11 @@
 		8DDC3DF429D16730003C4F8F /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		8DDC3DF529D16730003C4F8F /* libBSAppIron.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBSAppIron.a; sourceTree = "<group>"; };
 		8DDC3DFC29D1774B003C4F8F /* AppStartResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartResponse.swift; sourceTree = "<group>"; };
+		8DE310522A00F88300DF9653 /* BottomAccountListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAccountListView.swift; sourceTree = "<group>"; };
+		8DE310542A00F88900DF9653 /* BottomAccountListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomAccountListView.xib; sourceTree = "<group>"; };
+		8DE310572A00FE6700DF9653 /* BottomAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAccountModel.swift; sourceTree = "<group>"; };
+		8DE310592A01010600DF9653 /* BottomAccountListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAccountListTableViewCell.swift; sourceTree = "<group>"; };
+		8DE3105A2A01010600DF9653 /* BottomAccountListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomAccountListTableViewCell.xib; sourceTree = "<group>"; };
 		8DE325FE29D567C8006E3B69 /* guide_ani_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_ani_3.json; sourceTree = "<group>"; };
 		8DE325FF29D567C8006E3B69 /* guide_up.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_up.json; sourceTree = "<group>"; };
 		8DE3260029D567C8006E3B69 /* guide_ani_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_ani_1.json; sourceTree = "<group>"; };
@@ -510,6 +532,17 @@
 				8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */,
 			);
 			path = ZeroPayQRCode;
+			sourceTree = "<group>";
+		};
+		8D1C97F22A01DEF900A4BA50 /* BottomBankListView */ = {
+			isa = PBXGroup;
+			children = (
+				8D1C97F32A01DF1000A4BA50 /* BottomBankListView.swift */,
+				8D1C97F52A01DF1600A4BA50 /* BottomBankListView.xib */,
+				8D1C97F72A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift */,
+				8D1C97F82A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib */,
+			);
+			path = BottomBankListView;
 			sourceTree = "<group>";
 		};
 		8D205E2729D133FA00F43C99 = {
@@ -798,6 +831,8 @@
 				8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */,
 				8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */,
 				8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */,
+				8D1C97FB2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift */,
+				8D1C97FD2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -956,6 +991,8 @@
 		8D205EFE29D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8D1C97F22A01DEF900A4BA50 /* BottomBankListView */,
+				8DE310512A00F86100DF9653 /* BottomAccountListView */,
 				8D91E26529E5250F0015E5E7 /* DatePickerView */,
 				8D91D99629DFC66000B5D9AE /* ErrorPop */,
 				8DFB9D1F29DD35A3004E5021 /* LoadingView */,
@@ -978,8 +1015,8 @@
 		8D205F0029D1346E00F43C99 /* BottomTermsView */ = {
 			isa = PBXGroup;
 			children = (
-				8D205F0129D1346E00F43C99 /* BottomTermsView.xib */,
 				8D205F0229D1346E00F43C99 /* BottomTermsView.swift */,
+				8D205F0129D1346E00F43C99 /* BottomTermsView.xib */,
 				8D205F0329D1346E00F43C99 /* BottomTermsTableViewCell.swift */,
 				8D205F0429D1346E00F43C99 /* BottomTermsTableViewCell.xib */,
 			);
@@ -1211,6 +1248,26 @@
 			path = AppStart;
 			sourceTree = "<group>";
 		};
+		8DE310512A00F86100DF9653 /* BottomAccountListView */ = {
+			isa = PBXGroup;
+			children = (
+				8DE310562A00FE5900DF9653 /* Model */,
+				8DE310522A00F88300DF9653 /* BottomAccountListView.swift */,
+				8DE310542A00F88900DF9653 /* BottomAccountListView.xib */,
+				8DE310592A01010600DF9653 /* BottomAccountListTableViewCell.swift */,
+				8DE3105A2A01010600DF9653 /* BottomAccountListTableViewCell.xib */,
+			);
+			path = BottomAccountListView;
+			sourceTree = "<group>";
+		};
+		8DE310562A00FE5900DF9653 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DE310572A00FE6700DF9653 /* BottomAccountModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8DE325FD29D567BB006E3B69 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
@@ -1380,6 +1437,7 @@
 				8DD916BA29FB54F800805A7E /* OKZeroPayCardView.xib in Resources */,
 				8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */,
 				8D205F1429D1346F00F43C99 /* Pretendard-Thin.otf in Resources */,
+				8D1C97FA2A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib in Resources */,
 				8D205F3429D1346F00F43C99 /* TabbarCenterView.xib in Resources */,
 				8D55D56929E660F6009C43BF /* GoogleService-Info.plist in Resources */,
 				8D205F2F29D1346F00F43C99 /* Main.storyboard in Resources */,
@@ -1395,6 +1453,7 @@
 				8D205F2629D1346F00F43C99 /* Intro.storyboard in Resources */,
 				8D205F4229D1346F00F43C99 /* TopUserInfoView.xib in Resources */,
 				8D205F2829D1346F00F43C99 /* PermissionInfoView.xib in Resources */,
+				8DE3105C2A01010600DF9653 /* BottomAccountListTableViewCell.xib in Resources */,
 				8D205F2129D1346F00F43C99 /* FullWebViewController.xib in Resources */,
 				8D91E27729E53ACB0015E5E7 /* tabbar_wallet.json in Resources */,
 				8D205F2C29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.xib in Resources */,
@@ -1410,8 +1469,10 @@
 				8D205F3B29D1346F00F43C99 /* PointItemView.xib in Resources */,
 				8D205F4129D1346F00F43C99 /* BannerView.xib in Resources */,
 				8D205F3229D1346F00F43C99 /* TabBarView.xib in Resources */,
+				8DE310552A00F88900DF9653 /* BottomAccountListView.xib in Resources */,
 				8D2FC9E829DC05F50061821F /* BecomeActiveView.xib in Resources */,
 				8DE3260529D567C8006E3B69 /* guide_ani_1.json in Resources */,
+				8D1C97FE2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib in Resources */,
 				8DE3260729D567C8006E3B69 /* guide_ani_2.json in Resources */,
 				8D205F1129D1346F00F43C99 /* Pretendard-Light.otf in Resources */,
 				8DD916BE29FB56A300805A7E /* OKZeroPayCardListView.xib in Resources */,
@@ -1420,6 +1481,7 @@
 				8D205F1329D1346F00F43C99 /* Pretendard-Bold.otf in Resources */,
 				8D205F8829D1346F00F43C99 /* BottomTermsTableViewCell.xib in Resources */,
 				8D205F1029D1346F00F43C99 /* Pretendard-Medium.otf in Resources */,
+				8D1C97F62A01DF1600A4BA50 /* BottomBankListView.xib in Resources */,
 				8D205F1529D1346F00F43C99 /* Pretendard-ExtraLight.otf in Resources */,
 				8D205F1929D1346F00F43C99 /* NanumSquareRoundB.ttf in Resources */,
 				8DCB189A29F663DD000645D3 /* splash.json in Resources */,
@@ -1510,6 +1572,7 @@
 				8D205F8E29D1346F00F43C99 /* BaseWebViewController.swift in Sources */,
 				8D205F5529D1346F00F43C99 /* LoginViewController.swift in Sources */,
 				8D159EA329EF754000918CC0 /* ZeroPayQRCodeResponse.swift in Sources */,
+				8D1C97F42A01DF1000A4BA50 /* BottomBankListView.swift in Sources */,
 				8D205F3529D1346F00F43C99 /* TabbarViewController.swift in Sources */,
 				8D205F2729D1346F00F43C99 /* IntroModel.swift in Sources */,
 				8DBA445B29D428BA00A2E5C1 /* HybridOpenBankViewController.swift in Sources */,
@@ -1539,6 +1602,7 @@
 				8DCB18A629F6641E000645D3 /* CheckMnemonicViewController.swift in Sources */,
 				8D205F3D29D1346F00F43C99 /* PointItemView.swift in Sources */,
 				8D205F8D29D1346F00F43C99 /* BaseViewController.swift in Sources */,
+				8DE310582A00FE6700DF9653 /* BottomAccountModel.swift in Sources */,
 				8D205F2B29D1346F00F43C99 /* PermissionInfoView.swift in Sources */,
 				8D55D56629E648AC009C43BF /* SEED.mm in Sources */,
 				8D205F5829D1346F00F43C99 /* Array.swift in Sources */,
@@ -1575,6 +1639,7 @@
 				8D205F6A29D1346F00F43C99 /* UIApplication.swift in Sources */,
 				8D51442429D54AE70019943D /* LottieAniView.swift in Sources */,
 				8D205F8629D1346F00F43C99 /* BottomTermsView.swift in Sources */,
+				8D1C97F92A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift in Sources */,
 				8DDC3DFD29D1774B003C4F8F /* AppStartResponse.swift in Sources */,
 				8D91D99829DFC6C600B5D9AE /* HttpErrorPop.swift in Sources */,
 				8DBA445429D4176200A2E5C1 /* AlertViewController.swift in Sources */,
@@ -1582,6 +1647,7 @@
 				8D205F5329D1346F00F43C99 /* FinanceViewController.swift in Sources */,
 				8DCB18A729F6641E000645D3 /* RestoreWalletViewController.swift in Sources */,
 				8D205F6729D1346F00F43C99 /* UIImageView.swift in Sources */,
+				8D1C97FC2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift in Sources */,
 				8D9D924929F7B9F900F42B8D /* GuideInfoView.swift in Sources */,
 				8D205F6529D1346F00F43C99 /* UIButton.swift in Sources */,
 				8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */,
@@ -1598,6 +1664,7 @@
 				8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */,
 				8D205F6029D1346F00F43C99 /* NSMutableAttributedString.swift in Sources */,
 				8DCB18A829F6641E000645D3 /* WalletHelper.swift in Sources */,
+				8DE3105B2A01010600DF9653 /* BottomAccountListTableViewCell.swift in Sources */,
 				8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */,
 				8D205F3729D1346F00F43C99 /* AllMoreModel.swift in Sources */,
 				8D205F8429D1346F00F43C99 /* KeyChainCustItem.swift in Sources */,
@@ -1607,6 +1674,7 @@
 				8D205F5629D1346F00F43C99 /* Date.swift in Sources */,
 				8D205F5729D1346F00F43C99 /* UIView.swift in Sources */,
 				8D205F7C29D1346F00F43C99 /* PedometerRewardResponse.swift in Sources */,
+				8DE310532A00F88300DF9653 /* BottomAccountListView.swift in Sources */,
 				8DC72E6929D6A3420044F021 /* DatePickerViewController.swift in Sources */,
 				8D205F6229D1346F00F43C99 /* UITextField.swift in Sources */,
 				8D205F7529D1346F00F43C99 /* BaseResponse.swift in Sources */,

@@ -7,17 +7,113 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "844EA752-03A9-4EE4-8E30-DB9503AC1FF3"
+            uuid = "8274FC34-0187-4A97-866E-B7055BA70D9F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/UI/OkZeroPayment/View/OKZeroPayCardListView.swift"
+            filePath = "Class/Common/View/ErrorPop/HttpErrorPop.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "setCardDisplay()"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "setErrorView()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7182D69E-872E-4E8B-9706-AE88C991197E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Web/FullWebViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "webView(_:decidePolicyFor:preferences:decisionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "728BCACD-CE65-4720-87C7-686E43C8098E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/AllMore/View/AllMoreMenuListCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "setDisplay(_:viewModel:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DABB1E87-5AA5-4B2F-8092-BB9525994F94"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/AllMore/View/AllMoreMenuListCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "btn_action(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F6C20BAE-DA99-4B9D-A7F3-B72B9177CB75"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Web/WebMessagCallBackHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "712"
+            endingLineNumber = "712"
+            landmarkName = "setWebViewDisplay(_:fullDisplay:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F6C20BAE-DA99-4B9D-A7F3-B72B9177CB75 - 40766c7bde4323d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.setWebViewDisplay(_: Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;, fullDisplay: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Web/WebMessagCallBackHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "713"
+                  endingLineNumber = "713"
+                  offsetFromSymbolStart = "4184">
+               </Location>
+               <Location
+                  uuid = "F6C20BAE-DA99-4B9D-A7F3-B72B9177CB75 - 40766c7bde4323d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.setWebViewDisplay(_: Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;, fullDisplay: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Web/WebMessagCallBackHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "713"
+                  endingLineNumber = "713"
+                  offsetFromSymbolStart = "4312">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

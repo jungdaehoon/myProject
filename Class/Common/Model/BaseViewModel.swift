@@ -65,6 +65,10 @@ enum MENU_LIST : String  {
     case ID_FAQ                 = "ALL_018"
     /// 1:1 문의 페이지 URL 입니다.
     case ID_QNA                 = "ALL_019"
+    /// 제로페이 QR 결제 페이지 URL 입니다
+    case ID_ZERO_QR             = "ZERO_001"
+    /// 제로페이 상품권 페이지 URL 입니다
+    case ID_ZERO_GIFT           = "ZERO_002"
     /// 투자 성향분석 페이지 URL 입니다.
     case ID_INV_ANA             = "INV_014_01"
     /// 친구추천 페이지 URL 입니다.
@@ -252,6 +256,34 @@ class BaseViewModel : NSObject {
     
     
     /**
+     메뉴 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.02
+     - Parameters:
+        - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
+     - Throws : False
+     - returns :
+        - Bool
+            > 활성화 여부를 리턴 합니다.
+     */
+    func isAppMenuList( menuID : MENU_LIST ) -> Bool
+    {
+        if let response = BaseViewModel.appStartResponse,
+           let data     = response.data,
+           let menulist = data.menu_list
+        {
+            for info in menulist
+            {
+                if info.menu_id! == menuID.rawValue
+                {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    
+    /**
      연동할 URL 정보를 가져 옵니다.( J.D.H  VER : 1.0.0 )
      - Date : 2023.04.03
      - Parameters:
@@ -273,8 +305,7 @@ class BaseViewModel : NSObject {
                         for info in menulist
                         {
                             if info.menu_id! == menuID.rawValue
-                            {
-                                
+                            {                                
                                 promise(.success( AlamofireAgent.domainUrl  + info.url! ))
                                 return
                             }

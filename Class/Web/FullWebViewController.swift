@@ -213,6 +213,19 @@ extension FullWebViewController {
         }
         Slog("url : \(url)")
         
+        /// 중간 중단으로 메인 페이지 이동 URL 확인 경우 입니다. ( 추후 WebToApp 으로 변경예정 )
+        if url.description.contains("matcs/main.do")
+        {
+            self.navigationController?.popViewController(animated: true, completion: {
+                if self.completion != nil
+                {
+                    self.completion!( .pageClose )
+                }
+            })
+            decisionHandler(.allow, preferences)
+            return
+        }
+        
         /// 접근된 웹뷰 타입 체크 합니다.
         switch self.pageType
         {
@@ -241,18 +254,7 @@ extension FullWebViewController {
             return
         }
         
-        /// 중간 중단으로 메인 페이지 이동 URL 확인 경우 입니다. ( 추후 WebToApp 으로 변경예정 )
-        if url.description.contains("matcs/main.do")
-        {
-            self.navigationController?.popViewController(animated: true, completion: {
-                if self.completion != nil
-                {
-                    self.completion!( .pageClose )
-                }
-            })
-            decisionHandler(.allow, preferences)
-            return
-        }
+        
         
         
         if( scheme != "http" && scheme != "https" ) {

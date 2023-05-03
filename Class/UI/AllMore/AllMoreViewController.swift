@@ -146,8 +146,8 @@ class AllMoreViewController: BaseViewController {
         {
             self.monthInfo                                  = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo]               = []
-            menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "0원", menuType: "rightImg"))
-            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "0원", menuType: "rightImg"))
+            menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "0원", menuType: .rightimg))
+            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "0원", menuType: .rightimg))
             self.monthInfo!.setDisplay(menus: menus)
             self.stackView.addArrangedSubview(self.monthInfo!)
         }
@@ -155,8 +155,8 @@ class AllMoreViewController: BaseViewController {
         {
             let result = self.viewModel.allModeResponse!.result!
             var menus : [AllModeMenuListInfo]               = []
-            menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "\(result._current_month_pay_amt!.addComma())원", menuType: "rightImg"))
-            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "\(result._current_month_save_amt!.addComma())원", menuType: "rightImg"))
+            menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "\(result._current_month_pay_amt!.addComma())원", menuType: .rightimg))
+            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "\(result._current_month_save_amt!.addComma())원", menuType: .rightimg))
             
             /// 화면 다시 디스플레이 요청 합니다.
             self.monthInfo!.reloadDisplay(menus, viewModel: self.viewModel)
@@ -180,16 +180,27 @@ class AllMoreViewController: BaseViewController {
         {
             self.payServiceInfo                             = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo]               = []
-            menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
-            /// 현 버전에서는 사용하지 않습니다.
-            menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", subiCon: "NEW!", menuType: "rightimg"))
-            menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권",subiCon: "NEW!", menuType: "rightimg"))
+            /// OK마켓 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_GIFTYCON)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
+            }
+            /// 제로페이 QR 결제 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", subiCon: "NEW!", menuType: .rightimg))
+            }
+            /// 제로페이 상품권 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_ZERO_GIFT)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권",subiCon: "NEW!", menuType: .rightimg))
+            }
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
         }
         else
         {
-            self.payServiceInfo!.viewModel                  = self.viewModel
+            self.payServiceInfo!.setDisplay(self.viewModel)
         }
         
         /// 중간 배너 뷰어를 추가 합니다.
@@ -208,10 +219,14 @@ class AllMoreViewController: BaseViewController {
         {
             self.boonInfo                                   = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo]               = []
-            menus.append(self.viewModel.getMenuInfo(title: "만보Go", menuType: "rightimg" ))
-            menus.append(self.viewModel.getMenuInfo(title: "올림pick", menuType: "rightimg" ))
-            menus.append(self.viewModel.getMenuInfo(title: "친구추천",subiCon: "UPDATE!", menuType: "rightimg"))
-            menus.append(self.viewModel.getMenuInfo(title: "뿌리Go",menuType: "rightimg"))
+            menus.append(self.viewModel.getMenuInfo(title: "만보Go", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "올림pick", menuType: .rightimg ))
+            /// 친구추천 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_RECOMMEND_USER)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "친구추천",subiCon: "UPDATE!", menuType: .rightimg))
+            }
+            menus.append(self.viewModel.getMenuInfo(title: "뿌리Go",menuType: .rightimg))
             self.boonInfo!.setDisplay(titleName: "혜택", menus: menus)
             self.stackView.addArrangedSubview(self.boonInfo!)
         }
@@ -226,17 +241,34 @@ class AllMoreViewController: BaseViewController {
         {
             self.okPayServiceInfo                           = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo]               = []
-            menus.append(self.viewModel.getMenuInfo(title: "이벤트", menuType: "rightimg" ))
-            menus.append(self.viewModel.getMenuInfo(title: "고객센터", menuType: "rightimg" ))
-            menus.append(self.viewModel.getMenuInfo(title: "FAQ", menuType: "rightimg" ))
-            menus.append(self.viewModel.getMenuInfo(title: "서비스안내", menuType: "rightimg" ))
-            menus.append(self.viewModel.getMenuInfo(title: "공지사항", menuType: "rightimg" ))
+            /// 이벤트 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_EVENT)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "이벤트", menuType: .rightimg ))
+            }
+            /// 카카오 연동 페이지로 내부 URL 고정입니다.
+            menus.append(self.viewModel.getMenuInfo(title: "고객센터", menuType: .rightimg ))
+            /// FAQ 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_FAQ)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "FAQ", menuType: .rightimg ))
+            }
+            /// 서비스안내 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_POINT)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "서비스안내", menuType: .rightimg ))
+            }
+            /// 공지사항 정보를 체크 합니다.
+            if self.viewModel.isAppMenuList(menuID: .ID_NOTICE)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "공지사항", menuType: .rightimg ))
+            }
             self.okPayServiceInfo!.setDisplay(titleName: "이용안내", menus: menus)
             self.stackView.addArrangedSubview(self.okPayServiceInfo!)
         }
         else
         {
-            self.okPayServiceInfo!.viewModel = self.viewModel
+            self.okPayServiceInfo!.setDisplay(self.viewModel)
         }
         
         /// 최하단 로그아웃 뷰어 입니다.
@@ -256,7 +288,6 @@ class AllMoreViewController: BaseViewController {
             self.scrollView.refreshControl = self.getRefreshController()
         }
         
-        
         /// 새로고침 중인지를 체크 합니다.
         if self.refreshControl!.isRefreshing == true
         {
@@ -264,6 +295,9 @@ class AllMoreViewController: BaseViewController {
             self.refreshControl!.endRefreshing()
         }
     }
+    
+    
+    
     
     
     /**
@@ -288,7 +322,7 @@ class AllMoreViewController: BaseViewController {
      내자산 뷰어 새로고침 이벤트 요청 액션 입니다.  ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.17
      - Parameters:
-     - refresh : 내자산 새로고침 컨트롤러 입니다.
+        - refresh : 내자산 새로고침 컨트롤러 입니다.
      - returns :False
      */
     @objc func refreshTable(refresh : UIRefreshControl)
