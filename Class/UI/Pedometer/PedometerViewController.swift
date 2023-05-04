@@ -675,7 +675,7 @@ class PedometerViewController: BaseViewController {
         self.mStpesInfo.append(data)
         
         self.sendWeekData(data: self.mStpesInfo)
-        self.view.setDisplayWebView(WebPageConstants.URL_PEDO_RANK, modalPresent: true)
+        self.view.setDisplayWebView(WebPageConstants.URL_PEDO_RANK, modalPresent: true, titleBarType: 2)
     }
     /*
      // MARK: - Navigation

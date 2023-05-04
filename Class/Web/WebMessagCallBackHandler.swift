@@ -565,8 +565,6 @@ class WebMessagCallBackHandler : NSObject  {
                     let dateText                    = formatter.string(from: value )
                     self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: dateText)
                 }
-                
-                //self.target!.view.addSubview(dateView!)
             }
         }
     }
