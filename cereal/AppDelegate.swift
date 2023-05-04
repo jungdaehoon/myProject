@@ -43,9 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             /// FCM PUSH 선택으로 앱 실행된 경우 입니다.
             if let remoteNotification = launchOptions[.remoteNotification] as?  [AnyHashable : Any]
             {
-                Slog("DID PUSH  : \(remoteNotification)",category: .apns )
+                Slog("DID PUSH  : \(remoteNotification)",category: .push )
                 if let startUrl = remoteNotification["url"] as? String {
-                    Slog("DID PUSH URL : \(startUrl)",category: .apns )
+                    Slog("DID PUSH URL : \(startUrl)",category: .push )
                     /// PUSH 관련 정보 URL 을 받아 앱 메인에서 디스플레이 하도록 합니다.
                     BaseViewModel.shared.pushUrl = startUrl
                 }
@@ -93,11 +93,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().token { token, error in
             if let error = error
             {
-                Slog("Error fetching FCM registration token: \(error)", category: .apns )
+                Slog("Error fetching FCM registration token: \(error)", category: .push )
             }
             else if let token = token
             {
-                Slog("FCM registration token: \(token)", category: .apns )
+                Slog("FCM registration token: \(token)", category: .push )
                 if let custItem = SharedDefaults.getKeyChainCustItem()
                 {
                     custItem.fcm_token = token
@@ -130,12 +130,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate
     {
         let application = UIApplication.shared
         let userInfo = response.notification.request.content.userInfo
-        Slog("OPEN PUSH  : \(userInfo)",category: .apns )
+        Slog("OPEN PUSH  : \(userInfo)",category: .push )
         /// 앱이 켜져있는 상태에서 푸쉬 알림을 눌렀을 때 입니다.
         if application.applicationState == .active
         {
             if let url = userInfo["url"] as? String {
-                Slog("OPEN PUSH URL : \(url)",category: .apns )
+                Slog("OPEN PUSH URL : \(url)",category: .push )
                 BaseViewModel.shared.pushUrl = url
             }
         }
@@ -143,7 +143,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate
         {
             /// PUSH 데이터를 넘깁니다.
             if let url = userInfo["url"] as? String {
-                Slog("OPEN PUSH URL : \(url)",category: .apns )
+                Slog("OPEN PUSH URL : \(url)",category: .push )
                 BaseViewModel.shared.pushUrl = url
             }
         }
@@ -166,7 +166,7 @@ extension AppDelegate : MessagingDelegate
             {
                 if let custItem = SharedDefaults.getKeyChainCustItem()
                 {
-                    Slog("MessagingDelegate token: \(fcmToken!)", category: .apns )
+                    Slog("MessagingDelegate token: \(fcmToken!)", category: .push )
                     /// FCM 토큰 정보를 신규로 추가 합니다.
                     custItem.fcm_token = fcmToken
                     SharedDefaults.setKeyChainCustItem(custItem)

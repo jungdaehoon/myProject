@@ -35,7 +35,6 @@ class BecomeActiveView: UIView {
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
             DispatchQueue.main.async {
-                self.tag = 12345
                 base.addSubview(self)
             }
         }
@@ -53,7 +52,7 @@ class BecomeActiveView: UIView {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         DispatchQueue.main.async {
             _ = base!.subviews.map({
-                if $0.tag == 12345
+                if $0 is BecomeActiveView
                 {
                     $0.removeFromSuperview()
                 }

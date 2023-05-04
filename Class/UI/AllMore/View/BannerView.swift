@@ -14,15 +14,19 @@ import UIKit
  - Date : 2023.03.07
 */
 class BannerView: UIView {
-
-    @IBOutlet weak var aniView: UIView!
-    @IBOutlet weak var aniImage: UIImageView!
     var viewModel : AllMoreModel?
+    /// 애니 디스플레이 하는 뷰어 입니다.
+    @IBOutlet weak var aniView: UIView!
+    /// 스크롤 이동시 변경될 이미지 영역 입니다.
+    @IBOutlet weak var aniImage: UIImageView!
+    
 
+    
     // MARK: - instanceFromNib
     class func instanceFromNib() -> BannerView {
         return UINib(nibName: "BannerView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BannerView
     }
+    
     
     
     // MARK: - 지원 메서드 입니다.
@@ -39,11 +43,11 @@ class BannerView: UIView {
         let maxHeight       = scrollView.contentSize.height - scrollView.frame.size.height
         let itemHeight      = maxHeight/11
         let index           = (scrollView.contentOffset.y)/itemHeight
-        Slog("maxHeight : \(maxHeight) itemHeight : \(itemHeight) index : \(index)")
         self.aniImage.image = UIImage(named: "bbannerImg\(Int(index))")
     }
     
 
+    
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
         let result = self.viewModel!.allModeResponse!.result!
@@ -52,16 +56,16 @@ class BannerView: UIView {
         {
             if result._user_seq_no!.isEmpty
             {
-                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true)
+                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
             }
             else
             {
-                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true)
+                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
             }
         }
         else
         {
-            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true)
+            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
         }
     }    
 }

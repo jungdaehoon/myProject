@@ -10,10 +10,12 @@ import Alamofire
 import Combine
 import CoreMedia
 
-// 여러 Network, Database API를 가지고 UI에서 필요한 데이터 요청을 구성해 주는 역할을 한다.
+
+/**
+ Request 관련 API 메서드를 관리 합니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.09
+ */
 class NetworkManager {
-    
-    
     
     /**
      토큰 정보를 가져 옵니다. ( J.D.H  VER : 1.0.0 )
@@ -91,7 +93,7 @@ class NetworkManager {
     
     /**
      앱 시작 기본 정보 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /api/start.do
      - API 명: 앱 시작 기본 정보 요청 합니다.
      - Date : 2023.03.27
      - Parameters:
@@ -114,7 +116,7 @@ class NetworkManager {
     
     /**
       Fcm PUSH 토큰 정보를 업로드 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /api/pushToken.do
      - API 명: FCM Token 업데이트 합니다.
      - Date : 2023.04.12
      - Parameters:
@@ -137,7 +139,7 @@ class NetworkManager {
     
     /**
      로그인을 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /api/login.do
      - API 명: 로그아웃을 요청 합니다.
      - Date : 2023.03.27
      - Parameters:
@@ -160,7 +162,7 @@ class NetworkManager {
     
     /**
      로그아웃을 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /api/logout.do
      - API 명: 로그아웃을 요청 합니다.
      - Date : 2023.03.20
      - Parameters:

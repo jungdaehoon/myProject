@@ -89,7 +89,6 @@ enum MENU_LIST : String  {
  기본 베이스 모델 입니다.
  - Date : 2023.03.15
  */
-
 class BaseViewModel : NSObject {
     private var curCancellable: AnyCancellable?
     var cancellableSet                                      = Set<AnyCancellable>()
@@ -747,11 +746,11 @@ class BaseViewModel : NSObject {
                     Messaging.messaging().token { token, error in
                         if let error = error
                         {
-                            Slog("Error fetching FCM registration token: \(error)")
+                            Slog("Error fetching FCM registration token: \(error)", category: .push)
                         }
                         else if let token = token
                         {
-                            Slog("FCM registration token: \(token)")
+                            Slog("FCM registration token: \(token)", category: .push)
                             if let custItem = SharedDefaults.getKeyChainCustItem()
                             {
                                 custItem.fcm_token = token

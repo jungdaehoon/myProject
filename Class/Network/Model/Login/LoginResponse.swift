@@ -42,7 +42,10 @@ struct LoginResponse: BaseResponse {
     var data        : loginInfo?
 }
 
-
+/**
+ 로그인 주요 정보 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.04.13
+*/
 struct loginInfo: Codable
 {
     
@@ -94,8 +97,17 @@ struct loginInfo: Codable
 }
 
 
+/**
+ 유저의 제휴사 금액 정보 입니다.. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.04.13
+*/
 struct asset_info: Codable
 {
+    /// OK 머니 잔액 정보 입니다.
+    var _balance                  : String? { get { return  NC.S(balance) } }
+    /// 총자산 정보입니다.
+    var _asset_amt                : String? { get { return  NC.S(asset_amt) } }
+    
     /// OK 머니 잔액 정보 입니다.
     var balance     : String?
     /// 총자산 정보입니다.

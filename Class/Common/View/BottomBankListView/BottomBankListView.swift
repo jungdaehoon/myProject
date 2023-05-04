@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+/**
+ 제휴 은행 리스트 하단 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.05.04
+ */
 class BottomBankListView: UIView {
 
     /// 은행 리스트 뷰어의 최하단 위치 값입니다.
@@ -17,6 +22,8 @@ class BottomBankListView: UIView {
     @IBOutlet weak var accountTopGB: UILabel!
     /// 화면에 그려질 은행들 사이즈를 가집니다.
     var collectionCellSize : CGSize  = CGSize(width: 108, height: 96)
+    
+    
     
     //MARK: - Init
     init(){
@@ -92,10 +99,9 @@ class BottomBankListView: UIView {
     }
     
     
-    
-    
-
+    //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        self.hide()
     }
 }
 

@@ -129,12 +129,15 @@ class BottomTermsView: UIView {
      - returns :False
      */
     func hide() {
+        let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         DispatchQueue.main.async {
-            _ = self.subviews.map({
-                $0.removeFromSuperview()
+            _ = base!.subviews.map({
+                if $0 is BottomTermsView
+                {
+                    $0.removeFromSuperview()
+                }
             })
-            self.removeFromSuperview()
-        }
+        }        
     }
     
     

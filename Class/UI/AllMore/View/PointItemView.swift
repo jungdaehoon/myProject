@@ -147,12 +147,12 @@ class PointItemView: UIView {
             /// 오픈 뱅킹 계좌 연결 경우 입니다.
             if self.bankingNumber.text == OPEN_BANK_LINK
             {
-                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true)
+                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
             }
             /// 연결된 계좌 정보가 없는 경우 입니다.
             else if self.bankingNumber.text == NOT_BANK_LINK
             {
-                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true)
+                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
             }
             /// 계좌 재인증 경우 입니다.
             else if self.bankingNumber.text == RE_BACK_AUTH
@@ -176,7 +176,7 @@ class PointItemView: UIView {
                             let message: String = "계좌 등록 1년경과 시\n재인증이 필요해요."
                             /// 계좌 재인증 안내 팝업을 오픈 합니다.
                             CMAlertView().setAlertView(detailObject: message as AnyObject, cancelText: "확인") { event in
-                                self.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true)
+                                self.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2)
                             }
                         }
                     }

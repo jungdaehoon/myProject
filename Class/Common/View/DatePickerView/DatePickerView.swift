@@ -69,7 +69,6 @@ class DatePickerView: UIView {
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
             DispatchQueue.main.async {
-                self.tag        = 516789
                 base.addSubview(self)
             }
         }
@@ -87,7 +86,7 @@ class DatePickerView: UIView {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         DispatchQueue.main.async {
             _ = base!.subviews.map({
-                if $0.tag == 516789
+                if $0 is DatePickerView
                 {
                     $0.removeFromSuperview()
                 }

@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-var processPool = WKProcessPool()
+
 /**
  기본 베이스 웹 컨트롤뷰 입니다.
  - Date : 2023.03.20
@@ -22,6 +22,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     var messageHandler      : WebMessagCallBackHandler?
     /// 웹뷰는 기본 히든 처리 상태 입니다.
     var isWebViewHidden     : Bool = true
+    /// 쿠키를 변경 할지 여부를 받습니다.
     var updateCookies       : Bool = true
     
     

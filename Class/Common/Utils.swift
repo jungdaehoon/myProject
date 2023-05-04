@@ -21,7 +21,7 @@ extension OSLog
     /// Console Log 확인시 "Network" 카테고리 구분 입니다.
     static let network  = OSLog(subsystem: log_subtype!, category: "Network")
     /// Console Log 확인시 "Apns" 카테고리 구분 입니다.
-    static let apns     = OSLog(subsystem: log_subtype!, category: "Push")
+    static let push     = OSLog(subsystem: log_subtype!, category: "Push")
     /// Console Log 확인시 "DeepLink" 카테고리 구분 입니다.
     static let deeplink = OSLog(subsystem: log_subtype!, category: "DeepLink")
     /// Console Log 확인시 "OKPay" 카테고리 구분 입니다.

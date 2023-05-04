@@ -74,6 +74,8 @@ class TabbarViewController: UITabBarController {
         UITabBar.clearShadow()
         /// 탭바 상단 쉐도우 라인을 추가 합니다.
         tabBar.layer.applyShadow(color: .gray, alpha: 0.2, x: 0, y: 0, blur: 12)
+        /// Notification 관련 이벤트를 연결 합니다.
+        self.setNotification()
         /// 로그아웃 여부를 체크 합니다.
         BaseViewModel.shared.$logOut.sink { value in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.

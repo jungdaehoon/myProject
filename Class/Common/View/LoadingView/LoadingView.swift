@@ -52,8 +52,6 @@ class LoadingView: UIView {
         self.aniView = LottieAniView(frame: CGRect(origin: .zero, size: self.loadingView.frame.size))
         self.aniView!.setAnimationView(name: "loadingbar", loop: true)
         self.loadingView.addSubview(self.aniView!)
-        
-        
     }
     
     
@@ -78,7 +76,6 @@ class LoadingView: UIView {
         if self.isLoading { return }
         if let base = base {
             DispatchQueue.main.async {
-                self.tag            = 56789
                 self.isLoading      = true
                 self.loadingTimer   = Timer.scheduledTimer(timeInterval: 10,
                                              target: self, selector: #selector(self.timerAction),
@@ -111,7 +108,7 @@ class LoadingView: UIView {
                 self.loadingTimer = nil
             }
             _ = base!.subviews.map({
-                if $0.tag == 56789
+                if $0 is LoadingView
                 {
                     $0.removeFromSuperview()
                 }

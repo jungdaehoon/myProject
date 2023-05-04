@@ -39,6 +39,10 @@ struct PedometerRewardResponse: BaseResponse {
 }
 
 
+/**
+ 만보기 지급 포인트 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.23
+*/
 struct pedometer_rewardData : Codable {
     /// 지금 포인트 입니다.
     var _rcv_point          : Int? { get { return  NC.I(rcv_point) } }

@@ -30,7 +30,7 @@ struct AllModeMenuListInfo: Codable {
  - Date : 2023.05.02
 */
 enum MENU_TYPE : Codable {
-    /// 빈정도 디스플레이 입니다.
+    /// 아무런 정보를 디스플레이 하지 않습니다.
     case null
     /// 메뉴 문구 입니다.
     case text

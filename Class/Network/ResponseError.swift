@@ -21,13 +21,23 @@ let DATABSE_ERR_MSG             = "데이터베이스 에러가 발생하였습�
  - Date : 2023.03.20
  */
 enum ResponseError: Error {
+    /// Http 오류 입니다.
     case http(ErrorData)
+    /// 데이터 파싱 오류 입니다.
     case parsing(String)
+    /// 예외 오류 입니다.
     case unknown(String)
+    /// 타임 아웃 오류 입니다.
     case timeout(String)
 }
 
+/**
+ http 오류시 저장되는 정보 입니다 .( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.20
+ */
 struct ErrorData {
+    /// http 오류 코드 정보 입니다.
     var code: Int
+    /// http 오류 문구 정보 입니다.
     var message: String
 }

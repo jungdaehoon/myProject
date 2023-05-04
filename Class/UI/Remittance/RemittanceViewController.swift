@@ -72,7 +72,7 @@ class RemittanceViewController: BaseViewController {
                     if mainAccount!._fintech_use_num!.isEmpty
                     {
                         DispatchQueue.main.async {
-                            self.view.setDisplayWebView( WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true ) { value in
+                            self.view.setDisplayWebView( WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2 ) { value in
                                 switch value
                                 {
                                 case .pageClose:
@@ -118,7 +118,7 @@ class RemittanceViewController: BaseViewController {
                                             let message: String = "계좌 등록 1년경과 시\n재인증이 필요해요."
                                             /// 계좌 재인증 안내 팝업을 오픈 합니다.
                                             CMAlertView().setAlertView(detailObject: message as AnyObject, cancelText: "확인") { event in
-                                                self.view.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true) { value in
+                                                self.view.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2) { value in
                                                     switch value
                                                     {
                                                     case .pageClose:
@@ -148,7 +148,7 @@ class RemittanceViewController: BaseViewController {
                 else
                 {
                     DispatchQueue.main.async {
-                        self.view.setDisplayWebView( WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true ) { value in
+                        self.view.setDisplayWebView( WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2 ) { value in
                             switch value
                             {
                             case .pageClose:

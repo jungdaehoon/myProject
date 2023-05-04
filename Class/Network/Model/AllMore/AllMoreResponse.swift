@@ -22,12 +22,15 @@ struct AllMoreResponse: BaseResponse {
     var code        : String?
     /// 세부 응답메세지 입니다.
     var msg         : String?
-    /// 최대 카테고리 목록 입니다.
+    /// 전체 탭 주요 데이터 입니다.
     var result      : result?
 }
 
 
-
+/**
+ 전체 탭 주요 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.21
+*/
 struct result: Codable {
     /// 추천인 입력 가능여부 입니다.
     var _recomm_yn              : String? { get { return  NC.S(recomm_yn) } }
@@ -154,6 +157,11 @@ struct result: Codable {
     
 }
 
+
+/**
+ 제휴사 예치금 정보 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.21
+*/
 struct inv_balance_list: Codable
 {
     /// 제휴사 코드 정보입니다.
@@ -165,6 +173,10 @@ struct inv_balance_list: Codable
 }
 
 
+/**
+ 포인트 거래내역 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.21
+*/
 struct point_trans_list: Codable
 {
     /// 거래 일자 정보 입니다.
@@ -227,6 +239,10 @@ struct point_trans_list: Codable
 }
 
 
+/**
+ 거래내역 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.21
+*/
 struct acc_trans_list: Codable
 {
     /// 거래 넘버 정보입니다.

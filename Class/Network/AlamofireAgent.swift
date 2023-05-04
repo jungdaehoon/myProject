@@ -29,30 +29,33 @@ enum MultipartItem {
 }
 
 
-private let REQUEST_RETRY_COUNT = 2 // 서버 연결 타임아웃
-
-
+/**
+ HTTP 인터페이스 연결할 기본 메서드를 지원 합니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.07
+ */
 enum AlamofireAgent {
-    private static let REQUEST_TIMEOUT = TimeInterval(15) // 서버 연결 타임아웃
+    /// 최대 요청 타임 정보 입니다.
+    private static let REQUEST_TIMEOUT          = TimeInterval(5.0)
+    /// 최대 받는 타임 정보 입니다.
+    private static let RESOURCE_TIMEOUT         = TimeInterval(5.0)
     /// 도메인 URL 정보를 가져 옵니다.
-    static let domainUrl = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? ""
+    static let domainUrl                        = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? ""
+    /// 세션 정보를 가져 옵니다.
+    static var defaultManager : SessionManager! = { return Alamofire.SessionManager(configuration: urlSessionConfiguration()) }()
     
-    /// 세션 세부 정보를 세팅 합니다.
+    
+    
+    /**
+    HTTP 연결할 세션 정보를 설정 합니다. ( J.D.H  VER : 1.0.0 )
+    - Date : 2023.03.07
+    */
     static func urlSessionConfiguration() -> URLSessionConfiguration {
-        let urlSessionConfiguration = URLSessionConfiguration.default
-        urlSessionConfiguration.requestCachePolicy = .useProtocolCachePolicy // reloadIgnoringLocalCacheData
-        urlSessionConfiguration.timeoutIntervalForResource = TimeInterval(5.0)
-        urlSessionConfiguration.timeoutIntervalForRequest  = TimeInterval(5.0)
-        
+        let urlSessionConfiguration                         = URLSessionConfiguration.default
+        urlSessionConfiguration.requestCachePolicy          = .useProtocolCachePolicy
+        urlSessionConfiguration.timeoutIntervalForResource  = REQUEST_TIMEOUT
+        urlSessionConfiguration.timeoutIntervalForRequest   = RESOURCE_TIMEOUT
         return urlSessionConfiguration
     }
-    
-    /// 세션 연결 합니다.
-    static var defaultManager : SessionManager! = {
-        let sessionManager = Alamofire.SessionManager(configuration: urlSessionConfiguration())
-        return sessionManager;
-    }()
-    
     
     
     /**
@@ -78,10 +81,8 @@ enum AlamofireAgent {
         headers: HTTPHeaders? = ["x-requested-with": "XMLHttpRequest"],
         decoder: JSONDecoder = JSONDecoder())
         -> AnyPublisher<T, ResponseError>  {
-            
             let publisher               = PassthroughSubject<T,ResponseError>()
             let requestUrl              = URL(string: domainUrl + url)!
-            
             let request = defaultManager.request(
                 requestUrl,
                 method: method,
@@ -115,6 +116,16 @@ enum AlamofireAgent {
     }
     
     
+    /**
+     Error 발생시 이벤트 핸들러 입니다..( J.D.H  VER : 1.0.0 )
+     - Date : 2023.03.07
+     - Parameters:
+        - error     : 에러 타입을 받습니다.
+     - Throws : False
+     - returns :
+        + ResponseError
+            : 타입별 정리된 에러 값을 리턴 합니다.
+     */
     private static func handleError(_ error: Error) -> ResponseError {
         if let apiError = error as? ResponseError {
             return apiError
@@ -145,24 +156,10 @@ enum AlamofireAgent {
                         return .timeout(afError.errorDescription ?? NETWORK_ERR_MSG)
                     default:break
                     }
-                    
                 }
             case .responseSerializationFailed( _ ):
                 Slog("Response serialization failed: \(error.localizedDescription)", category: .network, logType: .error)
             }
-            /*
-            switch afError {
-            case .sessionTaskFailed(let sessionError):
-                if let urlError = sessionError as? URLError {
-                    if urlError.errorCode == NSURLErrorTimedOut {
-                        Slog("time out : #7 : \(afError)" )
-                        return .timeout(afError.errorDescription ?? NETWORK_ERR_MSG)
-                    }
-                }
-                
-            default: break
-            }
-             */
             return .unknown(afError.errorDescription ?? NETWORK_ERR_MSG)
         } else {
             return .unknown(NETWORK_ERR_MSG)
@@ -170,7 +167,16 @@ enum AlamofireAgent {
     }
     
     
-    
+    /**
+     멀티파트 파일 업로드 입니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.03.07
+     - Parameters:
+        - url : 업로드할 위치 정보입니다.
+        - multipartFormData : 보낼 데이터 입니다.
+        - encodingCompletion : 처리후 리턴 입니다.
+     - Throws : False
+     - returns :False
+     */
     static func upload(
         _ url: String,
         multipartFormData: @escaping (MultipartFormData) -> Void,

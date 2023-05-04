@@ -8,15 +8,24 @@
 import Foundation
 
 
-// keychainWrapper 에 저장하는 고객정보 객제
+/**
+ 공통으로 확인체크 하는 고객 정보를 저장 합니다.   ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.16
+ */
 class KeyChainCustItem: NSObject , NSCoding {
+    /// 마지막 접속 시간 입니다.
+    var last_login_time : String?
+    /// 로그인 토큰 정보 입니다.
+    var token : String?
+    /// 고객 넘버 입니다.
+    var user_no : String?
+    /// 휴대폰 정보 입니다.
+    var user_hp : String?
+    /// 자동 로그인 여부 입니다.
+    var auto_login : Bool = false
+    /// fcm 연결 토큰 정보 입니다.
+    var fcm_token : String?
     
-    var last_login_time : String?   // 마지막 접속 시간
-    var token : String?             // 로그인 토큰
-    var user_no : String?           // 고객번호
-    var user_hp : String?           // 전화번호
-    var auto_login : Bool = false   // 자동 로그인
-    var fcm_token : String?         // fcm token
     
     struct PropertyKey {
         static let kLast_login_time = "Last_login_time"
@@ -39,7 +48,6 @@ class KeyChainCustItem: NSObject , NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        
         self.init()
         
         if let last_login_time = aDecoder.decodeObject(forKey: PropertyKey.kLast_login_time)  {

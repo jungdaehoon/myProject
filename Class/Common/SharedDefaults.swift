@@ -10,7 +10,7 @@ import SwiftKeychainWrapper
 import UIKit
 
 /**
- 앱내 저장하는 UserDefaults 메니저 입니다. ( J.D.H  VER : 1.0.0 )
+ 앱내 저장하는 UserDefaults  입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.27
  */
 class SharedDefaults {

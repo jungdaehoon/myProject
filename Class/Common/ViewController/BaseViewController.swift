@@ -15,8 +15,6 @@ import Combine
  - Date : 2023.03.20
  */
 class BaseViewController: BaseWebViewController {
-
-    
     var cancellableSet = Set<AnyCancellable>()
     
     override func viewDidLoad() {

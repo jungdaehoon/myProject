@@ -169,6 +169,7 @@ class IntroViewController: BaseViewController {
      - returns :False
      */
     func setOKPayStart() {
+        /// 이전 유저 정보가 있는지를 체크하고 가져 옵니다.
         if let custItem = SharedDefaults.getKeyChainCustItem()
         {
             /// 자동 로그인 여부를 체크 합니다.
@@ -228,6 +229,7 @@ class IntroViewController: BaseViewController {
         newController.selectedIndex             = 2
         if loginEnabled == true
         {
+            /// 로그인 디스플레이로 기본 배경 뷰어를 디스플레이 합니다.
             BecomeActiveView().show()
             newController.loginDisplayFirst      = true
         }
