@@ -75,26 +75,26 @@ class WalletTestViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @IBAction func onRestoreWallet(_ sender: Any){
-        print("onRestoreWallet")
+        Slog("onRestoreWallet")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
         //let tPwdDec = WalletHelper.sharedInstance.getDecryptedWalletPasswdFromInfo(encInfo:tPwdEnc.text ?? "")
         let tMnemonic = WalletHelper.sharedInstance.getWalletMnemonicFromPref() ?? ""
         guard let ret = WalletHelper.sharedInstance.restoreWallet(self,encInfo:tPwdEnc,mnemonic:tMnemonic) else { return }
         tfResWallet.text =  ret
-        print("onRestoreWallet:ret=",tfResWallet.text!)
+        Slog("onRestoreWallet:ret=\(tfResWallet.text!)")
     }
     
     @IBAction func onGetWAddress(_ sender: Any) {
-        print("onGetWAddress")
+        Slog("onGetWAddress")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
         let ret = WalletHelper.sharedInstance.checkWAddressWalletFile(self,encInfo:tPwdEnc)
         let retMne = WalletHelper.sharedInstance.checkIfSameMnemonic(typedMnemonic: "this is a")
         tfCheckPwd.text =  ret
 
-        print("onGetWAddress:ret=",ret)
+        Slog("onGetWAddress:ret=\(ret)")
     }
     @IBAction func onReadQR(_ sender: Any) {
-        print("onReadQR")
+        Slog("onReadQR")
         let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
         let vc              = mainStoryboard.instantiateViewController(withIdentifier: "QRReaderViewController") as? QRReaderViewController
         //vc!.delegate         = self
@@ -102,22 +102,22 @@ class WalletTestViewController: UIViewController {
     }
     
     @IBAction func onGetPriKey(_ sender: Any) {
-        print("onGetPriKey")
+        Slog("onGetPriKey")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
         let ret = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self,encInfo:tPwdEnc)
         
         tfCheckPriKey.text =  ret
 
-        print("onGetPriKey:ret=",ret)
+        Slog("onGetPriKey:ret=\(ret)")
     }
     
     
     @IBAction func onCreateWallet(_ sender: Any) {
-        print("onCreateWallet")
+        Slog("onCreateWallet")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
         //let tPwdDec = WalletHelper.sharedInstance.getDecryptedWalletPasswdFromInfo(encInfo:tPwdEnc.text ?? "")
         let ret = WalletHelper.sharedInstance.createWallet(self,encInfo:tPwdEnc)
-        print("onCreateWallet:ret=",ret)
+        Slog("onCreateWallet:ret=\(ret)")
         tfCreMne.text = WalletHelper.sharedInstance.getWalletMnemonicFromPref()
         
         let retData = ret?.components(separatedBy: ":")
@@ -132,11 +132,11 @@ class WalletTestViewController: UIViewController {
     
     
     @IBAction func onGeneratePasswd(_ sender: Any) {
-        print("onGeneratePasswd")
+        Slog("onGeneratePasswd")
         tfGenPwd.becomeFirstResponder()
     }
     @IBAction func onWalletTest(_ sender: Any) {
-        print("onTestWallet")
+        Slog("onTestWallet")
 //        createMnemonics()
         checkExistingWalletFile()
     }
@@ -174,22 +174,21 @@ class WalletTestViewController: UIViewController {
             if let myWeb3KeyStore = keystore {
                 let manager = KeystoreManager([myWeb3KeyStore])
                 let address = keystore?.addresses?.first
-#if DEBUG
-                print("Address :::>>>>> ", address)
-                print("Address :::>>>>> ", manager.addresses)
-#endif
+
+                Slog("Address :::>>>>> \(address!)")
+                Slog("Address :::>>>>> \(manager.addresses!)")
+
                 let walletAddress = manager.addresses?.first?.address
 //                self.walletAddressLabel.text = walletAddress ?? "0x"
 
-                print(walletAddress)
+                Slog("walletAddress : \(walletAddress!)")
             } else {
-                print("error")
+                Slog("error")
             }
         } catch {
-#if DEBUG
-            print("error creating keyStore")
-            print("Private key error.")
-#endif
+
+            Slog("error creating keyStore")
+            Slog("Private key error.")
             let alert = UIAlertController(title: "Error", message: "Please enter correct Private key", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .destructive)
             alert.addAction(okAction)
@@ -205,9 +204,9 @@ class WalletTestViewController: UIViewController {
             
             let addrStr = "\(twalletAddressKeyStore?.addresses?.first?.address ?? "0x")"
 //            self.walletAddressLabel.text = "\(twalletAddressKeyStore?.addresses?.first?.address ?? "0x")"
-            print("import: mnemonics  = \(mnemonics)")
-            print("import: password  = \(tempPwd)")
-            print("import: address  = \(addrStr)")
+            Slog("import: mnemonics  = \(mnemonics)")
+            Slog("import: password  = \(tempPwd)")
+            Slog("import: address  = \(addrStr)")
             
             guard let wa = twalletAddressKeyStore?.addresses?.first else {
                 self.showAlertMessage(title: "", message: "Unable to create wallet", actionName: "Ok")
@@ -216,13 +215,13 @@ class WalletTestViewController: UIViewController {
             
             let privateKey = try twalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: tempPwd, account: wa)
             
-            print("import: private key  = \(String(describing: privateKey?.toHexString()))")
+            Slog("import: private key  = \(String(describing: privateKey?.toHexString()))")
             
             let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             let keyData = try? JSONEncoder().encode(twalletAddressKeyStore?.keystoreParams)
             FileManager.default.createFile(atPath: userDir + "/keystore" + "/key.json", contents: keyData, attributes: nil)
             
-            print("import: end")
+            Slog("import: end")
             
         } catch {
             
@@ -247,8 +246,8 @@ class WalletTestViewController: UIViewController {
                 }
                 
                 let privateKey = try web3KeyStore?.UNSAFE_getPrivateKeyData(password: tempPwd, account: walletAddress)
-                print("checkPrivate : walletAddress  = \(walletAddress)")
-                print("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))")
+                Slog("checkPrivate : walletAddress  = \(walletAddress)")
+                Slog("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))")
                 
             }
             
@@ -273,7 +272,7 @@ class WalletTestViewController: UIViewController {
                     self.showAlertMessage(title: "", message: "Unable to load wallet", actionName: "Ok")
                     return
                 }
-                print("CheckExisting : walletAddress  = \(walletAddress)")
+                Slog("CheckExisting : walletAddress  = \(walletAddress)")
             }
             
         } catch {
@@ -294,7 +293,7 @@ class WalletTestViewController: UIViewController {
                     return
                 }
                 self._mnemonics = tMnemonics
-                print(_mnemonics)
+                Slog(_mnemonics)
 
                 let tempWalletAddressKeyStore = try? BIP32Keystore(mnemonics: self._mnemonics, password: tempPwd, mnemonicsPassword : tempPwd,prefixPath: HDNode.defaultPath)
                 guard let walletAddress = tempWalletAddressKeyStore?.addresses?.first else {
@@ -307,10 +306,10 @@ class WalletTestViewController: UIViewController {
                 let keyData = try? JSONEncoder().encode(tempWalletAddressKeyStore?.keystoreParams)
                 FileManager.default.createFile(atPath: userDir + "/keystore" + "/key.json", contents: keyData, attributes: nil)
                 
-                print("create: mnemonics  = \(self._mnemonics)")
-                print("create: password  = \(tempPwd)")
-                print("create: address key  = \(walletAddress.address)")
-                print("create: private key  = \(String(describing: privateKey?.toHexString()))")
+                Slog("create: mnemonics  = \(self._mnemonics)")
+                Slog("create: password  = \(tempPwd)")
+                Slog("create: address key  = \(walletAddress.address)")
+                Slog("create: private key  = \(String(describing: privateKey?.toHexString()))")
                 
 //                var tW =  Web3Wallet(address: walletAddress.address, data: keyData, name: "testname", type: .hd(mnemonics: tMnemonics))
             }
@@ -325,7 +324,7 @@ class WalletTestViewController: UIViewController {
 // MARK:// UITextFieldDelegate
 extension WalletTestViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        print("textFieldShouldReturn called")
+        Slog("textFieldShouldReturn called")
         if textField == tfGenPwd {
 //            tfCheckPwd.text = tfGenPwd.text
         } else if textField == tfCreWallet{
@@ -335,13 +334,13 @@ extension WalletTestViewController : UITextFieldDelegate {
     }
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        print("textFieldShouldBeginEditing called")
+        Slog("textFieldShouldBeginEditing called")
         
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("textFieldDidEndEditing called")
+        Slog("textFieldDidEndEditing called")
         if textField == tfGenPwd {
             tfCheckPwd.text = tfGenPwd.text
         } else if textField == tfCreWallet{
@@ -364,7 +363,7 @@ extension WalletTestViewController {
 //        let hybridInterface = UtilityInterface(viewController: self, command: message) { (hybridResult) in
 //            var callbackArray = message[0] as! Array<String>
 //            if callbackArray.count > 0 {
-//                print("psg test : hybridInterface result = \(hybridResult)")
+//                Slog("psg test : hybridInterface result = \(hybridResult)")
 //                switch(hybridResult) {
 //                case .success(let retMessage) :
 //                    if action == UtilityInterface.COMMAND_GET_APP_VERSION {

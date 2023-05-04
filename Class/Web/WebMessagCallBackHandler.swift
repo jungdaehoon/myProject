@@ -1071,7 +1071,7 @@ class WebMessagCallBackHandler : NSObject  {
                 if (error != nil)
                 {
                     //self.hideHudView()
-                    print("error___1")
+                    Slog("error___1")
                 }
             }
         }
@@ -1330,10 +1330,10 @@ class WebMessagCallBackHandler : NSObject  {
         let callback                = body[0] as! [String?]
         Messaging.messaging().token { token, error in
             if let error = error {
-                print("Error fetching FCM registration token: \(error)")
+                Slog("Error fetching FCM registration token: \(error)")
                 
             } else if let token = token {
-                print("FCM registration token: \(token)")
+                Slog("FCM registration token: \(token)")
                 self.setEvaluateJavaScript(callback: NC.S(callback[0]), message: token)
             }
         }
@@ -1607,12 +1607,12 @@ extension WebMessagCallBackHandler{
             scriptMsg += ")"
         }
         
-        print("scriptMsg:\(scriptMsg)")
+        Slog("scriptMsg:\(scriptMsg)")
         self.webView!.evaluateJavaScript(scriptMsg) { ( anyData , error) in
             if (error != nil)
             {
                 //self.hideHudView()
-                print("error___1")
+                Slog("error___1")
             }
         }
     }
@@ -1724,8 +1724,8 @@ extension WebMessagCallBackHandler : CNContactPickerDelegate {
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {}
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {}
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-        print("contact : \(contact) ")
-        print("contact.phoneNumbers : \(contact.phoneNumbers) ")
+        Slog("contact : \(contact) ")
+        Slog("contact.phoneNumbers : \(contact.phoneNumbers) ")
         
         /// 연락처의 전화번호가 1개 인 경우 입니다.
         if contact.phoneNumbers.count == 1

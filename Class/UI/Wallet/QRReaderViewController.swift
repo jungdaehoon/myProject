@@ -82,7 +82,7 @@ class QRReaderViewController: UIViewController {
             captureSession.startRunning()
         }
         catch {
-            print("error")
+            Slog("error")
         }
     }
 
@@ -214,13 +214,13 @@ extension QRReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             }
 
             if stringValue.hasPrefix("0x") && (stringValue.count > 10)  {
-                print("QR read : " ,stringValue)
+                Slog("QR read : \(stringValue)")
                 self.readQRAddr = stringValue
                 
                 self.onCloseBtn("")
             }
             else{
-                print("readError : ",stringValue)
+                Slog("readError : \(stringValue)")
             }
         }
     }

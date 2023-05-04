@@ -122,7 +122,7 @@ class PedometerViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("viewDidAppear")
+        Slog("viewDidAppear")
         
         if let callback = self.mCallback
         {
@@ -169,7 +169,7 @@ class PedometerViewController: BaseViewController {
     
     func getHealthData()
     {
-        print("getHealthData")
+        Slog("getHealthData")
         
         HealthKitManager.healthCheck{ (result) in
             if result
@@ -260,7 +260,7 @@ class PedometerViewController: BaseViewController {
         }
         else
         {
-            print("is not StepCountingAvailable")
+            Slog("is not StepCountingAvailable")
         }
     }
     
@@ -330,7 +330,7 @@ class PedometerViewController: BaseViewController {
     
     func sendData(data : [[String:Any]])
     {
-        print("success_result")
+        Slog("success_result")
     }
     
     
@@ -343,10 +343,10 @@ class PedometerViewController: BaseViewController {
         let jsonString = String(data: jsonData!, encoding: .utf8)
 
         let param = AES256Util.encrypt(string: jsonString!, timestamp: timestamp)
-        print("encrypt_param::\(param)")
+        Slog("encrypt_param::\(param)")
         let decrypt = AES256Util.decrypt(encoded: param, timestamp:  timestamp)
 
-        print("decrypt_param::\(decrypt)")
+        Slog("decrypt_param::\(decrypt)")
         
         var parameters  : [String:Any] = [:]
         parameters = ["verification" : param + timestamp, "info_list": data]
@@ -367,16 +367,16 @@ class PedometerViewController: BaseViewController {
     
         let data = [["date":"20220315","steps":"1800"]]
      
-        print("check::\(   data.description)")
+        Slog("check::\(   data.description)")
         
         let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
         let jsonString = String(data: jsonData!, encoding: .utf8)
         let param = AES256Util.encrypt(string: jsonString!, timestamp: timestamp)
 
-        print("encrypt_param::\(param)")
+        Slog("encrypt_param::\(param)")
         let decrypt = AES256Util.decrypt(encoded: param, timestamp:  timestamp)
 
-        print("decrypt_param::\(decrypt)")
+        Slog("decrypt_param::\(decrypt)")
         
         var parameters  : [String:Any] = [:]
         parameters = ["verification" : param + timestamp, "info_list": data]
@@ -428,7 +428,7 @@ class PedometerViewController: BaseViewController {
         }
         else
         {
-            print("selected false")
+            Slog("selected false")
             if self.mPeometerCount == 0
             {
                 self.ibImageViewWalking.isHidden = true
@@ -462,9 +462,9 @@ class PedometerViewController: BaseViewController {
     {
         let timestamp   = "\(UInt64(Int64(Date().timeIntervalSince1970 * 1000)))"
         let param       = AES256Util.encrypt(string: "\(self.mPeometerCount)", timestamp: timestamp)
-        print("get_reward_encrypt_param::\(param)")
+        Slog("get_reward_encrypt_param::\(param)")
         let decrypt     = AES256Util.decrypt(encoded: param, timestamp:  timestamp)
-        print("get_reward_decrypt_param::\(decrypt)")
+        Slog("get_reward_decrypt_param::\(decrypt)")
         
         var parameters  : [String:Any] = [:]
         parameters      = ["verification": param + timestamp, "steps" :  self.mPeometerCount]

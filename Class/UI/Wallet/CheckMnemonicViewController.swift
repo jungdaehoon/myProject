@@ -90,7 +90,7 @@ class CheckMnemonicViewController: UIViewController {
     }
     
     deinit {
-        print("Login deinit")
+        Slog("Login deinit")
     }
     
 

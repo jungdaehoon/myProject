@@ -16,13 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 기본 베이스 모델 설정 입니다.
     var viewModel : BaseViewModel = BaseViewModel()
     
+    
     /**
      앱 최초 실행 진입 입니다.
      - Date : 2023.04.06
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // 시큐온 키패드 HotFix (23.04.10)
+        /// 시큐온 키패드 HotFix (23.04.10)
         /// 이전 프레임워크를 제거하고, 전달받은 프레임워크로 교체 이후, 아래 코드를 호출합니다.
         (XKConfigure.sharedInstance()! as AnyObject).setTlsCoinfgWithModule(TLS_MODULE_EXTERNAL_0, version: TLS_VERSION_1_2)
         /// Fabric Crashlystics (크래시 리포트) 설정 합니다.
@@ -42,7 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             /// FCM PUSH 선택으로 앱 실행된 경우 입니다.
             if let remoteNotification = launchOptions[.remoteNotification] as?  [AnyHashable : Any]
             {
+                Slog("DID PUSH  : \(remoteNotification)",category: .apns )
                 if let startUrl = remoteNotification["url"] as? String {
+                    Slog("DID PUSH URL : \(startUrl)",category: .apns )
                     /// PUSH 관련 정보 URL 을 받아 앱 메인에서 디스플레이 하도록 합니다.
                     BaseViewModel.shared.pushUrl = startUrl
                 }
@@ -50,8 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             /// 외부에서 Link 정보를 받아 앱 실행 되는 경우 입니다. ( cereal://movepage?url=URL )
             else if let url = launchOptions[.url] as? URL
             {
+                Slog("DID DEEPLINK : \(url)",category: .deeplink )
                 /// Deeplink 접근할 URL 정보를 요청 합니다.
                 self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
+                    Slog("DID DEEPLINK URL : \(deeplink)",category: .deeplink )
                     /// DeepLink 접근할.URL 정보를 받습니다.
                     BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
                 }.store(in: &self.viewModel.cancellableSet)
@@ -68,8 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date : 2023.04.06
      */
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        Slog("OPEN DEEPLINK : \(url)",category: .deeplink )
         /// Deeplink 접근할 URL 정보를 요청 합니다.
         self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
+            Slog("OPEN DEEPLINK URL : \(deeplink)",category: .deeplink )
             /// DeepLink 접근할.URL 정보를 받습니다.
             BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
         }.store(in: &self.viewModel.cancellableSet)
@@ -86,11 +93,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().token { token, error in
             if let error = error
             {
-                print("Error fetching FCM registration token: \(error)")
+                Slog("Error fetching FCM registration token: \(error)", category: .apns )
             }
             else if let token = token
             {
-                print("FCM registration token: \(token)")
+                Slog("FCM registration token: \(token)", category: .apns )
                 if let custItem = SharedDefaults.getKeyChainCustItem()
                 {
                     custItem.fcm_token = token
@@ -123,11 +130,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate
     {
         let application = UIApplication.shared
         let userInfo = response.notification.request.content.userInfo
-        
+        Slog("OPEN PUSH  : \(userInfo)",category: .apns )
         /// 앱이 켜져있는 상태에서 푸쉬 알림을 눌렀을 때 입니다.
         if application.applicationState == .active
         {
             if let url = userInfo["url"] as? String {
+                Slog("OPEN PUSH URL : \(url)",category: .apns )
                 BaseViewModel.shared.pushUrl = url
             }
         }
@@ -135,6 +143,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate
         {
             /// PUSH 데이터를 넘깁니다.
             if let url = userInfo["url"] as? String {
+                Slog("OPEN PUSH URL : \(url)",category: .apns )
                 BaseViewModel.shared.pushUrl = url
             }
         }
@@ -157,6 +166,7 @@ extension AppDelegate : MessagingDelegate
             {
                 if let custItem = SharedDefaults.getKeyChainCustItem()
                 {
+                    Slog("MessagingDelegate token: \(fcmToken!)", category: .apns )
                     /// FCM 토큰 정보를 신규로 추가 합니다.
                     custItem.fcm_token = fcmToken
                     SharedDefaults.setKeyChainCustItem(custItem)

@@ -23,6 +23,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>CONSOLE_OS_LOG</key>
+	<string>$(OS_LOG_ENABLED)</string>
 	<key>GAI_TRACKING_KEY</key>
 	<string>UA-153393422-1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

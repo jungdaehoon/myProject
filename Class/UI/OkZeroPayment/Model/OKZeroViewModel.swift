@@ -105,7 +105,7 @@ class OKZeroViewModel : BaseViewModel
                 let minute      = min < 10 ? "0\(min)" : "\(min)"
                 /// 최종 디스플레이할 타임 정보를 설정 합니다.
                 let displayTime = "0\(hour):\(minute)"
-                print(displayTime)
+                Slog(displayTime)
                 
                 /// 인식 가능 타임을 종료 합니다.
                 if maxtime == overtime
@@ -148,7 +148,7 @@ class OKZeroViewModel : BaseViewModel
                 let minute      = min < 10 ? "0\(min)" : "\(min)"
                 /// 최종 디스플레이할 타임 정보를 설정 합니다.
                 let displayTime = "0\(hour):\(minute)"
-                print(displayTime)
+                Slog(displayTime)
                 
                 /// 인식 가능 타임을 종료 합니다.
                 if maxtime == overtime ||
@@ -184,7 +184,7 @@ class OKZeroViewModel : BaseViewModel
                 videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
             } catch let error {
                 promise(.success(nil))
-                print(error.localizedDescription)
+                Slog(error.localizedDescription)
                 return
             }
             
@@ -267,7 +267,7 @@ extension OKZeroViewModel: AVCaptureMetadataOutputObjectsDelegate {
             self.captureSession!.stopRunning()
             /// QRCode 정보를 넘깁니다.
             self.qrCodeValue = .qr_success(qrcode: stringValue)
-            print("OKZeroViewModel Value\n + \(self.qrCodeValue)\n")
+            Slog("OKZeroViewModel Value\n + \(self.qrCodeValue)\n")
         }
     }
 }

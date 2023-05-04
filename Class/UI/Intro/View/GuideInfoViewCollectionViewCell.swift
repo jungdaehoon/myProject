@@ -65,8 +65,8 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
             break
         }
         self.layoutIfNeeded()
-        print("self.frame : \(self.frame.size)")
-        print("self.aniImageView.frame.size : \(self.aniImageView.frame.size)")
+        Slog("self.frame : \(self.frame.size)")
+        Slog("self.aniImageView.frame.size : \(self.aniImageView.frame.size)")
         /// 이전에 추가된 뷰어가 있다면 전부 삭제하고 추가합니다.
         for subView in self.aniImageView.subviews { subView.removeFromSuperview() }
         /// 로띠 뷰어를 추가합니다.

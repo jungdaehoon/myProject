@@ -156,7 +156,7 @@ extension UIView {
                             pageType        : FULL_PAGE_TYPE = .default_type,
                             animatedType    : AnimationType = .up,
                             titleName       : String        = "",
-                            titleBarType    : Int           = 2,
+                            titleBarType    : Int           = 0,
                             titleBarHidden  : Bool          = false,
                             completion      : (( _ value : FULL_WEB_CB ) -> Void )? = nil ) {
         if modalPresent

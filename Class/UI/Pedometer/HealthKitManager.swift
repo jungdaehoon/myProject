@@ -45,18 +45,18 @@ class HealthKitManager {
             
             // Determine if the user saw the permission view
             if (userWasShownPermissionView) {
-                print("User was shown permission view")
+                Slog("User was shown permission view")
                 
                 // ** IMPORTANT
                 // Check for access to your HealthKit Type(s). This is an example of using BodyMass.
 //                if (HealthKitManager.healthStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!) == .sharingAuthorized) {
-//                    print("Permission Granted to Access BodyMass")
+//                    Slog("Permission Granted to Access BodyMass")
 //                    HealthKitManager.isAuthorized = true
 //
 //                    completion(true)
 //
 //                } else {
-//                    print("Permission Denied to Access BodyMass")
+//                    Slog("Permission Denied to Access BodyMass")
 //                    HealthKitManager.isAuthorized = false
 //                    completion(false)
 //                }
@@ -65,11 +65,11 @@ class HealthKitManager {
                 completion(true)
                 
             } else {
-                print("User was not shown permission view")
+                Slog("User was not shown permission view")
                 
                 // An error occurred
                 if let e = error {
-                    print(e)
+                    Slog(e)
                     completion(false)
                 }
             }

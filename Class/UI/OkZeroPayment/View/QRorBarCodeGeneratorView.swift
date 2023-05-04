@@ -74,7 +74,7 @@ class QRorBarCodeGeneratorView: UIView {
         case .barcode:
             if let image = self.generateBarcode128(code)
             {
-                print("setCodeDisplay self.frame.size : \(self.frame.size)")
+                Slog("setCodeDisplay self.frame.size : \(self.frame.size)")
                 self.imageView.image = image.resize(size: self.frame.size)
                 completion!(true)
             }

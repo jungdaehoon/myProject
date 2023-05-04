@@ -40,7 +40,7 @@ class AES256Util {
     private static func getAESObject(timestamp: String) -> AES{
         
         let key =  SharedDefaults.getKeyChainCustItem()!.user_no!.prefix(3) + timestamp
-        print("key::\(key)")
+        Slog("key::\(key)")
     
         let keyDecodes : Array<UInt8> = Array(key.utf8)
         let aesObject = try! AES(key: keyDecodes, blockMode: CBC(iv: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), padding: .pkcs5) 

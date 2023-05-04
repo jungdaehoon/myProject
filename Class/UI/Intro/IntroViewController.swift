@@ -248,7 +248,7 @@ extension IntroViewController : UINavigationControllerDelegate
 {
     /// UINavigationControllerDelegate push/pop 애니메이션 효과를 추가 합니다.
     public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("navigationController.operation: \(operation)")
+        Slog("navigationController.operation: \(operation)")
         /// 페이지 종료시 입니다.
         if operation == .pop
         {

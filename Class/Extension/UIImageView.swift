@@ -42,7 +42,7 @@ extension UIImageView {
         }
         
         Alamofire.download(url, to: destination).downloadProgress(queue: DispatchQueue.global(qos: .utility)) { (progress) in
-            print("Progress: \(progress.fractionCompleted)")
+            Slog("Progress: \(progress.fractionCompleted)")
         } .validate().responseData { ( response ) in
             if let destinationURL = response.destinationURL {
                 if let data = try? Data(contentsOf: destinationURL) {

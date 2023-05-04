@@ -185,7 +185,7 @@ final class PickerViewViewController: UIViewController {
     }
     
     deinit {
-        print("has deinitialized")
+        Slog("has deinitialized")
     }
     
     override func loadView() {

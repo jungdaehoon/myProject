@@ -64,14 +64,14 @@ class WalletHelper
     }
 
     func makeEncryptString(orgStr:String ) -> String {
-        print("psg test:makeEncryptString")
+        Slog("psg test:makeEncryptString")
         guard let encInfo = encryptWData(message:orgStr, key: encKey, iv: endIv) else { return "" }
-        print("psg test:makeEncryptString : \(encInfo)")
+        Slog("psg test:makeEncryptString : \(encInfo)")
         return encInfo
     }
     
     func decryptEncString(orgStr:String ) -> String {
-//        print("psg test:makeEncryptString")
+//        Slog("psg test:makeEncryptString")
 //        val decInfo = decryptWData(orgStr, encKey, endIv)
 //        if (decInfo == nil) {
 //            return ""
@@ -111,10 +111,10 @@ class WalletHelper
             
             let privateKey = try twalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: wa)
             
-            print("import: mnemonics  = \(mnemonics)")
-            print("import: password  = \(walletPass)")
-            print("import: address  = \(addrStr)")
-            print("import: private key  = \(String(describing: privateKey?.toHexString()))")
+            Slog("import: mnemonics  = \(mnemonics)")
+            Slog("import: password  = \(walletPass)")
+            Slog("import: address  = \(addrStr)")
+            Slog("import: private key  = \(String(describing: privateKey?.toHexString()))")
             
             let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             let keyData = try? JSONEncoder().encode(twalletAddressKeyStore?.keystoreParams)
@@ -166,7 +166,7 @@ class WalletHelper
                     vc.showAlertMessage(title: "", message: "Unable to load wallet", actionName: "Ok")
                     return ""
                 }
-                print("CheckExisting : walletAddress  = \(walletAddress.address)")
+                Slog("CheckExisting : walletAddress  = \(walletAddress.address)")
                 return walletAddress.address
             }
         } catch {
@@ -194,13 +194,13 @@ class WalletHelper
                     }
                     
                     let privateKey = try web3KeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: walletAddress)
-                    print("checkPrivate : walletAddress  = \(walletAddress)")
-                    print("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))")
+                    Slog("checkPrivate : walletAddress  = \(walletAddress)")
+                    Slog("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))")
                     return privateKey?.toHexString()
                 }
             }
         } catch {
-            print(error)
+            Slog(error)
             return ""
         }
         return ""
@@ -234,10 +234,10 @@ class WalletHelper
                 let keyData = try? JSONEncoder().encode(tempWalletAddressKeyStore?.keystoreParams)
                 FileManager.default.createFile(atPath: userDir + "/keystore" + "/key.json", contents: keyData, attributes: nil)
                 
-                print("create: mnemonics  = \(tMnemonics)")
-                print("create: password  = \(walletPass)")
-                print("create: address key  = \(walletAddress.address)")
-                print("create: private key  = \(String(describing: privateKey?.toHexString()))")
+                Slog("create: mnemonics  = \(tMnemonics)")
+                Slog("create: password  = \(walletPass)")
+                Slog("create: address key  = \(walletAddress.address)")
+                Slog("create: private key  = \(String(describing: privateKey?.toHexString()))")
                 let pForcedStr2 : String! = String(describing: privateKey?.toHexString())
                 let pForcedStr : String! =  privateKey?.toHexString()
                 return walletAddress.address + ":" + pForcedStr

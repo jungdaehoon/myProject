@@ -92,7 +92,7 @@ class GuideInfoView: UIView {
      - returns :False
      */
     func setOpenView( animation : Bool = true,  completion : (( _ value : Bool ) -> Void )? = nil ){
-        print("self.frame : \(self.frame)")
+        Slog("self.frame : \(self.frame)")
         self.completion = completion
         self.setAniDisplay( animation: false)
     }
@@ -181,7 +181,7 @@ class GuideInfoView: UIView {
         {
             /// 현 위치 값을 저장 합니다.
             self.cardIngPostionY = positions.y
-            print("began : \(self.cardIngPostionY!)")
+            Slog("began : \(self.cardIngPostionY!)")
         }
         else if( gesture.state == .changed )
         {
@@ -191,7 +191,7 @@ class GuideInfoView: UIView {
             if ingPosition < CARD_BOTTOM_DEFAULT_Y { return }
             /// 기본 위치 값에 이동한 위치값을 추가 합니다.
             self.cardViewBottom.constant        = ingPosition
-            print("changed  : \(ingPosition)")
+            Slog("changed  : \(ingPosition)")
             /// 카드 전체 높이 기준 3/2 수준으로 올라가는 경우 입니다.
             if ingPosition > (( self.bottomView.frame.size.height - CARD_BOTTOM_DEFAULT_Y )/3) * 2
             {
@@ -206,10 +206,10 @@ class GuideInfoView: UIView {
         }
         else if(gesture.state == .ended )
         {
-            print("ended!")
+            Slog("ended!")
             /// 시작 부터 현 이동한 위치 값을 체크 합니다.
             ingPosition                         = (self.cardIngPostionY - positions.y) + CARD_BOTTOM_DEFAULT_Y
-            print("ended! : \(ingPosition)")
+            Slog("ended! : \(ingPosition)")
             /// 카드 위치를 아래로 내리지 못하도록 합니다.
             if ingPosition < CARD_BOTTOM_DEFAULT_Y { return }
             /// 카드 전체 높이 기준 2/1 수준으로 올라가는 경우 입니다.
@@ -241,7 +241,7 @@ class GuideInfoView: UIView {
     
     // MARK: - 화면 디스플레이 영역 입니다.
     override func draw(_ rect: CGRect) {
-        print("rect : \(rect)")
+        Slog("rect : \(rect)")
         self.bottomTopColor.setGradientDownTop(color1: UIColor(hex: 0x000000,alpha: 0.0), color2: UIColor(hex: 0x000000,alpha: 0.2))
         self.cardBgColor.setGradientDownTop(color1: UIColor(hex: 0xFD9200,alpha: 1.0), color2: UIColor(hex: 0xFF5000,alpha: 0.5))
         self.setLottieView()

@@ -26,7 +26,7 @@ extension WKWebView {
             if let value = cookieHeaders["Cookie"]
             {
                 urlRequest.setValue(value, forHTTPHeaderField: "Cookie")
-                print("cookie value:\(value)")
+                Slog("cookie value:\(value)")
             }
         }
         
@@ -149,10 +149,9 @@ extension WKWebView {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
-                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                #if DEBUG
-                    print("WKWebsiteDataStore record deleted:", record)
-                #endif
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})                
+                Slog("WKWebsiteDataStore record deleted: \(record)")
+                
             }
         }
     }

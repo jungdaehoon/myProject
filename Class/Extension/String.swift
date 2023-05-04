@@ -326,7 +326,7 @@ extension String {
             let data: Data = self.data(using: String.Encoding.utf8)!
             result = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
         } catch {
-            //print("json parse error : \(error)")
+            //Slog("json parse error : \(error)")
         }
         
         return result
@@ -366,7 +366,7 @@ extension String {
     // LEFT
     // Returns the specified number of chars from the left of the string
     // let str = "Hello"
-    // print(str.left(3))         // Hel
+    // Slog(str.left(3))         // Hel
     func left(_ to: Int) -> String {
         return "\(self[..<self.index(startIndex, offsetBy: to)])"
     }
@@ -374,7 +374,7 @@ extension String {
     // RIGHT
     // Returns the specified number of chars from the right of the string
     // let str = "Hello"
-    // print(str.right(3))         // llo
+    // Slog(str.right(3))         // llo
     func right(_ from: Int) -> String {
         return "\(self[self.index(startIndex, offsetBy: self.length-from)...])"
     }
@@ -382,7 +382,7 @@ extension String {
     // MID
     // Returns the specified number of chars from the startpoint of the string
     // let str = "Hello"
-    // print(str.mid(2,amount: 2))         // ll
+    // Slog(str.mid(2,amount: 2))         // ll
     func mid(_ from: Int, amount: Int) -> String {
         let x = "\(self[self.index(startIndex, offsetBy: from)...])"
         return x.left(amount)

@@ -185,7 +185,7 @@ class PointItemView: UIView {
             /// 계좌 정상 디스플레이로 선택시 리스트 페이지로 이동합니다.
             else
             {
-                self.setDisplayWebView(WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, titleBarHidden: true)
+                self.setDisplayWebView(WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, titleBarType: 0, titleBarHidden: true)
             }
             break
         default:

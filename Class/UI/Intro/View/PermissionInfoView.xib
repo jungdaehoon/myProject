@@ -76,7 +76,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="전화 (선택)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRV-pB-Gjk">
-                                                            <rect key="frame" x="48.000000000000007" y="0.0" width="71.666666666666686" height="19"/>
+                                                            <rect key="frame" x="47.999999999999993" y="0.0" width="71.333333333333314" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="KbZ-es-85A"/>
                                                             </constraints>
@@ -111,7 +111,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="알림 (선택)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHZ-QI-sRR">
-                                                            <rect key="frame" x="52.000000000000007" y="0.0" width="71.666666666666686" height="19"/>
+                                                            <rect key="frame" x="51.999999999999993" y="0.0" width="71.333333333333314" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="t6y-GD-JIr"/>
                                                             </constraints>
@@ -181,7 +181,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="건강 (선택)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqW-E2-9L7">
-                                                            <rect key="frame" x="48.000000000000007" y="0.0" width="71.666666666666686" height="19"/>
+                                                            <rect key="frame" x="47.999999999999993" y="0.0" width="71.333333333333314" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="jOS-XS-9U3"/>
                                                             </constraints>
@@ -272,6 +272,11 @@
                                         <constraint firstItem="ckz-T6-Ge6" firstAttribute="centerX" secondItem="a7U-Ol-K6c" secondAttribute="centerX" id="hJ2-cu-H3e"/>
                                         <constraint firstAttribute="trailing" secondItem="ckz-T6-Ge6" secondAttribute="trailing" id="k96-4i-isW"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="16"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </scrollView>
                             </subviews>
                             <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>

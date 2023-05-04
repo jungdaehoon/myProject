@@ -10,26 +10,58 @@ import UIKit
 import CryptoKit
 import os
 
-func Slog(_ object: Any) {
-    #if DEBUG || DEBUGREAL
+
+/**
+ Console App Log 확인을 위해 사용 합니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.05.03
+ */
+extension OSLog
+{
+    private static var log_subtype = Bundle.main.bundleIdentifier
+    /// Console Log 확인시 "Network" 카테고리 구분 입니다.
+    static let network  = OSLog(subsystem: log_subtype!, category: "Network")
+    /// Console Log 확인시 "Apns" 카테고리 구분 입니다.
+    static let apns     = OSLog(subsystem: log_subtype!, category: "Push")
+    /// Console Log 확인시 "DeepLink" 카테고리 구분 입니다.
+    static let deeplink = OSLog(subsystem: log_subtype!, category: "DeepLink")
+    /// Console Log 확인시 "OKPay" 카테고리 구분 입니다.
+    static let okpay    = OSLog(subsystem: log_subtype!, category: "OKPay")
+    /// Console App Log 활성화 여부 입니다.
+    static let OS_LOG   = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "CONSOLE_OS_LOG") as? String ?? "" == "YES" ? true : false
+}
+
+
+/**
+ Log 확인을 위해 사용 합니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.05.03
+ - Parameters:
+    - object : 로그 정보 입니다.
+    - category : 카테고리 타입 입니다. ( default : .okpay )
+    - logType : 콘솔 로그 타입 입니다. ( default : .default )
+ - returns :False
+ */
+func Slog(_ object: Any, category : OSLog = .okpay, logType : OSLogType = .default ) {
+     
+    if OSLog.OS_LOG == true
+    {
+        os_log("%{public}@", log:  category, type: logType, "\(object)")
+        return
+    }
+    #if DEBUG
     print(object)
     #endif
 }
+
 
 /// 앱 버튼 ID 정보 입니다.
 let APP_BUNDLE_ID       = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String ?? ""
 /// 앱 버전 정보 입니다.
 let APP_VERSION         = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
-///
-let APPSTORE_ID         = "1456336959" 
+
 
 class Utils {
-    
-    
     static let bundleIdentifier = {
         return Bundle.main.bundleIdentifier
-        //    return [[[NSBundle mainBundle] infoDictionary] objectForKey: @“CFBundleIdentifier"];
-        //  NSString *appID = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleIdentifierKey];
     }()
     
     static let appVersion : String = {
@@ -42,27 +74,7 @@ class Utils {
         
     
     static var serverVersion : String?
-    
-    
-    static func openAppStore(_ appstoreId: String = "", closeApp: Bool = true) {
-        if let url = URL(string: "itms-apps://itunes.apple.com/kr/app/\(appstoreId.isValid ? appstoreId : APPSTORE_ID)"),
-           UIApplication.shared.canOpenURL(url) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:]) { (opened) in
-                    if(opened){
-                        Slog("App Store Opened")
-                        if closeApp {
-                            exit(0)
-                        }
-                    }
-                }
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        } else {
-            Slog("Can't Open URL on Simulator")
-        }
-    }
+        
     
     static func getInfoDictionary(key: String) -> String? {
         guard let data = Bundle.main.infoDictionary?[key] as? String, !data.isEmpty else {
@@ -129,34 +141,8 @@ class Utils {
             return string
         }
         return nil
-   //     throw NSError(domain: "Dictionary", code: 1, userInfo: ["message": "Data cannot be converted to .utf8 string"])
     }
-    /*
-    static func toSha256(plainString : String) -> String {
-        func digest(input : NSData) -> NSData {
-            let digestLength = Int(CC_SHA256_DIGEST_LENGTH)
-            var hash = [UInt8](repeating: 0, count: digestLength)
-            CC_SHA256(input.bytes, UJSONSerialization.dataInt32(input.length), &hash)
-            return NSData(bytes: hash, length: digestLength)
-        }
-
-        func hexStringFromData(input: NSData) -> String {
-            var bytes = [UInt8](repeating: 0, count: input.length)
-            input.getBytes(&bytes, length: input.length)
-
-            var hexString = ""
-            for byte in bytes {
-                hexString += String(format:"%02x", UInt8(byte))
-            }
-
-            return hexString
-        }
-        
-        if let stringData = plainString.data(using: String.Encoding.utf8) {
-            return hexStringFromData(input: digest(input: stringData as NSData))
-        }
-        return ""
-    }*/
+    
     
     static func openSettings() {
         let url = URL(string: UIApplication.openSettingsURLString)!
@@ -247,21 +233,21 @@ class Utils {
     
     
     func deviceModelName() -> String? {
-            print("")
-            print("===============================")
-            print("[ViewController >> deviceModelName() :: 디바이스 모델 명칭 확인 실시]")
-            print("===============================")
-            print("")
+            Slog("")
+            Slog("===============================")
+            Slog("[ViewController >> deviceModelName() :: 디바이스 모델 명칭 확인 실시]")
+            Slog("===============================")
+            Slog("")
             
             // [1]. 시뮬레이터 체크 수행 실시
             var modelName = ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] ?? ""
             if modelName != "" && modelName.isEmpty == false && modelName.count>0 {
-                print("")
-                print("===============================")
-                print("[ViewController >> deviceModelName() :: 디바이스 시뮬레이터]")
-                print("[deviceModelName :: \(modelName)]")
-                print("===============================")
-                print("")
+                Slog("")
+                Slog("===============================")
+                Slog("[ViewController >> deviceModelName() :: 디바이스 시뮬레이터]")
+                Slog("[deviceModelName :: \(modelName)]")
+                Slog("===============================")
+                Slog("")
                 
                 // [리턴 반환 실시]
                 return modelName
@@ -276,12 +262,12 @@ class Utils {
                 modelName = String(describing: device.perform(selector, with: "marketing-name").takeRetainedValue())
             }
             
-            print("")
-            print("===============================")
-            print("[ViewController >> deviceModelName() :: 실제 디바이스 기기]")
-            print("[deviceModelName :: \(modelName)]")
-            print("===============================")
-            print("")
+            Slog("")
+            Slog("===============================")
+            Slog("[ViewController >> deviceModelName() :: 실제 디바이스 기기]")
+            Slog("[deviceModelName :: \(modelName)]")
+            Slog("===============================")
+            Slog("")
             
             // [리턴 반환 실시]
             return modelName

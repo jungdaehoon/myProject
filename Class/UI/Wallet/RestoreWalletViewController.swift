@@ -41,7 +41,7 @@ class RestoreWalletViewController: UIViewController {
     }
     
     deinit {
-        print("Login deinit")
+        Slog("Login deinit")
     }
     
     // 컨트롤 셋팅
@@ -67,7 +67,7 @@ class RestoreWalletViewController: UIViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소",
                                       style: .cancel) { _ in
-//            print("취소처리")
+//            Slog("취소처리")
         })
 
         alert.addAction(UIAlertAction(title: "확인",
@@ -101,7 +101,7 @@ class RestoreWalletViewController: UIViewController {
     }
     
     func clickConfirm() {
-        print("psg test:")
+        Slog("psg test:")
         var mnemonicStr = tfMnemonic.text ?? ""
 //        //todelete
 //        mnemonicStr = "dog owner follow fence swarm apology protect cheap snow neck prize enlist"
@@ -120,7 +120,7 @@ class RestoreWalletViewController: UIViewController {
                     self.showAlertCheckMnemonic()
                 }
             }
-            print("psg test : restore wallet")
+            Slog("psg test : restore wallet")
         }
     }
 }
@@ -135,7 +135,7 @@ extension String {
 // MARK:// UITextFieldDelegate
 extension RestoreWalletViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        print("textFieldShouldReturn called")
+        Slog("textFieldShouldReturn called")
         if textField == tfMnemonic {
 //            tfCheckPwd.text = tfGenPwd.text
 //            self.clickConfirm()
@@ -148,7 +148,7 @@ extension RestoreWalletViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("textFieldDidEndEditing called")
+        Slog("textFieldDidEndEditing called")
         if textField == tfMnemonic {
 //            tfCheckPwd.text = tfGenPwd.text
         }

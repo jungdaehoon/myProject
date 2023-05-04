@@ -147,7 +147,7 @@ class AllMoreMenuListCell: UITableViewCell {
     
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        print("title name : \(self.menuInfo!.title!)")
+        Slog("title name : \(self.menuInfo!.title!)")
         
         if self.menuInfo!.title! == "이번달 결제"
         {

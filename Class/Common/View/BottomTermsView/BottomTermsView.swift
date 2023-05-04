@@ -97,7 +97,7 @@ class BottomTermsView: UIView {
         self.target         = target
         self.titleText.text = title
         self.termsList      = termsList
-        print("CGFloat(termsList.count * 16) : \(CGFloat(termsList.count * 32))")
+        Slog("CGFloat(termsList.count * 16) : \(CGFloat(termsList.count * 32))")
         self.tableViewHeight.constant = CGFloat(termsList.count * 32)
         self.completion     = completion
         self.tableView.reloadData()

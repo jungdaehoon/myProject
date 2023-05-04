@@ -39,7 +39,7 @@ class BannerView: UIView {
         let maxHeight       = scrollView.contentSize.height - scrollView.frame.size.height
         let itemHeight      = maxHeight/11
         let index           = (scrollView.contentOffset.y)/itemHeight
-        print("maxHeight : \(maxHeight) itemHeight : \(itemHeight) index : \(index)")
+        Slog("maxHeight : \(maxHeight) itemHeight : \(itemHeight) index : \(index)")
         self.aniImage.image = UIImage(named: "bbannerImg\(Int(index))")
     }
     

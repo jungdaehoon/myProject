@@ -8,6 +8,7 @@
 import Combine
 import Alamofire
 import AlamofireActivityLogger
+import os
 
 // 멀티파트로 전송할 데이터를 구성하기 위한 클래스
 struct MultipartWithData {
@@ -28,20 +29,7 @@ enum MultipartItem {
 }
 
 
-
-
 private let REQUEST_RETRY_COUNT = 2 // 서버 연결 타임아웃
-
-
-// alamofire_activity_logger 로그레벨
-var alamofireLevel :  LogLevel = {
-    var level = LogLevel.none
-    #if DEBUG
-    level = LogLevel.all
-    #endif
-    
-    return level
-}()
 
 
 enum AlamofireAgent {
@@ -102,10 +90,10 @@ enum AlamofireAgent {
                 headers: headers
             )
             
-            request.validate().log(level:alamofireLevel).responseJSON { (response) in
+            request.validate().responseJSON { (response) in
                 guard response.result.isSuccess,
                     let _ = response.result.value else {
-                        print("response.result.error value error")
+                        Slog("response.result.error value error", category: .network, logType: .error)
                     publisher.send(completion: .failure( handleError(response.result.error!) ))
                         return
                 }
@@ -115,15 +103,17 @@ enum AlamofireAgent {
                     guard let value     = try? decoder.decode(T.self, from: response.data!) else {
                         throw ResponseError.parsing(PARSING_ERR_MSG)
                     }
+                    Slog(response.debugDescription, category: .network, logType: .default)
                     publisher.send(value)
                 }
                 catch ( let error )
                 {
-                    print("response.result.error:::\(error)")
+                    Slog("response.result.error:::\(error)", category: .network, logType: .error)
                 }
             }
             return publisher.eraseToAnyPublisher()
     }
+    
     
     private static func handleError(_ error: Error) -> ResponseError {
         if let apiError = error as? ResponseError {
@@ -131,30 +121,24 @@ enum AlamofireAgent {
         } else if let afError = error as? AFError {
             switch afError {
             case .invalidURL( _ ):
-                Slog("invalidURL: \(error.localizedDescription)")
-                //devErrorMessage = "잘못된 URL 입니다.\n\(url) - \(error.localizedDescription)"
-                //realErrorMessage = "서비스 요청 오류입니다."
+                Slog("잘못된 URL 입니다.: \(error.localizedDescription)", category: .network, logType: .error)
             case .parameterEncodingFailed( _ ):
-                Slog("Parameter encoding failed: \(error.localizedDescription)")
-                //devErrorMessage = "파라미터 인코딩 오류 입니다.\n\(error.localizedDescription)\nFailure Reason: \(reason)"
-                //realErrorMessage = "서비스 요청 오류입니다."
+                Slog("파라미터 인코딩 오류 입니다: \(error.localizedDescription)", category: .network, logType: .error)
             case .multipartEncodingFailed( _ ):
-                Slog("multipartEncodingFailed: \(error.localizedDescription)")
-                //devErrorMessage = "멀티파트 오류 인코딩 오류 입니다.\n\(error.localizedDescription)\nFailure Reason: \(reason)"
-                //realErrorMessage = "파일첨부 서비스 요청 오류입니다."
+                Slog("파일첨부 서비스 요청 오류입니다: \(error.localizedDescription)", category: .network, logType: .error)
             case .responseValidationFailed( let reason ):
-                Slog("Response validation failed: \(error.localizedDescription)")
-                Slog("Failure Reason: \(reason)")
+                Slog("Response validation failed: \(error.localizedDescription)", category: .network, logType: .error)
+                Slog("Failure Reason: \(reason)", category: .network, logType: .error)
                 
                 switch reason {
                 case .dataFileNil, .dataFileReadFailed:
-                    Slog("Downloaded file could not be read")
+                    Slog("Downloaded file could not be read", category: .network, logType: .error)
                 case .missingContentType(let acceptableContentTypes):
-                    Slog("Content Type Missing: \(acceptableContentTypes)")
+                    Slog("Content Type Missing: \(acceptableContentTypes)", category: .network, logType: .error)
                 case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
-                    Slog("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                    Slog("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)", category: .network, logType: .error)
                 case .unacceptableStatusCode(let code):
-                    Slog("Response status code was unacceptable: \(code)")
+                    Slog("Response status code was unacceptable: \(code)", category: .network, logType: .error)
                     switch code
                     {
                     case 503 :
@@ -164,7 +148,7 @@ enum AlamofireAgent {
                     
                 }
             case .responseSerializationFailed( _ ):
-                Slog("Response serialization failed: \(error.localizedDescription)")
+                Slog("Response serialization failed: \(error.localizedDescription)", category: .network, logType: .error)
             }
             /*
             switch afError {

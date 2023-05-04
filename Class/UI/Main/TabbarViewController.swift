@@ -118,7 +118,6 @@ class TabbarViewController: UITabBarController {
                     } puchCompletion: {
                         
                     }
-
                 }
             }
         }.store(in: &self.viewModel.cancellableSet)

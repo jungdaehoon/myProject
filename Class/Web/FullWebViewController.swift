@@ -188,7 +188,7 @@ class FullWebViewController: BaseViewController {
         
         /// 타이틀을 세팅 합니다.
         self.titleName.text = self.titleText
-        print("self.pageURL : \(self.pageURL)")
+        Slog("self.pageURL : \(self.pageURL)")
         self.loadMainURL(self.pageURL)
     }
     
@@ -338,8 +338,8 @@ extension FullWebViewController {
                                 {
                                 case .scriptCall(let collBackID, _, _):
                                     self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
-                                        print(anyData as Any)
-                                        print(error as Any)
+                                        Slog(anyData as Any)
+                                        Slog(error as Any)
                                     }
                                 default:break
                                 }
@@ -383,8 +383,8 @@ extension FullWebViewController {
                             {
                             case .scriptCall(let collBackID, _, _):
                                 self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
-                                    print(anyData as Any)
-                                    print(error as Any)
+                                    Slog(anyData as Any)
+                                    Slog(error as Any)
                                 }
                             default:break
                             }
@@ -450,12 +450,12 @@ extension FullWebViewController {
                                         {
                                             scricptCB += "('\(cbParam)')"
                                             self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                print(anyData as Any)
-                                                print(error as Any)
+                                                Slog(anyData as Any)
+                                                Slog(error as Any)
                                             }
                                         }
                                     }catch{
-                                        print("QrCode toJSONString Error")
+                                        Slog("QrCode toJSONString Error")
                                     }
                                     OKZeroPayQRCaptureView().hide()
                                 }
@@ -475,12 +475,12 @@ extension FullWebViewController {
                                         {
                                             scricptCB += "('\(cbParam)')"
                                             self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                print(anyData as Any)
-                                                print(error as Any)
+                                                Slog(anyData as Any)
+                                                Slog(error as Any)
                                             }
                                         }
                                     }catch{
-                                        print("QrCode toJSONString Error")
+                                        Slog("QrCode toJSONString Error")
                                     }
                                     OKZeroPayQRCaptureView().hide()
                                 }
@@ -490,8 +490,8 @@ extension FullWebViewController {
                                 /// 제로페이에 QRCode 데이터를 전송 합니다.
                                 DispatchQueue.main.async {
                                     self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
-                                        print(anyData as Any)
-                                        print(error as Any)
+                                        Slog(anyData as Any)
+                                        Slog(error as Any)
                                     }
                                     OKZeroPayQRCaptureView().hide()
                                 }

@@ -67,11 +67,11 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
         let url: String = webView.url?.absoluteString ?? ""
         if !url.isEmpty
         {
-            print("didfinishi__URL::\(url)")
+            Slog("didfinishi__URL::\(url)")
             if url.contains(HybridOpenBankViewController.RESPONSE_URL)
             {
                 let rsp_code = self.getParameterFrom(url: url, param: "rsp_code")
-                print("rsp_code::\(rsp_code)")
+                Slog("rsp_code::\(rsp_code)")
                 if rsp_code == "0000"
                 {
                     self.dismiss(animated: true) {

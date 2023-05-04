@@ -37,8 +37,7 @@ class WebPageConstants {
     /// OK 포인트 페이지 입니다.
     static let URL_POINT_TRANSFER_LIST          = baseURL + "/myp/mypPointTransHistory.do"
     /// 결제 페이지 입니다.
-    static let URL_TOTAL_PAY_LIST               = baseURL + "/all/totalPaymentList.do"
-    
+    static let URL_TOTAL_PAY_LIST               = baseURL + "/all/totalPaymentList.do"    
     /// 카카오톡 문의하기 페이지 입니다.
     static let URL_KAKAO_CONTACT                = "https://pf.kakao.com/_jxcxgaK"
     /// 올림pick 페이지 입니다.

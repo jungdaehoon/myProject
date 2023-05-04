@@ -105,7 +105,7 @@ class RemittanceViewController: BaseViewController {
                                                 if (error != nil)
                                                 {
                                                     //self.hideHudView()
-                                                    print("error___1")
+                                                    Slog("error___1")
                                                 }
                                             }
                                         }

@@ -145,7 +145,7 @@ class BaseViewModel : NSObject {
         curCancellable = publisher()
             .handleEvents(receiveOutput: { received in
             }, receiveCancel: {
-                print("receiveCancel")
+                Slog("receiveCancel")
                 //self?.action = .navigation(.close)
             })
             .sink(receiveCompletion: { [weak self] completion in
@@ -156,7 +156,7 @@ class BaseViewModel : NSObject {
                 if showLoading { LoadingView.default.hide() }
                 switch completion {
                 case .finished:
-                    print("completion")
+                    Slog("completion")
                 case .failure(let error):
                     // 공통 에러처리
                     if errorHandler?(error) ?? false == false {
@@ -171,16 +171,16 @@ class BaseViewModel : NSObject {
                         }
                         switch error {
                         case .http(let errorData):
-                            print("[ NETWORK_ERROR_DATA_HTTP ]\n\(errorData.message)")
+                            Slog("[ NETWORK_ERROR_DATA_HTTP ]\n\(errorData.message)")
                         case .parsing(let errMsg):
-                            print("[ NETWORK_ERROR_DATA_Parsing ]\n\(errMsg)")
+                            Slog("[ NETWORK_ERROR_DATA_Parsing ]\n\(errMsg)")
                         case .unknown(let errMsg):
                             let _ =  errorHandler!(.unknown(errMsg))
-                            print("[ NETWORK_ERROR_DATA_Unknown ]\n\(errMsg)")
+                            Slog("[ NETWORK_ERROR_DATA_Unknown ]\n\(errMsg)")
                         case .timeout(let errMsg):
                             let _ =  errorHandler!(.timeout(errMsg))
                             
-                            print("[ NETWORK_ERROR_DATA_Timeout ]\n\(errMsg)")
+                            Slog("[ NETWORK_ERROR_DATA_Timeout ]\n\(errMsg)")
                         }
                     }
                 }
@@ -747,11 +747,11 @@ class BaseViewModel : NSObject {
                     Messaging.messaging().token { token, error in
                         if let error = error
                         {
-                            print("Error fetching FCM registration token: \(error)")
+                            Slog("Error fetching FCM registration token: \(error)")
                         }
                         else if let token = token
                         {
-                            print("FCM registration token: \(token)")
+                            Slog("FCM registration token: \(token)")
                             if let custItem = SharedDefaults.getKeyChainCustItem()
                             {
                                 custItem.fcm_token = token

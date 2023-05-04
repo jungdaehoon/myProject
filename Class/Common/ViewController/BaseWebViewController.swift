@@ -178,12 +178,12 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
-        print("webView didStartProvisionalNavigation")
+        Slog("webView didStartProvisionalNavigation")
         LoadingView.default.show()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("webView didFinish")
+        Slog("webView didFinish")
         /// 웹페이지 정상 디스플레이 완료후 쿠키를 업데이트 합니다.
         if self.updateCookies == true
         {
@@ -193,9 +193,9 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
             /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
             self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
                 self.webView!.evaluateJavaScript(script) { ( anyData , error) in
-                    print("updateCookies anyData:\(anyData as Any)")
-                    print("updateCookies error:\(error as Any)")
-                    print("updateCookies script:\(script)")
+                    Slog("updateCookies anyData:\(anyData as Any)")
+                    Slog("updateCookies error:\(error as Any)")
+                    Slog("updateCookies script:\(script)")
                 }
                 webView.configuration.userContentController.removeAllUserScripts()
             }.store(in: &self.baseViewModel.cancellableSet)
@@ -204,13 +204,13 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("webView didFail")
+        Slog("webView didFail")
         LoadingView.default.hide()
     }
     
     // page 로드 실패
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("webView didFailProvisionalNavigation")
+        Slog("webView didFailProvisionalNavigation")
         LoadingView.default.hide()
     }
     
@@ -318,15 +318,15 @@ extension BaseWebViewController: WKScriptMessageHandler {
         /// 쿠키 업데이트 메세지 이벤트 입니다.
         if message.name == "\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies)"
         {
-            print("\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies) : \(message.body)")
+            Slog("\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies) : \(message.body)")
             /// 연결 도메인의 쿠키 정보를 가져 옵니다.
             let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
             /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
             self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
                 self.webView!.evaluateJavaScript(script) { ( anyData , error) in
-                    print("updateCookies anyData:\(anyData as Any)")
-                    print("updateCookies error:\(error as Any)")
-                    print("updateCookies script:\(script)")
+                    Slog("updateCookies anyData:\(anyData as Any)")
+                    Slog("updateCookies error:\(error as Any)")
+                    Slog("updateCookies script:\(script)")
                 }
             }.store(in: &self.baseViewModel.cancellableSet)
             return

@@ -711,8 +711,8 @@
 		8D205E8729D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D205E8829D1346E00F43C99 /* PermissionInfoView.xib */,
 				8D205E8B29D1346E00F43C99 /* PermissionInfoView.swift */,
+				8D205E8829D1346E00F43C99 /* PermissionInfoView.xib */,
 				8D205E8A29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.swift */,
 				8D205E8C29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.xib */,
 			);
@@ -1907,12 +1907,14 @@
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
 				MARKETING_VERSION = 1.25.2;
+				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고 개발";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/cereal/cereal-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1968,6 +1970,7 @@
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
 				MARKETING_VERSION = 1.24.42;
+				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고";

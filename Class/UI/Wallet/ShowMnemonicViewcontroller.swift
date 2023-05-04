@@ -40,7 +40,7 @@ class ShowMnemonicViewController: UIViewController {
     }
     
     deinit {
-        print("Login deinit")
+        Slog("Login deinit")
     }
     
     // 컨트롤 셋팅
@@ -88,7 +88,7 @@ class ShowMnemonicViewController: UIViewController {
     
     @IBAction func onCopyMne(_ sender: Any) {
         let copyText = tfMnemonic.text ?? ""
-        print("copy text = \(copyText)")
+        Slog("copy text = \(copyText)")
         UIPasteboard.general.string = copyText
         showAlertMessage(title:"",message:"복사되었습니다")
     }

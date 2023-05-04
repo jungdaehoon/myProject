@@ -88,10 +88,10 @@ class SecureKeyPadView: UIView {
         xkPasswordTextField.e2eURL          = WebPageConstants.URL_KEYBOARD_E2E
         self.addSubview(xkPasswordTextField)
         self.setResignFirstResponder()
-        print("xkKeypadType!:\(xkKeypadType!)")
-        print("xkKeypadViewType!!:\(xkKeypadViewType!)")
-        print("e2eURLString!!:\(WebPageConstants.URL_KEYBOARD_E2E)")
-        print("xkPasswordTextField::\(xkPasswordTextField)")
+        Slog("xkKeypadType!:\(xkKeypadType!)")
+        Slog("xkKeypadViewType!!:\(xkKeypadViewType!)")
+        Slog("e2eURLString!!:\(WebPageConstants.URL_KEYBOARD_E2E)")
+        Slog("xkPasswordTextField::\(xkPasswordTextField)")
         /// 배경 터치 키패드 종료 이벤트 연결 입니다.
         let gesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(self.tapGestureRecognized(_ :)))
         self.addGestureRecognizer(gesture)
@@ -205,14 +205,14 @@ extension SecureKeyPadView : XKTextFieldDelegate{
     
     
     func keypadE2EInputCompleted(_ aSessionID: String!, token aToken: String!, indexCount aCount: Int) {
-        print("ABC keypadE2EInputCompleted aSessionID \(aSessionID) aToken \(aToken) aCount \(aCount)")
+        Slog("ABC keypadE2EInputCompleted aSessionID \(aSessionID) aToken \(aToken) aCount \(aCount)")
         self.mainKeypadInputCompleted(aCount,finished: true,tuple: (aSessionID, aToken ) )
         xkPasswordTextField.cancelKeypad()
         self.endEditing(true)
     }
     
     func keypadCanceled() {
-        print("ABC keypadCanceled ")
+        Slog("ABC keypadCanceled ")
         self.setResignFirstResponder()
     }
     
@@ -237,13 +237,13 @@ extension SecureKeyPadView : XKTextFieldDelegate{
     
     
     func textFieldShouldDeleteCharacter(_ textField: XKTextField!) -> Bool {
-        print("ABC textFieldShouldDeleteCharacter length:\(String(describing: textField.text?.count))")
+        Slog("ABC textFieldShouldDeleteCharacter length:\(String(describing: textField.text?.count))")
         self.mainKeypadInputCompleted((textField.text?.count)!)
         return true
     }
     
     func textFieldSessionTimeOut(_ textField: XKTextField!) {
-        print("ABC textFieldSessionTimeOut ")
+        Slog("ABC textFieldSessionTimeOut ")
         textField.cancelKeypad();
         /// 세션만료 안내 팝업 오픈 입니다.
         CMAlertView().setAlertView(detailObject: "보안 세션이 만료되었습니다.\n다시 실행해 주세요." as AnyObject, cancelText: "확인") { event in
