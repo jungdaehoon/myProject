@@ -148,7 +148,7 @@ class FullWebViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup after loading the view.
-        self.setWebViewDisplaya()
+        self.setWebViewDisplay()
     }
     
     
@@ -166,7 +166,7 @@ class FullWebViewController: BaseViewController {
      - Throws : False
      - returns :False
      */
-    func setWebViewDisplaya()
+    func setWebViewDisplay()
     {
         /// 타이틀바 활성화 하며 뒤로 가기 버튼 입니다.
         if self.titleBarType == 1

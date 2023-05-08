@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+/**
+ 혜택 페이지 입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.03.21
+*/
 class BenefitViewController: BaseViewController {
 
     @IBOutlet weak var webDisplayView: UIView!

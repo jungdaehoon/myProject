@@ -590,34 +590,27 @@ class WebMessagCallBackHandler : NSObject  {
             let url         = params[0] as! String
             if let info     = Utils.toJSON(params[1] as! String)
             {
+                /// callHybridPopup 에서 다시 넘겨줄 콜백 정보를 저장합니다.
+                let callHPCB        = NC.S(callBacks[0] as? String)
+                /// 상단 타이틀 디스플레이 여부 입니다.
+                let title           = NC.S(info["title"] as? String)
+                /// 상단 타이틀 디스플레이 여부 입니다. ( 0 : 타이틀 바 히든, 1 : 뒤로가기 버튼, 2 : 종료 버튼 )
+                let titleBarType    = NC.S( info["button"] as? String ).isValid == true ? Int(NC.S( info["button"] as? String ))! : 0
+                /// 현 페이지 종료 여부를 받습니다.
+                let ingPageClose    = NC.B( info["ingPageClose"] as? Bool )
                 /// 페이지 타입을 받습니다.
                 if let type    = info["type"] as? String
                 {
+                    /// 페이지 타입을 설정 합니다.
                     let pageType = FULL_PAGE_TYPE(rawValue: type) ?? .default_type
                     switch pageType {
                         /// PG 카드 결제 요청 입니다.
                     case .pg_type,.zeropay_type,.auth_type:
-                        /// 상단 타이틀 디스플레이 여부 입니다.
-                        let title           = NC.S(info["title"] as? String)
-                        /// 상단 타이틀 디스플레이 여부 입니다. ( 0 : 타이틀 바 히든, 1 : 뒤로가기 버튼, 2 : 종료 버튼 )
-                        let button          = NC.S( info["button"] as? String )
-                        /// 현 페이지 종료 여부를 받습니다.
-                        let ingPageClose    = NC.B( info["ingPageClose"] as? Bool )
-                        /// PG 결제에서 사용할 콜백 메서드 입니다.
-                        let pg_Callback     = callBacks[0] as! String
                         let linkUrl         = AlamofireAgent.domainUrl + url
                         /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title, titleBarHidden: button == "0" ? true : false, pageURL: linkUrl) { cbType in
-                            
-                            switch cbType {
-                            case .pageClose :
-                                break
-                            case .loginCall :
-                                self.setLoginDisplay()
-                            case .scriptCall( let callback , let message, _ ) :
-                                self.setEvaluateJavaScript(callback: callback == "" ? pg_Callback : callback, message: message, isJson: true)
-                            default:break
-                            }
+                        let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title,titleBarType: titleBarType, pageURL: linkUrl) { cbType in
+                            /// 앱웹으로 콜백을 요청 합니다.
+                            self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                         }
                         
                         /// 전체 화면 모드 입니다.
@@ -689,16 +682,9 @@ class WebMessagCallBackHandler : NSObject  {
                         /// 약관동의 페이지 요청 입니다.
                     case .db_type:
                         /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController = FullWebViewController.init( titleBarHidden: true, pageURL: AlamofireAgent.domainUrl +  url) { cbType in
-                            switch cbType {
-                            case .pageClose:
-                                return
-                            case .scriptCall( let collBackID, _, let controller ):
-                                controller.messageHandler!.setEvaluateJavaScript(callback: collBackID, message: params[1], isJson: true)
-                                return
-                            default:
-                                break
-                            }
+                        let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: AlamofireAgent.domainUrl +  url) { cbType in
+                            /// 앱웹으로 콜백을 요청 합니다.
+                            self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                         }
                         
                         if let controller = self.target
@@ -707,31 +693,47 @@ class WebMessagCallBackHandler : NSObject  {
                         }
                         return
                     case .outdside_type:
-                        /// 상단 타이틀 디스플레이 여부 입니다.
-                        let title           = NC.S(info["title"] as? String)
-                        /// 상단 타이틀 디스플레이 여부 입니다. ( 0 : 타이틀 바 히든, 1 : 뒤로가기 버튼, 2 : 종료 버튼 )
-                        let button          = NC.S( info["button"] as? String )
                         /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController  = FullWebViewController.init( title: title, titleBarType: Int( button )!, pageURL: url ) { cbType in
+                        let viewController  = FullWebViewController.init( title: title, titleBarType: titleBarType, pageURL: url ) { cbType in
+                            /// 앱웹으로 콜백을 요청 합니다.
+                            self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                         }
                         self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
                         return
                     default:
                         break
                     }
-                    
-                    /// 전체 화면 웹뷰를 오픈 합니다.
-                    let viewController  = FullWebViewController.init( pageURL: AlamofireAgent.domainUrl +  url) { cbType in
-                    }
-                    self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
-                    return
                 }
                 
                 /// 전체 화면 웹뷰를 오픈 합니다.
-                let viewController  = FullWebViewController.init( pageURL: AlamofireAgent.domainUrl +  url) { cbType in
+                let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: AlamofireAgent.domainUrl +  url) { cbType in
+                    /// 앱웹으로 콜백을 요청 합니다.
+                    self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                 }
                 self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
             }
+        }
+    }
+    
+    
+    /**
+     전체 화면 종료시 콜백 처리 입니다.
+     - Date : 2023.05.08
+     - Parameters:
+        - callHybridPopupCB : callHybridPopup 에서 받은 콜백 정보 입니다.
+        - webCBType : 웹뷰 종료시 타입 정보를 받습니다.
+     - Throws : False
+     - returns :False
+     */
+    func setFullWebCB( callHybridPopupCB : String = "", webCBType : FULL_WEB_CB ){
+        switch webCBType {
+            case .pageClose :
+                break
+            case .loginCall :
+                self.setLoginDisplay()
+            case .scriptCall( let callback , let message, _ ) :
+                self.setEvaluateJavaScript(callback: callback == "" ? callHybridPopupCB : callback, message: message, isJson: true)
+            default:break
         }
     }
     
@@ -785,6 +787,17 @@ class WebMessagCallBackHandler : NSObject  {
                         }
                     } catch { }
                 }
+                /// info 정보에 다른 형태의 데이터가 있을 경우 입니다.
+                else if info.count > 0
+                {
+                    do {
+                        /// 결제 정보를 문자 형태로 변환하여 리턴 합니다.
+                        if let message = try Utils.toJSONString(info)
+                        {
+                            object = message
+                        }
+                    } catch { }
+                }
                 /// 데이터가 없을경우 기본 정보를 설정 합니다.
                 else
                 {
@@ -798,7 +811,6 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }
         }
-        
         /// 페이지 종료처리 합니다.
         self.setTargetDismiss( param: NC.S(object) )
     }
@@ -912,7 +924,7 @@ class WebMessagCallBackHandler : NSObject  {
         let padType         = params[0] as? String
         /// 최대 입력 카운트를 받습니다.
         let maxNumber       = params[1] as? Int
-        let keypod = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType)) { cbType in
+        let _ = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
             switch cbType {
             case .progress( let message ) :
                 self.setEvaluateJavaScript(callback: callback[0], message: message)
@@ -924,8 +936,6 @@ class WebMessagCallBackHandler : NSObject  {
                 break
             }
         }
-        self.target!.view.addSubview(keypod)
-        self.target!.view.addConstraintsToFit(keypod)
     }
     
     

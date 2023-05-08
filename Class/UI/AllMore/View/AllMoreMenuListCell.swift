@@ -185,6 +185,7 @@ class AllMoreMenuListCell: UITableViewCell {
                 /// 인증 처리 팝업 입니다.
                 self.setZeroPayTermsViewDisplay()
             }
+             
         }
      
         if self.menuInfo!.title! == "제로페이 상품권"
@@ -312,11 +313,7 @@ extension AllMoreMenuListCell
             
             }
         }
-        
         return
-//        let viewController = OkPaymentViewController()
-//        viewController.modalPresentationStyle = .overFullScreen
-//        self.viewController.navigationController!.pushViewController(viewController, animated: true, animatedType: .up)
     }
     
     
@@ -383,7 +380,8 @@ extension AllMoreMenuListCell
      */
     func setPedometerTermsViewDisplay()
     {
-        let terms = [TERMS_INFO.init(title: "서비스 이용안내", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001"),TERMS_INFO.init(title: "개인정보 수집·이용 동의",url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S002")]
+        let terms = [TERMS_INFO.init(title: "서비스 이용안내", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001"),
+                     TERMS_INFO.init(title: "개인정보 수집·이용 동의",url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S002")]
         BottomTermsView().setDisplay( target: self.viewController, "도전! 만보GO 서비스를 이용하실려면\n이용약관에 동의해주세요",
                                      termsList: terms) { value in
             /// 동의/취소 여부를 받습니다.

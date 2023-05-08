@@ -227,7 +227,7 @@ class NetworkManager {
             >  PedometerResponse : 만보기 데이터를 받습니다.
      */
     static func requestPedometer( token : String = NetworkManager.getToken() ) -> AnyPublisher<PedometerResponse, ResponseError> {
-        let parameters: Parameters = ["token": token,"":""]
+        let parameters: Parameters = [ "token": token ]
         return AlamofireAgent.request(APIConstant.API_GET_PEDOMETER, parameters: parameters)
     }
     
@@ -246,7 +246,7 @@ class NetworkManager {
             >  PedometerRewardResponse : 만보기 리워드 데이터를 받습니다.
      */
     static func requestPedometerReward( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<PedometerRewardResponse, ResponseError> {
-        var parameters: Parameters = ["token": token,"":""]
+        var parameters: Parameters = [ "token": token ]
         for (key,value) in params
         {
             parameters.updateValue(value, forKey: key)
@@ -269,7 +269,7 @@ class NetworkManager {
             >  PedometerUpdateResponse : 만보기 업데이트 완료 여부를 받습니다.
      */
     static func requestPedometerUpdate( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<PedometerUpdateResponse, ResponseError> {
-        var parameters: Parameters = ["token": token,"":""]
+        var parameters: Parameters = [ "token": token ]
         for (key,value) in params
         {
             parameters.updateValue(value, forKey: key)

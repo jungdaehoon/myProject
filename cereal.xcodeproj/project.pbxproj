@@ -54,8 +54,6 @@
 		8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */; };
 		8D205F3129D1346F00F43C99 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9529D1346E00F43C99 /* TabBarView.swift */; };
 		8D205F3229D1346F00F43C99 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E9629D1346E00F43C99 /* TabBarView.xib */; };
-		8D205F3329D1346F00F43C99 /* TabbarCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9729D1346E00F43C99 /* TabbarCenterView.swift */; };
-		8D205F3429D1346F00F43C99 /* TabbarCenterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E9829D1346E00F43C99 /* TabbarCenterView.xib */; };
 		8D205F3529D1346F00F43C99 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9929D1346E00F43C99 /* TabbarViewController.swift */; };
 		8D205F3629D1346F00F43C99 /* AllMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9B29D1346E00F43C99 /* AllMoreViewController.swift */; };
 		8D205F3729D1346F00F43C99 /* AllMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E9D29D1346E00F43C99 /* AllMoreModel.swift */; };
@@ -291,8 +289,6 @@
 		8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarView.swift; sourceTree = "<group>"; };
 		8D205E9529D1346E00F43C99 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		8D205E9629D1346E00F43C99 /* TabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarView.xib; sourceTree = "<group>"; };
-		8D205E9729D1346E00F43C99 /* TabbarCenterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarCenterView.swift; sourceTree = "<group>"; };
-		8D205E9829D1346E00F43C99 /* TabbarCenterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbarCenterView.xib; sourceTree = "<group>"; };
 		8D205E9929D1346E00F43C99 /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		8D205E9B29D1346E00F43C99 /* AllMoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMoreViewController.swift; sourceTree = "<group>"; };
 		8D205E9D29D1346E00F43C99 /* AllMoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMoreModel.swift; sourceTree = "<group>"; };
@@ -713,8 +709,6 @@
 			children = (
 				8D205E8B29D1346E00F43C99 /* PermissionInfoView.swift */,
 				8D205E8829D1346E00F43C99 /* PermissionInfoView.xib */,
-				8D205E8A29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.swift */,
-				8D205E8C29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -732,11 +726,9 @@
 		8D205E9329D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */,
 				8D205E9529D1346E00F43C99 /* TabBarView.swift */,
 				8D205E9629D1346E00F43C99 /* TabBarView.xib */,
-				8D205E9729D1346E00F43C99 /* TabbarCenterView.swift */,
-				8D205E9829D1346E00F43C99 /* TabbarCenterView.xib */,
+				8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1158,6 +1150,8 @@
 			children = (
 				8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */,
 				8D9D924829F7B9F900F42B8D /* GuideInfoView.xib */,
+				8D205E8A29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.swift */,
+				8D205E8C29D1346E00F43C99 /* GuideInfoViewCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1438,7 +1432,6 @@
 				8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */,
 				8D205F1429D1346F00F43C99 /* Pretendard-Thin.otf in Resources */,
 				8D1C97FA2A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib in Resources */,
-				8D205F3429D1346F00F43C99 /* TabbarCenterView.xib in Resources */,
 				8D55D56929E660F6009C43BF /* GoogleService-Info.plist in Resources */,
 				8D205F2F29D1346F00F43C99 /* Main.storyboard in Resources */,
 				8D205F1E29D1346F00F43C99 /* NanumSquareRoundEB.ttf in Resources */,
@@ -1606,7 +1599,6 @@
 				8D205F2B29D1346F00F43C99 /* PermissionInfoView.swift in Sources */,
 				8D55D56629E648AC009C43BF /* SEED.mm in Sources */,
 				8D205F5829D1346F00F43C99 /* Array.swift in Sources */,
-				8D205F3329D1346F00F43C99 /* TabbarCenterView.swift in Sources */,
 				8D205F3129D1346F00F43C99 /* TabBarView.swift in Sources */,
 				8D205F7F29D1346F00F43C99 /* LogOutResponse.swift in Sources */,
 				8D205F4629D1346F00F43C99 /* HealthKitManager.swift in Sources */,

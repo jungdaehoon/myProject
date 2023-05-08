@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- 만보기 리워드 요청 입니다. ( J.D.H  VER : 1.0.0 )
+ 만보기 상세정보 요청 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.23
 */
 struct PedometerResponse: BaseResponse {

@@ -95,8 +95,9 @@ class OKZeroPayView: UIView {
     @IBOutlet weak var codeFullHeight       : NSLayoutConstraint!
     //// 코드 전체 화면 넓이 입니다.
     @IBOutlet weak var codeFullWidth        : NSLayoutConstraint!
-    
+    /// 결제 가능한 카드 리스트 뷰어의 상단 연결 위치 정보 입니다.
     @IBOutlet weak var payCardListTop       : NSLayoutConstraint!
+    /// 결제 가능한 카드 리스트 뷰어 입니다.
     @IBOutlet weak var payCardListView      : OKZeroPayCardListView!
     
     //MARK: - Init

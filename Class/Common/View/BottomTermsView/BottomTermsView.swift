@@ -181,9 +181,18 @@ extension BottomTermsView : UITableViewDelegate, UITableViewDataSource
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let termsinfo : TERMS_INFO  = self.termsList[indexPath.row]
-        let vc = BaseWebViewController()
-        self.target!.present(vc, animated: true, completion: {
-            vc.loadMainURL(termsinfo.url!)
+        /// 전체 화면 웹뷰를 오픈 합니다.
+        let viewController = FullWebViewController.init( titleBarType: 2, pageURL: termsinfo.url! ) { cbType in
+            switch cbType {
+            case .pageClose:
+                self.isHidden = false
+                return
+            default:
+                break
+            }
+        }
+        self.isHidden = true
+        self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up, completion: {
         })
     }
     

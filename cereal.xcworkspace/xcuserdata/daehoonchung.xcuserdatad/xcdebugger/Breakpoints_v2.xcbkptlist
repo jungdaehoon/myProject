@@ -7,17 +7,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "28409648-01AF-4CCA-9C2D-75FBD5BE0D1C"
+            uuid = "973910B9-4B02-48A1-A7FC-25EE321E3E67"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/Common/Utils.swift"
+            filePath = "Class/Web/View/SecureKeyPadView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "Slog(_:category:logType:)"
-            landmarkType = "9">
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "init?(coder:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96274118-977A-4CD3-BBD6-7E851553AEE1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Web/View/SecureKeyPadView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "keypadInputCompleted(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D8ABD20A-8588-48DF-945A-7B152BBF132F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Web/WebMessagCallBackHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "756"
+            endingLineNumber = "756"
+            landmarkName = "setConfirmPopup(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D8ABD20A-8588-48DF-945A-7B152BBF132F - b2e23a6c77bd70a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.setConfirmPopup(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Web/WebMessagCallBackHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "764"
+                  endingLineNumber = "764"
+                  offsetFromSymbolStart = "892">
+               </Location>
+               <Location
+                  uuid = "D8ABD20A-8588-48DF-945A-7B152BBF132F - b2e23a6c77bd70a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.setConfirmPopup(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Web/WebMessagCallBackHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "764"
+                  endingLineNumber = "764"
+                  offsetFromSymbolStart = "976">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

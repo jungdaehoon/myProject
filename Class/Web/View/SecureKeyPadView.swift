@@ -30,7 +30,9 @@ enum SecureKeyPadCBType {
 class SecureKeyPadView: UIView {
 
     /// 이벤트를 넘깁니다.
-    var completion                      : (( _ CBType : SecureKeyPadCBType ) -> Void )? = nil
+    var completion                  : (( _ CBType : SecureKeyPadCBType ) -> Void )? = nil
+    /// 연결할 타켓 뷰어 입니다.
+    var target                      : UIViewController?
     /// 보안 키페드 관련 입니다.
     var xkKeypadType                : XKeypadType?
     var xkKeypadViewType            : XKeypadViewType?
@@ -46,11 +48,13 @@ class SecureKeyPadView: UIView {
     
     
     //MARK: - Init
-    init( maxNumber : Int, padType : String, completion : (( _ CBType : SecureKeyPadCBType ) -> Void )? = nil  ) {
+    init( maxNumber : Int, padType : String, target : UIViewController, completion : (( _ CBType : SecureKeyPadCBType ) -> Void )? = nil  ) {
         super.init(frame: UIScreen.main.bounds)
         self.maxNumber  = maxNumber
         self.keyPadType = padType
+        self.target     = target
         self.completion = completion
+        self.initXKTextField()
     }
     
     
@@ -86,16 +90,17 @@ class SecureKeyPadView: UIView {
         xkPasswordTextField.xkeypadViewType = xkKeypadViewType!
         xkPasswordTextField.subTitle        = "비밀번호"
         xkPasswordTextField.e2eURL          = WebPageConstants.URL_KEYBOARD_E2E
-        self.addSubview(xkPasswordTextField)
+        self.target!.view.addSubview(xkPasswordTextField)
         self.setResignFirstResponder()
         Slog("xkKeypadType!:\(xkKeypadType!)")
         Slog("xkKeypadViewType!!:\(xkKeypadViewType!)")
         Slog("e2eURLString!!:\(WebPageConstants.URL_KEYBOARD_E2E)")
         Slog("xkPasswordTextField::\(xkPasswordTextField)")
-        /// 배경 터치 키패드 종료 이벤트 연결 입니다.
-        let gesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(self.tapGestureRecognized(_ :)))
-        self.addGestureRecognizer(gesture)
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+            /// 보안 키패드를 오픈 합니다.
+            self.xkKeyPadBecomeFirstResponder()
+        })
     }
      
     
@@ -107,8 +112,7 @@ class SecureKeyPadView: UIView {
      - returns :False
      */
     func xkKeyPadBecomeFirstResponder() {
-        self.endEditing(true)
-        self.isHidden = false
+        self.target!.view.endEditing(true)
         self.xkPasswordTextField.becomeFirstResponder()
     }
     
@@ -121,9 +125,8 @@ class SecureKeyPadView: UIView {
      - returns :False
      */
     func setResignFirstResponder() {
-        self.isHidden = true
         self.xkPasswordTextField.resignFirstResponder()
-        self.endEditing(true)
+        self.target!.view.endEditing(true)
     }
     
     
@@ -186,13 +189,6 @@ class SecureKeyPadView: UIView {
             self.completion!( .progress(message: "\(aCount)"))
         }
     }
-    
-
-    
-    // MARK: - GestureRecognizer
-    @objc func tapGestureRecognized(_ gestureRecognizer:UITapGestureRecognizer) {
-        self.setResignFirstResponder()
-    }
 }
 
 
@@ -206,9 +202,9 @@ extension SecureKeyPadView : XKTextFieldDelegate{
     
     func keypadE2EInputCompleted(_ aSessionID: String!, token aToken: String!, indexCount aCount: Int) {
         Slog("ABC keypadE2EInputCompleted aSessionID \(aSessionID) aToken \(aToken) aCount \(aCount)")
-        self.mainKeypadInputCompleted(aCount,finished: true,tuple: (aSessionID, aToken ) )
+        //self.mainKeypadInputCompleted(aCount,finished: true,tuple: (aSessionID, aToken ) )
         xkPasswordTextField.cancelKeypad()
-        self.endEditing(true)
+        self.target!.view.endEditing(true)
     }
     
     func keypadCanceled() {

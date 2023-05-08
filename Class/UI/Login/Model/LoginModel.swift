@@ -36,13 +36,13 @@ enum LOGIN_CODE : String {
 class LoginModel : BaseViewModel {
     
     /**
-     로그아웃 처리 합니다. ( J.D.H  VER : 1.0.0 )
+     로그인 처리 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.20
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<LogOutResponse?, ResponseError>
-            >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+        - AnyPublisher<LoginResponse?, ResponseError>
+            >  LoginResponse : 로그인 처리 결과를 받습니다.
      */
     func setLogin( _ id : String, xkPWField : XKTextField, inputPW : String ) ->  AnyPublisher<LoginResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]
