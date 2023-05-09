@@ -387,7 +387,7 @@ extension AllMoreMenuListCell
             /// 동의/취소 여부를 받습니다.
             if value == .success
             {
-                /// 약관동의 처리를 요청합니다.
+                /// 약관동의 요청합니다.
                 self.viewModel!.setPTTermAgreeCheck().sink { result in
                     
                 } receiveValue: { response in

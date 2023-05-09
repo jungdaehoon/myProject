@@ -34,6 +34,7 @@ class PedometerViewController: BaseViewController {
     
     @IBOutlet weak var ibViewMainStack: UIStackView!
     
+    @IBOutlet weak var ibBannerBtn: UIButton!
     //필요시 처리
     var mIsAuthorized: Bool = false
     var mPeometerCount: Int = 0
@@ -137,7 +138,7 @@ class PedometerViewController: BaseViewController {
                 /// 동의/취소 여부를 받습니다.
                 if value == .success
                 {
-                    /// 약관동의 처리를 요청합니다.
+                    /// 약관동의 요청합니다.
                     self.viewModel.setPTTermAgreeCheck().sink { result in
                         
                     } receiveValue: { response in
@@ -176,6 +177,15 @@ class PedometerViewController: BaseViewController {
             {
                 self.mIsAuthorized = true
                 HealthKitManager.getTodaysSteps {   (steps) in
+                    DispatchQueue.main.async {
+                        self.mPeometerCount = Int(steps)
+                        //                        self.__setLayout()
+                        self.getWeekPedoMeter(callback: self.sendData)
+                        self.updateTime()
+                        //추후 보상들어가면 삭제
+                        self.getData()
+                    }
+                    /*
                     if steps == 0 {
                         DispatchQueue.main.async {
                             self.mIsAuthorized = false
@@ -194,7 +204,7 @@ class PedometerViewController: BaseViewController {
                             self.getData()
                         }
                     }
-                    
+                    */
                 }
             }
             else
@@ -441,6 +451,19 @@ class PedometerViewController: BaseViewController {
             self.changeButtonColor(button: self.ibBtnReward, selected: false)
         }
         
+        /// 만보고 데이터를 확인 합니다.
+        if let response = self.viewModel.pedometerResponse,
+           let data = response._data,
+           data._ban_img!.isValid
+        {
+            /// 서버에서 받은 베너 URL 정보를 확인 합니다.
+            UIImageView.loadImage(from: URL(string: data._ban_img!)!).sink { image in
+                if let profileImage = image {
+                    self.ibBannerBtn.setBackgroundImage(profileImage, for: .normal)
+                }
+            }.store(in: &self.viewModel.cancellableSet)
+        }
+        
         
         
     }
@@ -675,7 +698,13 @@ class PedometerViewController: BaseViewController {
         self.mStpesInfo.append(data)
         
         self.sendWeekData(data: self.mStpesInfo)
-        self.view.setDisplayWebView(WebPageConstants.URL_PEDO_RANK, modalPresent: true, titleBarType: 2)
+        /// 만보고에 받은 정보를 확인 합니다.
+        if let response = self.viewModel.pedometerResponse,
+           let data = response._data
+        {
+            /// 배너 페이지로 이동합니다.
+            self.view.setDisplayWebView(WebPageConstants.baseURL + data._ban_url!, modalPresent: true, titleBarType: 2)
+        }
     }
     /*
      // MARK: - Navigation

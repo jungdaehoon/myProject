@@ -242,8 +242,8 @@ class GuideInfoView: UIView {
     // MARK: - 화면 디스플레이 영역 입니다.
     override func draw(_ rect: CGRect) {
         Slog("rect : \(rect)")
-        self.bottomTopColor.setGradientDownTop(color1: UIColor(hex: 0x000000,alpha: 0.0), color2: UIColor(hex: 0x000000,alpha: 0.2))
-        self.cardBgColor.setGradientDownTop(color1: UIColor(hex: 0xFD9200,alpha: 1.0), color2: UIColor(hex: 0xFF5000,alpha: 0.5))
+        self.bottomTopColor.setGradientDownTop(starColor: UIColor(hex: 0x000000,alpha: 0.0), endColor: UIColor(hex: 0x000000,alpha: 0.2))
+        self.cardBgColor.setGradientDownTop(starColor: UIColor(hex: 0xFD9200,alpha: 1.0), endColor: UIColor(hex: 0xFF5000,alpha: 0.5))
         self.setLottieView()
         self.collectionView.reloadData()
     }

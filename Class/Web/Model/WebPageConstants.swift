@@ -50,8 +50,6 @@ class WebPageConstants {
     static let URL_MY_RELATIONSHIP              = baseURL + "/myp/mypRelationship.do"
     /// 닉네임 화면 입니다.
     static let URL_CHANGE_NICKNAME              = baseURL + "/all/changeNickname.do"
-    /// 만보기 랭킹 페이지 입니다.
-    static let URL_PEDO_RANK                    = baseURL + "/myp/mypPedometer.do"
     /// 만보기 서비스 이용안내/개인 정보제공 동의 페이지 입니다. ( ?terms_cd=S001 / ?terms_cd=S002 )
     static let URL_PEDO_TERMS                   = baseURL + "/popup/pedometerTermsView.do"
     /// 재로페이 상품권으로 결제 인증 요청 입니다.

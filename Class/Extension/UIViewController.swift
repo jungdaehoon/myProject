@@ -8,23 +8,6 @@
 import UIKit
 
 extension UIViewController {
-    
-    func finish(_ animated: Bool) {
-        guard let presentingViewController = presentingViewController else {
-            navigationController?.popViewController(animated: animated)
-            return
-        }
-        presentingViewController.dismiss(animated: animated)
-    }
-    
-    func finish(_ animated: Bool, _ completion: @escaping () -> Void) {
-        guard let presentingViewController = presentingViewController else {
-            navigationController?.popViewController(animated: animated)
-            return
-        }
-        presentingViewController.dismiss(animated: animated, completion: completion)
-    }
-    
     func isVisible() -> Bool {
         return self.isViewLoaded && self.view.window != nil
     }

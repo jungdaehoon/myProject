@@ -85,28 +85,21 @@
 		8D205F5529D1346F00F43C99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC429D1346E00F43C99 /* LoginViewController.swift */; };
 		8D205F5629D1346F00F43C99 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC629D1346E00F43C99 /* Date.swift */; };
 		8D205F5729D1346F00F43C99 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC729D1346E00F43C99 /* UIView.swift */; };
-		8D205F5829D1346F00F43C99 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC829D1346E00F43C99 /* Array.swift */; };
-		8D205F5929D1346F00F43C99 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC929D1346E00F43C99 /* NSLayoutConstraint.swift */; };
 		8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ECA29D1346E00F43C99 /* UIColor.swift */; };
 		8D205F5B29D1346F00F43C99 /* WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ECB29D1346E00F43C99 /* WKWebView.swift */; };
 		8D205F5C29D1346F00F43C99 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ECC29D1346E00F43C99 /* NSObject.swift */; };
 		8D205F5E29D1346F00F43C99 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ECE29D1346E00F43C99 /* Encodable.swift */; };
 		8D205F5F29D1346F00F43C99 /* DataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ECF29D1346E00F43C99 /* DataResponse.swift */; };
-		8D205F6029D1346F00F43C99 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED029D1346E00F43C99 /* NSMutableAttributedString.swift */; };
 		8D205F6129D1346F00F43C99 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED129D1346E00F43C99 /* Int.swift */; };
-		8D205F6229D1346F00F43C99 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED229D1346E00F43C99 /* UITextField.swift */; };
 		8D205F6329D1346F00F43C99 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED329D1346E00F43C99 /* URL.swift */; };
 		8D205F6429D1346F00F43C99 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED429D1346E00F43C99 /* String.swift */; };
 		8D205F6529D1346F00F43C99 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED529D1346E00F43C99 /* UIButton.swift */; };
 		8D205F6629D1346F00F43C99 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED629D1346E00F43C99 /* UIViewController.swift */; };
 		8D205F6729D1346F00F43C99 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED729D1346E00F43C99 /* UIImageView.swift */; };
 		8D205F6829D1346F00F43C99 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED829D1346E00F43C99 /* Double.swift */; };
-		8D205F6929D1346F00F43C99 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205ED929D1346E00F43C99 /* UIFont.swift */; };
 		8D205F6A29D1346F00F43C99 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EDA29D1346E00F43C99 /* UIApplication.swift */; };
-		8D205F6B29D1346F00F43C99 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EDB29D1346E00F43C99 /* UIControl.swift */; };
 		8D205F6C29D1346F00F43C99 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EDC29D1346E00F43C99 /* UINavigationController.swift */; };
 		8D205F6D29D1346F00F43C99 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EDD29D1346E00F43C99 /* Float.swift */; };
-		8D205F6E29D1346F00F43C99 /* UITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EDE29D1346E00F43C99 /* UITapGestureRecognizer.swift */; };
 		8D205F6F29D1346F00F43C99 /* WebPageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EE029D1346E00F43C99 /* WebPageConstants.swift */; };
 		8D205F7029D1346F00F43C99 /* WebMessagCallBackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EE129D1346E00F43C99 /* WebMessagCallBackHandler.swift */; };
 		8D205F7129D1346F00F43C99 /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EE329D1346E00F43C99 /* ResponseError.swift */; };
@@ -320,28 +313,21 @@
 		8D205EC429D1346E00F43C99 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D205EC629D1346E00F43C99 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		8D205EC729D1346E00F43C99 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		8D205EC829D1346E00F43C99 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		8D205EC929D1346E00F43C99 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		8D205ECA29D1346E00F43C99 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		8D205ECB29D1346E00F43C99 /* WKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebView.swift; sourceTree = "<group>"; };
 		8D205ECC29D1346E00F43C99 /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		8D205ECE29D1346E00F43C99 /* Encodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		8D205ECF29D1346E00F43C99 /* DataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataResponse.swift; sourceTree = "<group>"; };
-		8D205ED029D1346E00F43C99 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		8D205ED129D1346E00F43C99 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		8D205ED229D1346E00F43C99 /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		8D205ED329D1346E00F43C99 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		8D205ED429D1346E00F43C99 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8D205ED529D1346E00F43C99 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		8D205ED629D1346E00F43C99 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8D205ED729D1346E00F43C99 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		8D205ED829D1346E00F43C99 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		8D205ED929D1346E00F43C99 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		8D205EDA29D1346E00F43C99 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		8D205EDB29D1346E00F43C99 /* UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControl.swift; sourceTree = "<group>"; };
 		8D205EDC29D1346E00F43C99 /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		8D205EDD29D1346E00F43C99 /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
-		8D205EDE29D1346E00F43C99 /* UITapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizer.swift; sourceTree = "<group>"; };
 		8D205EE029D1346E00F43C99 /* WebPageConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageConstants.swift; sourceTree = "<group>"; };
 		8D205EE129D1346E00F43C99 /* WebMessagCallBackHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebMessagCallBackHandler.swift; sourceTree = "<group>"; };
 		8D205EE329D1346E00F43C99 /* ResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
@@ -853,29 +839,22 @@
 			children = (
 				8D205EC629D1346E00F43C99 /* Date.swift */,
 				8D205EC729D1346E00F43C99 /* UIView.swift */,
-				8D205EC829D1346E00F43C99 /* Array.swift */,
-				8D205EC929D1346E00F43C99 /* NSLayoutConstraint.swift */,
 				8D205ECA29D1346E00F43C99 /* UIColor.swift */,
 				8D205ECB29D1346E00F43C99 /* WKWebView.swift */,
 				8D205ECC29D1346E00F43C99 /* NSObject.swift */,
 				8D205ECE29D1346E00F43C99 /* Encodable.swift */,
 				8D205ECF29D1346E00F43C99 /* DataResponse.swift */,
-				8D205ED029D1346E00F43C99 /* NSMutableAttributedString.swift */,
 				8D205ED129D1346E00F43C99 /* Int.swift */,
-				8D205ED229D1346E00F43C99 /* UITextField.swift */,
 				8D205ED329D1346E00F43C99 /* URL.swift */,
 				8D205ED429D1346E00F43C99 /* String.swift */,
 				8D205ED529D1346E00F43C99 /* UIButton.swift */,
 				8D205ED629D1346E00F43C99 /* UIViewController.swift */,
 				8D205ED729D1346E00F43C99 /* UIImageView.swift */,
 				8D205ED829D1346E00F43C99 /* Double.swift */,
-				8D205ED929D1346E00F43C99 /* UIFont.swift */,
 				8D205EDA29D1346E00F43C99 /* UIApplication.swift */,
-				8D205EDB29D1346E00F43C99 /* UIControl.swift */,
 				8D205EDC29D1346E00F43C99 /* UINavigationController.swift */,
 				8DF117A029E7996300D7A095 /* NavigationControllerAnimated.swift */,
 				8D205EDD29D1346E00F43C99 /* Float.swift */,
-				8D205EDE29D1346E00F43C99 /* UITapGestureRecognizer.swift */,
 				8DAEFAF429F907850057215C /* UIImage.swift */,
 			);
 			path = Extension;
@@ -1575,7 +1554,6 @@
 				8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */,
 				8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */,
 				8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */,
-				8D205F6B29D1346F00F43C99 /* UIControl.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
 				8D205F8B29D1346F00F43C99 /* Utils.swift in Sources */,
@@ -1598,7 +1576,6 @@
 				8DE310582A00FE6700DF9653 /* BottomAccountModel.swift in Sources */,
 				8D205F2B29D1346F00F43C99 /* PermissionInfoView.swift in Sources */,
 				8D55D56629E648AC009C43BF /* SEED.mm in Sources */,
-				8D205F5829D1346F00F43C99 /* Array.swift in Sources */,
 				8D205F3129D1346F00F43C99 /* TabBarView.swift in Sources */,
 				8D205F7F29D1346F00F43C99 /* LogOutResponse.swift in Sources */,
 				8D205F4629D1346F00F43C99 /* HealthKitManager.swift in Sources */,
@@ -1610,7 +1587,6 @@
 				8D205F7229D1346F00F43C99 /* APIConstant.swift in Sources */,
 				8D205F2329D1346F00F43C99 /* HomeViewController.swift in Sources */,
 				8D205F6329D1346F00F43C99 /* URL.swift in Sources */,
-				8D205F6E29D1346F00F43C99 /* UITapGestureRecognizer.swift in Sources */,
 				8D205F6129D1346F00F43C99 /* Int.swift in Sources */,
 				8D205F5F29D1346F00F43C99 /* DataResponse.swift in Sources */,
 				8D205F2529D1346F00F43C99 /* IntroViewController.swift in Sources */,
@@ -1654,7 +1630,6 @@
 				8D205F5C29D1346F00F43C99 /* NSObject.swift in Sources */,
 				8D205F3E29D1346F00F43C99 /* TopUserInfoView.swift in Sources */,
 				8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */,
-				8D205F6029D1346F00F43C99 /* NSMutableAttributedString.swift in Sources */,
 				8DCB18A829F6641E000645D3 /* WalletHelper.swift in Sources */,
 				8DE3105B2A01010600DF9653 /* BottomAccountListTableViewCell.swift in Sources */,
 				8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */,
@@ -1668,21 +1643,18 @@
 				8D205F7C29D1346F00F43C99 /* PedometerRewardResponse.swift in Sources */,
 				8DE310532A00F88300DF9653 /* BottomAccountListView.swift in Sources */,
 				8DC72E6929D6A3420044F021 /* DatePickerViewController.swift in Sources */,
-				8D205F6229D1346F00F43C99 /* UITextField.swift in Sources */,
 				8D205F7529D1346F00F43C99 /* BaseResponse.swift in Sources */,
 				8D205F8329D1346F00F43C99 /* BaseViewModel.swift in Sources */,
 				8D205F3629D1346F00F43C99 /* AllMoreViewController.swift in Sources */,
 				8D205F7829D1346F00F43C99 /* PedometerTermsAgreeResponse.swift in Sources */,
 				8D205F5029D1346F00F43C99 /* OkPaymentViewController.swift in Sources */,
 				8D205F6429D1346F00F43C99 /* String.swift in Sources */,
-				8D205F6929D1346F00F43C99 /* UIFont.swift in Sources */,
 				8DAAF57D29ED1550000FE02E /* ServiceErrorPop.swift in Sources */,
 				8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */,
 				8D205F7629D1346F00F43C99 /* SelectAccountListResponse.swift in Sources */,
 				8D205F6D29D1346F00F43C99 /* Float.swift in Sources */,
 				8DAEFAF529F907850057215C /* UIImage.swift in Sources */,
 				8D205F6829D1346F00F43C99 /* Double.swift in Sources */,
-				8D205F5929D1346F00F43C99 /* NSLayoutConstraint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

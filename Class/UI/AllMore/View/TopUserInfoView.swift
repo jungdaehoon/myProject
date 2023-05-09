@@ -55,7 +55,8 @@ class TopUserInfoView: UIView {
             self.nickNameText.text  = "\(result._nickname!)"
             
             /// 프로필 이미지를 다운로드 합니다.
-            if let url = URL(string: result._user_img_url!)
+            if result._user_img_url!.isValid,
+               let url = URL(string: result._user_img_url!)
             {
                 UIImageView.loadImage(from: url).sink { image in
                     if let profileImage = image {
@@ -63,11 +64,7 @@ class TopUserInfoView: UIView {
                     }
                 }.store(in: &self.viewModel!.cancellableSet)
             }
-            
-             
         }
-        
-        
     }
     
     

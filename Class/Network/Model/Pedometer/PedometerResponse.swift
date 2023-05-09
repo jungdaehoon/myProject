@@ -50,6 +50,10 @@ struct pedometer_data : Codable {
     var _total_rcv_point    : Int? { get { return  NC.I(total_rcv_point) } }
     /// 리워여 여부 입니다.
     var _reward_yn          : String? { get { return  NC.S(reward_yn) } }
+    /// 배너 이미지 정보 입니다.
+    var _ban_img            : String? { get { return  NC.S(ban_img) } }
+    /// 배너 선택시 이동할 URL 입니다.
+    var _ban_url            : String? { get { return  NC.S(ban_url) } }
     
     
     /// 지금 포인트 입니다.
@@ -58,4 +62,9 @@ struct pedometer_data : Codable {
     var total_rcv_point     : Int?
     /// 리워여 여부 입니다.
     var reward_yn           : String?
+    /// 배너 이미지 정보 입니다.
+    var ban_img             : String?
+    /// 배너 선택시 이동할 URL 입니다.
+    var ban_url             : String?
+    
 }

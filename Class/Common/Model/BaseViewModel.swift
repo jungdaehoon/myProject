@@ -346,13 +346,13 @@ class BaseViewModel : NSObject {
     
     
     /**
-     만보기 약관 동의를 처리 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 약관 동의 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.09
      - Parameters:False
      - Throws : False
      - returns :
      - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
-     >  InsertPedometerTermsResponse : 약관동의 처리 여부를 받습니다.
+     >  InsertPedometerTermsResponse : 약관동의 요청 정상처리 여부를 받습니다.
      */
     func setPTTermAgreeCheck() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
@@ -624,7 +624,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     Deeplink URL 정보를 체크하여 이동 할  URL 정보를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
+     Deeplink URL 정보를 체크하여 이동 할 URL 정보를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.29
      - Throws : False
      - returns :

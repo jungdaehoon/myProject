@@ -68,7 +68,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
             } else {
                 self.webView!.configuration.preferences.javaScriptEnabled = true
             }
-            self.webView!.allowsBackForwardNavigationGestures       = false
+            self.webView!.allowsBackForwardNavigationGestures       = false            
             self.webView!.evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
                 if error == nil
                 {
@@ -180,7 +180,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         Slog("webView didStartProvisionalNavigation")
-        //LoadingView.default.show()
+        LoadingView.default.show()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

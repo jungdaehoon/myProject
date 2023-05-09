@@ -109,7 +109,7 @@ class OKZeroPayCardListView: UIView {
         let point                           = CGPoint(x: self.frame.size.width/2 - size.width/2, y: position_y)
         cardview.frame                      = CGRect(origin: point, size: size)
         cardview.cardBGColor.frame          = CGRect(origin: .zero, size: size)
-        cardview.cardBGColor.setGradientRightDownLeftTop(color1: colors.c1, color2: colors.c2)
+        cardview.cardBGColor.setGradientRightDownLeftTop( starColor: colors.c1, endColor: colors.c2 )
         return cardview
     }
 

@@ -732,6 +732,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ibBannerBtn" destination="0dd-LX-Qav" id="9wa-On-A44"/>
                         <outlet property="ibBtnReward" destination="xn3-cY-8Xc" id="4OX-zt-WSA"/>
                         <outlet property="ibContentView" destination="E9E-8D-gNY" id="WAk-Rw-DVI"/>
                         <outlet property="ibImageViewWalking" destination="hTW-Ku-Tu1" id="Eok-vA-zc9"/>
@@ -872,11 +873,6 @@
             <point key="canvasLocation" x="-593" y="904"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="iRn-Ys-HEu">
-            <size key="intrinsicContentSize" width="-1" height="83"/>
-        </designable>
-    </designables>
     <resources>
         <image name="allMore_Setting" width="40" height="40"/>
         <image name="header_close" width="40" height="40"/>

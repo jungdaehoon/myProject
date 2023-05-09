@@ -185,34 +185,38 @@ extension UIView {
     
     /**
      UIViewController 를 받아 네비 컨트롤로 효과로 페이지 이동 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.24
+     - Date : 2023.05.09
      - Parameters:
         - controller : 이동할 타켓 컨트롤 뷰어 입니다.
-        - animated : 페이지 이동 애니 효과 입니다.
+        - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
+        - animationType : 페이지 이동할 효과 정보를 받습니다.  ( default : .left )
+        - completion : 페이지 이동후 콜백 입니다.
      - returns : False
      */
-    func pushViewController( _ controller: UIViewController, animated: Bool )
+    func pushViewController( _ controller: UIViewController, animated: Bool = true, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {} )
     {
-        /// 타켓 뷰어를 페이지 이동 하빈다.
-        viewController.navigationController?.pushViewController(controller, animated: animated)
+        /// 타켓 뷰어를 페이지 이동 합니다.
+        self.viewController.navigationController?.pushViewController(controller, animated: animated, animatedType: animatedType!,completion: completion)
     }
     
 
     /**
      최 앞단 페이지로 이동 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.11
+     - Date : 2022.05.09
      - Parameters:
-        + animated : 효과 활성화 여부 값 입니다. (  true / false )
+        - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
+        - animationType : 페이지 이동할 효과 정보를 받습니다. ( default : .right )
+        - completion : 페이지 이동후 콜백 입니다.
      - returns : False
      */
-    func popToRootViewController( animated : Bool){
+    func popToRootViewController( animated : Bool = true, animatedType: AnimationType? = .right, completion: @escaping () -> Void = {} ){
         let rootController          = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController
         let childs                  = rootController!.children
         
         /// 탭 정보가 1 이상인경우 네비게이션 컨트롤 타입을 적용 합니다.
         if childs.count > 1
         {
-            self.viewController.navigationController?.popToRootViewController(animated: animated)
+            self.viewController.navigationController?.popToRootViewController(animated: animated, animatedType: animatedType, completion: completion)
         }
         /// 탭 정보가 2보다 작은 경우는 모달 타입으로 신규 루트 뷰어가 오픈된거로 체크 합니다.
         else
@@ -252,9 +256,17 @@ extension UIView {
     }
     
     
-    func setGradientDownTop(color1:UIColor,color2:UIColor){
+    /**
+     배경에 그라데이션 컬러를 하단에서 상단으로 추가 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2022.05.03
+     - Parameters:
+        - starColor : 시작 컬러 입니다.
+        - endColor : 종료 컬러 입니다.
+     - returns : False
+     */
+    func setGradientDownTop( starColor : UIColor , endColor : UIColor ){
         let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.colors     = [color1.cgColor,color2.cgColor]
+        gradient.colors     = [starColor.cgColor,endColor.cgColor]
         gradient.locations  = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 1.0, y: 1.0)
         gradient.endPoint   = CGPoint(x: 1.0, y: 0.0)
@@ -263,9 +275,17 @@ extension UIView {
     }
     
     
-    func setGradientRightDownLeftTop(color1:UIColor,color2:UIColor){
+    /**
+     배경에 그라데이션 컬러를 오른쪽 하단에서 왼쪽 상단으로 추가 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2022.05.03
+     - Parameters:
+        - starColor : 시작 컬러 입니다.
+        - endColor : 종료 컬러 입니다.
+     - returns : False
+     */
+    func setGradientRightDownLeftTop( starColor : UIColor , endColor : UIColor ){
         let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.colors     = [color1.cgColor,color2.cgColor]
+        gradient.colors     = [starColor.cgColor,endColor.cgColor]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint   = CGPoint(x: 1.0, y: 1.0)
         gradient.frame      = bounds

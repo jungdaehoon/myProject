@@ -11,6 +11,17 @@ extension WKWebView {
     
     private var httpCookieStore: WKHTTPCookieStore  { return WKWebsiteDataStore.default().httpCookieStore }
 
+    /**
+     기본 URL 연결 지원 메서드 입니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2022.05.09
+     - Parameters:
+        - url : 연결할 URL 정보 입니다.
+        - domainUrl : 기본 도메인 URL 정보 입니다.
+        - httpMethod : HTTP 연결 타입 입니다. ( default : GET )
+        - postData : HTTP 연결 타입이 POST 경우 데이터 입니다.
+        - headerFields : HTTP 연결시 Header 정보 입니다.
+     - returns : False
+     */
     func urlLoad( url : String,
                   domainUrl : String = AlamofireAgent.domainUrl,
                   httpMethod : String = "GET",

@@ -9,6 +9,7 @@ import Foundation
 
 extension URL {
     
+    /// URL 정보를 파라미터 Dic 정보로 변경 합니다.
     public var queryParameters: [String:String]? {
         guard
             let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
@@ -18,6 +19,7 @@ extension URL {
         }
     }
     
+    /// URL 정보를 디코딩하여 파라미터 Dic 정보로 변경 합니다.
     public var decodedQueryParameters: [String:String]? {
         let queryItems = URLComponents(string: self.absoluteString)?.queryItems
         let queryTuples: [(String, String)] = queryItems?.compactMap{

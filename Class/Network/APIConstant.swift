@@ -36,7 +36,7 @@ class APIConstant {
     static let API_UPDATE_PEDOMETER     = "/myp/updateDailyPedometer.do"
     /// 만보기 약관동의 여부 요청 입니다.
     static let API_PEDO_TERMS_CHECK     = "/popup/selectPedometerTerms.do"
-    /// 만보기 약관 동의 입니다.
+    /// 만보기 약관 동의 요청 입니다.
     static let API_PEDO_TERMS_AGREE     = "/popup/insertPedometerTerms.do"
     /// QRCode 인증 할 제로페이 스크립트를 요청 합니다.
     static let API_ZEROPAY_QRCODE       = "/api/v1/zeropay/qrcode.do"

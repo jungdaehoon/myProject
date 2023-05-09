@@ -55,7 +55,7 @@ class NetworkManager {
     
     
     /**
-     만보게 약관 동의 여부 요청 합니다..( J.D.H  VER : 1.0.0 )
+     만보게 약관 동의 여부 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - API ID:
      - API 명: 만보게 페이지 진입전 약관 동의 여부를 확인 합니다.
      - Date : 2023.03.09
@@ -74,16 +74,16 @@ class NetworkManager {
     
     
     /**
-     만보게 약관 동의 정보를 넘깁니다. ( J.D.H  VER : 1.0.0 )
+     만보게 약관 동의 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - API ID:
-     - API 명: 만보게 페이지 진입전 약관 동의를 처리 합니다.
+     - API 명: 만보기 약관동의 팝업에서 "동의" 선택으로 약관동의를 요청 합니다.
      - Date : 2023.03.15
      - Parameters:
         - token : token : 기본 토큰 정보 입니다.
      - Throws : False
      - returns :
         - AnyPublisher<InsertPedometerTermsResponse, ResponseError>
-            >  InsertPedometerTermsResponse : 만보게 약관동의 요청후 확인 정보를 받습니다.
+            >  InsertPedometerTermsResponse : 만보게 약관동의 요청 후 확인 정보를 받습니다.
      */
     static func requestInsertPedometerTerms( token : String = NetworkManager.getToken() ) -> AnyPublisher<InsertPedometerTermsResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
