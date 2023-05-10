@@ -21,8 +21,9 @@ class OKZeroPayCardListView: UIView {
     /// 전체 화면 활성화 버튼 입니다
     @IBOutlet weak var listEnabledBtn   : UIButton!
     /// 카드 뷰어를 저장 합니다.
-    var cardViews : [OKZeroPayCardView?] = []
-    
+    var cardViews                       : [OKZeroPayCardView?] = []
+    /// 카드 뷰어 상단 까지의 포지션 입니다.
+    var topPosition                     : CGFloat = 0.0
     
     
     //MARK: - Init
@@ -115,13 +116,16 @@ class OKZeroPayCardListView: UIView {
 
     
     /**
-     결제 카드 전체 화면 종료로 하단에 디스플레이 되도록 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.28
-     - Parameters:False
+     결제 카드 정보를 하단에 디스플레이 되도록 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.10
+     - Parameters:
+        - topPosition : 하단 디스플레이시 상단 까지의 포지션 입니다.
      - Throws : False
      - returns :False
      */
-    func setCardFullClose(){
+    func setCardBottom( topPosition : CGFloat = 0.0){
+        /// 최대 상단 포지션을 저장 합니다.
+        self.topPosition = topPosition
         for index in 0..<self.cardViews.count
         {
             let w = self.frame.size.width/2
@@ -132,7 +136,15 @@ class OKZeroPayCardListView: UIView {
                 let position_y  : CGFloat   = CGFloat(index) * 7.0
                 var frame                   = view.frame
                 frame.origin.x              = w - (width/2)
-                frame.origin.y              = position_y
+                if index == self.cardViews.count - 1
+                {
+                    frame.origin.y              = topPosition == 0.0 ?  position_y : position_y + topPosition - 40
+                }
+                else
+                {
+                    frame.origin.y              = position_y + topPosition
+                }
+                
                 frame.size.width            = width
                 view.frame                  = frame
             }
@@ -142,56 +154,155 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     결제 카드 전체 화면 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.28
-     - Parameters:False
+     결제 카드 정보를 하단에 순차적으로 디스플레이 되도록 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.10
+     - Parameters:
+        - index : 순차적으로 보여질 카드 인덱스 정보 입니다.
+        - completion : 이벤트 완료 처리를 리턴 합니다.
      - Throws : False
      - returns :False
      */
-    func setCardFullDisplay(){
-        /// 시작 인덱스 정보를 가집니다.
-        var startIndex = 0
+    func setCardFullAniClose( index : Int = 0, completion : (( _ success : Bool ) -> Void)? = nil )
+    {
+        DispatchQueue.global(qos: .userInteractive).async {
+            var cardView : UIView?
+            /// 디스플레이할 카드 인덱스 정보를 가져 옵니다.
+            var viewIndex = index
+            while(true)
+            {
+                Thread.sleep(forTimeInterval: 0.001)
+                print("viewIndex : \(viewIndex)")
+                /// 카드뷰어를 가져 옵니다.
+                if let view = self.cardViews[viewIndex] { cardView = view }
+                break
+            }
+            
+            DispatchQueue.main.async {
+                /// 카드뷰어가 있을경우 위치르 변경 합니다.
+                if let view = cardView
+                {
+                    UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseIn) {
+                        let mainw       : CGFloat   = self.frame.size.width/2
+                        let width       : CGFloat   = ( self.frame.size.width - 40.0 ) - ( CGFloat((self.cardViews.count - viewIndex)) * 20.0)
+                        let position_y  : CGFloat   = CGFloat(viewIndex) * 7.0
+                        var frame                   = view.frame
+                        frame.origin.x              = mainw - (width/2)
+                        frame.origin.y              = position_y + self.topPosition
+                        frame.size.width            = width
+                        view.frame                  = frame
+                        /// 디스플레이할 카드 인덱스 정보를 변경 합니다.
+                        viewIndex                   += 1
+                        /// 최대 인덱스 정보를 체크 합니다.
+                        if viewIndex == self.cardViews.count - 1
+                        {
+                            /// 마지막 카드뷰어를 추가 이동 합니다.
+                            if let view = self.cardViews[viewIndex]
+                            {
+                                let mainw       : CGFloat   = self.frame.size.width/2
+                                let width       : CGFloat   = ( self.frame.size.width - 40.0 ) - ( CGFloat((self.cardViews.count - viewIndex)) * 20.0)
+                                let position_y  : CGFloat   = CGFloat(viewIndex) * 7.0
+                                var frame                   = view.frame
+                                frame.origin.x              = mainw - (width/2)
+                                frame.origin.y              = position_y + 50
+                                frame.size.width            = width
+                                view.frame                  = frame
+                            }
+                        }
+                    } completion: { _ in
+                        if viewIndex < self.cardViews.count
+                        {
+                            /// 최대 인덱스 카드정보인 경우 입니다.
+                            if viewIndex == self.cardViews.count - 1
+                            {
+                                self.setCardFullAniClose(index: viewIndex, completion: completion)
+                                completion!(true)                                
+                            }
+                            else
+                            {
+                                self.setCardFullAniClose(index: viewIndex, completion: completion)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    /**
+     결제 카드 전체 화면에 순차적으로 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.10
+     - Parameters:
+        - index : 순차적으로 디스플레이할 카드 인덱스 정보 입니다.
+        - update_y : 순차적으로 디스플레이 할 위치 Y 좌표 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func setCardFullDisplay( index : Int = -1, update_y : CGFloat = 0.0){
         /// 카드간의 간격 정보 입니다.
         let interval   = 12.0
         /// 카드 기본 위치 정보 입니다.
-        var position_y = interval
+        var position_y = interval + update_y
         /// 카드 기본 넓이 입니다.
-        var cardWidth  = 350.0
+        let cardWidth  = self.frame.size.width - 40.0
         /// 카드 기본 높이 입니다.
-        var cardHeight = 208.0
-        /// 저장된 카드리스트에 뒤에서 부터 0번째 순으로 디스플레이 하도록 합니다.
-        for viewIndex in (0..<self.cardViews.count).reversed()
-        {
-            /// 0번째 위치는 정상 디스플레이로 하단 있을때 그대로 디스플레이 합니다.
-            if startIndex == 0 {
-                position_y += cardHeight + interval
-                /// 카드의 기본 사이즈를 가져 옵니다.
-                if let view = self.cardViews[viewIndex]
-                {
-                    cardWidth  = view.frame.size.width
-                    cardHeight = view.frame.size.height
-                }
-                startIndex += 1
-                continue
-            }
-            /// 카드 리스트 뷰어의 전체 넓이 입니다.
-            let mainw = self.frame.size.width/2
-            /// 각 카드뷰어를 가져 옵니다.
-            if let view = self.cardViews[viewIndex]
+        let cardHeight = 208.0
+        DispatchQueue.global(qos: .userInteractive).async {
+            /// 디스플레이할 카드 인덱스 정보를 가져 옵니다.
+            var viewIndex = index == -1 ? self.cardViews.count - 1 : index
+            /// 디스플레이할 카드 입니다.
+            var cardView : UIView?
+            while(true)
             {
-                var frame           = view.frame
-                frame.origin.x      = mainw - (cardWidth/2)
-                frame.origin.y      = position_y
-                frame.size.width    = cardWidth
-                frame.size.height   = cardHeight
-                view.frame          = frame
+                Thread.sleep(forTimeInterval: 0.001)
+                print("viewIndex : \(viewIndex)")
+                /// 카드뷰어를 가져 옵니다.
+                if let view = self.cardViews[viewIndex] { cardView = view }
+                break
             }
-            /// 카드뷰어의 위치값을 추가 합니다.
-            position_y += cardHeight + interval
+            
+            DispatchQueue.main.async {
+                /// 카드뷰어가 있을경우 위치르 변경 합니다.
+                if let view = cardView
+                {
+                    UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseOut) {
+                        let mainw           = self.frame.size.width/2
+                        var frame           = view.frame
+                        frame.origin.x      = mainw - (cardWidth/2)
+                        frame.origin.y      = position_y
+                        frame.size.width    = cardWidth
+                        frame.size.height   = cardHeight
+                        view.frame          = frame
+                        position_y          += cardHeight
+                        /// 디스플레이할 카드 인덱스 정보를 변경 합니다.
+                        viewIndex -= 1
+                        /// 최소 인덱스 정보를 체크 합니다.
+                        if viewIndex >= 0
+                        {
+                            /// 마지막 카드뷰어를 추가 이동 합니다.
+                            if let nextView = self.cardViews[viewIndex]
+                            {
+                                /// 카드 리스트 뷰어의 전체 넓이 입니다.
+                                let mainw           = self.frame.size.width/2
+                                var frame           = nextView.frame
+                                frame.origin.x      = mainw - (cardWidth/2)
+                                frame.origin.y      -= 100
+                                frame.size.width    = cardWidth
+                                frame.size.height   = cardHeight
+                                nextView.frame      = frame
+                            }
+                        }
+                    } completion: { _ in
+                        if viewIndex > -1
+                        {
+                            /// 남은 카드 정보를 추가 디스플레이 합니다.
+                            self.setCardFullDisplay(index: viewIndex, update_y: position_y)
+                        }
+                    }
+                }
+            }
         }
-        self.scrollView.layoutSubviews()
     }
-    
     
     
     //MARK: - 버튼 액션 입니다.

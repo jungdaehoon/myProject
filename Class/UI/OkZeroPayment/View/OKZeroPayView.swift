@@ -136,7 +136,13 @@ class OKZeroPayView: UIView {
 
         /// 스캔한 결제 코드 정보를 받습니다.
         self.viewModel.$qrCodeValue.sink { value in
-            if value == .start { return }
+            switch value
+            {
+            case .qr_success(let qrcode):
+                Slog("qrcode : \(qrcode!)")
+                break
+            default:break
+            }
         }.store(in: &self.viewModel.cancellableSet)
                 
         /// 결제코드 활성화시 타임 정보를 받습니다.
@@ -583,24 +589,55 @@ class OKZeroPayView: UIView {
      */
     func setCardFullDisplay( display : Bool = true ){
         /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
-        self.isCardFullDisplay                       = display
+        self.isCardFullDisplay                          = display
         /// 전체화면 활성화 버튼을 온/오프 합니다.
-        self.payCardListView.listEnabledBtn.isHidden = display
-        self.payCardListTop.constant    = (self.payCardListView.frame.origin.y * -1) + 48
-        
-        
-        /// QR결제 위치로 선택 배경을 이동 합니다.
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
-            self.detaileViewTop.constant        = display == true ? 12.0 : 315.0
-            if display == false { self.payCardListView.setCardFullClose() }
-            else { self.payCardListView.setCardFullDisplay() }
-            
+        self.payCardListView.listEnabledBtn.isHidden    = display
+        /// 카드를 전체화면 디스플레이 합니다.
+        if display == true
+        {
+            let update_y                                = (self.payCardListView.frame.origin.y * -1) + 48
+            let deplay1                                 = self.detaileViewTop.constant
+            self.payCardListTop.constant                = update_y
+            /// QR결제 위치로 선택 배경을 이동 합니다.
+            UIView.animate(withDuration: 0.20, delay: 0.0, options: .curveEaseIn) {
+                self.detaileViewTop.constant        = display == true ? 12.0 : 315.0
+                print("self.detaileViewTop.constant : \(self.detaileViewTop.constant)")
+                if display == false { self.payCardListView.setCardBottom() }
+                if display == true { self.payCardListView.setCardBottom( topPosition : (update_y * -1) + deplay1) }
+                self.layoutIfNeeded()
+            } completion: { _ in
+                if display == true { self.payCardListView.setCardFullDisplay() }
+            }
+        }
+        /// 카드를 하단에 디스플레이 합니다.
+        else
+        {
+            /// 하단에 순차적으로 디스플레이 합니다.
+            self.payCardListView.setCardFullAniClose(index: 0) { [self] success in
+                self.perform(#selector(setCardFullAniDelayClose), with: nil, afterDelay: 0.05)
+            }
+        }
+    }
+    
+    
+    /**
+     하단 순차적으로 디스플레이후 최종 배경 위치 값을 초기화 합니다.
+     - Date : 2023.04.27
+     - Parameters:False
+     - Throws : False
+     - returns :False
+     */
+    @objc func setCardFullAniDelayClose(){
+        UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseOut) {
+            self.payCardListTop.constant        = (self.payCardListView.frame.origin.y * -1) + 48
+            self.detaileViewTop.constant        = 315.0
+            self.payCardListView.setCardBottom()
             self.layoutIfNeeded()
         } completion: { _ in
             
         }
+        
     }
-    
     
     
     //MARK: - 버튼 액션 입니다.
@@ -646,7 +683,7 @@ class OKZeroPayView: UIView {
                     break
                 case .location_search:
                 /// 제로페이 가맹점 검색 URL 입니다.
-                var urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                 
                     /// 제로페이 가맹점 네이버 지도를 요청 합니다.
                 self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)

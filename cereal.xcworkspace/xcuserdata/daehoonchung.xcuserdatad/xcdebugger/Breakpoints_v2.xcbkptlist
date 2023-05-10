@@ -87,22 +87,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1D68572C-7FE2-4F20-A07C-17629ACC5D3E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/UI/AllMore/View/TopUserInfoView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "setDisplay(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "565CC6DA-D235-45F5-A243-328587F69873"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -146,6 +130,165 @@
                   offsetFromSymbolStart = "84">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C364404-7BC4-4095-A106-428FC0B8EEF1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "569"
+            endingLineNumber = "569"
+            landmarkName = "closeFullCardDisplay()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BA7DE888-A7C0-4206-BEF8-455B6846884E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "initZeroPayView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F1BBC6E6-2DA2-48E3-89CC-8BB5E9BBBB90"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/Pedometer/PedometerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "454"
+            endingLineNumber = "454"
+            landmarkName = "__setLayout()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F1BBC6E6-2DA2-48E3-89CC-8BB5E9BBBB90 - f609d868892241b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.PedometerViewController.__setLayout() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Pedometer/PedometerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "455"
+                  endingLineNumber = "455"
+                  offsetFromSymbolStart = "3872">
+               </Location>
+               <Location
+                  uuid = "F1BBC6E6-2DA2-48E3-89CC-8BB5E9BBBB90 - f609d868892241b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.PedometerViewController.__setLayout() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Pedometer/PedometerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "455"
+                  endingLineNumber = "455"
+                  offsetFromSymbolStart = "3964">
+               </Location>
+               <Location
+                  uuid = "F1BBC6E6-2DA2-48E3-89CC-8BB5E9BBBB90 - f609d868892241b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.PedometerViewController.__setLayout() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Pedometer/PedometerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "455"
+                  endingLineNumber = "455"
+                  offsetFromSymbolStart = "4920">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "27CEE523-75CF-45D0-BA74-EA04F6CAF582"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/Pedometer/PedometerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
+            landmarkName = "__setLayout()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "27CEE523-75CF-45D0-BA74-EA04F6CAF582 - c81029b7c143363d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in cereal.PedometerViewController.__setLayout() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Pedometer/PedometerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "461"
+                  endingLineNumber = "461"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "27CEE523-75CF-45D0-BA74-EA04F6CAF582 - c81029b7c143363d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in cereal.PedometerViewController.__setLayout() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Pedometer/PedometerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "461"
+                  endingLineNumber = "461"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B389ADE-064C-455D-A337-8F93911048F1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/OkZeroPayment/View/OKZeroPayCardListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "setCardFullAniClose(index:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
