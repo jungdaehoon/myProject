@@ -177,15 +177,6 @@ class PedometerViewController: BaseViewController {
             {
                 self.mIsAuthorized = true
                 HealthKitManager.getTodaysSteps {   (steps) in
-                    DispatchQueue.main.async {
-                        self.mPeometerCount = Int(steps)
-                        //                        self.__setLayout()
-                        self.getWeekPedoMeter(callback: self.sendData)
-                        self.updateTime()
-                        //추후 보상들어가면 삭제
-                        self.getData()
-                    }
-                    /*
                     if steps == 0 {
                         DispatchQueue.main.async {
                             self.mIsAuthorized = false
@@ -204,7 +195,6 @@ class PedometerViewController: BaseViewController {
                             self.getData()
                         }
                     }
-                    */
                 }
             }
             else
@@ -457,7 +447,7 @@ class PedometerViewController: BaseViewController {
            data._ban_img!.isValid
         {
             /// 서버에서 받은 베너 URL 정보를 확인 합니다.
-            UIImageView.loadImage(from: URL(string: data._ban_img!)!).sink { image in
+            UIImageView.loadImage(from: URL(string: WebPageConstants.baseURL + data._ban_img!)!).sink { image in
                 if let profileImage = image {
                     self.ibBannerBtn.setBackgroundImage(profileImage, for: .normal)
                 }

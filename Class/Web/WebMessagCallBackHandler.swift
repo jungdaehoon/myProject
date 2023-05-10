@@ -539,7 +539,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     전체 화면 웹뷰를 디스플레이 합니다.
+     날짜 선택 피커뷰를 디스플레이 합니다.
      - Date : 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -848,7 +848,7 @@ class WebMessagCallBackHandler : NSObject  {
         {
             /// 로그인 페이지 요청 입니다.
             controller.completion!(.loginCall)
-            controller.navigationController?.popViewController(animated: true, completion: {
+            controller.navigationController?.popViewController(animated: true, completion: {                
             })
             return
         }
