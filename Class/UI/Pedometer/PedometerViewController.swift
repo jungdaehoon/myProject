@@ -183,6 +183,7 @@ class PedometerViewController: BaseViewController {
                             /// 만보기 서비스 이용활성화를 위해 설정으로 이동 안내 팝업 오픈 입니다.
                             CMAlertView().setAlertView(detailObject: "만보기 서비스이용을 위해  \n 건강앱에 들어가셔서 데이터 접근 권한을 허용해주세요." as AnyObject, cancelText: "확인") { event in
                                 "x-apple-health://".openUrl()
+                                self.popController(animated: true,animatedType: .down)
                             }
                         }
                     } else {
@@ -570,9 +571,7 @@ class PedometerViewController: BaseViewController {
     }
     
     @IBAction func onTappedClose(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
-            
-        })
+        self.popController(animated: true,animatedType: .down)        
     }
     
     @IBAction func onTappedConfirm(_ sender: UIButton) {

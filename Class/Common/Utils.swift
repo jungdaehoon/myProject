@@ -368,7 +368,7 @@ class NC {
         - object : 체크할 Int 형 데이터 입니다.
      - returns :
         - Int Typre
-            > 체크된 데이터를 리턴 합니다. 비정상 데이터면 0 정보를 리턴 합니다.
+            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 0 정보를 리턴 합니다.
      */
     static func I( _ object : Int? ) -> Int {
         if object == nil
@@ -386,7 +386,7 @@ class NC {
         - object : 체크할 Double 형 데이터 입니다.
      - returns :
         - Double Typre
-            > 체크된 데이터를 리턴 합니다. 비정상 데이터면 0.0 정보를 리턴 합니다.
+            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 0.0 정보를 리턴 합니다.
      */
     static func D( _ object : Double? ) -> Double {
         if object == nil
@@ -404,7 +404,7 @@ class NC {
         - object : 체크할 String 형 데이터 입니다.
      - returns :
         - String Typre
-            > 체크된 데이터를 리턴 합니다. 비정상 데이터면 "" 정보를 리턴 합니다.
+            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 "" 정보를 리턴 합니다.
      */
     static func S( _ object : String? ) -> String
     {
@@ -424,7 +424,7 @@ class NC {
         - object : 체크할 Bool 형 데이터 입니다.
      - returns :
         - Bool Type
-            > 체크된 데이터를 리턴 합니다. 비정상 데이터면 false 정보를 리턴 합니다.
+            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 false 정보를 리턴 합니다.
      */
     static func B( _ object : Bool? ) -> Bool
     {

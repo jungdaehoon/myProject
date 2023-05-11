@@ -327,14 +327,15 @@ class LoginViewController: BaseViewController {
                                 let _ = self.viewModel.setFcmTokenRegister()
                                 /// 로그인 페이지를 종료 여부를 넘깁니다.
                                 if self.completion != nil { self.completion!(true) }
-                                /// 로그인 페이지를 종료 합니다.
-                                self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
+                                /// 현 페이지를 종료합니다.
+                                self.popController(animated: true,animatedType: .down) { firstViewController in
+                                    /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
                                     if let tabbar = TabBarView.tabbar
                                     {
                                         /// 페이지 종료 완료시 탭인덱스를 기본 메인 홈으로 이동 하며 웹 쿠키를 신규로 업데이트 합니다.
                                         tabbar.setSelectedIndex( .home, object: WebPageConstants.URL_MAIN, updateCookies: true)
                                     }
-                                })
+                                }
                             }
                         }.store(in: &self.viewModel.cancellableSet)
                         return

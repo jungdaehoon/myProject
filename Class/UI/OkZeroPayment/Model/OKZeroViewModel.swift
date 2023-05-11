@@ -84,7 +84,7 @@ class OKZeroViewModel : BaseViewModel
      - Throws : False
      - returns :
         - Future<CODE_ENABLED_TIME, Never>
-            >  CODE_ENABLED_TIME : 현 인식 가능 타임 정보를 리턴 합니다.
+            +  CODE_ENABLED_TIME : 현 인식 가능 타임 정보를 리턴 합니다.
      */
     func isTimeCodeEnabeld() -> CurrentValueSubject<CODE_ENABLED_TIME,Never>
     {
@@ -172,7 +172,7 @@ class OKZeroViewModel : BaseViewModel
      - Throws : False
      - returns :
         - Future<Bool, Never>
-            >  Bool : 세션 연결 여부를 받아 리턴 합니다.
+            +  Bool : 세션 연결 여부를 받아 리턴 합니다.
      */
     func isAVCaptureSession() -> Future<AVCaptureMetadataOutput?, Never>
     {
@@ -227,7 +227,7 @@ class OKZeroViewModel : BaseViewModel
      - Throws : False
      - returns :
         - AnyPublisher<ZeroPayQRCodeResponse?, ResponseError>
-            >  ZeroPayQRCodeResponse : QRCode 인증 할 제로페이 스크립트를 받습니다.
+            +  ZeroPayQRCodeResponse : QRCode 인증 할 제로페이 스크립트를 받습니다.
      */
     func getQRCodeZeroPay( params : [String : Any] = [:]) -> AnyPublisher<ZeroPayQRCodeResponse?, ResponseError>
     {

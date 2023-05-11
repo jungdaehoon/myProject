@@ -38,11 +38,14 @@ class LoginModel : BaseViewModel {
     /**
      로그인 처리 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.20
-     - Parameters:False
+     - Parameters:
+        - id : 아이디 정보를 받습니다.
+        - xkPWField : 보안 텍스트 필드 입니다.
+        - inputPW : 입력된 패스워드 입니다.
      - Throws : False
      - returns :
         - AnyPublisher<LoginResponse?, ResponseError>
-            >  LoginResponse : 로그인 처리 결과를 받습니다.
+            +  LoginResponse : 로그인 처리 결과를 받습니다.
      */
     func setLogin( _ id : String, xkPWField : XKTextField, inputPW : String ) ->  AnyPublisher<LoginResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]
@@ -95,7 +98,7 @@ class LoginModel : BaseViewModel {
      - Throws : False
      - returns :
         - AnyPublisher<Bool?, Never>
-            >  정상 저장 여부를 리턴 합니다.
+            +  정상 저장 여부를 리턴 합니다.
      */
     func setKeyChainCustItem( _ user_hp : String ) -> Future<Bool, Never> {
         return Future<Bool, Never> { promise in

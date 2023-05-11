@@ -89,7 +89,7 @@ class CMAlertView: UIView {
      - Throws : False
      - returns :
         - CMAlertView Type
-            > 버튼 이벤트를 추가할 알림뷰 자기 자신을 넘깁니다.
+            + 버튼 이벤트를 추가할 알림뷰 자기 자신을 넘깁니다.
      */
     func setAlertView( titleText : String = "", detailObject : AnyObject) -> CMAlertView?
     {

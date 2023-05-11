@@ -31,7 +31,7 @@ class PedometerModel : BaseViewModel
      - Throws : False
      - returns :
         - AnyPublisher<PedometerResponse?, ResponseError>
-            >  PedometerResponse : 만보기 정보를 받습니다.
+            +  PedometerResponse : 만보기 정보를 받습니다.
      */
     func getPedometer( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerResponse?, ResponseError>
     {
@@ -60,7 +60,7 @@ class PedometerModel : BaseViewModel
      - Throws : False
      - returns :
         - AnyPublisher<PedometerRewardResponse?, ResponseError>
-            >  PedometerRewardResponse : 만보기 리워드 정보 입니다.
+            +  PedometerRewardResponse : 만보기 리워드 정보 입니다.
      */
     func getPedometerReward( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerRewardResponse?, ResponseError>
     {
@@ -90,7 +90,7 @@ class PedometerModel : BaseViewModel
      - Throws : False
      - returns :
         - AnyPublisher<PedometerUpdateResponse?, ResponseError>
-            >  PedometerUpdateResponse : 업데이트 여부 입니다.
+            +  PedometerUpdateResponse : 업데이트 여부 입니다.
      */
     func setPedometerUpdate( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerUpdateResponse?, ResponseError>
     {

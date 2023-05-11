@@ -201,20 +201,21 @@ class FullWebViewController: BaseViewController {
             switch type
             {
                 case .page_back:
-                self.navigationController?.popViewController(animated: true, animatedType: .right, completion: {
+                    self.popController(animated: true, animatedType: .right) { firstViewController in
                         if self.completion != nil
                         {
                             self.completion!(.pageClose)
                         }
-                    })
+                    }
                     break
                 case .page_close:
-                    self.navigationController?.popViewController(animated: true, completion: {
+                    self.popController(animated: true, animatedType: .down) { firstViewController in
                         if self.completion != nil
                         {
                             self.completion!(.pageClose)
                         }
-                    })
+                    }
+                    
                     break
             }
         }
@@ -241,12 +242,12 @@ extension FullWebViewController {
         /// 중간 중단으로 메인 페이지 이동 URL 확인 경우 입니다. ( 추후 WebToApp 으로 변경예정 )
         if url.description.contains("matcs/main.do")
         {
-            self.navigationController?.popViewController(animated: true, completion: {
+            self.popController(animated: true, animatedType: .down) { firstViewController in
                 if self.completion != nil
                 {
-                    self.completion!( .pageClose )
+                    self.completion!(.pageClose)
                 }
-            })
+            }
             decisionHandler(.allow, preferences)
             return
         }
@@ -269,12 +270,12 @@ extension FullWebViewController {
                 return
             }
             
-            self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
+            self.popController(animated: true, animatedType: .down) { firstViewController in
                 if self.completion != nil
                 {
                     self.completion!( .urlLink(url: "myp/mypAccountList.do"))
                 }
-            })
+            }
             decisionHandler(.allow, preferences)
             return
         }
@@ -321,7 +322,8 @@ extension FullWebViewController {
                 /// 제로페이 진입후 제로페이에서 화면 종료 이벤트 발생 입니다.
                 if NC.S(event).contains("close")
                 {
-                    self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {})
+                    /// 현 페이지를 종료 합니다.
+                    self.popController(animated: true, animatedType: .down)
                     decisionHandler(.allow, preferences)
                     return
                 }
@@ -333,7 +335,7 @@ extension FullWebViewController {
                     self.viewModel.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params).sink { getUrl in
                         DispatchQueue.main.async {
                             /// 전체 웹뷰를 호출 합니다.
-                            let webview = FullWebViewController.init(pageType: .zeropay_type, titleBarType: self.titleBarType, pageURL: getUrl) { webCBType in
+                            let controller = FullWebViewController.init(pageType: .zeropay_type, titleBarType: self.titleBarType, pageURL: getUrl) { webCBType in
                                 switch webCBType
                                 {
                                 case .scriptCall(let collBackID, _, _):
@@ -344,8 +346,8 @@ extension FullWebViewController {
                                 default:break
                                 }
                             }
-                            webview.view.backgroundColor = .clear
-                            self.navigationController?.pushViewController(webview, animated: true, animatedType: .up)
+                            controller.view.backgroundColor = .clear
+                            self.pushController(controller, animated: true, animatedType: .up)
                         }
                     }.store(in: &self.baseViewModel.cancellableSet)
                     decisionHandler(.allow, preferences)
@@ -378,7 +380,7 @@ extension FullWebViewController {
                     /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
                     self.viewModel.getURLGetType(mainUrl: mainURL, params: params).sink { getUrl in
                         /// 전체 웹뷰를 호출 합니다.
-                        let webview =  FullWebViewController.init(pageType: .zeropay_type, pageURL: getUrl) { cbType in
+                        let controller =  FullWebViewController.init(pageType: .zeropay_type, pageURL: getUrl) { cbType in
                             switch cbType
                             {
                             case .scriptCall(let collBackID, _, _):
@@ -389,7 +391,7 @@ extension FullWebViewController {
                             default:break
                             }
                         }
-                        self.navigationController?.pushViewController(webview, animated: true, animatedType: .up)
+                        self.pushController(controller, animated: true, animatedType: .up)
                     }.store(in: &self.baseViewModel.cancellableSet)
                     decisionHandler(.allow, preferences)
                     return
@@ -405,8 +407,8 @@ extension FullWebViewController {
                     }
                     else
                     {
-                        self.navigationController?.popViewController(animated: true, animatedType: .down, completion: {
-                        })
+                        /// 현 페이지를 종료 합니다.
+                        self.popController(animated: true, animatedType: .down)
                     }
                     decisionHandler(.allow, preferences)
                     return

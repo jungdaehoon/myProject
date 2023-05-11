@@ -152,7 +152,7 @@ class WebMsgModel : BaseViewModel {
         - retStr : 리턴 할 데이터 정보 입니다.
      - returns :
         - Future<String, Never>
-            >  String : 리턴 할 데이터 정보 입니다.
+            +  String : 리턴 할 데이터 정보 입니다.
      */
     func getWalletJsonMsg( retStr: String? ) -> Future<String, Never>
     {
@@ -180,7 +180,7 @@ class WebMsgModel : BaseViewModel {
         - msg : 데이터가 없는 경우 메세지 정보 입니다.
      - returns :
         - Future<String, Never>
-            >  String : 리턴 할 데이터 정보 입니다.
+            +  String : 리턴 할 데이터 정보 입니다.
      */
     private func getWalletJsonString(_ isSuccess: Bool , data: String, msg: String) -> String {
         let resultStr   : String        = isSuccess ? "true" :  "false"

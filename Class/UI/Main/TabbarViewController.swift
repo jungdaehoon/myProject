@@ -218,7 +218,7 @@ class TabbarViewController: UITabBarController {
      */
     func setDisplayLogin( animation : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
         let viewController = LoginViewController.init( completion: completion )
-        self.navigationController!.pushViewController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)
+        self.pushController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)        
     }
     
     

@@ -27,7 +27,7 @@ class RemittanceModel : BaseViewModel{
      - Throws : False
      - returns :
         - AnyPublisher<SelectAccountListResponse?, ResponseError>
-            >  SelectAccountListResponse : 연결된 계좌 정보들을 받습니다.
+            +  SelectAccountListResponse : 연결된 계좌 정보들을 받습니다.
      */
     func getSelectAccountList() ->  AnyPublisher<SelectAccountListResponse?, ResponseError> {
         let subject             = PassthroughSubject<SelectAccountListResponse?,ResponseError>()
@@ -53,7 +53,7 @@ class RemittanceModel : BaseViewModel{
      - Throws : False
      - returns :
         - AnyPublisher<LogOutResponse?, ResponseError>
-            >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+            +  LogOutResponse : 로그아웃 처리 결과를 받습니다.
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()

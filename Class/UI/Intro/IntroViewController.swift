@@ -224,20 +224,21 @@ class IntroViewController: BaseViewController {
      */
     func setMainDisplay( loginEnabled : Bool = false ){
         let storyboard                          = UIStoryboard(name: "Main", bundle: nil)
-        let newController                       = storyboard.instantiateViewController(withIdentifier: "TabbarViewController") as! TabbarViewController
+        let tabController                       = storyboard.instantiateViewController(withIdentifier: "TabbarViewController") as! TabbarViewController
         /// 최초 진입을 홈으로 설정 합니다. ( 기본 설정은 0 번으로 진행 됩니다. )
-        newController.selectedIndex             = 2
+        tabController.selectedIndex             = 2
         if loginEnabled == true
         {
             /// 로그인 디스플레이로 기본 배경 뷰어를 디스플레이 합니다.
             BecomeActiveView().show()
-            newController.loginDisplayFirst      = true
+            tabController.loginDisplayFirst     = true
         }
         self.aniView!.stop()
-        self.navigationController!.replaceViewController(viewController: newController,animated: false) {
+        /// 현 페이지를 탭바 컨트롤로 변경 합니다.
+        self.replaceController(viewController: tabController, animated: false) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                newController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)
+                tabController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)
             })
         }
     }
@@ -250,7 +251,6 @@ extension IntroViewController : UINavigationControllerDelegate
 {
     /// UINavigationControllerDelegate push/pop 애니메이션 효과를 추가 합니다.
     public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        Slog("navigationController.operation: \(operation)")
         /// 페이지 종료시 입니다.
         if operation == .pop
         {

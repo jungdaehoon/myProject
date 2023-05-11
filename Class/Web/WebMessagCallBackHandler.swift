@@ -584,12 +584,10 @@ class WebMessagCallBackHandler : NSObject  {
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks = body[0] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
-        if let params = body[2] as? [Any]
-        {
+        if let params = body[2] as? [Any] {
             /// 연결할 URL 정보를 받습니다.
             let url         = params[0] as! String
-            if let info     = Utils.toJSON(params[1] as! String)
-            {
+            if let info     = Utils.toJSON(params[1] as! String) {
                 /// callHybridPopup 에서 다시 넘겨줄 콜백 정보를 저장합니다.
                 let callHPCB        = NC.S(callBacks[0] as? String)
                 /// 상단 타이틀 디스플레이 여부 입니다.
@@ -599,118 +597,64 @@ class WebMessagCallBackHandler : NSObject  {
                 /// 현 페이지 종료 여부를 받습니다.
                 let ingPageClose    = NC.B( info["ingPageClose"] as? Bool )
                 /// 페이지 타입을 받습니다.
-                if let type    = info["type"] as? String
-                {
+                if let type    = info["type"] as? String {
                     /// 페이지 타입을 설정 합니다.
                     let pageType = FULL_PAGE_TYPE(rawValue: type) ?? .default_type
                     switch pageType {
                         /// PG 카드 결제 요청 입니다.
                     case .pg_type,.zeropay_type,.auth_type:
-                        let linkUrl         = AlamofireAgent.domainUrl + url
-                        /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title,titleBarType: titleBarType, pageURL: linkUrl) { cbType in
-                            /// 앱웹으로 콜백을 요청 합니다.
-                            self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
-                        }
-                        
-                        /// 전체 화면 모드 입니다.
-                        if fullDisplay == true
-                        {
-                            /// 컨트롤러 연결 되었는지를 체크 합니다.
-                            if let controller = self.target
-                            {
-                                /// 네비게이션 타입인지를 체크 합니다.
-                                if let navigation = controller.navigationController
-                                {
-                                    /// 현 페이지 종료 여부를 체크 합니다.
-                                    if ingPageClose == true
-                                    {
-                                        navigation.replaceViewController(viewController: viewController, animated: true, animatedType: .up, completion:{})
-                                    }
-                                    else
-                                    {
-                                        navigation.pushViewController(viewController, animated: true, animatedType: .up)
-                                    }
-                                }
-                                else
-                                {
-                                    /// 현 페이지 종료 여부를 체크 합니다.
-                                    if ingPageClose == true
-                                    {
-                                        /// 현 페이지를 종료하고 신규 페이지를 추가 합니다.
-                                        if let pvc = controller.presentingViewController
-                                        {
-                                            controller.dismiss(animated: false) {
-                                                pvc.present(viewController, animated: false) {
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        controller.present(viewController,animated: true)
-                                    }
-                                    
-                                }
+                        /// 컨트롤러 연결 되었는지를 체크 합니다.
+                        if let controller = self.target {
+                            let linkUrl         = AlamofireAgent.domainUrl + url
+                            /// 전체 화면 웹뷰를 오픈 합니다.
+                            let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title,titleBarType: titleBarType, pageURL: linkUrl) { cbType in
+                                /// 앱웹으로 콜백을 요청 합니다.
+                                self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
-                        }
-                        /// 전체 화면 모드가 아는 경우 입니다.
-                        else
-                        {
-                            /// 컨트롤러 연결 여부를 체크 합니다.
-                            if let controller = self.target
+                            /// 현 페이지 종료 여부를 체크 합니다.
+                            if ingPageClose
                             {
-                                /// 현 페이지 종료 여부를 체크 합니다.
-                                if ingPageClose == true
-                                {
-                                    /// 현 페이지를 종료하고 신규 페이지를 추가 합니다.
-                                    if let pvc = controller.presentingViewController
-                                    {
-                                        controller.dismiss(animated: false) {
-                                            pvc.present(viewController, animated: false) {
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    controller.present(viewController,animated: true)
-                                }
+                                controller.replaceController(viewController: viewController,animated: false, animatedType: .up)
+                            }
+                            else
+                            {
+                                controller.pushController(viewController, animated: true, animatedType: .up)
                             }
                         }
                         return
                         /// 약관동의 페이지 요청 입니다.
                     case .db_type:
-                        /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: AlamofireAgent.domainUrl +  url) { cbType in
-                            /// 앱웹으로 콜백을 요청 합니다.
-                            self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
-                        }
-                        
-                        if let controller = self.target
-                        {
-                            controller.present(viewController,animated: true)
+                        if let controller = self.target {
+                            /// 전체 화면 웹뷰를 오픈 합니다.
+                            let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: AlamofireAgent.domainUrl +  url, returnParam: NC.S(params[1] as? String)) { cbType in
+                                /// 앱웹으로 콜백을 요청 합니다.
+                                self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                            }
+                            controller.pushController(viewController, animated: true, animatedType: .up)
                         }
                         return
                     case .outdside_type:
-                        /// 전체 화면 웹뷰를 오픈 합니다.
-                        let viewController  = FullWebViewController.init( title: title, titleBarType: titleBarType, pageURL: url ) { cbType in
-                            /// 앱웹으로 콜백을 요청 합니다.
-                            self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                        if let controller = self.target {
+                            /// 전체 화면 웹뷰를 오픈 합니다.
+                            let viewController  = FullWebViewController.init( title: title, titleBarType: titleBarType, pageURL: url ) { cbType in
+                                /// 앱웹으로 콜백을 요청 합니다.
+                                self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                            }
+                            controller.pushController(viewController, animated: true, animatedType: .up)
                         }
-                        self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
                         return
                     default:
                         break
                     }
                 }
-                
-                /// 전체 화면 웹뷰를 오픈 합니다.
-                let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: AlamofireAgent.domainUrl +  url) { cbType in
-                    /// 앱웹으로 콜백을 요청 합니다.
-                    self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                if let controller = self.target {
+                    /// 전체 화면 웹뷰를 오픈 합니다.
+                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: AlamofireAgent.domainUrl +  url) { cbType in
+                        /// 앱웹으로 콜백을 요청 합니다.
+                        self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                    }
+                    controller.pushController(viewController, animated: true, animatedType: .up)
                 }
-                self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
             }
         }
     }
@@ -819,7 +763,8 @@ class WebMessagCallBackHandler : NSObject  {
     /**
      이전에 웹 호출시에 받은 데이터를 다시 현 웹에게 전송합니다.
      - Date : 2023.03.28
-     - Parameters:False
+     - Parameters:
+        - body : 스크립트에서 받은 메세지 입니다.
      - Throws : False
      - returns :False
      */
@@ -827,10 +772,7 @@ class WebMessagCallBackHandler : NSObject  {
         let callback        = body[0] as! [Any?]
         if let controller = self.target as? FullWebViewController
         {
-            if let completion = controller.completion
-            {
-                completion(.scriptCall(collBackID: callback[0] as! String , message: "", controller: controller))
-            }
+            self.setEvaluateJavaScript(callback: NC.S(callback[0] as? String), message: controller.returnParam, isJson: true)
         }
     }
     
@@ -843,20 +785,18 @@ class WebMessagCallBackHandler : NSObject  {
      - returns :False
      */
     func setLoginDisplay(){
-        /// 현 페이지가 전체 웹뷰라면 이전 페이지가 로그인 페이지로 체크 하여 페이지를 종료 합니다. 웹뷰 타입 경우인지를 체크 합니다.
-        if let controller = self.target as? FullWebViewController
+        /// 연결된 viewController 가 있을 경우 입니다.
+        if let controller = self.target
         {
-            /// 로그인 페이지 요청 입니다.
-            controller.completion!(.loginCall)
-            controller.navigationController?.popViewController(animated: true, completion: {                
-            })
-            return
+            controller.popToRootController(animated: true) { firstViewController in
+                if let rootController = firstViewController
+                {
+                    /// 로그인 페이지를 디스플레이 합니다.
+                    let viewController = LoginViewController()
+                    rootController.pushController(viewController, animated: true, animatedType: .up)
+                }
+            }
         }
-        
-        /// 로그인 페이지를 디스플레이 합니다.
-        let viewController                      = LoginViewController()
-        viewController.modalPresentationStyle   = .overFullScreen
-        self.target!.navigationController?.pushViewController( viewController, animated: true, animatedType: .up)
     }
     
     
@@ -1101,23 +1041,17 @@ class WebMessagCallBackHandler : NSObject  {
         } receiveValue: { response in
             if response != nil
             {
-                /// 전체 웹뷰 타입 경우인지를 체크 합니다.
-                if let controller = self.target as? FullWebViewController
-                {
-                    controller.navigationController?.popViewController(animated: true, completion: {
-                        /// 로그인 페이지를 오픈 합니다.
-                        let viewController                      = LoginViewController()
-                        self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
-                    })
-                    return
-                }
-                
                 /// 연결된 타켓 정보가 있는지를 체크 합니다.
                 if let controller = self.target
                 {
-                    /// 로그인 페이지를 오픈 합니다.
-                    let viewController                      = LoginViewController()
-                    controller.navigationController?.pushViewController(viewController, animated: true, animatedType: .up)
+                    controller.popToRootController(animated: true) { firstViewController in
+                        if let rootController = firstViewController
+                        {
+                            /// 로그인 페이지를 디스플레이 합니다.
+                            let viewController = LoginViewController()
+                            rootController.pushController(viewController, animated: true, animatedType: .up)
+                        }
+                    }
                 }
             }
         }.store(in: &self.cancellableSet)
@@ -1502,10 +1436,13 @@ class WebMessagCallBackHandler : NSObject  {
                             SharedDefaults.default.pedometerTermsAgree = "Y"
                             /// 만보고 페이지로 이동 합니다.
                             DispatchQueue.main.async {
-                                let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
-                                let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
-                                vc?.modalPresentationStyle  = .overFullScreen
-                                self.target!.navigationController?.pushViewController(vc!, animated: true, animatedType: .up)
+                                if let controller = self.target
+                                {
+                                    let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
+                                    let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
+                                    vc?.modalPresentationStyle  = .overFullScreen
+                                    controller.pushController(vc!, animated: true, animatedType: .up)
+                                }
                             }
                         }
                     }
@@ -1549,10 +1486,13 @@ class WebMessagCallBackHandler : NSObject  {
                             /// 약관동의 여부를 "Y" 변경 합니다.
                             SharedDefaults.default.pedometerTermsAgree = "Y"
                             DispatchQueue.main.async {
-                                let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
-                                let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
-                                vc?.modalPresentationStyle  = .overFullScreen
-                                self.target!.navigationController?.pushViewController(vc!, animated: true, animatedType: .up)
+                                if let controller = self.target
+                                {
+                                    let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
+                                    let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
+                                    vc?.modalPresentationStyle  = .overFullScreen
+                                    controller.pushController(vc!, animated: true, animatedType: .up)
+                                }
                             }
                         }
                         /// 약관 동의 요청에 실패 하였습니다.
@@ -1637,35 +1577,15 @@ extension WebMessagCallBackHandler{
      */
     func setTargetDismiss( _ callback : String = "", param : String = "" ){
         /// 전체 웹뷰 타입 경우인지를 체크 합니다.
-        if let controller = self.target as? FullWebViewController
-        {
+        if let controller = self.target as? FullWebViewController {
             controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
-            /// 네비컨트롤러가 활성화 되는 컨트롤러인 경우 입니다.
-            if let navigation = controller.navigationController
-            {
-                navigation.popViewController(animated: true, animatedType: .down, completion: {
-                })
-            }
-            else
-            {
-                controller.dismiss(animated: true)
-            }
-            
+            controller.popController(animated: true, animatedType: .down)
+            return
         }
         
         /// 연결된 타켓 정보가 있는지를 체크 합니다.
-        if let controller = self.target
-        {
-            /// 네비컨트롤러가 활성화 되는 컨트롤러인 경우 입니다.
-            if let navigation = controller.navigationController
-            {
-                navigation.popViewController(animated: true, animatedType: .down, completion: {
-                })
-            }
-            else
-            {
-                controller.dismiss(animated: true)
-            }
+        if let controller = self.target {
+            controller.popController(animated: true, animatedType: .down)
         }
     }
 
@@ -1752,7 +1672,9 @@ extension WebMessagCallBackHandler : CNContactPickerDelegate {
             contactVC.delegate              = self
             contactVC.allowsEditing         = false
             contactVC.allowsActions         = false
-            self.target!.navigationController?.pushViewController(contactVC, animated: false, animatedType: .up)
+            if let controller = self.target {
+                controller.pushController(contactVC, animated: false, animatedType: .up)
+            }
         }
     }
 }
@@ -1771,9 +1693,7 @@ extension WebMessagCallBackHandler : CNContactViewControllerDelegate {
         let phoneString     = (property.value as! CNPhoneNumber).stringValue
         /// 웹에 전송할 연락처를 추가 합니다.
         self.contactInfo    = [contactName, phoneString]
-        viewController.navigationController?.popViewController(animated: true,animatedType: .down,completion: {
-            
-        })
+        viewController.popController(animated: true, animatedType: .down)
         return false
     }
 }

@@ -23,6 +23,117 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    
+    /**
+     컨트롤러를 받아 다음 페이지로 이동 합니다.
+     - Date : 2023.04.12
+     - Parameters:
+        - viewController : 이동할 페이지 입니다.
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func pushController( _ viewController: UIViewController, animated: Bool, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {})
+    {
+        if let navigation = self.navigationController {
+            navigation.pushViewController(viewController, animated: true, animatedType: animatedType,completion: completion)
+        }
+        else
+        {
+            self.present(viewController, animated: true,completion: completion)
+        }
+    }
+    
+    
+    /**
+     컨트롤로 현 페이지를 종료 합니다.
+     - Date : 2023.04.17
+     - Parameters:
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func popController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
+        if let navigation = self.navigationController {
+            navigation.popViewController(animated: animated, animatedType: .down) {
+                if let viewController = navigation.viewControllers.last
+                {
+                    if completion != nil { completion!(viewController) }
+                }
+            }
+        }
+        else
+        {
+            let viewController = self.presentingViewController
+            self.dismiss(animated: animated) {
+                if let contollelr = viewController
+                {
+                    if completion != nil { completion!(contollelr) }
+                }
+            }
+        }
+    }
+    
+    
+    /**
+     컨트롤로 0번 페이지로 이동합니다.
+     - Date : 2023.04.17
+     - Parameters:
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func popToRootController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
+        if let navigation = self.navigationController {
+            navigation.popToRootViewController(animated: animated, animatedType: .down) {
+                if let viewController = navigation.viewControllers.last
+                {
+                    if completion != nil { completion!(viewController) }
+                }
+            }
+        }
+        else
+        {
+            self.dismissToRoot(animated: true) { firstViewController in
+                if completion != nil { completion!(firstViewController) }
+            }
+        }
+    }
+    
+    
+    /**
+     현 페이지를 삭제하고 추가할 페이지로 변경합니다.
+     - Date : 2023.05.03
+     - Parameters:
+        - viewController : 이동할 페이지 입니다.
+        - animated : 애니 효과 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+     - Throws : False
+     - returns :False
+     */
+    func replaceController( viewController: UIViewController, animated : Bool = true, animatedType: AnimationType? = .down, completion: @escaping () -> Void = {}) {
+        if let navigation = self.navigationController {
+            navigation.replaceViewController(viewController: viewController, animated: animated, animatedType: animatedType, completion: completion)
+        }
+        else
+        {
+            if let viewcontroller = self.presentingViewController
+            {
+                self.dismiss(animated: false){
+                    viewcontroller.present(viewController, animated: true)
+                }
+            }
+            
+        }
+    }
+    
+    
     /**
      present로 연결된 ViewControllers 를 0번째 Root ViewController 이동 하도록 합니다.
      - Date : 2023.05.3
@@ -34,26 +145,42 @@ extension UIViewController {
         - [String : Any]
             + 파라미터 정보를 정리하여 리턴 합니다.
      */
-    func dismissToRoot( animated : Bool = true, completion: (() -> Void)? = nil ){
+    func dismissToRoot( animated : Bool = true, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil ){
         var presents    = [UIViewController?]()
         var ingPresent   = self.presentingViewController
-        
-        /// 전체 연결된 ViewControllers 찾습니다.
+        /// 현 ViewController 추가 합니다.
+        presents.append(self)
+        /// 이전 연결된 ViewControllers 전부 추가 합니다.
         while ingPresent != nil
         {
             presents.append(ingPresent)
             ingPresent = ingPresent!.presentingViewController
         }
-        
         /// 0번째 ViewController 로 이동 합니다.
-        for index in 0..<presents.count
+        for index in 0..<presents.count-1
         {
             if let pvc = presents[index]
             {
-                pvc.dismiss(animated: index == presents.count - 1 ? animated : false, completion: completion )
+                if index == presents.count - 2
+                {
+                    /// 0번째 ViewController 입니다.
+                    let rootViewcontroller = pvc.presentingViewController
+                    pvc.dismiss(animated: animated) {
+                        /// 0번째 ViewController 를 넘깁니다.
+                        completion!(rootViewcontroller)
+                    }
+                }
+                else
+                {
+                    pvc.dismiss(animated: false) {}
+                }
             }
         }
     }
+    
+    
+    
+    
     
     
 }

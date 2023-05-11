@@ -143,6 +143,7 @@ extension UIView {
      - Parameters:
         - linkUrl : 연결할 웹페이지 입니다.
         - modalPresent : 신규 컨트롤러 뷰어로 모달 오픈 할지를 받습니다.
+        - animated : 애니 효과 입니다.
         - animatedType : 모달 팝업시 에니 효과 입니다.
         - titleName : 타이틀 명칭 입니다.
         - titleBarType  : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
@@ -154,6 +155,7 @@ extension UIView {
     func setDisplayWebView( _ linkUrl       : String        = "",
                             modalPresent    : Bool          = false,
                             pageType        : FULL_PAGE_TYPE = .default_type,
+                            animated        : Bool          = true,
                             animatedType    : AnimationType = .up,
                             titleName       : String        = "",
                             titleBarType    : Int           = 0,
@@ -161,9 +163,9 @@ extension UIView {
                             completion      : (( _ value : FULL_WEB_CB ) -> Void )? = nil ) {
         if modalPresent
         {
-            let webview =  FullWebViewController( pageType: pageType, title: titleName,titleBarType: titleBarType, titleBarHidden: titleBarHidden, pageURL: linkUrl, completion : completion)
-            webview.modalPresentationStyle = .overFullScreen
-            self.viewController.navigationController!.pushViewController(webview, animated: true, animatedType: animatedType)
+            let webViewController =  FullWebViewController( pageType: pageType, title: titleName,titleBarType: titleBarType, titleBarHidden: titleBarHidden, pageURL: linkUrl, completion : completion)
+            webViewController.modalPresentationStyle = .overFullScreen
+            self.pushViewController(webViewController, animated: true, animatedType: animatedType)
         }
         else
         {
@@ -184,8 +186,8 @@ extension UIView {
     
     
     /**
-     UIViewController 를 받아 네비 컨트롤로 효과로 페이지 이동 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.09
+     UIViewController 를 받아 페이지 이동 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.11
      - Parameters:
         - controller : 이동할 타켓 컨트롤 뷰어 입니다.
         - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
@@ -196,45 +198,51 @@ extension UIView {
     func pushViewController( _ controller: UIViewController, animated: Bool = true, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {} )
     {
         /// 타켓 뷰어를 페이지 이동 합니다.
-        self.viewController.navigationController?.pushViewController(controller, animated: animated, animatedType: animatedType!,completion: completion)
+        self.viewController.pushController(controller, animated: animated, animatedType: animatedType,completion: completion)
     }
     
 
     /**
-     최 앞단 페이지로 이동 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.05.09
+     이전 페이지로 이동 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.11
      - Parameters:
         - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
         - animationType : 페이지 이동할 효과 정보를 받습니다. ( default : .right )
         - completion : 페이지 이동후 콜백 입니다.
      - returns : False
      */
-    func popToRootViewController( animated : Bool = true, animatedType: AnimationType? = .right, completion: @escaping () -> Void = {} ){
-        let rootController          = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController
-        let childs                  = rootController!.children
-        
-        /// 탭 정보가 1 이상인경우 네비게이션 컨트롤 타입을 적용 합니다.
-        if childs.count > 1
-        {
-            self.viewController.navigationController?.popToRootViewController(animated: animated, animatedType: animatedType, completion: completion)
-        }
-        /// 탭 정보가 2보다 작은 경우는 모달 타입으로 신규 루트 뷰어가 오픈된거로 체크 합니다.
-        else
-        {
-            /// 연결된 루트 뷰어 모달 타입을 체크 합니다.
-            if let presented = rootController!.presentedViewController {
-                /// 모달 타입 뷰어의 0 번째 컨트롤러의 네비 위치를 0번째로 이동하며 해당 모달 타입을 내립니다.
-                let presentedChilds = presented.children
-                let root = presentedChilds[0] as UIViewController
-                root.navigationController?.popToRootViewController(animated: false)
-                root.dismiss(animated: animated)
-            }
-            
-            /// 연결된 루트 뷰어가 네비 타입으로 연결된 경우 0번째로 이동 합니다.
-            rootController?.navigationController?.popToRootViewController(animated: animated)
-        }
+    func popViewController( animated : Bool = true, animatedType: AnimationType? = .right, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
+        self.viewController.popController(animated: animated,animatedType: animatedType,completion: completion)
     }
     
+    
+    /**
+     최 앞단 페이지로 이동 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.11
+     - Parameters:
+        - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
+        - animationType : 페이지 이동할 효과 정보를 받습니다. ( default : .right )
+        - completion : 페이지 이동후 콜백 입니다.
+     - returns : False
+     */
+    func popToRootViewController( animated : Bool = true, animatedType: AnimationType? = .right, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil ){
+        self.viewController.popToRootController(animated: animated,animatedType: animatedType,completion: completion)
+    }
+    
+    
+    /**
+     현 페이지를 삭제하고 추가할 페이지로 변경합니다.
+     - Date : 2023.05.11
+     - Parameters:
+        - viewController : 이동할 페이지 입니다.
+        - animated : 애니 효과 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+     - Throws : False
+     - returns :False
+     */
+    func replaceViewController( viewController: UIViewController, animated : Bool = true, animatedType: AnimationType? = .down, completion: @escaping () -> Void ) {
+        self.viewController.replaceController(viewController: viewController,animated: animated,animatedType: animatedType,completion: completion)
+    }
     
     
     /**

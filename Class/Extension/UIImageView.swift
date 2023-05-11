@@ -20,7 +20,7 @@ extension UIImageView {
      - Throws : False
      - returns :
         - AnyPublisher<UIImage?, Never>
-            : UIImage 이미지 정보를 받습니다.
+            + UIImage 이미지 정보를 받습니다.
      */
     static func loadImage(from url: URL) -> AnyPublisher<UIImage?, Never>
     {

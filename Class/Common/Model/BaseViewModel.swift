@@ -229,8 +229,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-     - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-     >  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
+        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
+            +  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
      */
     func setAppStart() -> AnyPublisher<AppStartResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]
@@ -262,7 +262,7 @@ class BaseViewModel : NSObject {
      - Throws : False
      - returns :
         - Bool
-            > 활성화 여부를 리턴 합니다.
+            + 활성화 여부를 리턴 합니다.
      */
     func isAppMenuList( menuID : MENU_LIST ) -> Bool
     {
@@ -289,8 +289,8 @@ class BaseViewModel : NSObject {
         - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
      - Throws : False
      - returns :
-     - Future<String, Never>
-     >  연동할 URL 정보르 리턴 합니다.
+        - Future<String, Never>
+            + 연동할 URL 정보르 리턴 합니다.
      */
     func getAppMenuList( menuID : MENU_LIST ) -> Future<String, Never>
     {
@@ -323,8 +323,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-     - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-     >  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
+        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
+            +  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
      */
     func getPTTermAgreeCheck() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
@@ -351,8 +351,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-     - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
-     >  InsertPedometerTermsResponse : 약관동의 요청 정상처리 여부를 받습니다.
+        - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
+            +  InsertPedometerTermsResponse : 약관동의 요청 정상처리 여부를 받습니다.
      */
     func setPTTermAgreeCheck() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
@@ -378,8 +378,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-     - AnyPublisher<LogOutResponse?, ResponseError>
-     >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+        - AnyPublisher<LogOutResponse?, ResponseError>
+            +  LogOutResponse : 로그아웃 처리 결과를 받습니다.
      */
     func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
         let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
@@ -407,7 +407,8 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-     - AnyPublisher<FcmPushUpdateResponse?, ResponseError>
+        - AnyPublisher<FcmPushUpdateResponse?, ResponseError>
+            + FcmPushUpdateResponse : FCM 정상 등로 결과를 받습니다.
      */
     func setFcmTokenRegister() ->  AnyPublisher<FcmPushUpdateResponse?, ResponseError> {
         let subject             = PassthroughSubject<FcmPushUpdateResponse?,ResponseError>()
@@ -448,8 +449,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.27
      - Throws : False
      - returns :
-     - Future<AppShield, Never>
-     >  AppShield : 앱 실드 정상 여부를 체크 합니다.
+        - Future<AppShield, Never>
+            + AppShield : 앱 실드 정상 여부를 체크 합니다.
      */
     func getAppShield() -> Future<AppShield, Never>
     {
@@ -487,8 +488,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-     - Future<Bool, Never>
-     >  Bool : 앱 카메라 접근 여부 값을 리턴 합니다.
+        - Future<Bool, Never>
+            +  Bool : 앱 카메라 접근 여부 값을 리턴 합니다.
      */
     func isCameraAuthorization() -> Future<Bool, Never>
     {
@@ -507,8 +508,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.20
      - Throws : False
      - returns :
-     - Future<Bool, Never>
-     >  Bool : 앱 이미지 저장소 접근 여부 값을 리턴 합니다.
+        - Future<Bool, Never>
+            +  Bool : 앱 이미지 저장소 접근 여부 값을 리턴 합니다.
      */
     func isPhotoSaveAuthorization() -> Future<Bool, Never>
     {
@@ -542,8 +543,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-     - Future<Bool, Never>
-     >  Bool : 앱 연락처 접근 여부 값을 리턴 합니다.
+        - Future<Bool, Never>
+            +  Bool : 앱 연락처 접근 여부 값을 리턴 합니다.
      */
     func isContactAuthorization() -> Future<Bool, Never>
     {
@@ -563,8 +564,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-     - Future<Bool, Never>
-     >  Bool : PUSH 사용 인증 여부 값을 리탄합니다.
+        - Future<Bool, Never>
+            +  Bool : PUSH 사용 인증 여부 값을 리탄합니다.
      */
     func isAPNSAuthorization() -> Future<Bool, Never>
     {
@@ -585,8 +586,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.20
      - Throws : False
      - returns :
-     - Future<Bool, Never>
-     >  Bool : 앱 추적 허용 승인 여부 값을 리턴 합니다.
+        - Future<Bool, Never>
+            +  Bool : 앱 추적 허용 승인 여부 값을 리턴 합니다.
      */
     func isTrackingAuthorization() -> Future<Bool, Never>
     {
@@ -628,8 +629,8 @@ class BaseViewModel : NSObject {
      - Date : 2023.03.29
      - Throws : False
      - returns :
-     - Future<String, Never>
-     >  String : 딥링크 진입 할 URL 정보를 받습니다.
+        - Future<String, Never>
+            +  String : 딥링크 진입 할 URL 정보를 받습니다.
      */
     func getDeepLink( deelLinkUrl url: URL ) -> Future<String, Never>
     {
@@ -661,8 +662,8 @@ class BaseViewModel : NSObject {
      - url : URL 정보 입니다.
      - Throws : False
      - returns :
-     - Future <[String : Any],Naver>
-     + 파라미터 정보를 정리하여 리턴 합니다.
+        - Future <[String : Any],Naver>
+            + 파라미터 정보를 정리하여 리턴 합니다.
      */
     func getURLParams( url : URL ) -> Future<[String : Any], Never>
     {

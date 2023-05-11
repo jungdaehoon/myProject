@@ -24,7 +24,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - String
-            > 토큰 정보를 리턴 합니다.
+            + 토큰 정보를 리턴 합니다.
      */
     static func getToken() -> String
     {
@@ -46,7 +46,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<AllMoreResponse, ResponseError>
-            >  AllMoreResponse : 전체 탭 상세 정보 데에터 입니다.
+            + AllMoreResponse : 전체 탭 상세 정보 데에터 입니다.
      */
     static func requestAllMore( token : String = NetworkManager.getToken() ) -> AnyPublisher<AllMoreResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
@@ -64,7 +64,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<PedometerTermsAgreeResponse, ResponseError>
-            >  PedometerTermsAgreeResponse : 만보게 약관 동의 여부를 받습니다.
+            +  PedometerTermsAgreeResponse : 만보게 약관 동의 여부를 받습니다.
      */
     static func requestPedometerTermsAgree( token : String = NetworkManager.getToken() ) -> AnyPublisher<PedometerTermsAgreeResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
@@ -83,7 +83,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<InsertPedometerTermsResponse, ResponseError>
-            >  InsertPedometerTermsResponse : 만보게 약관동의 요청 후 확인 정보를 받습니다.
+            +  InsertPedometerTermsResponse : 만보게 약관동의 요청 후 확인 정보를 받습니다.
      */
     static func requestInsertPedometerTerms( token : String = NetworkManager.getToken() ) -> AnyPublisher<InsertPedometerTermsResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
@@ -102,7 +102,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<AppStartResponse, ResponseError>
-            >  AppStartResponse : 앱 전체적으로 기본 정보를 가집니다. ( 각 메뉴 선택시 URL 정보 )
+            +  AppStartResponse : 앱 전체적으로 기본 정보를 가집니다. ( 각 메뉴 선택시 URL 정보 )
      */
     static func requestAppStart( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<AppStartResponse, ResponseError> {
         var parameters: Parameters = [:]
@@ -125,7 +125,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<FcmPushUpdateResponse, ResponseError>
-            >  FcmPushUpdateResponse : FCM 업로드 요청 입니다.
+            +  FcmPushUpdateResponse : FCM 업로드 요청 입니다.
      */
     static func requestFcmUpdate( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<FcmPushUpdateResponse, ResponseError> {
         var parameters: Parameters = [:]
@@ -148,7 +148,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<LoginResponse, ResponseError>
-            >  LoginResponse : 로그인 데이터 정보 입니다.
+            +  LoginResponse : 로그인 데이터 정보 입니다.
      */
     static func requestLogin( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<LoginResponse, ResponseError> {
         var parameters: Parameters = ["token": token]
@@ -170,7 +170,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<LogOutResponse, ResponseError>
-            >  LogOutResponse : 로그아웃 여부 정보를 받습니다.
+            +  LogOutResponse : 로그아웃 여부 정보를 받습니다.
      */
     static func requestLogOut( token : String = NetworkManager.getToken() ) -> AnyPublisher<LogOutResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
@@ -188,7 +188,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<ReBankAuthResponse, ResponseError>
-            >  ReBankAuthResponse : 인증 여부를 받습니다.
+            +  ReBankAuthResponse : 인증 여부를 받습니다.
      */
     static func requestReBankAuth( token : String = NetworkManager.getToken() ) -> AnyPublisher<ReBankAuthResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
@@ -206,7 +206,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<SelectAccountListResponse, ResponseError>
-            >  SelectAccountListResponse : 계좌 리스트 정보를 받습니다.
+            +  SelectAccountListResponse : 계좌 리스트 정보를 받습니다.
      */
     static func requestSelectAccountList( token : String = NetworkManager.getToken() ) -> AnyPublisher<SelectAccountListResponse, ResponseError> {
         let parameters: Parameters = ["token": token]
@@ -224,7 +224,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<PedometerResponse, ResponseError>
-            >  PedometerResponse : 만보기 데이터를 받습니다.
+            +  PedometerResponse : 만보기 데이터를 받습니다.
      */
     static func requestPedometer( token : String = NetworkManager.getToken() ) -> AnyPublisher<PedometerResponse, ResponseError> {
         let parameters: Parameters = [ "token": token ]
@@ -243,7 +243,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<PedometerRewardResponse, ResponseError>
-            >  PedometerRewardResponse : 만보기 리워드 데이터를 받습니다.
+            +  PedometerRewardResponse : 만보기 리워드 데이터를 받습니다.
      */
     static func requestPedometerReward( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<PedometerRewardResponse, ResponseError> {
         var parameters: Parameters = [ "token": token ]
@@ -266,7 +266,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<PedometerUpdateResponse, ResponseError>
-            >  PedometerUpdateResponse : 만보기 업데이트 완료 여부를 받습니다.
+            +  PedometerUpdateResponse : 만보기 업데이트 완료 여부를 받습니다.
      */
     static func requestPedometerUpdate( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<PedometerUpdateResponse, ResponseError> {
         var parameters: Parameters = [ "token": token ]
@@ -289,7 +289,7 @@ class NetworkManager {
      - Throws : False
      - returns :
         - AnyPublisher<ZeroPayQRCodeResponse, ResponseError>
-            >  ZeroPayQRCodeResponse : QRCode 인증 할 제로페이 스크립트를 받습니다.
+            +  ZeroPayQRCodeResponse : QRCode 인증 할 제로페이 스크립트를 받습니다.
      */
     static func requestZeroPayQRcode( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayQRCodeResponse, ResponseError> {
         var getParams = "?"

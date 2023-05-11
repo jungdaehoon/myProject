@@ -81,7 +81,7 @@ class AllMoreModel : BaseViewModel{
      - Throws : False
      - returns :
         - AnyPublisher<AllMoreResponse?, ResponseError>
-            >  AllMoreResponse : 홈 소비 정보를 요청 합니다.
+            +  AllMoreResponse : 홈 소비 정보를 요청 합니다.
      */
     func getAllMoreInfo() -> AnyPublisher<AllMoreResponse?, ResponseError>
     {
@@ -109,7 +109,7 @@ class AllMoreModel : BaseViewModel{
      - Throws : False
      - returns :
         - AnyPublisher<LogOutResponse?, ResponseError>
-            >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+            +  LogOutResponse : 로그아웃 처리 결과를 받습니다.
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()

@@ -192,8 +192,12 @@ extension BottomTermsView : UITableViewDelegate, UITableViewDataSource
             }
         }
         self.isHidden = true
-        self.target!.navigationController?.pushViewController(viewController, animated: true, animatedType: .up, completion: {
-        })
+        /// 연결된 컨트롤러 확인 합니다.
+        if let controller = self.target
+        {
+            /// 약관 동의 페이지를 이동 합니다.
+            controller.pushController(viewController, animated: true, animatedType: .up)
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

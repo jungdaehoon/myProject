@@ -304,8 +304,8 @@ class AllMoreViewController: BaseViewController {
      내자산 뷰어 새로고침 컨트롤러를 생성 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.17
      - returns :
-     - UIRefreshControl Typre
-     > 내 자산 정보 새로고침 컨트롤을 리턴 합니다.
+        - UIRefreshControl
+            + 내 자산 정보 새로고침 컨트롤을 리턴 합니다.
      */
     func getRefreshController() -> UIRefreshControl
     {

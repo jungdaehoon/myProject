@@ -126,7 +126,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     내비게이션 컨트롤로 현 페이지를 종료 합니다.
+     내비게이션 컨트롤로 0번 페이지로 이동합니다.
      - Date : 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
@@ -189,8 +189,7 @@ extension UINavigationController : UINavigationControllerExtension {
             return
         }
         
-        coordinator.animate(alongsideTransition: nil) { _ in completion() }
-        
+        coordinator.animate(alongsideTransition: nil) { _ in completion() }        
     }
     
     
