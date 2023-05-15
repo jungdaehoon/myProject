@@ -88,10 +88,10 @@ class AllMoreViewController: BaseViewController {
     
     
     /**
-     홈  화면 유닛 데이터를 가져와 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     화면 유닛 데이터를 가져와 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2022.03.16
      */
-    func setDisplayData(){
+    override func setDisplayData(){
         /// 전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.
         self.setInitWebView()
         /// 서버에 전제 상세 데이터를 요청 합니다.
@@ -121,7 +121,7 @@ class AllMoreViewController: BaseViewController {
         /// 최상단 뷰어를 디스플레이 합니다.
         if self.topUserInfoView == nil
         {
-            self.topUserInfoView                            = TopUserInfoView.instanceFromNib()
+            self.topUserInfoView = TopUserInfoView.instanceFromNib()
             self.stackView.addArrangedSubview(self.topUserInfoView!)
         }
         else

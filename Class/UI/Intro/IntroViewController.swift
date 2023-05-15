@@ -85,9 +85,6 @@ class IntroViewController: BaseViewController {
                     DispatchQueue.main.async(execute: {
                         /// 서비스 불가 안내 뷰어를 오픈 합니다.
                         ServiceErrorPop().show()
-                        CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
-                            exit(0)
-                        }
                     })
                 }
                 /// 앱 실드 정상처리 입니다.
@@ -158,7 +155,6 @@ class IntroViewController: BaseViewController {
                 }
             }.store(in: &self.cancellableSet)
         }.store(in: &self.viewModel.cancellableSet)
-        
     }
 
     

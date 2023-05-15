@@ -96,15 +96,9 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
      - returns :False
      */
     func loadTabPageURL( _ url: String ) {
-        switch url
+        if self.webView?.url?.absoluteString == "about:blank"
         {
-            case WebPageConstants.URL_MAIN :
-                if self.webView?.url?.absoluteString == "about:blank"
-                {
-                    self.loadMainURL(url)
-                }
-                break
-            default:break
+            self.loadMainURL(url)
         }
     }
     
@@ -130,6 +124,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     }
     
     
+    
     /**
      웹 페이지를 빈화면으로 설정 합니다 ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.20
@@ -141,6 +136,8 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         {
             /// 웹 화면 케시를 전부 삭제 합니다.
             self.messageHandler!.setWebViewClearCache()
+            /// 웹 화면 히스토리를 초기화 합니다.
+            self.webView!.clearHistory()
             /// 화면을 초기화 합니다.
             self.webView!.load(URLRequest(url: URL(string: "about:blank")!))
         }

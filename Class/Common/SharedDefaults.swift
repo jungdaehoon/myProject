@@ -24,7 +24,7 @@ class SharedDefaults {
     /// 만보고 최초 진입시 날짜 정보 입니다.
     static let PEDOMETER_FIRST_AGREE            = "PEDOMETER_FIRST_DATE"
     
-    /// 계좌 여부 체크 입니다.
+    /// 연결 계좌 여부 체크 입니다.
     static let SET_ACCOUNT_ENABLED              = "SET_ACCOUNT_ENABLED"
     /// 월렛 복구문 정보 입니다.
     static let WALLET_MNEMONIC                  = "WALLET_MNEMONIC"
@@ -131,7 +131,7 @@ class SharedDefaults {
     
     
     private var _accountEnabled : Bool = false
-    /// 앱 가이드 유저 확인 여부 체크 입니다.
+    /// 연결 계좌 여부 체크 입니다.
     var accountEnabled : Bool {
         get {
             _accountEnabled = defaults.bool(forKey: SharedDefaults.SET_ACCOUNT_ENABLED)

@@ -45,7 +45,6 @@ class HttpErrorPop: UIView {
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
             DispatchQueue.main.async {
-                self.tag = 567812
                 base.addSubview(self)
             }
         }
@@ -63,7 +62,7 @@ class HttpErrorPop: UIView {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         DispatchQueue.main.async {
             _ = base!.subviews.map({
-                if $0.tag == 567812
+                if $0 is HttpErrorPop
                 {
                     $0.removeFromSuperview()
                 }
@@ -71,5 +70,8 @@ class HttpErrorPop: UIView {
         }
     }
     
-
+    @IBAction func btn_action(_ sender: Any) {
+        self.hide()
+    }
+    
 }

@@ -45,7 +45,6 @@ class ServiceErrorPop: UIView {
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
             DispatchQueue.main.async {
-                self.tag = 567822
                 base.addSubview(self)
             }
         }
@@ -63,7 +62,7 @@ class ServiceErrorPop: UIView {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         DispatchQueue.main.async {
             _ = base!.subviews.map({
-                if $0.tag == 567822
+                if $0 is ServiceErrorPop
                 {
                     $0.removeFromSuperview()
                 }

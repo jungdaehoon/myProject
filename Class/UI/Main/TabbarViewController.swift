@@ -167,7 +167,7 @@ class TabbarViewController: UITabBarController {
         if self.loginDisplayFirst
         {
             /// 로그인 페이지를 오픈 합니다.
-            self.setDisplayLogin { success in
+            self.setDisplayLogin(gudieViewEnabled: true) { success in
                 if success
                 {
                     /// 로그인 디스플레이를 하지 않도록 합니다.
@@ -212,12 +212,14 @@ class TabbarViewController: UITabBarController {
      - Date : 2022.04.24
      - Parameters:
         - animation : 디스플레이시 애니 효과 적용 여부 입니다.
+        - gudieViewEnabled : 가이드 디스플레이 여부 입니다.
         - completion : 로그인 정상 처리시 여부 콜백 입니다.
         - puchCompletion : 로그인 페이지 정상 호출시 콜백 입니다.
      - returns :False
      */
-    func setDisplayLogin( animation : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
-        let viewController = LoginViewController.init( completion: completion )
+    func setDisplayLogin( animation : Bool = false, gudieViewEnabled : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
+        let viewController              = LoginViewController.init( completion: completion )
+        viewController.guideViewEnabled = gudieViewEnabled
         self.pushController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)        
     }
     

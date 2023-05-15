@@ -45,8 +45,8 @@ class LoginViewController: BaseViewController {
     let ID_MAX_LEN                          : Int = 11
     /// 패스워드 최대 카운트 입니다.
     let PW_MAX_LEN                          : Int = 6
-    /// 가이드뷰 디스플레이 여부 활성화 입니다. ( default : true )
-    var guideViewEnabled                    : Bool = true
+    /// 가이드뷰 디스플레이 여부 활성화 입니다. ( default : false )
+    var guideViewEnabled                    : Bool = false
     /// 가이드 뷰어 입니다.
     @IBOutlet weak var guideView            : GuideInfoView!
     /// 아이디 입력 필드 입니다.
@@ -230,6 +230,11 @@ class LoginViewController: BaseViewController {
                 })
                 alert?.show()
             }
+        }
+        else
+        {
+            /// 앱 실드 체크 합니다.
+            self.setAppShield()
         }
         
     }

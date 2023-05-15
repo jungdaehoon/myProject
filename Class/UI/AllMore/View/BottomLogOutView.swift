@@ -36,6 +36,7 @@ class BottomLogOutView: UIView {
             
         })
         alert?.addAlertBtn(btnTitleText: "확인", completion: { result in
+            /// 로그아웃을 요청 합니다.
             self.viewModel?.setLogOut().sink(receiveCompletion: { result in
                 
             }, receiveValue: { response in
@@ -46,7 +47,7 @@ class BottomLogOutView: UIView {
                     SharedDefaults.setKeyChainCustItem(custItem!)
                     /// 로그아웃 여부를 활성화 합니다.
                     BaseViewModel.shared.logOut             = true
-                    /// 계좌 여부를 활성화 합니다.
+                    /// 계좌 여부를 비활성화 합니다.
                     SharedDefaults.default.accountEnabled   = false
                 }
                 

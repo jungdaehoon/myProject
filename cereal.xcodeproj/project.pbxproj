@@ -155,6 +155,7 @@
 		8D91E27929E53ACB0015E5E7 /* tabbar_benefit.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27429E53ACA0015E5E7 /* tabbar_benefit.json */; };
 		8D91E27A29E53ACB0015E5E7 /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27529E53ACA0015E5E7 /* tabbar_home.json */; };
 		8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */; };
+		8D9855B32A11F0D800AE86B9 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9855B22A11F0D800AE86B9 /* WalletViewModel.swift */; };
 		8D9A004629DEAD9600424077 /* libnProtectMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */; };
 		8D9D924929F7B9F900F42B8D /* GuideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */; };
 		8D9D924A29F7B9F900F42B8D /* GuideInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D924829F7B9F900F42B8D /* GuideInfoView.xib */; };
@@ -386,6 +387,7 @@
 		8D91E27429E53ACA0015E5E7 /* tabbar_benefit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_benefit.json; sourceTree = "<group>"; };
 		8D91E27529E53ACA0015E5E7 /* tabbar_home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_home.json; sourceTree = "<group>"; };
 		8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_financial.json; sourceTree = "<group>"; };
+		8D9855B22A11F0D800AE86B9 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnProtectMobileSDK.a; sourceTree = "<group>"; };
 		8D9A004529DEAD9600424077 /* IxSecureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IxSecureManager.h; sourceTree = "<group>"; };
 		8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideInfoView.swift; sourceTree = "<group>"; };
@@ -1115,6 +1117,14 @@
 			path = DatePickerView;
 			sourceTree = "<group>";
 		};
+		8D9855B12A11F0C700AE86B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D9855B22A11F0D800AE86B9 /* WalletViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8D9A004329DEAD9600424077 /* SecureManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1164,6 +1174,7 @@
 		8DCB189B29F6641E000645D3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				8D9855B12A11F0C700AE86B9 /* Model */,
 				8DCB189C29F6641E000645D3 /* Wallet.storyboard */,
 				8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */,
 				8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */,
@@ -1568,6 +1579,7 @@
 				8D205F7D29D1346F00F43C99 /* PedometerUpdateResponse.swift in Sources */,
 				8DC72E6B29D6A34B0044F021 /* PickerViewViewController.swift in Sources */,
 				8D205F8C29D1346F00F43C99 /* SharedDefaults.swift in Sources */,
+				8D9855B32A11F0D800AE86B9 /* WalletViewModel.swift in Sources */,
 				8D205F3829D1346F00F43C99 /* BannerView.swift in Sources */,
 				8D205F3A29D1346F00F43C99 /* BottomLogOutView.swift in Sources */,
 				8DCB18A629F6641E000645D3 /* CheckMnemonicViewController.swift in Sources */,

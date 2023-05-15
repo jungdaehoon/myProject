@@ -31,20 +31,15 @@ class FinanceViewController: BaseViewController {
         self.loadMainURL(WebPageConstants.URL_FINANCE_MAIN)
     }
 
-    
-    
-    // MARK: - 지원 메서드 입니다.
     /**
-     전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.
-     - Date : 2022.04.17
+     화면 새로고침 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2022.03.16
      */
-    func setInitWebView()
-    {
-        /// 웹 화면 케시를 전부 삭제 합니다.
-        self.messageHandler!.setWebViewClearCache()
-        /// 화면을 초기화 합니다.
-        self.webView!.load(URLRequest(url: URL(string: "about:blank")!))
+    override func setDisplayData() {
+        super.setDisplayData()
+        self.loadTabPageURL(WebPageConstants.URL_FINANCE_MAIN)
     }
+    
     
     
     /*

@@ -41,6 +41,9 @@
                     <state key="normal" title=" 이전페이지로 가기 ">
                         <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="sFv-Cq-iLb"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error img" translatesAutoresizingMaskIntoConstraints="NO" id="Cde-zs-gbZ">
                     <rect key="frame" x="66" y="328" width="243" height="239"/>

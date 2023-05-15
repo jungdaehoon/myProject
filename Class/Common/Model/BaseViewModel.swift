@@ -246,7 +246,6 @@ class BaseViewModel : NSObject {
             return NetworkManager.requestAppStart(params: parameters)
         } completion: { model in
             BaseViewModel.appStartResponse = model
-            //self.appStartResponse = model
             // 앱 인터페이스 정상처리 여부를 넘깁니다.
             subject.send(model)
         }

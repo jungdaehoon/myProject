@@ -67,14 +67,18 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="102" id="F9I-HB-c9K"/>
                     </constraints>
-                    <string key="text">점검 기간에도 고객님의 정보는 안전하게 보호되며,
-보다 좋은 서비스를 위해 노력하는 올리고가 되겠습니다. 감사합니다.</string>
+                    <string key="text">점검 기간에도 고객님의 정보는 안전하게 보호되며, 
+보다 좋은 서비스를 위해 노력하는 올리고가 되겠습니다.
+감사합니다.</string>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="15"/>
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9t-dg-yaX">
-                    <rect key="frame" x="199" y="441" width="30" height="208"/>
+                    <rect key="frame" x="174" y="441" width="80" height="208"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="MH9-2z-hGH"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="SpoqaHanSans-Bold" family="SpoqaHanSans" pointSize="15"/>
                     <state key="normal" title="닫기">
                         <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>

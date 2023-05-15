@@ -601,7 +601,7 @@ class WebMessagCallBackHandler : NSObject  {
                     /// 페이지 타입을 설정 합니다.
                     let pageType = FULL_PAGE_TYPE(rawValue: type) ?? .default_type
                     switch pageType {
-                        /// PG 카드 결제 요청 입니다.
+                        /// PG카드, 제로페이, 인증 요청 입니다.
                     case .pg_type,.zeropay_type,.auth_type:
                         /// 컨트롤러 연결 되었는지를 체크 합니다.
                         if let controller = self.target {
@@ -633,6 +633,7 @@ class WebMessagCallBackHandler : NSObject  {
                             controller.pushController(viewController, animated: true, animatedType: .up)
                         }
                         return
+                        /// 외부 웹페이지 접근으로 내부 도메인을 사용하지 않습니다.
                     case .outdside_type:
                         if let controller = self.target {
                             /// 전체 화면 웹뷰를 오픈 합니다.
@@ -692,7 +693,6 @@ class WebMessagCallBackHandler : NSObject  {
      */
     func setConfirmPopup( _ body : [Any?] ){
         var object : String?
-        
         if let params = body[2] as? [Any]
         {
             if let info = params[0] as? [String:Any]
@@ -1041,17 +1041,23 @@ class WebMessagCallBackHandler : NSObject  {
         } receiveValue: { response in
             if response != nil
             {
+                let custItem                            = SharedDefaults.getKeyChainCustItem()
+                custItem!.auto_login                    = false
+                SharedDefaults.setKeyChainCustItem(custItem!)
+                /// 계좌 여부를 비활성화 합니다.
+                SharedDefaults.default.accountEnabled   = false
                 /// 연결된 타켓 정보가 있는지를 체크 합니다.
                 if let controller = self.target
                 {
                     controller.popToRootController(animated: true) { firstViewController in
-                        if let rootController = firstViewController
-                        {
-                            /// 로그인 페이지를 디스플레이 합니다.
-                            let viewController = LoginViewController()
-                            rootController.pushController(viewController, animated: true, animatedType: .up)
-                        }
+                        /// 로그아웃 여부를 활성화 합니다.
+                        BaseViewModel.shared.logOut = true
                     }
+                }
+                else
+                {
+                    /// 로그아웃 여부를 활성화 합니다.
+                    BaseViewModel.shared.logOut = true
                 }
             }
         }.store(in: &self.cancellableSet)
@@ -1075,7 +1081,6 @@ class WebMessagCallBackHandler : NSObject  {
             SharedDefaults.setKeyChainCustItem(custItem!)
         }
     }
-    
     
     
     /**
@@ -1181,7 +1186,6 @@ class WebMessagCallBackHandler : NSObject  {
         }
         alert.show()
     }
-    
     
     
     /**

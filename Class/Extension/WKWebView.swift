@@ -167,6 +167,14 @@ extension WKWebView {
         }
     }
     
+    
+    func clearHistory() {
+        if self.canGoBack {
+            self.go(to: self.backForwardList.backList.first!)
+        }
+    }
+    
+    
     func capture() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, scrollView.isOpaque, 0)
         let currentContentOffset    = scrollView.contentOffset

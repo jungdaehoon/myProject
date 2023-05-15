@@ -32,6 +32,7 @@ class RemittanceViewController: BaseViewController {
     }
 
     
+    // MARK: - 지원 메서드 입니다.
     /**
      은행 계좌 정보를 체크합니다.( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.22

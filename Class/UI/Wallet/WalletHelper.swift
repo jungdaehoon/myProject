@@ -15,6 +15,14 @@ import Web3Core
 class WalletHelper
 {
     static let sharedInstance = WalletHelper()
+    var keyManager : KeystoreManager? {
+        get {
+            let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let path = userDir+"/keystore"
+            let keystoreManager =  KeystoreManager.managerForPath(path)
+            return keystoreManager
+        }
+    }
     
     private init() {}
     
@@ -144,33 +152,19 @@ class WalletHelper
     }
     
     func checkWAddressWalletFile(_ vc: UIViewController,encInfo:String) -> String! {
-        do {
-//            let walletPass = getDecryptedWalletPasswdFromInfo(encInfo)
-//            if(walletPass == nil){
-//                return ""
-//            }
-            
-            //get file from disk
-            let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let path = userDir+"/keystore/"
-
-            let web3KeystoreManager = KeystoreManager.managerForPath(path, scanForHDwallets: true, suffix: "json")
-            
-            if web3KeystoreManager?.addresses?.count ?? 0 >= 0 {
-                if web3KeystoreManager?.addresses?.count == 0{
-                    return ""
-                }
-                let web3KeyStore = web3KeystoreManager?.walletForAddress((web3KeystoreManager?.addresses?[0])!) as? BIP32Keystore
-                
-                guard let walletAddress = web3KeyStore?.addresses?.first else {
+        if let web3KeystoreManager = self.keyManager,
+           let addresses = web3KeystoreManager.addresses,
+           addresses.count > 0
+        {
+            if let web3KeyStore = web3KeystoreManager.walletForAddress(addresses[0])
+            {
+                guard let walletAddress = web3KeyStore.addresses?.first else {
                     vc.showAlertMessage(title: "", message: "Unable to load wallet", actionName: "Ok")
                     return ""
                 }
                 Slog("CheckExisting : walletAddress  = \(walletAddress.address)")
                 return walletAddress.address
             }
-        } catch {
-            return ""
         }
         return ""
     }

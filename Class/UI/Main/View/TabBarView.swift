@@ -148,24 +148,11 @@ class TabBarView : UIView
             /// 현 탭 정보를 저장 합니다.
             TabBarView.tabSeletedIndex          = pageTag - 10
             
-            /// 현 페이지가 전체 탭 페이지면 초기화합니다.
-            if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? AllMoreViewController
+            /// 현 페이지 초기화합니다.
+            if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController
             {
-                /// 한번이라도 요청된적이 있는 경우 입니다.
-                if let _ = viewController.viewModel.allModeResponse
-                {
-                    viewController.setDisplayData()
-                }
+                viewController.setDisplayData()
             }
-            
-            /// 이전 웹페이지를 초기화 합니다.
-            if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabBackIndex] as? BaseViewController ,
-               TabBarView.tabSeletedIndex != TabBarView.tabBackIndex
-            {
-                /// 이전 페이지의 웹뷰를 초기화 합니다.
-                viewController.initWebPage()
-            }
-        
 
             Slog("TabBarView.tabBackIndex : \(TabBarView.tabBackIndex)")
             Slog("TabBarView.tabSeletedIndex : \(TabBarView.tabSeletedIndex)")
