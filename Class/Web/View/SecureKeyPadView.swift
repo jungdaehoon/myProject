@@ -244,6 +244,7 @@ extension SecureKeyPadView : XKTextFieldDelegate{
         /// 세션만료 안내 팝업 오픈 입니다.
         CMAlertView().setAlertView(detailObject: "보안 세션이 만료되었습니다.\n다시 실행해 주세요." as AnyObject, cancelText: "확인") { event in
             self.setResignFirstResponder()
+            self.target!.popController(animated: true, animatedType: .down)
         }
     }
     

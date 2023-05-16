@@ -28,7 +28,7 @@ class OKZeroPayQRCaptureView: UIView {
     
     
     //MARK: - Init
-    init( completion : (( _ qrcodeCB : QRCODE_CB ) -> Void)? = nil, params: [String:Any] = [:]){
+    init( params: [String:Any] = [:], completion : (( _ qrcodeCB : QRCODE_CB ) -> Void)? = nil){
         super.init(frame: UIScreen.main.bounds)
         self.initZeroPayView()
         /// 리턴 이벤트를 연결 합니다.

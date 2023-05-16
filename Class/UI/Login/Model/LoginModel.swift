@@ -90,34 +90,5 @@ class LoginModel : BaseViewModel {
     }
     
     
-    /**
-     정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.17
-     - Parameters:
-        - user_hp : 유저 휴대폰 정보를 받습니다.
-     - Throws : False
-     - returns :
-        - AnyPublisher<Bool?, Never>
-            +  정상 저장 여부를 리턴 합니다.
-     */
-    func setKeyChainCustItem( _ user_hp : String ) -> Future<Bool, Never> {
-        return Future<Bool, Never> { promise in
-            if let custItem = SharedDefaults.getKeyChainCustItem() {
-                if let response = BaseViewModel.loginResponse
-                {
-                    if let info = response.data
-                    {
-                        custItem.last_login_time    = info.Last_login_time
-                        custItem.token              = info.token
-                        custItem.user_no            = info.user_no
-                        custItem.user_hp            = user_hp
-                        SharedDefaults.setKeyChainCustItem(custItem)
-                        promise(.success(true))
-                        return
-                    }
-                }
-            }
-            promise(.success(false))
-        }
-    }
+    
 }

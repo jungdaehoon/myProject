@@ -29,15 +29,18 @@ extension UIViewController {
      - Date : 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
+        - modalPresent : 모달 타입으로 페이지 이동 경우 입니다. ( default : false )
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
      - Throws : False
      - returns :False
      */
-    func pushController( _ viewController: UIViewController, animated: Bool, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {})
+    func pushController( _ viewController: UIViewController, modalPresent : Bool = false, animated: Bool, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {})
     {
-        if let navigation = self.navigationController {
+        if let navigation = self.navigationController,
+           modalPresent == false
+        {
             navigation.pushViewController(viewController, animated: true, animatedType: animatedType,completion: completion)
         }
         else

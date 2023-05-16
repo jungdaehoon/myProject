@@ -98,6 +98,8 @@ class TabbarViewController: UITabBarController {
         BaseViewModel.shared.$deepLinkUrl.sink { url in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !url.isValid { return }
+            /// 앱 시작시 받을수 있는 딥링크 데이터를 초기화 합니다.
+            BaseViewModel.shared.didDeepLinkUrl = ""
             /// 로그인 정보가 있는지를 체크 합니다.
             if let login = BaseViewModel.loginResponse
             {
@@ -106,8 +108,10 @@ class TabbarViewController: UITabBarController {
                     /// 해당 URL 로 이동합니다.
                     if NC.S(url).isValid
                     {
+                        /// 진행중인 탭 인덱스를 초기화 합니다.
+                        self.setIngTabToRootController()
                         /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
-                        self.setSelectedIndex(.home,object: url)
+                        self.setSelectedIndex(.home, object: url)
                         BaseViewModel.shared.deepLinkUrl = ""
                     }
                 }
@@ -128,6 +132,8 @@ class TabbarViewController: UITabBarController {
         BaseViewModel.shared.$pushUrl.sink { url in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !url.isValid  { return }
+            /// 앱 시작시 받을수 있는 PUSH 데이터를 초기화 합니다.
+            BaseViewModel.shared.didPushUrl = ""
             /// 로그인 정보가 있는지를 체크 합니다.
             if let login = BaseViewModel.loginResponse {
                 if login.islogin!
@@ -135,6 +141,8 @@ class TabbarViewController: UITabBarController {
                     /// 해당 URL 로 이동합니다.
                     if NC.S(url).isValid
                     {
+                        /// 진행중인 탭 인덱스를 초기화 합니다.
+                        self.setIngTabToRootController()
                         /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
                         self.setSelectedIndex( .home, object: url)
                         /// PUSH 에서 받은 연결 정보를 초기화 합니다.
@@ -158,8 +166,9 @@ class TabbarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("TabbarViewController viewDidAppear")
     }
-    
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
@@ -196,7 +205,7 @@ class TabbarViewController: UITabBarController {
     // MARK: - 지원 메서드 입니다.
     /**
      탭 아이템  활성화 여부를 받아 활성화 합니다..   ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.25
+     - Date : 2023.03.25
      - Parameters:
         - selectedIndex : 탭 변경 인덱스 정보 입니다.
      - returns :False
@@ -209,7 +218,7 @@ class TabbarViewController: UITabBarController {
     
     /**
      로그인 페이지 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.04.24
+     - Date : 2023.04.24
      - Parameters:
         - animation : 디스플레이시 애니 효과 적용 여부 입니다.
         - gudieViewEnabled : 가이드 디스플레이 여부 입니다.
@@ -267,6 +276,15 @@ class TabbarViewController: UITabBarController {
 
 extension UITabBarController
 {
+    
+    func setIngTabToRootController(){
+        /// 이전 진행중인 ViewController 을 초기화 합니다.
+        if let viewController = self.viewControllers![self.selectedIndex] as? BaseViewController
+        {
+            viewController.popToRootController(animated: false)
+        }
+    }
+    
     /**
      텝 이동시 해당 텝에서 체크 할 데이터를 추가합니다.  ( J.D.H  VER : 1.0.0 )
      - Date : 2023.04.24
@@ -279,8 +297,8 @@ extension UITabBarController
     func setSelectedIndex( _ tabIndex : TAB_STATUS, object : Any? = nil, updateCookies : Bool = false ){
         if object != nil
         {
-            let value = TAB_STATUS(rawValue: selectedIndex)
-            switch value
+            Slog("setSelectedIndex : \(tabIndex.rawValue)")
+            switch tabIndex
             {
                 /// 월렛 입니다.
             case .wallet :
@@ -290,7 +308,9 @@ extension UITabBarController
                 break;
                 /// 홈 입니다.
             case .home :
-                if let home = self.viewControllers![selectedIndex] as? HomeViewController
+                
+                
+                if let home = self.viewControllers![tabIndex.rawValue] as? HomeViewController
                 {
                     if object is String,
                        let value = object as? String
@@ -307,10 +327,9 @@ extension UITabBarController
                 /// 전체 입니다.
             case .allmenu :
                 break;
-            default:break;
             }
         }
-        self.selectedIndex = selectedIndex
+        self.selectedIndex = tabIndex.rawValue
     }
 }
 

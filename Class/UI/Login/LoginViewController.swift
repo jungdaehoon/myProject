@@ -328,6 +328,8 @@ class LoginViewController: BaseViewController {
                         self.viewModel.setKeyChainCustItem(NC.S(self.idField.text)).sink { success in
                             if success
                             {
+                                /// 로그인 여부를 활성화 합니다.
+                                BaseViewModel.loginResponse!.islogin = true
                                 /// FCM TOKEN 정보를 서버에 등록 합니다.
                                 let _ = self.viewModel.setFcmTokenRegister()
                                 /// 로그인 페이지를 종료 여부를 넘깁니다.
@@ -337,8 +339,23 @@ class LoginViewController: BaseViewController {
                                     /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
                                     if let tabbar = TabBarView.tabbar
                                     {
-                                        /// 페이지 종료 완료시 탭인덱스를 기본 메인 홈으로 이동 하며 웹 쿠키를 신규로 업데이트 합니다.
-                                        tabbar.setSelectedIndex( .home, object: WebPageConstants.URL_MAIN, updateCookies: true)
+                                        Slog("LoginView popController")
+                                        /// 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 입니다.
+                                        if let link = BaseViewModel.shared.getInDataAppStartURL(),
+                                           link.isValid
+                                        {
+                                            Slog("LoginView popController Link")
+                                            /// 진행중인 탭 인덱스를 초기화 합니다.
+                                            tabbar.setIngTabToRootController()
+                                            /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
+                                            tabbar.setSelectedIndex(.home, object: link)
+                                        }
+                                        else
+                                        {
+                                            Slog("LoginView popController Home")
+                                            /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                                            tabbar.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN, updateCookies: true)
+                                        }
                                     }
                                 }
                             }

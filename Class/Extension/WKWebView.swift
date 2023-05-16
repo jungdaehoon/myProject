@@ -229,7 +229,7 @@ extension WKWebView {
         
         let bakFrame     = self.frame
         let bakSuperView = self.superview
-        let bakIndex     = self.superview?.subviews.index(of: self)
+        let bakIndex     = self.superview?.subviews.firstIndex(of: self)
         
         // remove WebView from superview & put container view
         self.removeFromSuperview()

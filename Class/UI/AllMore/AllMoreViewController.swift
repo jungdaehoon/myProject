@@ -70,7 +70,7 @@ class AllMoreViewController: BaseViewController {
     //MARK: - 지원 메서드 입니다.
     /**
      전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.
-     - Date : 2022.04.17
+     - Date : 2023.04.17
      */
     func setInitWebView()
     {
@@ -82,6 +82,8 @@ class AllMoreViewController: BaseViewController {
         self.webDisplayView.isHidden = self.isWebViewHidden
         /// 웹 화면 케시를 전부 삭제 합니다.
         self.messageHandler!.setWebViewClearCache()
+        /// 웹 화면 히스토리를 초기화 합니다.
+        self.webView!.clearHistory()
         /// 화면을 초기화 합니다.
         self.webView!.load(URLRequest(url: URL(string: "about:blank")!))
     }
@@ -89,7 +91,7 @@ class AllMoreViewController: BaseViewController {
     
     /**
      화면 유닛 데이터를 가져와 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.03.16
+     - Date : 2023.03.16
      */
     override func setDisplayData(){
         /// 전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.

@@ -181,13 +181,21 @@ class IntroViewController: BaseViewController {
                         Slog("NC.S(response!.code) : \(NC.S(response!.code))")
                         if NC.S(response!.code) == LOGIN_CODE._code_0000_.rawValue
                         {
-                            /// FCM PUSH Token 정보를 업로드 합니다.
-                            self.viewModel.setFcmTokenRegister().sink { result in
-                                /// 로그인 정상처리로 메인 페이지로 이동합니다.
-                                self.setMainDisplay()
-                            } receiveValue: { response in
-                                /// 로그인 정상처리로 메인 페이지로 이동합니다.
-                                self.setMainDisplay()
+                            /// 정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.
+                            self.viewModel.setKeyChainCustItem(NC.S(custItem.user_hp)).sink { success in
+                                if success
+                                {
+                                    /// 로그인 여부를 활성화 합니다.
+                                    BaseViewModel.loginResponse!.islogin = true
+                                    /// FCM PUSH Token 정보를 업로드 합니다.
+                                    self.viewModel.setFcmTokenRegister().sink { result in
+                                        /// 로그인 정상처리로 메인 페이지로 이동합니다.
+                                        self.setMainDisplay()
+                                    } receiveValue: { response in
+                                        /// 로그인 정상처리로 메인 페이지로 이동합니다.
+                                        self.setMainDisplay()
+                                    }.store(in: &self.viewModel.cancellableSet)
+                                }
                             }.store(in: &self.viewModel.cancellableSet)
                         }
                         else
@@ -233,8 +241,20 @@ class IntroViewController: BaseViewController {
         /// 현 페이지를 탭바 컨트롤로 변경 합니다.
         self.replaceController(viewController: tabController, animated: false) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                tabController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)
+                /// 자동 로그인으로 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 입니다.
+                if loginEnabled == false,
+                   let link = BaseViewModel.shared.getInDataAppStartURL(),
+                   link.isValid
+                {
+                    /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
+                    tabController.setSelectedIndex(.home, object: link)
+                }
+                else
+                {
+                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                    tabController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)
+                }
+                
             })
         }
     }

@@ -346,8 +346,9 @@ extension FullWebViewController {
                                 default:break
                                 }
                             }
-                            controller.view.backgroundColor = .clear
-                            self.pushController(controller, animated: true, animatedType: .up)
+                            controller.view.backgroundColor     = .clear
+                            controller.modalPresentationStyle   = .overFullScreen
+                            self.pushController(controller,modalPresent: true, animated: true, animatedType: .up)
                         }
                     }.store(in: &self.baseViewModel.cancellableSet)
                     decisionHandler(.allow, preferences)
@@ -369,7 +370,7 @@ extension FullWebViewController {
                             break
                         /// 환불 입니다.
                         case "C":
-                            mainURL = WebPageConstants.URL_ZERO_PAY_PURCHASE
+                            mainURL = WebPageConstants.URL_ZERO_PAY_PURCHASE_CANCEL
                             break
                         /// 신용 카드 구매 환불 입니다.
                         case "M":
@@ -397,7 +398,6 @@ extension FullWebViewController {
                     return
                 }
                 
-                
                 /// 이전 히스토리로 이동 이벤트 발생 입니다.
                 if NC.S(event).contains("historyBack")
                 {
@@ -414,7 +414,6 @@ extension FullWebViewController {
                     return
                 }
                 
-                
                 /// 외부 사파리 웹페이지로 이동 이벤트 합니다.
                 if NC.S(event).contains("externalLink")
                 {
@@ -427,7 +426,6 @@ extension FullWebViewController {
                     return
                 }
                 
-                
                 /// QRCode 스캔 오픈 요청 이벤트 입니다.
                 if NC.S(event).contains("qrCode")
                 {
@@ -435,8 +433,7 @@ extension FullWebViewController {
                     var params      = params
                     /// 제로페이에 데이터 리턴할 콜백 스크립트를 저장 합니다.
                     var scricptCB   = NC.S(params["callbackUrl"] as? String)
-                    ///  QRCode 스캔 하는 전체 화면 뷰어를 호출 합니다.
-                    OKZeroPayQRCaptureView(completion: { qrCodeCB in
+                    OKZeroPayQRCaptureView(params: params) { qrCodeCB in
                         switch qrCodeCB
                         {
                             /// QRCdoe 읽기 실패 입니다.
@@ -501,7 +498,7 @@ extension FullWebViewController {
                         }
                         decisionHandler(.allow, preferences)
                         return
-                    }, params: params).show()
+                    }.show()
                 }
                 else
                 {

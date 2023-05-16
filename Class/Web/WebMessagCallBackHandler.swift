@@ -533,7 +533,7 @@ class WebMessagCallBackHandler : NSObject  {
     {
         if let _ = BaseViewModel.loginResponse
         {
-            BaseViewModel.loginResponse?.islogin = true
+            BaseViewModel.loginResponse!.islogin = true
         }
     }
     

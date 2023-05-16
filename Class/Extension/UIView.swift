@@ -70,7 +70,7 @@ extension UIView {
     
     /**
      Xib View 를 가져 옵니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.0211
+     - Date : 2023.0211
      - returns
         - UIView Type
             > Xib 에서 가져온 UIView 를 리턴 합니다.
@@ -84,7 +84,7 @@ extension UIView {
     
     /**
      Xib View Layout  상위뷰 사이즈에 맞춰 고정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.0211
+     - Date : 2023.0211
      - Parameters :
             - view : 상위 뷰어에 사이즈 맞춰 고정할 뷰어 입니다.
      - returns
@@ -103,7 +103,7 @@ extension UIView {
     
     /**
      Xib 와 UIView Class 를 연결 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.0211
+     - Date : 2023.0211
      */
     func initView()
     {
@@ -115,7 +115,7 @@ extension UIView {
     
     /**
      연결된 UIViewcontroller 를 사용 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.02.16
+     - Date : 2023.02.16
      */
     var viewController : UIViewController
     {
@@ -190,15 +190,16 @@ extension UIView {
      - Date : 2023.05.11
      - Parameters:
         - controller : 이동할 타켓 컨트롤 뷰어 입니다.
+        - modalPresent : 모달 타입으로 페이지 이동 경우 입니다. ( default : false )
         - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
         - animationType : 페이지 이동할 효과 정보를 받습니다.  ( default : .left )
         - completion : 페이지 이동후 콜백 입니다.
      - returns : False
      */
-    func pushViewController( _ controller: UIViewController, animated: Bool = true, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {} )
+    func pushViewController( _ controller: UIViewController, modalPresent : Bool = false, animated: Bool = true,animatedType: AnimationType? = .left, completion: @escaping () -> Void = {} )
     {
         /// 타켓 뷰어를 페이지 이동 합니다.
-        self.viewController.pushController(controller, animated: animated, animatedType: animatedType,completion: completion)
+        self.viewController.pushController(controller, modalPresent:modalPresent, animated: animated, animatedType: animatedType,completion: completion)
     }
     
 
@@ -247,7 +248,7 @@ extension UIView {
     
     /**
      배경에 쉐도우 를 추가 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.05.03
+     - Date : 2023.05.03
      - Parameters:
         - rect : 배경 넓이 입니다.
         - alpha : 쉐도우 배경 컬러 알파 값입니다.
@@ -266,7 +267,7 @@ extension UIView {
     
     /**
      배경에 그라데이션 컬러를 하단에서 상단으로 추가 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.05.03
+     - Date : 2023.05.03
      - Parameters:
         - starColor : 시작 컬러 입니다.
         - endColor : 종료 컬러 입니다.
@@ -285,7 +286,7 @@ extension UIView {
     
     /**
      배경에 그라데이션 컬러를 오른쪽 하단에서 왼쪽 상단으로 추가 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2022.05.03
+     - Date : 2023.05.03
      - Parameters:
         - starColor : 시작 컬러 입니다.
         - endColor : 종료 컬러 입니다.

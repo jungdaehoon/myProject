@@ -202,7 +202,7 @@ class CMAlertView: UIView {
         let maxSize                     = CGSize(width: self.detailView.frame.size.width ,
                                                  height: UIScreen.main.bounds.height - self.alertView.frame.height )
         let textSize                    = textLabel.sizeThatFits(maxSize)
-        let textWidth                   = min(textSize.width, maxSize.width)
+        let _                           = min(textSize.width, maxSize.width)
         let textHeight                  = min(textSize.height, maxSize.height)
         
         self.detailViewHeight.constant  = textHeight

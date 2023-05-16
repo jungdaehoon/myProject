@@ -26,10 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// 시큐온 키패드 HotFix (23.04.10)
         /// 이전 프레임워크를 제거하고, 전달받은 프레임워크로 교체 이후, 아래 코드를 호출합니다.
         (XKConfigure.sharedInstance()! as AnyObject).setTlsCoinfgWithModule(TLS_MODULE_EXTERNAL_0, version: TLS_VERSION_1_2)
-        /// Fabric Crashlystics (크래시 리포트) 설정 합니다.
-        Fabric.sharedSDK().debug = true
-        /// FirebaseApp (FCM) 설정관련 연결 입니다.
+        /// FirebaseApp (FCM,Crashlystics) 설정관련 연결 입니다.
         FirebaseApp.configure()
+        /// Fabric Crashlystics (크래시 리포트) 디버깅 활성화 합니다.
+        Fabric.sharedSDK().debug = true
         /// 키체인 사용여부를 체크 합니다.
         self.viewModel.setKeyChainEnabled()
         /// 탈옥 단말 체크 합니다.
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let startUrl = remoteNotification["url"] as? String {
                     Slog("DID PUSH URL : \(startUrl)",category: .push )
                     /// PUSH 관련 정보 URL 을 받아 앱 메인에서 디스플레이 하도록 합니다.
-                    BaseViewModel.shared.pushUrl = startUrl
+                    BaseViewModel.shared.didPushUrl = startUrl
                 }
             }
             /// 외부에서 Link 정보를 받아 앱 실행 되는 경우 입니다. ( cereal://movepage?url=URL )
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
                     Slog("DID DEEPLINK URL : \(deeplink)",category: .deeplink )
                     /// DeepLink 접근할.URL 정보를 받습니다.
-                    BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+                    BaseViewModel.shared.didDeepLinkUrl = NC.S(deeplink)
                 }.store(in: &self.viewModel.cancellableSet)
             }
         }
@@ -73,13 +73,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date : 2023.04.06
      */
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        Slog("OPEN DEEPLINK : \(url)",category: .deeplink )
-        /// Deeplink 접근할 URL 정보를 요청 합니다.
-        self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
-            Slog("OPEN DEEPLINK URL : \(deeplink)",category: .deeplink )
-            /// DeepLink 접근할.URL 정보를 받습니다.
-            BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
-        }.store(in: &self.viewModel.cancellableSet)
+        /// 외부 데이터 실행 정보와, 로그인 되어있는 경우에만 실시간 딥링크를 처리 합니다.
+        if BaseViewModel.shared.didDeepLinkUrl.isValid == false,
+           let login = BaseViewModel.loginResponse,
+           login.islogin! == true
+        {
+            Slog("OPEN DEEPLINK : \(url)",category: .deeplink )
+            /// Deeplink 접근할 URL 정보를 요청 합니다.
+            self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
+                Slog("OPEN DEEPLINK URL : \(deeplink)",category: .deeplink )
+                /// DeepLink 접근할.URL 정보를 받습니다.
+                BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+            }.store(in: &self.viewModel.cancellableSet)
+        }
+        else
+        {
+            /// Deeplink 접근할 URL 정보를 요청 합니다.
+            self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
+                Slog("OPEN DEEPLINK URL : \(deeplink)",category: .deeplink )
+                /// DeepLink 접근할.URL 정보를 받습니다.
+                BaseViewModel.shared.didDeepLinkUrl = NC.S(deeplink)
+            }.store(in: &self.viewModel.cancellableSet)
+        }
         return true
     }
     
@@ -134,14 +149,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate
         /// 앱이 켜져있는 상태에서 푸쉬 알림을 눌렀을 때 입니다.
         if application.applicationState == .active
         {
-            if let url = userInfo["url"] as? String {
-                Slog("OPEN PUSH URL : \(url)",category: .push )
-                BaseViewModel.shared.pushUrl = url
-            }
-        }
-        else
-        {
-            /// PUSH 데이터를 넘깁니다.
             if let url = userInfo["url"] as? String {
                 Slog("OPEN PUSH URL : \(url)",category: .push )
                 BaseViewModel.shared.pushUrl = url

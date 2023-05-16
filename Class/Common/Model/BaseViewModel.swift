@@ -97,8 +97,12 @@ class BaseViewModel : NSObject {
     @Published public var logOut        : Bool              = false
     /// 딥링크 URL 정보를 가집니다. ( TabbarViewController:viewDidLoad  $deepLinkUrl 이벤트 입니다.   )
     @Published public var deepLinkUrl   : String            = ""
+    /// 딥링크로 앱 시작시 저장되는 정보 입니다.
+    public var didDeepLinkUrl           : String            = ""
     ///  PUSH URL 정보를 가집니다.
     @Published public var pushUrl       : String            = ""
+    ///  PUSH로 앱 시작시 저장되는 정보 입니다.
+    public var didPushUrl               : String            = ""
     /// 앱 시작시 받는 데이터 입니다.
     static var appStartResponse         : AppStartResponse? = AppStartResponse()
     /// 로그인 정보를 받습니다.
@@ -254,6 +258,35 @@ class BaseViewModel : NSObject {
     
     
     /**
+     DeepLink,Push 선택으로 들어 온 경우 데이터 찾아 리턴 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.02
+     - Parameters:False
+     - Throws : False
+     - returns :
+        - String
+            + 페이지 이동 할 링크 입니다.
+     */
+    func getInDataAppStartURL() -> String?
+    {
+        Slog("$deepLinkUrl.BaseViewModel.shared.didDeepLinkUrl : \(BaseViewModel.shared.didDeepLinkUrl)")
+        if BaseViewModel.shared.didDeepLinkUrl.isValid
+        {
+            let deepLink = BaseViewModel.shared.didDeepLinkUrl
+            BaseViewModel.shared.didDeepLinkUrl = ""
+            return deepLink
+        }
+        
+        if BaseViewModel.shared.didPushUrl.isValid
+        {
+            let pushLink = BaseViewModel.shared.didPushUrl
+            BaseViewModel.shared.didPushUrl = ""
+            return pushLink
+        }
+        return ""
+    }
+    
+    
+    /**
      메뉴 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.05.02
      - Parameters:
@@ -397,6 +430,38 @@ class BaseViewModel : NSObject {
             subject.send(model)
         }
         return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.( J.D.H  VER : 1.0.0 )
+     - Date : 2023.04.17
+     - Parameters:
+        - user_hp : 유저 휴대폰 정보를 받습니다.
+     - Throws : False
+     - returns :
+        - AnyPublisher<Bool?, Never>
+            +  정상 저장 여부를 리턴 합니다.
+     */
+    func setKeyChainCustItem( _ user_hp : String ) -> Future<Bool, Never> {
+        return Future<Bool, Never> { promise in
+            if let custItem = SharedDefaults.getKeyChainCustItem() {
+                if let response = BaseViewModel.loginResponse
+                {
+                    if let info = response.data
+                    {
+                        custItem.last_login_time    = info.Last_login_time
+                        custItem.token              = info.token
+                        custItem.user_no            = info.user_no
+                        custItem.user_hp            = user_hp
+                        SharedDefaults.setKeyChainCustItem(custItem)
+                        promise(.success(true))
+                        return
+                    }
+                }
+            }
+            promise(.success(false))
+        }
     }
     
     

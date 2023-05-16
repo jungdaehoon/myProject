@@ -279,7 +279,7 @@ class Utils {
 
 /**
  Nil 체크 하는 클래스 입니다.  ( J.D.H  VER : 1.0.0 )
-- Date : 2022.03.16
+- Date : 2023.03.16
 */
 class NC {
 

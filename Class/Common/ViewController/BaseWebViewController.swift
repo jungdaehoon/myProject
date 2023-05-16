@@ -118,6 +118,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
             if self.webView != nil
             {
                 self.webView!.isHidden  = false
+                Slog("webView!.urlLoad : \(url)")
                 self.webView!.urlLoad(url: url)
             }
         }

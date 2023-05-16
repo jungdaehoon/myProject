@@ -124,11 +124,8 @@ class TabBarView : UIView
                     /// 디폴트 버튼을 활성화 여부를 설정 합니다.
                     item.isSelected  = enabled
                     item.isEnabled   = enabled
-                    
                 }
             }
-            
-            
         }
     }
     
@@ -147,16 +144,8 @@ class TabBarView : UIView
             TabBarView.tabBackIndex             = TabBarView.tabSeletedIndex
             /// 현 탭 정보를 저장 합니다.
             TabBarView.tabSeletedIndex          = pageTag - 10
-            
-            /// 현 페이지 초기화합니다.
-            if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController
-            {
-                viewController.setDisplayData()
-            }
-
             Slog("TabBarView.tabBackIndex : \(TabBarView.tabBackIndex)")
             Slog("TabBarView.tabSeletedIndex : \(TabBarView.tabSeletedIndex)")
-            
             self.setDefault()
             self.setSeleted(subView, enabled: true)
         }
@@ -166,10 +155,14 @@ class TabBarView : UIView
     
     //MARK: - 버튼 이벤트 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        let btn : UIButton  = sender as! UIButton
-        Slog("btn.tag: \(btn.tag)")
-        let seletedIndex    = btn.tag - 10
-        TabBarView.tabbar!.selectedIndex    = seletedIndex
+        let btn : UIButton                  = sender as! UIButton
+        Slog("Tabbar SelectedIndex : \(btn.tag - 10)")
+        TabBarView.tabbar!.selectedIndex    = btn.tag - 10
+        /// 현 페이지 초기화합니다.
+        if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController
+        {
+            viewController.setDisplayData()
+        }
     }
 
 }
