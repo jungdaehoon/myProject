@@ -1050,14 +1050,14 @@ class WebMessagCallBackHandler : NSObject  {
                 if let controller = self.target
                 {
                     controller.popToRootController(animated: true) { firstViewController in
-                        /// 로그아웃 여부를 활성화 합니다.
-                        BaseViewModel.shared.logOut = true
+                        /// 재로그인 요청 합니다.
+                        BaseViewModel.shared.reLogin = true
                     }
                 }
                 else
                 {
-                    /// 로그아웃 여부를 활성화 합니다.
-                    BaseViewModel.shared.logOut = true
+                    /// 재로그인 요청 합니다.
+                    BaseViewModel.shared.reLogin = true
                 }
             }
         }.store(in: &self.cancellableSet)

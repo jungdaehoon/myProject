@@ -11,7 +11,7 @@ import UIKit
  하단 계좌 선택 뷰어 입니다.   ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.05
  */
-class BottomAccountListView: UIView {
+class BottomAccountListView: BaseView {
 
     /// 계좌 리스트뷰 최하단 포지션 입니다.
     @IBOutlet weak var accountListViewBottom: NSLayoutConstraint!

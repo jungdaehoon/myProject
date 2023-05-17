@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let startUrl = remoteNotification["url"] as? String {
                     Slog("DID PUSH URL : \(startUrl)",category: .push )
                     /// PUSH 관련 정보 URL 을 받아 앱 메인에서 디스플레이 하도록 합니다.
-                    BaseViewModel.shared.didPushUrl = startUrl
+                    BaseViewModel.shared.savePushUrl = startUrl
                 }
             }
             /// 외부에서 Link 정보를 받아 앱 실행 되는 경우 입니다. ( cereal://movepage?url=URL )
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
                     Slog("DID DEEPLINK URL : \(deeplink)",category: .deeplink )
                     /// DeepLink 접근할.URL 정보를 받습니다.
-                    BaseViewModel.shared.didDeepLinkUrl = NC.S(deeplink)
+                    BaseViewModel.shared.saveDeepLinkUrl = NC.S(deeplink)
                 }.store(in: &self.viewModel.cancellableSet)
             }
         }
@@ -70,31 +70,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      앱 실행중 딥링크 진입 입니다.
      - Description
         - cereal://movepage?url=URL정보로 약속합니다.
-     - Date : 2023.04.06
+     - Date : 2023.05.17
      */
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        /// 외부 데이터 실행 정보와, 로그인 되어있는 경우에만 실시간 딥링크를 처리 합니다.
-        if BaseViewModel.shared.didDeepLinkUrl.isValid == false,
-           let login = BaseViewModel.loginResponse,
-           login.islogin! == true
-        {
-            Slog("OPEN DEEPLINK : \(url)",category: .deeplink )
+        /// 앱이 현 활성화 상태인지를 체크 합니다.
+        self.viewModel.isAppEnabled(inAppStartType: .deeplink_type).sink(receiveValue: { isApp in
             /// Deeplink 접근할 URL 정보를 요청 합니다.
             self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
                 Slog("OPEN DEEPLINK URL : \(deeplink)",category: .deeplink )
-                /// DeepLink 접근할.URL 정보를 받습니다.
-                BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+                /// 앱 활성화 상태인 경우 입니다.
+                if isApp
+                {
+                    /// DeepLink 접근할.URL 정보로 페이지 이동 하도록 합니다.
+                    BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+                }
+                else
+                {
+                    /// DeepLink 접근할.URL 정보를 앱 활성화 후 사용하도록 저장합니다.
+                    BaseViewModel.shared.saveDeepLinkUrl = NC.S(deeplink)
+                }
             }.store(in: &self.viewModel.cancellableSet)
-        }
-        else
-        {
-            /// Deeplink 접근할 URL 정보를 요청 합니다.
-            self.viewModel.getDeepLink(deelLinkUrl: url).sink { deeplink in
-                Slog("OPEN DEEPLINK URL : \(deeplink)",category: .deeplink )
-                /// DeepLink 접근할.URL 정보를 받습니다.
-                BaseViewModel.shared.didDeepLinkUrl = NC.S(deeplink)
-            }.store(in: &self.viewModel.cancellableSet)
-        }
+        }).store(in: &self.viewModel.cancellableSet)
         return true
     }
     
@@ -139,21 +135,29 @@ extension AppDelegate : UNUserNotificationCenterDelegate
     
     /**
      실시간 PUSH 정보를 처리 합니다.
-     - Date : 2023.04.06
+     - Date : 2023.05.17
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
     {
-        let application = UIApplication.shared
         let userInfo = response.notification.request.content.userInfo
         Slog("OPEN PUSH  : \(userInfo)",category: .push )
-        /// 앱이 켜져있는 상태에서 푸쉬 알림을 눌렀을 때 입니다.
-        if application.applicationState == .active
-        {
+        /// 앱이 현 활성화 상태인지를 체크 합니다.
+        self.viewModel.isAppEnabled(inAppStartType: .push_type).sink(receiveValue: { isApp in
             if let url = userInfo["url"] as? String {
                 Slog("OPEN PUSH URL : \(url)",category: .push )
-                BaseViewModel.shared.pushUrl = url
+                /// 앱 활성화 상태인 경우 입니다.
+                if isApp
+                {
+                    /// PUSH 받은.URL 정보로 페이지 이동 하도록 합니다.
+                    BaseViewModel.shared.pushUrl     = url
+                }
+                else
+                {
+                    /// 앱 활성화후 사용하도록 PUSH 에서 받은 URL 정보를 저장 합니다.
+                    BaseViewModel.shared.savePushUrl = url
+                }
             }
-        }
+        }).store(in: &self.viewModel.cancellableSet)
         completionHandler()
     }
 }

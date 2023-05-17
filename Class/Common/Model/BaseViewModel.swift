@@ -29,6 +29,16 @@ struct AppShield  {
     var error_msg    : String?
 }
 
+/**
+ 앱 활성화 여부를 체크 타입 합니다. ( J.D.H  VER : 1.0.0 )
+ - Date : 2023.05.17
+ */
+enum IN_APP_START_TYPE : Int {
+    /// 푸시로 타입입니다.
+    case push_type      = 10
+    /// 딥링크 타입 입니다.
+    case deeplink_type  = 11
+}
 
 /**
  앱 시작시 관련 정보 메뉴 리스트 URL 정보 타입 입니다. ( J.D.H  VER : 1.0.0 )
@@ -93,16 +103,16 @@ class BaseViewModel : NSObject {
     private var curCancellable: AnyCancellable?
     var cancellableSet                                      = Set<AnyCancellable>()
     public static let shared            : BaseViewModel     = BaseViewModel()
-    /// 로그아웃 여부를 가집니다. ( TabbarViewController:viewDidLoad  $logOut 이벤트 입니다.   )
-    @Published public var logOut        : Bool              = false
-    /// 딥링크 URL 정보를 가집니다. ( TabbarViewController:viewDidLoad  $deepLinkUrl 이벤트 입니다.   )
+    /// 로그아웃 여부를 가집니다. ( TabbarViewController:viewDidLoad $reLogin 이벤트 입니다.   )
+    @Published public var reLogin       : Bool              = false
+    /// 딥링크 URL 정보를 가집니다. ( TabbarViewController:viewDidLoad $deepLinkUrl 이벤트 입니다.   )
     @Published public var deepLinkUrl   : String            = ""
-    /// 딥링크로 앱 시작시 저장되는 정보 입니다.
-    public var didDeepLinkUrl           : String            = ""
+    /// 딥링크 정보를 미리 저장하는 정보 입니다. ( 로그인 이후 사용 합니다. )
+    public var saveDeepLinkUrl          : String            = ""
     ///  PUSH URL 정보를 가집니다.
     @Published public var pushUrl       : String            = ""
-    ///  PUSH로 앱 시작시 저장되는 정보 입니다.
-    public var didPushUrl               : String            = ""
+    ///  PUSH 정보를 미리 저장하는 정보 입니다. ( 로그인 이후 사용 합니다. )
+    public var savePushUrl              : String            = ""
     /// 앱 시작시 받는 데이터 입니다.
     static var appStartResponse         : AppStartResponse? = AppStartResponse()
     /// 로그인 정보를 받습니다.
@@ -126,10 +136,10 @@ class BaseViewModel : NSObject {
      상황별 인터페이스를 요청 합니다.( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.23
      - Parameters:
-        - showLoading       : 로딩 디스플레이 여부 입니다.
-        - appExit           : 예외 사항일 경우 앱 종료로 연결할지여부 입니다.
-        - errorPopEnabled   : 공통 error 팝업을 사용할지 여부 입니다.
-        - errorHandler      : ResponseError 헨들러 입니다.
+        - showLoading       : 로딩 디스플레이 여부 입니다. ( default = false )
+        - appExit           : 예외 사항일 경우 앱 종료로 연결할지여부 입니다. ( default = false )
+        - errorPopEnabled   : 공통 error 팝업을 사용할지 여부 입니다. ( default = true )
+        - errorHandler      : ResponseError 헨들러 입니다. ( default = nil )
         - publisher         : 타입별 데이터를 연결 합니다.
         - completion        : http 요청할 파라미터 정보 입니다.
      - Throws : False
@@ -188,6 +198,12 @@ class BaseViewModel : NSObject {
                     }
                 }
             }, receiveValue: { value in
+                /// Http Error 공통 팝업을 사용하지 않을 경우 입니다.
+                if errorPopEnabled == false
+                {
+                    completion?(value)
+                    return
+                }
                 /// 로딩을 종료 합니다.
                 if showLoading { LoadingView.default.hide() }
                 let code = value.code == nil ? NC.S(value.result_cd) : NC.S(value.code)
@@ -200,8 +216,8 @@ class BaseViewModel : NSObject {
                         DispatchQueue.main.async {
                             /// 로그인 요청을 다시 안내하는 팝업을 오픈 합니다.
                             CMAlertView().setAlertView(detailObject: "고객님의 소중한 개인정보 \n보호를 위해  재로그인 부탁드립니다." as AnyObject, cancelText: "확인") { event in
-                                /// 로그아웃 여부를 활성화 합니다.
-                                BaseViewModel.shared.logOut = true
+                                /// 로그인 페이지로 이동합니다.
+                                BaseViewModel.shared.reLogin = true
                             }
                         }
                         return
@@ -259,7 +275,7 @@ class BaseViewModel : NSObject {
     
     /**
      DeepLink,Push 선택으로 들어 온 경우 데이터 찾아 리턴 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.02
+     - Date : 2023.05.17
      - Parameters:False
      - Throws : False
      - returns :
@@ -268,24 +284,116 @@ class BaseViewModel : NSObject {
      */
     func getInDataAppStartURL() -> String?
     {
-        Slog("$deepLinkUrl.BaseViewModel.shared.didDeepLinkUrl : \(BaseViewModel.shared.didDeepLinkUrl)")
-        if BaseViewModel.shared.didDeepLinkUrl.isValid
+        if BaseViewModel.shared.saveDeepLinkUrl.isValid
         {
-            let deepLink = BaseViewModel.shared.didDeepLinkUrl
-            BaseViewModel.shared.didDeepLinkUrl = ""
+            let deepLink = BaseViewModel.shared.saveDeepLinkUrl
+            BaseViewModel.shared.saveDeepLinkUrl = ""
             return deepLink
         }
         
-        if BaseViewModel.shared.didPushUrl.isValid
+        if BaseViewModel.shared.savePushUrl.isValid
         {
-            let pushLink = BaseViewModel.shared.didPushUrl
-            BaseViewModel.shared.didPushUrl = ""
+            let pushLink = BaseViewModel.shared.savePushUrl
+            BaseViewModel.shared.savePushUrl = ""
             return pushLink
         }
         return ""
     }
     
     
+    /**
+     앱 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.17
+     - Parameters:
+        - inAppStartType : 앱 활성화 여부를 체크하는 타입 입니다.
+     - Throws : False
+     - returns :
+        - Future<Bool, Never>
+            + 앱 활성화 여부를 리턴 합니다.
+     */
+    func isAppEnabled( inAppStartType : IN_APP_START_TYPE ) -> Future<Bool, Never> {
+        return Future<Bool, Never> { promise in
+            /// 로그인 여부를 체크 합니다.
+            if let login = BaseViewModel.loginResponse,
+               login.islogin! == true
+            {
+                /// 로그인 상태에서 세션이 유지되고 있는지를 체크 합니다.
+                self.isSessionEnabeld().sink { result in
+                    /// 요청 비정상 처리로 세션 유지 실패로 리턴 합니다.
+                    promise(.success(false))
+                    /// 재로그인 요청 합니다.
+                    BaseViewModel.shared.reLogin = true
+                } receiveValue: { sessionSesponse in
+                    /// 앱 활성화 여부를 체크 합니다.
+                    var isEnabled = true
+                    /// 세션 유지가 정상인지를 체크 합니다.
+                    if let response = sessionSesponse,
+                       let code     = response.code,
+                       code         == "0000"
+                    {
+                        /// 활성화 여부 타입 입니다.
+                        switch inAppStartType
+                        {
+                            case .push_type:
+                                /// 저장된 PUSH 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                                if BaseViewModel.shared.savePushUrl.isValid {
+                                    /// 앱 비활성화 타입으로 변경 합니다.
+                                    isEnabled = false
+                                }
+                            case .deeplink_type:
+                                /// 저장된 DeepLink 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                                if BaseViewModel.shared.saveDeepLinkUrl.isValid{
+                                    /// 앱 비활성화 타입으로 변경 합니다.
+                                    isEnabled = false
+                                }
+                        }
+                    }
+                    else
+                    {
+                        /// 앱 비활성화 타입으로 변경 합니다.
+                        isEnabled                    = false
+                        /// 재로그인 요청 합니다.
+                        BaseViewModel.shared.reLogin = true
+                    }
+                    /// 앱 타입을 리턴 합니다.
+                    promise(.success(isEnabled))
+                }.store(in: &self.cancellableSet)
+            }
+            else
+            {
+                /// 비로그인으로 앱 비활성화 타입으로 리턴 합니다.
+                promise(.success(false))
+            }
+        }
+    }
+    
+    
+    /**
+     앱 세션 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.17
+     - Parameters:False
+     - Throws : False
+     - returns :
+        - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
+            + InsertPedometerTermsResponse : 앱 활성화 여부를 리턴 합니다.
+     */
+    func isSessionEnabeld() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<InsertPedometerTermsResponse?,ResponseError>()
+        requst( errorPopEnabled: false ) { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 만보게 약관 동의를 요청 합니다.
+            return NetworkManager.requestInsertPedometerTerms()
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+
     /**
      메뉴 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.05.02
@@ -327,20 +435,16 @@ class BaseViewModel : NSObject {
     func getAppMenuList( menuID : MENU_LIST ) -> Future<String, Never>
     {
         return Future<String, Never> { promise in
-            if let response = BaseViewModel.appStartResponse
+            if let response = BaseViewModel.appStartResponse,
+               let data     = response.data,
+               let menulist = data.menu_list
             {
-                if let data = response.data
+                for info in menulist
                 {
-                    if let menulist = data.menu_list
+                    if info.menu_id! == menuID.rawValue
                     {
-                        for info in menulist
-                        {
-                            if info.menu_id! == menuID.rawValue
-                            {                                
-                                promise(.success( AlamofireAgent.domainUrl  + info.url! ))
-                                return
-                            }
-                        }
+                        promise(.success( AlamofireAgent.domainUrl  + info.url! ))
+                        return
                     }
                 }
             }
@@ -356,7 +460,7 @@ class BaseViewModel : NSObject {
      - Throws : False
      - returns :
         - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-            +  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
+            +  PedometerTermsAgreeResponse : 약관동의 여부를 리턴 합니다.
      */
     func getPTTermAgreeCheck() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
@@ -520,8 +624,7 @@ class BaseViewModel : NSObject {
     {
         return Future<AppShield, Never> { promise in
             /// 앱 실드 여부 체크 입니다.
-            AppshieldManager.sharedInstance.authApp { result in
-                
+            AppshieldManager.sharedInstance.authApp { result in                
                 switch result {
                 case let .success(data):
                     // handle success
@@ -540,7 +643,6 @@ class BaseViewModel : NSObject {
                     }
                     promise(.success(self.appShield))
                     return
-                    
                 }
             }
         }

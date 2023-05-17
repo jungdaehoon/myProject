@@ -12,7 +12,7 @@ import UIKit
  제휴 은행 리스트 하단 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.05.04
  */
-class BottomBankListView: UIView {
+class BottomBankListView: BaseView {
 
     /// 은행 리스트 뷰어의 최하단 위치 값입니다.
     @IBOutlet weak var bankListViewBottom: NSLayoutConstraint!

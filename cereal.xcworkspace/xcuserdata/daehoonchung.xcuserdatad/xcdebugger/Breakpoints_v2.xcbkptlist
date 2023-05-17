@@ -7,112 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F9DCBF74-01C8-45DE-B28E-7772360A75B1"
+            uuid = "968550A5-1565-49F0-90EA-0262C2438680"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/UI/Intro/IntroViewController.swift"
+            filePath = "Class/Common/ViewController/BaseWebViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "setAppChecking()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "54AAEA14-AF3F-4DCC-8D4E-73737EA48712"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/UI/Finance/FinanceViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "setDisplayData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "75B59208-2F49-4233-AA5D-DF49E06DE3A9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/UI/Login/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
-            landmarkName = "setLogin()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "75B59208-2F49-4233-AA5D-DF49E06DE3A9 - 483aea8f01adfff3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIViewController&gt;) -&gt; () in closure #2 (Swift.Bool) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "344"
-                  endingLineNumber = "344"
-                  offsetFromSymbolStart = "252">
-               </Location>
-               <Location
-                  uuid = "75B59208-2F49-4233-AA5D-DF49E06DE3A9 - 483aea8f01adfff3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIViewController&gt;) -&gt; () in closure #2 (Swift.Bool) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "344"
-                  endingLineNumber = "344"
-                  offsetFromSymbolStart = "356">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4D4AC76C-3EDE-40F0-BFB8-5295C5D36CFD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/UI/Main/TabbarViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "setSelectedIndex(_:object:updateCookies:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "79DC4E04-EC5F-49A3-8C00-01FF13C012C5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/UI/AllMore/AllMoreViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
-            landmarkName = "webView(_:decidePolicyFor:preferences:decisionHandler:)"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "initWebPage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

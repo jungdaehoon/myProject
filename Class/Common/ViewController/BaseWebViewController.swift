@@ -124,8 +124,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    
-    
+        
     /**
      웹 페이지를 빈화면으로 설정 합니다 ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.20

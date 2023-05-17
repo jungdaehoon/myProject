@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03A8B402B8ABD84636006B8B /* Pods_cereal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740F24DF294204F2C066E1 /* Pods_cereal.framework */; };
 		8D159EA329EF754000918CC0 /* ZeroPayQRCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */; };
+		8D17C9582A14BDD4001CB173 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D17C9572A14BDD4001CB173 /* BaseView.swift */; };
 		8D1C97F42A01DF1000A4BA50 /* BottomBankListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C97F32A01DF1000A4BA50 /* BottomBankListView.swift */; };
 		8D1C97F62A01DF1600A4BA50 /* BottomBankListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1C97F52A01DF1600A4BA50 /* BottomBankListView.xib */; };
 		8D1C97F92A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C97F72A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift */; };
@@ -234,6 +235,7 @@
 		80C3106D529C4F05193371E0 /* Pods-cereal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.release.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.release.xcconfig"; sourceTree = "<group>"; };
 		8CF5385A8BC1A2DBDC899E25 /* Pods-cereal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.debug.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.debug.xcconfig"; sourceTree = "<group>"; };
 		8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeResponse.swift; sourceTree = "<group>"; };
+		8D17C9572A14BDD4001CB173 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		8D1C97F32A01DF1000A4BA50 /* BottomBankListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBankListView.swift; sourceTree = "<group>"; };
 		8D1C97F52A01DF1600A4BA50 /* BottomBankListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBankListView.xib; sourceTree = "<group>"; };
 		8D1C97F72A01EA0300A4BA50 /* BottomBankListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBankListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -974,6 +976,7 @@
 				8D205EFF29D1346E00F43C99 /* WebView */,
 				8D205F0029D1346E00F43C99 /* BottomTermsView */,
 				8D205F0529D1346E00F43C99 /* AlertView */,
+				8D17C9572A14BDD4001CB173 /* BaseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1639,6 +1642,7 @@
 				8D205F8929D1346F00F43C99 /* CMAlertView.swift in Sources */,
 				8D205F6F29D1346F00F43C99 /* WebPageConstants.swift in Sources */,
 				8D205F2229D1346F00F43C99 /* FullWebViewController.swift in Sources */,
+				8D17C9582A14BDD4001CB173 /* BaseView.swift in Sources */,
 				8D205F5C29D1346F00F43C99 /* NSObject.swift in Sources */,
 				8D205F3E29D1346F00F43C99 /* TopUserInfoView.swift in Sources */,
 				8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */,

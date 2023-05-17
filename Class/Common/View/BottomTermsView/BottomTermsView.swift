@@ -35,7 +35,7 @@ struct TERMS_INFO {
  하단 디스플레이 할 약관 동의 관련 안내 팝업입니다.
  - Date : 2023.03.15
  */
-class BottomTermsView: UIView {
+class BottomTermsView: BaseView {
 
     
     /// 버튼 팝업 종료 이벤트를 넘깁니다.

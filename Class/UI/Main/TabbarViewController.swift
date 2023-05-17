@@ -76,16 +76,20 @@ class TabbarViewController: UITabBarController {
         tabBar.layer.applyShadow(color: .gray, alpha: 0.2, x: 0, y: 0, blur: 12)
         /// Notification 관련 이벤트를 연결 합니다.
         self.setNotification()
-        /// 로그아웃 여부를 체크 합니다.
-        BaseViewModel.shared.$logOut.sink { value in
+        /// 재로그인 이벤트 입니다.
+        BaseViewModel.shared.$reLogin.sink { value in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !value { return }
+            /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+            self.setCommonViewRemove()
+            /// 진행중인 탭 인덱스를 초기화 합니다.
+            self.setIngTabToRootController()
             /// 로그인 페이지를 오픈 합니다.
             self.setDisplayLogin( animation: true ) { success in
                 if success
                 {
-                    /// 로그아웃을. false 변경 합니다.
-                    BaseViewModel.shared.logOut = false
+                    /// 재로그인 요청을 비활성화 합니다.
+                    BaseViewModel.shared.reLogin = false
                     /// 탭 인덱스를 기본 홈으로 설정 합니다.
                     self.selectedIndex          = 2
                 }
@@ -99,7 +103,7 @@ class TabbarViewController: UITabBarController {
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !url.isValid { return }
             /// 앱 시작시 받을수 있는 딥링크 데이터를 초기화 합니다.
-            BaseViewModel.shared.didDeepLinkUrl = ""
+            BaseViewModel.shared.saveDeepLinkUrl = ""
             /// 로그인 정보가 있는지를 체크 합니다.
             if let login = BaseViewModel.loginResponse
             {
@@ -133,7 +137,7 @@ class TabbarViewController: UITabBarController {
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !url.isValid  { return }
             /// 앱 시작시 받을수 있는 PUSH 데이터를 초기화 합니다.
-            BaseViewModel.shared.didPushUrl = ""
+            BaseViewModel.shared.savePushUrl = ""
             /// 로그인 정보가 있는지를 체크 합니다.
             if let login = BaseViewModel.loginResponse {
                 if login.islogin!
@@ -277,13 +281,38 @@ class TabbarViewController: UITabBarController {
 extension UITabBarController
 {
     
+    /**
+     현 진행중인 안내 뷰어 를 전부 초기화 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.17
+     - Parameters:False
+     - returns :False
+     */
+    func setCommonViewRemove(){
+        let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+        DispatchQueue.main.async {
+            _ = base!.subviews.map({
+                if $0 is BaseView { $0.removeFromSuperview() }
+            })
+        }
+    }
+    
+    
+    /**
+     현 진행중인 페이지를 root 페이지로 초기화 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date : 2023.05.17
+     - Parameters:False
+     - returns :False
+     */
     func setIngTabToRootController(){
+        /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+        self.setCommonViewRemove()
         /// 이전 진행중인 ViewController 을 초기화 합니다.
         if let viewController = self.viewControllers![self.selectedIndex] as? BaseViewController
         {
             viewController.popToRootController(animated: false)
         }
     }
+    
     
     /**
      텝 이동시 해당 텝에서 체크 할 데이터를 추가합니다.  ( J.D.H  VER : 1.0.0 )
@@ -308,8 +337,6 @@ extension UITabBarController
                 break;
                 /// 홈 입니다.
             case .home :
-                
-                
                 if let home = self.viewControllers![tabIndex.rawValue] as? HomeViewController
                 {
                     if object is String,

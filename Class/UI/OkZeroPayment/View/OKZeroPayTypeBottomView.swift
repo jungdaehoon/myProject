@@ -29,7 +29,7 @@ enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
  제로페이 서비스 안내 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.28
  */
-class OKZeroPayTypeBottomView: UIView {
+class OKZeroPayTypeBottomView: BaseView {
 
     /// 타입 선택시 이벤트 입니다.
     var btnEvent                    : (( _ event : ZEROPAY_TYPE_BOTTOM_BTN ) -> Void)? = nil

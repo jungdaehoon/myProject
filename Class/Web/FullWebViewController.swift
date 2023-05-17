@@ -348,7 +348,7 @@ extension FullWebViewController {
                             }
                             controller.view.backgroundColor     = .clear
                             controller.modalPresentationStyle   = .overFullScreen
-                            self.pushController(controller,modalPresent: true, animated: true, animatedType: .up)
+                            self.pushController(controller, animated: true, animatedType: .up)
                         }
                     }.store(in: &self.baseViewModel.cancellableSet)
                     decisionHandler(.allow, preferences)

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import WebKit
 
 
 /**
@@ -339,20 +339,19 @@ class LoginViewController: BaseViewController {
                                     /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
                                     if let tabbar = TabBarView.tabbar
                                     {
-                                        Slog("LoginView popController")
-                                        /// 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 입니다.
+                                        /// 비로그인 상태에서 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 받은 데이터롤 가져 옵니다.
                                         if let link = BaseViewModel.shared.getInDataAppStartURL(),
                                            link.isValid
                                         {
-                                            Slog("LoginView popController Link")
                                             /// 진행중인 탭 인덱스를 초기화 합니다.
-                                            tabbar.setIngTabToRootController()
+                                            tabbar.setIngTabToRootController()                                            
                                             /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
-                                            tabbar.setSelectedIndex(.home, object: link)
+                                            let link = "\(WebPageConstants.URL_MAIN)?url=\(link)"
+                                            /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
+                                            tabbar.setSelectedIndex(.home, object: link, updateCookies: true)
                                         }
                                         else
                                         {
-                                            Slog("LoginView popController Home")
                                             /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
                                             tabbar.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN, updateCookies: true)
                                         }

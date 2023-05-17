@@ -12,7 +12,7 @@ import UIKit
  날짜 정보를 PickerView 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.17
  */
-class DatePickerView: UIView {
+class DatePickerView: BaseView {
 
     @IBOutlet weak var pickerView: PickerView!
     /// 왼쪽 버튼 팝업 종료 이벤트를 넘깁니다.

@@ -46,12 +46,10 @@ class TabBarView : UIView
      */
     func initTabBarView(){
         /// Xib 연결 합니다.
-        self.commonInit()
-        
+        self.commonInit()        
         /// 아이템 들 넓이를 설정 합니다.
         self.itemWidth.constant  = (UIScreen.main.bounds.size.width - 20) / 5
         self.itemHeight.constant = self.frame.size.height
-        //Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
     }
     
     
@@ -157,11 +155,19 @@ class TabBarView : UIView
     @IBAction func btn_action(_ sender: Any) {
         let btn : UIButton                  = sender as! UIButton
         Slog("Tabbar SelectedIndex : \(btn.tag - 10)")
+        /// 변경 인덱스 정보를 적용 합니다.
         TabBarView.tabbar!.selectedIndex    = btn.tag - 10
         /// 현 페이지 초기화합니다.
         if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController
         {
             viewController.setDisplayData()
+        }
+        /// 이전 웹페이지를 초기화 합니다.
+        if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabBackIndex] as? BaseViewController ,
+           TabBarView.tabSeletedIndex != TabBarView.tabBackIndex
+        {
+            /// 이전 페이지의 웹뷰를 초기화 합니다.
+            viewController.initWebPage()
         }
     }
 
