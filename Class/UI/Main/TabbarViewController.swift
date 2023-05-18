@@ -323,7 +323,7 @@ extension UITabBarController
         - updateCookies : 탭 이동시 쿠키 값을 업로드 할지 여부를 받습니다.
      - returns :False
      */
-    func setSelectedIndex( _ tabIndex : TAB_STATUS, object : Any? = nil, updateCookies : Bool = false ){
+    func setSelectedIndex( _ tabIndex : TAB_STATUS, object : Any? = nil, updateCookies : Bool = false, completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
         if object != nil
         {
             Slog("setSelectedIndex : \(tabIndex.rawValue)")
@@ -342,7 +342,12 @@ extension UITabBarController
                     if object is String,
                        let value = object as? String
                     {
-                        home.loadMainURL(value, updateCookies: updateCookies)
+                        home.loadMainURL(value, updateCookies: updateCookies) { success in
+                            if completion != nil
+                            {
+                                completion!(home)
+                            }
+                        }                        
                     }
                 }
                 break;

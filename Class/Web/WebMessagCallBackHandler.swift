@@ -461,6 +461,7 @@ class WebMessagCallBackHandler : NSObject  {
     {
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks = body[0] as! [Any]
+        /// 연락처 접근 허용 여부를 요청 합니다.
         self.viewModel.isContactAuthorization().sink { success in
             if success
             {

@@ -175,7 +175,7 @@ class AllMoreViewController: BaseViewController {
             self.cashReceiptInfo!.setDisplay(titleName: "현금영수증", menus: menus)
             self.stackView.addArrangedSubview(self.cashReceiptInfo!)
         }
-         */
+        */
         
         /// 결제서비스 영역 뷰어를 추가합니다.
         if self.payServiceInfo  == nil
@@ -188,10 +188,10 @@ class AllMoreViewController: BaseViewController {
                 menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
             }
             /// 제로페이 QR 결제 정보를 체크 합니다.
-            //if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
-            //{
+            if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
+            {
                 menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", subiCon: "NEW!", menuType: .rightimg))
-            //}
+            }
             /// 제로페이 상품권 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_GIFT)
             {

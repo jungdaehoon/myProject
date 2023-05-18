@@ -28,7 +28,6 @@ class FinanceViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.loadMainURL(WebPageConstants.URL_FINANCE_MAIN)
     }
 
     /**

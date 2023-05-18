@@ -192,9 +192,9 @@ class BaseViewModel : NSObject {
                             Slog("[ NETWORK_ERROR_DATA_Unknown ]\n\(errMsg)")
                         case .timeout(let errMsg):
                             let _ =  errorHandler!(.timeout(errMsg))
-                            
                             Slog("[ NETWORK_ERROR_DATA_Timeout ]\n\(errMsg)")
                         }
+                        HttpErrorPop().show()
                     }
                 }
             }, receiveValue: { value in

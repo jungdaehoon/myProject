@@ -346,9 +346,27 @@ class LoginViewController: BaseViewController {
                                             /// 진행중인 탭 인덱스를 초기화 합니다.
                                             tabbar.setIngTabToRootController()                                            
                                             /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
-                                            let link = "\(WebPageConstants.URL_MAIN)?url=\(link)"
+                                            //let link = "\(WebPageConstants.URL_MAIN)?url=\(link)"
+                                            /*
                                             /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
-                                            tabbar.setSelectedIndex(.home, object: link, updateCookies: true)
+                                            tabbar.setSelectedIndex(.home, object: link, updateCookies: true) { controller in
+//                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+//                                                    controller.loadMainURL(link) { success in
+//
+//                                                    }
+//                                                })
+                                            }
+                                             */
+                                            
+                                            /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
+                                            tabbar.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN, updateCookies: true) { controller in
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                                    controller.loadMainURL(link) { success in
+                                                        
+                                                    }
+                                                })
+                                            }
+                                             
                                         }
                                         else
                                         {

@@ -29,7 +29,6 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Slog("HomeViewController loadTabPageURL")
-        self.loadTabPageURL(WebPageConstants.URL_MAIN)
     }
     
     

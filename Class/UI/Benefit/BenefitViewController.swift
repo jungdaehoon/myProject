@@ -24,7 +24,6 @@ class BenefitViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.loadMainURL(WebPageConstants.URL_BENEFIT_MAIN)
     }
     
 

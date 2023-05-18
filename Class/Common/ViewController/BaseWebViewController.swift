@@ -24,8 +24,8 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     var isWebViewHidden     : Bool = true
     /// 쿠키를 변경 할지 여부를 받습니다.
     var updateCookies       : Bool = true
-    
-    
+    /// 코드 선택시 이벤트 입니다.
+    var webLoadCompletion   : (( _ success : Bool ) -> Void)? = nil
     
     //MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -109,15 +109,17 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
      - Parameters:
         - url : 디스플레이할 웹 페이지 입니다.
         - updateCookies : 쿠키를 변경 할지 여부를 받습니다.
+        - loadCompletion : 웹 페이지 정상 로드 확인 입니다.
      - returns :False
      */
-    func loadMainURL( _ url: String, updateCookies : Bool = false  ) {
+    func loadMainURL( _ url: String, updateCookies : Bool = false, loadCompletion : (( _ success : Bool ) -> Void)? = nil  ) {
         self.isWebViewHidden    = false
         self.updateCookies      = updateCookies
         DispatchQueue.main.async {
             if self.webView != nil
             {
                 self.webView!.isHidden  = false
+                self.webLoadCompletion = loadCompletion
                 Slog("webView!.urlLoad : \(url)")
                 self.webView!.urlLoad(url: url)
             }
@@ -176,12 +178,21 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
-        Slog("webView didStartProvisionalNavigation")
+        /// 빈 배경 설정으로 리턴 합니다.
+        if webView.url!.absoluteString == "about:blank" { return }
+        Slog("webView didStartProvisionalNavigation url : \(webView.url!.absoluteString)")
         LoadingView.default.show()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        Slog("webView didFinish")
+        /// 빈 배경 설정으로 리턴 합니다.
+        if webView.url!.absoluteString == "about:blank" { return }
+        Slog("webView didFinish url : \(webView.url!.absoluteString)")
+        if let loadCompletion = self.webLoadCompletion
+        {
+            loadCompletion(true)
+        }
+        
         /// 웹페이지 정상 디스플레이 완료후 쿠키를 업데이트 합니다.
         if self.updateCookies == true
         {
@@ -202,13 +213,25 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        Slog("webView didFail")
+        /// 빈 배경 설정으로 리턴 합니다.
+        if webView.url!.absoluteString == "about:blank" { return }
+        Slog("webView didFail url : \(webView.url!.absoluteString)")
+        if let loadCompletion = self.webLoadCompletion
+        {
+            loadCompletion(true)
+        }
         LoadingView.default.hide()
     }
     
     // page 로드 실패
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        Slog("webView didFailProvisionalNavigation")
+        /// 빈 배경 설정으로 리턴 합니다.
+        if webView.url!.absoluteString == "about:blank" { return }
+        Slog("webView didFailProvisionalNavigation url : \(webView.url!.absoluteString)")
+        if let loadCompletion = self.webLoadCompletion
+        {
+            loadCompletion(true)
+        }
         LoadingView.default.hide()
     }
     
