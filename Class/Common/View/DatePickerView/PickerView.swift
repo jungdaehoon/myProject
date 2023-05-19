@@ -124,7 +124,6 @@ class PickerView: UIPickerView {
      */
     func setPicketInfoDate( minDate : String, maxDate : String, setDate : String )
     {
-        
         /// 최소 날짜 정보 입니다.
         self.minDate                = self.getStringToDate(minDate)
         /// 최대 날짜 정보 입니다.

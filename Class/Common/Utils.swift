@@ -292,7 +292,7 @@ class NC {
      */
     static func PE( _ object : Any?)
     {
-        /*
+        
         if object == nil
         {
             /// 네트워크 사용 불가능으로 안내 팝업을 오픈 합니다.
@@ -301,8 +301,6 @@ class NC {
                 exit(0)
             }
         }
-         */
-         
     }
     
     
@@ -412,7 +410,6 @@ class NC {
         {
             return ""
         }
-        //return object!
         return String.init(htmlEncodedString: object!)!
     }
     

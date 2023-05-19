@@ -85,7 +85,8 @@ class FullWebViewController: BaseViewController {
     var returnParam                     : String        = ""
     /// 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
     var titleBarType                    : Int           = 0
-    
+    /// 웹 디스플레이 여부를 체크 합니다.
+    var startWebDisplay                 : Bool          = false
     
     // MARK: - init
     /**
@@ -147,8 +148,12 @@ class FullWebViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Do any additional setup after loading the view.
-        self.setWebViewDisplay()
+        /// 웹 데이터 디스플레이 여부를 체크 합니다.
+        if self.startWebDisplay == false
+        {
+            self.setWebViewDisplay()
+        }
+        
     }
     
     
@@ -186,8 +191,10 @@ class FullWebViewController: BaseViewController {
             self.titleBarHeight.constant    = 56
         }
         
+        /// 웹 데이터 디스플레이 체크 합니다.
+        self.startWebDisplay    = true
         /// 타이틀을 세팅 합니다.
-        self.titleName.text = self.titleText
+        self.titleName.text     = self.titleText
         Slog("self.pageURL : \(self.pageURL)")
         self.loadMainURL(self.pageURL)
     }

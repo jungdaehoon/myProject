@@ -115,7 +115,7 @@ class TabbarViewController: UITabBarController {
                         /// 진행중인 탭 인덱스를 초기화 합니다.
                         self.setIngTabToRootController()
                         /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
-                        self.setSelectedIndex(.home, object: url)
+                        self.setSelectedIndex(.home, seletedItem: url)
                         BaseViewModel.shared.deepLinkUrl = ""
                     }
                 }
@@ -148,7 +148,7 @@ class TabbarViewController: UITabBarController {
                         /// 진행중인 탭 인덱스를 초기화 합니다.
                         self.setIngTabToRootController()
                         /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                        self.setSelectedIndex( .home, object: url)
+                        self.setSelectedIndex( .home, seletedItem: url)
                         /// PUSH 에서 받은 연결 정보를 초기화 합니다.
                         BaseViewModel.shared.pushUrl = ""
                     }
@@ -315,52 +315,68 @@ extension UITabBarController
     
     
     /**
-     텝 이동시 해당 텝에서 체크 할 데이터를 추가합니다.  ( J.D.H  VER : 1.0.0 )
+     하단 탭바 위치를 이동합니다.  ( J.D.H  VER : 1.0.0 )
+     - Description      : 탭을 이동시 추가 정보를 받아 디스플레이 할 수 있으며, 기본 위치 정보를 넘길 경우 해당 위치의 기본 데이터가 새로고침 됩니다. 추가 정보가 있는 경우에는 해당 정보가 정상 처리된 후 "completion" 콜백으로 최종 처리 이벤트를 받을 수 있습니다. 이벤트에는 탭 이동된 "BaseViewController" 정보를 파라미터로 받습니다.
      - Date : 2023.04.24
      - Parameters:
         - tabIndex      : 이동할 탭 넘버 입니다.
-        - object        : 추가할 데이터 입니다.
-        - updateCookies : 탭 이동시 쿠키 값을 업로드 할지 여부를 받습니다.
+        - seletedItem   : 추가할 데이터 입니다.
+        - updateCookies : 탭 이동시 추가한 URL 정보가 디스플레이 되면 쿠키 값을 업로드 할지 여부를 받습니다. ( 추가한 데이터가 있을 경우에만 사용 가능 합니다. )
+        - completion    : 탭 이동후 추가한 URL 정보가 디스플레이 되면 호출 됩니다. ( 추가한 데이터가 있을 경우에만 사용 가능 합니다. )
      - returns :False
      */
-    func setSelectedIndex( _ tabIndex : TAB_STATUS, object : Any? = nil, updateCookies : Bool = false, completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
-        if object != nil
+    func setSelectedIndex( _ tabIndex : TAB_STATUS, seletedItem : Any? = nil, updateCookies : Bool = false, completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
+        /// 탭 이동시 아이템이 있을 경우 아이템 데이터 우선으로 처리 합니다.
+        if let tabitem = seletedItem
         {
-            Slog("setSelectedIndex : \(tabIndex.rawValue)")
+            Slog("setSelectedIndex : \(tabIndex.rawValue), tabitem : \(tabitem)")
             switch tabIndex
             {
-                /// 월렛 입니다.
-            case .wallet :
-                break;
-                /// 혜택 입니다.
-            case .benefit :
-                break;
                 /// 홈 입니다.
-            case .home :
-                if let home = self.viewControllers![tabIndex.rawValue] as? HomeViewController
-                {
-                    if object is String,
-                       let value = object as? String
+                case .home :
+                    if let home = self.viewControllers![tabIndex.rawValue] as? HomeViewController
                     {
-                        home.loadMainURL(value, updateCookies: updateCookies) { success in
-                            if completion != nil
-                            {
-                                completion!(home)
+                        /// 탭 이동시 아이템 정보가 문자형태인지를 체크 합니다.
+                        if tabitem is String,
+                           NC.S(tabitem as? String).isValid
+                        {
+                            /// 탭 이동시 해당 item 위치로 이동 합니다.
+                            home.loadMainURL(NC.S(tabitem as? String), updateCookies: updateCookies) { success in
+                                if completion != nil
+                                {
+                                    completion!(home)
+                                }
                             }
-                        }                        
+                        }
                     }
-                }
-                break;
-                /// 금융 입니다.
-            case .finance :
-                //let remittance = self.viewControllers![selectedIndex] as! RemittanceViewController
-                //remittance._viewModel.displayData = object
-                break;
-                /// 전체 입니다.
-            case .allmenu :
-                break;
+                    break
+                default:break
             }
         }
+        /// 아이템이 없을 경우 기본 탭 데이터를 호출 합ㄴ디ㅏ.
+        else
+        {
+            /// 해당 탭 인덱스의 Controller 을 가져 옵니다.
+            if let contrller = self.viewControllers![tabIndex.rawValue] as? BaseViewController
+            {
+                /// 해당 탭의 웹뷰 초기화 여부를 체크 합니다.
+                if let _ = contrller.webView
+                {
+                    /// 해당 탭 실 데이터를 초기화 합니다.
+                    contrller.setDisplayData()
+                }
+                /// 해당 탭의 웹뷰가 초기화 되지 않은 경우 탭을 먼저 이동 후 실 데이터롤 초기화 합니다.
+                else
+                {
+                    /// 탭을 이동 합니다.
+                    self.selectedIndex = tabIndex.rawValue
+                    /// 해당 탭 실 데이터를 초기화 합니다.
+                    contrller.setDisplayData()
+                    return
+                }
+            }
+        }
+        /// 탭을 이동 합니다.
         self.selectedIndex = tabIndex.rawValue
     }
 }

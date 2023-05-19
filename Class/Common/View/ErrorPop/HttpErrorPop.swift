@@ -12,7 +12,7 @@ import UIKit
  네트워크 연결 처리가 비정상일 경우 안내 뷰어 입니다.    ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.05
  */
-class HttpErrorPop: UIView {
+class HttpErrorPop: BaseView {
 
     //MARK: - Init
     init(){

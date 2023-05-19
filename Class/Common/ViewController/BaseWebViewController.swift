@@ -156,6 +156,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         return createWebView
     }
     
+    
     func closeWebView(_ removeAll: Bool = false, withTag: Int) {
         if removeAll {
             for view in view.subviews {
@@ -167,6 +168,7 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
             view.viewWithTag(withTag)?.removeFromSuperview()
         }
     }
+    
     
     func closeWebView(_ webView: WKWebView?) {
         for view in view.subviews {
@@ -184,10 +186,12 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         LoadingView.default.show()
     }
     
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFinish url : \(webView.url!.absoluteString)")
+        /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion
         {
             loadCompletion(true)
@@ -212,58 +216,36 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         LoadingView.default.hide()
     }
     
+    
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFail url : \(webView.url!.absoluteString)")
+        /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion
         {
             loadCompletion(true)
         }
         LoadingView.default.hide()
     }
+    
     
     // page 로드 실패
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFailProvisionalNavigation url : \(webView.url!.absoluteString)")
+        /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion
         {
             loadCompletion(true)
         }
         LoadingView.default.hide()
     }
-    
-    
-    
-    //MARK: - ErrorViewDelegate
-    func onErrorViewReload() {
-        webView?.reload()
-    }
-    
-    func onErrorViewClose() {
-        if webView?.canGoBack ?? false {
-            webView?.goBack()
-        }
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
-
+// MARK: - WKUIDelegate
 extension BaseWebViewController: WKUIDelegate {
-    
-    // MARK: - WKUIDelegate
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         CMAlertView().setAlertView(detailObject: message as AnyObject, cancelText: "확인") { event in
             completionHandler()
@@ -305,10 +287,12 @@ extension BaseWebViewController: WKUIDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    
     ///WKNavigationDelegate 중복적으로 리로드 방지 (iOS 9 이후지원)
     public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
     }
+    
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         weak var createWebView = createWebView(frame: view.bounds, configuration: configuration)
@@ -317,7 +301,6 @@ extension BaseWebViewController: WKUIDelegate {
         }
         return createWebView
     }
-    
     
     
     func webViewDidClose(_ webView: WKWebView) {

@@ -247,12 +247,12 @@ class IntroViewController: BaseViewController {
                    link.isValid
                 {
                     /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
-                    tabController.setSelectedIndex(.home, object: link)
+                    tabController.setSelectedIndex(.home, seletedItem:link)
                 }
                 else
                 {
                     /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                    tabController.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN)
+                    tabController.setSelectedIndex( .home )
                 }
                 
             })

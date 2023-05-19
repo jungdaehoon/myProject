@@ -44,8 +44,8 @@ class IntroModel : BaseViewModel{
      네크워크  연결 상태를 체크 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.20
      - returns :
-            - CurrentValueSubject<IS_CHECKING, Never>
-                >  네트워크 연결 가능 여부를 리턴 합니다. ( true / false )
+        - CurrentValueSubject<IS_CHECKING, Never>
+            + 네트워크 연결 가능 여부를 리턴 합니다. ( true / false )
      */
     func isConnectedToNetwork() -> CurrentValueSubject<IS_CHECKING,Never> {
         /// 네트워크 체킹 여부 값을 리턴 합니다.
@@ -101,7 +101,7 @@ class IntroModel : BaseViewModel{
      - Throws : False
      - returns :
         - AnyPublisher<LogOutResponse?, ResponseError>
-            >  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+            + LogOutResponse : 로그아웃 처리 결과를 받습니다.
      */
     func setAutoLogin() ->  AnyPublisher<LoginResponse?, ResponseError> {
         var parameters : [String:Any]       = [:]
@@ -115,7 +115,7 @@ class IntroModel : BaseViewModel{
         parameters["appshield_token"]       = ""
         
         let subject             = PassthroughSubject<LoginResponse?,ResponseError>()
-        requst( showLoading: true ) { error in
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {

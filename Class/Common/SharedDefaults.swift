@@ -18,20 +18,16 @@ class SharedDefaults {
     static let PERMISSION_INITIALCHECK          = "PERMISSION_INITIALCHECK"
     /// 앱 가이드 유저 확인 여부 체크 입니다.
     static let GUIDE_SHOW_FINISHED              = "GUIDE_SHOW_FINISHED"
-        
     /// 만보고 약관 동의 여부 입니다.
     static let PEDOMETER_TERAMS_AGREE           = "PEDOMETER_TERAMS_AGREE"
     /// 만보고 최초 진입시 날짜 정보 입니다.
     static let PEDOMETER_FIRST_AGREE            = "PEDOMETER_FIRST_DATE"
-    
     /// 연결 계좌 여부 체크 입니다.
     static let SET_ACCOUNT_ENABLED              = "SET_ACCOUNT_ENABLED"
     /// 월렛 복구문 정보 입니다.
     static let WALLET_MNEMONIC                  = "WALLET_MNEMONIC"
     /// 키체인 정보를 읽었는지를 체크 합니다.
     static let IS_KEYCHAIN_READ                 = "IS_KEYCHAIN_READ"
-    
-    
     
     
     /// 키체인을 연결 합니다.

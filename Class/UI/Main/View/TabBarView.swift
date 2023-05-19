@@ -69,7 +69,7 @@ class TabBarView : UIView
     
     
     /**
-     탭 아이템  활성화 여부를 받아 활성화 합니다..   ( J.D.H  VER : 1.0.0 )
+     탭 아이템 활성화 여부를 받아 활성화 합니다..   ( J.D.H  VER : 1.0.0 )
      - Date : 2023.03.20
      - Parameters:
         - subViews : 활성화될 아이템 뷰어 입니다.

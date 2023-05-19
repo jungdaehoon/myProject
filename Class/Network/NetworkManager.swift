@@ -38,7 +38,7 @@ class NetworkManager {
     
     /**
      전체 탭 요청 합니다.( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /all/selectMyInfo.do
      - API 명: 하단 전체 탭에 데이터 정보를 요청 합니다.
      - Date : 2023.03.09
      - Parameters:
@@ -56,7 +56,7 @@ class NetworkManager {
     
     /**
      만보게 약관 동의 여부 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /popup/selectPedometerTerms.do
      - API 명: 만보게 페이지 진입전 약관 동의 여부를 확인 합니다.
      - Date : 2023.03.09
      - Parameters:
@@ -75,7 +75,7 @@ class NetworkManager {
     
     /**
      만보게 약관 동의 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID:
+     - API ID: /popup/insertPedometerTerms.do
      - API 명: 만보기 약관동의 팝업에서 "동의" 선택으로 약관동의를 요청 합니다.
      - Date : 2023.03.15
      - Parameters:
@@ -276,7 +276,6 @@ class NetworkManager {
         }
         return AlamofireAgent.request(APIConstant.API_UPDATE_PEDOMETER, parameters: parameters, encoding: JSONEncoding.default)
     }
-    
     
     
     /**

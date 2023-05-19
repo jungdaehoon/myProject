@@ -134,10 +134,11 @@ class BaseViewModel : NSObject {
     
     /**
      상황별 인터페이스를 요청 합니다.( J.D.H  VER : 1.0.0 )
+     - Description          : Http 네트워크 요청시 공통 지원 메서드 입니다. "errorPopEnabled" 에 따라 공통 오류 코드에 따른 안내 팝업 처리 및 공통 이벤트 처리가 될수 있습니다. 별도 이벤트 처리는 "errorPopEnabled = false"  처리시 별도 이벤트 처리가 가능합니다.
      - Date : 2023.03.23
      - Parameters:
-        - showLoading       : 로딩 디스플레이 여부 입니다. ( default = false )
-        - appExit           : 예외 사항일 경우 앱 종료로 연결할지여부 입니다. ( default = false )
+        - showLoading       : 로딩 디스플레이 여부 입니다. ( default = true )
+        - appExit           : 예외 사항일 경우 앱 종료로 연결할지 여부 입니다. ( default = false )
         - errorPopEnabled   : 공통 error 팝업을 사용할지 여부 입니다. ( default = true )
         - errorHandler      : ResponseError 헨들러 입니다. ( default = nil )
         - publisher         : 타입별 데이터를 연결 합니다.
@@ -145,7 +146,7 @@ class BaseViewModel : NSObject {
      - Throws : False
      - returns :False
      */
-    func requst<T: BaseResponse>(showLoading: Bool = false,
+    func requst<T: BaseResponse>(showLoading: Bool = true,
                                  appExit : Bool = false,
                                  errorPopEnabled : Bool = true,
                                  errorHandler: ((ResponseError) -> Bool)? = nil,
@@ -258,7 +259,7 @@ class BaseViewModel : NSObject {
                       "appshield_session_id"    : self.appShield.session_id! ,
                       "appshield_token"         : self.appShield.token!]
         let subject             = PassthroughSubject<AppStartResponse?,ResponseError>()
-        requst() { error in
+        requst( showLoading : false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -380,7 +381,7 @@ class BaseViewModel : NSObject {
     func isSessionEnabeld() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<InsertPedometerTermsResponse?,ResponseError>()
-        requst( errorPopEnabled: false ) { error in
+        requst( showLoading : false, errorPopEnabled: false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -465,7 +466,7 @@ class BaseViewModel : NSObject {
     func getPTTermAgreeCheck() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<PedometerTermsAgreeResponse?,ResponseError>()
-        requst( showLoading: true ) { error in
+        requst() { error in
             
             subject.send(completion: .failure(error))
             return false
@@ -493,7 +494,7 @@ class BaseViewModel : NSObject {
     func setPTTermAgreeCheck() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<InsertPedometerTermsResponse?,ResponseError>()
-        requst( showLoading: true ) { error in
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -519,7 +520,7 @@ class BaseViewModel : NSObject {
      */
     func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
         let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
-        requst( showLoading: true ) { error in
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -587,7 +588,7 @@ class BaseViewModel : NSObject {
             {
                 /// 파라미터  user_no : 고객번호, push_token : FCM 토큰 파라미터를 생성 합니다.
                 let parameters  = ["user_no" : NC.S(custItem.user_no) , "push_token" : fcm_token]
-                requst() { error in
+                requst( showLoading : false ) { error in
                     subject.send(completion: .failure(error))
                     return false
                 } publisher: {

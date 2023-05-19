@@ -16,8 +16,6 @@ class TopUserInfoView: UIView {
     var viewModel : AllMoreModel?
     /// 유저 프로필 이미지 입니다.
     @IBOutlet weak var profileImage: UIImageView!
-    /// 유저 레벨 정보 입니다.
-    @IBOutlet weak var levelText    : UILabel!
     /// 유저 닉네임 정보 입니다.
     @IBOutlet weak var nickNameText : UILabel!
     
@@ -49,8 +47,6 @@ class TopUserInfoView: UIView {
         self.viewModel          = model
         if let result = model.allModeResponse!.result
         {
-            /// 레벨 정보를 디스플레이 합니다.
-            self.levelText.text     = "Level \(result._user_level!)"
             /// 닉네임 정보를 디스플레이 합니다.
             self.nickNameText.text  = "\(result._nickname!)"
             

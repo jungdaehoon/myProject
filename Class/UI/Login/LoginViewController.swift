@@ -344,34 +344,33 @@ class LoginViewController: BaseViewController {
                                            link.isValid
                                         {
                                             /// 진행중인 탭 인덱스를 초기화 합니다.
-                                            tabbar.setIngTabToRootController()                                            
-                                            /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
-                                            //let link = "\(WebPageConstants.URL_MAIN)?url=\(link)"
-                                            /*
+                                            tabbar.setIngTabToRootController()
                                             /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
-                                            tabbar.setSelectedIndex(.home, object: link, updateCookies: true) { controller in
-//                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-//                                                    controller.loadMainURL(link) { success in
-//
-//                                                    }
-//                                                })
-                                            }
-                                             */
-                                            
-                                            /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
-                                            tabbar.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN, updateCookies: true) { controller in
+                                            tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true) { controller in
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                                                     controller.loadMainURL(link) { success in
                                                         
                                                     }
                                                 })
                                             }
-                                             
+                                            
+                                            /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다. ( 추후 딥링크 관련 딜레이 0.1 처리부분을 웹에서 할 경우 입니다. )
+                                            /*
+                                            let link = "\(WebPageConstants.URL_MAIN)?url=\(link)"
+                                            /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
+                                            tabbar.setSelectedIndex(.home, object: link, updateCookies: true) { controller in
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                                                    controller.loadMainURL(link) { success in
+
+                                                    }
+                                                })
+                                            }
+                                             */
                                         }
                                         else
                                         {
                                             /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                                            tabbar.setSelectedIndex(.home, object: WebPageConstants.URL_MAIN, updateCookies: true)
+                                            tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
                                         }
                                     }
                                 }

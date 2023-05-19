@@ -202,7 +202,7 @@ extension UIView {
         self.viewController.pushController(controller, modalPresent:modalPresent, animated: animated, animatedType: animatedType,completion: completion)
     }
     
-
+    
     /**
      이전 페이지로 이동 합니다. ( J.D.H  VER : 1.0.0 )
      - Date : 2023.05.11
@@ -214,6 +214,22 @@ extension UIView {
      */
     func popViewController( animated : Bool = true, animatedType: AnimationType? = .right, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
         self.viewController.popController(animated: animated,animatedType: animatedType,completion: completion)
+    }
+    
+    
+    /**
+     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다.
+     - Date : 2023.05.19
+     - Parameters:
+        - viewController : 이동할 ViewController 입니다.
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func popToViewController(_ controller: UIViewController, modalPresent : Bool = false, animated: Bool = true,animatedType: AnimationType? = .left, completion: @escaping () -> Void = {} ) {
+        self.viewController.popToController(controller,animated: animated,animatedType: animatedType,completion: completion)
     }
     
     

@@ -140,10 +140,10 @@
                             </constraints>
                         </view>
                         <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lif-dd-3uK">
-                            <rect key="frame" x="0.0" y="324" width="335" height="45"/>
+                            <rect key="frame" x="0.0" y="324" width="335" height="56"/>
                             <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="45" id="xT0-hs-eXV"/>
+                                <constraint firstAttribute="height" constant="56" id="xT0-hs-eXV"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                             <state key="normal" title="로그인">
@@ -165,18 +165,18 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRM-Ef-3iG" userLabel="자동 로그인 Check Box">
-                            <rect key="frame" x="0.0" y="385" width="24" height="34"/>
+                            <rect key="frame" x="0.0" y="396" width="24" height="34"/>
                             <state key="normal" image="login_check_off"/>
                             <state key="selected" image="login_check_on"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자동로그인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGn-4P-4B6">
-                            <rect key="frame" x="34" y="392.5" width="69.5" height="19"/>
+                            <rect key="frame" x="34" y="403.5" width="69.5" height="19"/>
                             <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="16"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bX-QE-G5S">
-                            <rect key="frame" x="0.0" y="385" width="103.5" height="34"/>
+                            <rect key="frame" x="0.0" y="396" width="103.5" height="34"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="4Cn-Nx-hqE"/>

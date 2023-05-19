@@ -27,7 +27,7 @@ enum SecureKeyPadCBType {
  키패드 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.29
 */
-class SecureKeyPadView: UIView {
+class SecureKeyPadView: BaseView {
 
     /// 이벤트를 넘깁니다.
     var completion                  : (( _ CBType : SecureKeyPadCBType ) -> Void )? = nil

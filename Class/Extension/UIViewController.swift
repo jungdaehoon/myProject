@@ -83,6 +83,24 @@ extension UIViewController {
     
     
     /**
+     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다.
+     - Date : 2023.05.19
+     - Parameters:
+        - viewController : 이동할 ViewController 입니다.
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func popToController( _ viewController: UIViewController, animated: Bool, animatedType: AnimationType? = .down, completion: @escaping () -> Void = {}) {
+        if let navigation = self.navigationController {
+            navigation.popToViewController(viewController, animated: animated, animatedType:animatedType,completion: completion)
+        }
+    }
+    
+    
+    /**
      컨트롤로 0번 페이지로 이동합니다.
      - Date : 2023.04.17
      - Parameters:

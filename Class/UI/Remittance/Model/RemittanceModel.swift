@@ -31,7 +31,7 @@ class RemittanceModel : BaseViewModel{
      */
     func getSelectAccountList() ->  AnyPublisher<SelectAccountListResponse?, ResponseError> {
         let subject             = PassthroughSubject<SelectAccountListResponse?,ResponseError>()
-        requst() { error in
+        requst( showLoading : false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -57,7 +57,7 @@ class RemittanceModel : BaseViewModel{
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()
-        requst( showLoading: true ) { error in
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {

@@ -441,7 +441,7 @@ class WebMessagCallBackHandler : NSObject  {
         {
             /// 인덱스 정보를 받아 탭 인덱스를 변경 합니다.
             if let tabIndex = info["tabIndex"] {
-                TabBarView.tabbar!.selectedIndex = Int(tabIndex)!
+                TabBarView.tabbar!.setSelectedIndex(TAB_STATUS(rawValue: Int(tabIndex)!)!)
             }
         }
     }
@@ -651,7 +651,7 @@ class WebMessagCallBackHandler : NSObject  {
                 }
                 if let controller = self.target {
                     /// 전체 화면 웹뷰를 오픈 합니다.
-                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: AlamofireAgent.domainUrl +  url) { cbType in
+                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: AlamofireAgent.domainUrl +  url, returnParam: NC.S(params[1] as? String)) { cbType in
                         /// 앱웹으로 콜백을 요청 합니다.
                         self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                     }
@@ -780,7 +780,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      로그인 페이지를 디스플레이 합니다.
-     - Date : 2023.03.28
+     - Date : 2023.05.19
      - Parameters:False
      - Throws : False
      - returns :False
@@ -789,10 +789,26 @@ class WebMessagCallBackHandler : NSObject  {
         /// 연결된 viewController 가 있을 경우 입니다.
         if let controller = self.target
         {
+            /// 네비게이션 타입을 체크 합니다.
+            if let navigation  = controller.navigationController
+            {
+                let controllers = navigation.viewControllers
+                /// 총 컨트롤러 정보를 체크 합니다.
+                for index in 0..<controllers.count
+                {
+                    /// 네비게이션 총 컨트롤러 중에 로그인 컨트롤러가 있다면 해당 페이지로 이동 후 종료 처리 합니다.
+                    if navigation.viewControllers[index] is LoginViewController {
+                        /// 로그인 페이지로 이동합니다.
+                        navigation.popToViewController(controllers[index], animated: true, animatedType: .down) {}
+                        return
+                    }
+                }
+            }
+            
             controller.popToRootController(animated: true) { firstViewController in
                 if let rootController = firstViewController
                 {
-                    /// 로그인 페이지를 디스플레이 합니다.
+                    /// 로그인 페이지로 이동합니다.
                     let viewController = LoginViewController()
                     rootController.pushController(viewController, animated: true, animatedType: .up)
                 }

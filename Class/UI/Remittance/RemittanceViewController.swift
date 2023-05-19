@@ -25,12 +25,14 @@ class RemittanceViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.viewModel.selectAccountListResponse == nil
-        {
-            self.isAccount()
-        }        
     }
 
+
+    override func setDisplayData() {
+        self.isAccount()
+    }
+    
+    
     
     // MARK: - 지원 메서드 입니다.
     /**
@@ -78,7 +80,7 @@ class RemittanceViewController: BaseViewController {
                                 {
                                 case .pageClose:
                                     /// 하단 탭 홈으로 이동합니다.
-                                    TabBarView.tabbar!.selectedIndex = 2
+                                    TabBarView.tabbar!.setSelectedIndex( .home )
                                     return
                                 default:break
                                 }
@@ -99,7 +101,7 @@ class RemittanceViewController: BaseViewController {
                                     
                                     if !response!.gateWayURL!.contains("{")
                                     {
-                                        /// 오픈 뱅킹 웹 페이지를 디스플레이 합니다.
+                                        /// 오픈 뱅킹 웹 페이지를 디스플레이 합니다. ( 기존 로직으로 필요 없어 보이는데... )
                                         let vc = HybridOpenBankViewController.init(pageURL: response!.gateWayURL! ) { value in
                                             /// 웹페이지에 오픈 뱅킹 처리관련 부분을 스크립트로 넘깁니다.
                                             self.webView!.evaluateJavaScript(value) { ( anyData , error) in
@@ -124,7 +126,7 @@ class RemittanceViewController: BaseViewController {
                                                     {
                                                     case .pageClose:
                                                         /// 하단 탭 홈으로 이동합니다.
-                                                        TabBarView.tabbar!.selectedIndex = 2
+                                                        TabBarView.tabbar!.setSelectedIndex( .home )
                                                         return
                                                     default:break
                                                     }
@@ -154,7 +156,7 @@ class RemittanceViewController: BaseViewController {
                             {
                             case .pageClose:
                                 /// 하단 탭 홈으로 이동합니다.
-                                TabBarView.tabbar!.selectedIndex = 2
+                                TabBarView.tabbar!.setSelectedIndex( .home )
                                 return
                             default:break
                             }

@@ -7,15 +7,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FF9492BF-F5EE-434D-B9FB-0D87794D32F3"
+            uuid = "E1804CB5-C148-44DD-9974-52750F41BD2A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/Main/TabbarViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "setSelectedIndex(_:seletedItem:updateCookies:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E1804CB5-C148-44DD-9974-52750F41BD2A - 9e45c2c8c8907d5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__C.UITabBarController.setSelectedIndex(_: cereal.TAB_STATUS, seletedItem: Swift.Optional&lt;Any&gt;, updateCookies: Swift.Bool, completion: Swift.Optional&lt;(cereal.BaseViewController) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Main/TabbarViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "369"
+                  endingLineNumber = "369"
+                  offsetFromSymbolStart = "1708">
+               </Location>
+               <Location
+                  uuid = "E1804CB5-C148-44DD-9974-52750F41BD2A - 9e45c2c8c8907d5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__C.UITabBarController.setSelectedIndex(_: cereal.TAB_STATUS, seletedItem: Swift.Optional&lt;Any&gt;, updateCookies: Swift.Bool, completion: Swift.Optional&lt;(cereal.BaseViewController) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Main/TabbarViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "369"
+                  endingLineNumber = "369"
+                  offsetFromSymbolStart = "2112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58F7EF36-8945-4115-ABCB-2C3093E436C8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Class/Common/ViewController/BaseWebViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "loadTabPageURL(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,48 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A3EC89A4-33AB-4A93-A632-448202F968A2"
-            shouldBeEnabled = "No"
+            uuid = "F8B8897C-B92C-40CC-848F-5BAF862E237B"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Class/UI/Main/TabbarViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "setSelectedIndex(_:object:updateCookies:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8C275A5B-BB63-40E3-ADCC-A8B34393B406"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Common/View/LoadingView/LoadingView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "show(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "10608E42-E09B-4003-9F8A-6D75F61A5F1D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Common/View/LottieView/LottieAniView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "play(completion:)"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
+            landmarkName = "setSelectedIndex(_:seletedItem:updateCookies:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

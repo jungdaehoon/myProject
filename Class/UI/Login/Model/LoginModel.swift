@@ -75,7 +75,7 @@ class LoginModel : BaseViewModel {
         
         
         let subject             = PassthroughSubject<LoginResponse?,ResponseError>()
-        requst(showLoading: true ) { error in
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -88,7 +88,4 @@ class LoginModel : BaseViewModel {
         }
         return subject.eraseToAnyPublisher()
     }
-    
-    
-    
 }

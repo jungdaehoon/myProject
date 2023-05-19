@@ -12,7 +12,7 @@ import UIKit
  레벨 팝업 입니다.   ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.29
  */
-class LevelPopView: UIView {
+class LevelPopView: BaseView {
 
     /// 레벨 문구 입니다.
     @IBOutlet weak var levelText    : UILabel!

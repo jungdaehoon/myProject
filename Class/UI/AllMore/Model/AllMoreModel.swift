@@ -86,7 +86,7 @@ class AllMoreModel : BaseViewModel{
     func getAllMoreInfo() -> AnyPublisher<AllMoreResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<AllMoreResponse?,ResponseError>()
-        requst(showLoading : true ) { error in
+        requst() { error in
             self.allModeResponse = nil
             subject.send(completion: .failure(error))
             return false
@@ -113,7 +113,7 @@ class AllMoreModel : BaseViewModel{
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()
-        requst( showLoading : true ) { error in
+        requst() { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {

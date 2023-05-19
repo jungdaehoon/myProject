@@ -232,7 +232,7 @@ class OKZeroViewModel : BaseViewModel
     func getQRCodeZeroPay( params : [String : Any] = [:]) -> AnyPublisher<ZeroPayQRCodeResponse?, ResponseError>
     {
         let subject             = PassthroughSubject<ZeroPayQRCodeResponse?,ResponseError>()
-        requst( showLoading : true ) { error in
+        requst() { error in
             self.zeroPayQrCodeResponse = nil
             subject.send(completion: .failure(error))
             return false

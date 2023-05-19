@@ -42,33 +42,8 @@ extension UINavigationControllerExtension where Self : UINavigationController
 
 extension UINavigationController : UINavigationControllerExtension {
     
-    var rootViewController: UIViewController? {
-        return viewControllers.first
-    }
-    
-    func finish() {
-        if viewControllers.count == 1 {
-            exit(0)
-        } else {
-            popViewController(animated: true)
-        }
-    }
-    
-    public func pushViewController(
-        _ viewController: UIViewController,
-        animated: Bool,
-        completion: @escaping () -> Void)
-    {
-        pushViewController(viewController, animated: animated)
-        
-        guard animated, let coordinator = transitionCoordinator else {
-            DispatchQueue.main.async { completion() }
-            return
-        }
-        
-        coordinator.animate(alongsideTransition: nil) { _ in completion() }
-    }
-    
+    /// 루트 뷰어를 가집니다.
+    var rootViewController: UIViewController? { return viewControllers.first }
     
     /**
      내비게이션 컨트롤로 push 이동시 타입을 받아 처리 합니다.
@@ -126,6 +101,34 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
+     이동할 ViewController 을 받아 해당 위치로 이동 합니다.
+     - Date : 2023.04.17
+     - Parameters:
+        - viewController : 뒤로 이동할 컨트롤 입니다.
+        - animated : 효과 여부 입니다.
+        - animationType : 페이지 이동할 효과 정보를 받습니다.
+        - completion : 페이지 이동후 콜백 입니다.
+     - Throws : False
+     - returns :False
+     */
+    func popToViewController(
+        _ viewController: UIViewController,
+        animated: Bool,
+        animatedType: AnimationType? = .down,
+        completion: @escaping () -> Void)
+    {
+        self.popAnimation = animatedType!
+        popToViewController(viewController, animated: animated)
+        
+        guard animated, let coordinator = transitionCoordinator else {
+            DispatchQueue.main.async { completion() }
+            return
+        }
+        coordinator.animate(alongsideTransition: nil) { _ in completion() }
+    }
+    
+    
+    /**
      내비게이션 컨트롤로 0번 페이지로 이동합니다.
      - Date : 2023.04.17
      - Parameters:
@@ -151,20 +154,6 @@ extension UINavigationController : UINavigationControllerExtension {
         coordinator.animate(alongsideTransition: nil) { _ in completion() }
     }
     
-    
-    func popToRootViewController(
-        animated: Bool,
-        completion: @escaping () -> Void)
-    {
-        popToRootViewController(animated: animated)
-        
-        guard animated, let coordinator = transitionCoordinator else {
-            DispatchQueue.main.async { completion() }
-            return
-        }
-        
-        coordinator.animate(alongsideTransition: nil) { _ in completion() }
-    }
     
     /**
      내비게이션 컨트롤로 이동시 현 페이지를 삭제하고 추가할 페이지로 변경합니다.

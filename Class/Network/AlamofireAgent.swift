@@ -10,24 +10,6 @@ import Alamofire
 import AlamofireActivityLogger
 import os
 
-// 멀티파트로 전송할 데이터를 구성하기 위한 클래스
-struct MultipartWithData {
-    var data: Data
-    var fileName: String?
-    var mimeType: String
-}
-
-struct MultipartWithURL {
-    var url: URL
-    var fileName: String?
-    var mimeType: String
-}
-
-enum MultipartItem {
-    case data(MultipartWithData)
-    case url(MultipartWithURL)
-}
-
 
 /**
  HTTP 인터페이스 연결할 기본 메서드를 지원 합니다. ( J.D.H  VER : 1.0.0 )
@@ -42,7 +24,6 @@ enum AlamofireAgent {
     static let domainUrl                        = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? ""
     /// 세션 정보를 가져 옵니다.
     static var defaultManager : SessionManager! = { return Alamofire.SessionManager(configuration: urlSessionConfiguration()) }()
-    
     
     
     /**

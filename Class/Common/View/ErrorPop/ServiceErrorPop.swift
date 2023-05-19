@@ -12,7 +12,7 @@ import UIKit
  서비스 불가능 안내팝업 입니다.   ( J.D.H  VER : 1.0.0 )
  - Date : 2023.04.05
  */
-class ServiceErrorPop: UIView {
+class ServiceErrorPop: BaseView {
 
     //MARK: - Init
     init(){
