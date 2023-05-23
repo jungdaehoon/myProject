@@ -1459,10 +1459,10 @@ class WebMessagCallBackHandler : NSObject  {
                             DispatchQueue.main.async {
                                 if let controller = self.target
                                 {
-                                    let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
-                                    let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
-                                    vc?.modalPresentationStyle  = .overFullScreen
-                                    controller.pushController(vc!, animated: true, animatedType: .up)
+                                    if let vc = PedometerViewController.instantiate(withStoryboard: "Main")
+                                    {
+                                        controller.pushController(vc, animated: true, animatedType: .up)
+                                    }
                                 }
                             }
                         }
@@ -1507,12 +1507,13 @@ class WebMessagCallBackHandler : NSObject  {
                             /// 약관동의 여부를 "Y" 변경 합니다.
                             SharedDefaults.default.pedometerTermsAgree = "Y"
                             DispatchQueue.main.async {
+                                
                                 if let controller = self.target
                                 {
-                                    let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
-                                    let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
-                                    vc?.modalPresentationStyle  = .overFullScreen
-                                    controller.pushController(vc!, animated: true, animatedType: .up)
+                                    if let vc = PedometerViewController.instantiate(withStoryboard: "Main")
+                                    {
+                                        controller.pushController(vc, animated: true, animatedType: .up)
+                                    }
                                 }
                             }
                         }

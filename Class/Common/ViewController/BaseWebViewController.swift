@@ -14,7 +14,7 @@ import WebKit
  - Date : 2023.03.20
  */
 
-class BaseWebViewController: UIViewController, WKNavigationDelegate {
+class BaseWebViewController: UIViewController {
     var baseViewModel       : BaseViewModel = BaseViewModel()
     /// 웹 화면 디스플레이 입니다.
     var webView             : WKWebView?
@@ -26,6 +26,8 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     var updateCookies       : Bool = true
     /// 코드 선택시 이벤트 입니다.
     var webLoadCompletion   : (( _ success : Bool ) -> Void)? = nil
+    
+    
     
     //MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -144,41 +146,13 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
             self.webView!.load(URLRequest(url: URL(string: "about:blank")!))
         }
     }
-    
-    
-    
-    //MARK: - WKWebView callback
-    func createWebView(_ withTag: Int = 100, frame: CGRect, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) -> WKWebView {
-        let createWebView = WKWebView(frame: frame, configuration: configuration)
-        createWebView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        createWebView.uiDelegate = self
-        createWebView.tag = withTag
-        return createWebView
-    }
-    
-    
-    func closeWebView(_ removeAll: Bool = false, withTag: Int) {
-        if removeAll {
-            for view in view.subviews {
-                if view.tag != 0 {
-                    view.removeFromSuperview()
-                }
-            }
-        } else {
-            view.viewWithTag(withTag)?.removeFromSuperview()
-        }
-    }
-    
-    
-    func closeWebView(_ webView: WKWebView?) {
-        for view in view.subviews {
-            if webView == view {
-                view.removeFromSuperview()
-            }
-        }
-    }
-    
-    
+}
+
+
+
+//MARK: - WKNavigationDelegate
+extension BaseWebViewController: WKNavigationDelegate
+{
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
@@ -230,7 +204,6 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
     }
     
     
-    // page 로드 실패
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
@@ -243,6 +216,8 @@ class BaseWebViewController: UIViewController, WKNavigationDelegate {
         LoadingView.default.hide()
     }
 }
+
+
 
 // MARK: - WKUIDelegate
 extension BaseWebViewController: WKUIDelegate {
@@ -305,6 +280,38 @@ extension BaseWebViewController: WKUIDelegate {
     
     func webViewDidClose(_ webView: WKWebView) {
         closeWebView(webView)
+    }
+    
+    
+    // MARK: - WKUIDelegate 지원 메서드 입니다.
+    func createWebView(_ withTag: Int = 100, frame: CGRect, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) -> WKWebView {
+        let createWebView = WKWebView(frame: frame, configuration: configuration)
+        createWebView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        createWebView.uiDelegate = self
+        createWebView.tag = withTag
+        return createWebView
+    }
+    
+    
+    func closeWebView(_ removeAll: Bool = false, withTag: Int) {
+        if removeAll {
+            for view in view.subviews {
+                if view.tag != 0 {
+                    view.removeFromSuperview()
+                }
+            }
+        } else {
+            view.viewWithTag(withTag)?.removeFromSuperview()
+        }
+    }
+    
+    
+    func closeWebView(_ webView: WKWebView?) {
+        for view in view.subviews {
+            if webView == view {
+                view.removeFromSuperview()
+            }
+        }
     }
 }
 

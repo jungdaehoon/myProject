@@ -350,10 +350,10 @@ extension AllMoreMenuListCell
                             SharedDefaults.default.pedometerTermsAgree = "Y"
                             /// 만보고 페이지로 이동 합니다.
                             DispatchQueue.main.async {
-                                let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
-                                let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
-                                vc?.modalPresentationStyle  = .overFullScreen
-                                self.pushViewController(vc!, animated: true, animatedType: .up)
+                                if let controller = PedometerViewController.instantiate(withStoryboard: "Main")
+                                {
+                                    self.pushViewController(controller, animated: true, animatedType: .up)
+                                }
                             }
                         }
                     }
@@ -395,13 +395,15 @@ extension AllMoreMenuListCell
                         /// 약관동의가 정상처리 되었습니다
                         if response?.code == "0000"
                         {
+                            
+                            
                             /// 약관동의 여부를 "Y" 변경 합니다.
                             SharedDefaults.default.pedometerTermsAgree = "Y"
                             DispatchQueue.main.async {
-                                let mainStoryboard          = UIStoryboard(name: "Main", bundle: nil)
-                                let vc                      = mainStoryboard.instantiateViewController(withIdentifier: "pedometerVC") as? PedometerViewController
-                                vc?.modalPresentationStyle  = .overFullScreen
-                                self.pushViewController(vc!, animated: true, animatedType: .up)
+                                if let controller = PedometerViewController.instantiate(withStoryboard: "Main")
+                                {
+                                    self.pushViewController(controller, animated: true, animatedType: .up)
+                                }
                             }
                         }
                         /// 약관 동의 요청에 실패 하였습니다.

@@ -134,16 +134,16 @@ enum AlamofireAgent {
                     switch code
                     {
                     case 503 :
-                        return .timeout(afError.errorDescription ?? NETWORK_ERR_MSG)
+                        return .timeout(afError.errorDescription ?? NETWORK_ERR_MSG_DETAIL)
                     default:break
                     }
                 }
             case .responseSerializationFailed( _ ):
                 Slog("Response serialization failed: \(error.localizedDescription)", category: .network, logType: .error)
             }
-            return .unknown(afError.errorDescription ?? NETWORK_ERR_MSG)
+            return .unknown(afError.errorDescription ?? NETWORK_ERR_MSG_DETAIL)
         } else {
-            return .unknown(NETWORK_ERR_MSG)
+            return .unknown(NETWORK_ERR_MSG_DETAIL)
         }
     }
     

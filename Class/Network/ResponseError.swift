@@ -8,7 +8,8 @@
 import Foundation
 
 let NETWORK_ERR_MSG             = "네트워크 연결 상태가 좋지 않습니다"
-let NETWORK_ERR_MSG_DETAIL      = "휴대폰 연결 상태를 확인해주세요."
+let NETWORK_ERR_MSG_DETAIL      = "네트워크를 연결할 수 없습니다.\n네트워크 상태를 확인해 주세요."
+
 let TIMEOUT_ERR_MSG             = "통신 중 일시적인 오류가 발생했습니다"
 let TIMEOUT_ERR_MSG_DETAIL      = "앱 종료 후 다시 실행해주세요."
 let TEMP_NETWORK_ERR_MSG        = "안내"

@@ -13,6 +13,8 @@ import UIKit
  - Date : 2023.04.17
  */
 class LoadingView: UIView {
+    /// 최대 로딩 타임 입니다.
+    private let LOADING_MAX_TIME            = 10.0
     /// 로딩 디스플레이 뷰어 입니다.
     @IBOutlet weak var loadingView  : UIImageView!
     /// 로딩중 이미지를 체크 합니다.
@@ -77,7 +79,7 @@ class LoadingView: UIView {
         if let base = base {
             DispatchQueue.main.async {
                 self.isLoading      = true
-                self.loadingTimer   = Timer.scheduledTimer(timeInterval: 10,
+                self.loadingTimer   = Timer.scheduledTimer(timeInterval: self.LOADING_MAX_TIME,
                                              target: self, selector: #selector(self.timerAction),
                                              userInfo: nil,
                                              repeats: false)

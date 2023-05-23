@@ -303,7 +303,7 @@
         <!--Pedometer View Controller-->
         <scene sceneID="BMr-Lo-O9o">
             <objects>
-                <viewController storyboardIdentifier="pedometerVC" id="hjg-r4-Nnx" customClass="PedometerViewController" customModule="cereal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PedometerViewController" id="hjg-r4-Nnx" customClass="PedometerViewController" customModule="cereal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aay-ND-Wjn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -872,11 +872,6 @@
             <point key="canvasLocation" x="-593" y="904"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="iRn-Ys-HEu">
-            <size key="intrinsicContentSize" width="-1" height="83"/>
-        </designable>
-    </designables>
     <resources>
         <image name="allMore_Setting" width="40" height="40"/>
         <image name="header_close" width="40" height="40"/>

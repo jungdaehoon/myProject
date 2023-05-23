@@ -106,6 +106,7 @@ class CMAlertView: UIView {
         {
             self.titleLabel.isHidden        = false
             self.titleHeight.constant       = 36
+            self.titleLabel.text            = titleText
         }
         
         /// 문자 정보 입니다.

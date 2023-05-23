@@ -22,8 +22,12 @@ struct AllMoreResponse: BaseResponse {
     var code        : String?
     /// 세부 응답메세지 입니다.
     var msg         : String?
+    
     /// 전체 탭 주요 데이터 입니다.
-    var result      : result?
+    var _result       : allData? { get { return result != nil ? result : allData() } }
+    
+    /// 전체 탭 주요 데이터 입니다.
+    var result      : allData?
 }
 
 
@@ -31,7 +35,7 @@ struct AllMoreResponse: BaseResponse {
  전체 탭 주요 데이터 입니다. ( J.D.H  VER : 1.0.0 )
  - Date : 2023.03.21
 */
-struct result: Codable {
+struct allData: Codable {
     /// 추천인 입력 가능여부 입니다.
     var _recomm_yn              : String? { get { return  NC.S(recomm_yn) } }
     /// 계좌넘버 입니다.

@@ -54,7 +54,7 @@ class IntroViewController: BaseViewController {
                 break;
             case .fail:
                 /// 네트워크 사용 불가능으로 안내 팝업을 오픈 합니다.
-                CMAlertView().setAlertView(titleText: "네트워크 연결 상태가 좋지\n않습니다", detailObject: "휴대폰 연결 상태를 확인해주세요." as AnyObject, cancelText: "확인") { event in
+                CMAlertView().setAlertView(titleText: "", detailObject: NETWORK_ERR_MSG_DETAIL as AnyObject, cancelText: "확인") { event in
                     /// 시나리오상 앱 강제 종료로 되어있어 진행 ... 체크가 필요해 보입니다.
                     exit(0)
                 }
@@ -227,36 +227,38 @@ class IntroViewController: BaseViewController {
      - returns :False
      */
     func setMainDisplay( loginEnabled : Bool = false ){
-        let storyboard                          = UIStoryboard(name: "Main", bundle: nil)
-        let tabController                       = storyboard.instantiateViewController(withIdentifier: "TabbarViewController") as! TabbarViewController
-        /// 최초 진입을 홈으로 설정 합니다. ( 기본 설정은 0 번으로 진행 됩니다. )
-        tabController.selectedIndex             = 2
-        if loginEnabled == true
+        /// 탭바 컨트롤러를 호출 합니다.
+        if let controller = TabbarViewController.instantiate(withStoryboard: "Main")
         {
-            /// 로그인 디스플레이로 기본 배경 뷰어를 디스플레이 합니다.
-            BecomeActiveView().show()
-            tabController.loginDisplayFirst     = true
+            /// 최초 진입을 홈으로 설정 합니다. ( 기본 설정은 0 번으로 진행 됩니다. )
+            controller.selectedIndex             = 2
+            if loginEnabled == true
+            {
+                /// 로그인 디스플레이로 기본 배경 뷰어를 디스플레이 합니다.
+                BecomeActiveView().show()
+                controller.loginDisplayFirst     = true
+            }
+            self.aniView!.stop()
+            /// 현 페이지를 탭바 컨트롤로 변경 합니다.
+            self.replaceController(viewController: controller, animated: false) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    /// 자동 로그인으로 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 입니다.
+                    if loginEnabled == false,
+                       let link = BaseViewModel.shared.getInDataAppStartURL(),
+                       link.isValid
+                    {
+                        /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
+                        controller.setSelectedIndex(.home, seletedItem:link)
+                    }
+                    else
+                    {
+                        /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                        controller.setSelectedIndex( .home )
+                    }
+                })
+            }
         }
-        self.aniView!.stop()
-        /// 현 페이지를 탭바 컨트롤로 변경 합니다.
-        self.replaceController(viewController: tabController, animated: false) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                /// 자동 로그인으로 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 입니다.
-                if loginEnabled == false,
-                   let link = BaseViewModel.shared.getInDataAppStartURL(),
-                   link.isValid
-                {
-                    /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다.
-                    tabController.setSelectedIndex(.home, seletedItem:link)
-                }
-                else
-                {
-                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                    tabController.setSelectedIndex( .home )
-                }
-                
-            })
-        }
+        
     }
 }
 
