@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -12,6 +12,9 @@
         </array>
         <array key="Pretendard-Regular.otf">
             <string>Pretendard-Regular</string>
+        </array>
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
         </array>
     </customFonts>
     <objects>
@@ -57,6 +60,31 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZl-Ds-AuN">
+                            <rect key="frame" x="173.33333333333334" y="9" width="37" height="24"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="If6-h8-Ncq">
+                                    <rect key="frame" x="0.0" y="0.0" width="37" height="24"/>
+                                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="12"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="보기"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="If6-h8-Ncq" firstAttribute="top" secondItem="AZl-Ds-AuN" secondAttribute="top" id="3YH-iV-dPR"/>
+                                <constraint firstAttribute="height" constant="24" id="K7M-Vo-6hW"/>
+                                <constraint firstAttribute="bottom" secondItem="If6-h8-Ncq" secondAttribute="bottom" id="MjL-OB-KPN"/>
+                                <constraint firstItem="If6-h8-Ncq" firstAttribute="leading" secondItem="AZl-Ds-AuN" secondAttribute="leading" id="c1B-sB-lKm"/>
+                                <constraint firstAttribute="width" constant="37" id="g8r-9Z-g0T"/>
+                                <constraint firstAttribute="trailing" secondItem="If6-h8-Ncq" secondAttribute="trailing" id="gTR-BK-pn3"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -65,6 +93,8 @@
                         <constraint firstAttribute="height" constant="38" id="IVM-vx-bk2"/>
                         <constraint firstItem="x6E-xH-mCh" firstAttribute="leading" secondItem="x4t-j9-BUd" secondAttribute="leading" id="Mp6-c7-v06"/>
                         <constraint firstItem="BhA-dq-YqS" firstAttribute="leading" secondItem="x6E-xH-mCh" secondAttribute="trailing" constant="4" id="TOy-6C-1LW"/>
+                        <constraint firstItem="AZl-Ds-AuN" firstAttribute="leading" secondItem="BhA-dq-YqS" secondAttribute="trailing" constant="5" id="Yqv-p4-CHx"/>
+                        <constraint firstItem="AZl-Ds-AuN" firstAttribute="centerY" secondItem="x4t-j9-BUd" secondAttribute="centerY" constant="2" id="t4R-HF-Rib"/>
                         <constraint firstItem="x6E-xH-mCh" firstAttribute="top" secondItem="x4t-j9-BUd" secondAttribute="top" id="wwp-ZB-eUW"/>
                     </constraints>
                 </view>

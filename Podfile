@@ -19,8 +19,7 @@ target 'cereal' do
   pod 'AlamofireActivityLogger'
   # keychainWrapper sdk
   pod 'SwiftKeychainWrapper'
-  # SEED CBC SHA sdk
-  pod 'CocoaSecurity'
   # Wallet SDK ( BigInt, CryptoSwift, Starscream, Web3Core, secp256k1 전부 지원 합니다. )
   pod 'web3swift'
+  
 end

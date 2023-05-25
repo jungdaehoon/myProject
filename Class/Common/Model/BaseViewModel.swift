@@ -375,18 +375,18 @@ class BaseViewModel : NSObject {
      - Parameters:False
      - Throws : False
      - returns :
-        - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
-            + InsertPedometerTermsResponse : 앱 활성화 여부를 리턴 합니다.
+        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
+            + PedometerTermsAgreeResponse : 앱 활성화 여부를 리턴 합니다.
      */
-    func isSessionEnabeld() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
+    func isSessionEnabeld() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
-        let subject             = PassthroughSubject<InsertPedometerTermsResponse?,ResponseError>()
+        let subject             = PassthroughSubject<PedometerTermsAgreeResponse?,ResponseError>()
         requst( showLoading : false, errorPopEnabled: false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
-            /// 만보게 약관 동의를 요청 합니다.
-            return NetworkManager.requestInsertPedometerTerms()
+            /// 만보게 약관 동의여부 요청 합니다.
+            return NetworkManager.requestPedometerTermsAgree()
         } completion: { model in
             // 앱 인터페이스 정상처리 여부를 넘깁니다.
             subject.send(model)

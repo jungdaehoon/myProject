@@ -144,8 +144,6 @@
 		8D51442429D54AE70019943D /* LottieAniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51442329D54AE70019943D /* LottieAniView.swift */; };
 		8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */; };
 		8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */; };
-		8D55D56629E648AC009C43BF /* SEED.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D56229E648AC009C43BF /* SEED.mm */; };
-		8D55D56729E648AC009C43BF /* KISA_SEED_CBC.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D56329E648AC009C43BF /* KISA_SEED_CBC.c */; };
 		8D55D56929E660F6009C43BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D56829E660F6009C43BF /* GoogleService-Info.plist */; };
 		8D55D56C29E691EF009C43BF /* FcmPushUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D56B29E691EF009C43BF /* FcmPushUpdateResponse.swift */; };
 		8D91D99829DFC6C600B5D9AE /* HttpErrorPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91D99729DFC6C600B5D9AE /* HttpErrorPop.swift */; };
@@ -375,10 +373,6 @@
 		8D51442329D54AE70019943D /* LottieAniView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAniView.swift; sourceTree = "<group>"; };
 		8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroPayQRCaptureView.swift; sourceTree = "<group>"; };
 		8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OKZeroPayQRCaptureView.xib; sourceTree = "<group>"; };
-		8D55D56229E648AC009C43BF /* SEED.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SEED.mm; sourceTree = "<group>"; };
-		8D55D56329E648AC009C43BF /* KISA_SEED_CBC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = KISA_SEED_CBC.c; sourceTree = "<group>"; };
-		8D55D56429E648AC009C43BF /* SEED.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEED.h; sourceTree = "<group>"; };
-		8D55D56529E648AC009C43BF /* KISA_SEED_CBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KISA_SEED_CBC.h; sourceTree = "<group>"; };
 		8D55D56829E660F6009C43BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D55D56B29E691EF009C43BF /* FcmPushUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmPushUpdateResponse.swift; sourceTree = "<group>"; };
 		8D91D99729DFC6C600B5D9AE /* HttpErrorPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpErrorPop.swift; sourceTree = "<group>"; };
@@ -1022,7 +1016,6 @@
 		8D205F9129D14B8B00F43C99 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				8D55D56129E648AC009C43BF /* KisaSeedCBC */,
 				8D9A004329DEAD9600424077 /* SecureManager */,
 				8D48BB2C29D2CC9E00CC4D62 /* KakaoLink */,
 				8DDC3DEC29D16730003C4F8F /* AppIron */,
@@ -1078,17 +1071,6 @@
 				8D51442329D54AE70019943D /* LottieAniView.swift */,
 			);
 			path = LottieView;
-			sourceTree = "<group>";
-		};
-		8D55D56129E648AC009C43BF /* KisaSeedCBC */ = {
-			isa = PBXGroup;
-			children = (
-				8D55D56529E648AC009C43BF /* KISA_SEED_CBC.h */,
-				8D55D56329E648AC009C43BF /* KISA_SEED_CBC.c */,
-				8D55D56429E648AC009C43BF /* SEED.h */,
-				8D55D56229E648AC009C43BF /* SEED.mm */,
-			);
-			path = KisaSeedCBC;
 			sourceTree = "<group>";
 		};
 		8D55D56A29E691BA009C43BF /* FcmPushUpdate */ = {
@@ -1572,7 +1554,6 @@
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
 				8D205F8B29D1346F00F43C99 /* Utils.swift in Sources */,
 				8D205F7029D1346F00F43C99 /* WebMessagCallBackHandler.swift in Sources */,
-				8D55D56729E648AC009C43BF /* KISA_SEED_CBC.c in Sources */,
 				8D205F7129D1346F00F43C99 /* ResponseError.swift in Sources */,
 				8D2FC9E629DC05EC0061821F /* BecomeActiveView.swift in Sources */,
 				8DCB18A929F6641E000645D3 /* ShowMnemonicViewcontroller.swift in Sources */,
@@ -1590,7 +1571,6 @@
 				8D205F8D29D1346F00F43C99 /* BaseViewController.swift in Sources */,
 				8DE310582A00FE6700DF9653 /* BottomAccountModel.swift in Sources */,
 				8D205F2B29D1346F00F43C99 /* PermissionInfoView.swift in Sources */,
-				8D55D56629E648AC009C43BF /* SEED.mm in Sources */,
 				8D205F3129D1346F00F43C99 /* TabBarView.swift in Sources */,
 				8D205F7F29D1346F00F43C99 /* LogOutResponse.swift in Sources */,
 				8D205F4629D1346F00F43C99 /* HealthKitManager.swift in Sources */,

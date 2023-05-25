@@ -5,7 +5,6 @@ PODS:
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
   - BigInt (5.2.0)
-  - CocoaSecurity (1.2.4)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - CryptoSwift (1.5.1)
@@ -121,7 +120,6 @@ DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireActivityLogger
   - AlamofireImage (~> 3.3)
-  - CocoaSecurity
   - Crashlytics
   - Fabric
   - Firebase/Core
@@ -136,7 +134,6 @@ SPEC REPOS:
     - AlamofireActivityLogger
     - AlamofireImage
     - BigInt
-    - CocoaSecurity
     - Crashlytics
     - CryptoSwift
     - Fabric
@@ -163,7 +160,6 @@ SPEC CHECKSUMS:
   AlamofireActivityLogger: 4dbb52cbd9a26590775df5d4d0284fa81f9b9b5b
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
-  CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
   Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
   CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
   Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
@@ -185,6 +181,6 @@ SPEC CHECKSUMS:
   Web3Core: 050eb18f0434ac16c42eb7b2270fbce325935128
   web3swift: 8496f6615c3a1f86e7c9e5fe16c5422ef181527b
 
-PODFILE CHECKSUM: 995bad0bbaf3788666df5043d6f6604fd2647113
+PODFILE CHECKSUM: e4b2ac4a57618856b34038613617ca98133b98bf
 
 COCOAPODS: 1.12.0
