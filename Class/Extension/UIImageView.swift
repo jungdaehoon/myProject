@@ -14,13 +14,12 @@ extension UIImageView {
     
     /**
      이미지를 다운로드 하여 리턴 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.04
+     - Date: 2023.04.04
      - Parameters:
         - url : 이미지 url 정보를 받습니다.
-     - Throws : False
-     - returns :
-        - AnyPublisher<UIImage?, Never>
-            + UIImage 이미지 정보를 받습니다.
+     - Throws: False
+     - Returns:
+        UIImage 이미지 정보를 받습니다. (AnyPublisher<UIImage?, Never>)
      */
     static func loadImage(from url: URL) -> AnyPublisher<UIImage?, Never>
     {

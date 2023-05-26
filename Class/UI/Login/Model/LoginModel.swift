@@ -11,7 +11,7 @@ import Combine
 
 /**
  로그인 코드 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.03
+ - Date: 2023.04.03
 */
 enum LOGIN_CODE : String {
     /// 로그인 체크 코드가 없을 경우 입니다.
@@ -31,21 +31,20 @@ enum LOGIN_CODE : String {
 
 /**
  로그인 페이지 모델 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
 */
 class LoginModel : BaseViewModel {
     
     /**
      로그인 처리 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:
         - id : 아이디 정보를 받습니다.
         - xkPWField : 보안 텍스트 필드 입니다.
         - inputPW : 입력된 패스워드 입니다.
-     - Throws : False
-     - returns :
-        - AnyPublisher<LoginResponse?, ResponseError>
-            +  LoginResponse : 로그인 처리 결과를 받습니다.
+     - Throws: False
+     - Returns:
+        로그인 처리 결과를 받습니다. (AnyPublisher<LoginResponse?, ResponseError>)
      */
     func setLogin( _ id : String, xkPWField : XKTextField, inputPW : String ) ->  AnyPublisher<LoginResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]

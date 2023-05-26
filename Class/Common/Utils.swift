@@ -13,7 +13,7 @@ import os
 
 /**
  Console App Log 확인을 위해 사용 합니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.05.03
+ - Date: 2023.05.03
  */
 extension OSLog
 {
@@ -33,12 +33,12 @@ extension OSLog
 
 /**
  Log 확인을 위해 사용 합니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.05.03
+ - Date: 2023.05.03
  - Parameters:
     - object : 로그 정보 입니다.
     - category : 카테고리 타입 입니다. ( default : .okpay )
     - logType : 콘솔 로그 타입 입니다. ( default : .default )
- - returns :False
+ - Returns:False
  */
 func Slog(_ object: Any, category : OSLog = .okpay, logType : OSLogType = .default ) {
      
@@ -279,16 +279,16 @@ class Utils {
 
 /**
  Nil 체크 하는 클래스 입니다.  ( J.D.H  VER : 1.0.0 )
-- Date : 2023.03.16
+- Date: 2023.03.16
 */
 class NC {
 
     /**
      NIL 체크 후 안내 팝업을 오픈 하며 앱을 강제 종료 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.01
+     - Date: 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
-     - returns :False
+     - Returns:False
      */
     static func PE( _ object : Any?)
     {
@@ -306,10 +306,10 @@ class NC {
     
     /**
      NIL 체크 후 안내 팝업을 오픈 하며 현 페이지를  종료 하며 이전 페이지로 돌아 갑니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.01
+     - Date: 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
-     - returns :False
+     - Returns:False
      */
     static func PB( _ object : Any?)
     {
@@ -361,12 +361,11 @@ class NC {
     
     /**
      Int 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - object : 체크할 Int 형 데이터 입니다.
-     - returns :
-        - Int Typre
-            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 0 정보를 리턴 합니다.
+     - Returns:
+        체크된 데이터를 리턴 합니다. 비정상 데이터면 0 정보를 리턴 합니다. (Int)
      */
     static func I( _ object : Int? ) -> Int {
         if object == nil
@@ -379,12 +378,11 @@ class NC {
     
     /**
      Double 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - object : 체크할 Double 형 데이터 입니다.
-     - returns :
-        - Double Typre
-            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 0.0 정보를 리턴 합니다.
+     - Returns:
+        체크된 데이터를 리턴 합니다. 비정상 데이터면 0.0 정보를 리턴 합니다. (Double)
      */
     static func D( _ object : Double? ) -> Double {
         if object == nil
@@ -397,12 +395,11 @@ class NC {
     
     /**
      String 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - object : 체크할 String 형 데이터 입니다.
-     - returns :
-        - String Typre
-            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 "" 정보를 리턴 합니다.
+     - Returns:
+        체크된 데이터를 리턴 합니다. 비정상 데이터면 "" 정보를 리턴 합니다. (String)
      */
     static func S( _ object : String? ) -> String
     {
@@ -416,12 +413,11 @@ class NC {
     
     /**
      Bool 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.03
+     - Date: 2023.05.03
      - Parameters:
         - object : 체크할 Bool 형 데이터 입니다.
-     - returns :
-        - Bool Type
-            + 체크된 데이터를 리턴 합니다. 비정상 데이터면 false 정보를 리턴 합니다.
+     - Returns:
+        체크된 데이터를 리턴 합니다. 비정상 데이터면 false 정보를 리턴 합니다. (Bool)
      */
     static func B( _ object : Bool? ) -> Bool
     {

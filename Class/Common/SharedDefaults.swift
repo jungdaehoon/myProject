@@ -11,7 +11,7 @@ import UIKit
 
 /**
  앱내 저장하는 UserDefaults  입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.27
+ - Date: 2023.03.27
  */
 class SharedDefaults {
     /// 앱 최초 권한 선택 여부 값을 체크 합니다.
@@ -143,12 +143,11 @@ class SharedDefaults {
     //MARK: - 지원 메서드 입니다.
     /**
      키체인 연결 custItem 타입의 데이터를 가져 옵니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:False
-     - Throws : False
-     - returns :
-        - KeyChainCustItem
-            + 유저 데이터를 가져 옵니다.
+     - Throws: False
+     - Returns:
+        유저 데이터를 가져 옵니다. (KeyChainCustItem)
      */
     static func getKeyChainCustItem() -> KeyChainCustItem?
     {
@@ -159,11 +158,11 @@ class SharedDefaults {
     
     /**
      키체인에 custItem 타입의 데이터를 추가 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - custItem : 유저 데이터를 추가 합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     static func setKeyChainCustItem( _ custItem : KeyChainCustItem )
     {
@@ -174,12 +173,12 @@ class SharedDefaults {
     
     /**
      키체인에 데이터를 추가 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - value : 추가할 데이터 입니다.
         - key : 데이터 키 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     static func setKeyChain( _ value: String, forKey key: String )
     {
@@ -190,13 +189,12 @@ class SharedDefaults {
     
     /**
      키체인에 문자형 데이터를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - key : 리턴할 데이터의 키값을 받습니다.
-     - Throws : False
-     - returns :
-        - String
-            + 리턴할 문자형 데이터 입니다.
+     - Throws: False
+     - Returns:
+        리턴할 문자형 데이터 입니다. (String)
      */
     static func getStringKeyChain( forKey key: String ) -> String?
     {

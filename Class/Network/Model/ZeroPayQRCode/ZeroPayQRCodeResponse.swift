@@ -9,7 +9,7 @@ import Foundation
 
 /**
  QRCode 인증 할 제로페이 스크립트를 받습니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.19
+ - Date: 2023.04.19
 */
 struct ZeroPayQRCodeResponse: BaseResponse {
     /// 세부 응답코드 입니다.

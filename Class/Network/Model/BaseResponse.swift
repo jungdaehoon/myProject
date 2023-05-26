@@ -10,7 +10,7 @@ import Foundation
 
 /**
  기본 베이스 네트워크 인터페이스 Response 입니다.
- - Date : 2023.03.15
+ - Date: 2023.03.15
  */
 protocol BaseResponse: Codable {
     /// 세부 응답코드 입니다.

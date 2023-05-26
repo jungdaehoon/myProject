@@ -11,13 +11,12 @@ extension UIImage
 {
     /**
      이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다.
-     - Date : 2023.04.26
+     - Date: 2023.04.26
      - parameters:
         - size : 이미지를 넓이 기준으로 리사이징 합니다.
      - Throws:False
      - returns:
-        + UIImage
-            : 리사이징 된 이미지를 리턴 합니다.
+        리사이징 된 이미지를 리턴 합니다. (UIImage)
     */
     func resize( size : CGSize) -> UIImage {
         let render = UIGraphicsImageRenderer(size: size)
@@ -30,13 +29,12 @@ extension UIImage
     
     /**
      이미지를 넓이 기준으로 리사이징 하여 리턴 합니다.
-     - Date : 2023.04.26
+     - Date: 2023.04.26
      - parameters:
         - newWidth : 이미지를 넓이 기준으로 리사이징 합니다.
      - Throws:False
      - returns:
-        + UIImage
-            : 리사이징 된 이미지를 리턴 합니다.
+        리사이징 된 이미지를 리턴 합니다. (UIImage)
     */
     func resize(newWidth: CGFloat) -> UIImage {
         let scale = newWidth / self.size.width
@@ -53,7 +51,7 @@ extension UIImage
     
     /**
      회전된 이미지를 계산하여 리턴 합니다.
-     - Date : 2023.04.26
+     - Date: 2023.04.26
      - parameters:
         - radians : 회전 각도 값입니다. ( CGFloat(angle * .pi) / 180 as CGFloat 설정된 값 )
      - Throws:False

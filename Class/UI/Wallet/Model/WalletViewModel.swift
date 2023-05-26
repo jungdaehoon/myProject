@@ -13,7 +13,7 @@ import Web3Core
 
 /**
  월렛 모델 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.05.15
+ - Date: 2023.05.15
 */
 class WalletViewModel : BaseViewModel{
     let encKey  = "CpUzZ08BAcn46Ie1"

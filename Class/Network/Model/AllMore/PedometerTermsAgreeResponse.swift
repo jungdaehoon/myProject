@@ -10,7 +10,7 @@ import Foundation
 
 /**
  만보GO 약관동의 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.22
+ - Date: 2023.03.22
 */
 struct PedometerTermsAgreeResponse: BaseResponse {
     /// 세부 응답코드 입니다.
@@ -35,7 +35,7 @@ struct PedometerTermsAgreeResponse: BaseResponse {
 
 /**
  만보GO 약관동의 여부를 정보 데이터 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.22
+ - Date: 2023.03.22
 */
 struct use_data: Codable {
     /// 약관동의 여부 값을 받습니다.

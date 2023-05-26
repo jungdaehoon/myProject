@@ -10,7 +10,7 @@ import UIKit
 
 /**
  현 머니/포인트 정보 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
 */
 class PointItemView: UIView {
     /// 오픈 뱅킹 계좌 안내 문구 입니다.
@@ -39,10 +39,10 @@ class PointItemView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      모델 데이터 기준으로 포인트 영역 디스플레이 합니다.
-     - Date : 2023.03.08
+     - Date: 2023.03.08
      - Parameters:False
-     - Throws : False
-     - returns : False
+     - Throws: False
+     - Returns: False
      */
     func setDisplay( _ model : AllMoreModel )
     {

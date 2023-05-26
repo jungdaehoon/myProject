@@ -12,7 +12,7 @@ import UIKit
 
 /**
  QRcode 및 바코드 생성 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
 */
 class QRorBarCodeGeneratorView: UIView {
 
@@ -43,7 +43,7 @@ class QRorBarCodeGeneratorView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      제로페이 QRCode 뷰어 입니다.
-     - Date : 2023.03.13
+     - Date: 2023.03.13
      */
     func initGeneratorView(){
         /// Xib 연결 합니다.
@@ -53,14 +53,14 @@ class QRorBarCodeGeneratorView: UIView {
     
     /**
      코드별 디스플레이할 이미지 세팅 입니다.
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:
         - codeType : 코드 타입 정보를 받습니다.
         - code : 코드 정보 입니다.
         - completion : 코드가 정상 적으로 생성되었는지를 리턴 합니다.
         - btnEvent : 버튼 이벤트를 리턴 합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCodeDisplay( _ codeType : ZEROPAY_CODE_TYPE,
                          code : String = "",
@@ -94,14 +94,13 @@ class QRorBarCodeGeneratorView: UIView {
     
     /**
      바코드 이미지 생성 입니다.
-     - Date : 2023.03.13
+     - Date: 2023.03.13
      - Parameters:
         - barcode : 이미지로 생성될 바코드 정보 입니다.
         - scale : 이미지 크기를 설정 합니다.
-     - Throws : False
-     - returns :
-        - UIImage?
-            + barcode 문자를 이미지로 변경한 데이터를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        barcode 문자를 이미지로 변경한 데이터를 리턴 합니다. (UIImage)
      */
     func generateBarcode128( _ barcode: String, scale : CGFloat = 10.0 ) -> UIImage? {
         let data = barcode.data(using: String.Encoding.ascii)
@@ -119,14 +118,13 @@ class QRorBarCodeGeneratorView: UIView {
     
     /**
      QR코드 이미지 생성 입니다.
-     - Date : 2023.03.13
+     - Date: 2023.03.13
      - Parameters:
         - qrcode : 이미지로 생성될 QRCode 정보 입니다.
         - scale : QRCode 이미지 크기 정보 입니다.
-     - Throws : False
-     - returns :
-        - UIImage?
-            + QRCode 문자를 이미지로 변경한 데이터를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        QRCode 문자를 이미지로 변경한 데이터를 리턴 합니다. (UIImage)        
      */
     func generateQRCode(_ qrcode: String, scale : CGFloat = 10.0 ) -> UIImage? {
 

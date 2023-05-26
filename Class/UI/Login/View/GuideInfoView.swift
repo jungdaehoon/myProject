@@ -10,7 +10,7 @@ import UIKit
 
 /**
  가이드 안내 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.24
+ - Date: 2023.03.24
 */
 class GuideInfoView: UIView {
     /// 시작 안내 뷰어 입니다.
@@ -65,7 +65,7 @@ class GuideInfoView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      접근 권한 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      */
     func initGuideInfo(){
         /// Xib 연결 합니다.
@@ -84,12 +84,12 @@ class GuideInfoView: UIView {
     
     /**
      가이드 디스플레이를 시작 하며 버튼 이벤트를 연결 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:
         - animation :
         - completion : 가이드 뷰어의 시작하기 이벤트를 넘기는 이벤트를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setOpenView( animation : Bool = true,  completion : (( _ value : Bool ) -> Void )? = nil ){
         Slog("self.frame : \(self.frame)")
@@ -100,10 +100,10 @@ class GuideInfoView: UIView {
     
     /**
      하단 카드 올리는 화살표 애니 이미지 입니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setLottieView(){
         /// 로딩중 뷰어를 설정 합니다.
@@ -116,11 +116,11 @@ class GuideInfoView: UIView {
     
     /**
      애니 효과로 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAniDisplay( animation : Bool = true ){
         self.isHidden   = false
@@ -136,11 +136,11 @@ class GuideInfoView: UIView {
     
     /**
      애니 효과로 종료 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAniClose( animation : Bool = true )
     {        
@@ -157,11 +157,11 @@ class GuideInfoView: UIView {
     
     /**
      가이드 디스플레이 순서를 초기화 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다. ( 기본 : false )
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setZeroPage( animation : Bool = false )
     {

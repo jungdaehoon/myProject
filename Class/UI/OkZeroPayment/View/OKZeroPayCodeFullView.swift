@@ -10,7 +10,7 @@ import UIKit
 
 /**
  제로페이 결제코드 전체화면 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.27
+ - Date: 2023.04.27
  */
 class OKZeroPayCodeFullView: UIView {
 
@@ -60,7 +60,7 @@ class OKZeroPayCodeFullView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      제로페이 결제코드 전체화면 초기화 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      */
     func initZeroPayCodeFullView(){
         self.commonInit()
@@ -69,13 +69,13 @@ class OKZeroPayCodeFullView: UIView {
     
     /**
      전체 화면에 코드정보를 빈값으로 초기화 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
         - code : 디스플레이 할 코드 정보 입니다.
         - completion : 결제 코드 정상 디스플레이 여부를 리턴 합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func releaseCodeView()
     {
@@ -98,13 +98,13 @@ class OKZeroPayCodeFullView: UIView {
     
     /**
      결제 코드를 전체 화면에 설정 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
         - code : 디스플레이 할 코드 정보 입니다.
         - completion : 결제 코드 정상 디스플레이 여부를 리턴 합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setDisplayView( codeType : ZEROPAY_CODE_TYPE , code : String, completion : (( _ success : Bool ) -> Void)? = nil ){
         /// 바코드 뷰어 입니다.

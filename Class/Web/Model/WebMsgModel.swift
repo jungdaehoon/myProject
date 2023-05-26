@@ -11,7 +11,7 @@ import Combine
 
 /**
  웹 인터페이스 헨들러들 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.28
+ - Date: 2023.03.28
  */
 enum SCRIPT_MESSAGE_HANDLER_TYPE : String, CaseIterable {
     /// OKPay 기본 하이브리드 스크립트 입니다.
@@ -23,7 +23,7 @@ enum SCRIPT_MESSAGE_HANDLER_TYPE : String, CaseIterable {
 
 /**
  웹 인터페이스 메세지 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.28
+ - Date: 2023.03.28
  */
 enum SCRIPT_MESSAGES : String
 {
@@ -139,20 +139,19 @@ enum SCRIPT_MESSAGES : String
 
 /**
  웹 헨들러 지원 모델 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
 */
 class WebMsgModel : BaseViewModel {
     
     
     /**
      Wallet 리턴 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.24
-     - Throws : False
+     - Date: 2023.04.24
+     - Throws: False
      - Parameters :
         - retStr : 리턴 할 데이터 정보 입니다.
-     - returns :
-        - Future<String, Never>
-            +  String : 리턴 할 데이터 정보 입니다.
+     - Returns:
+        리턴 할 데이터 정보 입니다. (Future<String, Never>)
      */
     func getWalletJsonMsg( retStr: String? ) -> Future<String, Never>
     {
@@ -172,15 +171,14 @@ class WebMsgModel : BaseViewModel {
     
     /**
      Wallet 리턴 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.24
-     - Throws : False
+     - Date: 2023.04.24
+     - Throws: False
      - Parameters :
         - isSuccess : 데이터 여부 입니다.
         - data : 데이터 정보 입니다.
         - msg : 데이터가 없는 경우 메세지 정보 입니다.
-     - returns :
-        - Future<String, Never>
-            +  String : 리턴 할 데이터 정보 입니다.
+     - Returns:
+        리턴 할 데이터 정보 입니다. (Future<String, Never>)
      */
     private func getWalletJsonString(_ isSuccess: Bool , data: String, msg: String) -> String {
         let resultStr   : String        = isSuccess ? "true" :  "false"

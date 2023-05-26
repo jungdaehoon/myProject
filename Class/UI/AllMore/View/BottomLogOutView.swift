@@ -11,7 +11,7 @@ import UIKit
 
 /**
  최하단 로그아웃 페이지 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
 */
 class BottomLogOutView: UIView {
     

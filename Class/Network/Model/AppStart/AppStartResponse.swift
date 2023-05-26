@@ -10,7 +10,7 @@ import Foundation
 
 /**
  앱 시작시 기본 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.27
+ - Date: 2023.03.27
 */
 struct AppStartResponse: BaseResponse {
     /// 세부 응답코드 입니다.
@@ -74,7 +74,7 @@ struct AppStartResponse: BaseResponse {
       "menu_id" : "MEM_000",
       "menu_nm" : "기프티콘",
       "menu_id" : "MYP_027",
- - Date : 2023.03.27
+ - Date: 2023.03.27
  }
  */
 struct menudata : Codable
@@ -92,7 +92,7 @@ struct menudata : Codable
 
 /**
  메뉴 상세 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.27
+ - Date: 2023.03.27
 */
 struct menu_list : Codable {
     /// 로그인 체크 여부 입니다.
@@ -118,7 +118,7 @@ struct menu_list : Codable {
 
 /**
  앱 시작시 버전 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.27
+ - Date: 2023.03.27
 */
 struct versionInfo :Codable
 {

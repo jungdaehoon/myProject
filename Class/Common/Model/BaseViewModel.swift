@@ -16,7 +16,7 @@ import AdSupport
 
 /**
  앱실드 데이터를 가집니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.27
+ - Date: 2023.03.27
 */
 struct AppShield  {
     /// 세션 아이디 입니다.
@@ -31,7 +31,7 @@ struct AppShield  {
 
 /**
  앱 활성화 여부를 체크 타입 합니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.05.17
+ - Date: 2023.05.17
  */
 enum IN_APP_START_TYPE : Int {
     /// 푸시로 타입입니다.
@@ -42,7 +42,7 @@ enum IN_APP_START_TYPE : Int {
 
 /**
  앱 시작시 관련 정보 메뉴 리스트 URL 정보 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.03
+ - Date: 2023.04.03
 */
 enum MENU_LIST : String  {
     /// 메인 페이지 URL 입니다.
@@ -97,7 +97,7 @@ enum MENU_LIST : String  {
 
 /**
  기본 베이스 모델 입니다.
- - Date : 2023.03.15
+ - Date: 2023.03.15
  */
 class BaseViewModel : NSObject {
     private var curCancellable: AnyCancellable?
@@ -135,7 +135,7 @@ class BaseViewModel : NSObject {
     /**
      상황별 인터페이스를 요청 합니다.( J.D.H  VER : 1.0.0 )
      - Description          : Http 네트워크 요청시 공통 지원 메서드 입니다. "errorPopEnabled" 에 따라 공통 오류 코드에 따른 안내 팝업 처리 및 공통 이벤트 처리가 될수 있습니다. 별도 이벤트 처리는 "errorPopEnabled = false"  처리시 별도 이벤트 처리가 가능합니다.
-     - Date : 2023.03.23
+     - Date: 2023.03.23
      - Parameters:
         - showLoading       : 로딩 디스플레이 여부 입니다. ( default = true )
         - appExit           : 예외 사항일 경우 앱 종료로 연결할지 여부 입니다. ( default = false )
@@ -143,8 +143,8 @@ class BaseViewModel : NSObject {
         - errorHandler      : ResponseError 헨들러 입니다. ( default = nil )
         - publisher         : 타입별 데이터를 연결 합니다.
         - completion        : http 요청할 파라미터 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func requst<T: BaseResponse>(showLoading: Bool = true,
                                  appExit : Bool = false,
@@ -246,12 +246,11 @@ class BaseViewModel : NSObject {
     
     /**
      앱 시작시 관련 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.03
+     - Date: 2023.04.03
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-            +  PedometerTermsAgreeResponse : 홈 소비 정보를 요청 합니다.
+     - Throws: False
+     - Returns:
+        홈 소비 정보를 요청 합니다. (AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>)
      */
     func setAppStart() -> AnyPublisher<AppStartResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]
@@ -276,12 +275,11 @@ class BaseViewModel : NSObject {
     
     /**
      DeepLink,Push 선택으로 들어 온 경우 데이터 찾아 리턴 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.17
+     - Date: 2023.05.17
      - Parameters:False
-     - Throws : False
-     - returns :
-        - String
-            + 페이지 이동 할 링크 입니다.
+     - Throws: False
+     - Returns:
+        페이지 이동 할 링크 입니다. (String)
      */
     func getInDataAppStartURL() -> String?
     {
@@ -304,13 +302,12 @@ class BaseViewModel : NSObject {
     
     /**
      앱 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.17
+     - Date: 2023.05.17
      - Parameters:
         - inAppStartType : 앱 활성화 여부를 체크하는 타입 입니다.
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            + 앱 활성화 여부를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        앱 활성화 여부를 리턴 합니다. (Future<Bool, Never>)
      */
     func isAppEnabled( inAppStartType : IN_APP_START_TYPE ) -> Future<Bool, Never> {
         return Future<Bool, Never> { promise in
@@ -371,12 +368,11 @@ class BaseViewModel : NSObject {
     
     /**
      앱 세션 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.17
+     - Date: 2023.05.17
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-            + PedometerTermsAgreeResponse : 앱 활성화 여부를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        앱 활성화 여부를 리턴 합니다. (AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>)
      */
     func isSessionEnabeld() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
@@ -397,13 +393,12 @@ class BaseViewModel : NSObject {
 
     /**
      메뉴 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.02
+     - Date: 2023.05.02
      - Parameters:
         - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
-     - Throws : False
-     - returns :
-        - Bool
-            + 활성화 여부를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        활성화 여부를 리턴 합니다. (Bool)
      */
     func isAppMenuList( menuID : MENU_LIST ) -> Bool
     {
@@ -425,13 +420,12 @@ class BaseViewModel : NSObject {
     
     /**
      연동할 URL 정보를 가져 옵니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.03
+     - Date: 2023.04.03
      - Parameters:
         - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
-     - Throws : False
-     - returns :
-        - Future<String, Never>
-            + 연동할 URL 정보르 리턴 합니다.
+     - Throws: False
+     - Returns:
+        연동할 URL 정보르 리턴 합니다. (Future<String, Never>)
      */
     func getAppMenuList( menuID : MENU_LIST ) -> Future<String, Never>
     {
@@ -456,12 +450,11 @@ class BaseViewModel : NSObject {
     
     /**
      만보기 약관 동의 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.09
+     - Date: 2023.03.09
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
-            +  PedometerTermsAgreeResponse : 약관동의 여부를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        약관동의 여부를 리턴 합니다. (AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>)
      */
     func getPTTermAgreeCheck() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
     {
@@ -484,12 +477,11 @@ class BaseViewModel : NSObject {
     
     /**
      만보기 약관 동의 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.09
+     - Date: 2023.03.09
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
-            +  InsertPedometerTermsResponse : 약관동의 요청 정상처리 여부를 받습니다.
+     - Throws: False
+     - Returns:
+        약관동의 요청 정상처리 여부를 받습니다. (AnyPublisher<InsertPedometerTermsResponse?, ResponseError>)
      */
     func setPTTermAgreeCheck() -> AnyPublisher<InsertPedometerTermsResponse?, ResponseError>
     {
@@ -511,12 +503,11 @@ class BaseViewModel : NSObject {
     
     /**
      로그아웃 처리 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<LogOutResponse?, ResponseError>
-            +  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+     - Throws: False
+     - Returns:
+        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
      */
     func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
         let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
@@ -540,13 +531,12 @@ class BaseViewModel : NSObject {
     
     /**
      정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - user_hp : 유저 휴대폰 정보를 받습니다.
-     - Throws : False
-     - returns :
-        - AnyPublisher<Bool?, Never>
-            +  정상 저장 여부를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        정상 저장 여부를 리턴 합니다. (AnyPublisher<Bool?, Never>)
      */
     func setKeyChainCustItem( _ user_hp : String ) -> Future<Bool, Never> {
         return Future<Bool, Never> { promise in
@@ -572,12 +562,11 @@ class BaseViewModel : NSObject {
     
     /**
      FCM TOKEN 정보를 서버에 등록 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.13
+     - Date: 2023.04.13
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<FcmPushUpdateResponse?, ResponseError>
-            + FcmPushUpdateResponse : FCM 정상 등로 결과를 받습니다.
+     - Throws: False
+     - Returns:
+        FCM 정상 등로 결과를 받습니다. (AnyPublisher<FcmPushUpdateResponse?, ResponseError>)
      */
     func setFcmTokenRegister() ->  AnyPublisher<FcmPushUpdateResponse?, ResponseError> {
         let subject             = PassthroughSubject<FcmPushUpdateResponse?,ResponseError>()
@@ -615,11 +604,10 @@ class BaseViewModel : NSObject {
     
     /**
      앱 실드 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.27
-     - Throws : False
-     - returns :
-        - Future<AppShield, Never>
-            + AppShield : 앱 실드 정상 여부를 체크 합니다.
+     - Date: 2023.03.27
+     - Throws: False
+     - Returns:
+        앱 실드 정상 여부를 체크 합니다. (Future<AppShield, Never>)
      */
     func getAppShield() -> Future<AppShield, Never>
     {
@@ -652,11 +640,10 @@ class BaseViewModel : NSObject {
     
     /**
      앱 카메라 접근 허용 여부를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.29
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            +  Bool : 앱 카메라 접근 여부 값을 리턴 합니다.
+     - Date: 2023.03.29
+     - Throws: False
+     - Returns:
+        앱 카메라 접근 여부 값을 리턴 합니다. (Future<Bool, Never>)
      */
     func isCameraAuthorization() -> Future<Bool, Never>
     {
@@ -672,11 +659,10 @@ class BaseViewModel : NSObject {
     
     /**
      앱 이미지 저장소 접근 허용 여부를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            +  Bool : 앱 이미지 저장소 접근 여부 값을 리턴 합니다.
+     - Date: 2023.03.20
+     - Throws: False
+     - Returns:
+        앱 이미지 저장소 접근 여부 값을 리턴 합니다. (Future<Bool, Never>)
      */
     func isPhotoSaveAuthorization() -> Future<Bool, Never>
     {
@@ -707,11 +693,10 @@ class BaseViewModel : NSObject {
     
     /**
      연락처 접근 허용 여부를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.29
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            +  Bool : 앱 연락처 접근 여부 값을 리턴 합니다.
+     - Date: 2023.03.29
+     - Throws: False
+     - Returns:
+        앱 연락처 접근 여부 값을 리턴 합니다. (Future<Bool, Never>)
      */
     func isContactAuthorization() -> Future<Bool, Never>
     {
@@ -728,11 +713,10 @@ class BaseViewModel : NSObject {
     
     /**
      앱 PUSH 사용 허용 여부를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.29
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            +  Bool : PUSH 사용 인증 여부 값을 리탄합니다.
+     - Date: 2023.03.29
+     - Throws: False
+     - Returns:
+        PUSH 사용 인증 여부 값을 리탄합니다. (Future<Bool, Never>)
      */
     func isAPNSAuthorization() -> Future<Bool, Never>
     {
@@ -750,11 +734,10 @@ class BaseViewModel : NSObject {
     
     /**
      앱 추적 (IDFA) 허용 여부를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            +  Bool : 앱 추적 허용 승인 여부 값을 리턴 합니다.
+     - Date: 2023.03.20
+     - Throws: False
+     - Returns:
+        앱 추적 허용 승인 여부 값을 리턴 합니다. (Future<Bool, Never>)
      */
     func isTrackingAuthorization() -> Future<Bool, Never>
     {
@@ -793,11 +776,10 @@ class BaseViewModel : NSObject {
     
     /**
      Deeplink URL 정보를 체크하여 이동 할 URL 정보를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.29
-     - Throws : False
-     - returns :
-        - Future<String, Never>
-            +  String : 딥링크 진입 할 URL 정보를 받습니다.
+     - Date: 2023.03.29
+     - Throws: False
+     - Returns:
+        딥링크 진입 할 URL 정보를 받습니다. (Future<String, Never>)
      */
     func getDeepLink( deelLinkUrl url: URL ) -> Future<String, Never>
     {
@@ -824,13 +806,12 @@ class BaseViewModel : NSObject {
     
     /**
      URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다.
-     - Date : 2023.04.19
+     - Date: 2023.04.19
      - Parameters:
      - url : URL 정보 입니다.
-     - Throws : False
-     - returns :
-        - Future <[String : Any],Naver>
-            + 파라미터 정보를 정리하여 리턴 합니다.
+     - Throws: False
+     - Returns:
+        파라미터 정보를 정리하여 리턴 합니다. (Future <[String : Any],Naver>)
      */
     func getURLParams( url : URL ) -> Future<[String : Any], Never>
     {
@@ -850,14 +831,13 @@ class BaseViewModel : NSObject {
     
     /**
      GET 방식 URL 파라미터를 설정하여 리턴 합니다.
-     - Date : 2023.04.19
+     - Date: 2023.04.19
      - Parameters:
         - mainUrl : 메인 URL 정보 입니다.
         - params : GET 방식으로 연결할 파라미터 정보 입니다.
-     - Throws : False
-     - returns :
-        - Future<String,Never>
-            + 파라미터 연결된 GET 방식 URL 정보를 넘깁니다.
+     - Throws: False
+     - Returns:
+        파라미터 연결된 GET 방식 URL 정보를 넘깁니다. (Future<String,Never>)
      */
     func getURLGetType( mainUrl : String, params : [String : Any] = [:]) -> Future<String, Never>
     {
@@ -875,13 +855,12 @@ class BaseViewModel : NSObject {
     
     /**
      Session 유지를 위해 쿠키 업데이트 정보를 리턴 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.25
+     - Date: 2023.04.25
      - Parameters:
         - cookies : 업데이트할 쿠키 정보입니다.
-     - Throws : False
-     - returns :
-        - Future<String, Never>
-            + 업데이트 된 정보를 넘깁니다.
+     - Throws: False
+     - Returns:
+        업데이트 된 정보를 넘깁니다. (Future<String, Never>)
      */
     func getJSCookiesString( cookies : [HTTPCookie]? ) -> Future<String, Never>
     {
@@ -898,10 +877,10 @@ class BaseViewModel : NSObject {
     
     /**
      FCM PUSH 수신을 등록합니다.
-     - Date : 2023.04.06
+     - Date: 2023.04.06
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setFcmRegister( appDelegate : AppDelegate ) {
         /// 앱 PUSH 사용 허용 여부를 요청 합니다.
@@ -934,10 +913,10 @@ class BaseViewModel : NSObject {
     
     /**
      키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱삭제후 설치 . 기존 키체인 내용을 삭제 )
-     - Date : 2023.04.06
+     - Date: 2023.04.06
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setKeyChainEnabled(){
         if SharedDefaults.default.isKeychainRead == false
@@ -957,10 +936,10 @@ class BaseViewModel : NSObject {
     
     /**
      탈옥 방지 체크 합니다.
-     - Date : 2023.04.06
+     - Date: 2023.04.06
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setSecureCheck() {
         if let secuManager = IxSecureManager.shared() {

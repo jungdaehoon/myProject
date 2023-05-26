@@ -12,7 +12,7 @@ import Combine
 
 /**
  기본 베이스 컨트롤뷰 입니다.
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 class BaseViewController: BaseWebViewController {
     var cancellableSet = Set<AnyCancellable>()
@@ -30,7 +30,7 @@ class BaseViewController: BaseWebViewController {
 
     /**
      화면 새로고침 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.15
+     - Date: 2023.05.15
      */
     func setDisplayData(){
         self.initWebPage()        

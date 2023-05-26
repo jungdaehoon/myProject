@@ -11,7 +11,7 @@ import Combine
 
 /**
  하단 계좌 리스트 모델 입니다.    ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.05
+ - Date: 2023.04.05
  */
 class BottomAccountModel : BaseViewModel{
     

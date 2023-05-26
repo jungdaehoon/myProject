@@ -10,7 +10,7 @@ import UIKit
 
 /**
  전체화면에 센터 안내 버튼 팝업 입니다.   ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.16
+ - Date: 2023.03.16
  */
 class CMAlertView: UIView {
     /// 왼쪽 버튼 팝업 종료 이벤트를 넘깁니다.
@@ -61,14 +61,14 @@ class CMAlertView: UIView {
     /**
      싱글 버튼 형태의 안내 팝업 입니다.   ( J.D.H  VER : 1.0.0 )
      - Description : 버튼이 1개인 안내 팝업으로 Show() 추가 호출없이 바로 팝업 오픈 합니다.
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - titleText : 팝업 타이틀 정보 입니다.
         - detailObject : 팝업 상세 정보에 디스플레이 할 정보 입니다. ( String : 문자를 받아 디스플레이 합니다. , UIView : 상세 뷰어에 디스플레이 합니다.)
         - cancelText : 하단 버튼 타이틀 정보 입니다.
         - completion : 팝업 종료시 이벤트를 가집니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAlertView( titleText : String = "", detailObject : AnyObject, cancelText : String, completion : (( _ result : String ) -> Void )? = nil )
     {
@@ -84,14 +84,13 @@ class CMAlertView: UIView {
      안내 팝업 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
      - Description : 버튼을 별도로 추가하는 형태의 안내 팝업 오픈을 위한 기본 정보를 받아 디스플레이 하는 메서드 입니다.
                      별도로 버튼  'addAlertBtn'  으로 추가 해야하며 최대 2개까지 추가 가능합니다. 별도로 show 메서드를 호출해야 합니다.
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - titleText : 팝업 타이틀 정보 입니다.
         - detailObject : 팝업 상세 정보에 디스플레이 할 정보 입니다. ( String : 문자를 받아 디스플레이 합니다. , UIView : 상세 뷰어에 디스플레이 합니다.)
-     - Throws : False
-     - returns :
-        - CMAlertView Type
-            + 버튼 이벤트를 추가할 알림뷰 자기 자신을 넘깁니다.
+     - Throws: False
+     - Returns:
+        버튼 이벤트를 추가할 알림뷰 자기 자신을 넘깁니다. (CMAlertView)
      */
     func setAlertView( titleText : String = "", detailObject : AnyObject) -> CMAlertView?
     {
@@ -130,12 +129,12 @@ class CMAlertView: UIView {
     /**
      팝업에 사용될 버튼을 추가 합니다.   ( J.D.H  VER : 1.0.0 )
      - Description : 버튼을 별도로 추가하며 최대 2개까지만 추가됩니다.
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - btnTitleText : 버튼 타이틀 정보 입니다.
         - completion : 추가되는 버튼 이벤트를 가집니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func addAlertBtn( btnTitleText : String, completion : (( _ result : String ) -> Void )? = nil )
     {
@@ -171,11 +170,11 @@ class CMAlertView: UIView {
     
     /**
      안내 팝업의 상세 뷰어에  받아온 뷰어를  추가합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - view : 상세 뷰어 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func addView( _ view : UIView )
     {
@@ -186,11 +185,11 @@ class CMAlertView: UIView {
     
     /**
      안내 팝업의 상세 뷰어에  받아온 문자정보를  추가합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:
         - text : 상세 문자 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func addLabel( _ text : String )
     {
@@ -215,10 +214,10 @@ class CMAlertView: UIView {
 
     /**
      안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
@@ -231,10 +230,10 @@ class CMAlertView: UIView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func hide() {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })

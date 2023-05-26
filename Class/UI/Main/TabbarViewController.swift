@@ -9,7 +9,7 @@ import UIKit
 
 /**
  노티 이벤트 이름을 가집니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 extension Notification.Name {
     /// PUSH 이벤트 발생시 입니다.
@@ -21,7 +21,7 @@ extension Notification.Name {
 
 /**
  텝 별 인덱스 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.21
+ - Date: 2023.04.21
  */
 enum TAB_STATUS : Int {
     /// 월렛 탭 인덱스 입니다.
@@ -39,7 +39,7 @@ enum TAB_STATUS : Int {
 
 /**
  메인 탭바 컨트롤러 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 class TabbarViewController: UITabBarController {
     var viewModel                       : BaseViewModel = BaseViewModel()
@@ -209,10 +209,10 @@ class TabbarViewController: UITabBarController {
     // MARK: - 지원 메서드 입니다.
     /**
      탭 아이템  활성화 여부를 받아 활성화 합니다..   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.25
+     - Date: 2023.03.25
      - Parameters:
         - selectedIndex : 탭 변경 인덱스 정보 입니다.
-     - returns :False
+     - Returns:False
      */
     func tabChangedTo(selectedIndex: Int) {
         /// 탭 인덱스 정보를 커스텀 탭 바에 넘깁니다.
@@ -222,13 +222,13 @@ class TabbarViewController: UITabBarController {
     
     /**
      로그인 페이지 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.24
+     - Date: 2023.04.24
      - Parameters:
         - animation : 디스플레이시 애니 효과 적용 여부 입니다.
         - gudieViewEnabled : 가이드 디스플레이 여부 입니다.
         - completion : 로그인 정상 처리시 여부 콜백 입니다.
         - puchCompletion : 로그인 페이지 정상 호출시 콜백 입니다.
-     - returns :False
+     - Returns:False
      */
     func setDisplayLogin( animation : Bool = false, gudieViewEnabled : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
         let viewController              = LoginViewController.init( completion: completion )
@@ -239,10 +239,10 @@ class TabbarViewController: UITabBarController {
     
     /**
      Notification 관련 이벤트를 연결 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.23
+     - Date: 2023.04.23
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setNotification(){
         /// 백그라운드에서 올라오는 경우 이벤트를 연결 합니다.
@@ -256,7 +256,7 @@ class TabbarViewController: UITabBarController {
     // MARK: - NotificationCenter
     /**
      앱 백그라운드 이동하는 경우 입니다.
-     - Date : 2023.04.04
+     - Date: 2023.04.04
      - Throws:False
      - returns:False
      */
@@ -267,7 +267,7 @@ class TabbarViewController: UITabBarController {
     
     /**
      앱 백그라운드 에서 호출되는 경우 입니다.
-     - Date : 2023.04.04
+     - Date: 2023.04.04
      - Throws:False
      - returns:False
      */
@@ -283,9 +283,9 @@ extension UITabBarController
     
     /**
      현 진행중인 안내 뷰어 를 전부 초기화 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.17
+     - Date: 2023.05.17
      - Parameters:False
-     - returns :False
+     - Returns:False
      */
     func setCommonViewRemove(){
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
@@ -299,9 +299,9 @@ extension UITabBarController
     
     /**
      현 진행중인 페이지를 root 페이지로 초기화 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.17
+     - Date: 2023.05.17
      - Parameters:False
-     - returns :False
+     - Returns:False
      */
     func setIngTabToRootController(){
         /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
@@ -317,13 +317,13 @@ extension UITabBarController
     /**
      하단 탭바 위치를 이동합니다.  ( J.D.H  VER : 1.0.0 )
      - Description      : 탭을 이동시 추가 정보를 받아 디스플레이 할 수 있으며, 기본 위치 정보를 넘길 경우 해당 위치의 기본 데이터가 새로고침 됩니다. 추가 정보가 있는 경우에는 해당 정보가 정상 처리된 후 "completion" 콜백으로 최종 처리 이벤트를 받을 수 있습니다. 이벤트에는 탭 이동된 "BaseViewController" 정보를 파라미터로 받습니다.
-     - Date : 2023.04.24
+     - Date: 2023.04.24
      - Parameters:
         - tabIndex      : 이동할 탭 넘버 입니다.
         - seletedItem   : 추가할 데이터 입니다.
         - updateCookies : 탭 이동시 추가한 URL 정보가 디스플레이 되면 쿠키 값을 업로드 할지 여부를 받습니다. ( 추가한 데이터가 있을 경우에만 사용 가능 합니다. )
         - completion    : 탭 이동후 추가한 URL 정보가 디스플레이 되면 호출 됩니다. ( 추가한 데이터가 있을 경우에만 사용 가능 합니다. )
-     - returns :False
+     - Returns:False
      */
     func setSelectedIndex( _ tabIndex : TAB_STATUS, seletedItem : Any? = nil, updateCookies : Bool = false, completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
         /// 탭 이동시 아이템이 있을 경우 아이템 데이터 우선으로 처리 합니다.

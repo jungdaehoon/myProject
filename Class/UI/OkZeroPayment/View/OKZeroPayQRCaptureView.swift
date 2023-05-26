@@ -12,7 +12,7 @@ import AVFoundation
 
 /**
  제로페이 QRCode 체크 전체 화면 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.11
+ - Date: 2023.04.11
 */
 class OKZeroPayQRCaptureView: UIView {
 
@@ -68,11 +68,11 @@ class OKZeroPayQRCaptureView: UIView {
     
     /**
      프리뷰 화면 설정 메서드 입니다.
-     - Date : 2023.03.13
+     - Date: 2023.03.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     private func setPreviewLayer( _ captureMetadataOutPut : AVCaptureMetadataOutput? ) {
         /// 캡쳐 세션이 사용 가능한지를 체크 합니다.
@@ -120,10 +120,10 @@ class OKZeroPayQRCaptureView: UIView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.05
+     - Date: 2023.04.05
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
@@ -137,10 +137,10 @@ class OKZeroPayQRCaptureView: UIView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.05
+     - Date: 2023.04.05
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func hide() {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })

@@ -11,7 +11,7 @@ import Combine
 
 /**
  메뉴 리스트별 인포 정보 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
 */
 struct AllModeMenuListInfo: Codable {
     /// 타이틀 정보 입니다
@@ -27,7 +27,7 @@ struct AllModeMenuListInfo: Codable {
 
 /**
  메뉴 리스트 타입 정보 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.05.02
+ - Date: 2023.05.02
 */
 enum MENU_TYPE : Codable {
     /// 아무런 정보를 디스플레이 하지 않습니다.
@@ -41,7 +41,7 @@ enum MENU_TYPE : Codable {
 
 /**
  전체 상세정보를 모델 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
 */
 class AllMoreModel : BaseViewModel{
     /// 전체 탭 데이터를 가집니다.
@@ -53,15 +53,15 @@ class AllMoreModel : BaseViewModel{
     
     /**
      메뉴 리스트별 디스플레이 할 정보를 넘깁니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      - Parameters:
         - title     : 메뉴 리스트 타이틀 정보 입니다.
         - subTitle  : 메뉴 리스트 오른쪽 추가 정보 문구 입니다. ( "우리01029" )
         - subiCon   : 메뉴 리스트 타이틀 정보 오른족 안내 아이콘 입니다. ( "NEW!", "UPDATE!!" )
         - menuType  : 메뉴 리스트 타입 정보 입니다. (.text : "등록" 문구 , .rightimg : > 이미지)
-     - Throws : False
-     - returns :
-        + AllModeMenuListInfo : 메뉴에 디스플레이할 정보 입니다.
+     - Throws: False
+     - Returns:
+        메뉴에 디스플레이할 정보 입니다. (AllModeMenuListInfo)
      */
     func getMenuInfo( title : String = "", subTitle : String = "", subiCon : String = "", menuType : MENU_TYPE = .null ) -> AllModeMenuListInfo
     {
@@ -76,12 +76,11 @@ class AllMoreModel : BaseViewModel{
     
     /**
      전체 탭 상세 정보를 서버에 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.09
+     - Date: 2023.03.09
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<AllMoreResponse?, ResponseError>
-            +  AllMoreResponse : 홈 소비 정보를 요청 합니다.
+     - Throws: False
+     - Returns:
+        홈 소비 정보를 요청 합니다. (AnyPublisher<AllMoreResponse?, ResponseError>)
      */
     func getAllMoreInfo() -> AnyPublisher<AllMoreResponse?, ResponseError>
     {
@@ -104,12 +103,11 @@ class AllMoreModel : BaseViewModel{
     
     /**
      은행 계좌 재인증 요청 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.21
+     - Date: 2023.03.21
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<LogOutResponse?, ResponseError>
-            +  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+     - Throws: False
+     - Returns:
+        은행 계좌 재인증 처리 결과를 받습니다. (AnyPublisher<ReBankAuthResponse?, ResponseError>)
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()

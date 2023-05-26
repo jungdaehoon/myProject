@@ -10,7 +10,7 @@ import UIKit
 
 /**
  제로페이 결제 가능 카드 리스트 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.28
+ - Date: 2023.04.28
  */
 class OKZeroPayCardListView: UIView {
     var viewModel                       : OKZeroViewModel = OKZeroViewModel()
@@ -50,7 +50,7 @@ class OKZeroPayCardListView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      제로페이 결제 가능 카드뷰어 초기화 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.28
+     - Date: 2023.04.28
      */
     func initZeroPayCardList(){
         self.commonInit()
@@ -59,11 +59,11 @@ class OKZeroPayCardListView: UIView {
     
     /**
      카드 리스트 뷰어어 디스플레이를 요청 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.28
+     - Date: 2023.04.28
      - Parameters:
         - btnEvent : 버튼 이벤트를 넘깁니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setDisplay( btnEvent : (( _ success : Bool ) -> Void)? = nil ){
         self.btnEvent = btnEvent
@@ -72,10 +72,10 @@ class OKZeroPayCardListView: UIView {
     
     /**
      최초 카드 정보를 화면에 추가 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.28
+     - Date: 2023.04.28
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCardDisplay(){
         let colors : [(c1 : UIColor, c2 : UIColor)]  = [(UIColor(hex: 0x666666),UIColor(hex: 0xF6F6F6)),
@@ -96,13 +96,13 @@ class OKZeroPayCardListView: UIView {
     
     /**
      카드 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.28
+     - Date: 2023.04.28
      - Parameters:
         - position_y : 카드 y 좌표 위치 입니다.
         - width : 카드 넓이 입니다.
         - colors : 카드 컬러 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getCardView( position_y : CGFloat = 0.0, width : CGFloat = 0.0, colors : (c1 : UIColor, c2 : UIColor) ) -> OKZeroPayCardView? {
         let cardview : OKZeroPayCardView    = OKZeroPayCardView()
@@ -117,11 +117,11 @@ class OKZeroPayCardListView: UIView {
     
     /**
      결제 카드 정보를 하단에 디스플레이 되도록 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.10
+     - Date: 2023.05.10
      - Parameters:
         - topPosition : 하단 디스플레이시 상단 까지의 포지션 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCardBottom( topPosition : CGFloat = 0.0){
         /// 최대 상단 포지션을 저장 합니다.
@@ -155,12 +155,12 @@ class OKZeroPayCardListView: UIView {
     
     /**
      결제 카드 정보를 하단에 순차적으로 디스플레이 되도록 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.10
+     - Date: 2023.05.10
      - Parameters:
         - index : 순차적으로 보여질 카드 인덱스 정보 입니다.
         - completion : 이벤트 완료 처리를 리턴 합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCardFullAniClose( index : Int = 0, completion : (( _ success : Bool ) -> Void)? = nil )
     {
@@ -231,12 +231,12 @@ class OKZeroPayCardListView: UIView {
     
     /**
      결제 카드 전체 화면에 순차적으로 디스플레이 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.10
+     - Date: 2023.05.10
      - Parameters:
         - index : 순차적으로 디스플레이할 카드 인덱스 정보 입니다.
         - update_y : 순차적으로 디스플레이 할 위치 Y 좌표 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCardFullDisplay( index : Int = -1, update_y : CGFloat = 0.0){
         /// 카드간의 간격 정보 입니다.

@@ -10,7 +10,7 @@ import UIKit
 
 /**
  로딩 뷰어 입니다.   ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.17
+ - Date: 2023.04.17
  */
 class LoadingView: UIView {
     /// 최대 로딩 타임 입니다.
@@ -46,7 +46,7 @@ class LoadingView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      로딩 애니효과를 설정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      */
     func setLoadingView(){
         commonInit()
@@ -59,7 +59,7 @@ class LoadingView: UIView {
     
     /**
      로딩 최대 타임 종료시 호출 하여 로딩바 히든 처리 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      */
     @objc func timerAction() {
         self.hide()
@@ -68,10 +68,10 @@ class LoadingView: UIView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         /// 로그인 중에 추가 로그인 요청을 하지 않습니다.
@@ -92,10 +92,10 @@ class LoadingView: UIView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.05
+     - Date: 2023.04.05
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func hide() {
         /// 로딩중이 아닌 경우 히든 처리시 리턴 합니다.

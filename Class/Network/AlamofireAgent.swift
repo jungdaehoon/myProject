@@ -13,7 +13,7 @@ import os
 
 /**
  HTTP 인터페이스 연결할 기본 메서드를 지원 합니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
  */
 enum AlamofireAgent {
     /// 최대 요청 타임 정보 입니다.
@@ -28,7 +28,7 @@ enum AlamofireAgent {
     
     /**
     HTTP 연결할 세션 정보를 설정 합니다. ( J.D.H  VER : 1.0.0 )
-    - Date : 2023.03.07
+    - Date: 2023.03.07
     */
     static func urlSessionConfiguration() -> URLSessionConfiguration {
         let urlSessionConfiguration                         = URLSessionConfiguration.default
@@ -41,7 +41,7 @@ enum AlamofireAgent {
     
     /**
      상황별 인터페이스를 요청 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      - Parameters:
         - operation     : 요청할 인터페이스 타입 입니다.
         - method        : 요청 http 타입 기본 post 타입입니다.
@@ -49,10 +49,9 @@ enum AlamofireAgent {
         - encoding      : encoding 타입으로 기본 타입을 사용 합니다.
         - headers       : 기본 헤더 정보를 사용 합니다. "["x-requested-with": "XMLHttpRequest"]"
         - decoder       : 요청후 받은 데이터 디코딩 타입 입니다. 기본 JSONDecoder 를 사용 합니다.
-     - Throws : False
-     - returns :
-        + AnyPublisher<T, ResponseError>
-            : 요청된 T 값을 리턴 합니다.
+     - Throws: False
+     - Returns:
+        요청된 T 값을 리턴 합니다. (AnyPublisher<T, ResponseError>)
      */
     static  func request<T: Decodable>(
         _ url: String ,
@@ -75,6 +74,7 @@ enum AlamofireAgent {
             request.validate().responseJSON { (response) in
                 guard response.result.isSuccess,
                     let _ = response.result.value else {
+                        Slog(response.debugDescription, category: .network, logType: .default)
                         Slog("response.result.error value error", category: .network, logType: .error)
                     publisher.send(completion: .failure( handleError(response.result.error!) ))
                         return
@@ -99,13 +99,12 @@ enum AlamofireAgent {
     
     /**
      Error 발생시 이벤트 핸들러 입니다..( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      - Parameters:
         - error     : 에러 타입을 받습니다.
-     - Throws : False
-     - returns :
-        + ResponseError
-            : 타입별 정리된 에러 값을 리턴 합니다.
+     - Throws: False
+     - Returns:
+        타입별 정리된 에러 값을 리턴 합니다. (ResponseError)
      */
     private static func handleError(_ error: Error) -> ResponseError {
         if let apiError = error as? ResponseError {
@@ -135,6 +134,8 @@ enum AlamofireAgent {
                     {
                     case 503 :
                         return .timeout(afError.errorDescription ?? NETWORK_ERR_MSG_DETAIL)
+                    case 404 :
+                        return .http(ErrorData(code: 404, message: NETWORK_ERR_404_MSG))
                     default:break
                     }
                 }
@@ -150,13 +151,13 @@ enum AlamofireAgent {
     
     /**
      멀티파트 파일 업로드 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      - Parameters:
         - url : 업로드할 위치 정보입니다.
         - multipartFormData : 보낼 데이터 입니다.
         - encodingCompletion : 처리후 리턴 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     static func upload(
         _ url: String,

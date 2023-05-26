@@ -30,12 +30,12 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
     // MARK: - init
     /**
      전체 웹뷰 초기화 메서드 입니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - pageURL : 연결할 페이지 URL 입니다.
         - completion :  페이지 종료시 콜백 핸들러 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     init( pageURL : String = "", completion : (( _ value : String ) -> Void )? = nil ) {
         super.init(nibName: nil, bundle: nil)

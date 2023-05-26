@@ -10,7 +10,7 @@ import UIKit
 
 /**
  탭바 호출시 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 enum TAB_REPLACE
 {
@@ -22,7 +22,7 @@ enum TAB_REPLACE
 
 /**
  탭바 뷰어의 높이 값 설정 및 커스텀 UI 연결 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 class BaseTabBarView: UITabBar {
     var tabMode : TAB_REPLACE? = .normal

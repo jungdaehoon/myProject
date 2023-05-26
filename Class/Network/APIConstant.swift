@@ -11,7 +11,7 @@ import Foundation
 
 /**
  API 인터페이스 정보입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.23
+ - Date: 2023.03.23
 */
 class APIConstant {
     /// 앱 시작시 기본 사항 요청 입니다.
@@ -36,6 +36,8 @@ class APIConstant {
     static let API_UPDATE_PEDOMETER     = "/myp/updateDailyPedometer.do"
     /// 만보기 약관동의 여부 요청 입니다.
     static let API_PEDO_TERMS_CHECK     = "/popup/selectPedometerTerms.do"
+    /// 현 세션이 활성화 상태인지를 체크 합니다.
+    static let API_SESSION_CHECK        = "/api/checkLoginInfo"
     /// 만보기 약관 동의 요청 입니다.
     static let API_PEDO_TERMS_AGREE     = "/popup/insertPedometerTerms.do"
     /// QRCode 인증 할 제로페이 스크립트를 요청 합니다.

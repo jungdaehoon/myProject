@@ -9,7 +9,7 @@ import UIKit
 
 /**
  탭바 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 class TabBarView : UIView
 {
@@ -42,7 +42,7 @@ class TabBarView : UIView
     //MARK: - 지원 메서드 입니다
     /**
      탭바  뷰어 초기화 메서드 입니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      */
     func initTabBarView(){
         /// Xib 연결 합니다.
@@ -55,9 +55,9 @@ class TabBarView : UIView
     
     /**
      탭 아이템 기본 상태로 설정 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - returns :False
+     - Returns:False
      */
     func setDefault(){
         let itemViews = self.subviews[0].subviews
@@ -70,11 +70,11 @@ class TabBarView : UIView
     
     /**
      탭 아이템 활성화 여부를 받아 활성화 합니다..   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:
         - subViews : 활성화될 아이템 뷰어 입니다.
         - enabled : 활성화 여부 값입니다.
-     - returns :False
+     - Returns:False
      */
     func setSeleted( _ subViews : UIView, enabled : Bool )
     {
@@ -130,10 +130,10 @@ class TabBarView : UIView
     
     /**
      변경할 탭 카운트를 받아 활성화 합니다..   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:
         - pageTag : 활성화될 아이템 넘버 입니다.
-     - returns :False
+     - Returns:False
      */
     func setChangePage( _ pageTag : Int ){
         if let subView = self.viewWithTag(pageTag)
@@ -176,7 +176,7 @@ class TabBarView : UIView
 
 /**
  탭바 상단 쉐도우 라인을 그립니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 extension CALayer {
     // Sketch 스타일의 그림자를 생성하는 유틸리티 함수

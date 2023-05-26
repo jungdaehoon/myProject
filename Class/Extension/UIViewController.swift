@@ -26,15 +26,15 @@ extension UIViewController {
     
     /**
      컨트롤러를 받아 다음 페이지로 이동 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
         - modalPresent : 모달 타입으로 페이지 이동 경우 입니다. ( default : false )
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func pushController( _ viewController: UIViewController, modalPresent : Bool = false, animated: Bool, animatedType: AnimationType? = .left, completion: @escaping () -> Void = {})
     {
@@ -52,13 +52,13 @@ extension UIViewController {
     
     /**
      컨트롤로 현 페이지를 종료 합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func popController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
         if let navigation = self.navigationController {
@@ -84,14 +84,14 @@ extension UIViewController {
     
     /**
      이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다.
-     - Date : 2023.05.19
+     - Date: 2023.05.19
      - Parameters:
         - viewController : 이동할 ViewController 입니다.
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func popToController( _ viewController: UIViewController, animated: Bool, animatedType: AnimationType? = .down, completion: @escaping () -> Void = {}) {
         if let navigation = self.navigationController {
@@ -102,13 +102,13 @@ extension UIViewController {
     
     /**
      컨트롤로 0번 페이지로 이동합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func popToRootController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
         if let navigation = self.navigationController {
@@ -130,13 +130,13 @@ extension UIViewController {
     
     /**
      현 페이지를 삭제하고 추가할 페이지로 변경합니다.
-     - Date : 2023.05.03
+     - Date: 2023.05.03
      - Parameters:
         - viewController : 이동할 페이지 입니다.
         - animated : 애니 효과 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func replaceController( viewController: UIViewController, animated : Bool = true, animatedType: AnimationType? = .down, completion: @escaping () -> Void = {}) {
         if let navigation = self.navigationController {
@@ -157,14 +157,13 @@ extension UIViewController {
     
     /**
      present로 연결된 ViewControllers 를 0번째 Root ViewController 이동 하도록 합니다.
-     - Date : 2023.05.03
+     - Date: 2023.05.03
      - Parameters:
         - animated : 종료시 애니 효과 적용 입니다.
         - completion : 페이지 최종 이동 종료후 리턴 이벤트 입니다.
-     - Throws : False
-     - returns :
-        - [String : Any]
-            + 파라미터 정보를 정리하여 리턴 합니다.
+     - Throws: False
+     - Returns:
+        파라미터 정보를 정리하여 리턴 합니다. ([String : Any])
      */
     func dismissToRoot( animated : Bool = true, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil ){
         var presents    = [UIViewController?]()

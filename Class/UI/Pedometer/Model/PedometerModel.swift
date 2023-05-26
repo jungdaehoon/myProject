@@ -11,7 +11,7 @@ import Combine
 
 /**
  만보고 모델 정보 입니다.
- - Date : 2023.03.23
+ - Date: 2023.03.23
  */
 class PedometerModel : BaseViewModel
 {
@@ -26,12 +26,11 @@ class PedometerModel : BaseViewModel
     
     /**
      만보기 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.23
+     - Date: 2023.03.23
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<PedometerResponse?, ResponseError>
-            +  PedometerResponse : 만보기 정보를 받습니다.
+     - Throws: False
+     - Returns:
+        만보기 정보를 받습니다. (AnyPublisher<PedometerResponse?, ResponseError>)
      */
     func getPedometer( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerResponse?, ResponseError>
     {
@@ -55,12 +54,11 @@ class PedometerModel : BaseViewModel
     
     /**
      만보기 리워드 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.23
+     - Date: 2023.03.23
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<PedometerRewardResponse?, ResponseError>
-            +  PedometerRewardResponse : 만보기 리워드 정보 입니다.
+     - Throws: False
+     - Returns:
+        만보기 리워드 정보 입니다. (AnyPublisher<PedometerRewardResponse?, ResponseError>)
      */
     func getPedometerReward( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerRewardResponse?, ResponseError>
     {
@@ -84,13 +82,12 @@ class PedometerModel : BaseViewModel
     
     /**
      만보기 데이터 업데이트 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.23
+     - Date: 2023.03.23
      - Parameters:
         - params : 업데이트할 만보기 정보 입니다.
-     - Throws : False
-     - returns :
-        - AnyPublisher<PedometerUpdateResponse?, ResponseError>
-            +  PedometerUpdateResponse : 업데이트 여부 입니다.
+     - Throws: False
+     - Returns:
+        업데이트 여부 입니다. (AnyPublisher<PedometerUpdateResponse?, ResponseError>)
      */
     func setPedometerUpdate( _ params : [String : Any] = [:]  ) -> AnyPublisher<PedometerUpdateResponse?, ResponseError>
     {

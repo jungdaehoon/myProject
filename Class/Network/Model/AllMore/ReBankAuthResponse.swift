@@ -11,7 +11,7 @@ import Foundation
 
 /**
  은행계좌 재인증 요청 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.22
+ - Date: 2023.03.22
 */
 struct ReBankAuthResponse: BaseResponse {
     /// 세부 응답코드 입니다.

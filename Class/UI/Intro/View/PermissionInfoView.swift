@@ -10,7 +10,7 @@ import UIKit
 
 /**
  접근권한 안내 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.24
+ - Date: 2023.03.24
 */
 class PermissionInfoView: UIView {
 
@@ -39,7 +39,7 @@ class PermissionInfoView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      접근 권한 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      */
     func initPermissionInfo(){
         /// Xib 연결 합니다.
@@ -59,11 +59,11 @@ class PermissionInfoView: UIView {
            
     /**
      애니 효과로 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAniDisplay( animation : Bool = true )
     {
@@ -91,11 +91,11 @@ class PermissionInfoView: UIView {
     
     /**
      애니 효과로 종료 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAniClose( enabeld : Bool )
     {
@@ -112,11 +112,11 @@ class PermissionInfoView: UIView {
     
     /**
      접근권한 뷰어를 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.10
+     - Date: 2023.03.10
      - Parameters:
         - completion : 접근 권한 뷰어에 이벤트를 넘깁니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setOpenView( animation : Bool = true, completion : (( _ value : Bool ) -> Void )? = nil ){
         

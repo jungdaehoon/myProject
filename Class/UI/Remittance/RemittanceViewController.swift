@@ -11,7 +11,7 @@ import Combine
 
 /**
  송금 페이지 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.21
+ - Date: 2023.03.21
 */
 class RemittanceViewController: BaseViewController {
 
@@ -37,10 +37,10 @@ class RemittanceViewController: BaseViewController {
     // MARK: - 지원 메서드 입니다.
     /**
      은행 계좌 정보를 체크합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.22
+     - Date: 2023.03.22
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func isAccount()
     {

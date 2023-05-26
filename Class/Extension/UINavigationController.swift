@@ -47,14 +47,14 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 push 이동시 타입을 받아 처리 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     public func pushViewController(
         _ viewController: UIViewController,
@@ -76,13 +76,13 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 현 페이지를 종료 합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func popViewController(
         animated: Bool,
@@ -102,14 +102,14 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      이동할 ViewController 을 받아 해당 위치로 이동 합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - viewController : 뒤로 이동할 컨트롤 입니다.
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func popToViewController(
         _ viewController: UIViewController,
@@ -130,13 +130,13 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 0번 페이지로 이동합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
         - completion : 페이지 이동후 콜백 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func popToRootViewController(
         animated: Bool,
@@ -157,13 +157,13 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 이동시 현 페이지를 삭제하고 추가할 페이지로 변경합니다.
-     - Date : 2023.05.03
+     - Date: 2023.05.03
      - Parameters:
         - viewController : 이동할 페이지 입니다.
         - animated : 애니 효과 입니다.
         - animationType : 페이지 이동할 효과 정보를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func replaceViewController( viewController: UIViewController, animated : Bool = true, animatedType: AnimationType? = .down, completion: @escaping () -> Void ) {
         let vcs                         = self.viewControllers
@@ -184,11 +184,11 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 이동시 0번재 root 페이지 다음에 추가할 페이지로 변경합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func rootNextViewController( viewController:UIViewController, animated: Bool = true) {
         let vcs                         = self.viewControllers
@@ -201,11 +201,11 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /**
      내비게이션 컨트롤로 이동시 0번재 root 페이지 다음에 추가할 페이지들로 변경합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - viewControllers : 이동할 페이지들 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func rootNextViewController( viewControllers: [UIViewController], animated: Bool = true) {
         let vcs                         = self.viewControllers

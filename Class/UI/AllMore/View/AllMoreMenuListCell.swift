@@ -9,7 +9,7 @@ import UIKit
 
 /**
  아이콘 타입 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
  
         + not     : 디스플레이 하지 않습니다.
         + new     : "NEW!" 아이콘을 디스플레이 합니다.
@@ -26,7 +26,7 @@ enum typeIconStatus {
 
 /**
  전체 탭 뷰어 ( 이번달 결제/적립부터 이용안내 까지 영역 ) 의 셀 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
  */
 class AllMoreMenuListCell: UITableViewCell {
 
@@ -61,12 +61,12 @@ class AllMoreMenuListCell: UITableViewCell {
     //MARK: - 지원 메서드 입니다.
     /**
      메뉴 인포정보를 받아 디스플레이 합니다.
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      - Parameters:
         - menuInfo : 메뉴 리스트 인포 정보 입니다.
         - viewModel : 뷰 모델을 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setDisplay( _ menuInfo : AllModeMenuListInfo, viewModel : AllMoreModel? )
     {
@@ -284,10 +284,10 @@ extension AllMoreMenuListCell
     //MARK: - 지원 메서드 입니다.
     /**
      제로페이 결제 페이지로 이동 합니다.
-     - Date : 2023.03.07
+     - Date: 2023.03.07
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func toQRZeroPayPage()
     {
@@ -318,10 +318,10 @@ extension AllMoreMenuListCell
     
     /**
      만보고 페이지로 이동 합니다.
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func toPedometerPage()
     {
@@ -372,10 +372,10 @@ extension AllMoreMenuListCell
     
     /**
      만보고 약관동의 페이지를 디스플레이 합니다.
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setPedometerTermsViewDisplay()
     {
@@ -424,10 +424,10 @@ extension AllMoreMenuListCell
     
     /**
      올림pick 약관동의 페이지를 디스플레이 합니다.
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setOlimpickTermsViewDisplay()
     {
@@ -450,10 +450,10 @@ extension AllMoreMenuListCell
     
     /**
      제로페이 약관동의 페이지를 디스플레이 합니다.
-     - Date : 2023.03.16
+     - Date: 2023.03.16
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setZeroPayTermsViewDisplay()
     {

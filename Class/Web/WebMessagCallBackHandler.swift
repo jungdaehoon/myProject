@@ -34,7 +34,7 @@ import AddressBookUI
 
 /**
  웹 인터페이스 컨트롤 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.28
+ - Date: 2023.03.28
  */
 class WebMessagCallBackHandler : NSObject  {
     private var curCancellable: AnyCancellable?
@@ -53,11 +53,11 @@ class WebMessagCallBackHandler : NSObject  {
     // MARK: - init
     /**
      웹 인터페이스 헨들러 초기화를 진행 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:
         - webViewController : 연결 컨트롤 뷰어 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     init( webViewController : BaseWebViewController ) {            
     }
@@ -66,11 +66,11 @@ class WebMessagCallBackHandler : NSObject  {
     /** 
      웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다.
      - Description : hybridscript WebAPP 인터페이스 정보를 받아 처리 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - message : 스크립트 메세지 정보를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func didReceiveMessage(message: WKScriptMessage) {
         /// 메세지 데이터 입니다.
@@ -397,11 +397,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      제로페이에 리턴할 콜백 스크립트를 받습니다.
-     - Date : 2023.04.19
+     - Date: 2023.04.19
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setZeroPayCB( _ body : [Any?] ){
         let params          = body[2] as! [Any]
@@ -429,11 +429,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      하단 탭 인덱스 정보를 받아 탭 페이지를 변경 합니다.
-     - Date : 2023.04.18
+     - Date: 2023.04.18
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setTabChange( _ body : [Any?] ){
         let params          = body[2] as! [Any]
@@ -451,11 +451,11 @@ class WebMessagCallBackHandler : NSObject  {
     @Published var contactInfo : [String] = []
     /**
      연락처 정보를 조회해 리턴 합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setContactInfo( _ body : [Any?] )
     {
@@ -489,11 +489,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      자동로그인 타입을 변경 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAutoLoginSetting( _ body : [Any?] ){
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
@@ -524,11 +524,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      로그인 여부를 체크 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func checkWebLogin()
     {
@@ -541,11 +541,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      날짜 선택 피커뷰를 디스플레이 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setDateDisplay( _ body : [Any?] ){
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
@@ -574,12 +574,12 @@ class WebMessagCallBackHandler : NSObject  {
     // MARK: - 지원 메서드 입니다.
     /**
      전체 화면 웹뷰를 디스플레이 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
         - fullDisplay : 전체 화면 모드 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setWebViewDisplay( _ body : [Any?], fullDisplay : Bool = true ){
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
@@ -664,12 +664,12 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      전체 화면 종료시 콜백 처리 입니다.
-     - Date : 2023.05.08
+     - Date: 2023.05.08
      - Parameters:
         - callHybridPopupCB : callHybridPopup 에서 받은 콜백 정보 입니다.
         - webCBType : 웹뷰 종료시 타입 정보를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setFullWebCB( callHybridPopupCB : String = "", webCBType : FULL_WEB_CB ){
         switch webCBType {
@@ -686,11 +686,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      페이지 종료후 이전 웹뷰에 데이터를 넘깁니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setConfirmPopup( _ body : [Any?] ){
         var object : String?
@@ -763,11 +763,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      이전에 웹 호출시에 받은 데이터를 다시 현 웹에게 전송합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setRecieveParamToWeb( _ body : [Any?] ){
         let callback        = body[0] as! [Any?]
@@ -780,10 +780,10 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      로그인 페이지를 디스플레이 합니다.
-     - Date : 2023.05.19
+     - Date: 2023.05.19
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setLoginDisplay(){
         /// 연결된 viewController 가 있을 경우 입니다.
@@ -819,10 +819,10 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      웹뷰 캐시를 삭제 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setWebViewClearCache() {
         let websiteDataTypes    = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
@@ -833,11 +833,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      문자 외부 공유 입니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 바디 데이터 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setShareApp( _ body : [Any?] ){
         let params          = body[2] as! [Any?]
@@ -866,11 +866,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      보안키패드 오픈 입니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 바디 데이터 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setSecureKeyPadDisplay( _ body : [Any?] ){
         let params          = body[2] as! [Any?]
@@ -898,11 +898,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      문자 보내기를 요청 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setSendSMS( _ body : [Any?] ){
         let params          = body[2] as! [Any?]
@@ -929,11 +929,11 @@ class WebMessagCallBackHandler : NSObject  {
     @Published var imgSavePhoto : Bool = false
     /**
      웹 전체 화면 캡쳐 입니다. ( 저장 여부는 imgSavePhoto 여부로 체크 합니다. )
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setWebViewCapture( _ body : [Any?] ){
         guard self.target != nil else { return }
@@ -960,7 +960,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      겔러리에 이미지 저장 여부를 확인 합니다.
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      */
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if error != nil
@@ -978,11 +978,11 @@ class WebMessagCallBackHandler : NSObject  {
     @Published var uploadImg : UIImage?
     /**
      사진첩에 이미지를 찾아 업도르 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. )
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setGallerySendServer( _ body : [Any?] ){
         guard self.target != nil else { return }
@@ -1006,11 +1006,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      사진첩에 이미지를 찾아 업도르 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. )
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setLevelPop( _ body : [Any?] ){
         let params = body[2] as! [Any]
@@ -1021,11 +1021,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      오픈뱅킹 관련 외부 웹페이지 입니다.
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setHybridOpenBank( _ body : [Any?] ){
         let params          = body[2] as! [Any]
@@ -1045,11 +1045,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      로그아웃 요청 입니다.
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setLogOut( _ body : [Any?] ){
         /// 로그아웃 요청 합니다.
@@ -1083,11 +1083,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      토큰 정보를 저장 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setSaveToken( _ body : [Any?] ){
         let messages = body[2] as! [Any?]
@@ -1102,11 +1102,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      키체인에 데이터를 추가 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setPreference( _ body : [Any?] ){
         let params          = body[2] as! [String?]
@@ -1119,11 +1119,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      키체인에서 데이터를 가져 옵니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getPreference( _ body : [Any?] ){
         let params          = body[2] as! [String?]
@@ -1138,11 +1138,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      날짜 선택 피커뷰를 디스플레이 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setDatePickerView( _ body : [Any?] ){
         let callback                = body[0] as! [String?]
@@ -1207,11 +1207,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      문자를 복사 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setPasteboard( _ body : [Any?] ){
         let params                  = body[2] as! [String?]
@@ -1222,11 +1222,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      OS 타입을 리턴 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getOSType( _ body : [Any?] ){
         let callback                  = body[0] as! [String?]
@@ -1236,11 +1236,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      Device 정보를 리턴 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getDevice( _ body : [Any?] ){
         let callback                  = body[0] as! [String?]
@@ -1250,11 +1250,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      AppVer 을 리턴 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getAppVer( _ body : [Any?] ){
         let callback     = body[0] as! [String?]
@@ -1283,11 +1283,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      PUSH Token 정보를 리턴 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getPushToken( _ body : [Any?] ){
         let callback                = body[0] as! [String?]
@@ -1305,11 +1305,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      PUSH 사용여부 값을 리턴합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func getPushAuth( _ body : [Any?] ){
         let callback                = body[0] as! [String?]
@@ -1321,11 +1321,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      디바이스 설정으로 이동 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setMoveDeviceSetting(){
         UIApplication.openSettingsURLString.openUrl()
@@ -1334,11 +1334,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      카카오톡 설치 여부를 리턴 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setIstalledKakaoTalk( _ body : [Any?] ){
         let callback        = body[0] as! [String?]
@@ -1349,11 +1349,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      앱 업데이트로 Apple Store 이동 합니다.
-     - Date : 2023.03.31
+     - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAppUpdate(){
         if let appStart = BaseViewModel.appStartResponse
@@ -1368,11 +1368,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      외부 브라우저를 실행 합니다.
-     - Date : 2023.04.06
+     - Date: 2023.04.06
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setOutSideOpenUrl( _ body : [Any?] ){
         let params          = body[2] as! [Any]        
@@ -1388,11 +1388,11 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      현 페이지 POST 방식 새로고침 입니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCallRedirectPostUrl( _ body : [Any?] ){
         let params          = body[2] as! [Any]
@@ -1425,10 +1425,10 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      만보고 페이지로 이동 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setMoveToManboGo()
     {
@@ -1482,10 +1482,10 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      만보고 약관동의 페이지를 디스플레이 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setPedometerTermsViewDisplay()
     {
@@ -1540,13 +1540,13 @@ class WebMessagCallBackHandler : NSObject  {
 extension WebMessagCallBackHandler{
     /**
      앱에서 웹으로 스크립트 처리 입니다.
-     - Date : 2023.03.29
+     - Date: 2023.03.29
      - Parameters:
         - callback : 콜백 타입입니다.
         - message : 파라미터 정보 입니다.
         - isJson : Json 타입 데이터 인지를 체크 합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setEvaluateJavaScript(callback: String, message : Any , isJson : Bool = false ) {
         /*
@@ -1590,12 +1590,12 @@ extension WebMessagCallBackHandler{
     
     /**
      페이지 종료처리 부분 입니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      - Parameters:
         - callback : 콜백 메서드 입니다.
         - param : 종료시 넘기 파라미터 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setTargetDismiss( _ callback : String = "", param : String = "" ){
         /// 전체 웹뷰 타입 경우인지를 체크 합니다.
@@ -1613,11 +1613,11 @@ extension WebMessagCallBackHandler{
 
     /**
      사용자명을 CNContact 의  property 속성을 문자로 리턴 합니다.
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:
         - contact : 선택된 연락처 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func conactName( contact: CNContact ) -> String {
         var contactName : String = ""

@@ -13,7 +13,7 @@ import Combine
 
 /**
  제로페이 페이지 버튼 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.26
+ - Date: 2023.04.26
 */
 enum ZEROPAY_BTN_TYPE : Int {
     /// 페이지 종료 입니다.
@@ -31,7 +31,7 @@ enum ZEROPAY_BTN_TYPE : Int {
 
 /**
  제로페이 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
 */
 class OKZeroPayView: UIView {
     var viewModel                           : OKZeroViewModel = OKZeroViewModel()
@@ -116,7 +116,7 @@ class OKZeroPayView: UIView {
     //MARK: - 지원 메서드 입니다.
     /**
      제로페이 QRCode 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.13
+     - Date: 2023.03.13
      */
     func initZeroPayView(){
         self.commonInit()
@@ -191,11 +191,11 @@ class OKZeroPayView: UIView {
 
     /**
      프리뷰 화면과 캡쳐할 영역 설정 합니다.
-     - Date : 2023.03.13
+     - Date: 2023.03.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     private func setPreviewLayer( _ captureMetadataOutPut : AVCaptureMetadataOutput? ) {
         /// 캡쳐 세션이 사용 가능한지를 체크 합니다.
@@ -243,14 +243,14 @@ class OKZeroPayView: UIView {
     
     /**
      결제 코드별 타입을 화면 디스플레이 합니다.
-     - Date : 2023.04.26
+     - Date: 2023.04.26
      - Parameters:
         - type : 코드 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
         - overTime : 타이머 오버 값을 받습니다.
         - animation : 애니 사용 모드 입니다.
         - viewEnabled : 결제 타입 이동 없이 현 위치 뷰어만 상황별 디스플레이 하는 경우 입니다. ( 주로 현 결제 타입에서 타임 오버 되었을 경우 입니다. )
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setZeroPayCodeDisplay( type : ZEROPAY_CODE_TYPE, overTime : Bool = false, animation : Bool = true, viewEnabled : Bool = false ) {
         switch type {
@@ -344,10 +344,10 @@ class OKZeroPayView: UIView {
     
     /**
      생성된 결제 코드를 빈값으로 전부 초기화 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func releaseCodeView(){
         /// 바코드 라운드 컬러를 활성화 컬러로 변경 합니다.
@@ -386,11 +386,11 @@ class OKZeroPayView: UIView {
     
     /**
      결제타입 뷰어를 활성화 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setPayViewEnabled( codeType : ZEROPAY_CODE_TYPE ){
         if codeType == .barcode
@@ -418,10 +418,10 @@ class OKZeroPayView: UIView {
     
     /**
      코드생성으로 결제 코드를 생성 합니다.
-     - Date : 2023.04.26
+     - Date: 2023.04.26
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCodeCreationView(){
         /// 코드 정보를 요청해서 받는 API 추가 예정 입니다.
@@ -481,12 +481,12 @@ class OKZeroPayView: UIView {
     
     /**
      결제 코드를 전체 화면 디스플레이 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
         - code : 디스플레이 할 코드 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func openFullCodeDisplay( codeType : ZEROPAY_CODE_TYPE, code : String = "" ){
         /// 결제 가능 카드 리스트 뷰어를 히든처리 합니다.
@@ -528,10 +528,10 @@ class OKZeroPayView: UIView {
     
     /**
      결제 코드 전체 화면을 종료 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func closeFullCodeDisplay(){
         /// 결제 가능 카드 리스트 뷰어를 디스플레이 합니다.
@@ -560,10 +560,10 @@ class OKZeroPayView: UIView {
     
     /**
      결제 카드 리스트 전체 화면을 종료 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func closeFullCardDisplay(){
         /// 카드 디스플레이 전체 화면 여부를 비활성화 합니다.
@@ -581,11 +581,11 @@ class OKZeroPayView: UIView {
     
     /**
      결제 카드 리스트 전체 화면을 온오프 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:
         - display : 디스플레이 여부 값을 받습니다. ( true : 카드 리스트 전체화면, false : 카드 하단 디스플레이 )
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setCardFullDisplay( display : Bool = true ){
         /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
@@ -622,10 +622,10 @@ class OKZeroPayView: UIView {
     
     /**
      하단 순차적으로 디스플레이후 최종 배경 위치 값을 초기화 합니다.
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     @objc func setCardFullAniDelayClose(){
         UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseOut) {

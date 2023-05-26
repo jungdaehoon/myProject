@@ -9,7 +9,7 @@ import UIKit
 
 /**
  입 최초 실행시 인트로 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 class IntroViewController: BaseViewController {
 
@@ -68,10 +68,10 @@ class IntroViewController: BaseViewController {
     // MARK: - 지원 메서드 입니다.
     /**
      앱 기본 체크 사항을 확인 하고 디스플레이 합니다..  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAppChecking()
     {
@@ -160,9 +160,9 @@ class IntroViewController: BaseViewController {
     
     /**
      OKPay 앱을 시작 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
-     - Throws : False
-     - returns :False
+     - Date: 2023.03.20
+     - Throws: False
+     - Returns:False
      */
     func setOKPayStart() {
         /// 이전 유저 정보가 있는지를 체크하고 가져 옵니다.
@@ -220,11 +220,11 @@ class IntroViewController: BaseViewController {
     
     /**
      메인 화면 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.04
+     - Date: 2023.04.04
      - Parameters:
         - loginEnabled : 로그인 페이지 디스플레이 여부를 받습니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setMainDisplay( loginEnabled : Bool = false ){
         /// 탭바 컨트롤러를 호출 합니다.

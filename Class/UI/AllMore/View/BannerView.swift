@@ -11,7 +11,7 @@ import UIKit
 
 /**
  베너 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.07
+ - Date: 2023.03.07
 */
 class BannerView: UIView {
     var viewModel : AllMoreModel?
@@ -32,11 +32,11 @@ class BannerView: UIView {
     // MARK: - 지원 메서드 입니다.
     /**
      "전체" 탭 에서 스크롤시 이벤트 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.08
+     - Date: 2023.03.08
      - Parameters:
         - scrollView : 스크롤 정보를 받습니다
-     - Throws : False
-     - returns : False
+     - Throws: False
+     - Returns: False
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {

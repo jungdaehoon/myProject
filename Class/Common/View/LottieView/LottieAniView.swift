@@ -9,7 +9,7 @@ import Lottie
 
 /**
  Lottie.json 파일 디스플레이 뷰어입니다.
- - Date : 2023.05.04
+ - Date: 2023.05.04
  */
 @objc class LottieAniView: UIView {
     /// 로띠 연결할 기본 뷰어 입니다.
@@ -31,7 +31,7 @@ import Lottie
     // MARK: - override
     /**
      설정된 로띠 화면 layout 을 전체 화면으로 연결 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.04
+     - Date: 2023.05.04
      */
     override func updateConstraints() {
         self.addConstraintsToFit(animationView)
@@ -43,12 +43,12 @@ import Lottie
     // MARK: - 지원 메서드 입니다.
     /**
      연결할 기본 정보를 받아 설정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.04
+     - Date: 2023.05.04
      - Parameters:
         - name : 연결 할 파일명 입니다.
         - loop : 반복 여부를 받습니다. ( default : true )
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     @objc func setAnimationView(name: String, loop: Bool = true) {
         self.animationView                       = AnimationView(name: name)
@@ -61,11 +61,11 @@ import Lottie
     
     /**
      플레이 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.04
+     - Date: 2023.05.04
      - Parameters:
         - completion : 플레이 처리후 완료시 리턴 됩니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     @objc func play( completion: LottieCompletionBlock? = nil ) {
         if !animationView.isAnimationPlaying {
@@ -76,11 +76,11 @@ import Lottie
     
     /**
      중단 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.04
+     - Date: 2023.05.04
      - Parameters:
         - completion : 플레이 처리후 완료시 리턴 됩니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     @objc func stop() {
         if animationView.isAnimationPlaying {

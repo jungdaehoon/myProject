@@ -10,7 +10,7 @@ import Combine
 
 /**
  송금 웹뷰 모델 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.22
+ - Date: 2023.03.22
 */
 class RemittanceModel : BaseViewModel{
     /// 계좌 정보를 요청 합니다.
@@ -22,12 +22,11 @@ class RemittanceModel : BaseViewModel{
     
     /**
      은행 계좌 리스트 정보를 요청 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.21
+     - Date: 2023.03.21
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<SelectAccountListResponse?, ResponseError>
-            +  SelectAccountListResponse : 연결된 계좌 정보들을 받습니다.
+     - Throws: False
+     - Returns:
+        연결된 계좌 정보들을 받습니다. (AnyPublisher<SelectAccountListResponse?, ResponseError>)
      */
     func getSelectAccountList() ->  AnyPublisher<SelectAccountListResponse?, ResponseError> {
         let subject             = PassthroughSubject<SelectAccountListResponse?,ResponseError>()
@@ -48,12 +47,11 @@ class RemittanceModel : BaseViewModel{
     
     /**
      은행 계좌 재인증 요청 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.21
+     - Date: 2023.03.21
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<LogOutResponse?, ResponseError>
-            +  LogOutResponse : 로그아웃 처리 결과를 받습니다.
+     - Throws: False
+     - Returns:
+        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
      */
     func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
         let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()

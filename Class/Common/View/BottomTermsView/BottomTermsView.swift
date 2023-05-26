@@ -10,7 +10,7 @@ import UIKit
 
 /**
  약관동의/취소 관련 버튼 이벤트 타입 입니다.
- - Date : 2023.03.15
+ - Date: 2023.03.15
  */
 enum BTN_ACTION : Int {
     /// 동의 이벤트 입니다.
@@ -21,7 +21,7 @@ enum BTN_ACTION : Int {
 
 /**
  약관동의 관련 데이터 정보를 관리합니다.
- - Date : 2023.03.15
+ - Date: 2023.03.15
  */
 struct TERMS_INFO {
     /// 약관동의 타이틀 정보 입니다.
@@ -33,7 +33,7 @@ struct TERMS_INFO {
 
 /**
  하단 디스플레이 할 약관 동의 관련 안내 팝업입니다.
- - Date : 2023.03.15
+ - Date: 2023.03.15
  */
 class BottomTermsView: BaseView {
 
@@ -66,7 +66,7 @@ class BottomTermsView: BaseView {
     //MARK: - 지원 메서드 입니다.
     /**
      하단 약관동의 뷰어 입니다.
-     - Date : 2023.03.15
+     - Date: 2023.03.15
      */
     func initBottomTermsView(){
         /// Xib 연결 합니다.
@@ -83,14 +83,14 @@ class BottomTermsView: BaseView {
     
     /**
      안내 팝업 데이터를 설정 하고 디스플레이 합니다.
-     - Date : 2023.03.15
+     - Date: 2023.03.15
      - Parameters:
         - target : 디스플레이할 타켓 뷰컨트롤러를 받습니다.
         - title : 팝업에 타이틀 영역 문구를 받습니다.
         - termsList : 약관동의할 리스트 정보를 받습니다.
         - completion : 동의/취소 여부에따른 버튼 이벤트를 리턴합니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setDisplay( target : UIViewController,  _ title : String,  termsList : [TERMS_INFO], completion : (( _ value : BTN_ACTION ) -> Void )? = nil )
     {
@@ -107,10 +107,10 @@ class BottomTermsView: BaseView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.
-     - Date : 2023.03.15
+     - Date: 2023.03.15
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
@@ -123,10 +123,10 @@ class BottomTermsView: BaseView {
     
     /**
      안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.
-     - Date : 2023.03.15
+     - Date: 2023.03.15
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func hide() {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })

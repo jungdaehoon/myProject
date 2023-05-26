@@ -10,7 +10,7 @@ import Foundation
 
 /**
  공통으로 확인체크 하는 고객 정보를 저장 합니다.   ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.16
+ - Date: 2023.03.16
  */
 class KeyChainCustItem: NSObject , NSCoding {
     /// 마지막 접속 시간 입니다.

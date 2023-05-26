@@ -23,7 +23,7 @@ extension Date {
 
     /**
      받은 DateFormat  정보 기준으로 해당 날짜 정보를 String 리턴 됩니다. ( J.D.H  VER : 1.0.0 )
-    - Date : 2023.02.23
+    - Date: 2023.02.23
     - Parameters:
         - typetText : 날짜 타입 스타일 정보를 받습니다. ( DateFormat )
     - Returns

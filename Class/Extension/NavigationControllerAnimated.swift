@@ -10,7 +10,7 @@ import UIKit
 
 /**
  내비 컨트롤러 페이지 이동시 애니 타입별 효과 지원 클래스 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.12
+ - Date: 2023.04.12
  */
 class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitioning {
     /// 애니 효과 타임 정보 입니다.
@@ -21,11 +21,11 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
     
     /**
      애니 효과 타입 받아 페이지 집인 이동시 효과를 주는 클래스를 초기화 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - animationType : 페이지 이동할 효과 정보를 받습니다.
-     - Throws : False
-     - returns :Self
+     - Throws: False
+     - Returns:Self
      */
     init( pushAnimation: AnimationType  ) {
         self.pushAnimation = pushAnimation
@@ -33,11 +33,11 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
     
     /**
      애니 효과 타입 받아 페이지 종료 이동시 효과를 주는 클래스를 초기화 합니다.
-     - Date : 2023.04.12
+     - Date: 2023.04.12
      - Parameters:
         - animationType : 페이지 이동할 효과 정보를 받습니다.
-     - Throws : False
-     - returns :Self
+     - Throws: False
+     - Returns:Self
      */
     init( popAnimation: AnimationType  ) {
         self.popAnimation = popAnimation

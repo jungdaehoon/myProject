@@ -12,4 +12,4 @@
 /// 탈옥 단말 체크 입니다.
 #import "IxSecureManager.h"
 /// 제로페이 암호관련 입니다.
-#import "SEED.h"
+//#import "SEED.h"

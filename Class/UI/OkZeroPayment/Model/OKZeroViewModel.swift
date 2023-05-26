@@ -12,7 +12,7 @@ import Combine
 
 /**
  결제 코드 활성화 타임별 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.26
+ - Date: 2023.04.26
 */
 enum CODE_ENABLED_TIME : Equatable {
     case start_time
@@ -27,7 +27,7 @@ enum CODE_ENABLED_TIME : Equatable {
 
 /**
  코드 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.13
+ - Date: 2023.03.13
 */
 enum ZEROPAY_CODE_TYPE
 {
@@ -40,7 +40,7 @@ enum ZEROPAY_CODE_TYPE
 
 /**
  전체 웹 종료 콜백 입니다.  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.19
+ - Date: 2023.04.19
 */
 enum QRCODE_CB : Equatable {
     /// QRCode 페이지 시작 입니다.
@@ -60,7 +60,7 @@ enum QRCODE_CB : Equatable {
 
 /**
  제로페이 뷰어 관련 모델 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.13
+ - Date: 2023.03.13
 */
 class OKZeroViewModel : BaseViewModel
 {
@@ -79,12 +79,11 @@ class OKZeroViewModel : BaseViewModel
     
     /**
      싱글 결제 코드 인식 가능한 타임 여부를 체크 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.26
+     - Date: 2023.04.26
      - Parameters:False
-     - Throws : False
-     - returns :
-        - Future<CODE_ENABLED_TIME, Never>
-            +  CODE_ENABLED_TIME : 현 인식 가능 타임 정보를 리턴 합니다.
+     - Throws: False
+     - Returns:
+        현 인식 가능 타임 정보를 리턴 합니다. (Future<CODE_ENABLED_TIME, Never>)
      */
     func isTimeCodeEnabeld() -> CurrentValueSubject<CODE_ENABLED_TIME,Never>
     {
@@ -126,10 +125,10 @@ class OKZeroViewModel : BaseViewModel
     
     /**
      결제 코드 사용가능 타임을 체크 합니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.27
+     - Date: 2023.04.27
      - Parameters:False
      - Timer : true
-     - returns :False
+     - Returns:False
      */
     func startCodeTimerEnabeld()
     {
@@ -167,12 +166,11 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     바코드 인식할 세션 연결 입니다.( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.13
-     - Throws : False
-     - returns :
-        - Future<Bool, Never>
-            +  Bool : 세션 연결 여부를 받아 리턴 합니다.
+     바코드 인식할 캡쳐 세션 연결 입니다.( J.D.H  VER : 1.0.0 )
+     - Date: 2023.03.13
+     - Throws: False
+     - Returns:
+        캡쳐 세션 연결 여부를 받아 리턴 합니다. (Future<AVCaptureMetadataOutput?, Never>)
      */
     func isAVCaptureSession() -> Future<AVCaptureMetadataOutput?, Never>
     {
@@ -221,13 +219,12 @@ class OKZeroViewModel : BaseViewModel
     
     /**
      QRCode 인증 할 제로페이 스크립트를 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.19
+     - Date: 2023.04.19
      - Parameters:
         - params : 제로페이에서 받은 파라미터 정보 입니다.
-     - Throws : False
-     - returns :
-        - AnyPublisher<ZeroPayQRCodeResponse?, ResponseError>
-            +  ZeroPayQRCodeResponse : QRCode 인증 할 제로페이 스크립트를 받습니다.
+     - Throws: False
+     - Returns:
+        QRCode 인증 할 제로페이 스크립트를 받습니다. (AnyPublisher<ZeroPayQRCodeResponse?, ResponseError>)
      */
     func getQRCodeZeroPay( params : [String : Any] = [:]) -> AnyPublisher<ZeroPayQRCodeResponse?, ResponseError>
     {

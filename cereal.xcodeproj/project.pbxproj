@@ -134,6 +134,7 @@
 		8D205F9629D14B8B00F43C99 /* XecureKeypad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D205F9429D14B8B00F43C99 /* XecureKeypad.framework */; };
 		8D2FC9E629DC05EC0061821F /* BecomeActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FC9E529DC05EC0061821F /* BecomeActiveView.swift */; };
 		8D2FC9E829DC05F50061821F /* BecomeActiveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FC9E729DC05F50061821F /* BecomeActiveView.xib */; };
+		8D4120B32A2037C100C72328 /* SessionCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4120B22A2037C100C72328 /* SessionCheckResponse.swift */; };
 		8D48BB3029D2CC9F00CC4D62 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D48BB2D29D2CC9E00CC4D62 /* KakaoCommon.framework */; };
 		8D48BB3129D2CC9F00CC4D62 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D48BB2E29D2CC9E00CC4D62 /* KakaoLink.framework */; };
 		8D48BB3229D2CC9F00CC4D62 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D48BB2F29D2CC9E00CC4D62 /* KakaoMessageTemplate.framework */; };
@@ -363,6 +364,7 @@
 		8D205F9429D14B8B00F43C99 /* XecureKeypad.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XecureKeypad.framework; sourceTree = "<group>"; };
 		8D2FC9E529DC05EC0061821F /* BecomeActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeActiveView.swift; sourceTree = "<group>"; };
 		8D2FC9E729DC05F50061821F /* BecomeActiveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BecomeActiveView.xib; sourceTree = "<group>"; };
+		8D4120B22A2037C100C72328 /* SessionCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCheckResponse.swift; sourceTree = "<group>"; };
 		8D48BB2D29D2CC9E00CC4D62 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
 		8D48BB2E29D2CC9E00CC4D62 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoLink.framework; sourceTree = "<group>"; };
 		8D48BB2F29D2CC9E00CC4D62 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 		8D205EE729D1346E00F43C99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D4120B12A20378D00C72328 /* SessionCheck */,
 				8D159E9F29EF750200918CC0 /* ZeroPayQRCode */,
 				8D55D56A29E691BA009C43BF /* FcmPushUpdate */,
 				8DDC3DFB29D17738003C4F8F /* AppStart */,
@@ -1040,6 +1043,14 @@
 				8D2FC9E729DC05F50061821F /* BecomeActiveView.xib */,
 			);
 			path = BecomeActiveView;
+			sourceTree = "<group>";
+		};
+		8D4120B12A20378D00C72328 /* SessionCheck */ = {
+			isa = PBXGroup;
+			children = (
+				8D4120B22A2037C100C72328 /* SessionCheckResponse.swift */,
+			);
+			path = SessionCheck;
 			sourceTree = "<group>";
 		};
 		8D48BB2C29D2CC9E00CC4D62 /* KakaoLink */ = {
@@ -1612,6 +1623,7 @@
 				8D205F6729D1346F00F43C99 /* UIImageView.swift in Sources */,
 				8D1C97FC2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift in Sources */,
 				8D9D924929F7B9F900F42B8D /* GuideInfoView.swift in Sources */,
+				8D4120B32A2037C100C72328 /* SessionCheckResponse.swift in Sources */,
 				8D205F6529D1346F00F43C99 /* UIButton.swift in Sources */,
 				8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */,
 				8DDC3DE929D15FA6003C4F8F /* LoginModel.swift in Sources */,

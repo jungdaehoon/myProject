@@ -10,7 +10,7 @@ import UIKit
 
 /**
  제로페이 결제 가능 카드 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.28
+ - Date: 2023.04.28
  */
 class OKZeroPayCardView: UIView {
 

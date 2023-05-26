@@ -15,7 +15,7 @@ import Photos
 
 /**
  연결 체크 타입 입니다..  ( J.D.H  VER : 1.0.0 )
- - Date : 2023.03.20
+ - Date: 2023.03.20
  
         + checking   : 체킹을 시작 합니다.
         + connecting : 네트워크 연결로 사용 가능 입니다.
@@ -33,7 +33,7 @@ enum IS_CHECKING {
 
 /**
  인트로 뷰어 지원 모델 입니다.    ( J.D.H  VER : 1.0.0 )
- - Date : 2023.04.05
+ - Date: 2023.04.05
  */
 class IntroModel : BaseViewModel{
     /// 네트워크 채킹 이벤트 입니다.
@@ -42,10 +42,9 @@ class IntroModel : BaseViewModel{
     
     /**
      네크워크  연결 상태를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
-     - returns :
-        - CurrentValueSubject<IS_CHECKING, Never>
-            + 네트워크 연결 가능 여부를 리턴 합니다. ( true / false )
+     - Date: 2023.03.20
+     - Returns:
+        네트워크 연결 가능 여부를 리턴 합니다. (CurrentValueSubject<IS_CHECKING, Never>)
      */
     func isConnectedToNetwork() -> CurrentValueSubject<IS_CHECKING,Never> {
         /// 네트워크 체킹 여부 값을 리턴 합니다.
@@ -96,12 +95,11 @@ class IntroModel : BaseViewModel{
     
     /**
      자동로그인 처리 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - Throws : False
-     - returns :
-        - AnyPublisher<LogOutResponse?, ResponseError>
-            + LogOutResponse : 로그아웃 처리 결과를 받습니다.
+     - Throws: False
+     - Returns:
+        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
      */
     func setAutoLogin() ->  AnyPublisher<LoginResponse?, ResponseError> {
         var parameters : [String:Any]       = [:]

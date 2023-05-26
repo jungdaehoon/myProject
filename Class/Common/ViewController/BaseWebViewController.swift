@@ -11,7 +11,7 @@ import WebKit
 
 /**
  기본 베이스 웹 컨트롤뷰 입니다.
- - Date : 2023.03.20
+ - Date: 2023.03.20
  */
 
 class BaseWebViewController: UIViewController {
@@ -92,10 +92,10 @@ class BaseWebViewController: UIViewController {
     
     /**
      탭 이동시 현 페이지가 빈화면으로 새로고침을 해야하는 상황인지를 체크후 URL 로드 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.21
+     - Date: 2023.04.21
      - Parameters:
         - url : 디스플레이할 웹 페이지 입니다.
-     - returns :False
+     - Returns:False
      */
     func loadTabPageURL( _ url: String ) {
         if self.webView?.url?.absoluteString == "about:blank"
@@ -107,12 +107,12 @@ class BaseWebViewController: UIViewController {
     
     /**
      URL 정보를 받아 화면에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:
         - url : 디스플레이할 웹 페이지 입니다.
         - updateCookies : 쿠키를 변경 할지 여부를 받습니다.
         - loadCompletion : 웹 페이지 정상 로드 확인 입니다.
-     - returns :False
+     - Returns:False
      */
     func loadMainURL( _ url: String, updateCookies : Bool = false, loadCompletion : (( _ success : Bool ) -> Void)? = nil  ) {
         self.isWebViewHidden    = false
@@ -131,9 +131,9 @@ class BaseWebViewController: UIViewController {
         
     /**
      웹 페이지를 빈화면으로 설정 합니다 ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.20
+     - Date: 2023.03.20
      - Parameters:False
-     - returns :False
+     - Returns:False
      */
     func initWebPage(){
         if self.messageHandler != nil
@@ -322,7 +322,7 @@ extension BaseWebViewController: WKScriptMessageHandler {
     /**
      Web 에서 ScriptMessage 받는 메서드 입니다. ( J.D.H  VER : 1.0.0 )
      - Description : hybridscript, updateCookies 헨들러 이벤트를 받아 WebAPP 인터페이스를 처리 합니다.
-     - Date : 2023.03.28
+     - Date: 2023.03.28
      */
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         Slog("wkwebview run javascript name = \(message.name) body = \(message.body)")

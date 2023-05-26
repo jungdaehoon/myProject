@@ -11,7 +11,7 @@ import WebKit
 
 /**
  로그인 페이지 버튼 이벤트 타입 입니다.
- - Date : 2023.03.24
+ - Date: 2023.03.24
  */
 enum LOGIN_BTN_ACTION : Int {
     /// 로그인 페이지 종료 입니다.
@@ -32,7 +32,7 @@ enum LOGIN_BTN_ACTION : Int {
 
 /**
  로그인 페이지 입니다.
- - Date : 2023.03.24
+ - Date: 2023.03.24
  */
 class LoginViewController: BaseViewController {
     
@@ -80,11 +80,11 @@ class LoginViewController: BaseViewController {
     // MARK: - init
     /**
      전체 웹뷰 초기화 메서드 입니다.
-     - Date : 2023.04.04
+     - Date: 2023.04.04
      - Parameters:
         - completion :  페이지 종료시 콜백 핸들러 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     init( completion : (( _ success : Bool ) -> Void )? = nil ) {
         super.init(nibName: nil, bundle: nil)
@@ -134,10 +134,10 @@ class LoginViewController: BaseViewController {
     // MARK: - 지원 메서드 입니다.
     /**
      로그인 페이지 초기화 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func initLoginView()
     {
@@ -160,10 +160,10 @@ class LoginViewController: BaseViewController {
     
     /**
      입력 필드 및 안내 초기화 설정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.04.17
+     - Date: 2023.04.17
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setInitTextField(){
         self.idField.text                   = ""
@@ -175,10 +175,10 @@ class LoginViewController: BaseViewController {
     
     /**
      입력 필드 Placeholder Font 정보를 설정 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setTextFieldPlaceholder() {
         let id_attributedString = NSMutableAttributedString(string: "아이디 (휴대폰번호 “-”없이 입력)", attributes: [
@@ -198,10 +198,10 @@ class LoginViewController: BaseViewController {
     
     /**
      앱 가이드 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setGuideDisplay(){
         /// 가이드 뷰가 활성화 인지를 체크 합니다.
@@ -242,11 +242,11 @@ class LoginViewController: BaseViewController {
     
     /**
      로그인 버튼 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.22
+     - Date: 2023.03.22
      - Parameters:
         - linkUrl : 연결할 페이지 URL 정보 입니다.
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setLoginBtn(){
         /// 로그인 버튼 활성화 체크 입니다.
@@ -270,10 +270,10 @@ class LoginViewController: BaseViewController {
     
     /**
      앱 실드로 정상 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.27
+     - Date: 2023.03.27
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setAppShield(){
         /// 앱 실드 체크 합니다.
@@ -294,10 +294,10 @@ class LoginViewController: BaseViewController {
     
     /**
      로그인 요청 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.27
+     - Date: 2023.03.27
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setLogin(){
         /// 로그인 활성화인 경우 입니다.
@@ -521,10 +521,10 @@ extension LoginViewController : UITextFieldDelegate {
 extension LoginViewController {
     /**
      보안 키페드 를 초기화 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func initXKTextField() {
         xkKeypadType                        = .number
@@ -547,10 +547,10 @@ extension LoginViewController {
     
     /**
      보안 키페드 를 활성화 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.27
+     - Date: 2023.03.27
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func xkKeyPadBecomeFirstResponder() {
         self.view.endEditing(true)
@@ -561,10 +561,10 @@ extension LoginViewController {
     
     /**
      키페드 를 종료 합니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.27
+     - Date: 2023.03.27
      - Parameters:Fasle
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func setResignFirstResponder() {
         self.view.endEditing(true)
@@ -578,13 +578,13 @@ extension LoginViewController {
     
     /**
      보안키패드 입력 될 때 마다 받는 콜백 메서드 입니다.  ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.03.24
+     - Date: 2023.03.24
      - Parameters:
         - aCount: 입력된 카운트 정보 입니다.
         - finished : 입력 여부 입니다. ( true : 입력완료 , false : 미입력 )
         - tuple : finished 가 true 일 때  tuple 입력 받습니다.. ( 보안 키패드 관련된 sessionid, token , e2edata)
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func mainKeypadInputCompleted(_ aCount: Int,  finished : Bool = false, tuple : (String,String)? = nil ) {
         /// 비밀번호 정보를 초기화 합니다.

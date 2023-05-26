@@ -10,7 +10,7 @@ import UIKit
 
 /**
  제휴 은행 리스트 하단 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
- - Date : 2023.05.04
+ - Date: 2023.05.04
  */
 class BottomBankListView: BaseView {
 
@@ -52,7 +52,7 @@ class BottomBankListView: BaseView {
     //MARK: - 지원 메서드 입니다.
     /**
      계좌 리스트 뷰어 초기화 입니다.
-     - Date : 2023.05.02
+     - Date: 2023.05.02
      */
     func initBottomAccountListView(){
         /// Xib 연결 합니다.
@@ -65,10 +65,10 @@ class BottomBankListView: BaseView {
 
     /**
      뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.02
+     - Date: 2023.05.02
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func show() {
         if let base = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
@@ -81,10 +81,10 @@ class BottomBankListView: BaseView {
     
     /**
      뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date : 2023.05.02
+     - Date: 2023.05.02
      - Parameters:False
-     - Throws : False
-     - returns :False
+     - Throws: False
+     - Returns:False
      */
     func hide() {
         let base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
