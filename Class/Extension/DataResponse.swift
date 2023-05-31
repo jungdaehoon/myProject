@@ -34,12 +34,15 @@ extension DataResponse {
             let metricsDescription = metrics.map { "\($0.taskInterval.duration)s" } ?? "None"
             
             let log = """
-            \n[Request API]: \(requestAPI)
+            _\n\n----------------------------- API Request Open -------------------------------
+            [Request API]: \(requestAPI)
             [Request Header]: \n\(requestHeader)
             [Request Body]: \n\(requestBody)
             [Response Status Code]: \(responseCode)
             [Response Body]: \n\(responseBody)
             [Network Duration]: \(metricsDescription)
+            ----------------------------- API Request End --------------------------------
+            _\n
             """
             return log
         }

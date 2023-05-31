@@ -88,7 +88,7 @@ enum MENU_LIST : String  {
     /// 비밀번호 찾기 페이지 URL 입니다.
     case ID_LOG_FIND_PW         = "LOG_006"
     /// 90일 비밀번호 찾기 페이지 URL 입니다.
-    case ID_LOG_CHANG_PW_90     = "LOG_028"
+    case ID_LOG_CHANG_PW_90     = "LOG_028" 
     /// 휴먼회원 페이지 URL 입니다.
     case ID_WAKE_SLEEP_USER     = "LOG_029"
 }
@@ -135,14 +135,14 @@ class BaseViewModel : NSObject {
     /**
      상황별 인터페이스를 요청 합니다.( J.D.H  VER : 1.0.0 )
      - Description          : Http 네트워크 요청시 공통 지원 메서드 입니다. "errorPopEnabled" 에 따라 공통 오류 코드에 따른 안내 팝업 처리 및 공통 이벤트 처리가 될수 있습니다. 별도 이벤트 처리는 "errorPopEnabled = false"  처리시 별도 이벤트 처리가 가능합니다.
-     - Date: 2023.03.23
+     - Date: 2023.05.23
      - Parameters:
         - showLoading       : 로딩 디스플레이 여부 입니다. ( default = true )
         - appExit           : 예외 사항일 경우 앱 종료로 연결할지 여부 입니다. ( default = false )
         - errorPopEnabled   : 공통 error 팝업을 사용할지 여부 입니다. ( default = true )
         - errorHandler      : ResponseError 헨들러 입니다. ( default = nil )
         - publisher         : 타입별 데이터를 연결 합니다.
-        - completion        : http 요청할 파라미터 정보 입니다.
+        - completion        : 통신 완료처리 후 콜백입니다. (T: BaseResponse)
      - Throws: False
      - Returns:False
      */
@@ -302,6 +302,7 @@ class BaseViewModel : NSObject {
     
     /**
      앱 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - Description: 세션여부를 체크 하며 세션이 유지 상태로 체크 되었을시에 추가로 저장된 PUSH/Deep 링크 정보가 있을 경우 이전 비활성화에서 받은 정보가 있는것으로 보고 앱 비활성화 타입을 리턴 합니다.
      - Date: 2023.05.17
      - Parameters:
         - inAppStartType : 앱 활성화 여부를 체크하는 타입 입니다.
@@ -368,21 +369,22 @@ class BaseViewModel : NSObject {
     
     /**
      앱 세션 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date: 2023.05.17
+     - Description: 세션 여부 체크만 하는 것으로 네트워크 통신 오류시에 공통 오류 팝업 처리 하지 않으며. 세션 실패로 리턴 하도록 합니다.
+     - Date: 2023.05.26
      - Parameters:False
      - Throws: False
      - Returns:
-        앱 활성화 여부를 리턴 합니다. (AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>)
+        앱 활성화 여부를 리턴 합니다. (AnyPublisher<SessionCheckResponse?, ResponseError>)
      */
-    func isSessionEnabeld() -> AnyPublisher<PedometerTermsAgreeResponse?, ResponseError>
+    func isSessionEnabeld() -> AnyPublisher<SessionCheckResponse?, ResponseError>
     {
-        let subject             = PassthroughSubject<PedometerTermsAgreeResponse?,ResponseError>()
+        let subject             = PassthroughSubject<SessionCheckResponse?,ResponseError>()
         requst( showLoading : false, errorPopEnabled: false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
             /// 만보게 약관 동의여부 요청 합니다.
-            return NetworkManager.requestPedometerTermsAgree()
+            return NetworkManager.requestSessionCheck()
         } completion: { model in
             // 앱 인터페이스 정상처리 여부를 넘깁니다.
             subject.send(model)
@@ -867,6 +869,10 @@ class BaseViewModel : NSObject {
         return Future<String, Never> { promise in
             var source = String()
             cookies?.forEach { cookie in
+                Slog("cookie.name : \(cookie.name))")
+                Slog("cookie.value : \(cookie.value))")
+                Slog("cookie.path : \(cookie.path))")
+                Slog("cookie.domain : \(cookie.domain))")
                 source.append("document.cookie = '")
                 source.append("\(cookie.name)=\(cookie.value); path=\(cookie.path); domain=\(cookie.domain);'\n")
             }

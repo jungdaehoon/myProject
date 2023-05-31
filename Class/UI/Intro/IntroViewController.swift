@@ -79,12 +79,14 @@ class IntroViewController: BaseViewController {
         self.viewModel.isTrackingAuthorization().sink { success in
             /// 앱 실드 체크 합니다.
             self.viewModel.getAppShield().sink { appShield in
-                /// error 이 아닌 경우 정상 처리 합니다.
+                /// error 이 아닌 경우 error 안내 처리 합니다.
                 if appShield.error != nil
                 {
                     DispatchQueue.main.async(execute: {
-                        /// 서비스 불가 안내 뷰어를 오픈 합니다.
-                        ServiceErrorPop().show()
+                        /// 앱 실드 비정상 처리 안내 팝업 입니다.
+                        CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
+                            exit(0)
+                        }
                     })
                 }
                 /// 앱 실드 정상처리 입니다.

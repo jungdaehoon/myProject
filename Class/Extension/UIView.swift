@@ -141,13 +141,14 @@ extension UIView {
      링크 기준으로 전체 화면 웹뷰를 디스플레이 합니다.
      - Date: 2023.03.13
      - Parameters:
-        - linkUrl : 연결할 웹페이지 입니다.
+        - linkUrl : 도메인 포함된 URL 을 받습니다.
         - modalPresent : 신규 컨트롤러 뷰어로 모달 오픈 할지를 받습니다.
+        - pageType : 웹 페이지 타입을 받습니다. ( default : .default_type )
         - animated : 애니 효과 입니다.
         - animatedType : 모달 팝업시 에니 효과 입니다.
         - titleName : 타이틀 명칭 입니다.
         - titleBarType  : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
-        - titleBarHidden : 타이틀바 디스플레이 여부를 받습니다. ( default false )
+        - titleBarHidden : 타이틀바 디스플레이 여부를 받습니다. ( default : false )
         - completion : 콜백 데이터 입니다.
      - Throws: False
      - Returns:False

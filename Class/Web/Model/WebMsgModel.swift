@@ -75,6 +75,10 @@ enum SCRIPT_MESSAGES : String
     case autoLoginSetting           = "autoLoginSetting"
     /// 로그아웃 요청 입니다.
     case setLogout                  = "setLogout"
+    /// 닉네임 정보를 받습니다.
+    case setNickName                = "setNickName"
+    /// 현 페이지를 종료하고 메인 홈으로 이동 합니다.
+    case gotoHome                   = "gotoHome"
     /// 공용 토큰을 저장 합니다.
     case saveToken                  = "saveToken"
     /// 앱 내부 저장소에 데이터 저장 입니다.
@@ -142,7 +146,6 @@ enum SCRIPT_MESSAGES : String
  - Date: 2023.03.20
 */
 class WebMsgModel : BaseViewModel {
-    
     
     /**
      Wallet 리턴 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )

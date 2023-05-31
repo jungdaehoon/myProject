@@ -41,7 +41,7 @@ class NetworkManager {
      - API 명: 하단 전체 탭에 데이터 정보를 요청 합니다.
      - Date: 2023.03.09
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws: False
      - Returns:
         전체 탭 상세 정보 데에터 입니다. ( AnyPublisher<AllMoreResponse, ResponseError> )
@@ -58,7 +58,7 @@ class NetworkManager {
      - API 명: 만보게 페이지 진입전 약관 동의 여부를 확인 합니다.
      - Date: 2023.03.09
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws: False
      - Returns:
         만보게 약관 동의 여부를 받습니다. (AnyPublisher<PedometerTermsAgreeResponse, ResponseError>)
@@ -76,7 +76,7 @@ class NetworkManager {
      - API 명: 만보기 약관동의 팝업에서 "동의" 선택으로 약관동의를 요청 합니다.
      - Date: 2023.03.15
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws: False
      - returns:
         만보게 약관동의 요청 후 확인 정보를 받습니다. (AnyPublisher<InsertPedometerTermsResponse, ResponseError>)
@@ -93,7 +93,7 @@ class NetworkManager {
      - API 명: 앱 시작 기본 정보 요청 합니다.
      - Date: 2023.03.27
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
         - params : 파라미터 정보를 넘깁니다.
      - Throws: False
      - Returns:
@@ -137,7 +137,7 @@ class NetworkManager {
      - API 명: 로그아웃을 요청 합니다.
      - Date: 2023.03.27
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
         - params : 파라미터 정보를 넘깁니다.
      - Throws: False
      - Returns:
@@ -159,7 +159,7 @@ class NetworkManager {
      - API 명: 로그아웃을 요청 합니다.
      - Date: 2023.03.20
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws: False
      - Returns:
         로그아웃 여부 정보를 받습니다. (AnyPublisher<LogOutResponse, ResponseError>)
@@ -193,7 +193,7 @@ class NetworkManager {
      - API 명: 은행 계좌 요청 입니다.
      - Date: 2023.03.22
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws: False
      - Returns:
         계좌 리스트 정보를 받습니다. (AnyPublisher<SelectAccountListResponse, ResponseError>)
@@ -210,7 +210,7 @@ class NetworkManager {
      - API 명: 만보기 수령 요청 입니다.
      - Date: 2023.03.22
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws: False
      - Returns:
         만보기 데이터를 받습니다. (AnyPublisher<PedometerResponse, ResponseError>)
@@ -227,7 +227,7 @@ class NetworkManager {
      - API 명: 만보기 리워드 수령 요청 입니다.
      - Date: 2023.03.22
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
         - params : 파라미터 정보를 넘깁니다.
      - Throws: False
      - Returns:
@@ -249,7 +249,7 @@ class NetworkManager {
      - API 명: 만보기 데이터를 업데이트 합니다.
      - Date: 2023.03.22
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
         - params : 파라미터 정보를 넘깁니다.
      - Throws: False
      - Returns:
@@ -288,12 +288,12 @@ class NetworkManager {
     
     
     /**
-     만보기 수령 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID: myp/selectMyPedometer.do
-     - API 명: 만보기 수령 요청 입니다.
-     - Date: 2023.03.22
+     세션이 활성화 상태인지를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - API ID: /api/checkLoginInfo
+     - API 명: 현 세션이 활성화 상태인지를 체크 합니다.
+     - Date: 2023.05.26
      - Parameters:
-        - token : token : 기본 토큰 정보 입니다.
+        - token : 기본 토큰 정보 입니다.
      - Throws:False
      - Returns:
         세션 유지 여부를 받습니다. ( AnyPublisher<SessionCheckResponse, ResponseError> )

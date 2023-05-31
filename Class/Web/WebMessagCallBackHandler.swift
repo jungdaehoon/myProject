@@ -162,6 +162,14 @@ class WebMessagCallBackHandler : NSObject  {
             case .setLogout                  :
                 self.setLogOut( body )
                 break
+            /// 닉네임 정보를 받습니다.
+            case .setNickName                :
+                self.setNickName( body )
+                break
+            /// 현 페이지를 종료하고 메인 홈으로 이동 합니다.
+            case .gotoHome                   :
+                self.setGoToHome( body )
+                break
             /// 공용 토큰을 저장 합니다.
             case .saveToken                  :
                 self.setSaveToken( body )
@@ -1037,6 +1045,70 @@ class WebMessagCallBackHandler : NSObject  {
                 {
                     //self.hideHudView()
                     Slog("error___1")
+                }
+            }
+        }
+    }
+    
+    
+    /**
+     닉네임 정보를 받습니다.
+     - Date: 2023.05.31
+     - Parameters:
+        - body : 스크립트에서 받은 메세지 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setNickName( _ body : [Any?] ){
+        let messages = body[2] as! [Any?]
+        if let nickName = messages[0] as? String
+        {
+            if var response = BaseViewModel.loginResponse {
+                response.data!.nickname = nickName
+            }
+        }
+    }
+    
+    
+    /**
+     페이지 종료 후 메인 홈으로 이동 합니다.
+     - Description : 종료후 메인 홈으로 이동하며 딥링크나/PUSH 정보를 가지고 있다면 홈으로 이동 후 해당 웹페이지를 디스플레이 하도록 합니다.
+     - Date: 2023.05.31
+     - Parameters:
+        - body : 스크립트에서 받은 메세지 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setGoToHome( _ body : [Any?] ){
+        if let controler = self.target {
+            /// 전체 웹뷰 타입 경우인지를 체크 합니다.
+            if let controller = self.target as? FullWebViewController {
+                /// 리턴 콜백이 있는 지를 체크 합니다.
+                if let completion = controller.completion {
+                    /// 전체 웹뷰 진입 타입을 체크 합니다.
+                    switch controller.pageType
+                    {
+                        /// 닉네임 변경 타입으로 진입 경우 입니다.
+                    case .NICKNAME_CHANGE:
+                        completion(.goToHome)
+                        return
+                        /// 90일 동안 비밀번호 변경 요청 없는 경우 페이지 진입 입니다.
+                    case .PW90_NOT_CHANGE:
+                        completion(.goToHome)
+                        return
+                    default:break
+                    }
+                }
+            }
+            
+            /// 0번째 페이지로 이동 후 홈으로 이동 합니다.
+            controler.popToRootController(animated: true, animatedType: .down) { firstViewController in
+                /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+                if let tabbar = TabBarView.tabbar {
+                    /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                    tabbar.setCommonViewRemove()
+                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                    tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
                 }
             }
         }

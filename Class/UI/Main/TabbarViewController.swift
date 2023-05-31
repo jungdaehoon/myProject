@@ -190,18 +190,6 @@ class TabbarViewController: UITabBarController {
                 BecomeActiveView().hide()
             }
         }
-        /// 로그인 이후 진입 경우 입니다.
-        else
-        {
-            /// 닉네임과 유저 넘버가 동일한 경우닉네임 변경 페이지 이동을 체크 합니다.
-            if let login = BaseViewModel.loginResponse
-            {
-                if login.nickname_ch!
-                {
-                    self.view.setDisplayWebView( WebPageConstants.URL_CHANGE_NICKNAME, modalPresent: true, titleBarHidden: true)
-                }
-            }
-        }
     }
     
     

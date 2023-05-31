@@ -52,6 +52,17 @@ extension WKWebView {
                 urlRequest.setValue(value, forHTTPHeaderField: key)
             }
         }
+        
+        let weblog = """
+        _\n\n----------------------------- WebView Request Open -------------------------------
+        [WebView Request Type]: \n\(httpMethod)
+        [WebView Request Url]: \n\(urlRequest.url!.absoluteString)
+        [WebView Load Request Header]: \n\(urlRequest.allHTTPHeaderFields!)
+        [WebView Request Body]: \n\(postData)
+        ----------------------------- WebView Request End --------------------------------
+        _\n
+        """
+        Slog("\(weblog)", category: .network)
         load(urlRequest)
     }
     

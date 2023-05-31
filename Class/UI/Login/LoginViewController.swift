@@ -332,47 +332,18 @@ class LoginViewController: BaseViewController {
                                 BaseViewModel.loginResponse!.islogin = true
                                 /// FCM TOKEN 정보를 서버에 등록 합니다.
                                 let _ = self.viewModel.setFcmTokenRegister()
-                                /// 로그인 페이지를 종료 여부를 넘깁니다.
-                                if self.completion != nil { self.completion!(true) }
-                                /// 현 페이지를 종료합니다.
-                                self.popController(animated: true,animatedType: .down) { firstViewController in
-                                    /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
-                                    if let tabbar = TabBarView.tabbar
-                                    {
-                                        /// 비로그인 상태에서 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 받은 데이터롤 가져 옵니다.
-                                        if let link = BaseViewModel.shared.getInDataAppStartURL(),
-                                           link.isValid
-                                        {
-                                            /// 진행중인 탭 인덱스를 초기화 합니다.
-                                            tabbar.setIngTabToRootController()
-                                            /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
-                                            tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true) { controller in
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                                    controller.loadMainURL(link) { success in
-                                                        
-                                                    }
-                                                })
-                                            }
-                                            
-                                            /// 메인 탭 이동 하면서 외부 데이터에서 받은 URL 페이지로 이동합니다. ( 추후 딥링크 관련 딜레이 0.1 처리부분을 웹에서 할 경우 입니다. )
-                                            /*
-                                            let link = "\(WebPageConstants.URL_MAIN)?url=\(link)"
-                                            /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
-                                            tabbar.setSelectedIndex(.home, object: link, updateCookies: true) { controller in
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                                                    controller.loadMainURL(link) { success in
-
-                                                    }
-                                                })
-                                            }
-                                             */
-                                        }
-                                        else
-                                        {
-                                            /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                                            tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
-                                        }
+                                /// 닉네임 변경 여부를 체크 합니다.
+                                if BaseViewModel.loginResponse!.nickname_ch!
+                                {
+                                    /// 닉네임 변경 페이지로 이동 합니다.
+                                    self.view.setDisplayWebView(WebPageConstants.URL_CHANGE_NICKNAME, modalPresent: true, pageType: .NICKNAME_CHANGE, titleBarType: 0) { value in
+                                        self.closeLogin()
                                     }
+                                }
+                                else
+                                {
+                                    /// 로그인 페이지를 종료 처리 합니다.
+                                    self.closeLogin()
                                 }
                             }
                         }.store(in: &self.viewModel.cancellableSet)
@@ -391,10 +362,62 @@ class LoginViewController: BaseViewController {
                         }
                         menu_id     = .ID_LOG_FIND_PW
                         return
+                        /// 휴먼회원 입니다.
+                    case ._code_0010_:
+                        self.view.setDisplayWebView(WebPageConstants.URL_WAKE_SLEEP_USER, modalPresent: true, titleBarType: 2) { value in
+                            self.setAppShield()
+                        }
+                        return
+                        /// 인증 만료 코드 입니다. ( 계좌인증 만료 )
+                    case ._code_0011_:
+                        CMAlertView().setAlertView(detailObject: "인증이 만료되었습니다.\n다시 인증 받으시기 바랍니다." as AnyObject, cancelText: "확인") { event in
+                            self.view.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2) { value in
+                                self.setAppShield()
+                            }
+                        }
+                        return
                         /// 90일 동안 비밀번호 변경 요청 없는 경우 입니다.
                     case ._code_1006_:
                         menu_id     = .ID_LOG_CHANG_PW_90
-                        break
+                        self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
+                            /// 비밀번호 변경 요청 페이지로 이동합니다.
+                            self.view.setDisplayWebView(url + "?flag=2", modalPresent: true, pageType: .PW90_NOT_CHANGE, titleBarType: 0) { value in
+                                /// 콜백 타입을 체크 합니다.
+                                switch value
+                                {
+                                    /// 비밀번호 변경 후 진입 경우 입니다.
+                                    case .loginCall:
+                                        self.setAppShield()
+                                        return
+                                    default:break
+                                }
+                                
+                                /// 비밀번호 미변경시 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.
+                                self.viewModel.setKeyChainCustItem(NC.S(self.idField.text)).sink { success in
+                                    if success
+                                    {
+                                        /// 로그인 여부를 활성화 합니다.
+                                        BaseViewModel.loginResponse!.islogin = true
+                                        /// FCM TOKEN 정보를 서버에 등록 합니다.
+                                        let _ = self.viewModel.setFcmTokenRegister()
+                                        /// 닉네임 변경 여부를 체크 합니다.
+                                        if BaseViewModel.loginResponse!.nickname_ch!
+                                        {
+                                            /// 닉네임 변경 페이지로 이동 합니다.
+                                            self.view.setDisplayWebView(WebPageConstants.URL_CHANGE_NICKNAME, modalPresent: true, pageType: .NICKNAME_CHANGE, titleBarType: 0) { value in
+                                                self.closeLogin()
+                                            }
+                                        }
+                                        else
+                                        {
+                                            /// 로그인 페이지를 종료 처리 합니다.
+                                            self.closeLogin()
+                                        }
+                                    }
+                                }.store(in: &self.viewModel.cancellableSet)
+                            }
+                        }.store(in: &self.viewModel.cancellableSet)
+                        return
                         /// 휴대폰 본인 재인증 입니다.
                     case ._code_1004_:
                         msg         = "고객님의 안전한 정보보호를 위해 앱 재설치 시, 휴대폰 본인인증이 필요합니다."
@@ -425,6 +448,48 @@ class LoginViewController: BaseViewController {
             }.store(in: &self.viewModel.cancellableSet)
         }
     }
+    
+    
+    /**
+     로그인 페이지를 종료 합니다.
+     - Description : 종료후 메인 홈으로 이동하며 딥링크나/PUSH 정보를 가지고 있다면 홈으로 이동 후 해당 웹페이지를 디스플레이 하도록 합니다.
+     - Date: 2023.05.31
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func closeLogin(){
+        /// 로그인 페이지를 종료 여부를 넘깁니다.
+        if self.completion != nil { self.completion!(true) }
+        /// 현 페이지를 종료합니다.
+        self.popController(animated: true,animatedType: .down) { firstViewController in
+            /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+            if let tabbar = TabBarView.tabbar
+            {
+                /// 비로그인 상태에서 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 받은 데이터롤 가져 옵니다.
+                if let link = BaseViewModel.shared.getInDataAppStartURL(),
+                   link.isValid
+                {
+                    /// 진행중인 탭 인덱스를 초기화 합니다.
+                    tabbar.setIngTabToRootController()
+                    /// 메인탭 URL 정보에 뒤 파라미터로 추가한 URL 로 이동 합니다.
+                    tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true) { controller in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            controller.loadMainURL(link) { success in
+                                
+                            }
+                        })
+                    }
+                }
+                else
+                {
+                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                    tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
+                }
+            }
+        }
+    }
+    
     
     
     // MARK: - 버튼 액션 입니다.

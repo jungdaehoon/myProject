@@ -17,6 +17,10 @@ enum FULL_BTN : Int {
     /// 페이지 이전 페이지 이동 입니다.
     case page_back  = 11
 }
+
+
+
+
 /**
  전체 웹 종료 콜백 입니다.  ( J.D.H  VER : 1.0.0 )
  - Date: 2023.03.21
@@ -24,6 +28,8 @@ enum FULL_BTN : Int {
 enum FULL_WEB_CB {
     /// 로그인 페이지 디스플레이 요청 입니다.
     case loginCall
+    /// 페이지 종료후 바로 홈으로 이동합니다.
+    case goToHome
     /// 페이지 닫기 입니다.
     case pageClose
     /// URL 정보를 넘깁니다
@@ -39,17 +45,21 @@ enum FULL_WEB_CB {
 */
 enum FULL_PAGE_TYPE : String {
     /// 기본 타입 입니다.
-    case default_type   = "DT"
+    case default_type       = "DT"
     /// 약관동의 타입 입니다.
-    case db_type        = "DB"
+    case db_type            = "DB"
     /// PG 결제 연동 타입 입니다.
-    case pg_type        = "PG"
+    case pg_type            = "PG"
     /// 제로페이 연동 타입 입니다.
-    case zeropay_type   = "ZP"
+    case zeropay_type       = "ZP"
     /// 인증 관련 페이지 입니다.
-    case auth_type      = "AUTH"
+    case auth_type          = "AUTH"
     /// 외부 웹페이지 접근으로 내부 도메인을 사용하지 않습니다.
-    case outdside_type  = "OUTSIDE"
+    case outdside_type      = "OUTSIDE"
+    /// 90일 동안 비밀번호 변경 요청 없는 경우 페이지 진입 입니다.
+    case PW90_NOT_CHANGE    = "PW90_NOT_CHANGE"
+    /// 닉네임 변경 페이지 진입 입니다.
+    case NICKNAME_CHANGE    = "NICKNAME_CHANGE"
 }
 
 

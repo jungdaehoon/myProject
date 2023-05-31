@@ -82,12 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if isApp
                 {
                     /// DeepLink 접근할.URL 정보로 페이지 이동 하도록 합니다.
-                    BaseViewModel.shared.deepLinkUrl = NC.S(deeplink)
+                    BaseViewModel.shared.deepLinkUrl        = NC.S(deeplink)
                 }
                 else
                 {
                     /// DeepLink 접근할.URL 정보를 앱 활성화 후 사용하도록 저장합니다.
-                    BaseViewModel.shared.saveDeepLinkUrl = NC.S(deeplink)
+                    BaseViewModel.shared.saveDeepLinkUrl    = NC.S(deeplink)
                 }
             }.store(in: &self.viewModel.cancellableSet)
         }).store(in: &self.viewModel.cancellableSet)
