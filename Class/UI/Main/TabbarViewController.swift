@@ -341,7 +341,7 @@ extension UITabBarController
                 default:break
             }
         }
-        /// 아이템이 없을 경우 기본 탭 데이터를 호출 합ㄴ디ㅏ.
+        /// 아이템이 없을 경우 기본 탭 데이터를 호출 합니다.
         else
         {
             /// 해당 탭 인덱스의 Controller 을 가져 옵니다.

@@ -95,5 +95,9 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>W_ENCIV</key>
+	<string>${WALLET_ENC_IV}</string>
+	<key>W_ENCKEY</key>
+	<string>${WALLET_ENC_KEY}</string>
 </dict>
 </plist>

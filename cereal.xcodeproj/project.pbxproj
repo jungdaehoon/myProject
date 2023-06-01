@@ -147,6 +147,7 @@
 		8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */; };
 		8D55D56929E660F6009C43BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D56829E660F6009C43BF /* GoogleService-Info.plist */; };
 		8D55D56C29E691EF009C43BF /* FcmPushUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D56B29E691EF009C43BF /* FcmPushUpdateResponse.swift */; };
+		8D8E6FCE2A287E1B007455BD /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E6FCD2A287E1B007455BD /* WalletViewController.swift */; };
 		8D91D99829DFC6C600B5D9AE /* HttpErrorPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91D99729DFC6C600B5D9AE /* HttpErrorPop.swift */; };
 		8D91D99A29DFC6D000B5D9AE /* HttpErrorPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D91D99929DFC6D000B5D9AE /* HttpErrorPop.xib */; };
 		8D91D99C29DFCC1100B5D9AE /* loadingbar.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91D99B29DFCC1100B5D9AE /* loadingbar.json */; };
@@ -231,6 +232,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19D41EB7ECEBA3711544E792 /* Pods-cereal.stage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.stage.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.stage.xcconfig"; sourceTree = "<group>"; };
 		80C3106D529C4F05193371E0 /* Pods-cereal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.release.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.release.xcconfig"; sourceTree = "<group>"; };
 		8CF5385A8BC1A2DBDC899E25 /* Pods-cereal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cereal.debug.xcconfig"; path = "Target Support Files/Pods-cereal/Pods-cereal.debug.xcconfig"; sourceTree = "<group>"; };
 		8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeResponse.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 		8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OKZeroPayQRCaptureView.xib; sourceTree = "<group>"; };
 		8D55D56829E660F6009C43BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D55D56B29E691EF009C43BF /* FcmPushUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmPushUpdateResponse.swift; sourceTree = "<group>"; };
+		8D8E6FCD2A287E1B007455BD /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		8D91D99729DFC6C600B5D9AE /* HttpErrorPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpErrorPop.swift; sourceTree = "<group>"; };
 		8D91D99929DFC6D000B5D9AE /* HttpErrorPop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HttpErrorPop.xib; sourceTree = "<group>"; };
 		8D91D99B29DFCC1100B5D9AE /* loadingbar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingbar.json; sourceTree = "<group>"; };
@@ -492,6 +495,7 @@
 			children = (
 				8CF5385A8BC1A2DBDC899E25 /* Pods-cereal.debug.xcconfig */,
 				80C3106D529C4F05193371E0 /* Pods-cereal.release.xcconfig */,
+				19D41EB7ECEBA3711544E792 /* Pods-cereal.stage.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1116,6 +1120,7 @@
 		8D9855B12A11F0C700AE86B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8DCB18A129F6641E000645D3 /* WalletHelper.swift */,
 				8D9855B22A11F0D800AE86B9 /* WalletViewModel.swift */,
 			);
 			path = Model;
@@ -1176,8 +1181,8 @@
 				8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */,
 				8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */,
 				8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */,
-				8DCB18A129F6641E000645D3 /* WalletHelper.swift */,
 				8DCB18A229F6641E000645D3 /* ShowMnemonicViewcontroller.swift */,
+				8D8E6FCD2A287E1B007455BD /* WalletViewController.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1629,6 +1634,7 @@
 				8DDC3DE929D15FA6003C4F8F /* LoginModel.swift in Sources */,
 				8D205F4429D1346F00F43C99 /* PedometerModel.swift in Sources */,
 				8D205F4529D1346F00F43C99 /* AES256Util.swift in Sources */,
+				8D8E6FCE2A287E1B007455BD /* WalletViewController.swift in Sources */,
 				8D205F3C29D1346F00F43C99 /* AllMoreMenuListCell.swift in Sources */,
 				8D205F4929D1346F00F43C99 /* OKZeroPayView.swift in Sources */,
 				8D205F8929D1346F00F43C99 /* CMAlertView.swift in Sources */,
@@ -1854,14 +1860,14 @@
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
-				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 사진을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지 등록을 위해 위해 권한이 필요합니다.\n접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 및 상품 이미지 등록을 위해 접근이 필요합니다. 설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1887,12 +1893,13 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/cereal/cereal-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				WALLET_ENC_IV = tPAG8Ru1SS5qjyEo;
+				WALLET_ENC_KEY = CpUzZ08BAcn46Ie1;
 			};
 			name = Debug;
 		};
@@ -1917,14 +1924,14 @@
 				HOST_SERVER_URL = "https://m.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
-				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 사진을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지 등록을 위해 위해 권한이 필요합니다.\n접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 및 상품 이미지 등록을 위해 접근이 필요합니다. 설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1954,6 +1961,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/cereal/cereal-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				WALLET_ENC_IV = HghM24SDlb7ilX9V;
+				WALLET_ENC_KEY = T6t4iN4q1AUWzDBz;
 			};
 			name = Release;
 		};
@@ -2033,6 +2042,169 @@
 			};
 			name = Release;
 		};
+		8D8E6FC92A2850D9007455BD /* Stage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Stage;
+		};
+		8D8E6FCA2A2850D9007455BD /* Stage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19D41EB7ECEBA3711544E792 /* Pods-cereal.stage.xcconfig */;
+			buildSettings = {
+				APPIRON_URL = "https://m.mycereal.co.kr:8445/appiron-inspect_test/authCheck.call";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = UR9BW3835D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs/XecureKeypad",
+					"$(PROJECT_DIR)/Libs/KakaoLink",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HOST_SERVER_URL = "https://staged.mycereal.co.kr:9443/matcs";
+				INFOPLIST_FILE = cereal/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 및 상품 이미지 등록을 위해 접근이 필요합니다. 설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Intro;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs/AppIron/lib",
+					"$(PROJECT_DIR)/Libs/ProtectMobile",
+					"$(PROJECT_DIR)/Libs/SecureManager",
+				);
+				MARKETING_VERSION = 1.24.42;
+				OS_LOG_ENABLED = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROJECT_NAME = "올리고 개발";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/cereal/cereal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				WALLET_ENC_IV = HghM24SDlb7ilX9V;
+				WALLET_ENC_KEY = T6t4iN4q1AUWzDBz;
+			};
+			name = Stage;
+		};
+		8D8E6FCB2A2850D9007455BD /* Stage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJJSQBC34Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.cereal.cerealTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cereal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/cereal";
+			};
+			name = Stage;
+		};
+		8D8E6FCC2A2850D9007455BD /* Stage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJJSQBC34Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.cereal.cerealUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = cereal;
+			};
+			name = Stage;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2040,6 +2212,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D205E5829D133FC00F43C99 /* Debug */,
+				8D8E6FC92A2850D9007455BD /* Stage */,
 				8D205E5929D133FC00F43C99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2049,6 +2222,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D205E5B29D133FC00F43C99 /* Debug */,
+				8D8E6FCA2A2850D9007455BD /* Stage */,
 				8D205E5C29D133FC00F43C99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2058,6 +2232,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D205E5E29D133FC00F43C99 /* Debug */,
+				8D8E6FCB2A2850D9007455BD /* Stage */,
 				8D205E5F29D133FC00F43C99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2067,6 +2242,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D205E6129D133FC00F43C99 /* Debug */,
+				8D8E6FCC2A2850D9007455BD /* Stage */,
 				8D205E6229D133FC00F43C99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

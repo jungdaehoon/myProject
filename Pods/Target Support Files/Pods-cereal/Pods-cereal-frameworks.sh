@@ -217,6 +217,27 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework"
 fi
+if [[ "$CONFIGURATION" == "Stage" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireActivityLogger/AlamofireActivityLogger.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Web3Core/Web3Core.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework"
+fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
 fi

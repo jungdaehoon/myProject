@@ -19,7 +19,8 @@ class QRReaderViewController: UIViewController {
     weak var delegate : QRReaderVcDelegate? = nil
     
     private let captureSession = AVCaptureSession()
-
+    /// 이벤트를 넘깁니다.
+    var completion  : (( _ value : Any? ) -> Void )? = nil
     var readQRAddr : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +46,25 @@ class QRReaderViewController: UIViewController {
         }
     }
     
+    /**
+     데이터 세팅 입니다.
+     - Date: 2023.03.13
+     - Parameters:
+        - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setInitData( completion : (( _ value : Any? ) -> Void)? = nil ) {
+        self.completion = completion
+    }
+    
+    
     private func closeCapture(){
         DispatchQueue.global(qos: .background).async {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
                 self.delegate?.readQRResult(self, action: .close, info:self.readQRAddr)
+                if let completion = self.completion { completion(self.readQRAddr) }
             }
         }
     }

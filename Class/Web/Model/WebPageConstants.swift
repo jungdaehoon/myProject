@@ -14,8 +14,10 @@ import Foundation
 */
 class WebPageConstants {
     /// 도메인 URL 정보를 가져 옵니다.
-    static let baseURL = "\(NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? "")" 
-    /// ㅎ 페이지 입니다.
+    static let baseURL      = "\(NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? "")"
+    /// NFT 도메인 URL 정보를 가져 옵니다.
+    static let NFT_baseURL  = "https://dm.mycereal.co.kr:28443/matcs"
+    /// 메인 페이지 입니다.
     static let URL_MAIN                         = baseURL + "/main.do"
     /// 휴먼 회원 페이지 입니다.
     static let URL_WAKE_SLEEP_USER              = baseURL + "/mem/wakeSleepUser.do"
@@ -33,6 +35,8 @@ class WebPageConstants {
     static let URL_BENEFIT_MAIN                 = baseURL + "/all/benefitList.do"
     /// OK 머니 페이지 입니다.
     static let URL_ACCOUNT_TRANSFER_LIST        = baseURL + "/myp/mypAccountTransList.do"
+    /// OK 머니 충전 페이지 입니다.
+    static let URL_RECHARE_MONEY                = baseURL + "myp/mypRecharge.do"
     /// OK 포인트 페이지 입니다.
     static let URL_POINT_TRANSFER_LIST          = baseURL + "/myp/mypPointTransHistory.do"
     /// 결제 페이지 입니다.
@@ -57,5 +61,21 @@ class WebPageConstants {
     static let URL_ZERO_PAY_PURCHASE            = baseURL + "/zeropay/giftcard/purchase.do"
     /// 재로페이 상품권 환불웹뷰 입니다.
     static let URL_ZERO_PAY_PURCHASE_CANCEL     = baseURL + "/zeropay/giftcard/purchase/cancel.do"
+    
+    /// 월렛 홈 페이지 입니다.
+    static let URL_WALLET_HOME                  = NFT_baseURL + "/walletHome.do"
+    /// NFT 받는 페이지 입니다.
+    static let URL_MYP_RECEIVE                  = NFT_baseURL + "/nft/transfer/transferNftAccept.do"
+    // NFT 보유 목록 페이지 입니다.
+    static let URL_NFT_OWN_LIST                 = NFT_baseURL + "/nft/own/ownNftList.do"
+    /// NFT 거래내역 페이지 입니다.
+    static let URL_NFT_TRANS_LIST               = NFT_baseURL + "/nft/own/ownNftTransList.do"
+    /// NFT 발행내역 페이지 입니다.
+    static let URL_NFT_ISSUED_LIST              = NFT_baseURL + "/nft/own/ownNftIssuedList.do"
+    /// NFT 수집 목록 페이지 입니다.
+    static let URL_NFT_COLLECTED_LIST           = NFT_baseURL + "/nft/own/ownNftCollectedList.do"
+    /// 마켓 구매내역 페이지 입니다.
+    static let URL_MARKET_HISTORY               = NFT_baseURL + "/myp/mypGifticonList.do?tab=myTab"
+        
     
 }

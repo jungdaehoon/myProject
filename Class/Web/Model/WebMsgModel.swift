@@ -37,6 +37,8 @@ enum SCRIPT_MESSAGES : String
     case captureAndSaveImage        = "captureAndSaveImage"
     /// 사진(갤러리)앱에서 사진을 선택해서 프로필 사진으로 서버에 전송 합니다.
     case getImageFromGallery        = "getImageFromGallery"
+    /// 
+    case getImageFromCamera         = "getImageFromCamera"
     /// 로딩바 디스플레이 합니다.
     case showLoadingBar             = "showLoadingBar"
     /// 로딩바 히든 처리 합니다.

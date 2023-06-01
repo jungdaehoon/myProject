@@ -188,6 +188,9 @@ class PointItemView: UIView {
                 self.setDisplayWebView(WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, titleBarType: 0, titleBarHidden: true)
             }
             break
+        case 13:
+            self.setDisplayWebView(WebPageConstants.URL_NFT_TRANS_LIST)
+            break
         default:
             break
         }

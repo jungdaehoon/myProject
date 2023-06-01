@@ -42,4 +42,8 @@ class APIConstant {
     static let API_PEDO_TERMS_AGREE     = "/popup/insertPedometerTerms.do"
     /// QRCode 인증 할 제로페이 스크립트를 요청 합니다.
     static let API_ZEROPAY_QRCODE       = "/api/v1/zeropay/qrcode.do"
+    /// NFT IMAGE 업로드 합니다.
+    static let API_NFT_IMAGE            = "api/uploadNftImg.do"
+
+    
 }

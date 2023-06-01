@@ -73,9 +73,9 @@ class LoginModel : BaseViewModel {
                       "appshield_session_id"    : self.appShield.session_id! ,
                       "appshield_token"         : self.appShield.token!]
         
-        parameters["auto_login"]    = SharedDefaults.getKeyChainCustItem()!.auto_login == true ? "Y" : "N"
-        parameters["user_no"]       = NC.S(SharedDefaults.getKeyChainCustItem()!.user_no)
-        
+        parameters["auto_login"]        = SharedDefaults.getKeyChainCustItem()!.auto_login == true ? "Y" : "N"
+        parameters["user_no"]           = NC.S(SharedDefaults.getKeyChainCustItem()!.user_no)
+        parameters["wallet_address"]    = SharedDefaults.default.walletAddress
         
         let subject             = PassthroughSubject<LoginResponse?,ResponseError>()
         requst() { error in

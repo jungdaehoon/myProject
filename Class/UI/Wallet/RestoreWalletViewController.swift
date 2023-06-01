@@ -9,19 +9,15 @@
 import Foundation
 
 
-protocol RestoreWalletVcDelegate : class {
-    func restoreWalletResult(  _ controller : RestoreWalletViewController , action : DelegateButtonAction ,   info: Any?    ) -> Void
-    
-}
-
 class RestoreWalletViewController: UIViewController {
 
     
-    weak var delegate : RestoreWalletVcDelegate? = nil
     var mAlertView: UIAlertController?
-    var encInfo : String = ""
-    var preAddr : String = ""
-    
+    var encInfo     : String = ""
+    var preAddr     : String = ""
+    /// 이벤트를 넘깁니다.
+    var completion  : (( _ value : Any? ) -> Void )? = nil
+
     @IBOutlet weak var tfMnemonic: TextFieldWithPadding!
     
     override func viewDidLoad() {
@@ -49,6 +45,20 @@ class RestoreWalletViewController: UIViewController {
         tfMnemonic.delegate = self
     }
 
+    /**
+     데이터 세팅 입니다.
+     - Date: 2023.03.13
+     - Parameters:
+        - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setInitData( encInfo : String = "", preAddr : String = "", completion : (( _ value : Any? ) -> Void)? = nil ) {
+        self.encInfo    = encInfo
+        self.preAddr    = preAddr
+        self.completion = completion
+    }
+    
     
     @IBAction func onConfirm(_ sender: Any) {
         self.clickConfirm()
@@ -58,39 +68,30 @@ class RestoreWalletViewController: UIViewController {
         showConfirmLostMnemonic()
     }
     @IBAction func onClose(_ sender: Any) {
-        self.delegate?.restoreWalletResult(self, action: .close, info: nil)
+        if let completion = self.completion { completion(nil) }
+        self.popController(animated: true,animatedType: .down)
     }
     
     func showConfirmLostMnemonic(){
-        let alert = UIAlertController(title: "복구구문을 잃어버리셨나요?",
-                                      message:  "복구 구문을 메모 하지 않은 경우나 분실한 경우는 관리자를 통한 요청으로 복구가 가능합니다.\n\n 복구 요청을 하시겠습니까?",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "취소",
-                                      style: .cancel) { _ in
-//            Slog("취소처리")
+        /// 업데이트 안내 팝업 입니다.
+        let alert = CMAlertView().setAlertView( titleText:"복구구문을 잃어버리셨나요?", detailObject: "복구 구문을 메모 하지 않은 경우나 분실한 경우는 관리자를 통한 요청으로 복구가 가능합니다.\n\n 복구 요청을 하시겠습니까?" as AnyObject )
+        alert?.addAlertBtn(btnTitleText: "취소", completion: { result in
+            
         })
-
-        alert.addAction(UIAlertAction(title: "확인",
-                                      style: .default,
-                                      handler: { action in
-            self.delegate?.restoreWalletResult(self, action: .close, info: "recovery-admin")
-        }))
+        alert?.addAlertBtn(btnTitleText: "확인", completion: { result in
+            if let completion = self.completion { completion("recovery-admin") }
+            self.popController(animated: true,animatedType: .down)
+        })
+        alert?.show()
         
-        self.present(alert,  animated: true, completion: nil)
+
     }
     
     func showAlertCheckMnemonic(){
-        let alert = UIAlertController(title: "",
-                                      message:  "복구 구문 확인이 틀렸습니다. 복구 구문을 다시 한번 확인 해 주세요.",
-                                      preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "확인",
-                                      style: .default,
-                                      handler: { action in
-        }))
-        
-        self.present(alert,  animated: true, completion: nil)
+        CMAlertView().setAlertView(detailObject: "복구 구문 확인이 틀렸습니다. 복구 구문을 다시 한번 확인 해 주세요." as AnyObject, cancelText: "확인") { event in
+        }
     }
+    
     func getMneAryFromStr(_ mnemonicStr : String ) -> Array<String>?{
         let mne2 = mnemonicStr.replacingOccurrences(of: ",", with: " ")
         let mne3 = mne2.replacingOccurrences(of: ".", with: " ")
@@ -115,7 +116,8 @@ class RestoreWalletViewController: UIViewController {
                 if retAddr.compare(preAddr, options: .caseInsensitive) == .orderedSame {
                     // 복구 성공
                     let retEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr: retAddr)
-                    self.delegate?.restoreWalletResult(self, action: .close, info: retEnc)
+                    if let completion = self.completion { completion(retEnc) }
+                    self.popController(animated: true,animatedType: .down)
                 }else{
                     self.showAlertCheckMnemonic()
                 }

@@ -79,7 +79,7 @@ class WalletTestViewController: UIViewController {
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
         //let tPwdDec = WalletHelper.sharedInstance.getDecryptedWalletPasswdFromInfo(encInfo:tPwdEnc.text ?? "")
         let tMnemonic = WalletHelper.sharedInstance.getWalletMnemonicFromPref() ?? ""
-        guard let ret = WalletHelper.sharedInstance.restoreWallet(self,encInfo:tPwdEnc,mnemonic:tMnemonic) else { return }
+        guard let ret = WalletHelper.sharedInstance.restoreWallet(self,encInfo:tPwdEnc!,mnemonic:tMnemonic) else { return }
         tfResWallet.text =  ret
         Slog("onRestoreWallet:ret=\(tfResWallet.text!)")
     }
@@ -87,7 +87,7 @@ class WalletTestViewController: UIViewController {
     @IBAction func onGetWAddress(_ sender: Any) {
         Slog("onGetWAddress")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
-        let ret = WalletHelper.sharedInstance.checkWAddressWalletFile(self,encInfo:tPwdEnc)
+        let ret = WalletHelper.sharedInstance.checkWAddressWalletFile(self,encInfo:tPwdEnc!)
         let retMne = WalletHelper.sharedInstance.checkIfSameMnemonic(typedMnemonic: "this is a")
         tfCheckPwd.text =  ret
 
@@ -104,7 +104,7 @@ class WalletTestViewController: UIViewController {
     @IBAction func onGetPriKey(_ sender: Any) {
         Slog("onGetPriKey")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
-        let ret = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self,encInfo:tPwdEnc)
+        let ret = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self,encInfo:tPwdEnc!)
         
         tfCheckPriKey.text =  ret
 
@@ -116,7 +116,7 @@ class WalletTestViewController: UIViewController {
         Slog("onCreateWallet")
         let tPwdEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr:tfGenPwd.text ?? "")
         //let tPwdDec = WalletHelper.sharedInstance.getDecryptedWalletPasswdFromInfo(encInfo:tPwdEnc.text ?? "")
-        let ret = WalletHelper.sharedInstance.createWallet(self,encInfo:tPwdEnc)
+        let ret = WalletHelper.sharedInstance.createWallet(self,encInfo:tPwdEnc!)
         Slog("onCreateWallet:ret=\(ret)")
         tfCreMne.text = WalletHelper.sharedInstance.getWalletMnemonicFromPref()
         

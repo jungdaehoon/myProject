@@ -18,6 +18,8 @@ import Web3Core
 class WalletViewModel : BaseViewModel{
     let encKey  = "CpUzZ08BAcn46Ie1"
     let endIv   = "tPAG8Ru1SS5qjyEo"
+    static let W_ENCKEY : String = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "W_ENCKEY") as? String ?? ""
+    static let W_ENCIV : String  = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "W_ENCIV") as? String ?? ""
     
     var keyManager : KeystoreManager? {
         get {

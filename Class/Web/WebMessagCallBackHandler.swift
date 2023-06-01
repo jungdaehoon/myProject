@@ -94,8 +94,14 @@ class WebMessagCallBackHandler : NSObject  {
             case .captureAndSaveImage        :
                 self.setWebViewCapture( body )
                 break
-                /// 사진(갤러리)앱에서 사진을 선택해서 프로필 사진으로 서버에 전송 합니다.
-            case .getImageFromGallery        : break
+                /// 사진(갤러리)앱에서 사진을 선택해서 서버에 전송 합니다.
+            case .getImageFromGallery        :
+                self.setImageSendServer( body )
+                break
+                /// 사진을 촬영해서 서버에 전송 합니다.
+            case .getImageFromCamera         :
+                self.setImageSendServer( body , sourceCamera: true)
+                break
                 /// 로딩바 디스플레이 합니다.
             case .showLoadingBar             :
                 LoadingView.default.show()
@@ -255,7 +261,7 @@ class WebMessagCallBackHandler : NSObject  {
                 break
                 /// 지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다.
             case .getWAddress                :
-                self.setWAddressWalletFile( body )
+                self.getWalletAddress( body )
                 break
                 /// 지갑 : 개인키가져오기 : 지갑에서 개인키를 획득후 전달 합니다.
             case .checkWInfo                 :
@@ -285,89 +291,156 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
+    /**
+     지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다.
+    - Date: 2023.06.01
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
     func setQRCodeReadDisplay( _ body : [Any?] )
     {
-        let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
-        let vc              = mainStoryboard.instantiateViewController(withIdentifier: "QRReaderViewController") as? QRReaderViewController
-        //vc!.delegate         = self
-        self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        if  let controller     = self.target,
+            let nextController = QRReaderViewController.instantiate(withStoryboard: "Wallet") {
+            nextController.setInitData() { value in
+                if let qrAddr = value as? String {
+                    /// 콜백 데이터 정보를 요청 합니다.
+                    self.viewModel.getWalletJsonMsg(retStr: qrAddr).sink { message in
+                        /// 콜백으로 데이터를 리턴 합니다.
+                        self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                    }.store(in: &self.viewModel.cancellableSet)
+                }
+            }
+            controller.pushController(nextController, animated: true, animatedType: .up)
+        }
+        
     }
         
-        
+    
+    /**
+     지갑 : 복구구문 보기 : 니모닉 정보를 화면에 표시 합니다.
+    - Date: 2023.06.01
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
     func setMnemonicDisplay( _ body : [Any?] )
     {
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
-        if let _   = body[2] as? [Any]
+        if let params     = body[2] as? [Any]
         {
+            let isNextPage      = NC.S(params[0] as? String ) == "true" ? true : false
             let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
             let vc              = mainStoryboard.instantiateViewController(withIdentifier: "ShowMnemonicViewController") as? ShowMnemonicViewController
-            vc!.showNext         = true
-            //vc!.delegate         = self
-            self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
+            if  let controller     = self.target,
+                let nextController = ShowMnemonicViewController.instantiate(withStoryboard: "Wallet") {
+                nextController.showNext = isNextPage
+                nextController.setInitData(showNext: isNextPage) { value in
+                    if let check = value as? String {
+                        /// 콜백 데이터 정보를 요청 합니다.
+                        self.viewModel.getWalletJsonMsg(retStr: check).sink { message in
+                            /// 콜백으로 데이터를 리턴 합니다.
+                            self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                        }.store(in: &self.viewModel.cancellableSet)
+                    }
+                }
+                controller.pushController(nextController, animated: true, animatedType: .up)
+            }
         }
     }
     
     
+    /**
+     지갑 : 복구 : 니모닉을 받아 지갑을 복구 하고 주소 전달 합니다.
+    - Date: 2023.06.01
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
     func setRestoreWInfo( _ body : [Any?] ){
-        
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
-        if let params   = body[2] as? [Any]
+        if let params   = body[2] as? [Any],
+           let encInfo  = params[0] as? String
         {
-            let encInfo         = params[0] as! String
             let preAddr         = params.count > 1 ? NC.S(params[1] as? String) : ""
-            
-            let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
-            let vc              = mainStoryboard.instantiateViewController(withIdentifier: "RestoreWalletViewController") as? RestoreWalletViewController
-            vc!.encInfo         = encInfo
-            vc!.preAddr         = preAddr
-            //vc!.delegate        = self
-            self.target!.navigationController!.pushViewController(vc!, animated: true, animatedType :.up)
+            Slog ("setRestoreWInfo encInfo : \(encInfo) ", category: .wallet )
+            Slog ("setRestoreWInfo preAddr : \(preAddr) ", category: .wallet )
+            if  let controller     = self.target,
+                let nextController = RestoreWalletViewController.instantiate(withStoryboard: "Wallet") {
+                /// 데이터를 넘기고 결과를 받습니다.
+                nextController.setInitData(encInfo: encInfo, preAddr: preAddr) { value in
+                    if let retEnc = value as? String {
+                        /// 콜백 데이터 정보를 요청 합니다.
+                        self.viewModel.getWalletJsonMsg(retStr: retEnc).sink { message in
+                            /// 콜백으로 데이터를 리턴 합니다.
+                            self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                        }.store(in: &self.viewModel.cancellableSet)
+                    }
+                }
+                controller.pushController(nextController, animated: true, animatedType: .up)
+            }
         }
     }
     
     
+    /**
+     지갑 : 생성후 정보 전달 : 지갑생성 후 주소:개인키 전달 합니다.
+    - Date: 2023.06.01
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
     func setCreateWallet( _ body : [Any?] ){
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks   = body[0] as! [Any]
-        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
-        let action      = body[1] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
-        if let params   = body[2] as? [Any]
+        if let params   = body[2] as? [Any],
+           let encInfo  = params[0] as? String
         {
-            let encInfo = params[0] as! String
-            print ("psg test:checkw  encInfo = \(encInfo) " )
-            let wRet = WalletHelper.sharedInstance.createWallet(self.target!, encInfo: encInfo)
-            print ("psg test:checkw  wRet = \(wRet ?? "nil") " )
             var encWaddr = ""
-            if let tRet = wRet  {
-                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: tRet)
+            Slog ("setCreateWallet encInfo : \(encInfo) ", category: .wallet )
+            if let wRet = WalletHelper.sharedInstance.createWallet(self.target!, encInfo: encInfo) {
+                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: wRet)!
             }
             /// 콜백 데이터 정보를 요청 합니다.
             self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
                 /// 콜백으로 데이터를 리턴 합니다.
                 self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
             }.store(in: &self.viewModel.cancellableSet)
+            
         }
     }
     
-    
+    /**
+     지갑 : 개인키가져오기 : 지갑에서 개인키를 획득 후 전달 합니다.
+    - Date: 2023.06.01
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
     func setPrivateKeyWithWalletFile( _ body : [Any?] ){
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks   = body[0] as! [Any]
-        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
-        let action      = body[1] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
-        if let params   = body[2] as? [Any]
+        if let params   = body[2] as? [Any],
+           let encInfo  = params[0] as? String
         {
-            let encInfo = params[0] as! String
-            print ("psg test:checkw  encInfo = \(encInfo) " )
-            let wRet = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self.target!, encInfo: encInfo)
-            print ("psg test:checkw  wRet = \(wRet ?? "nil") " )
+            Slog ("setPrivateKeyWithWalletFile encInfo : \(encInfo) ", category: .wallet )
             var encWaddr = ""
-            if let tRet = wRet  {
-                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: tRet)
+            if let wRet = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self.target!, encInfo: encInfo) {
+                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: wRet)!
             }
-            
             /// 콜백 데이터 정보를 요청 합니다.
             self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
                 /// 콜백으로 데이터를 리턴 합니다.
@@ -377,23 +450,26 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
-    func setWAddressWalletFile( _ body : [Any?] ){
+    /**
+     지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다.
+    - Date: 2023.06.01
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
+    func getWalletAddress( _ body : [Any?] ){
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks   = body[0] as! [Any]
-        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
-        let action      = body[1] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
-        if let params   = body[2] as? [Any]
+        if let params   = body[2] as? [Any],
+           let encInfo  = params[0] as? String
         {
-            let encInfo = params[0] as! String
-            print ("psg test:getw  encInfo = \(encInfo) " )
-            let wRet = WalletHelper.sharedInstance.checkWAddressWalletFile(self.target!, encInfo: encInfo)
-            print ("psg test:getw  wRet = \(wRet ?? "nil") " )
+            Slog ("getWalletAddress encInfo : \(encInfo) ", category: .wallet )
             var encWaddr = ""
-            if let tRet = wRet  {
-                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: tRet)
+            if let wRet = WalletHelper.sharedInstance.checkWAddressWalletFile(self.target!, encInfo: encInfo) {
+                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: wRet)!
             }
-            
             /// 콜백 데이터 정보를 요청 합니다.
             self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
                 /// 콜백으로 데이터를 리턴 합니다.
@@ -985,30 +1061,57 @@ class WebMessagCallBackHandler : NSObject  {
     /// 업로드할 이미지를 받습니다.
     @Published var uploadImg : UIImage?
     /**
-     사진첩에 이미지를 찾아 업도르 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. )
+     사진첩에 이미지를 찾아 업로드 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. )
      - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
+        - sourceCamera : ImagePicker 접근 타입으로 기본 .photoLibrary 접근으로 합니다. ( default : false )
      - Throws: False
      - Returns:False
      */
-    func setGallerySendServer( _ body : [Any?] ){
+    func setImageSendServer( _ body : [Any?], sourceCamera : Bool = false  ){
         guard self.target != nil else { return }
         /// 이미지 업로드 여부를 체크 합니다.
         self.$uploadImg.sink { image in
-            if image != nil
+            if let uploadImage = image
             {
-                /// 사용하지 않는 것으로 확인 됩니다...
+                self.btnSendServerAction(image: uploadImage)
             }
         }.store(in: &self.cancellableSet)
+        /// 접근 타입이 카메라인 경우 입니다.
+        if sourceCamera == true
+        {
+            /// 카메라 사용 권한을 체크 합니다.
+            self.viewModel.isCameraAuthorization().sink { value in
+                if value
+                {
+                    /// 이미지 피커 뷰를 사용 합니다.
+                    let picker              = UIImagePickerController()
+                    picker.sourceType       = .camera
+                    picker.mediaTypes       = [ kUTTypeImage as String]
+                    picker.delegate         = self
+                    picker.allowsEditing    = true
+                    self.target!.present(picker, animated: true)
+                }
+            }.store(in: &self.viewModel.cancellableSet)
+        }
+        else
+        {
+            /// 사진 저장소 접근 권한을 체크 합니다.
+            self.viewModel.isPhotoSaveAuthorization().sink { value in
+                if value
+                {
+                    /// 이미지 피커 뷰를 사용 합니다.
+                    let picker              = UIImagePickerController()
+                    picker.sourceType       = .photoLibrary
+                    picker.mediaTypes       = [ kUTTypeImage as String]
+                    picker.delegate         = self
+                    picker.allowsEditing    = true
+                    self.target!.present(picker, animated: true)
+                }
+            }.store(in: &self.viewModel.cancellableSet)
+        }
         
-        /// 이미지 피커 뷰를 사용 합니다.
-        let picker              = UIImagePickerController()
-        picker.sourceType       = .photoLibrary
-        picker.mediaTypes       = [ kUTTypeImage as String]
-        picker.delegate         = self
-        picker.allowsEditing    = true
-        self.target!.present(picker, animated: true)
     }
     
     
@@ -1733,9 +1836,18 @@ extension WebMessagCallBackHandler : UIImagePickerControllerDelegate , UINavigat
         guard let selectedImage = info[.editedImage] as? UIImage else {
             fatalError("Expected dictionary containing an image, but was provided the following: \(info)")
         }
-        /// 업로드할 이미지를 추가 합니다.
-        self.uploadImg = selectedImage
-        picker.dismiss(animated:true)
+        
+        picker.dismiss(animated:true) {
+            var image       = selectedImage
+            guard let type  = info[.mediaType] as? NSString else {return}
+            switch type as CFString {
+            case kUTTypeImage:
+                /// 업로드할 이미지를 추가 합니다.
+                self.uploadImg = image
+            default:
+                ()
+            }
+        }
     }
 }
 
@@ -1792,3 +1904,118 @@ extension WebMessagCallBackHandler : CNContactViewControllerDelegate {
     }
 }
 
+
+
+
+extension WebMessagCallBackHandler {
+    
+    /// 선택한 이미지를 서버에 전송
+    func btnSendServerAction(image : UIImage) {
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            Slog("Could not get JPEG representation of UIImage")
+            return
+        }
+        
+        
+        
+        let custItem = SharedDefaults.getKeyChainCustItem()
+        
+        // Multi-part 형태로 보낸다.
+        AlamofireAgent.upload(WebPageConstants.NFT_baseURL + APIConstant.API_NFT_IMAGE, multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
+            multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
+        },
+        encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.uploadProgress { progress in
+                    Slog(progress.fractionCompleted)
+                }
+                
+                _ = upload.log()
+                
+                
+                upload.response(completionHandler: { (defaultData) in
+                    if let data =  defaultData.data {
+                        let responseData = String(data: data, encoding: .utf8)
+                        Slog(defaultData.response?.statusCode as Any)
+                        Slog(responseData as Any)
+                    }
+                })
+                
+                upload.responseJSON { response in
+                    guard response.result.isSuccess else {
+                        Slog("Error while uploading file: \(String(describing: response.result.error))")
+                        /// 스크립트 실패 보내기
+                        return
+                    }
+                   
+                    if let value = response.result.value as? [String:Any] {
+                    
+                        if let data = value["data"] as? [String:Any] {
+                            if let url = data["url"] as? String {
+                                var infoStr = data["info"] as? String ?? ""
+                                let retJsonStr = self.getNftReturnJsonMsg(url,infoStr)
+
+                                //Notification.Name.PhotoChange.post(object: nil, userInfo: ["url" : url])
+//                                self.resultCallback( HybridResult.success(message: url))
+                                /// 스크립트 정상처리 결과 보내기 "retJsonStr"
+                            } else {
+                                let retJsonStr = self.getNftReturnJsonMsg()
+                                /// 스크립트 정상처리 결과 보내기 "retJsonStr"
+                                //self.resultCallback( HybridResult.success(message: retJsonStr ))
+                                return
+                            }
+                        }
+                    } else {
+                        let retJsonStr = self.getNftReturnJsonMsg()
+                        /// 스크립트 정상처리 결과 보내기 "retJsonStr"
+                       // self.resultCallback( HybridResult.success(message: retJsonStr ))
+                        return
+                    }
+                }
+                
+            case .failure(let encodingError):
+                Slog(encodingError)
+                /// 스크립트 실패 보내기
+                //self.resultCallback( HybridResult.success(message: "false" ))
+                return
+            }
+        })
+        
+    }
+    
+    
+    private func getNftReturnJsonMsg(_ url:String = "" ,_ infoStr:String = "" ) -> String {
+        var isSuccess = false
+        if (url.count > 0 ){
+            isSuccess = true
+        }
+
+        let resultStr : String = isSuccess ? "true" :  "false"
+        let errorStr : String = isSuccess ? "" :  "파일 업로드 오류 입니다."
+        
+        // 앱버전 조회
+        let message : [String:Any] = [
+            "result" : resultStr,
+            "url" : url,
+            "info" : infoStr,
+            "msg" : errorStr,
+        ]
+        
+        do {
+            let data =  try JSONSerialization.data(withJSONObject: message, options:.prettyPrinted)
+            if let dataString = String.init(data: data, encoding: .utf8) {
+                //resultCallback( HybridResult.success(message: dataString ))
+                return dataString
+            }
+        } catch {
+           // resultCallback( HybridResult.success(message: dataString ))
+            return ""
+        }
+        return ""
+    }
+    
+
+}

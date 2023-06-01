@@ -19,7 +19,8 @@ class ShowMnemonicViewController: UIViewController {
     weak var delegate : ShowMnemonicVcDelegate? = nil
     var mAlertView: UIAlertController?
     var showNext : Bool = false
-    
+    /// 이벤트를 넘깁니다.
+    var completion  : (( _ value : Any? ) -> Void )? = nil
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var tfMnemonic: UILabel!
     
@@ -66,8 +67,24 @@ class ShowMnemonicViewController: UIViewController {
         
     }
 
+    
+    /**
+     데이터 세팅 입니다.
+     - Date: 2023.06.01
+     - Parameters:
+        - showNext : 다음 페이지 여부를 체크 합니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setInitData( showNext : Bool = false , completion : (( _ value : Any? ) -> Void)? = nil ) {
+        self.showNext   = showNext
+        self.completion = completion
+    }
+    
+    
     @IBAction func btnCopyClipAction(_ sender: Any) {
         self.delegate?.showMnemonicResult(self, action: .memberJoin, info: nil)
+        if let completion = self.completion { completion("true") }
     }
     
     @IBAction func onConfirm(_ sender: Any) {
@@ -84,6 +101,7 @@ class ShowMnemonicViewController: UIViewController {
     
     @IBAction func onClose(_ sender: Any) {
         self.delegate?.showMnemonicResult(self, action: .close, info: nil)
+        if let completion = self.completion { completion("true") }
     }
     
     @IBAction func onCopyMne(_ sender: Any) {

@@ -230,8 +230,8 @@
             filePath = "Class/Common/Utils.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "PB(_:)"
             landmarkType = "7">
             <Locations>
@@ -308,6 +308,51 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "406"
                   endingLineNumber = "406"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "124858CD-E962-4A5C-B0D8-2A13640F0760 - 29c4961a0a8db29e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static cereal.NC.PB(Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Common/Utils.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "321"
+                  endingLineNumber = "321"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "124858CD-E962-4A5C-B0D8-2A13640F0760 - f2b28e6e0ea5c96"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; () in static cereal.NC.PB(Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Common/Utils.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "323"
+                  endingLineNumber = "323"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "124858CD-E962-4A5C-B0D8-2A13640F0760 - 80bcb9f0ebef6ea7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in cereal.WebMessagCallBackHandler.getPushAuth(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Common/Utils.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "408"
+                  endingLineNumber = "408"
                   offsetFromSymbolStart = "44">
                </Location>
             </Locations>
@@ -808,6 +853,36 @@
                   endingLineNumber = "374"
                   offsetFromSymbolStart = "28">
                </Location>
+               <Location
+                  uuid = "D942DC1A-847F-4A48-A7D4-4AEE9A9A78DD - 3d51c5386dc78a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "373"
+                  endingLineNumber = "373"
+                  offsetFromSymbolStart = "5464">
+               </Location>
+               <Location
+                  uuid = "D942DC1A-847F-4A48-A7D4-4AEE9A9A78DD - 13d036b9806f5cce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.String) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "374"
+                  endingLineNumber = "374"
+                  offsetFromSymbolStart = "104">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -821,8 +896,8 @@
             filePath = "Class/Web/WebMessagCallBackHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1063"
-            endingLineNumber = "1063"
+            startingLineNumber = "1166"
+            endingLineNumber = "1166"
             landmarkName = "setNickName(_:)"
             landmarkType = "7">
             <Locations>
@@ -869,6 +944,36 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1063"
                   endingLineNumber = "1063"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "55D64361-C845-46B1-9B5A-F2572A1D7EBF - 93806172dd51a20f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.setNickName(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Web/WebMessagCallBackHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1140"
+                  endingLineNumber = "1140"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "55D64361-C845-46B1-9B5A-F2572A1D7EBF - 5b6ba5961b5be061"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Dead&gt; of cereal.WebMessagCallBackHandler.setNickName(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/Web/WebMessagCallBackHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1140"
+                  endingLineNumber = "1140"
                   offsetFromSymbolStart = "64">
                </Location>
             </Locations>
@@ -934,6 +1039,36 @@
                   endingLineNumber = "382"
                   offsetFromSymbolStart = "2104">
                </Location>
+               <Location
+                  uuid = "02B3C676-31A4-4AB0-9C86-CBE8B56A7D24 - 3d51c5386dc7672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "382"
+                  endingLineNumber = "382"
+                  offsetFromSymbolStart = "5756">
+               </Location>
+               <Location
+                  uuid = "02B3C676-31A4-4AB0-9C86-CBE8B56A7D24 - e903eefbe09c3bb9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 (Swift.String) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "384"
+                  endingLineNumber = "384"
+                  offsetFromSymbolStart = "120">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -982,6 +1117,36 @@
                   endingLineNumber = "386"
                   offsetFromSymbolStart = "28">
                </Location>
+               <Location
+                  uuid = "2F824FA3-C81F-47CE-93E8-78A7BAB79EEE - e903eefbe09c3bb9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 (Swift.String) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "384"
+                  endingLineNumber = "384"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "2F824FA3-C81F-47CE-93E8-78A7BAB79EEE - dfa45c64dabd2d9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (cereal.FULL_WEB_CB) -&gt; () in closure #5 (Swift.String) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386"
+                  offsetFromSymbolStart = "92">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -1029,6 +1194,69 @@
                   startingLineNumber = "417"
                   endingLineNumber = "417"
                   offsetFromSymbolStart = "444">
+               </Location>
+               <Location
+                  uuid = "413D0634-2A42-438F-8775-49AF8058776F - a7b29bd47826665b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 (cereal.FULL_WEB_CB) -&gt; () in closure #5 (Swift.String) -&gt; () in closure #2 (Swift.Optional&lt;cereal.LoginResponse&gt;) -&gt; () in cereal.LoginViewController.setLogin() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/Login/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "400"
+                  endingLineNumber = "400"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D88E6540-3E35-4F6C-8994-3529E0FC9A45"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/AllMore/AllMoreViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "setDisplayView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D88E6540-3E35-4F6C-8994-3529E0FC9A45 - b4056dc9feaf9971"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.AllMoreViewController.setDisplayView() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/AllMore/AllMoreViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "5716">
+               </Location>
+               <Location
+                  uuid = "D88E6540-3E35-4F6C-8994-3529E0FC9A45 - b4056dc9feaf9971"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.AllMoreViewController.setDisplayView() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daehoonchung/Desktop/newProject/Wallet/2023_0424/cereal/Class/UI/AllMore/AllMoreViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "5740">
                </Location>
             </Locations>
          </BreakpointContent>

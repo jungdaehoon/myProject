@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vqu-s6-De7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vqu-s6-De7">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -59,7 +59,7 @@
         <!--Item 1-->
         <scene sceneID="LxP-WI-aBc">
             <objects>
-                <viewController id="Axd-e1-pIX" customClass="RemittanceViewController" customModule="cereal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletViewController" id="Axd-e1-pIX" customClass="WalletViewController" customModule="cereal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hxj-eq-Vmd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +88,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="rlf-uu-k5U"/>
                     <connections>
-                        <outlet property="webDisplayView" destination="94x-zG-2VG" id="fVr-j5-6hD"/>
+                        <outlet property="webDisplayView" destination="94x-zG-2VG" id="drS-Rs-MdE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAV-HP-nBC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -872,6 +872,11 @@
             <point key="canvasLocation" x="-593" y="904"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="iRn-Ys-HEu">
+            <size key="intrinsicContentSize" width="-1" height="83"/>
+        </designable>
+    </designables>
     <resources>
         <image name="allMore_Setting" width="40" height="40"/>
         <image name="header_close" width="40" height="40"/>

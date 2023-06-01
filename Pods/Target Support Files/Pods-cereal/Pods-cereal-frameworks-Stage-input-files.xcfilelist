@@ -1,0 +1,20 @@
+${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/AlamofireActivityLogger/AlamofireActivityLogger.framework
+${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
+${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework
+${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
+${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
+${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework
+${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework
+${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework
+${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework
+${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
+${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
+${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework
+${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework
+${BUILT_PRODUCTS_DIR}/Web3Core/Web3Core.framework
+${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework
+${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
+${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework
+${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework

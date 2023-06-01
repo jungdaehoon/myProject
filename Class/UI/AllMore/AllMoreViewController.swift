@@ -36,6 +36,10 @@ class AllMoreViewController: BaseViewController {
     var cashReceiptInfo             : AllMoreMenuListView?
     /// 결제 서비스 입니다.
     var payServiceInfo              : AllMoreMenuListView?
+    /// 마이 OK머니 입니다.
+    var myOKMoneyInfo               : AllMoreMenuListView?
+    /// 마이 OK머니 입니다.
+    var myNFTInfo                   : AllMoreMenuListView?
     /// 혜택 메뉴 입니다.
     var boonInfo                    : AllMoreMenuListView?
     /// 이용안내 메뉴 입니다.
@@ -205,6 +209,24 @@ class AllMoreViewController: BaseViewController {
             self.payServiceInfo!.setDisplay(self.viewModel)
         }
         
+        /// MY OK머니 영역 뷰어를 추가 합니다.
+        if self.myOKMoneyInfo == nil
+        {
+            self.myOKMoneyInfo                = AllMoreMenuListView.instanceFromNib()
+            var menus : [AllModeMenuListInfo] = []
+            menus.append(self.viewModel.getMenuInfo(title: "거래내역" ))
+            menus.append(self.viewModel.getMenuInfo(title: "OK머니 충전" ))
+            menus.append(self.viewModel.getMenuInfo(title: "OK머니 송금" ))
+            menus.append(self.viewModel.getMenuInfo(title: "OK머니 받기" ))
+            self.myOKMoneyInfo!.setDisplay(titleName: "MY OK머니", menus: menus)
+            self.stackView.addArrangedSubview(self.myOKMoneyInfo!)
+        }
+        else
+        {
+            self.myOKMoneyInfo!.viewModel = self.viewModel
+        }
+        
+        
         /// 중간 배너 뷰어를 추가 합니다.
         if self.bannerView == nil
         {
@@ -216,11 +238,32 @@ class AllMoreViewController: BaseViewController {
             self.bannerView!.viewModel = self.viewModel
         }
         
+        
+        /// NFT 영역 뷰어를 추가 합니다.
+        if self.myNFTInfo == nil
+        {
+            self.myNFTInfo                = AllMoreMenuListView.instanceFromNib()
+            var menus : [AllModeMenuListInfo] = []
+            menus.append(self.viewModel.getMenuInfo(title: "보유중인 NFT" ))
+            menus.append(self.viewModel.getMenuInfo(title: "NFT 거래내역" ))
+            menus.append(self.viewModel.getMenuInfo(title: "발행한 NFT" ))
+            menus.append(self.viewModel.getMenuInfo(title: "수집한 NFT" ))
+            self.myNFTInfo!.setDisplay(titleName: "MY NFT", menus: menus)
+            self.stackView.addArrangedSubview(self.myNFTInfo!)
+        }
+        else
+        {
+            self.myNFTInfo!.viewModel = self.viewModel
+        }
+        
+        
+        
+        
         /// 혜택 뷰어를 추가합니다.
         if self.boonInfo == nil
         {
-            self.boonInfo                                   = AllMoreMenuListView.instanceFromNib()
-            var menus : [AllModeMenuListInfo]               = []
+            self.boonInfo                     = AllMoreMenuListView.instanceFromNib()
+            var menus : [AllModeMenuListInfo] = []
             menus.append(self.viewModel.getMenuInfo(title: "만보Go", menuType: .rightimg ))
             menus.append(self.viewModel.getMenuInfo(title: "올림pick", menuType: .rightimg ))
             /// 친구추천 정보를 체크 합니다.

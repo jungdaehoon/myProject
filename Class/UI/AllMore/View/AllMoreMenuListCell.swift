@@ -198,6 +198,45 @@ class AllMoreMenuListCell: UITableViewCell {
                 }
             }).store(in: &self.viewModel!.cancellableSet)
         }
+        if self.menuInfo!.title! == "거래내역"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
+        }
+        
+        if self.menuInfo!.title! == "OK머니 충전"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_RECHARE_MONEY)
+        }
+        
+        if self.menuInfo!.title! == "OK머니 송금"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_REMITTANCE_MONEY)
+        }
+        
+        if self.menuInfo!.title! == "OK머니 받기"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_MYP_RECEIVE)
+        }
+        
+        if self.menuInfo!.title! == "보유중인 NFT"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_NFT_OWN_LIST)
+        }
+        
+        if self.menuInfo!.title! == "NFT 거래내역"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_NFT_TRANS_LIST)
+        }
+        
+        if self.menuInfo!.title! == "발행한 NFT"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_NFT_ISSUED_LIST)
+        }
+        
+        if self.menuInfo!.title! == "수집한 NFT"
+        {
+            self.setDisplayWebView(WebPageConstants.URL_NFT_COLLECTED_LIST)
+        }
         
         if self.menuInfo!.title! == "만보Go"
         {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,9 +28,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvd-q9-Bdo">
-                                        <rect key="frame" x="19.999999999999996" y="10" width="50.666666666666657" height="36"/>
+                                        <rect key="frame" x="19.999999999999996" y="9" width="52.666666666666657" height="38"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="btn_close" title=" "/>
+                                        <buttonConfiguration key="configuration" style="plain" image="btn_back" title=" "/>
                                         <connections>
                                             <action selector="onClose:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="m7c-ei-mDG"/>
                                         </connections>
@@ -196,10 +196,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVT-M0-bbT">
-                                        <rect key="frame" x="19.999999999999996" y="10" width="50.666666666666657" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVT-M0-bbT">
+                                        <rect key="frame" x="19.999999999999996" y="9" width="52.666666666666657" height="38"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="btn_close" title=" "/>
+                                        <buttonConfiguration key="configuration" style="plain" image="btn_back" title=" "/>
                                         <connections>
                                             <action selector="onCloseBtn:" destination="PZS-Gs-6lH" eventType="touchUpInside" id="0hx-Eu-8sw"/>
                                         </connections>
@@ -209,6 +209,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="YVO-ma-mgN"/>
                                     <constraint firstItem="YVT-M0-bbT" firstAttribute="leading" secondItem="wLn-DX-IiB" secondAttribute="leading" constant="20" id="bNc-Xe-13n"/>
+                                    <constraint firstItem="YVT-M0-bbT" firstAttribute="centerY" secondItem="wLn-DX-IiB" secondAttribute="centerY" id="gj7-59-h4c"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="jUG-P1-FIU"/>
                                 </constraints>
                             </view>
@@ -432,12 +433,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bkg-mV-q3w">
-                                        <rect key="frame" x="19.999999999999996" y="10" width="50.666666666666657" height="36"/>
+                                        <rect key="frame" x="19.999999999999996" y="9" width="50.666666666666657" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50.670000000000002" id="HST-mT-Nou"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="btn_close" title=" "/>
+                                        <buttonConfiguration key="configuration" style="plain" image="btn_back" title=" "/>
                                         <connections>
                                             <action selector="onClose:" destination="axP-4I-pDf" eventType="touchUpInside" id="b3x-aq-QDg"/>
                                         </connections>
@@ -1038,6 +1039,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="btn_back" width="24" height="24"/>
         <image name="btn_close" width="22" height="22"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

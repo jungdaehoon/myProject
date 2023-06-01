@@ -26,6 +26,8 @@ class SharedDefaults {
     static let SET_ACCOUNT_ENABLED              = "SET_ACCOUNT_ENABLED"
     /// 월렛 복구문 정보 입니다.
     static let WALLET_MNEMONIC                  = "WALLET_MNEMONIC"
+    /// 월렛 주소 입니다.
+    static let WALLET_ADDRESS                   = "WALLET_ADDRESS"
     /// 키체인 정보를 읽었는지를 체크 합니다.
     static let IS_KEYCHAIN_READ                 = "IS_KEYCHAIN_READ"
     
@@ -67,6 +69,21 @@ class SharedDefaults {
             defaults.set(_walletMnemonic, forKey: SharedDefaults.WALLET_MNEMONIC)
         }
     }
+    
+    
+    private var _walletAddress : String = ""
+    /// 월렛 주소 입니다.
+    var walletAddress : String {
+        get {
+            _walletAddress = defaults.string(forKey: SharedDefaults.WALLET_ADDRESS) ?? ""
+            return _walletAddress
+        }
+        set {
+            _walletAddress = newValue
+            defaults.set(_walletAddress, forKey: SharedDefaults.WALLET_ADDRESS)
+        }
+    }
+    
     
     
     private var _pedometerFirstDate : String = ""
