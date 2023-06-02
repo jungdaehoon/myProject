@@ -53,12 +53,8 @@ class ShowMnemonicViewController: UIViewController {
             if custItem.auto_login {
             }
         }
-        
-        var mnemonicTxt = WalletHelper.sharedInstance.getWalletMnemonicFromPref()
-        if(mnemonicTxt == nil || mnemonicTxt?.count == 0){
-            mnemonicTxt = "니모닉 정보가 없습니다."
-        }
-        tfMnemonic.text = mnemonicTxt
+
+        tfMnemonic.text = SharedDefaults.default.walletMnemonic.isValid == true ? SharedDefaults.default.walletMnemonic : "니모닉 정보가 없습니다."
         if(showNext){
             btnNext.titleLabel?.text = "다음"
         }else{

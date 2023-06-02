@@ -29,7 +29,7 @@ class IntroViewController: BaseViewController {
         self.navigationController!.delegate = self
         /// 로띠 뷰어를 추가합니다.
         self.aniView = LottieAniView(frame: CGRect(origin: .zero, size: self.logoView.frame.size))
-        self.aniView!.setAnimationView(name: "splash", loop: true)
+        self.aniView!.setAnimationView(name: "splash", loop: false)
         self.logoView.addSubview(self.aniView!)
         self.aniView!.play()
     }

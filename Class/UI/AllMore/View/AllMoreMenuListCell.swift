@@ -43,6 +43,7 @@ class AllMoreMenuListCell: UITableViewCell {
     @IBOutlet weak var rightSubText : UIView!
     /// 오른쪽 이동 아이콘 이미지 입니다.
     @IBOutlet weak var rightImage: UIImageView!
+    @IBOutlet weak var backBtn: UIButton!
     /// 타이틀 오른쪽 아이콘 디스플레이 여부 입니다.
     var typeIConStatus              : typeIconStatus = .not
     /// 인포 정보 입니다.
@@ -142,6 +143,8 @@ class AllMoreMenuListCell: UITableViewCell {
 
         /// 현 메뉴정보를 넘깁니다.
         self.menuInfo = menuInfo
+        /// 선택시 하이라이트 배경입니다.
+        self.backBtn.setBackgroundImage(UIColor(hex: 0xEEEEEE).createImageFromUIColor(), for: .highlighted)
     }
     
     

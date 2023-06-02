@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,7 +57,7 @@
                             </connections>
                         </collectionView>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="zIV-sb-GzU">
-                            <rect key="frame" x="0.0" y="278" width="375" height="10"/>
+                            <rect key="frame" x="0.0" y="232" width="375" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="oSt-w5-XNa"/>
                             </constraints>
@@ -115,7 +115,7 @@
                         <constraint firstAttribute="trailing" secondItem="zIV-sb-GzU" secondAttribute="trailing" id="4VT-3T-bJA"/>
                         <constraint firstAttribute="bottom" secondItem="8RS-Xu-id7" secondAttribute="bottom" id="Bdb-TZ-Veu"/>
                         <constraint firstItem="8RS-Xu-id7" firstAttribute="leading" secondItem="LyK-1p-mxh" secondAttribute="leading" id="DzP-og-IpD"/>
-                        <constraint firstItem="zIV-sb-GzU" firstAttribute="top" secondItem="LyK-1p-mxh" secondAttribute="top" constant="278" id="Ld8-xa-8d1"/>
+                        <constraint firstItem="zIV-sb-GzU" firstAttribute="top" secondItem="LyK-1p-mxh" secondAttribute="top" constant="232" id="Ld8-xa-8d1"/>
                         <constraint firstAttribute="trailing" secondItem="8RS-Xu-id7" secondAttribute="trailing" id="R1e-OG-SrI"/>
                         <constraint firstItem="zIV-sb-GzU" firstAttribute="leading" secondItem="LyK-1p-mxh" secondAttribute="leading" id="cxT-8i-MCI"/>
                         <constraint firstItem="FE8-Pb-FlC" firstAttribute="top" secondItem="LyK-1p-mxh" secondAttribute="top" constant="19" id="l7R-VV-rE5"/>

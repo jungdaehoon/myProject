@@ -336,8 +336,6 @@ class WebMessagCallBackHandler : NSObject  {
         if let params     = body[2] as? [Any]
         {
             let isNextPage      = NC.S(params[0] as? String ) == "true" ? true : false
-            let mainStoryboard  = UIStoryboard(name: "Wallet", bundle: nil)
-            let vc              = mainStoryboard.instantiateViewController(withIdentifier: "ShowMnemonicViewController") as? ShowMnemonicViewController
             if  let controller     = self.target,
                 let nextController = ShowMnemonicViewController.instantiate(withStoryboard: "Wallet") {
                 nextController.showNext = isNextPage
@@ -407,19 +405,27 @@ class WebMessagCallBackHandler : NSObject  {
         if let params   = body[2] as? [Any],
            let encInfo  = params[0] as? String
         {
-            var encWaddr = ""
             Slog ("setCreateWallet encInfo : \(encInfo) ", category: .wallet )
-            if let wRet = WalletHelper.sharedInstance.createWallet(self.target!, encInfo: encInfo) {
-                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: wRet)!
-            }
-            /// 콜백 데이터 정보를 요청 합니다.
-            self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
-                /// 콜백으로 데이터를 리턴 합니다.
-                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+            ///  신규 생성된 지갑 정보를 로컬에 저장 합니다.
+            WalletViewModel.sharedInstance.setCreateWallet(encInfo: encInfo).sink { value in
+                /// 주소 정보를 체크 합니다
+                if let walletAddr = value {
+                    /// AES 암호화 합니다.
+                    WalletViewModel.sharedInstance.getMakeEncryptString(orgStr: walletAddr).sink { value in
+                        /// 암호화 된 ENC 정보를 체크 합니다.
+                        if let encAddr = value {
+                            /// 콜백 데이터 정보를 요청 합니다.
+                            self.viewModel.getWalletJsonMsg(retStr: encAddr).sink { message in
+                                /// 콜백으로 데이터를 리턴 합니다.
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                            }.store(in: &self.viewModel.cancellableSet)
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
+                }
             }.store(in: &self.viewModel.cancellableSet)
-            
         }
     }
+    
     
     /**
      지갑 : 개인키가져오기 : 지갑에서 개인키를 획득 후 전달 합니다.
@@ -437,14 +443,21 @@ class WebMessagCallBackHandler : NSObject  {
            let encInfo  = params[0] as? String
         {
             Slog ("setPrivateKeyWithWalletFile encInfo : \(encInfo) ", category: .wallet )
-            var encWaddr = ""
-            if let wRet = WalletHelper.sharedInstance.checkPrivateKeyWithWalletFile(self.target!, encInfo: encInfo) {
-                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: wRet)!
-            }
-            /// 콜백 데이터 정보를 요청 합니다.
-            self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
-                /// 콜백으로 데이터를 리턴 합니다.
-                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+            /// 로컬 개인 키정보를 요청 합니다.
+            WalletViewModel.sharedInstance.getWalletPrivateKey( encInfo: encInfo ).sink { value in
+                if let privateKey = value {
+                    /// AES 암호화 합니다.
+                    WalletViewModel.sharedInstance.getMakeEncryptString(orgStr: privateKey).sink { value in
+                        /// 암호화 된 ENC 정보를 체크 합니다.
+                        if let encKey = value {
+                            /// 콜백 데이터 정보를 요청 합니다.
+                            self.viewModel.getWalletJsonMsg(retStr: encKey).sink { message in
+                                /// 콜백으로 데이터를 리턴 합니다.
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                            }.store(in: &self.viewModel.cancellableSet)
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
+                }
             }.store(in: &self.viewModel.cancellableSet)
         }
     }
@@ -467,13 +480,20 @@ class WebMessagCallBackHandler : NSObject  {
         {
             Slog ("getWalletAddress encInfo : \(encInfo) ", category: .wallet )
             var encWaddr = ""
-            if let wRet = WalletHelper.sharedInstance.checkWAddressWalletFile(self.target!, encInfo: encInfo) {
-                encWaddr = WalletHelper.sharedInstance.makeEncryptString(orgStr: wRet)!
-            }
-            /// 콜백 데이터 정보를 요청 합니다.
-            self.viewModel.getWalletJsonMsg(retStr: encWaddr).sink { message in
-                /// 콜백으로 데이터를 리턴 합니다.
-                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+            WalletViewModel.sharedInstance.getWalletAdderss( encInfo: encInfo).sink { value in
+                if let walletAddr = value {
+                    /// AES 암호화 합니다.
+                    WalletViewModel.sharedInstance.getMakeEncryptString(orgStr: walletAddr).sink { value in
+                        /// 암호화 된 ENC 정보를 체크 합니다.
+                        if let encAddr = value {
+                            /// 콜백 데이터 정보를 요청 합니다.
+                            self.viewModel.getWalletJsonMsg(retStr: encAddr).sink { message in
+                                /// 콜백으로 데이터를 리턴 합니다.
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                            }.store(in: &self.viewModel.cancellableSet)
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
+                }
             }.store(in: &self.viewModel.cancellableSet)
         }
     }

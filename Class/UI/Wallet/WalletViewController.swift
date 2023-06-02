@@ -25,6 +25,7 @@ class WalletViewController: BaseViewController {
      - Date: 2023.03.16
      */
     override func setDisplayData() {
+        super.setDisplayData()
         Slog("WalletViewController setDisplayData loadTabPageURL")
         self.loadTabPageURL(WebPageConstants.URL_WALLET_HOME)
     }

@@ -51,7 +51,7 @@ class DatePickerView: BaseView {
         /// 데이터 콜백을 연결 합니다.
         self.completion                 = completion
         /// 디스플레이 타입을 설정 합니다.
-        self.pickerView.displayType     = .all_date
+        self.pickerView.displayType     = displayType
         /// 디스플레이할 날짜 정보를 설정 합니다.
         self.pickerView.setPicketInfoDate( minDate: minDate, maxDate: maxDate, setDate: selectDate)
         ///< 화면을 디스플레이 합니다.

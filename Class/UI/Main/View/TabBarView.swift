@@ -48,7 +48,7 @@ class TabBarView : UIView
         /// Xib 연결 합니다.
         self.commonInit()        
         /// 아이템 들 넓이를 설정 합니다.
-        self.itemWidth.constant  = (UIScreen.main.bounds.size.width - 20) / 5
+        self.itemWidth.constant  = (UIScreen.main.bounds.size.width - 40) / 5
         self.itemHeight.constant = self.frame.size.height
     }
     
@@ -118,10 +118,17 @@ class TabBarView : UIView
                             aniView.removeFromSuperview()
                         }
                         subViews.addSubview(aniView)
+                        /// 디폴트 버튼을 활성화 여부를 설정 합니다.
+                        item.isSelected  = enabled
+                        item.isEnabled   = enabled
                     }
-                    /// 디폴트 버튼을 활성화 여부를 설정 합니다.
-                    item.isSelected  = enabled
-                    item.isEnabled   = enabled
+                    else
+                    {
+                        /// 디폴트 버튼을 활성화 여부를 설정 합니다.
+                        item.isSelected  = enabled
+                        //item.isEnabled   = enabled
+                    }
+                    
                 }
             }
         }

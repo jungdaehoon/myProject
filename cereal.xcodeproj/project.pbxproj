@@ -2106,13 +2106,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19D41EB7ECEBA3711544E792 /* Pods-cereal.stage.xcconfig */;
 			buildSettings = {
-				APPIRON_URL = "https://m.mycereal.co.kr:8445/appiron-inspect_test/authCheck.call";
+				APPIRON_URL = "https://dm.mycereal.co.kr:8445/appiron-inspect_test/authCheck.call";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.25.2.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2121,7 +2121,7 @@
 					"$(PROJECT_DIR)/Libs/KakaoLink",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HOST_SERVER_URL = "https://staged.mycereal.co.kr:9443/matcs";
+				HOST_SERVER_URL = "https://dm.mycereal.co.kr:28443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
@@ -2149,7 +2149,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 1.24.42;
+				MARKETING_VERSION = 1.25.2;
 				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

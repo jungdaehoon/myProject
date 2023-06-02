@@ -146,6 +146,17 @@ enum SCRIPT_MESSAGES : String
 /**
  웹 헨들러 지원 모델 입니다. ( J.D.H  VER : 1.0.0 )
  - Date: 2023.03.20
+ ex )
+ psg test:getw  retJsonStr = {
+   "msg" : "",
+   "result" : "true",
+   "data" : "YZo\/lO2AX+FPn0hRW2H0zw=="
+ }
+ retString:iOSPluginJSNI.callbackFromNative('showWRestoreText0',{
+   "msg" : "",
+   "result" : "true",
+   "data" : "YZo\/lO2AX+FPn0hRW2H0zw=="
+ })
 */
 class WebMsgModel : BaseViewModel {
     

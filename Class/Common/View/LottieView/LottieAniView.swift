@@ -47,14 +47,15 @@ import Lottie
      - Parameters:
         - name : 연결 할 파일명 입니다.
         - loop : 반복 여부를 받습니다. ( default : true )
+        - animationSpeed : 애니 속도 입니다.
      - Throws: False
      - Returns:False
      */
-    @objc func setAnimationView(name: String, loop: Bool = true) {
+    @objc func setAnimationView(name: String, loop: Bool = true, animationSpeed : CGFloat = 1.0 ) {
         self.animationView                       = AnimationView(name: name)
         self.animationView.backgroundBehavior    = .forceFinish
         self.animationView.loopMode              = loop ? .loop : .playOnce
-        self.animationView.animationSpeed        = 2.0
+        self.animationView.animationSpeed        = animationSpeed
         self.addSubview(animationView)
     }
     

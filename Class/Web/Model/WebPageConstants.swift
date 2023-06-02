@@ -36,7 +36,7 @@ class WebPageConstants {
     /// OK 머니 페이지 입니다.
     static let URL_ACCOUNT_TRANSFER_LIST        = baseURL + "/myp/mypAccountTransList.do"
     /// OK 머니 충전 페이지 입니다.
-    static let URL_RECHARE_MONEY                = baseURL + "myp/mypRecharge.do"
+    static let URL_RECHARE_MONEY                = baseURL + "/myp/mypRecharge.do"
     /// OK 포인트 페이지 입니다.
     static let URL_POINT_TRANSFER_LIST          = baseURL + "/myp/mypPointTransHistory.do"
     /// 결제 페이지 입니다.

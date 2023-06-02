@@ -194,12 +194,12 @@ class AllMoreViewController: BaseViewController {
             /// 제로페이 QR 결제 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
             {
-                menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", subiCon: "NEW!", menuType: .rightimg))
+                menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", menuType: .rightimg))
             }
             /// 제로페이 상품권 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_GIFT)
             {
-                menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권",subiCon: "NEW!", menuType: .rightimg))
+                menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권", menuType: .rightimg))
             }
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
@@ -269,7 +269,7 @@ class AllMoreViewController: BaseViewController {
             /// 친구추천 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_RECOMMEND_USER)
             {
-                menus.append(self.viewModel.getMenuInfo(title: "친구추천",subiCon: "UPDATE!", menuType: .rightimg))
+                menus.append(self.viewModel.getMenuInfo(title: "친구추천", menuType: .rightimg))
             }
             menus.append(self.viewModel.getMenuInfo(title: "뿌리Go",menuType: .rightimg))
             self.boonInfo!.setDisplay(titleName: "혜택", menus: menus)

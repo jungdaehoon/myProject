@@ -47,7 +47,7 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
         case 1:
             self.titleText.text     = "혜택 쌓이는"
             self.titleSubText.text  = "간편결제"
-            self.subInfoText.text   = "결제할때마다 쌓이는 혜택!"
+            self.subInfoText.text   = "쓰면 쓸수록 쌓이는 혜택!"
             
             break
         case 2:
@@ -58,7 +58,7 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
         case 3:
             self.titleText.text     = "OK에서 누리는"
             self.titleSubText.text  = "NFT 세상"
-            self.subInfoText.text   = "NFT로 불어나는 나만의 자산!"
+            self.subInfoText.text   = "나만의 NFT 컬렉션!"
             self.bottomView.isHidden = false
             break
         default:

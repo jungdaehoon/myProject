@@ -210,7 +210,7 @@ class PickerView: UIPickerView {
     {
         ///< 월 정보를 세팅 합니다.
         let dateFormatter       = DateFormatter()
-        dateFormatter.locale    = Calendar.current.locale
+        dateFormatter.locale    = Locale(identifier: "ko")
         
         if let maxMonth = self.pickerInfo!.maxMonth
         {

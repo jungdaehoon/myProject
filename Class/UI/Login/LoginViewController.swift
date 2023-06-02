@@ -26,6 +26,10 @@ enum LOGIN_BTN_ACTION : Int {
     case id_change  = 14
     /// 비밀번호 찾기 요청 입니다.
     case pw_change  = 15
+    /// 비밀번호 입력정보 초기화 입니다.
+    case pw_Clear   = 16
+    /// 아이디 입력정보 초기화 입니다.
+    case id_Clear   = 17
 }
 
 
@@ -51,12 +55,16 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var guideView            : GuideInfoView!
     /// 아이디 입력 필드 입니다.
     @IBOutlet weak var idField              : UITextField!
+    /// 아이디 입력 필드 초기화 버튼 입니다.
+    @IBOutlet weak var idFieldClearBtn      : UIButton!
     /// 아이디 입력 하단 라인 입니다
     @IBOutlet weak var idBottomLine         : UIView!
     /// 패스워드 입력 필드 입니다.
     @IBOutlet weak var pwField              : UITextField!
     /// 패스워드 입력 하단 라인 입니다
     @IBOutlet weak var pwBottomLine         : UIView!
+    /// 패스워드 입력 필드 초기화 버튼 입니다.
+    @IBOutlet weak var pwFieldClearBtn      : UIButton!
     /// 자동로그인 체크 버튼 입니다.
     @IBOutlet weak var autoLoginBtn         : UIButton!
     /// 로그인 버튼 입니다.
@@ -170,6 +178,8 @@ class LoginViewController: BaseViewController {
         self.pwField.text                   = ""
         self.idpwFailedText.text            = ""
         self.idpwFailedInfoHegith.constant  = 0
+        self.idFieldClearBtn.isHidden       = true
+        self.pwFieldClearBtn.isHidden       = true
     }
     
     
@@ -533,6 +543,14 @@ class LoginViewController: BaseViewController {
                 }
             }.store(in: &self.viewModel.cancellableSet)
             break
+        case .pw_Clear:
+            self.pwField.text               = ""
+            self.pwFieldClearBtn.isHidden   = true
+            break
+        case .id_Clear:
+            self.idField.text               = ""
+            self.idFieldClearBtn.isHidden   = true
+            break
         }
     }
 }
@@ -566,6 +584,13 @@ extension LoginViewController : UITextFieldDelegate {
         
     }
     
+    func textFieldDidChangeSelection(_ textField: UITextField )
+    {
+        Slog("textFieldDidChangeSelection : \(textField.text)")
+        if textField == self.idField { self.idFieldClearBtn.isHidden = !textField.text!.isValid }
+        
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         /// 로그인 버튼 활성화 여부를 체크 합니다.
         self.setLoginBtn()
@@ -576,6 +601,9 @@ extension LoginViewController : UITextFieldDelegate {
         {
             return false
         }
+        
+        
+        
         return true
     }
 }
@@ -659,7 +687,7 @@ extension LoginViewController {
         {
             self.pwField.text!.append("*")
         }
-        
+        self.pwFieldClearBtn.isHidden = !self.pwField.text!.isValid
         /// 입력 여부가 있을경우 데이터를 저장 합니다.
         if finished
         {
@@ -703,7 +731,6 @@ extension LoginViewController : XKTextFieldDelegate{
     
     func textField(_ textField: XKTextField!, shouldChangeLength length: UInt) -> Bool {
         Slog("ABC shouldChangeLength  \(length) ")
-        
         if(textField == xkPasswordTextField)
         {
             // 최대 자리수 6자리

@@ -111,7 +111,7 @@ class IntroModel : BaseViewModel{
         parameters["auto_login"]            = "Y"
         parameters["appshield_session_id"]  = ""
         parameters["appshield_token"]       = ""
-        parameters["wallet_address"]        = WalletHelper.sharedInstance.getWalletAddressFromPref()
+        parameters["wallet_address"]        = SharedDefaults.default.walletAddress
         
         let subject             = PassthroughSubject<LoginResponse?,ResponseError>()
         requst() { error in

@@ -7,11 +7,11 @@
 //
 
 import Foundation
-
+import Combine
 
 class RestoreWalletViewController: UIViewController {
 
-    
+    var viewModel : WalletViewModel = WalletViewModel()
     var mAlertView: UIAlertController?
     var encInfo     : String = ""
     var preAddr     : String = ""
@@ -111,17 +111,22 @@ class RestoreWalletViewController: UIViewController {
         if(mneAry == nil || mneAry?.count != 12 || encInfo.count == 0){
             self.showAlertCheckMnemonic()
         }else{
-            let retAddr = WalletHelper.sharedInstance.restoreWallet(self, encInfo: encInfo, mnemonic: mnemonicStr)
-            if let retAddr = retAddr {
-                if retAddr.compare(preAddr, options: .caseInsensitive) == .orderedSame {
-                    // 복구 성공
-                    let retEnc = WalletHelper.sharedInstance.makeEncryptString(orgStr: retAddr)
-                    if let completion = self.completion { completion(retEnc) }
-                    self.popController(animated: true,animatedType: .down)
-                }else{
+            /// 지갑 복구를 요청 합니다.
+            self.viewModel.getRestoreWallet( encInfo: encInfo, mnemonic: mnemonicStr).sink { [self] value in
+                /// 동일 여부를 체크 합니다.
+                if let walletAddr = value,
+                   walletAddr.compare(preAddr, options: .caseInsensitive) == .orderedSame {
+                    /// AES 암호화 합니다
+                    self.viewModel.getMakeEncryptString(orgStr: walletAddr).sink { value in
+                        if let completion = self.completion { completion(NC.S(value)) }
+                        self.popController(animated: true,animatedType: .down)
+                    }.store(in: &self.viewModel.cancellableSet)
+                }
+                else
+                {
                     self.showAlertCheckMnemonic()
                 }
-            }
+            }.store(in: &self.viewModel.cancellableSet)
             Slog("psg test : restore wallet")
         }
     }

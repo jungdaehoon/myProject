@@ -124,11 +124,11 @@ class CheckMnemonicViewController: UIViewController {
     }
     
     func loadData(){
-        var mnemonicTxt = WalletHelper.sharedInstance.getWalletMnemonicFromPref()
-        if(mnemonicTxt == nil || mnemonicTxt?.count == 0){
+        var mnemonicTxt = SharedDefaults.default.walletMnemonic
+        if(mnemonicTxt.count == 0){
             mnemonicTxt = "니모닉 정보가 없습니다."
         }
-        let arrMne = mnemonicTxt!.split(separator: " ")
+        let arrMne = mnemonicTxt.split(separator: " ")
         
         if(arrMne.count == 12){
             org3 = String(arrMne[2]) //3rd
@@ -177,10 +177,9 @@ class CheckMnemonicViewController: UIViewController {
             if custItem.auto_login {
             }
         }
-        
-        
-        var mnemonicTxt = WalletHelper.sharedInstance.getWalletMnemonicFromPref()
-        if(mnemonicTxt == nil || mnemonicTxt?.count == 0){
+                
+        var mnemonicTxt = SharedDefaults.default.walletMnemonic
+        if(mnemonicTxt.count == 0){
             mnemonicTxt = "니모닉 정보가 없습니다."
         }
         
