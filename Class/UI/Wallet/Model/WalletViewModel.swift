@@ -41,6 +41,7 @@ class WalletViewModel : BaseViewModel {
             // let enc = try AES(key: key, iv: iv, padding: .pkcs5).encrypt([UInt8](data))
             let enc = try AES(key: Array(key.utf8), blockMode: CBC(iv: Array(iv.utf8)), padding: .pkcs5).encrypt([UInt8](data))
             let encryptedData = Data(enc)
+            print("encryptWData enc : \(enc) message : \(message) key : \(key) iv : \(iv) base64 : \(encryptedData.base64EncodedString())")
             return encryptedData.base64EncodedString()
         }catch{
             return ""
@@ -137,7 +138,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     신규로 생성된 wallet 닉모닉음 생성 합니다.
+     신규로 생성된 wallet 닉모닉을 생성 합니다.
      - Date: 2023.06.02
      - Parameters:
         - walletPass : 닉모닉 생성시 사용할 wallet 페스워드 입니다.
@@ -203,7 +204,7 @@ class WalletViewModel : BaseViewModel {
     {
         let fileManager     = FileManager.default
         var isDir: ObjCBool = false
-        var exists          = fileManager.fileExists(atPath: path, isDirectory: &isDir)
+        let exists          = fileManager.fileExists(atPath: path, isDirectory: &isDir)
         if !isDir.boolValue || !exists { return }
         do {
             let allFiles = try fileManager.contentsOfDirectory(atPath: path)
@@ -301,6 +302,7 @@ class WalletViewModel : BaseViewModel {
         }
     }
     
+    
     /**
      로컬에 저장된 wallet 개인 키정보를 리턴 합니다.
      - Date: 2023.06.02
@@ -318,8 +320,7 @@ class WalletViewModel : BaseViewModel {
                     let path                = userDir+"/keystore/"
                     let web3KeystoreManager = KeystoreManager.managerForPath(path, scanForHDwallets: true, suffix: "json")
                     let tcount              = web3KeystoreManager?.addresses?.count ?? 0
-                    
-                    if web3KeystoreManager?.addresses?.count ?? 0 >= 1
+                    if tcount >= 1
                     {
                         let web3KeyStore        = web3KeystoreManager?.walletForAddress((web3KeystoreManager?.addresses?[0])!) as? BIP32Keystore
                         guard let walletAddress = web3KeyStore?.addresses?.first else {
@@ -364,28 +365,4 @@ class WalletViewModel : BaseViewModel {
             
         }
     }
-    
-    
-    
-    func isIfSameMnemonic( typedMnemonic : String? ) -> Future<Bool, Never> {
-        return Future<Bool, Never> { promise in
-            if let Mnemonic = typedMnemonic
-            {
-                let refindedMnemonic    = Mnemonic.trimmingCharacters(in: .whitespaces)
-                if SharedDefaults.default.walletMnemonic.compare(refindedMnemonic, options: .caseInsensitive) == .orderedSame
-                {
-                    promise(.success(true))
-                }
-                else
-                {
-                    promise(.success(false))
-                }
-            }
-            else
-            {
-                promise(.success(false))
-            }
-        }
-    }
-    
 }

@@ -62,11 +62,6 @@ class AllMoreViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.viewModel.allModeResponse == nil
-        {
-            /// 서버에 화면 디스플레이 데이터 정보를 요청 합니다.
-            self.setDisplayData()
-        }        
     }
     
 

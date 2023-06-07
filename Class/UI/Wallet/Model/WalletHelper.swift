@@ -67,7 +67,7 @@ class WalletHelper
     }
     
     func makeEncryptString(orgStr:String ) -> String? {
-        print("psg test:makeEncryptString")
+        print("psg test:makeEncryptString orgStr")
         if let encInfo = encryptWData(message:orgStr, key: WalletHelper.W_ENCKEY, iv: WalletHelper.W_ENCIV) {
             return encInfo
         }

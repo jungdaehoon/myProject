@@ -81,6 +81,7 @@ class ShowMnemonicViewController: UIViewController {
     @IBAction func btnCopyClipAction(_ sender: Any) {
         self.delegate?.showMnemonicResult(self, action: .memberJoin, info: nil)
         if let completion = self.completion { completion("true") }
+        self.popController(animated: true, animatedType: .down)
     }
     
     @IBAction func onConfirm(_ sender: Any) {
@@ -98,13 +99,16 @@ class ShowMnemonicViewController: UIViewController {
     @IBAction func onClose(_ sender: Any) {
         self.delegate?.showMnemonicResult(self, action: .close, info: nil)
         if let completion = self.completion { completion("true") }
+        self.popController(animated: true, animatedType: .down)
     }
     
     @IBAction func onCopyMne(_ sender: Any) {
         let copyText = tfMnemonic.text ?? ""
         Slog("copy text = \(copyText)")
         UIPasteboard.general.string = copyText
-        showAlertMessage(title:"",message:"복사되었습니다")
+        /// 앱 실드 비정상 처리 안내 팝업 입니다.
+        CMAlertView().setAlertView(detailObject: "복사되었습니다" as AnyObject, cancelText: "확인") { event in
+        }
     }
     
 }

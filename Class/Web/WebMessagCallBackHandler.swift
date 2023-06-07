@@ -256,6 +256,7 @@ class WebMessagCallBackHandler : NSObject  {
             case .callTabChange             :
                 self.setTabChange( body )
                 break
+            /// 제로페이에 리턴할 스크립트 콜백 정보를 받습니다
             case .callZeroPayCallBack       :
                 self.setZeroPayCB ( body )
                 break
@@ -316,7 +317,6 @@ class WebMessagCallBackHandler : NSObject  {
             }
             controller.pushController(nextController, animated: true, animatedType: .up)
         }
-        
     }
         
     
@@ -341,10 +341,17 @@ class WebMessagCallBackHandler : NSObject  {
                 nextController.showNext = isNextPage
                 nextController.setInitData(showNext: isNextPage) { value in
                     if let check = value as? String {
-                        /// 콜백 데이터 정보를 요청 합니다.
-                        self.viewModel.getWalletJsonMsg(retStr: check).sink { message in
-                            /// 콜백으로 데이터를 리턴 합니다.
-                            self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                        /// AES 암호화 합니다.
+                        WalletViewModel.sharedInstance.getMakeEncryptString(orgStr: check).sink { value in
+                            /// 암호화 된 ENC 정보를 체크 합니다.
+                            if let encCheck = value {
+                                /// 콜백 데이터 정보를 요청 합니다.
+                                self.viewModel.getWalletJsonMsg(retStr: encCheck).sink { message in
+                                    /// 콜백으로 데이터를 리턴 합니다.
+                                    self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
+                                    
+                                }.store(in: &self.viewModel.cancellableSet)
+                            }
                         }.store(in: &self.viewModel.cancellableSet)
                     }
                 }
@@ -479,7 +486,6 @@ class WebMessagCallBackHandler : NSObject  {
            let encInfo  = params[0] as? String
         {
             Slog ("getWalletAddress encInfo : \(encInfo) ", category: .wallet )
-            var encWaddr = ""
             WalletViewModel.sharedInstance.getWalletAdderss( encInfo: encInfo).sink { value in
                 if let walletAddr = value {
                     /// AES 암호화 합니다.
@@ -1930,81 +1936,74 @@ extension WebMessagCallBackHandler : CNContactViewControllerDelegate {
 extension WebMessagCallBackHandler {
     
     /// 선택한 이미지를 서버에 전송
-    func btnSendServerAction(image : UIImage) {
-        
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            Slog("Could not get JPEG representation of UIImage")
-            return
-        }
-        
-        
-        
-        let custItem = SharedDefaults.getKeyChainCustItem()
-        
-        // Multi-part 형태로 보낸다.
-        AlamofireAgent.upload(WebPageConstants.NFT_baseURL + APIConstant.API_NFT_IMAGE, multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
-            multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
-        },
-        encodingCompletion: { encodingResult in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.uploadProgress { progress in
-                    Slog(progress.fractionCompleted)
-                }
-                
-                _ = upload.log()
-                
-                
-                upload.response(completionHandler: { (defaultData) in
-                    if let data =  defaultData.data {
-                        let responseData = String(data: data, encoding: .utf8)
-                        Slog(defaultData.response?.statusCode as Any)
-                        Slog(responseData as Any)
-                    }
-                })
-                
-                upload.responseJSON { response in
-                    guard response.result.isSuccess else {
-                        Slog("Error while uploading file: \(String(describing: response.result.error))")
-                        /// 스크립트 실패 보내기
-                        return
-                    }
-                   
-                    if let value = response.result.value as? [String:Any] {
-                    
-                        if let data = value["data"] as? [String:Any] {
-                            if let url = data["url"] as? String {
-                                var infoStr = data["info"] as? String ?? ""
-                                let retJsonStr = self.getNftReturnJsonMsg(url,infoStr)
-
-                                //Notification.Name.PhotoChange.post(object: nil, userInfo: ["url" : url])
-//                                self.resultCallback( HybridResult.success(message: url))
-                                /// 스크립트 정상처리 결과 보내기 "retJsonStr"
-                            } else {
-                                let retJsonStr = self.getNftReturnJsonMsg()
-                                /// 스크립트 정상처리 결과 보내기 "retJsonStr"
-                                //self.resultCallback( HybridResult.success(message: retJsonStr ))
-                                return
-                            }
-                        }
-                    } else {
-                        let retJsonStr = self.getNftReturnJsonMsg()
-                        /// 스크립트 정상처리 결과 보내기 "retJsonStr"
-                       // self.resultCallback( HybridResult.success(message: retJsonStr ))
-                        return
-                    }
-                }
-                
-            case .failure(let encodingError):
-                Slog(encodingError)
-                /// 스크립트 실패 보내기
-                //self.resultCallback( HybridResult.success(message: "false" ))
+    func btnSendServerAction(image : UIImage)  -> Future<String?, Never>
+    {
+        return Future<String?, Never> { promise in
+            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+                Slog("Could not get JPEG representation of UIImage")
                 return
             }
-        })
-        
+            let custItem = SharedDefaults.getKeyChainCustItem()
+            // Multi-part 형태로 보낸다.
+            AlamofireAgent.upload(WebPageConstants.NFT_baseURL + APIConstant.API_NFT_IMAGE, multipartFormData: { (multipartFormData) in
+                multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
+                multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.uploadProgress { progress in
+                        Slog(progress.fractionCompleted)
+                    }
+                    
+                    _ = upload.log()
+                    
+                    
+                    upload.response(completionHandler: { (defaultData) in
+                        if let data =  defaultData.data {
+                            let responseData = String(data: data, encoding: .utf8)
+                            Slog(defaultData.response?.statusCode as Any)
+                            Slog(responseData as Any)
+                        }
+                    })
+                    
+                    upload.responseJSON { response in
+                        guard response.result.isSuccess else {
+                            Slog("Error while uploading file: \(String(describing: response.result.error))")
+                            /// 스크립트 실패 보내기
+                            return
+                        }
+                       
+                        if let value = response.result.value as? [String:Any] {
+                        
+                            if let data = value["data"] as? [String:Any] {
+                                if let url = data["url"] as? String {
+                                    var infoStr = data["info"] as? String ?? ""
+                                    let retJsonStr = self.getNftReturnJsonMsg(url,infoStr)
+                                    promise(.success(retJsonStr))
+                                } else {
+                                    let retJsonStr = self.getNftReturnJsonMsg()
+                                    promise(.success(retJsonStr))                                    
+                                    return
+                                }
+                            }
+                        } else {
+                            let retJsonStr = self.getNftReturnJsonMsg()
+                            promise(.success(retJsonStr))
+                            return
+                        }
+                    }
+                    
+                case .failure(let encodingError):
+                    Slog(encodingError)
+                    promise(.success("false"))
+                    return
+                }
+            })
+        }
     }
+        
+        
     
     
     private func getNftReturnJsonMsg(_ url:String = "" ,_ infoStr:String = "" ) -> String {

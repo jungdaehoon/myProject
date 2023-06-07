@@ -586,9 +586,8 @@ extension LoginViewController : UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField )
     {
-        Slog("textFieldDidChangeSelection : \(textField.text)")
-        if textField == self.idField { self.idFieldClearBtn.isHidden = !textField.text!.isValid }
-        
+        Slog("textFieldDidChangeSelection : \(NC.S(textField.text))")
+        if textField == self.idField { self.idFieldClearBtn.isHidden = !textField.text!.isValid }        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

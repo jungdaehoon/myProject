@@ -113,7 +113,7 @@ class AllMoreMenuListCell: UITableViewCell {
             /// 문구를 디스플레이 합니다.
             if menuInfo.subiCon! == "NEW!"
             {
-                self.typeiConView.backgroundColor = UIColor(red: 255/255, green: 83/255, blue: 0/255, alpha: 1.0)
+                self.typeiConView.backgroundColor = .OKColor
             }
             /// 오른쪽 이동 이미지를 디스플레이 합니다.
             else
