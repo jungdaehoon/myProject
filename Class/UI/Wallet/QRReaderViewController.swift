@@ -36,7 +36,7 @@ class QRReaderViewController: UIViewController {
     
     @IBOutlet weak var readView: UIView!
     
-    @IBAction func onCloseBtn(_ sender: Any) {
+    @IBAction func onCloseBtn( sender: Any) {
         self.closeCapture()
     }
     
@@ -65,6 +65,7 @@ class QRReaderViewController: UIViewController {
             DispatchQueue.main.async {
                 self.delegate?.readQRResult(self, action: .close, info:self.readQRAddr)
                 if let completion = self.completion { completion(self.readQRAddr) }
+                self.popController(animated: true, animatedType: .down)
             }
         }
     }
@@ -147,8 +148,8 @@ class QRReaderViewController: UIViewController {
                            height: imgW)
         let btnClose = UIButton(frame: tCloseRect)
         btnClose.setTitle("", for: .normal)
-        btnClose.addTarget(self, action: "onCloseBtn:", for: .touchUpInside)
-        if let image = UIImage(named: "btn_close") {
+        btnClose.addTarget(self, action: #selector(self.onCloseBtn( sender : )), for: .touchUpInside)
+        if let image = UIImage(named: "header_close") {
             btnClose.setImage(image, for: .normal)
         }
         
@@ -232,7 +233,7 @@ extension QRReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
                 Slog("QR read : \(stringValue)")
                 self.readQRAddr = stringValue
                 
-                self.onCloseBtn("")
+                self.onCloseBtn(sender:"")
             }
             else{
                 Slog("readError : \(stringValue)")

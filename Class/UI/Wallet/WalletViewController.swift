@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import WebKit
+
 
 class WalletViewController: BaseViewController {
     @IBOutlet weak var webDisplayView: UIView!
@@ -41,4 +43,30 @@ class WalletViewController: BaseViewController {
     }
     */
 
+}
+
+
+
+extension WalletViewController {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
+        preferences.preferredContentMode    = .mobile
+        let request                         = navigationAction.request
+        let optUrl                          = request.url
+        let optUrlScheme                    = optUrl?.scheme
+        guard let url = optUrl,
+              let _ = optUrlScheme
+            else {
+                return decisionHandler(.cancel, preferences)
+        }
+        Slog("BenefitViewController url : \(url)")
+
+        /// 해당 페이지에서 메인 URL 호출시 메인 탭으로 이동 합니다.
+        if url.description.contains("matcs/main.do")
+        {
+            TabBarView.setReloadSeleted(pageIndex: 2)
+            decisionHandler(.cancel, preferences)
+            return
+        }
+        decisionHandler(.allow, preferences)
+    }
 }

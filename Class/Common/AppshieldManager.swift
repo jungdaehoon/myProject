@@ -17,7 +17,7 @@ import UIKit
 class AppshieldManager
 {
     /// 도메인 URL 정보를 가져 옵니다.
-    static let APPIRON_AUTHCHECK_URL = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "AppSuitServer") as? String ?? ""
+    static let APPIRON_AUTHCHECK_URL = Bundle.main.infoDictionary?["AppSuitServer"] as? String ?? ""
     static let sharedInstance = AppshieldManager()
     var mAlertView: UIAlertController?
     

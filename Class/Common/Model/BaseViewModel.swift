@@ -793,7 +793,7 @@ class BaseViewModel : NSObject {
                 if NC.S(url.host) == "movepage"
                 {
                     /// 이동할 링크 정보를 받습니다.
-                    if let linkUrl = url.queryParameters?["url"],
+                    if let linkUrl = url.getQueries["url"],
                        linkUrl.isValid
                     {
                         /// Deeplink 데이터를 넘깁니다.
@@ -808,25 +808,33 @@ class BaseViewModel : NSObject {
     
     /**
      URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다.
-     - Date: 2023.04.19
+     - Date: 2023.06.08
      - Parameters:
-     - url : URL 정보 입니다.
+        - url : URL 정보 입니다.
      - Throws: False
      - Returns:
-        파라미터 정보를 정리하여 리턴 합니다. (Future <[String : Any],Naver>)
+        파라미터 정보를 정리하여 리턴 합니다. (Future <[String : Any]?,Naver>)
      */
-    func getURLParams( url : URL ) -> Future<[String : Any], Never>
+    func getURLParams( url : URL ) -> Future<[String : Any]?, Never>
     {
-        return Future<[String : Any], Never> { promise in
-            let components                   = URLComponents(string: url.absoluteString)
-            let items                        = components?.queryItems ?? []
-            var params      : [String : Any] = [:]
-            /// 제로페이에서 받은 데이터를 파라미터로 세팅 합니다.
-            for item in items
-            {
-                params.updateValue(item.value as Any, forKey: item.name)
+        return Future<[String : Any]?, Never> { promise in
+            guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                let _ = components.queryItems else {
+                print("Failed to parse query items")
+                promise(.success(nil))
+                return
             }
-            promise(.success(params))
+            promise(.success(url.getQueries))
+        }
+    }
+    
+    
+    func getZeroPayURLParams( url : URL ) -> Future<[String : Any]?, Never>
+    {
+        return Future<[String : Any]?, Never> { promise in
+            let queryString = url.absoluteString
+            let param = queryString.components(separatedBy: "?")           
+            promise(.success( ["param" : param[1]]))
         }
     }
     
@@ -961,4 +969,3 @@ class BaseViewModel : NSObject {
     }
     
 }
-

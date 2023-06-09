@@ -21,7 +21,7 @@ enum AlamofireAgent {
     /// 최대 받는 타임 정보 입니다.
     private static let RESOURCE_TIMEOUT         = TimeInterval(5.0)
     /// 도메인 URL 정보를 가져 옵니다.
-    static let domainUrl                        = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? ""
+    static let domainUrl                        = Bundle.main.infoDictionary?["Server"] as? String ?? ""
     /// 세션 정보를 가져 옵니다.
     static var defaultManager : SessionManager! = { return Alamofire.SessionManager(configuration: urlSessionConfiguration()) }()
     

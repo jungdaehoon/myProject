@@ -15,17 +15,21 @@ import WebKit
  */
 
 class BaseWebViewController: UIViewController {
-    var baseViewModel       : BaseViewModel = BaseViewModel()
+    var baseViewModel           : BaseViewModel = BaseViewModel()
     /// 웹 화면 디스플레이 입니다.
-    var webView             : WKWebView?
+    var webView                 : WKWebView?
     /// 웹 이벤트에서 주고받을 메세지 핸들러 입니다.
-    var messageHandler      : WebMessagCallBackHandler?
+    var messageHandler          : WebMessagCallBackHandler?
     /// 웹뷰는 기본 히든 처리 상태 입니다.
-    var isWebViewHidden     : Bool = true
+    var isWebViewHidden         : Bool = true
     /// 쿠키를 변경 할지 여부를 받습니다.
-    var updateCookies       : Bool = true
+    var updateCookies           : Bool = true
     /// 코드 선택시 이벤트 입니다.
-    var webLoadCompletion   : (( _ success : Bool ) -> Void)? = nil
+    var webLoadCompletion       : (( _ success : Bool ) -> Void)? = nil
+    /// 웹 화면 데이터 새로고침 컨트롤 입니다.
+    var webViewRefresh          : UIRefreshControl?
+    /// 웝 화면 새로고침 활성화 여부 입니다.
+    var webViewRefreshEnabled   : Bool = true
     
     
     
@@ -43,7 +47,17 @@ class BaseWebViewController: UIViewController {
     
     
     //MARK: - 지원 메서드 입니다.
-    func initWebView( _ view : UIView, target : UIViewController ) {
+    /**
+     WebView 를 초기화 합니다.. ( J.D.H  VER : 1.0.0 )
+     - description: WKWebView 를 초기화 하며  javaScript 이벤트를 등록 할 messagwhandler 를 초기화 합니다. 추가되는 핸들러는 "SCRIPT_MESSAGE_HANDLER_TYPE" 의 핸들러를 추가 합니다.
+     - Date: 2023.06.08
+     - Parameters:
+        - view : 웹뷰 추가할 뷰어 입니다.
+        - target : 핸들러 연결 할 controller 입니다.
+        - webTopRefresh : 웹뷰 새로고침 여부를 받습니다.
+     - Returns:False
+     */
+    func initWebView( _ view : UIView, target : UIViewController, webTopRefresh : Bool = true ) {
         /// 웹 메세지 핸들러를 연결 합니다.
         self.messageHandler                 = WebMessagCallBackHandler( webViewController: self )
         /// 도메인의 쿠키 정보를 가져 옵니다.
@@ -86,7 +100,45 @@ class BaseWebViewController: UIViewController {
             self.messageHandler!.target                             = target
             view.addSubview(self.webView!)
             view.addConstraintsToFit(self.webView!)
+            /// 웹뷰 새로고침 여부를 받습니다.
+            self.webViewRefreshEnabled = webTopRefresh
+            /// 새로고침 여부를 최초 한번 추가 합니다.
+            if self.webViewRefresh == nil,
+               self.webViewRefreshEnabled == true
+            {
+                self.webView!.scrollView.refreshControl = self.getWebViewRefreshController()
+            }
         }.store(in: &self.baseViewModel.cancellableSet)
+    }
+    
+    
+    /**
+     내자산 뷰어 새로고침 컨트롤러를 생성 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.06.08
+     - Returns:
+        내 자산 정보 새로고침 컨트롤을 리턴 합니다. (UIRefreshControl)
+     */
+    func getWebViewRefreshController() -> UIRefreshControl
+    {
+        self.webViewRefresh                  = UIRefreshControl()
+        self.webViewRefresh!.addTarget(self, action: #selector(setWebViewRefreshTable(webViewRefresh:)), for: .valueChanged)
+        self.webViewRefresh!.backgroundColor = .clear
+        self.webViewRefresh!.tintColor       = .gray
+        self.webViewRefresh!.isHidden        = true
+        return self.webViewRefresh!
+    }
+    
+    
+    /**
+     웹뷰 새로고침 이벤트 요청 액션 입니다.  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.06.08
+     - Parameters:
+        - webViewRefresh : 내자산 새로고침 컨트롤러 입니다.
+     - Returns:False
+     */
+    @objc func setWebViewRefreshTable( webViewRefresh : UIRefreshControl )
+    {
+        self.webView!.reload()
     }
     
     
@@ -156,7 +208,7 @@ extension BaseWebViewController: WKNavigationDelegate
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
-        Slog("webView didStartProvisionalNavigation url : \(webView.url!.absoluteString)")
+        Slog("webView didStartProvisionalNavigation url : \(webView.url!.absoluteString)")        
         LoadingView.default.show()
     }
     
@@ -166,11 +218,9 @@ extension BaseWebViewController: WKNavigationDelegate
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFinish url : \(webView.url!.absoluteString)")
         /// 웹 로드 완료 리턴 CB 체크 입니다.
-        if let loadCompletion = self.webLoadCompletion
-        {
-            loadCompletion(true)
-        }
-        
+        if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
+        /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
+        if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
         /// 웹페이지 정상 디스플레이 완료후 쿠키를 업데이트 합니다.
         if self.updateCookies == true
         {
@@ -196,10 +246,9 @@ extension BaseWebViewController: WKNavigationDelegate
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFail url : \(webView.url!.absoluteString)")
         /// 웹 로드 완료 리턴 CB 체크 입니다.
-        if let loadCompletion = self.webLoadCompletion
-        {
-            loadCompletion(true)
-        }
+        if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
+        /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
+        if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
         LoadingView.default.hide()
     }
     
@@ -209,10 +258,9 @@ extension BaseWebViewController: WKNavigationDelegate
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFailProvisionalNavigation url : \(webView.url!.absoluteString)")
         /// 웹 로드 완료 리턴 CB 체크 입니다.
-        if let loadCompletion = self.webLoadCompletion
-        {
-            loadCompletion(true)
-        }
+        if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
+        /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
+        if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
         LoadingView.default.hide()
     }
 }

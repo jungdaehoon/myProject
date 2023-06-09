@@ -15,8 +15,8 @@ import Web3Core
 class WalletHelper
 {
     static let sharedInstance = WalletHelper()
-    static let W_ENCKEY : String = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "W_ENCKEY") as? String ?? ""
-    static let W_ENCIV : String = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "W_ENCIV") as? String ?? ""
+    static let W_ENCKEY : String = Bundle.main.infoDictionary?["W_ENCKEY"] as? String ?? ""
+    static let W_ENCIV  : String = Bundle.main.infoDictionary?["W_ENCIV"] as? String ?? ""
     
     private init() {}
     

@@ -18,9 +18,9 @@ import Web3Core
 class WalletViewModel : BaseViewModel {
     static let sharedInstance = WalletViewModel()
     /// AES 키 정보 입니다.
-    static let W_ENCKEY : String = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "W_ENCKEY") as? String ?? ""
+    static let W_ENCKEY : String = Bundle.main.infoDictionary?["W_ENCKEY"] as? String ?? ""
     /// CBC IV 정보 입니다.
-    static let W_ENCIV : String  = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "W_ENCIV") as? String ?? ""
+    static let W_ENCIV  : String = Bundle.main.infoDictionary?["W_ENCIV"] as? String ?? ""    
     
     
     /**
@@ -38,7 +38,6 @@ class WalletViewModel : BaseViewModel {
     {
         do{
             let data = message.data(using: .utf8)!
-            // let enc = try AES(key: key, iv: iv, padding: .pkcs5).encrypt([UInt8](data))
             let enc = try AES(key: Array(key.utf8), blockMode: CBC(iv: Array(iv.utf8)), padding: .pkcs5).encrypt([UInt8](data))
             let encryptedData = Data(enc)
             print("encryptWData enc : \(enc) message : \(message) key : \(key) iv : \(iv) base64 : \(encryptedData.base64EncodedString())")
@@ -293,12 +292,18 @@ class WalletViewModel : BaseViewModel {
                 
                 guard let walletAddress = web3KeyStore?.addresses?.first else {
                     CMAlertView().setAlertView(detailObject: "저장된 정보를 찾을 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                        promise(.success(""))
                     }
                     return
                 }
                 Slog("CheckExisting : walletAddress  = \(walletAddress.address)",category: .wallet)
                 promise(.success(walletAddress.address))
             }
+            else
+            {
+                promise(.success(""))
+            }
+                
         }
     }
     
@@ -325,6 +330,7 @@ class WalletViewModel : BaseViewModel {
                         let web3KeyStore        = web3KeystoreManager?.walletForAddress((web3KeystoreManager?.addresses?[0])!) as? BIP32Keystore
                         guard let walletAddress = web3KeyStore?.addresses?.first else {
                             CMAlertView().setAlertView(detailObject: "저장된 정보를 찾을 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                                promise(.success(""))
                             }
                             return
                         }
@@ -333,8 +339,10 @@ class WalletViewModel : BaseViewModel {
                         Slog("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
                         
                         promise(.success(privateKey?.toHexString()))
+                        return
                     }
                 }
+                promise(.success(""))
             } catch {
                 Slog(error, category: .wallet)
                 promise(.success(""))

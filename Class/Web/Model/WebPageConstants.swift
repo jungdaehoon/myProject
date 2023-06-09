@@ -14,9 +14,7 @@ import Foundation
 */
 class WebPageConstants {
     /// 도메인 URL 정보를 가져 옵니다.
-    static let baseURL      = "\(NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "Server") as? String ?? "")"
-    /// NFT 도메인 URL 정보를 가져 옵니다.
-    static let NFT_baseURL  = "https://dm.mycereal.co.kr:28443/matcs"
+    static let baseURL                          = Bundle.main.infoDictionary?["Server"] as? String ?? ""
     /// 메인 페이지 입니다.
     static let URL_MAIN                         = baseURL + "/main.do"
     /// 휴먼 회원 페이지 입니다.
@@ -63,19 +61,19 @@ class WebPageConstants {
     static let URL_ZERO_PAY_PURCHASE_CANCEL     = baseURL + "/zeropay/giftcard/purchase/cancel.do"
     
     /// 월렛 홈 페이지 입니다.
-    static let URL_WALLET_HOME                  = NFT_baseURL + "/walletHome.do"
+    static let URL_WALLET_HOME                  = baseURL + "/walletHome.do"
     /// NFT 받는 페이지 입니다.
-    static let URL_MYP_RECEIVE                  = NFT_baseURL + "/nft/transfer/transferNftAccept.do"
+    static let URL_MYP_RECEIVE                  = baseURL + "/nft/transfer/transferNftAccept.do"
     // NFT 보유 목록 페이지 입니다.
-    static let URL_NFT_OWN_LIST                 = NFT_baseURL + "/nft/own/ownNftList.do"
+    static let URL_NFT_OWN_LIST                 = baseURL + "/nft/own/ownNftList.do"
     /// NFT 거래내역 페이지 입니다.
-    static let URL_NFT_TRANS_LIST               = NFT_baseURL + "/nft/own/ownNftTransList.do"
+    static let URL_NFT_TRANS_LIST               = baseURL + "/nft/own/ownNftTransList.do"
     /// NFT 발행내역 페이지 입니다.
-    static let URL_NFT_ISSUED_LIST              = NFT_baseURL + "/nft/own/ownNftIssuedList.do"
+    static let URL_NFT_ISSUED_LIST              = baseURL + "/nft/own/ownNftIssuedList.do"
     /// NFT 수집 목록 페이지 입니다.
-    static let URL_NFT_COLLECTED_LIST           = NFT_baseURL + "/nft/own/ownNftCollectedList.do"
+    static let URL_NFT_COLLECTED_LIST           = baseURL + "/nft/own/ownNftCollectedList.do"
     /// 마켓 구매내역 페이지 입니다.
-    static let URL_MARKET_HISTORY               = NFT_baseURL + "/myp/mypGifticonList.do?tab=myTab"
+    static let URL_MARKET_HISTORY               = baseURL + "/myp/mypGifticonList.do?tab=myTab"
         
     
 }

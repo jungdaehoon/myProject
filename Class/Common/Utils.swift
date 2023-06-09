@@ -29,7 +29,7 @@ extension OSLog
     /// Console Log 확인시 "Wallet" 카테고리 구분 입니다.
     static let wallet   = OSLog(subsystem: log_subtype!, category: "Wallet")
     /// Console App Log 활성화 여부 입니다.
-    static let OS_LOG   = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)?.value(forKey: "CONSOLE_OS_LOG") as? String ?? "" == "YES" ? true : false
+    static let OS_LOG   = Bundle.main.infoDictionary?["CONSOLE_OS_LOG"] as? String ?? "" == "YES" ? true : false
 }
 
 

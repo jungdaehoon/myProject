@@ -311,7 +311,7 @@ class WebMessagCallBackHandler : NSObject  {
                     /// 콜백 데이터 정보를 요청 합니다.
                     self.viewModel.getWalletJsonMsg(retStr: qrAddr).sink { message in
                         /// 콜백으로 데이터를 리턴 합니다.
-                        self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                        self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                     }.store(in: &self.viewModel.cancellableSet)
                 }
             }
@@ -387,7 +387,7 @@ class WebMessagCallBackHandler : NSObject  {
                         /// 콜백 데이터 정보를 요청 합니다.
                         self.viewModel.getWalletJsonMsg(retStr: retEnc).sink { message in
                             /// 콜백으로 데이터를 리턴 합니다.
-                            self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                            self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                         }.store(in: &self.viewModel.cancellableSet)
                     }
                 }
@@ -424,7 +424,7 @@ class WebMessagCallBackHandler : NSObject  {
                             /// 콜백 데이터 정보를 요청 합니다.
                             self.viewModel.getWalletJsonMsg(retStr: encAddr).sink { message in
                                 /// 콜백으로 데이터를 리턴 합니다.
-                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                             }.store(in: &self.viewModel.cancellableSet)
                         }
                     }.store(in: &self.viewModel.cancellableSet)
@@ -460,7 +460,7 @@ class WebMessagCallBackHandler : NSObject  {
                             /// 콜백 데이터 정보를 요청 합니다.
                             self.viewModel.getWalletJsonMsg(retStr: encKey).sink { message in
                                 /// 콜백으로 데이터를 리턴 합니다.
-                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                             }.store(in: &self.viewModel.cancellableSet)
                         }
                     }.store(in: &self.viewModel.cancellableSet)
@@ -495,7 +495,7 @@ class WebMessagCallBackHandler : NSObject  {
                             /// 콜백 데이터 정보를 요청 합니다.
                             self.viewModel.getWalletJsonMsg(retStr: encAddr).sink { message in
                                 /// 콜백으로 데이터를 리턴 합니다.
-                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message)
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                             }.store(in: &self.viewModel.cancellableSet)
                         }
                     }.store(in: &self.viewModel.cancellableSet)
@@ -1945,7 +1945,7 @@ extension WebMessagCallBackHandler {
             }
             let custItem = SharedDefaults.getKeyChainCustItem()
             // Multi-part 형태로 보낸다.
-            AlamofireAgent.upload(WebPageConstants.NFT_baseURL + APIConstant.API_NFT_IMAGE, multipartFormData: { (multipartFormData) in
+            AlamofireAgent.upload(WebPageConstants.baseURL + APIConstant.API_NFT_IMAGE, multipartFormData: { (multipartFormData) in
                 multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
                 multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
             },
@@ -1978,11 +1978,11 @@ extension WebMessagCallBackHandler {
                         
                             if let data = value["data"] as? [String:Any] {
                                 if let url = data["url"] as? String {
-                                    var infoStr = data["info"] as? String ?? ""
-                                    let retJsonStr = self.getNftReturnJsonMsg(url,infoStr)
+                                    let infoStr     = data["info"] as? String ?? ""
+                                    let retJsonStr  = self.getNftReturnJsonMsg(url,infoStr)
                                     promise(.success(retJsonStr))
                                 } else {
-                                    let retJsonStr = self.getNftReturnJsonMsg()
+                                    let retJsonStr  = self.getNftReturnJsonMsg()
                                     promise(.success(retJsonStr))                                    
                                     return
                                 }

@@ -203,7 +203,7 @@ class AllMoreViewController: BaseViewController {
         {
             self.payServiceInfo!.setDisplay(self.viewModel)
         }
-        
+        /*
         /// MY OK머니 영역 뷰어를 추가 합니다.
         if self.myOKMoneyInfo == nil
         {
@@ -220,7 +220,7 @@ class AllMoreViewController: BaseViewController {
         {
             self.myOKMoneyInfo!.viewModel = self.viewModel
         }
-        
+        */
         
         /// 중간 배너 뷰어를 추가 합니다.
         if self.bannerView == nil
@@ -233,7 +233,7 @@ class AllMoreViewController: BaseViewController {
             self.bannerView!.viewModel = self.viewModel
         }
         
-        
+        /*
         /// NFT 영역 뷰어를 추가 합니다.
         if self.myNFTInfo == nil
         {
@@ -250,7 +250,7 @@ class AllMoreViewController: BaseViewController {
         {
             self.myNFTInfo!.viewModel = self.viewModel
         }
-        
+        */
         
         
         
@@ -397,18 +397,14 @@ extension AllMoreViewController: UIScrollViewDelegate
 // MARK: - WKNavigationDelegate
 extension AllMoreViewController {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
-        
-        preferences.preferredContentMode = .mobile
-        
-        let request = navigationAction.request
-        let optUrl = request.url
-        let optUrlScheme = optUrl?.scheme
-        
+        preferences.preferredContentMode    = .mobile
+        let request                         = navigationAction.request
+        let optUrl                          = request.url
+        let optUrlScheme                    = optUrl?.scheme
         guard let url = optUrl, let scheme = optUrlScheme
             else {
                 return decisionHandler(.cancel, preferences)
         }
-        
         Slog("url : \(url)")
 
         /// 중간 중단으로 메인 페이지 이동 URL 확인 경우 입니다. ( 추후 WebToApp 으로 변경예정 )

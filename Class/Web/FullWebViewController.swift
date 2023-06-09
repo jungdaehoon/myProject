@@ -330,8 +330,11 @@ extension FullWebViewController {
     func setZeroPay( url : URL, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void ){
         let scheme   = NC.S(url.scheme)
         let event    = NC.S(url.host)
+        
         /// URL에서 파라미터 정보를 가져 옵니다.
-        self.viewModel.getURLParams(url: url).sink { params in
+        self.viewModel.getURLParams(url: url).sink { urlParams in
+            var params : [String:Any] = [:]
+            if let param = urlParams { params = param }
             /// 제로페이에서 이벤트 발생 체크 합니다.
             if scheme.contains("webtoapp")
             {
@@ -345,39 +348,45 @@ extension FullWebViewController {
                 }
                 
                 /// 제로페이 상품권으로 결제 요청시 사용자 인증 요청 이벤트 입니다.
-                if NC.S(event).contains("user/v2/auth")
+                if NC.S(event).contains("user")
                 {
-                    /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
-                    self.viewModel.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params).sink { getUrl in
-                        DispatchQueue.main.async {
-                            /// 전체 웹뷰를 호출 합니다.
-                            let controller = FullWebViewController.init(pageType: .zeropay_type, titleBarType: self.titleBarType, pageURL: getUrl) { webCBType in
-                                switch webCBType
-                                {
-                                case .scriptCall(let collBackID, _, _):
-                                    self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
-                                        Slog(anyData as Any)
-                                        Slog(error as Any)
+                    /// 제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다.
+                    self.viewModel.getZeroPayURLParams(url: url).sink { param in
+                        if let param = param {
+                            /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
+                            self.viewModel.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params).sink { getUrl in
+                                DispatchQueue.main.async {
+                                    /// 전체 웹뷰를 호출 합니다.
+                                    let controller = FullWebViewController.init(pageType: .zeropay_type, titleBarType: self.titleBarType, pageURL: getUrl) { webCBType in
+                                        switch webCBType
+                                        {
+                                        case .scriptCall(let collBackID, _, _):
+                                            self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
+                                                Slog(anyData as Any)
+                                                Slog(error as Any)
+                                            }
+                                        default:break
+                                        }
                                     }
-                                default:break
+                                    controller.view.backgroundColor     = .clear
+                                    controller.modalPresentationStyle   = .overFullScreen
+                                    self.pushController(controller, animated: true, animatedType: .up)
                                 }
-                            }
-                            controller.view.backgroundColor     = .clear
-                            controller.modalPresentationStyle   = .overFullScreen
-                            self.pushController(controller, animated: true, animatedType: .up)
+                            }.store(in: &self.viewModel.cancellableSet)
                         }
-                    }.store(in: &self.baseViewModel.cancellableSet)
+                    }.store(in: &self.viewModel.cancellableSet)
+                    
                     decisionHandler(.allow, preferences)
                     return
                 }
                 
                 /// 제로페이 상품권 구매,환불 선택시 이벤트 입니다.
-                if NC.S(event).contains("transfer/v2/auth")
+                if NC.S(event).contains("transfer")
                 {
                     /// GET 연결할 메인 URL 입니다.
                     var mainURL     = ""
                     /// 거래구분 코드 입니다. ( P:구매, C:환불 , M:신용카드구매환불 )
-                    let dealDivCd   = NC.S(params["dealDivCd"] as? String)
+                    let dealDivCd   = NC.S(params["dealDivCd"] as? String) 
                     switch dealDivCd
                     {
                         /// 구매 입니다.
@@ -394,22 +403,27 @@ extension FullWebViewController {
                         default:break
                     }
                     
-                    /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
-                    self.viewModel.getURLGetType(mainUrl: mainURL, params: params).sink { getUrl in
-                        /// 전체 웹뷰를 호출 합니다.
-                        let controller =  FullWebViewController.init(pageType: .zeropay_type, pageURL: getUrl) { cbType in
-                            switch cbType
-                            {
-                            case .scriptCall(let collBackID, _, _):
-                                self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
-                                    Slog(anyData as Any)
-                                    Slog(error as Any)
+                    /// 제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다.
+                    self.viewModel.getZeroPayURLParams(url: url).sink { param in
+                        if let param = param {
+                            /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
+                            self.viewModel.getURLGetType(mainUrl: mainURL, params: param).sink { getUrl in
+                                /// 전체 웹뷰를 호출 합니다.
+                                let controller =  FullWebViewController.init(pageType: .zeropay_type, pageURL: getUrl) { cbType in
+                                    switch cbType
+                                    {
+                                    case .scriptCall(let collBackID, _, _):
+                                        self.webView!.evaluateJavaScript(collBackID) { ( anyData , error) in
+                                            Slog(anyData as Any)
+                                            Slog(error as Any)
+                                        }
+                                    default:break
+                                    }
                                 }
-                            default:break
-                            }
+                                self.pushController(controller, animated: true, animatedType: .up)
+                            }.store(in: &self.viewModel.cancellableSet)
                         }
-                        self.pushController(controller, animated: true, animatedType: .up)
-                    }.store(in: &self.baseViewModel.cancellableSet)
+                    }.store(in: &self.viewModel.cancellableSet)
                     decisionHandler(.allow, preferences)
                     return
                 }
@@ -445,15 +459,13 @@ extension FullWebViewController {
                 /// QRCode 스캔 오픈 요청 이벤트 입니다.
                 if NC.S(event).contains("qrCode")
                 {
-                    /// 파라미터를 세팅 합니다.
-                    var params      = params
                     /// 제로페이에 데이터 리턴할 콜백 스크립트를 저장 합니다.
                     var scricptCB   = NC.S(params["callbackUrl"] as? String)
                     OKZeroPayQRCaptureView(params: params) { qrCodeCB in
                         switch qrCodeCB
                         {
                             /// QRCdoe 읽기 실패 입니다.
-                            case .qr_fail,.cb_fail :
+                        case .qr_fail,.cb_fail,.close :
                                 /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
                                 params.updateValue("N", forKey: "result")
                                 params.updateValue("", forKey: "qrCode")
@@ -474,9 +486,6 @@ extension FullWebViewController {
                                     }
                                     OKZeroPayQRCaptureView().hide()
                                 }
-                            /// QRCode 페이지 종료 입니다.
-                            case .close :
-                                OKZeroPayQRCaptureView().hide()
                             /// QRCode 정보를 넘깁니다
                             case .qr_success(let qrcode) :
                                 /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
@@ -489,6 +498,7 @@ extension FullWebViewController {
                                         if let cbParam = try Utils.toJSONString(params)
                                         {
                                             scricptCB += "('\(cbParam)')"
+                                            Slog("QrCode Success : \(scricptCB)")
                                             self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
                                                 Slog(anyData as Any)
                                                 Slog(error as Any)
@@ -512,18 +522,16 @@ extension FullWebViewController {
                                 }
                             default:break
                         }
-                        decisionHandler(.allow, preferences)
                         return
                     }.show()
                 }
                 else
                 {
-                    decisionHandler(.allow, preferences)
                     return
                 }
             }
             decisionHandler(.allow, preferences)
             return
-        }.store(in: &self.baseViewModel.cancellableSet)
+        }.store(in: &self.viewModel.cancellableSet)
     }
 }

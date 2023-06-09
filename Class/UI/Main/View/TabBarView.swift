@@ -157,13 +157,16 @@ class TabBarView : UIView
     }
     
     
-    
-    //MARK: - 버튼 이벤트 입니다.
-    @IBAction func btn_action(_ sender: Any) {
-        let btn : UIButton                  = sender as! UIButton
-        Slog("Tabbar SelectedIndex : \(btn.tag - 10)")
+    /**
+     변경할 탭 카운트를 받아 이동하며 해당 페이지를 새로고침 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.06.08
+     - Parameters:
+        - pageIndex : 활성화될 아이템 넘버 입니다.
+     - Returns:False
+     */
+    static func setReloadSeleted(  pageIndex : Int ){
         /// 변경 인덱스 정보를 적용 합니다.
-        TabBarView.tabbar!.selectedIndex    = btn.tag - 10
+        TabBarView.tabbar!.selectedIndex    = pageIndex
         /// 현 페이지 초기화합니다.
         if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController
         {
@@ -176,6 +179,15 @@ class TabBarView : UIView
             /// 이전 페이지의 웹뷰를 초기화 합니다.
             viewController.initWebPage()
         }
+    }
+    
+    
+    //MARK: - 버튼 이벤트 입니다.
+    @IBAction func btn_action(_ sender: Any) {
+        let btn : UIButton                  = sender as! UIButton
+        Slog("Tabbar SelectedIndex : \(btn.tag - 10)")
+        /// 탭을 이동시키며 새로고침 합니다.
+        TabBarView.setReloadSeleted(pageIndex: btn.tag - 10)
     }
 
 }
