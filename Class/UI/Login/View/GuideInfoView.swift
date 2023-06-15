@@ -281,12 +281,14 @@ extension GuideInfoView : UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
     }
-    
-    //MARK: - UIScrollViewDelegate
+}
+
+
+extension GuideInfoView : UIScrollViewDelegate
+{
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         /// 현 위치 정보를 디스플레이 합니다.
         let page                        = Int(targetContentOffset.pointee.x / self.frame.width)
         self.pageControl.currentPage    = page
     }
 }
-

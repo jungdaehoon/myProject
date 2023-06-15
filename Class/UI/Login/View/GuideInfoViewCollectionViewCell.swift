@@ -33,6 +33,14 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
     }
     
     
+    /**
+     가이드 인덱스에 맞춰 화면을 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.03.29
+     - Parameters:
+        - index : 가이드 인덱스 정보 입니다.
+     - Throws: False
+     - Returns:False
+     */
     func setDisplay( _ index : Int, completion : (( _ value : String ) -> Void )? = nil )
     {
         self.completion             = completion
@@ -65,8 +73,6 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
             break
         }
         self.layoutIfNeeded()
-        Slog("self.frame : \(self.frame.size)")
-        Slog("self.aniImageView.frame.size : \(self.aniImageView.frame.size)")
         /// 이전에 추가된 뷰어가 있다면 전부 삭제하고 추가합니다.
         for subView in self.aniImageView.subviews { subView.removeFromSuperview() }
         /// 로띠 뷰어를 추가합니다.
@@ -76,6 +82,8 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
         aniView.play()
     }
     
+    
+    // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
         self.completion!("EXIT")
     }

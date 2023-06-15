@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03A8B402B8ABD84636006B8B /* Pods_cereal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740F24DF294204F2C066E1 /* Pods_cereal.framework */; };
 		8D159EA329EF754000918CC0 /* ZeroPayQRCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D159EA229EF754000918CC0 /* ZeroPayQRCodeResponse.swift */; };
 		8D17C9582A14BDD4001CB173 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D17C9572A14BDD4001CB173 /* BaseView.swift */; };
 		8D1C97F42A01DF1000A4BA50 /* BottomBankListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C97F32A01DF1000A4BA50 /* BottomBankListView.swift */; };
@@ -156,6 +155,7 @@
 		8D91E27929E53ACB0015E5E7 /* tabbar_benefit.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27429E53ACA0015E5E7 /* tabbar_benefit.json */; };
 		8D91E27A29E53ACB0015E5E7 /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27529E53ACA0015E5E7 /* tabbar_home.json */; };
 		8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */; };
+		8D9306002A331FFD000332D8 /* Pods_cereal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD740F24DF294204F2C066E1 /* Pods_cereal.framework */; };
 		8D9855B32A11F0D800AE86B9 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9855B22A11F0D800AE86B9 /* WalletViewModel.swift */; };
 		8D9A004629DEAD9600424077 /* libnProtectMobileSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9A004429DEAD9600424077 /* libnProtectMobileSDK.a */; };
 		8D9D924929F7B9F900F42B8D /* GuideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D924729F7B9F900F42B8D /* GuideInfoView.swift */; };
@@ -462,12 +462,12 @@
 				8D48BB3229D2CC9F00CC4D62 /* KakaoMessageTemplate.framework in Frameworks */,
 				8D48BB3129D2CC9F00CC4D62 /* KakaoLink.framework in Frameworks */,
 				8DDC3DFA29D16731003C4F8F /* libBSAppIron.a in Frameworks */,
+				8D9306002A331FFD000332D8 /* Pods_cereal.framework in Frameworks */,
 				8DDC3DF929D16731003C4F8F /* libssl.a in Frameworks */,
 				8D48BB3029D2CC9F00CC4D62 /* KakaoCommon.framework in Frameworks */,
 				8D205F9629D14B8B00F43C99 /* XecureKeypad.framework in Frameworks */,
 				8DDC3DF629D16730003C4F8F /* libcrypto.a in Frameworks */,
 				8DDC3DF829D16731003C4F8F /* libBSAppIronCrypto-Raonsecure.a in Frameworks */,
-				03A8B402B8ABD84636006B8B /* Pods_cereal.framework in Frameworks */,
 				8DE5F21C29F285DD003601CB /* UserNotifications.framework in Frameworks */,
 				8DCB189829F64FDB000645D3 /* AdSupport.framework in Frameworks */,
 			);
