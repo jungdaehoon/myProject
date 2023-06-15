@@ -595,18 +595,21 @@ class OKZeroPayView: UIView {
         /// 카드를 전체화면 디스플레이 합니다.
         if display == true
         {
-            let update_y                                = (self.payCardListView.frame.origin.y * -1) + 48
-            let deplay1                                 = self.detaileViewTop.constant
-            self.payCardListTop.constant                = update_y
+            /// 카드 리스트 뷰어의 상단 위치정보를 가져 옵니다.
+            let cardListUpdatY                          = (self.payCardListView.frame.origin.y * -1) + 48
+            /// 기본 상세 디스플레이 뷰어의 상단 포지션을 가져 옵니다.
+            let topPosition                             = self.detaileViewTop.constant
+            /// 결제 가능한 카드 리스트 뷰어의 상단 위지 정보를 변경 합니다.
+            self.payCardListTop.constant                = cardListUpdatY
             /// QR결제 위치로 선택 배경을 이동 합니다.
             UIView.animate(withDuration: 0.20, delay: 0.0, options: .curveEaseIn) {
                 self.detaileViewTop.constant        = display == true ? 12.0 : 315.0
-                print("self.detaileViewTop.constant : \(self.detaileViewTop.constant)")
-                if display == false { self.payCardListView.setCardBottom() }
-                if display == true { self.payCardListView.setCardBottom( topPosition : (update_y * -1) + deplay1) }
+                /// 카드리스트 뷰어가 전체 화면 변경으로 전에 카드 위치값을 변경 합니다.
+                self.payCardListView.setCardListPosition( startPosition: (cardListUpdatY * -1) + topPosition)
                 self.layoutIfNeeded()
             } completion: { _ in
-                if display == true { self.payCardListView.setCardFullDisplay() }
+                /// 카드를 전체 화면으로 디스플레이 합니다.
+                self.payCardListView.setCardFullDisplay()
             }
         }
         /// 카드를 하단에 디스플레이 합니다.
@@ -631,7 +634,8 @@ class OKZeroPayView: UIView {
         UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseOut) {
             self.payCardListTop.constant        = (self.payCardListView.frame.origin.y * -1) + 48
             self.detaileViewTop.constant        = 315.0
-            self.payCardListView.setCardBottom()
+            /// 카드리스트가 다시 하단 위치 변경으로 카드 시작 위치값을 변경 합니다.
+            self.payCardListView.setCardListPosition()
             self.layoutIfNeeded()
         } completion: { _ in
             
