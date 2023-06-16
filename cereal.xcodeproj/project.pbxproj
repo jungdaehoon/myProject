@@ -1300,8 +1300,8 @@
 				8D205E2C29D133FA00F43C99 /* Sources */,
 				8D205E2D29D133FA00F43C99 /* Frameworks */,
 				8D205E2E29D133FA00F43C99 /* Resources */,
-				EF568B5166924EBBD8047E4A /* [CP] Embed Pods Frameworks */,
-				8D593F4F29F0FF31006AEFA3 /* Fabric Run Script */,
+				F2EBF4732A3C1CCB009BF601 /* ShellScript */,
+				E25F146BED29A7FCBF6FD22C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1489,24 +1489,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8D593F4F29F0FF31006AEFA3 /* Fabric Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Fabric Run Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/Fabric/run\n";
-		};
 		A06062C907C1B477BD0771CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1529,7 +1511,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EF568B5166924EBBD8047E4A /* [CP] Embed Pods Frameworks */ = {
+		E25F146BED29A7FCBF6FD22C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1545,6 +1527,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F2EBF4732A3C1CCB009BF601 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/FirebaseCrashlytics/run\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

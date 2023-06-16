@@ -13,13 +13,15 @@ import UIKit
  */
 enum CARD_BTN_EVENT : Int {
     /// 카드 금액 히든 이벤트 입니다.
-    case payhidden  = 10
+    case payhidden      = 10
     /// 카드 금액 디스플레이 입니다.
-    case paydisplay = 11
+    case paydisplay     = 11
     /// 은행 선택 버튼 입니다.
-    case bankchoice = 12
+    case bankchoice     = 12
     /// 카드 선택 이벤트  입니다.
-    case cardchoice = 13
+    case cardchoice     = 13
+    /// 배너 선택 이벤트  입니다.
+    case bannerchoice   = 14
 }
 
 /**
@@ -43,10 +45,31 @@ enum DISPLAY_TYPE : Int {
 class OKZeroPayCardView: UIView {
     /// 배너 뷰어어 입니다.
     @IBOutlet weak var bannerView: UIView!
+    /// 카드하단 디스플레이 안내 뷰어 입니다.
+    @IBOutlet weak var bottomDisplayInfoView: UIView!
+    /// 카드 하단 디스플레이시 잔액 보기/숨김 뷰어 입니다.
+    @IBOutlet weak var bottomDisplayMoneyOnOff: UIView!
+    /// 카드 하단 디스플레이시 보기/숨기 버튼 입니다.
+    @IBOutlet weak var bottomDisplayMoneyOnoffBtn: UIButton!
+    /// 카드 하단 디스플레이시 안내 문구 입니다.
+    @IBOutlet weak var bottomDisplayInfoText: UILabel!
+    /// 카드 하단 디스플레이시 타입 문구 입니다.
+    @IBOutlet weak var bottomDisplayTypeText: UILabel!
+    /// 카드 하단 디스플레이시 잔액 정보 입니다.
+    @IBOutlet weak var bottomDisplayMoneyText: UILabel!
+    /// 카드 하단 디스플레이시 잔액 디스플레이 뷰어 입니다.
+    @IBOutlet weak var bottomDisplayMoneyView: UIView!
+    /// 카드 하단 디스플레이시 "잔액숨김"  문구 입니다.
+    @IBOutlet weak var bottomDisplayMoneyHiddenText: UILabel!
+    /// 카드 하단 계좌 연결 카드 경우 상세 정보  입니다.
+    @IBOutlet weak var bottomDisplayAccountInfoText: UILabel!
+    /// 카드 하단 디스플레이시 배경 컬러 입니다.
+    @IBOutlet weak var bottomDisplayCardBGColor: UILabel!
     /// 카드 모드일 경우 총 카드 뷰어 입니다.
     @IBOutlet weak var cardView: UIView!
     /// 카드 배경 컬러 입니다.
     @IBOutlet weak var cardBGColor: UILabel!
+    
     /// 카드 타이틀 문구 입니다.
     @IBOutlet weak var titleText: UILabel!
     /// 카드 금액 정보 뷰어 입니다.
@@ -65,6 +88,8 @@ class OKZeroPayCardView: UIView {
     var saveBgColors : ( start : UIColor, end : UIColor)? = nil
     /// 디스플레이 타입을 받습니다.
     var displayType : DISPLAY_TYPE = .okmoney
+    
+    
     
     //MARK: - Init
     init(){
@@ -98,6 +123,8 @@ class OKZeroPayCardView: UIView {
             self.accountInfoText.text   = "OK저축은행 3456"
             break
         case .account:
+            self.payInfoView.isHidden   = true
+            self.payHiddenView.isHidden = true
             self.titleText.text         = "은행계좌에서 제로페이 결제"
             self.subInfoText.text       = "결제금액만큼 즉시 출금되어 결제됩니다."
             self.accountInfoText.text   = "신한은행 3456"
@@ -111,6 +138,67 @@ class OKZeroPayCardView: UIView {
     }
     
     
+    func setDisplayChange( bottomMode : Bool = true){
+        if bottomMode == true
+        {
+            /// 하단 모드  정보를 받아 하단 모드 뷰어를 온오프 합니다.
+            self.bottomDisplayInfoView.isHidden = false
+        }
+        else
+        {
+            /// 하단 모드  정보를 받아 하단 모드 뷰어를 온오프 합니다.
+            self.bottomDisplayInfoView.isHidden = true
+            return
+        }
+        
+        
+        switch displayType {
+        case .okmoney:
+            /// 계좌 연결 카드 상세 정보를 히든 처리 합니다.
+            self.bottomDisplayAccountInfoText.isHidden  = true
+            /// 카드 타입 문구를 디스플레이 합니다.
+            self.bottomDisplayTypeText.text            = "머니"
+            /// 카드 잔액 온오프 뷰어를 디스플레이 합니다.
+            self.bottomDisplayMoneyOnOff.isHidden       = false
+            /// 카드 안내 정보를 디스플레이 합니다.
+            self.bottomDisplayInfoText.text             = "부족한 금액은 충전 후 결제 됩니다."
+            /// 카드 잔앱 타입이 "보기" 경우 입니다.
+            if self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "보기"
+            {
+                /// 카드 잔액 정보 뷰어를 디스플레이 합니다.
+                self.bottomDisplayMoneyView.isHidden        = false
+                /// 카드 잔액정보를 추가합니다.
+                self.bottomDisplayMoneyText.text            = "2,012,800"
+                /// 카드 "잔액 숨김" 뷰어를 히든 처리 합니다.
+                self.bottomDisplayMoneyHiddenText.isHidden  = true
+            }
+            /// 카드 잔액 타입이 "숨김" 경우 입니다.
+            else
+            {
+                /// 카드 잔액 정보 뷰어를 히든 처리 합니다.
+                self.bottomDisplayMoneyView.isHidden        = true
+                /// 카드 잔액정보 "잔액 숨김" 문구를 디스플레이 합니다.
+                self.bottomDisplayMoneyHiddenText.isHidden  = false
+            }
+            break
+        case .account:
+            /// 계좌 연결 카드 상세 정보를 디스플레이 합니다.
+            self.bottomDisplayAccountInfoText.isHidden  = false
+            /// 카드 타입 문구를 디스플레이 합니다.
+            self.bottomDisplayTypeText.text             = "출금"
+            /// 카드 잔액 정보 뷰어를 히든 처리 합니다.
+            self.bottomDisplayMoneyView.isHidden        = true
+            /// 카드 "잔액 숨김" 문구도 히든 처리 합니다.
+            self.bottomDisplayMoneyHiddenText.isHidden  = true
+            /// 카드 안내정보를 디스플레이 합니다.
+            self.bottomDisplayInfoText.text             = "결제금액만큼 즉시 출금되어 결제됩니다."
+            break
+        case .banner:
+            self.cardView.isHidden      = true
+            self.bannerView.isHidden    = false
+            break
+        }
+    }
     
     /**
      그라데이션 컬러값을 받아 카드 배경에 컬러를 추가 합니다.
@@ -126,6 +214,7 @@ class OKZeroPayCardView: UIView {
             self.saveBgColors = bgColor
             self.cardBGColor.frame = CGRect(origin: .zero, size: self.frame.size)
             self.cardBGColor.setGradientRightDownLeftTop(starColor: bgColor.start, endColor: bgColor.end)
+            self.bottomDisplayCardBGColor.setGradientRightDownLeftTop(starColor: bgColor.start, endColor: bgColor.end)
         }
         else
         {
@@ -161,7 +250,10 @@ class OKZeroPayCardView: UIView {
                         /// 계좌 선택 페이지 입니다.
                     }
                     break
-                case .cardchoice:
+                case .cardchoice, .bannerchoice:
+                    /// 선탠된 카드에 현 카드정보를 넘깁니다.
+                    OKZeroViewModel.zeroPayShared.cardChoice = self
+                    
                     break
             }
             

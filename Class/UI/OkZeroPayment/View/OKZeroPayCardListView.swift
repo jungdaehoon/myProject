@@ -109,6 +109,7 @@ class OKZeroPayCardListView: UIView {
                     break
                 default:break
             }
+            cardview.setDisplayChange(bottomMode: true)
             self.cardViews.append(cardview)
             self.scrollView.addSubview(cardview)
         }
@@ -170,6 +171,7 @@ class OKZeroPayCardListView: UIView {
                 frame.size.width = width
                 cardView.frame   = frame
                 cardView.setCardBGColor()
+                cardView.setDisplayChange(bottomMode: startPosition == 0.0 ? true : false)                
             }
         }
         self.scrollView.layoutSubviews()

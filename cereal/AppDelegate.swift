@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-import Fabric
+import FirebaseCrashlytics
 import FirebaseMessaging
 import UserNotifications
 @main
@@ -28,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (XKConfigure.sharedInstance()! as AnyObject).setTlsCoinfgWithModule(TLS_MODULE_EXTERNAL_0, version: TLS_VERSION_1_2)
         /// FirebaseApp (FCM,Crashlystics) 설정관련 연결 입니다.
         FirebaseApp.configure()
-        /// Fabric Crashlystics (크래시 리포트) 디버깅 활성화 합니다.
-        Fabric.sharedSDK().debug = true
         /// 키체인 사용여부를 체크 합니다.
         self.viewModel.setKeyChainEnabled()
         /// 탈옥 단말 체크 합니다.

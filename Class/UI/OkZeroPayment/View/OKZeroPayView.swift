@@ -179,6 +179,18 @@ class OKZeroPayView: UIView {
             }
         }.store(in: &self.viewModel.cancellableSet)
                 
+        /// 카드 전체 화면 뷰에서 카드선택시 이벤트 입니다.
+        OKZeroViewModel.zeroPayShared.$cardChoice.sink { value in
+            if let card = value {
+                Slog("cardChoice : \(card.displayType)")
+                /// 선택된 카드를 초기화 합니다.
+                OKZeroViewModel.zeroPayShared.cardChoice = nil
+                /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
+                self.setCardFullDisplay( display: false )
+                
+            }
+        }.store(in: &OKZeroViewModel.zeroPayShared.cancellableSet)
+        
         /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
         self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
         /// 결제 가능 카드 리스트 뷰어를 디스플레이 합니다.
@@ -615,6 +627,8 @@ class OKZeroPayView: UIView {
         /// 카드를 하단에 디스플레이 합니다.
         else
         {
+            /// 카드리스트 뷰어를 이동중 선택 못 하도록 합니다.
+            self.payCardListView.isUserInteractionEnabled = false
             /// 하단에 순차적으로 디스플레이 합니다.
             self.payCardListView.setCardFullAniClose(index: 0) { [self] success in
                 self.perform(#selector(setCardFullAniDelayClose), with: nil, afterDelay: 0.05)
@@ -635,10 +649,11 @@ class OKZeroPayView: UIView {
             self.payCardListTop.constant        = (self.payCardListView.frame.origin.y * -1) + 48
             self.detaileViewTop.constant        = 315.0
             /// 카드리스트가 다시 하단 위치 변경으로 카드 시작 위치값을 변경 합니다.
-            self.payCardListView.setCardListPosition()
+            self.payCardListView.setCardListPosition()            
             self.layoutIfNeeded()
         } completion: { _ in
-            
+            /// 카드리스트 뷰어 선택을 활성화 합니다.
+            self.payCardListView.isUserInteractionEnabled = true
         }
         
     }

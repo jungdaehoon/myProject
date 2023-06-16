@@ -64,6 +64,7 @@ enum QRCODE_CB : Equatable {
 */
 class OKZeroViewModel : BaseViewModel
 {
+    static let zeroPayShared    : OKZeroViewModel     = OKZeroViewModel()
     /// 카드 리스트 들입니다.
     var cards : [String]        = ["OK저축은행","우리은행","광고","국민은행","NH농협"]
     /// 바코드 인식 세션 입니다.
@@ -73,8 +74,9 @@ class OKZeroViewModel : BaseViewModel
     /// 스캔한 바코드 정보를 가져 옵니다.
     @Published var qrCodeValue  : QRCODE_CB = .start
     /// 코드 타임진행 상태를 가집니다.
-    @Published var codeTimer    : CODE_ENABLED_TIME = .start_time
-    
+    @Published var codeTimer    : CODE_ENABLED_TIME  = .start_time
+    /// 카드 선택시 정보를 가집니다.
+    @Published var cardChoice   : OKZeroPayCardView? = nil
     
     
     /**

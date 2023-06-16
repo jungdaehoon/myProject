@@ -75,7 +75,7 @@ class QRorBarCodeGeneratorView: UIView {
             if let image = self.generateBarcode128(code)
             {
                 Slog("setCodeDisplay self.frame.size : \(self.frame.size)")
-                self.imageView.image = image.resize(size: self.frame.size)
+                self.imageView.image        = self.resize(image: image, size: self.frame.size)
                 completion!(true)
             }
             break
@@ -90,6 +90,26 @@ class QRorBarCodeGeneratorView: UIView {
             break
         }
     }
+    
+    
+    /**
+     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다.
+     - Date: 2023.04.26
+     - parameters:
+        - image : 원본 이미지를 받습니다.
+        - size : 이미지를 넓이 기준으로 리사이징 합니다.
+     - Throws:False
+     - returns:
+        리사이징 된 이미지를 리턴 합니다. (UIImage)
+    */
+    func resize( image : UIImage, size : CGSize) -> UIImage {
+        let render = UIGraphicsImageRenderer(size: size)
+        let renderImage = render.image { context in
+            image.draw(in: CGRect(origin: CGPoint(x: -20.0, y: -20.0), size: CGSize(width: size.width + 40, height: size.height + 40)))
+        }
+        return renderImage
+    }
+    
     
     
     /**
