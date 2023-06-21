@@ -64,7 +64,7 @@ class WebPageConstants {
     static let URL_WALLET_HOME                  = baseURL + "/walletHome.do"
     /// NFT 받는 페이지 입니다.
     static let URL_MYP_RECEIVE                  = baseURL + "/nft/transfer/transferNftAccept.do"
-    // NFT 보유 목록 페이지 입니다.
+    /// NFT 보유 목록 페이지 입니다.
     static let URL_NFT_OWN_LIST                 = baseURL + "/nft/own/ownNftList.do"
     /// NFT 거래내역 페이지 입니다.
     static let URL_NFT_TRANS_LIST               = baseURL + "/nft/own/ownNftTransList.do"

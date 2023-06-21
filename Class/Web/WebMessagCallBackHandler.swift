@@ -268,7 +268,7 @@ class WebMessagCallBackHandler : NSObject  {
             case .checkWInfo                 :
                 self.setPrivateKeyWithWalletFile( body )
                 break
-                /// 지갑 : 생성후 정보 전달 : 지갑생성 후 주소:개인키 전달 합니다.
+                /// 지갑 : 생성후 정보 전달 : 지갑생성 후 주소+개인키 전달 합니다.
             case .createWInfo                :
                 self.setCreateWallet( body )
                 break
@@ -398,7 +398,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     지갑 : 생성후 정보 전달 : 지갑생성 후 주소:개인키 전달 합니다.
+     지갑 생성후 "주소+개인키" 정보를 전달 합니다.
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -413,22 +413,25 @@ class WebMessagCallBackHandler : NSObject  {
            let encInfo  = params[0] as? String
         {
             Slog ("setCreateWallet encInfo : \(encInfo) ", category: .wallet )
-            ///  신규 생성된 지갑 정보를 로컬에 저장 합니다.
-            WalletViewModel.sharedInstance.setCreateWallet(encInfo: encInfo).sink { value in
-                /// 주소 정보를 체크 합니다
-                if let walletAddr = value {
+            /// 지갑 생성 요청으로 로딩을 20초  추가 합니다.
+            LoadingView.default.show(maxTime: 20.0)
+            ///  신규 생성된 지갑 정보를 로컬에 저장 후 주소 + 개인키 정보를 받습니다.
+            WalletViewModel.sharedInstance.setCreateWalletToAddrKey(encInfo: encInfo).sink { value in
+                /// 주소 + 개인키 정보를 체크 합니다
+                if let walletAddrKey = value {
                     /// AES 암호화 합니다.
-                    WalletViewModel.sharedInstance.getMakeEncryptString(orgStr: walletAddr).sink { value in
+                    WalletViewModel.sharedInstance.getMakeEncryptString(orgStr: walletAddrKey).sink { value in
                         /// 암호화 된 ENC 정보를 체크 합니다.
-                        if let encAddr = value {
+                        if let encAddrKey = value {
                             /// 콜백 데이터 정보를 요청 합니다.
-                            self.viewModel.getWalletJsonMsg(retStr: encAddr).sink { message in
+                            self.viewModel.getWalletJsonMsg(retStr: encAddrKey).sink { message in
                                 /// 콜백으로 데이터를 리턴 합니다.
                                 self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                             }.store(in: &self.viewModel.cancellableSet)
                         }
                     }.store(in: &self.viewModel.cancellableSet)
                 }
+                LoadingView.default.hide()
             }.store(in: &self.viewModel.cancellableSet)
         }
     }
@@ -450,6 +453,8 @@ class WebMessagCallBackHandler : NSObject  {
            let encInfo  = params[0] as? String
         {
             Slog ("setPrivateKeyWithWalletFile encInfo : \(encInfo) ", category: .wallet )
+            /// 지갑 생성 요청으로 로딩을 20초  추가 합니다.
+            LoadingView.default.show(maxTime: 20.0)
             /// 로컬 개인 키정보를 요청 합니다.
             WalletViewModel.sharedInstance.getWalletPrivateKey( encInfo: encInfo ).sink { value in
                 if let privateKey = value {
@@ -465,6 +470,7 @@ class WebMessagCallBackHandler : NSObject  {
                         }
                     }.store(in: &self.viewModel.cancellableSet)
                 }
+                LoadingView.default.hide()
             }.store(in: &self.viewModel.cancellableSet)
         }
     }

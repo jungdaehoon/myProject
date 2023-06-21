@@ -3,11 +3,16 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Bold.otf">
+            <string>Pretendard-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Show Mnemonic View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -43,19 +48,17 @@
                                     <constraint firstItem="Cvd-q9-Bdo" firstAttribute="centerY" secondItem="XyR-pa-4bt" secondAttribute="centerY" id="yhp-iq-6MC"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKv-PP-p4t">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKv-PP-p4t">
                                 <rect key="frame" x="0.0" y="754" width="393" height="64"/>
                                 <color key="backgroundColor" red="1" green="0.32549019610000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="KIC-a4-wlQ"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="kaU-lE-6bM"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="다음">
-                                    <backgroundConfiguration key="background"/>
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="다음"/>
                                 <connections>
                                     <action selector="onConfirm:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SEc-Td-wDc"/>
                                 </connections>
@@ -213,35 +216,32 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="jUG-P1-FIU"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjn-7f-We8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjn-7f-We8">
                                 <rect key="frame" x="0.0" y="754" width="196.66666666666666" height="64"/>
                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="LAI-iC-iDb"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="이전">
-                                    <backgroundConfiguration key="background"/>
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                    <color key="baseForegroundColor" white="0.68999999999999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="이전">
+                                    <color key="titleColor" white="0.68999999999999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="onPrev:" destination="PZS-Gs-6lH" eventType="touchUpInside" id="qUr-b2-Ace"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yd-8t-eRT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yd-8t-eRT">
                                 <rect key="frame" x="196.66666666666663" y="754" width="196.33333333333337" height="64"/>
                                 <color key="backgroundColor" red="1" green="0.32549019610000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="80Y-IV-fdV"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="확인">
-                                    <backgroundConfiguration key="background"/>
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="확인"/>
                                 <connections>
                                     <action selector="onConfirm:" destination="PZS-Gs-6lH" eventType="touchUpInside" id="gVW-yE-gPI"/>
                                 </connections>
@@ -398,199 +398,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOw-4d-HeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="937" y="-27"/>
-        </scene>
-        <!--Restore Wallet View Controller-->
-        <scene sceneID="bhQ-IV-ARy">
-            <objects>
-                <viewController storyboardIdentifier="RestoreWalletViewController" id="axP-4I-pDf" customClass="RestoreWalletViewController" customModule="cereal" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="p7u-Rn-q4V">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2L-0b-75d">
-                                <rect key="frame" x="0.0" y="754" width="393" height="64"/>
-                                <color key="backgroundColor" red="1" green="0.32549019610000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="S0Z-F4-5v8"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="확인">
-                                    <backgroundConfiguration key="background"/>
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="onConfirm:" destination="axP-4I-pDf" eventType="touchUpInside" id="FDA-zF-Z8a"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDz-wN-iaw">
-                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet 복구구문 안내" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlh-JF-T7j">
-                                        <rect key="frame" x="112.66666666666669" y="16" width="168" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bkg-mV-q3w">
-                                        <rect key="frame" x="19.999999999999996" y="9" width="50.666666666666657" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50.670000000000002" id="HST-mT-Nou"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="btn_back" title=" "/>
-                                        <connections>
-                                            <action selector="onClose:" destination="axP-4I-pDf" eventType="touchUpInside" id="b3x-aq-QDg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="Bkg-mV-q3w" firstAttribute="centerY" secondItem="DDz-wN-iaw" secondAttribute="centerY" id="3fl-XP-Mjp"/>
-                                    <constraint firstItem="dlh-JF-T7j" firstAttribute="centerX" secondItem="DDz-wN-iaw" secondAttribute="centerX" id="Fij-hX-EcX"/>
-                                    <constraint firstItem="Bkg-mV-q3w" firstAttribute="leading" secondItem="DDz-wN-iaw" secondAttribute="leading" constant="20" id="P2M-bK-TCo"/>
-                                    <constraint firstItem="dlh-JF-T7j" firstAttribute="centerY" secondItem="DDz-wN-iaw" secondAttribute="centerY" id="qOn-co-Xy0"/>
-                                    <constraint firstAttribute="height" constant="56" id="uk9-Kp-GZU"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="복구 구문을 순서대로 입력하세요." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUO-D2-JXZ">
-                                <rect key="frame" x="20" y="155" width="353" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ElA-47-lhA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQS-it-IlN">
-                                <rect key="frame" x="20" y="205" width="353" height="38.333333333333343"/>
-                                <string key="text">이전에 메모 또는 보관해 놓은 복구구문을
-순서대로 입력하세요.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="띄어쓰기를 포함하여 복구구문을 입력하세요." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CTb-PB-roD" customClass="TextFieldWithPadding" customModule="cereal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="262.33333333333331" width="353" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="rb8-D3-7Nt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KwJ-xf-QVj">
-                                <rect key="frame" x="20" y="486.33333333333331" width="181" height="31.666666666666686"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="복구구문을">
-                                            <attributes>
-                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
-                                            <attributes>
-                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="잃어버리셨나요">
-                                            <attributes>
-                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="?">
-                                            <attributes>
-                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="복구구문을">
-                                            <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
-                                            <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="잃어버리셨나요">
-                                            <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="?">
-                                            <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="onLostMnemonic:" destination="axP-4I-pDf" eventType="touchUpInside" id="hp7-mS-Cj5"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="QOC-Yf-77q"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="KwJ-xf-QVj" firstAttribute="leading" secondItem="p7u-Rn-q4V" secondAttribute="leading" constant="20" id="0JU-g5-zhf"/>
-                            <constraint firstItem="PUO-D2-JXZ" firstAttribute="top" secondItem="DDz-wN-iaw" secondAttribute="bottom" constant="40" id="1fC-W9-HF7"/>
-                            <constraint firstItem="DDz-wN-iaw" firstAttribute="leading" secondItem="QOC-Yf-77q" secondAttribute="leading" id="2pi-Fh-N3M"/>
-                            <constraint firstItem="Q2L-0b-75d" firstAttribute="leading" secondItem="p7u-Rn-q4V" secondAttribute="leading" id="BoU-3G-tuJ"/>
-                            <constraint firstItem="QOC-Yf-77q" firstAttribute="trailing" secondItem="Q2L-0b-75d" secondAttribute="trailing" id="Jae-FJ-bkA"/>
-                            <constraint firstItem="DDz-wN-iaw" firstAttribute="top" secondItem="QOC-Yf-77q" secondAttribute="top" id="Zl4-14-DxW"/>
-                            <constraint firstItem="QOC-Yf-77q" firstAttribute="bottom" secondItem="Q2L-0b-75d" secondAttribute="bottom" id="bfc-xJ-qQL"/>
-                            <constraint firstItem="QOC-Yf-77q" firstAttribute="trailing" secondItem="CTb-PB-roD" secondAttribute="trailing" constant="20" id="gEO-kj-hi7"/>
-                            <constraint firstItem="QOC-Yf-77q" firstAttribute="trailing" secondItem="DDz-wN-iaw" secondAttribute="trailing" id="iBt-E1-WBB"/>
-                            <constraint firstItem="CTb-PB-roD" firstAttribute="top" secondItem="nQS-it-IlN" secondAttribute="bottom" constant="19" id="iEZ-PW-ixl"/>
-                            <constraint firstItem="CTb-PB-roD" firstAttribute="leading" secondItem="QOC-Yf-77q" secondAttribute="leading" constant="20" id="iPm-cv-VKX"/>
-                            <constraint firstItem="nQS-it-IlN" firstAttribute="top" secondItem="PUO-D2-JXZ" secondAttribute="bottom" constant="20" id="l10-hy-G6h"/>
-                            <constraint firstItem="PUO-D2-JXZ" firstAttribute="leading" secondItem="QOC-Yf-77q" secondAttribute="leading" constant="20" id="m7G-JW-yaC"/>
-                            <constraint firstItem="QOC-Yf-77q" firstAttribute="trailing" secondItem="PUO-D2-JXZ" secondAttribute="trailing" constant="20" id="mPQ-mw-og4"/>
-                            <constraint firstItem="KwJ-xf-QVj" firstAttribute="top" secondItem="CTb-PB-roD" secondAttribute="bottom" constant="24" id="ufg-7x-Gh4"/>
-                            <constraint firstItem="nQS-it-IlN" firstAttribute="leading" secondItem="p7u-Rn-q4V" secondAttribute="leading" constant="20" id="w1w-oR-PPc"/>
-                            <constraint firstItem="QOC-Yf-77q" firstAttribute="trailing" secondItem="nQS-it-IlN" secondAttribute="trailing" constant="20" id="yPA-ZU-o5k"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tfMnemonic" destination="CTb-PB-roD" id="UWt-R9-rP7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wUU-Vt-dbJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1734" y="-27"/>
         </scene>
         <!--Wallet Test View Controller-->
         <scene sceneID="jYb-zn-v14">
@@ -1032,17 +839,208 @@
             </objects>
             <point key="canvasLocation" x="7000" y="-44"/>
         </scene>
+        <!--Restore Wallet View Controller-->
+        <scene sceneID="28L-ON-lzL">
+            <objects>
+                <viewController storyboardIdentifier="RestoreWalletViewController" id="zaE-Bc-l17" customClass="RestoreWalletViewController" customModule="cereal" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lbb-Mp-7I4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVM-Ug-2Dp">
+                                <rect key="frame" x="0.0" y="754" width="393" height="64"/>
+                                <color key="backgroundColor" red="1" green="0.32549019610000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="uDD-5U-72c"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="20"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="확인"/>
+                                <connections>
+                                    <action selector="onConfirm:" destination="zaE-Bc-l17" eventType="touchUpInside" id="YtH-1t-fv0"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2W9-uI-pUf">
+                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet 복구구문 안내" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCj-nd-qe1">
+                                        <rect key="frame" x="112.66666666666669" y="16" width="168" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idP-fy-nRE">
+                                        <rect key="frame" x="19.999999999999996" y="9" width="50.666666666666657" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50.670000000000002" id="C73-QL-EQm"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="btn_back" title=" "/>
+                                        <connections>
+                                            <action selector="onClose:" destination="zaE-Bc-l17" eventType="touchUpInside" id="sCc-IC-1vo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="nCj-nd-qe1" firstAttribute="centerY" secondItem="2W9-uI-pUf" secondAttribute="centerY" id="7uj-HS-e0j"/>
+                                    <constraint firstAttribute="height" constant="56" id="AgA-Tk-SJg"/>
+                                    <constraint firstItem="nCj-nd-qe1" firstAttribute="centerX" secondItem="2W9-uI-pUf" secondAttribute="centerX" id="I0u-Ze-iEE"/>
+                                    <constraint firstItem="idP-fy-nRE" firstAttribute="leading" secondItem="2W9-uI-pUf" secondAttribute="leading" constant="20" id="TST-Z3-N2a"/>
+                                    <constraint firstItem="idP-fy-nRE" firstAttribute="centerY" secondItem="2W9-uI-pUf" secondAttribute="centerY" id="cn5-1W-SxN"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="복구 구문을 순서대로 입력하세요." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lP8-X9-lgi">
+                                <rect key="frame" x="20" y="155" width="353" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="XIj-Mh-4gL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c98-Gd-Bgs">
+                                <rect key="frame" x="20" y="205" width="353" height="38.333333333333343"/>
+                                <string key="text">이전에 메모 또는 보관해 놓은 복구구문을
+순서대로 입력하세요.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="띄어쓰기를 포함하여 복구구문을 입력하세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kcg-hF-sNe">
+                                <rect key="frame" x="20" y="262.33333333333331" width="353" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="dSt-IL-LXv"/>
+                                </constraints>
+                                <color key="textColor" systemColor="systemGray3Color"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7eO-ft-ooJ">
+                                <rect key="frame" x="20" y="486.33333333333331" width="181" height="31.666666666666686"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="복구구문을">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="잃어버리셨나요">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="?">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="복구구문을">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="잃어버리셨나요">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="?">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="onLostMnemonic:" destination="zaE-Bc-l17" eventType="touchUpInside" id="hY5-VL-HYR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="V6U-jr-6XL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kcg-hF-sNe" firstAttribute="leading" secondItem="V6U-jr-6XL" secondAttribute="leading" constant="20" id="0jm-uj-lkl"/>
+                            <constraint firstItem="yVM-Ug-2Dp" firstAttribute="leading" secondItem="lbb-Mp-7I4" secondAttribute="leading" id="1QE-P0-jxk"/>
+                            <constraint firstItem="kcg-hF-sNe" firstAttribute="top" secondItem="c98-Gd-Bgs" secondAttribute="bottom" constant="19" id="4f9-K0-Nf3"/>
+                            <constraint firstItem="lP8-X9-lgi" firstAttribute="leading" secondItem="V6U-jr-6XL" secondAttribute="leading" constant="20" id="ANl-5r-Cx6"/>
+                            <constraint firstItem="V6U-jr-6XL" firstAttribute="trailing" secondItem="kcg-hF-sNe" secondAttribute="trailing" constant="20" id="FPx-Hm-1V8"/>
+                            <constraint firstItem="V6U-jr-6XL" firstAttribute="trailing" secondItem="2W9-uI-pUf" secondAttribute="trailing" id="Gm1-hb-XEy"/>
+                            <constraint firstItem="2W9-uI-pUf" firstAttribute="leading" secondItem="V6U-jr-6XL" secondAttribute="leading" id="Omf-Sq-DBO"/>
+                            <constraint firstItem="7eO-ft-ooJ" firstAttribute="leading" secondItem="lbb-Mp-7I4" secondAttribute="leading" constant="20" id="RL6-e6-6QV"/>
+                            <constraint firstItem="V6U-jr-6XL" firstAttribute="trailing" secondItem="lP8-X9-lgi" secondAttribute="trailing" constant="20" id="Vtz-xD-Zss"/>
+                            <constraint firstItem="V6U-jr-6XL" firstAttribute="trailing" secondItem="c98-Gd-Bgs" secondAttribute="trailing" constant="20" id="WBp-W4-HpL"/>
+                            <constraint firstItem="lP8-X9-lgi" firstAttribute="top" secondItem="2W9-uI-pUf" secondAttribute="bottom" constant="40" id="Wny-f8-Rji"/>
+                            <constraint firstItem="c98-Gd-Bgs" firstAttribute="leading" secondItem="lbb-Mp-7I4" secondAttribute="leading" constant="20" id="Y4C-cV-ehf"/>
+                            <constraint firstItem="c98-Gd-Bgs" firstAttribute="top" secondItem="lP8-X9-lgi" secondAttribute="bottom" constant="20" id="e7t-jS-XdA"/>
+                            <constraint firstItem="V6U-jr-6XL" firstAttribute="bottom" secondItem="yVM-Ug-2Dp" secondAttribute="bottom" id="fTa-7Q-lse"/>
+                            <constraint firstItem="7eO-ft-ooJ" firstAttribute="top" secondItem="kcg-hF-sNe" secondAttribute="bottom" constant="24" id="fYP-Rs-yj2"/>
+                            <constraint firstItem="2W9-uI-pUf" firstAttribute="top" secondItem="V6U-jr-6XL" secondAttribute="top" id="mKy-Wh-NB2"/>
+                            <constraint firstItem="V6U-jr-6XL" firstAttribute="trailing" secondItem="yVM-Ug-2Dp" secondAttribute="trailing" id="xJG-NI-HFi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tvMnemonic" destination="kcg-hF-sNe" id="lvX-xn-vXl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dPF-M5-vut" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1734" y="-27"/>
+        </scene>
     </scenes>
-    <designables>
-        <designable name="CTb-PB-roD">
-            <size key="intrinsicContentSize" width="342" height="63"/>
-        </designable>
-    </designables>
     <resources>
         <image name="btn_back" width="24" height="24"/>
         <image name="btn_close" width="22" height="22"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

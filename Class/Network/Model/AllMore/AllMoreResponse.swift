@@ -96,6 +96,11 @@ struct allData: Codable {
     var _openbank               : Bool?   { get { return  openbank == nil ? false : openbank } }
     /// 제로페이QR 결제 약관동의 여부 입니다.
     var _zeropayPaymentYn       : String? { get { return  NC.S(zeropayPaymentYn)  } }
+    /// NFT 구매 카운트 입니다.
+    var _own_nft_cnt            : Int? { get { return  NC.I(own_nft_cnt)  } }
+    /// NFT 아이디 정보 입니다.
+    var _nft_id                 : String? { get { return  NC.S(nft_id)  } }
+    
     
     
     /// 추천인 입력 가능여부 입니다.
@@ -158,7 +163,10 @@ struct allData: Codable {
     var openbank                : Bool?
     /// 제로페이QR 결제 약관동의 여부 입니다.
     var zeropayPaymentYn        : String?
-    
+    /// NFT 보유 카운트 입니다.
+    var own_nft_cnt             : Int?
+    /// NFT 아이디 정보 입니다.
+    var nft_id                  : String?
 }
 
 

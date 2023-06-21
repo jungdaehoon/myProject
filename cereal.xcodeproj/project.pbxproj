@@ -974,19 +974,11 @@
 				8DFB9D1F29DD35A3004E5021 /* LoadingView */,
 				8D2FC9E429DC05BD0061821F /* BecomeActiveView */,
 				8D51442229D54ADB0019943D /* LottieView */,
-				8D205EFF29D1346E00F43C99 /* WebView */,
 				8D205F0029D1346E00F43C99 /* BottomTermsView */,
 				8D205F0529D1346E00F43C99 /* AlertView */,
 				8D17C9572A14BDD4001CB173 /* BaseView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8D205EFF29D1346E00F43C99 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WebView;
 			sourceTree = "<group>";
 		};
 		8D205F0029D1346E00F43C99 /* BottomTermsView */ = {

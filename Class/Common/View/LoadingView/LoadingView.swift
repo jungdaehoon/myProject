@@ -14,7 +14,7 @@ import UIKit
  */
 class LoadingView: UIView {
     /// 최대 로딩 타임 입니다.
-    private let LOADING_MAX_TIME            = 10.0
+    private var LOADING_MAX_TIME            = 10.0
     /// 로딩 디스플레이 뷰어 입니다.
     @IBOutlet weak var loadingView  : UIImageView!
     /// 로딩중 이미지를 체크 합니다.
@@ -73,13 +73,13 @@ class LoadingView: UIView {
      - Throws: False
      - Returns:False
      */
-    func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
+    func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow }), maxTime : CGFloat = 10.0 ) {
         /// 로그인 중에 추가 로그인 요청을 하지 않습니다.
         if self.isLoading { return }
         if let base = base {
             DispatchQueue.main.async {
                 self.isLoading      = true
-                self.loadingTimer   = Timer.scheduledTimer(timeInterval: self.LOADING_MAX_TIME,
+                self.loadingTimer   = Timer.scheduledTimer(timeInterval: maxTime == 10.0 ? self.LOADING_MAX_TIME : maxTime,
                                              target: self, selector: #selector(self.timerAction),
                                              userInfo: nil,
                                              repeats: false)

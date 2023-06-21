@@ -60,7 +60,7 @@ enum QRCODE_CB : Equatable {
 
 /**
  제로페이 뷰어 관련 모델 입니다. ( J.D.H  VER : 1.0.0 )
- - Date: 2023.03.13
+ - Date: 2023.06.16
 */
 class OKZeroViewModel : BaseViewModel
 {

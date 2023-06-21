@@ -138,12 +138,13 @@ class WalletViewModel : BaseViewModel {
     
     /**
      신규로 생성된 wallet 닉모닉을 생성 합니다.
+     - description: 웹에서 신규 wallet 생성후 정보를 받아 로컬에 파일로 저장 합니다. (/keystore.json)
      - Date: 2023.06.02
      - Parameters:
         - walletPass : 닉모닉 생성시 사용할 wallet 페스워드 입니다.
      - Throws: False
      - Returns:
-        신규로 생성된 wallet 주소를 리턴 합니다. (String?)
+        신규로 생성된 wallet 주소 + 개인키 를 리턴 합니다. (String?)
      */
     private func setCreateMnemonics( walletPass : String = "" ) -> String? {
         SharedDefaults.default.walletMnemonic = ""
@@ -250,24 +251,37 @@ class WalletViewModel : BaseViewModel {
     /**
      지갑 복구를 요청 합니다.
      - description: 웹에서 복구 요청으로 받은 encinfo 정보와 유저가 입력한 닉모닉 정보를 받아 복구구분을 진행 복구된 지갑 정보를 리턴 합니다.
-     - Date: 2023.06.02
+     - Date: 2023.06.20
      - Parameters:
         - encInfo : enc 정보를 받습니다.
         - mnemonic : 복구할 닉모닉 정보 입니다.
      - Throws: False
+     - DispatchQueue: True
      - Returns:
         암호화된 ENC 정보를 리턴 합니다. Future<String?, Never>
      */
     func getRestoreWallet( encInfo : String = "", mnemonic : String = "" ) -> Future<String?, Never> {
         return Future<String?, Never> { promise in
+            
             /// 복호화된 password 를 가져 옵니다.
             if let walletPass = self.getDecryptedWalletPasswdFromInfo(encInfo) {
-                /// 복구된 지갑 정보를 가져 옵니다.
-                if let wallet = self.setWalletWithMnemonuc(walletPass: walletPass, mnemonics: mnemonic) {
-                    promise(.success(wallet))
-                } else { promise(.success("")) }
+                var wallet : String? = nil
+                DispatchQueue.global(qos: .userInteractive).async {
+                    /// 복구된 지갑 정보를 가져 옵니다.
+                    wallet = self.setWalletWithMnemonuc(walletPass: walletPass, mnemonics: mnemonic)
+                    DispatchQueue.main.async {
+                        if let wallet = wallet {
+                            promise(.success(wallet))
+                        }
+                        else
+                        {
+                            promise(.success(""))
+                        }
+                    }
+                }
             } else { promise(.success("")) }
         }
+        
     }
     
     
@@ -303,13 +317,12 @@ class WalletViewModel : BaseViewModel {
             {
                 promise(.success(""))
             }
-                
         }
     }
     
     
     /**
-     로컬에 저장된 wallet 개인 키정보를 리턴 합니다.
+     로컬에 저장된 Wallet 개인 키정보를 리턴 합니다.
      - Date: 2023.06.02
      - Parameters:
         - encInfo : enc 정보를 받습니다.
@@ -319,32 +332,24 @@ class WalletViewModel : BaseViewModel {
      */
     func getWalletPrivateKey( encInfo : String = "" )  -> Future<String?, Never> {
         return Future<String?, Never> { promise in
-            do {
-                if let walletPass = self.getDecryptedWalletPasswdFromInfo(encInfo) {
-                    let userDir             = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                    let path                = userDir+"/keystore/"
-                    let web3KeystoreManager = KeystoreManager.managerForPath(path, scanForHDwallets: true, suffix: "json")
-                    let tcount              = web3KeystoreManager?.addresses?.count ?? 0
-                    if tcount >= 1
-                    {
-                        let web3KeyStore        = web3KeystoreManager?.walletForAddress((web3KeystoreManager?.addresses?[0])!) as? BIP32Keystore
-                        guard let walletAddress = web3KeyStore?.addresses?.first else {
-                            CMAlertView().setAlertView(detailObject: "저장된 정보를 찾을 수 없습니다." as AnyObject, cancelText: "확인") { event in
-                                promise(.success(""))
-                            }
-                            return
+            if let walletPass = self.getDecryptedWalletPasswdFromInfo(encInfo) {
+                var privateKey : String? = nil
+                DispatchQueue.global(qos: .userInteractive).async {
+                    /// 신규로 저장된 Wallet 주소+ 개인키 를 받습니다.
+                    privateKey = self.getPrivateKey(walletPass: walletPass)
+                    DispatchQueue.main.async {
+                        if let privateKey = privateKey {
+                            promise(.success(privateKey))
                         }
-                        let privateKey          = try web3KeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: walletAddress)
-                        Slog("checkPrivate : walletAddress  = \(walletAddress)", category: .wallet)
-                        Slog("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
-                        
-                        promise(.success(privateKey?.toHexString()))
-                        return
+                        else
+                        {
+                            promise(.success(""))
+                        }
                     }
                 }
-                promise(.success(""))
-            } catch {
-                Slog(error, category: .wallet)
+            }
+            else
+            {
                 promise(.success(""))
             }
         }
@@ -352,23 +357,72 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
+     로컬에 저장된 개인 키정보를 리턴 합니다.
+     - Date: 2023.06.20
+     - Parameters:
+        - walletPass : 지갑 주소 정보를 받습니다.
+     - Throws: False
+     - Returns:
+        로컬 개인 키정보를 리턴 합니다. (String?)
+     */
+    private func getPrivateKey( walletPass : String ) -> String? {
+        let userDir             = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let path                = userDir+"/keystore/"
+        let web3KeystoreManager = KeystoreManager.managerForPath(path, scanForHDwallets: true, suffix: "json")
+        let tcount              = web3KeystoreManager?.addresses?.count ?? 0
+        if tcount >= 1
+        {
+            let web3KeyStore        = web3KeystoreManager?.walletForAddress((web3KeystoreManager?.addresses?[0])!) as? BIP32Keystore
+            guard let walletAddress = web3KeyStore?.addresses?.first else {
+                CMAlertView().setAlertView(detailObject: "저장된 정보를 찾을 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                }
+                return nil
+            }
+            do {
+                let privateKey      = try web3KeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: walletAddress)
+                Slog("checkPrivate : walletAddress  = \(walletAddress)", category: .wallet)
+                Slog("checkPrivate: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
+                return privateKey?.toHexString()
+            }
+            catch
+            {
+                Slog(error, category: .wallet)
+            }
+            return nil
+        }
+        return nil
+    }
+    
+    
+    /**
      신규 생성된 지갑 정보를 로컬에 저장 합니다.
-     - description: 웹에서 신규 wallet 생성후 정보를 받아 로컬에 파일로 저장 합니다. (/keystore.json)
+     - Description: 웹에서 신규 Wallet 생성후 정보를 받아 로컬에 파일로 저장 합니다. (/keystore.json) 저장후 주소 + 개인 키 정보를 리턴 합니다.
      - Date: 2023.06.02
      - Parameters:
         - encInfo : enc 정보를 받습니다.
      - Throws: False
+     - DispatchQueue: True
      - Returns:
         저장후 wallet 주소를 리턴 합니다. Future<String?, Never>
      */
-    func setCreateWallet( encInfo:String ) -> Future<String?, Never> {
+    func setCreateWalletToAddrKey( encInfo:String ) -> Future<String?, Never> {
         return Future<String?, Never> { promise in
             /// 복호화된 password 를 가져 옵니다.
             if let walletPass = self.getDecryptedWalletPasswdFromInfo(encInfo) {
-                /// 신규로 저장된 wallet 주소를 받습니다.
-                if let walletAddr = self.setCreateMnemonics( walletPass: walletPass ) {
-                    promise(.success(walletAddr))
-                } else { promise(.success("")) }
+                var walletAddrKey : String? = nil
+                DispatchQueue.global(qos: .userInteractive).async {
+                    /// 신규로 저장된 Wallet 주소+ 개인키 를 받습니다.
+                    walletAddrKey = self.setCreateMnemonics( walletPass: walletPass )
+                    DispatchQueue.main.async {
+                        if let walletAddrKey = walletAddrKey {
+                            promise(.success(walletAddrKey))
+                        }
+                        else
+                        {
+                            promise(.success(""))
+                        }
+                    }
+                }
             } else { promise(.success("")) }
             
         }

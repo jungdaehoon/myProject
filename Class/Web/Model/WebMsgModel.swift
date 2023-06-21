@@ -161,7 +161,7 @@ enum SCRIPT_MESSAGES : String
 class WebMsgModel : BaseViewModel {
     
     /**
-     Wallet 리턴 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
+     Wallet 스크립트 Message 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.24
      - Throws: False
      - Parameters :
