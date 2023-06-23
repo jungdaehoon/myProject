@@ -10,6 +10,25 @@ import WebKit
 
 
 /**
+ 웹 링크 연결시 진행 타입 값입니다. ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.06.23
+*/
+enum WEBVIEW_DID_STATUS {
+    /// 대기 상태 입니다.
+    case stay
+    /// 연결 시작 입니다.
+    case start
+    /// 연결중 입니다.
+    case ing
+    /// 정상 처리 완료 입니다.
+    case finish
+    /// 연결 오류 입니다.
+    case fail
+}
+
+
+
+/**
  기본 베이스 웹 컨트롤뷰 입니다.
  - Date: 2023.03.20
  */
@@ -30,7 +49,8 @@ class BaseWebViewController: UIViewController {
     var webViewRefresh          : UIRefreshControl?
     /// 웝 화면 새로고침 활성화 여부 입니다.
     var webViewRefreshEnabled   : Bool = true
-    
+    /// 웹 링크 연결 진행 상태 값을 가집니다.
+    var webViewDidStatus        : WEBVIEW_DID_STATUS = .stay
     
     
     //MARK: - viewDidLoad
@@ -206,17 +226,21 @@ class BaseWebViewController: UIViewController {
 extension BaseWebViewController: WKNavigationDelegate
 {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
+        /// 웹 연결 상태를 시작으로 합니다.
+        self.webViewDidStatus = .start
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
-        Slog("webView didStartProvisionalNavigation url : \(webView.url!.absoluteString)")        
+        Slog("webView didStartProvisionalNavigation url : \(webView.url!.absoluteString)", category: .network)
         LoadingView.default.show()
     }
     
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        /// 웹 연결 상태를 완료처리 합니다.
+        self.webViewDidStatus = .finish
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
-        Slog("webView didFinish url : \(webView.url!.absoluteString)")
+        Slog("webView didFinish url : \(webView.url!.absoluteString)", category: .network)
         /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
@@ -242,9 +266,11 @@ extension BaseWebViewController: WKNavigationDelegate
     
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        /// 웹 연결 상태를 시작으로 합니다.
+        self.webViewDidStatus = .fail
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
-        Slog("webView didFail url : \(webView.url!.absoluteString)")
+        Slog("webView didFail url : \(webView.url!.absoluteString)", category: .network)
         /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
@@ -254,9 +280,11 @@ extension BaseWebViewController: WKNavigationDelegate
     
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        /// 웹 연결 상태를 시작으로 합니다.
+        self.webViewDidStatus = .fail
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
-        Slog("webView didFailProvisionalNavigation url : \(webView.url!.absoluteString)")
+        Slog("webView didFailProvisionalNavigation url : \(webView.url!.absoluteString)", category: .network)
         /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
@@ -373,7 +401,7 @@ extension BaseWebViewController: WKScriptMessageHandler {
      - Date: 2023.03.28
      */
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        Slog("wkwebview run javascript name = \(message.name) body = \(message.body)")
+        Slog("wkwebview run javascript name = \(message.name) body = \(message.body)", category: .network)
         /// 쿠키 업데이트 메세지 이벤트 입니다.
         if message.name == "\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies)"
         {
@@ -383,9 +411,9 @@ extension BaseWebViewController: WKScriptMessageHandler {
             /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
             self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
                 self.webView!.evaluateJavaScript(script) { ( anyData , error) in
-                    Slog("updateCookies anyData:\(anyData as Any)")
-                    Slog("updateCookies error:\(error as Any)")
-                    Slog("updateCookies script:\(script)")
+                    Slog("updateCookies anyData:\(anyData as Any)", category: .network)
+                    Slog("updateCookies error:\(error as Any)", category: .network)
+                    Slog("updateCookies script:\(script)", category: .network)
                 }
             }.store(in: &self.baseViewModel.cancellableSet)
             return

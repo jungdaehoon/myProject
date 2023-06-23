@@ -63,7 +63,7 @@
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52d-pw-dIg" userLabel="BG COLOR">
                             <rect key="frame" x="0.0" y="0.0" width="350" height="208"/>
-                            <color key="backgroundColor" red="0.16470588235294117" green="0.20784313725490194" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -231,7 +231,7 @@
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsP-1s-sP8" userLabel="BG COLOR">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="208"/>
-                                    <color key="backgroundColor" red="0.1647058824" green="0.20784313730000001" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -331,7 +331,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Gvs-fr-BnS" firstAttribute="leading" secondItem="S7O-66-hUm" secondAttribute="leading" constant="16" id="1rt-Hc-68x"/>
                                 <constraint firstItem="7kx-G6-gKy" firstAttribute="top" secondItem="QCj-Ab-2lV" secondAttribute="bottom" constant="16" id="2pv-Ij-ERf"/>

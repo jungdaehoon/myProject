@@ -163,7 +163,7 @@ enum AlamofireAgent {
         _ url: String,
         multipartFormData: @escaping (MultipartFormData) -> Void,
         encodingCompletion: ((SessionManager.MultipartFormDataEncodingResult) -> Void)?) {
-        let url                     = URL(string: domainUrl + url)!
+        let url                     = URL(string:url)!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"        
         return defaultManager.upload(multipartFormData: multipartFormData, with: urlRequest, encodingCompletion: encodingCompletion)

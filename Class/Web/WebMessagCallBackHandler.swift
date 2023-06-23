@@ -96,11 +96,11 @@ class WebMessagCallBackHandler : NSObject  {
                 break
                 /// 사진(갤러리)앱에서 사진을 선택해서 서버에 전송 합니다.
             case .getImageFromGallery        :
-                self.setImageSendServer( body )
+                self.setPhotoImageToServer( body )
                 break
                 /// 사진을 촬영해서 서버에 전송 합니다.
             case .getImageFromCamera         :
-                self.setImageSendServer( body , sourceCamera: true)
+                self.setPhotoImageToServer( body , sourceCamera: true)
                 break
                 /// 로딩바 디스플레이 합니다.
             case .showLoadingBar             :
@@ -982,10 +982,12 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      보안키패드 오픈 입니다.
+     - Description: 보안 키패드 오픈시 web url 연결 finish 전에 키패드 오픈 경우 정상 오픈이 안되는 경우가 있어 finish 확인후 오픈 하도록 합니다.
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 바디 데이터 입니다.
      - Throws: False
+     - DispatchQueue: True
      - Returns:False
      */
     func setSecureKeyPadDisplay( _ body : [Any?] ){
@@ -997,18 +999,43 @@ class WebMessagCallBackHandler : NSObject  {
         let padType         = params[0] as? String
         /// 최대 입력 카운트를 받습니다.
         let maxNumber       = params[1] as? Int
-        let _ = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
-            switch cbType {
-            case .progress( let message ) :
-                self.setEvaluateJavaScript(callback: callback[0], message: message)
-            case .success( let message ) :
-                self.setEvaluateJavaScript(callback: callback[1], message: message, isJson: true)
-            case .fail( let message ) :
-                self.setEvaluateJavaScript(callback: callback[2], message: message)
-            default:
-                break
+        /// 기본 웹 컨트롤러가 연결되어있는지를 체크 합니다.
+        if let controller = self.target as? BaseWebViewController {
+            /// 웹 연결 URL 이 정상 finish 가 호출 될때 까지 대기 합니다.
+            DispatchQueue.global(qos: .userInitiated).async {
+                var count = 0
+                while true {
+                    Thread.sleep(forTimeInterval: 0.1)
+                    if controller.webViewDidStatus == .finish ||
+                       controller.webViewDidStatus == .fail
+                    {
+                        /// 정상 처리 후 대기 상태로 변경 합니다.
+                        controller.webViewDidStatus = .stay
+                        break
+                    }
+                    count += 1
+                    /// 최대 대기 타임은 10초로 합니다.
+                    if count > 100 { break }
+                }
+                
+                DispatchQueue.main.async {
+                    /// 보인 키패드를 오픈 합니다.
+                    let _ = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
+                        switch cbType {
+                        case .progress( let message ) :
+                            self.setEvaluateJavaScript(callback: callback[0], message: message)
+                        case .success( let message ) :
+                            self.setEvaluateJavaScript(callback: callback[1], message: message, isJson: true)
+                        case .fail( let message ) :
+                            self.setEvaluateJavaScript(callback: callback[2], message: message)
+                        default:
+                            break
+                        }
+                    }
+                }
             }
         }
+        
     }
     
     
@@ -1093,23 +1120,32 @@ class WebMessagCallBackHandler : NSObject  {
     /// 업로드할 이미지를 받습니다.
     @Published var uploadImg : UIImage?
     /**
-     사진첩에 이미지를 찾아 업로드 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. )
-     - Date: 2023.03.29
+     카메라 및. 사진첩에. 이미지를. 찾아. 업로드 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. )
+     - Date: 2023.06.23
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
         - sourceCamera : ImagePicker 접근 타입으로 기본 .photoLibrary 접근으로 합니다. ( default : false )
      - Throws: False
      - Returns:False
      */
-    func setImageSendServer( _ body : [Any?], sourceCamera : Bool = false  ){
+    func setPhotoImageToServer( _ body : [Any?], sourceCamera : Bool = false  ){
         guard self.target != nil else { return }
         /// 이미지 업로드 여부를 체크 합니다.
         self.$uploadImg.sink { image in
             if let uploadImage = image
             {
-                self.btnSendServerAction(image: uploadImage)
+                /// 이미지를 업로드 합니다.
+                self.viewModel.setUpdateImage(image: uploadImage).sink { value in
+                    if let message = value {
+                        /// 타입별 리턴 콜백을 받습니다.
+                        let callBacks = body[0] as! Array<String>
+                        /// 콜백으로 데이터를 리턴 합니다.
+                        self.setEvaluateJavaScript(callback: callBacks[0] , message: message, isJson: true)
+                    }
+                }.store(in: &self.cancellableSet)
             }
         }.store(in: &self.cancellableSet)
+        
         /// 접근 타입이 카메라인 경우 입니다.
         if sourceCamera == true
         {
@@ -1143,7 +1179,6 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }.store(in: &self.viewModel.cancellableSet)
         }
-        
     }
     
     
@@ -1755,43 +1790,46 @@ extension WebMessagCallBackHandler{
      - Throws: False
      - Returns:False
      */
-    func setEvaluateJavaScript(callback: String, message : Any , isJson : Bool = false ) {
+    func setEvaluateJavaScript(callback: String, message : Any? , isJson : Bool = false ) {
         /*
          iOSPluginJSNI.callbackFromNative('aaaa','20230412')
          */
-        var scriptMsg = "iOSPluginJSNI.callbackFromNative('\(callback)'"
-        if isJson
-        {
-            scriptMsg += ",\(message))"
-        }
-        else
-        {
-            if let message = message as? Array<String>
+        if let message = message {
+            var scriptMsg = "iOSPluginJSNI.callbackFromNative('\(callback)'"
+            if isJson
             {
-                for item in message
-                {
-                    scriptMsg += ",'\(item)'"
-                }
-            }
-            else if let message = message as? String
-            {
-                scriptMsg += ",'\(message)'"
+                scriptMsg += ",\(message))"
             }
             else
             {
-                scriptMsg += ",'\(message)'"
+                if let message = message as? Array<String>
+                {
+                    for item in message
+                    {
+                        scriptMsg += ",'\(item)'"
+                    }
+                }
+                else if let message = message as? String
+                {
+                    scriptMsg += ",'\(message)'"
+                }
+                else
+                {
+                    scriptMsg += ",'\(message)'"
+                }
+                scriptMsg += ")"
             }
-            scriptMsg += ")"
+            
+            Slog("scriptMsg:\(scriptMsg)")
+            self.webView!.evaluateJavaScript(scriptMsg) { ( anyData , error) in
+                if (error != nil)
+                {
+                    //self.hideHudView()
+                    Slog("error___1")
+                }
+            }
         }
         
-        Slog("scriptMsg:\(scriptMsg)")
-        self.webView!.evaluateJavaScript(scriptMsg) { ( anyData , error) in
-            if (error != nil)
-            {
-                //self.hideHudView()
-                Slog("error___1")
-            }
-        }
     }
     
     
@@ -1870,7 +1908,7 @@ extension WebMessagCallBackHandler : UIImagePickerControllerDelegate , UINavigat
         }
         
         picker.dismiss(animated:true) {
-            var image       = selectedImage
+            let image       = selectedImage
             guard let type  = info[.mediaType] as? NSString else {return}
             switch type as CFString {
             case kUTTypeImage:
@@ -1936,111 +1974,3 @@ extension WebMessagCallBackHandler : CNContactViewControllerDelegate {
     }
 }
 
-
-
-
-extension WebMessagCallBackHandler {
-    
-    /// 선택한 이미지를 서버에 전송
-    func btnSendServerAction(image : UIImage)  -> Future<String?, Never>
-    {
-        return Future<String?, Never> { promise in
-            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-                Slog("Could not get JPEG representation of UIImage")
-                return
-            }
-            let custItem = SharedDefaults.getKeyChainCustItem()
-            // Multi-part 형태로 보낸다.
-            AlamofireAgent.upload(WebPageConstants.baseURL + APIConstant.API_NFT_IMAGE, multipartFormData: { (multipartFormData) in
-                multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
-                multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.uploadProgress { progress in
-                        Slog(progress.fractionCompleted)
-                    }
-                    
-                    _ = upload.log()
-                    
-                    
-                    upload.response(completionHandler: { (defaultData) in
-                        if let data =  defaultData.data {
-                            let responseData = String(data: data, encoding: .utf8)
-                            Slog(defaultData.response?.statusCode as Any)
-                            Slog(responseData as Any)
-                        }
-                    })
-                    
-                    upload.responseJSON { response in
-                        guard response.result.isSuccess else {
-                            Slog("Error while uploading file: \(String(describing: response.result.error))")
-                            /// 스크립트 실패 보내기
-                            return
-                        }
-                       
-                        if let value = response.result.value as? [String:Any] {
-                        
-                            if let data = value["data"] as? [String:Any] {
-                                if let url = data["url"] as? String {
-                                    let infoStr     = data["info"] as? String ?? ""
-                                    let retJsonStr  = self.getNftReturnJsonMsg(url,infoStr)
-                                    promise(.success(retJsonStr))
-                                } else {
-                                    let retJsonStr  = self.getNftReturnJsonMsg()
-                                    promise(.success(retJsonStr))                                    
-                                    return
-                                }
-                            }
-                        } else {
-                            let retJsonStr = self.getNftReturnJsonMsg()
-                            promise(.success(retJsonStr))
-                            return
-                        }
-                    }
-                    
-                case .failure(let encodingError):
-                    Slog(encodingError)
-                    promise(.success("false"))
-                    return
-                }
-            })
-        }
-    }
-        
-        
-    
-    
-    private func getNftReturnJsonMsg(_ url:String = "" ,_ infoStr:String = "" ) -> String {
-        var isSuccess = false
-        if (url.count > 0 ){
-            isSuccess = true
-        }
-
-        let resultStr : String = isSuccess ? "true" :  "false"
-        let errorStr : String = isSuccess ? "" :  "파일 업로드 오류 입니다."
-        
-        // 앱버전 조회
-        let message : [String:Any] = [
-            "result" : resultStr,
-            "url" : url,
-            "info" : infoStr,
-            "msg" : errorStr,
-        ]
-        
-        do {
-            let data =  try JSONSerialization.data(withJSONObject: message, options:.prettyPrinted)
-            if let dataString = String.init(data: data, encoding: .utf8) {
-                //resultCallback( HybridResult.success(message: dataString ))
-                return dataString
-            }
-        } catch {
-           // resultCallback( HybridResult.success(message: dataString ))
-            return ""
-        }
-        return ""
-    }
-    
-
-}

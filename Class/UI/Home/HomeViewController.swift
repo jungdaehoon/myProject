@@ -16,7 +16,7 @@ class HomeViewController: BaseViewController {
 
     /// 웹 화면 디스플레이할 영역 뷰어 입니다.
     @IBOutlet weak var displayWebView: UIView!
-    var loadEnabled : Bool = false
+    
         
     // MARK: - viewDidLoad
     override func viewDidLoad() {

@@ -98,6 +98,8 @@ class FullWebViewController: BaseViewController {
     /// 웹 디스플레이 여부를 체크 합니다.
     var startWebDisplay                 : Bool          = false
     
+    
+    
     // MARK: - init
     /**
      전체 웹뷰 초기화 메서드 입니다.
@@ -352,7 +354,7 @@ extension FullWebViewController {
                 {
                     /// 제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다.
                     self.viewModel.getZeroPayURLParams(url: url).sink { param in
-                        if let param = param {
+                        if let _ = param {
                             /// GET 방식 파라미터를 추가한 URL 정보를 가져 옵니다.
                             self.viewModel.getURLGetType(mainUrl: WebPageConstants.URL_ZERO_PAY_GIFTCARD_PAYMENT, params: params).sink { getUrl in
                                 DispatchQueue.main.async {

@@ -35,9 +35,9 @@ enum SCRIPT_MESSAGES : String
     case sendSMS                    = "sendSMS"
     /// 현재 웹뷰를 캡쳐해서 사진(갤러리) 앱에 저장 합니다.
     case captureAndSaveImage        = "captureAndSaveImage"
-    /// 사진(갤러리)앱에서 사진을 선택해서 프로필 사진으로 서버에 전송 합니다.
+    /// 사진(갤러리)앱에서 사진을 선택해서 서버에 전송 합니다.
     case getImageFromGallery        = "getImageFromGallery"
-    /// 
+    /// 사진을 촬영해서 서버에 전송 합니다.
     case getImageFromCamera         = "getImageFromCamera"
     /// 로딩바 디스플레이 합니다.
     case showLoadingBar             = "showLoadingBar"
@@ -161,6 +161,37 @@ enum SCRIPT_MESSAGES : String
 class WebMsgModel : BaseViewModel {
     
     /**
+      NFI 이미지를  전송 합니다.
+     - Description: NFT 등록시 이미지 업로드 용으로 사용 합니다.
+     - Date: 2023.06.23
+     - Parameters:
+        - image : 서버에 업로드할 이미지 입니다.
+     - Throws: False
+     - Returns:
+        웹페이지로  리턴할 스크립트를 리턴 합니다.  Future<String?, Never>
+     */
+    func setUpdateImage( image : UIImage ) -> Future<String?, Never>
+    {
+        return Future<String?, Never> { promise in
+            /// 서버에 이미지를 전송 합니다.
+            self.request(image: image, url: APIConstant.API_NFT_IMAGE).sink { value in
+                /// NFT 업로드 결과용 스크립트 데이터를 기본 정보로 설정 합니다.
+                var retJsonStr = self.getNftReturnJsonMsg()
+                if let value = value,
+                   let data  = value["data"] as? [String:Any],
+                   let url   = data["url"] as? String
+                {
+                    let infoStr = data["info"] as? String ?? ""
+                    /// NFT 업로드 결과용 스크립트를 가져 옵니다.
+                    retJsonStr  = self.getNftReturnJsonMsg(url,infoStr)
+                }
+                promise(.success(retJsonStr))
+            }.store(in: &self.cancellableSet)
+        }
+    }
+    
+    
+    /**
      Wallet 스크립트 Message 데이터를 설정 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.24
      - Throws: False
@@ -215,6 +246,45 @@ class WebMsgModel : BaseViewModel {
         return ""
     }
 
-    
+    /**
+     NFT 이미지 업로드 결과를 JSon 형태로 웹 스크립트 Message 를 생성 합니다.  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.06.23
+     - Throws: False
+     - Parameters :
+        - isSuccess : 데이터 여부 입니다.
+        - data : 데이터 정보 입니다.
+        - msg : 데이터가 없는 경우 메세지 정보 입니다.
+     - Returns:
+        리턴 할 데이터 정보 입니다. (Future<String, Never>)
+     */
+    private func getNftReturnJsonMsg( _ url:String = "", _ infoStr:String = "" ) -> String {
+        var isSuccess = false
+        if (url.count > 0 ){
+            isSuccess = true
+        }
+
+        let resultStr : String = isSuccess ? "true" :  "false"
+        let errorStr : String = isSuccess ? "" :  "파일 업로드 오류 입니다."
+        
+        // 앱버전 조회
+        let message : [String:Any] = [
+            "result" : resultStr,
+            "url" : url,
+            "info" : infoStr,
+            "msg" : errorStr,
+        ]
+        
+        do {
+            let data =  try JSONSerialization.data(withJSONObject: message, options:.prettyPrinted)
+            if let dataString = String.init(data: data, encoding: .utf8) {
+                //resultCallback( HybridResult.success(message: dataString ))
+                return dataString
+            }
+        } catch {
+           // resultCallback( HybridResult.success(message: dataString ))
+            return ""
+        }
+        return ""
+    }
     
 }

@@ -245,6 +245,77 @@ class BaseViewModel : NSObject {
     
     
     /**
+     이미지를 서버에 전송 합니다.
+     - Date: 2023.06.23
+     - Parameters:
+        - image : 서버에 업로드할 이미지 입니다.
+        - url : 업로드할 URL 정보 입니다.
+     - Throws: False
+     - Returns:서버로 리턴할 스크립트를 리턴 합니다.  Future<[String:Any]?, Never>
+     */
+    func request( image : UIImage, url : String )  -> Future<[String:Any]?, Never>
+    {
+        return Future<[String:Any]?, Never> { promise in
+            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+                Slog("Could not get JPEG representation of UIImage", category: .network)
+                return
+            }
+            let custItem = SharedDefaults.getKeyChainCustItem()
+            // Multi-part 형태로 보낸다.
+            AlamofireAgent.upload( AlamofireAgent.domainUrl + url, multipartFormData: { (multipartFormData) in
+                multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
+                multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.uploadProgress { progress in
+                        Slog(progress.fractionCompleted, category: .network)
+                    }
+                    _ = upload.log()
+                    
+                    upload.response(completionHandler: { (defaultData) in
+                        if let data =  defaultData.data {
+                            let responseData = String(data: data, encoding: .utf8)
+                            Slog(defaultData.response?.statusCode as Any, category: .network)
+                            Slog(responseData as Any, category: .network)
+                        }
+                    })
+                    
+                    upload.responseJSON { response in
+                        guard response.result.isSuccess else {
+                            Slog("Error while uploading file: \(String(describing: response.result.error))", category: .network)
+                            promise(.success(nil))
+                            /// 스크립트 실패 보내기
+                            return
+                        }
+                       
+                        if let value = response.result.value as? [String:Any] {
+                            promise(.success(value))
+                            return
+                        }
+                        else
+                        {
+                            promise(.success(nil))
+                            return
+                        }
+                    }
+                case .failure(let encodingError):
+                    Slog(encodingError, category: .network)
+                    promise(.success(nil))
+                    return
+                }
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    /**
      앱 시작시 관련 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.03
      - Parameters:False

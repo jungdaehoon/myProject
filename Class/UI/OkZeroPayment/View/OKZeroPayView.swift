@@ -25,7 +25,7 @@ enum ZEROPAY_BTN_TYPE : Int {
     /// 신규 코드 생성 입니다.
     case creation_code      = 13
     /// 매장 찾기 입니다.
-    case location_search     = 14
+    case location_search    = 14
 }
 
 
@@ -179,6 +179,8 @@ class OKZeroPayView: UIView {
             }
         }.store(in: &self.viewModel.cancellableSet)
                 
+        /// 카드 선택 값을 초기화 합니다.
+        OKZeroViewModel.zeroPayShared.cardChoice = nil
         /// 카드 전체 화면 뷰에서 카드선택시 이벤트 입니다.
         OKZeroViewModel.zeroPayShared.$cardChoice.sink { value in
             if let card = value {
@@ -615,7 +617,7 @@ class OKZeroPayView: UIView {
             self.payCardListTop.constant                = cardListUpdatY
             /// QR결제 위치로 선택 배경을 이동 합니다.
             UIView.animate(withDuration: 0.20, delay: 0.0, options: .curveEaseIn) {
-                self.detaileViewTop.constant        = display == true ? 12.0 : 315.0
+                self.detaileViewTop.constant        = 12.0
                 /// 카드리스트 뷰어가 전체 화면 변경으로 전에 카드 위치값을 변경 합니다.
                 self.payCardListView.setCardListPosition( startPosition: (cardListUpdatY * -1) + topPosition)
                 self.layoutIfNeeded()
@@ -685,6 +687,7 @@ class OKZeroPayView: UIView {
                     {
                         self.viewModel.codeTimer = .exit_time
                     }
+
                     self.popViewController(animated: true, animatedType:  .down)
                     break
                 /// 결제 타입 선택버튼 입니다.

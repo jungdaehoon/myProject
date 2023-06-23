@@ -57,7 +57,7 @@ class PointItemView: UIView {
             /// OK포인트 정보 입니다.
             self.okPointText.text   = "\(result._user_point!.addComma())"
             /// NFT 보유 카운트 입니다.
-            self.nftCount.text      = "\(result.own_nft_cnt!)"
+            self.nftCount.text      = "\(result._own_nft_cnt!)"
             
             /// 계좌 정보가 없는 경우입니다.
             if result._acc_no!.isEmpty
