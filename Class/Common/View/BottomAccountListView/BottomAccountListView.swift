@@ -8,17 +8,43 @@
 import UIKit
 
 /**
+ 하단 계좌 선택 뷰어  버튼 타입 입니다. ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.06.27
+*/
+enum BOTTOM_ACCOUNT_LIET_BTN_ACTION : Int {
+    /// 계좌 리스트 종료 입니다.
+    case close        = 10
+    /// 계좌 추가 입니다.
+    case add_account  = 11
+}
+
+
+enum BOTTOM_ACCOUNT_EVENT {
+    /// 계좌 추가 이벤트 입니다.
+    case add_account
+    /// 계좌 선택 이벤트 입니다.
+    case account( account : String? )
+}
+
+/**
  하단 계좌 선택 뷰어 입니다.   ( J.D.H  VER : 1.0.0 )
  - Date: 2023.04.05
  */
 class BottomAccountListView: BaseView {
 
+    /// 계좌 리스트 기본 높이 입니다.
+    let ACCOUNT_DEFAULT_HEIGHT  = 102.0
+    /// 계좌 리스트 기본 하단 위치 입니다.
+    let ACCOUNT_DEFAULT_BOTTOM  = -24.0
+    /// 계좌 기본 높이 입니다.
+    let ACCOUNT_CELL_HEIGHT     = 64.0
+    var completion                : (( _ event : BOTTOM_ACCOUNT_EVENT ) -> Void )? = nil
     /// 계좌 리스트뷰 최하단 포지션 입니다.
     @IBOutlet weak var accountListViewBottom: NSLayoutConstraint!
     /// 계좌 리스트 뷰어 입니다.
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView            : UITableView!
     /// 계좌 리스트 최대 높이 입니다.
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeight      : NSLayoutConstraint!
     /// 선택 인덱스 입니다.
     var seletedIndex : Int = 0
     
@@ -48,6 +74,12 @@ class BottomAccountListView: BaseView {
         self.tableView.register(UINib(nibName: "BottomAccountListTableViewCell", bundle: nil), forCellReuseIdentifier: "BottomAccountListTableViewCell")
         /// 해더 간격을 0 으로 설정 합니다.
         if #available(iOS 15, *) { self.tableView.sectionHeaderTopPadding = 0 }
+      
+        /// 계좌 리스트 기본 높이를 설정 합니다.
+        self.tableViewHeight.constant       = ACCOUNT_CELL_HEIGHT * 5
+        /// 계좌 선택 리스트 뷰어 전체 높이를 아래로 이동 합니다.
+        self.accountListViewBottom.constant = ACCOUNT_DEFAULT_HEIGHT + (ACCOUNT_CELL_HEIGHT * 5) * -1
+        
     }
 
 
@@ -58,10 +90,18 @@ class BottomAccountListView: BaseView {
      - Throws: False
      - Returns:False
      */
-    func show() {
+    func show( completion : (( _ event : BOTTOM_ACCOUNT_EVENT ) -> Void )? = nil ) {
+        self.completion = completion
         if let base = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
             DispatchQueue.main.async {
                 base.addSubview(self)
+                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                UIView.animate(withDuration:0.3, delay: 0.1, options: .curveEaseOut) { [self] in
+                    self.accountListViewBottom.constant = ACCOUNT_DEFAULT_BOTTOM
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                }
+                
             }
         }
     }
@@ -89,6 +129,18 @@ class BottomAccountListView: BaseView {
     
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        if let type =  BOTTOM_ACCOUNT_LIET_BTN_ACTION(rawValue: (sender as AnyObject).tag)
+        {
+            switch type {
+            case .add_account:
+                if let event = self.completion {
+                    event(.add_account)
+                }
+                break
+            case .close:
+                break
+            }
+        }
         self.hide()
     }
 }
@@ -99,7 +151,15 @@ class BottomAccountListView: BaseView {
 extension BottomAccountListView : UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.reloadData()
+        if let event = self.completion {
+            event(.account(account: "237829332348293"))
+        }
+        self.hide()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return ACCOUNT_CELL_HEIGHT
     }
 }
 
@@ -113,6 +173,7 @@ extension BottomAccountListView : UITableViewDataSource
     {
         return 1
     }
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

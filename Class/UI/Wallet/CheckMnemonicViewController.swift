@@ -68,7 +68,6 @@ class CheckMnemonicViewController: UIViewController {
             /// 안내 팝업 오픈 합니다.
             CMAlertView().setAlertView(detailObject: "복구 구문 확인이 틀렸습니다.\n복구 구문 순서에 맞게 다시 선택하거나,뒤로 돌아가 복구 구문을\n다시 기록하세요." as AnyObject, cancelText: "확인") { event in
             }
-            
         }
 
     }

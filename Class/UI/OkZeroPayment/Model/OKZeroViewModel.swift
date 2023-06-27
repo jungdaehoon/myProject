@@ -59,6 +59,20 @@ enum QRCODE_CB : Equatable {
 
 
 /**
+ 카드 디스플레이 타입  입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.06.27
+*/
+enum CARD_DISPLAY  : Equatable {
+    /// 시작 타입 입니다.
+    case start
+    /// 하단 디스플레이 타입 입니다.
+    case bottom
+    /// 전체 화면 입니다.
+    case full
+}
+
+
+/**
  제로페이 뷰어 관련 모델 입니다. ( J.D.H  VER : 1.0.0 )
  - Date: 2023.06.16
 */
@@ -77,6 +91,8 @@ class OKZeroViewModel : BaseViewModel
     @Published var codeTimer    : CODE_ENABLED_TIME  = .start_time
     /// 카드 선택시 정보를 가집니다.
     @Published var cardChoice   : OKZeroPayCardView? = nil
+    /// 카드 디스플레이 타입을 가집니다.
+    @Published var cardDisplay  : CARD_DISPLAY = .bottom
     
     
     /**

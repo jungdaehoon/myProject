@@ -124,6 +124,8 @@ class OKZeroPayCodeFullView: UIView {
             self.barCodeTypeInfoText.text           = "매장에 바코드를 보여주세요"
             /// 바코드 넘버를 디스플레이 합니다.
             self.barCodeNumberText.text             = code
+            /// 전체 화면 디스플레이 값입니다.
+            self.barCodeGenerator.fullDisplay       = true
             /// 바코드 결제 이미지를 디스플레이 합니다.
             self.barCodeGenerator.setCodeDisplay(.barcode, code: code, completion: { success in
                 if success
@@ -147,6 +149,8 @@ class OKZeroPayCodeFullView: UIView {
             self.qrCodeView.borderColor             = .OKColor
             /// QRCode 사용가능 안내 문구를 디스플레이 합니다.
             self.qrCodeTypeInfoText.text            = "매장에 QR코드를 보여주세요"
+            /// 전체 화면 디스플레이 값입니다.
+            self.qrCodeGenerator.fullDisplay        = true            
             /// QRCode 결제 이미지를 디스플레이 합니다.
             self.qrCodeGenerator.setCodeDisplay(.qrcode, code: code, completion: { success in
                 if success

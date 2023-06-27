@@ -23,8 +23,6 @@ class OKZeroPayCardListView: UIView {
     @IBOutlet weak var scrollView       : UIScrollView!
     /// 코드 선택시 이벤트 입니다.
     var btnEvent                        : (( _ success : Bool ) -> Void)? = nil
-    /// 전체 화면 활성화 버튼 입니다
-    @IBOutlet weak var listEnabledBtn   : UIButton!
     /// 카드 뷰어를 저장 합니다.
     var cardViews                       : [OKZeroPayCardView?] = []
     /// 카드 뷰어 상단 까지의 포지션 입니다.
@@ -84,11 +82,9 @@ class OKZeroPayCardListView: UIView {
      */
     func setCardDisplay(){
         /// 카드 그라데이션 컬러 입니다.
-        let colors : [(start : UIColor, end : UIColor)]  = [(UIColor(hex: 0x666666),UIColor(hex: 0xF6F6F6)),
-                               (UIColor(hex: 0x2A357F),UIColor(hex: 0x626FC1)),
-                                                        (UIColor(hex: 0xFF5300),UIColor(hex: 0xFD9200))]
+        let colors : [(start : UIColor, end : UIColor)]  = [(UIColor(hex: 0x666666),UIColor(hex: 0xF6F6F6)),(UIColor(hex: 0xFF5300),UIColor(hex: 0xFD9200))]
         /// 최대 카운트 3개 입니다.
-        let maxCount = 3
+        let maxCount = 2
         /// 기본 카드 뷰어를 설정 합니다.
         for index in 0..<maxCount
         {
@@ -98,11 +94,8 @@ class OKZeroPayCardListView: UIView {
             let point                           = CGPoint(x: self.frame.size.width/2 - size.width/2, y: CGFloat(index) * 7.0)
             cardview.frame                      = CGRect(origin: point, size: size)
             switch index {
-                case 2 :
-                    cardview.setDisplayView(displayType: .okmoney, colors: colors[index])
-                    break
                 case 1 :
-                    cardview.setDisplayView(displayType: .account, colors: colors[index])
+                    cardview.setDisplayView(displayType: .okmoney, colors: colors[index])
                     break
                 case 0 :
                     cardview.setDisplayView(displayType: .banner)
@@ -323,16 +316,6 @@ class OKZeroPayCardListView: UIView {
                     }
                 }
             }
-        }
-    }
-    
-    
-    //MARK: - 버튼 액션 입니다.
-    @IBAction func btn_action(_ sender: Any) {
-        if let event = self.btnEvent
-        {
-            self.listEnabledBtn.isHidden = true
-            event(true)
         }
     }
 }

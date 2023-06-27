@@ -148,7 +148,7 @@ class TabbarViewController: UITabBarController {
                         /// 진행중인 탭 인덱스를 초기화 합니다.
                         self.setIngTabToRootController()
                         /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                        self.setSelectedIndex( .home, seletedItem: url)
+                        self.setSelectedIndex( .home, seletedItem: WebPageConstants.baseURL + url)
                         /// PUSH 에서 받은 연결 정보를 초기화 합니다.
                         BaseViewModel.shared.pushUrl = ""
                     }

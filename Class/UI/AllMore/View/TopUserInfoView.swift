@@ -49,16 +49,31 @@ class TopUserInfoView: UIView {
         {
             /// 닉네임 정보를 디스플레이 합니다.
             self.nickNameText.text  = "\(result._nickname!)"
-            
-            /// 프로필 이미지를 다운로드 합니다.
-            if result._user_img_url!.isValid,
-               let url = URL(string: result._user_img_url!)
+            /// NFT ID 정보가 있는지를 체크 합니다.
+            if result._nft_id!.isValid
             {
-                UIImageView.loadImage(from: url).sink { image in
-                    if let profileImage = image {
-                        self.profileImage.image = profileImage
-                    }
-                }.store(in: &self.viewModel!.cancellableSet)
+                if let url = URL(string: AlamofireAgent.domainUrl + "/all/profileImage?userNo=" + result._user_no!) {
+                    UIImageView.loadImage(from: url).sink { image in
+                        if let profileImage = image {
+                            /// 뷰어를 6각 형으로 변경 합니다.
+                            self.profileImage.applyHexagonMask()
+                            self.profileImage.image = profileImage
+                        }
+                    }.store(in: &self.viewModel!.cancellableSet)
+                }
+            }
+            else
+            {
+                /// 프로필 이미지를 다운로드 합니다.
+                if result._user_img_url!.isValid,
+                   let url = URL(string: result._user_img_url!)
+                {
+                    UIImageView.loadImage(from: url).sink { image in
+                        if let profileImage = image {
+                            self.profileImage.image = profileImage
+                        }
+                    }.store(in: &self.viewModel!.cancellableSet)
+                }
             }
         }
     }

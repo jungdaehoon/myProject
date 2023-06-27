@@ -24,7 +24,8 @@ class QRorBarCodeGeneratorView: UIView {
     var type                        : ZEROPAY_CODE_TYPE?
     /// 코드 선택시 이벤트 입니다.
     var btnEvent                    : (( _ success : Bool ) -> Void)? = nil
-    
+    /// 전체화면 디스플레이 여부를 체크 합니다.
+    var fullDisplay                 : Bool = false
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -105,7 +106,15 @@ class QRorBarCodeGeneratorView: UIView {
     func resize( image : UIImage, size : CGSize) -> UIImage {
         let render = UIGraphicsImageRenderer(size: size)
         let renderImage = render.image { context in
-            image.draw(in: CGRect(origin: CGPoint(x: -20.0, y: -20.0), size: CGSize(width: size.width + 40, height: size.height + 40)))
+            if self.fullDisplay
+            {
+                image.draw(in: CGRect(origin: CGPoint(x: -30.0, y: -35.0), size: CGSize(width: size.width + 60, height: size.height + 70)))
+            }
+            else
+            {
+                image.draw(in: CGRect(origin: CGPoint(x: -20.0, y: -20.0), size: CGSize(width: size.width + 40, height: size.height + 40)))
+            }
+            
         }
         return renderImage
     }

@@ -41,8 +41,7 @@ install_framework()
 
   if [ -L "${source}" ]; then
     echo "Symlinked..."
-    #source="$(readlink "${source}")" xcode14.3 버전에서 오류 발생으로 아래로 변경 합니다. ( J.D.H  VER : 1.0.0 )
-    source="$(readlink -f "${source}")"
+    source="$(readlink "${source}")"
   fi
 
   if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then

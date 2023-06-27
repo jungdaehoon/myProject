@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
             <connections>
                 <outlet property="accountListViewBottom" destination="09G-Z2-JVN" id="zLU-0l-ynd"/>
                 <outlet property="tableView" destination="8gG-vY-Z14" id="l7D-t6-Z0A"/>
-                <outlet property="tableViewHeight" destination="cai-eI-wlX" id="xhe-pl-grY"/>
+                <outlet property="tableViewHeight" destination="cai-eI-wlX" id="GgZ-1S-1l2"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,18 +34,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNr-kt-Qa3" userLabel="Account List">
-                    <rect key="frame" x="0.0" y="420" width="393" height="422"/>
+                    <rect key="frame" x="0.0" y="740" width="393" height="102"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oow-pE-0h4" userLabel="Top View">
                             <rect key="frame" x="0.0" y="16" width="393" height="56"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌를 선택해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArV-Mm-bRv">
-                                    <rect key="frame" x="24" y="17" width="145" height="22"/>
+                                    <rect key="frame" x="24" y="17.666666666666629" width="145" height="21"/>
                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                                     <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbt-Xp-rnb" userLabel="Close Button">
+                                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbt-Xp-rnb" userLabel="Close Button">
                                     <rect key="frame" x="341" y="8" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="LSs-Ql-2Bd"/>
@@ -53,11 +53,14 @@
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="header_close"/>
+                                    <connections>
+                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="I9O-TW-MCS"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VpV-io-OFg" userLabel="Account Add View">
                                     <rect key="frame" x="252" y="8" width="81" height="40"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhY-JI-ukH">
+                                        <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhY-JI-ukH">
                                             <rect key="frame" x="0.0" y="0.0" width="81" height="40"/>
                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="14"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -102,11 +105,11 @@
                                 <constraint firstAttribute="height" constant="56" id="nzb-tr-Z6k"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8gG-vY-Z14">
-                            <rect key="frame" x="24" y="80" width="345" height="320"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8gG-vY-Z14">
+                            <rect key="frame" x="0.0" y="80" width="393" height="0.0"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="320" id="cai-eI-wlX"/>
+                                <constraint firstAttribute="height" id="cai-eI-wlX"/>
                             </constraints>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="2tf-Gx-SOk"/>
@@ -118,10 +121,10 @@
                     <constraints>
                         <constraint firstItem="Oow-pE-0h4" firstAttribute="leading" secondItem="uNr-kt-Qa3" secondAttribute="leading" id="Gol-JA-7y5"/>
                         <constraint firstItem="8gG-vY-Z14" firstAttribute="top" secondItem="Oow-pE-0h4" secondAttribute="bottom" constant="8" id="IHw-gy-xt5"/>
-                        <constraint firstAttribute="trailing" secondItem="8gG-vY-Z14" secondAttribute="trailing" constant="24" id="LGY-F1-b3K"/>
+                        <constraint firstAttribute="trailing" secondItem="8gG-vY-Z14" secondAttribute="trailing" id="LGY-F1-b3K"/>
                         <constraint firstItem="Oow-pE-0h4" firstAttribute="top" secondItem="uNr-kt-Qa3" secondAttribute="top" constant="16" id="VYk-ln-flE"/>
                         <constraint firstAttribute="bottom" secondItem="8gG-vY-Z14" secondAttribute="bottom" constant="22" id="b6O-6H-OVr"/>
-                        <constraint firstItem="8gG-vY-Z14" firstAttribute="leading" secondItem="uNr-kt-Qa3" secondAttribute="leading" constant="24" id="fIi-rH-S9i"/>
+                        <constraint firstItem="8gG-vY-Z14" firstAttribute="leading" secondItem="uNr-kt-Qa3" secondAttribute="leading" id="fIi-rH-S9i"/>
                         <constraint firstAttribute="trailing" secondItem="Oow-pE-0h4" secondAttribute="trailing" id="wtd-Fx-ZgF"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

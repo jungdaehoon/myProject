@@ -179,6 +179,25 @@ class OKZeroPayView: UIView {
             }
         }.store(in: &self.viewModel.cancellableSet)
                 
+        /// 카드 디스플레이 값을 초기화 합니다.
+        OKZeroViewModel.zeroPayShared.cardDisplay = .start
+        /// 카드 디스플레이 타입이 맞춰 카드 리스트를  다시 그립니다.
+        OKZeroViewModel.zeroPayShared.$cardDisplay.sink { type in
+            switch type
+            {
+            case .bottom:
+                /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
+                self.setCardFullDisplay( display: false )
+                break
+            case .full:
+                /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
+                self.setCardFullDisplay( display: true )
+                break
+            default:break
+            }
+        }.store(in: &OKZeroViewModel.zeroPayShared.cancellableSet)
+        
+        
         /// 카드 선택 값을 초기화 합니다.
         OKZeroViewModel.zeroPayShared.cardChoice = nil
         /// 카드 전체 화면 뷰에서 카드선택시 이벤트 입니다.
@@ -187,11 +206,9 @@ class OKZeroPayView: UIView {
                 Slog("cardChoice : \(card.displayType)")
                 /// 선택된 카드를 초기화 합니다.
                 OKZeroViewModel.zeroPayShared.cardChoice = nil
-                /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
-                self.setCardFullDisplay( display: false )
-                
             }
         }.store(in: &OKZeroViewModel.zeroPayShared.cancellableSet)
+        
         
         /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
         self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
@@ -604,8 +621,6 @@ class OKZeroPayView: UIView {
     func setCardFullDisplay( display : Bool = true ){
         /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
         self.isCardFullDisplay                          = display
-        /// 전체화면 활성화 버튼을 온/오프 합니다.
-        self.payCardListView.listEnabledBtn.isHidden    = display
         /// 카드를 전체화면 디스플레이 합니다.
         if display == true
         {

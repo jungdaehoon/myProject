@@ -139,6 +139,8 @@ enum SCRIPT_MESSAGES : String
     case readQRInfo                 = "readQRInfo"
     /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
     case queryWKakao                = "queryWKakao"
+    /// 계좌 목록 팝업 오픈 요청 입니다.
+    case accoutsPopup               = "accoutsPopup"
 }
 
 

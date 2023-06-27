@@ -286,7 +286,42 @@ class WebMessagCallBackHandler : NSObject  {
                 break
                 /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
             case .queryWKakao                :break
+                /// 계좌 목록 팝업 오픈 요청 입니다.
+            case .accoutsPopup               :
+                self.setAccountsPopup( body )
+                break
             default: break
+            }
+        }
+    }
+    
+    
+    /**
+     하단에 계좌 선택  팝업을 오픈 합니다.
+    - Date: 2023.06.27
+    - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
+    func setAccountsPopup( _ body : [Any?] ) {
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        /// 계좌 선택 페이지 입니다.
+        BottomAccountListView().show { event in
+            switch event
+            {
+            case .add_account :
+                if let controller = self.target {
+                    controller.view.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                }
+                break
+            case .account( let account ):
+                if let account = account {
+                    /// 서버에 계좌 정보를 전달 합니다.
+                    self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: account )
+                }
+                break
             }
         }
     }
@@ -383,9 +418,9 @@ class WebMessagCallBackHandler : NSObject  {
                 let nextController = RestoreWalletViewController.instantiate(withStoryboard: "Wallet") {
                 /// 데이터를 넘기고 결과를 받습니다.
                 nextController.setInitData(encInfo: encInfo, preAddr: preAddr) { value in
-                    if let retEnc = value as? String {
+                    if let walletAddr = value as? String {
                         /// 콜백 데이터 정보를 요청 합니다.
-                        self.viewModel.getWalletJsonMsg(retStr: retEnc).sink { message in
+                        self.viewModel.getWalletJsonMsg(retStr: walletAddr).sink { message in
                             /// 콜백으로 데이터를 리턴 합니다.
                             self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
                         }.store(in: &self.viewModel.cancellableSet)
@@ -1009,8 +1044,6 @@ class WebMessagCallBackHandler : NSObject  {
                     if controller.webViewDidStatus == .finish ||
                        controller.webViewDidStatus == .fail
                     {
-                        /// 정상 처리 후 대기 상태로 변경 합니다.
-                        controller.webViewDidStatus = .stay
                         break
                     }
                     count += 1

@@ -58,6 +58,8 @@ class AllMoreViewController: BaseViewController {
         self.setDisplayView()
         self.initWebView(self.webDisplayView, target: self)
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
