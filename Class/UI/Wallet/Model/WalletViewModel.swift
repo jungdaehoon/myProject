@@ -101,7 +101,7 @@ class WalletViewModel : BaseViewModel {
      - Throws: False
      - Returns:
         복구된 지갑 Pass 정보를 리턴 합니다. (String?)
-     
+     */
     private func setWalletWithMnemonuc( walletPass : String = "", mnemonics : String = "" ) -> String?
     {
         do {
@@ -133,105 +133,8 @@ class WalletViewModel : BaseViewModel {
             return ""
         }
     }
-    
-    */
-    
-    private func setWalletWithMnemonuc( walletPass : String = "", mnemonics : String = "" ) -> String?
-    {
-        do {
-            var aosAddress = ""
-            var aosAdde : EthereumAddress? = nil
-            if let seed = BIP39.seedFromMmemonics(mnemonics,password: walletPass,language: .english) {
-                let account =  HDNode(seed: seed)?.derive(path: HDNode.defaultPathMetamask)
-                let newAddress = Utilities.publicToAddress(account!.publicKey)
-                Slog("seed HDNode.defaultPathMetamask newAddress = \(newAddress?.address.lowercased())", category: .wallet)
-                
-                let account1 =  HDNode(seed: seed)?.derive(path: HDNode.defaultPath)
-                aosAdde = Utilities.publicToAddress(account1!.publicKey)
-                let account2 =  HDNode(seed: seed)?.derive(path: HDNode.defaultPathPrefix)
-                let newAddress2 = Utilities.publicToAddress(account2!.publicKey)
-                let account3 =  HDNode(seed: seed)?.derive(path: HDNode.defaultPathMetamaskPrefix)
-                let newAddress3 = Utilities.publicToAddress(account3!.publicKey)
-                let account4 =  HDNode(seed: seed)?.derive(path: HDNode.defaultPathMetamask)
-                let newAddress4 = Utilities.publicToAddress(account4!.publicKey)
-                let account5 =  HDNode(seed: seed)?.derive(path: "44'/60'/0'/0")
-                let newAddress5 = Utilities.publicToAddress(account5!.publicKey)
 
-                aosAddress = aosAdde!.address.lowercased()
-                Slog("seed HDNode.defaultPathMetamask seed = \(aosAdde!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask seed = \(newAddress2!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask seed = \(newAddress3!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask seed = \(newAddress4!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask seed = \(newAddress5!.address.lowercased())", category: .wallet)
-            }
-                 
-            let twalletAddressKeyStore = try? BIP32Keystore(mnemonics: mnemonics, password: walletPass, mnemonicsPassword : walletPass, prefixPath: HDNode.defaultPath)
-            let addrStr = "\(twalletAddressKeyStore?.addresses?.first?.address ?? "0x")"
-            /// 블럭체인에서 대문자가 있으면 오류발생으로 전부 소문자로 변경 합니다.
-            let lowerWalletAddress = addrStr.lowercased()
-            
-            guard let wa = twalletAddressKeyStore?.addresses?.first else {
-                CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
-                }
-                return ""
-            }
-            
-            Slog("import: mnemonics  = \(mnemonics)", category: .wallet)
-            Slog("import: password  = \(walletPass)", category: .wallet)
-            Slog("import: twalletAddressKeyStore?.addresses  = \(twalletAddressKeyStore?.addresses)", category: .wallet)
-            Slog("import: lowerWalletAddress  = \(lowerWalletAddress)", category: .wallet)
-            
-            if let privateKey = try twalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: aosAdde!) {
-                Slog("import: private key  = \(String(describing: privateKey.toHexString()))", category: .wallet)
-                let account1 =  HDNode(seed: privateKey)?.derive(path: HDNode.defaultPath)
-                let newAddress1 = Utilities.publicToAddress(account1!.publicKey)
-                let account2 =  HDNode(seed: privateKey)?.derive(path: HDNode.defaultPathPrefix)
-                let newAddress2 = Utilities.publicToAddress(account2!.publicKey)
-                let account3 =  HDNode(seed: privateKey)?.derive(path: HDNode.defaultPathMetamaskPrefix)
-                let newAddress3 = Utilities.publicToAddress(account3!.publicKey)
-                let account4 =  HDNode(seed: privateKey)?.derive(path: HDNode.defaultPathMetamask)
-                let newAddress4 = Utilities.publicToAddress(account4!.publicKey)
-                let account5 =  HDNode(seed: privateKey)?.derive(path: "44'/60'/0'/0")
-                let newAddress5 = Utilities.publicToAddress(account5!.publicKey)
-
-                
-                Slog("seed HDNode.defaultPathMetamask privateKey = \(newAddress1!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask privateKey = \(newAddress2!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask privateKey = \(newAddress3!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask privateKey = \(newAddress4!.address.lowercased())", category: .wallet)
-                Slog("seed HDNode.defaultPathMetamask privateKey = \(newAddress5!.address.lowercased())", category: .wallet)
-            }
-            
-            /*
-             params    Web3Core.KeystoreParamsBIP32?    some
-             crypto    Web3Core.CryptoParamsV3
-             id    String?    "179ea375-714b-4898-bb3c-fa7d36097fc1"    some
-             version    Int    4
-             isHDWallet    Bool    true
-             pathAddressPairs    [Web3Core.PathAddressPair]    1 value
-             [0]    Web3Core.PathAddressPair
-             path    String    "m/44\'/60\'/0\'/0/0"
-             address    String    "0x129508615eE380966532757495cD205457cd20Ee"
-             rootPath    String?    "m/44\'/60\'/0\'/0"    some
-             _guts    _StringGuts
-             */
-            
-            let params = twalletAddressKeyStore?.keystoreParams
-           
-            let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let keyData = try? JSONEncoder().encode(twalletAddressKeyStore?.keystoreParams)
-            FileManager.default.createFile(atPath: userDir + "/keystore" + "/key.json", contents: keyData, attributes: nil)
-            SharedDefaults.default.walletMnemonic = mnemonics
-            SharedDefaults.default.walletAddress  = aosAddress
-            return aosAddress
-            
-        } catch {
-            return ""
-        }
-    }
     
-    
-  
     /**
      신규로 생성된 wallet 닉모닉을 생성 합니다.
      - description: 웹에서 신규 wallet 생성후 정보를 받아 로컬에 파일로 저장 합니다. (/keystore.json)
@@ -523,3 +426,4 @@ class WalletViewModel : BaseViewModel {
         }
     }
 }
+
