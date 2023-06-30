@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 /**
  하단 계좌 선택 뷰어  버튼 타입 입니다. ( J.D.H  VER : 1.0.0 )
  - Date: 2023.06.27
@@ -19,12 +20,17 @@ enum BOTTOM_ACCOUNT_LIET_BTN_ACTION : Int {
 }
 
 
+/**
+ 이벤트 타입 입니다.    ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.06.27
+ */
 enum BOTTOM_ACCOUNT_EVENT {
     /// 계좌 추가 이벤트 입니다.
     case add_account
     /// 계좌 선택 이벤트 입니다.
     case account( account : String? )
 }
+
 
 /**
  하단 계좌 선택 뷰어 입니다.   ( J.D.H  VER : 1.0.0 )

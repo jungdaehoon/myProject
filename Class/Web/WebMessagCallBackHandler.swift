@@ -285,7 +285,9 @@ class WebMessagCallBackHandler : NSObject  {
                 self.setQRCodeReadDisplay( body )
                 break
                 /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
-            case .queryWKakao                :break
+            case .queryWKakao                :
+                self.setQueryWKakao()
+                break
                 /// 계좌 목록 팝업 오픈 요청 입니다.
             case .accoutsPopup               :
                 self.setAccountsPopup( body )
@@ -293,6 +295,18 @@ class WebMessagCallBackHandler : NSObject  {
             default: break
             }
         }
+    }
+    
+    
+    /**
+     올리고 카카오톡 채널로 이동 합니다.
+    - Date: 2023.06.29
+    - Parameters:False
+    - Throws: False
+    - Returns:False
+    */
+    func setQueryWKakao(){
+        WebPageConstants.URL_KAKAO_CONTACT.openUrl()
     }
     
     
@@ -757,7 +771,7 @@ class WebMessagCallBackHandler : NSObject  {
                     case .pg_type,.zeropay_type,.auth_type:
                         /// 컨트롤러 연결 되었는지를 체크 합니다.
                         if let controller = self.target {
-                            let linkUrl         = AlamofireAgent.domainUrl + url
+                            let linkUrl         = WebPageConstants.baseURL + url
                             /// 전체 화면 웹뷰를 오픈 합니다.
                             let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title,titleBarType: titleBarType, pageURL: linkUrl) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
@@ -778,7 +792,7 @@ class WebMessagCallBackHandler : NSObject  {
                     case .db_type:
                         if let controller = self.target {
                             /// 전체 화면 웹뷰를 오픈 합니다.
-                            let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: AlamofireAgent.domainUrl +  url, returnParam: NC.S(params[1] as? String)) { cbType in
+                            let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: WebPageConstants.baseURL +  url, returnParam: NC.S(params[1] as? String)) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
                                 self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
@@ -802,7 +816,7 @@ class WebMessagCallBackHandler : NSObject  {
                 }
                 if let controller = self.target {
                     /// 전체 화면 웹뷰를 오픈 합니다.
-                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: AlamofireAgent.domainUrl +  url, returnParam: NC.S(params[1] as? String)) { cbType in
+                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: WebPageConstants.baseURL +  url, returnParam: NC.S(params[1] as? String)) { cbType in
                         /// 앱웹으로 콜백을 요청 합니다.
                         self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                     }

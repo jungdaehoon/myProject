@@ -21,9 +21,35 @@ enum AlamofireAgent {
     /// 최대 받는 타임 정보 입니다.
     private static let RESOURCE_TIMEOUT         = TimeInterval(5.0)
     /// 도메인 URL 정보를 가져 옵니다.
-    static let domainUrl                        = Bundle.main.infoDictionary?["Server"] as? String ?? ""
+    static let baseURL                          = Bundle.main.infoDictionary?["Server"] as? String ?? ""
     /// 세션 정보를 가져 옵니다.
-    static var defaultManager : SessionManager! = { return Alamofire.SessionManager(configuration: urlSessionConfiguration()) }()
+    static var defaultManager : SessionManager! = {
+        /// 취약점 점검인 경우 입니다.
+        if APP_INSPECTION
+        {
+            /// SSL 인증서 관련  델레게이트를 연결 합니다.
+            let delegate: Alamofire.SessionDelegate = SessionDelegate()
+            /// SSL 인증서 우회 진행으로 설정 합니다.
+            delegate.taskDidReceiveChallengeWithCompletion = { (session, task, challenge, completionHandler) in
+                /// 해당 도메인의 SSL 인증서 우회를 설정 합니다.
+                if challenge.protectionSpace.host.contains(AlamofireAgent.baseURL)
+                {
+                    let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+                    completionHandler(.useCredential, urlCredential)
+                }
+                else
+                {
+                    completionHandler(.performDefaultHandling, nil)
+                }
+            }
+            return Alamofire.SessionManager(configuration: urlSessionConfiguration(),delegate: delegate)
+        }
+        else
+        {
+            return Alamofire.SessionManager(configuration: urlSessionConfiguration())
+        }
+        
+    }()
     
     
     /**
@@ -53,7 +79,7 @@ enum AlamofireAgent {
      - Returns:
         요청된 T 값을 리턴 합니다. (AnyPublisher<T, ResponseError>)
      */
-    static  func request<T: Decodable>(
+    static func request<T: Decodable>(
         _ url: String ,
         method: HTTPMethod = .post,
         parameters: Parameters? = nil,
@@ -62,7 +88,7 @@ enum AlamofireAgent {
         decoder: JSONDecoder = JSONDecoder())
         -> AnyPublisher<T, ResponseError>  {
             let publisher               = PassthroughSubject<T,ResponseError>()
-            let requestUrl              = URL(string: domainUrl + url)!
+            let requestUrl              = URL(string: baseURL + url)!
             let request = defaultManager.request(
                 requestUrl,
                 method: method,
@@ -163,9 +189,9 @@ enum AlamofireAgent {
         _ url: String,
         multipartFormData: @escaping (MultipartFormData) -> Void,
         encodingCompletion: ((SessionManager.MultipartFormDataEncodingResult) -> Void)?) {
-        let url                     = URL(string:url)!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"        
+        let url                 = URL(string:url)!
+        var urlRequest          = URLRequest(url: url)
+        urlRequest.httpMethod   = "POST"
         return defaultManager.upload(multipartFormData: multipartFormData, with: urlRequest, encodingCompletion: encodingCompletion)
     }
     

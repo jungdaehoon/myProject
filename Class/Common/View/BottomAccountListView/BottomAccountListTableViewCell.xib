@@ -22,7 +22,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="okbank_round" translatesAutoresizingMaskIntoConstraints="NO" id="2jl-pj-Dq9" userLabel="Bank Icon">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultBankLogo" translatesAutoresizingMaskIntoConstraints="NO" id="2jl-pj-Dq9" userLabel="Bank Icon">
                         <rect key="frame" x="24" y="16" width="32" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="3O6-CU-inl"/>
@@ -63,7 +63,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="defaultBankLogo" width="32" height="32"/>
         <image name="icon_checkbox_on" width="24" height="24"/>
-        <image name="okbank_round" width="32" height="32"/>
     </resources>
 </document>

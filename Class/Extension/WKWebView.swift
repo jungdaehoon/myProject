@@ -23,7 +23,7 @@ extension WKWebView {
      - Returns: False
      */
     func urlLoad( url : String,
-                  domainUrl : String = AlamofireAgent.domainUrl,
+                  domainUrl : String = WebPageConstants.baseURL,
                   httpMethod : String = "GET",
                   postData : String = "",
                   headerFields : [String:String] = [:] ){

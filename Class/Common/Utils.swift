@@ -59,6 +59,8 @@ func Slog(_ object: Any, category : OSLog = .okpay, logType : OSLogType = .defau
 let APP_BUNDLE_ID       = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String ?? ""
 /// 앱 버전 정보 입니다.
 let APP_VERSION         = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
+/// 앱 취약점검 여부 입니다.
+let APP_INSPECTION      = Bundle.main.infoDictionary?["AppInspection"] as? String ?? "" == "YES" ? true : false
 
 
 class Utils {

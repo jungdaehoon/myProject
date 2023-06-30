@@ -262,7 +262,7 @@ class BaseViewModel : NSObject {
             }
             let custItem = SharedDefaults.getKeyChainCustItem()
             // Multi-part 형태로 보낸다.
-            AlamofireAgent.upload( AlamofireAgent.domainUrl + url, multipartFormData: { (multipartFormData) in
+            AlamofireAgent.upload( WebPageConstants.baseURL + url, multipartFormData: { (multipartFormData) in
                 multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
                 multipartFormData.append(custItem!.user_no!.data(using: .utf8)!, withName: "user_no")
             },
@@ -511,7 +511,7 @@ class BaseViewModel : NSObject {
                 {
                     if info.menu_id! == menuID.rawValue
                     {
-                        promise(.success( AlamofireAgent.domainUrl  + info.url! ))
+                        promise(.success( WebPageConstants.baseURL  + info.url! ))
                         return
                     }
                 }
@@ -997,7 +997,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱삭제후 설치 . 기존 키체인 내용을 삭제 )
+     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱 삭제 후 설치 . 기존 키체인 내용을 삭제 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1027,6 +1027,8 @@ class BaseViewModel : NSObject {
      - Returns:False
      */
     func setSecureCheck() {
+        /// 취약점 점검인 경우 입니다.
+        if APP_INSPECTION { return }
         if let secuManager = IxSecureManager.shared() {
             secuManager.initLicense("AB441C0C1755")
             secuManager.start()

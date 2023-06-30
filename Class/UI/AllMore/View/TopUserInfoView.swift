@@ -52,7 +52,7 @@ class TopUserInfoView: UIView {
             /// NFT ID 정보가 있는지를 체크 합니다.
             if result._nft_id!.isValid
             {
-                if let url = URL(string: AlamofireAgent.domainUrl + "/all/profileImage?userNo=" + result._user_no!) {
+                if let url = URL(string: WebPageConstants.baseURL + "/all/profileImage?userNo=" + result._user_no!) {
                     UIImageView.loadImage(from: url).sink { image in
                         if let profileImage = image {
                             /// 뷰어를 6각 형으로 변경 합니다.

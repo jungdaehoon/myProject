@@ -77,88 +77,109 @@ class IntroViewController: BaseViewController {
     {
         /// 앱 추적 (IDFA) 허용 여부를 요청 합니다.
         self.viewModel.isTrackingAuthorization().sink { success in
-            /// 앱 실드 체크 합니다.
-            self.viewModel.getAppShield().sink { appShield in
-                /// error 이 아닌 경우 error 안내 처리 합니다.
-                if appShield.error != nil
-                {
-                    DispatchQueue.main.async(execute: {
-                        /// 앱 실드 비정상 처리 안내 팝업 입니다.
-                        CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
-                            exit(0)
-                        }
-                    })
-                }
-                /// 앱 실드 정상처리 입니다.
-                else
-                {
-                    /// 앱 시작시 기본 정보를 요청합니다.
-                    self.viewModel.setAppStart().sink { result in
-                        /// 서비스 불가 안내 뷰어를 오픈 합니다.
-                        ServiceErrorPop().show()
-                    } receiveValue: { response in
-                        if let data = BaseViewModel.appStartResponse!._data
-                        {
-                            /// 버전 정보가 있는지를 체크 합니다.
-                            if let version = data._versionInfo
-                            {
-                                /// 서버 버전이 앱 버전보다 높을 경우 업데이트 여부를 체크 합니다.
-                                if version._version! > APP_VERSION
-                                {
-                                    /// 강제 업데이트 여부가 "N" 경우 안내 후 진행 합니다.
-                                    if version._compulsion_update == "N"
-                                    {
-                                        /// 업데이트 안내 팝업 입니다.
-                                        let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
-                                        alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
-                                            version._market_url!.openUrl()
-                                        })
-                                        alert?.addAlertBtn(btnTitleText: "다음에하기", completion: { result in
-                                            /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
-                                            self.permissionInfoView.setOpenView { value in
-                                                /// 접근권한 "확인" 일 경우 입니다.
-                                                if value == true
-                                                {
-                                                    self.setOKPayStart()
-                                                }
-                                            }
-                                        })
-                                        alert?.show()
-                                        return
-                                    }
-                                    /// 강제 업데이트 입니다.
-                                    else
-                                    {
-                                        /// 업데이트 안내 팝업 입니다.
-                                        let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
-                                        alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
-                                            version._market_url!.openUrl()
-                                        })
-                                        alert?.addAlertBtn(btnTitleText: "취소", completion: { result in
-                                            exit(0)
-                                        })
-                                        alert?.show()
-                                        
-                                    }
-                                    return
-                                }
+            /// 취약점 점검인 경우 입니다.
+            if APP_INSPECTION
+            {
+                /// 앱 상태를 서버 통해 체크 합니다.
+                self.setOKPayInfoCheck()
+            }
+            else
+            {
+                /// 앱 실드 체크 합니다.
+                self.viewModel.getAppShield().sink { appShield in
+                    /// error 이 아닌 경우 error 안내 처리 합니다.
+                    if appShield.error != nil
+                    {
+                        DispatchQueue.main.async(execute: {
+                            /// 앱 실드 비정상 처리 안내 팝업 입니다.
+                            CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
+                                exit(0)
                             }
-                        }
-                                            
-                        /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
-                        self.permissionInfoView.setOpenView { value in
-                            /// 접근권한 "확인" 일 경우 입니다.
-                            if value == true
-                            {
-                                self.setOKPayStart()
-                            }
-                        }
-                    }.store(in: &self.cancellableSet)
-                }
-            }.store(in: &self.cancellableSet)
+                        })
+                    }
+                    /// 앱 실드 정상처리 입니다.
+                    else
+                    {
+                        /// 앱 상태를 서버 통해 체크 합니다.
+                        self.setOKPayInfoCheck()
+                    }
+                }.store(in: &self.cancellableSet)
+            }
         }.store(in: &self.viewModel.cancellableSet)
     }
 
+    
+    /**
+     앱 업데이트 및 변경사항을 서버 요청후 체크 합니다..  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.03.20
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func setOKPayInfoCheck(){
+        /// 앱 시작시 기본 정보를 요청합니다.
+        self.viewModel.setAppStart().sink { result in
+            /// 서비스 불가 안내 뷰어를 오픈 합니다.
+            ServiceErrorPop().show()
+        } receiveValue: { response in
+            if let data = BaseViewModel.appStartResponse!._data
+            {
+                /// 버전 정보가 있는지를 체크 합니다.
+                if let version = data._versionInfo
+                {
+                    /// 서버 버전이 앱 버전보다 높을 경우 업데이트 여부를 체크 합니다.
+                    if version._version! > APP_VERSION
+                    {
+                        /// 강제 업데이트 여부가 "N" 경우 안내 후 진행 합니다.
+                        if version._compulsion_update == "N"
+                        {
+                            /// 업데이트 안내 팝업 입니다.
+                            let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
+                            alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
+                                version._market_url!.openUrl()
+                            })
+                            alert?.addAlertBtn(btnTitleText: "다음에하기", completion: { result in
+                                /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+                                self.permissionInfoView.setOpenView { value in
+                                    /// 접근권한 "확인" 일 경우 입니다.
+                                    if value == true
+                                    {
+                                        self.setOKPayStart()
+                                    }
+                                }
+                            })
+                            alert?.show()
+                            return
+                        }
+                        /// 강제 업데이트 입니다.
+                        else
+                        {
+                            /// 업데이트 안내 팝업 입니다.
+                            let alert = CMAlertView().setAlertView( detailObject: version._popup_msg as AnyObject )
+                            alert?.addAlertBtn(btnTitleText: "앱 업데이트", completion: { result in
+                                version._market_url!.openUrl()
+                            })
+                            alert?.addAlertBtn(btnTitleText: "취소", completion: { result in
+                                exit(0)
+                            })
+                            alert?.show()
+                            
+                        }
+                        return
+                    }
+                }
+            }
+                                
+            /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+            self.permissionInfoView.setOpenView { value in
+                /// 접근권한 "확인" 일 경우 입니다.
+                if value == true
+                {
+                    self.setOKPayStart()
+                }
+            }
+        }.store(in: &self.cancellableSet)
+    }
     
     /**
      OKPay 앱을 시작 합니다. ( J.D.H  VER : 1.0.0 )

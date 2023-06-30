@@ -81,7 +81,7 @@ class BaseWebViewController: UIViewController {
         /// 웹 메세지 핸들러를 연결 합니다.
         self.messageHandler                 = WebMessagCallBackHandler( webViewController: self )
         /// 도메인의 쿠키 정보를 가져 옵니다.
-        let cookies                         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl)!)
+        let cookies                         = HTTPCookieStorage.shared.cookies(for: URL(string: WebPageConstants.baseURL)!)
         /// 업데이트할 쿠키 스크립트를 요청 합니다.
         self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
             let contentController                                   = WKUserContentController()
@@ -250,7 +250,7 @@ extension BaseWebViewController: WKNavigationDelegate
         {
             self.updateCookies  = false
             /// 연결 도메인의 쿠키 정보를 가져 옵니다.
-            let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
+            let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: WebPageConstants.baseURL )!)
             /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
             self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
                 self.webView!.evaluateJavaScript(script) { ( anyData , error) in
@@ -290,6 +290,25 @@ extension BaseWebViewController: WKNavigationDelegate
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
         if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
         LoadingView.default.hide()
+    }
+    
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        /// 취약점 점검인 경우 입니다.
+        if APP_INSPECTION
+        {
+            /// 해당 도메인의 SSL 인증서 우회를 설정 합니다.
+            if challenge.protectionSpace.host.contains(WebPageConstants.baseURL){
+                let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)                
+                completionHandler(.useCredential, urlCredential)
+            }else{
+                completionHandler(.performDefaultHandling, nil)
+            }
+        }
+        else
+        {
+            completionHandler(.performDefaultHandling, nil)
+        }
     }
 }
 
@@ -407,7 +426,7 @@ extension BaseWebViewController: WKScriptMessageHandler {
         {
             Slog("\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies) : \(message.body)")
             /// 연결 도메인의 쿠키 정보를 가져 옵니다.
-            let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: AlamofireAgent.domainUrl )!)
+            let cookies         = HTTPCookieStorage.shared.cookies(for: URL(string: WebPageConstants.baseURL )!)
             /// 업데이할 쿠키 정보를 스크립트로 가져 옵니다.
             self.baseViewModel.getJSCookiesString(cookies: cookies).sink { script in
                 self.webView!.evaluateJavaScript(script) { ( anyData , error) in

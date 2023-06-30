@@ -150,7 +150,7 @@ class OKZeroPayCodeFullView: UIView {
             /// QRCode 사용가능 안내 문구를 디스플레이 합니다.
             self.qrCodeTypeInfoText.text            = "매장에 QR코드를 보여주세요"
             /// 전체 화면 디스플레이 값입니다.
-            self.qrCodeGenerator.fullDisplay        = true            
+            self.qrCodeGenerator.fullDisplay        = true
             /// QRCode 결제 이미지를 디스플레이 합니다.
             self.qrCodeGenerator.setCodeDisplay(.qrcode, code: code, completion: { success in
                 if success

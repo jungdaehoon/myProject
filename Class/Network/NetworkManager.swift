@@ -222,7 +222,7 @@ class NetworkManager {
     
     
     /**
-     만보기 리워드 수령 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 리워드 수령 합니다.  ( J.D.H  VER : 1.0.0 )
      - API ID: myp/insertPedometer.do
      - API 명: 만보기 리워드 수령 요청 입니다.
      - Date: 2023.03.22
@@ -297,7 +297,6 @@ class NetworkManager {
      - Throws:False
      - Returns:
         세션 유지 여부를 받습니다. ( AnyPublisher<SessionCheckResponse, ResponseError> )
-         
      */
     static func requestSessionCheck( token : String = NetworkManager.getToken() ) -> AnyPublisher<SessionCheckResponse, ResponseError> {
         let parameters: Parameters = [ "token": token ]

@@ -140,8 +140,6 @@ class PointItemView: UIView {
             switch btn.tag {
                 /// OK머니 버튼 이벤트 입니다.
             case 10:
-                /// 계좌 정보가 없는 경우입니다.
-                if result._acc_no!.isEmpty { return }
                 self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
                 break
                 /// OK포인트 버튼 이벤트 입니다.
