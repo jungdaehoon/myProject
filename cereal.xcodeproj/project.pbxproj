@@ -871,7 +871,6 @@
 				8D48BB3629D2D68E00CC4D62 /* View */,
 				8D205E7D29D1346E00F43C99 /* FullWebViewController.swift */,
 				8D205E7C29D1346E00F43C99 /* FullWebViewController.xib */,
-				8D205EE129D1346E00F43C99 /* WebMessagCallBackHandler.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -1149,6 +1148,7 @@
 		8DBA445029D3FF8500A2E5C1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D205EE129D1346E00F43C99 /* WebMessagCallBackHandler.swift */,
 				8D205EE029D1346E00F43C99 /* WebPageConstants.swift */,
 				8DBA445129D3FFA700A2E5C1 /* WebMsgModel.swift */,
 			);
@@ -1851,7 +1851,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
@@ -1916,7 +1916,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://m.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
@@ -2117,7 +2117,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:28443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";

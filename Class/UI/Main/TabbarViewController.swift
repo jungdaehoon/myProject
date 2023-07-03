@@ -190,6 +190,10 @@ class TabbarViewController: UITabBarController {
                 BecomeActiveView().hide()
             }
         }
+        else
+        {
+            BecomeActiveView().hide()
+        }
     }
     
     

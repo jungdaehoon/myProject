@@ -45,6 +45,7 @@ extension UIViewController {
         }
         else
         {
+            viewController.modalPresentationStyle  = .fullScreen
             self.present(viewController, animated: true,completion: completion)
         }
     }

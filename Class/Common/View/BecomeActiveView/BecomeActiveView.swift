@@ -14,10 +14,19 @@ import UIKit
  */
 class BecomeActiveView: UIView {
 
+    @IBOutlet weak var logoView: UIView!
+    /// 로고 애니 효과 뷰어 입니다.
+    var aniView : LottieAniView?
+    
     //MARK: - Init
     init(){
         super.init(frame: UIScreen.main.bounds)
         commonInit()
+        /// 로띠 뷰어를 추가합니다.
+        self.aniView = LottieAniView(frame: CGRect(origin: .zero, size: self.logoView.frame.size))
+        self.aniView!.setAnimationView(name: "splash", loop: false, animationSpeed: 100.0)
+        self.logoView.addSubview(self.aniView!)
+        self.aniView!.play()
     }
     
     required init?(coder: NSCoder) {

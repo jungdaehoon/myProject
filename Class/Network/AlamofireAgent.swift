@@ -107,11 +107,11 @@ enum AlamofireAgent {
                 }
                 
                 do {
+                    Slog(response.debugDescription, category: .network, logType: .default)
                     let decoder         = JSONDecoder()
                     guard let value     = try? decoder.decode(T.self, from: response.data!) else {
                         throw ResponseError.parsing(PARSING_ERR_MSG)
-                    }
-                    Slog(response.debugDescription, category: .network, logType: .default)
+                    }                    
                     publisher.send(value)
                 }
                 catch ( let error )

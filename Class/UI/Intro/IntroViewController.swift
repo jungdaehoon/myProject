@@ -175,11 +175,14 @@ class IntroViewController: BaseViewController {
                 /// 접근권한 "확인" 일 경우 입니다.
                 if value == true
                 {
+                    /// 로그인 디스플레이로 기본 배경 뷰어를 디스플레이 합니다.
+                    BecomeActiveView().show()
                     self.setOKPayStart()
                 }
             }
         }.store(in: &self.cancellableSet)
     }
+    
     
     /**
      OKPay 앱을 시작 합니다. ( J.D.H  VER : 1.0.0 )
@@ -257,8 +260,6 @@ class IntroViewController: BaseViewController {
             controller.selectedIndex             = 2
             if loginEnabled == true
             {
-                /// 로그인 디스플레이로 기본 배경 뷰어를 디스플레이 합니다.
-                BecomeActiveView().show()
                 controller.loginDisplayFirst     = true
             }
             self.aniView!.stop()
@@ -274,7 +275,7 @@ class IntroViewController: BaseViewController {
                         controller.setSelectedIndex(.home, seletedItem:link)
                     }
                     else
-                    {
+                    {                        
                         /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
                         controller.setSelectedIndex( .home )
                     }

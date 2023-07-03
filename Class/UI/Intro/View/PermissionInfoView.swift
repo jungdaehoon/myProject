@@ -105,6 +105,8 @@ class PermissionInfoView: UIView {
             self.layoutIfNeeded()
         } completion: { _ in
             self.isHidden       = true
+            /// 앱 최초 접근 권한 안내 팝업 오픈 여부를 ture 값으로 변경 합니다.
+            SharedDefaults.default.permissionInitialCheck = true
             self.completion!(enabeld)
         }
     }
@@ -119,7 +121,12 @@ class PermissionInfoView: UIView {
      - Returns:False
      */
     func setOpenView( animation : Bool = true, completion : (( _ value : Bool ) -> Void )? = nil ){
-        
+        /// 앱 최초 접근 권한 안내 팝업 오픈 여부가 true 경우 오픈 하지 않으며 바로 true 리턴 합니다.
+        if SharedDefaults.default.permissionInitialCheck
+        {
+            completion!(true)
+            return
+        }
         self.setAniDisplay( animation: animation )
         self.completion = completion
     }

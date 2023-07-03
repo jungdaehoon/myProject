@@ -22,7 +22,7 @@ class KeyChainCustItem: NSObject , NSCoding {
     /// 휴대폰 정보 입니다.
     var user_hp : String?
     /// 자동 로그인 여부 입니다.
-    var auto_login : Bool = false
+    var auto_login : Bool = true
     /// fcm 연결 토큰 정보 입니다.
     var fcm_token : String?
     
@@ -71,10 +71,5 @@ class KeyChainCustItem: NSObject , NSCoding {
         if let fcm_token = aDecoder.decodeObject(forKey: PropertyKey.kFcm_token) {
             self.fcm_token = fcm_token  as? String
         }
-            
-//
     }
-    
-
-    
 }
