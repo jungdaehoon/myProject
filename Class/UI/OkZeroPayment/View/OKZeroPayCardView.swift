@@ -47,6 +47,7 @@ enum DISPLAY_TYPE : Int {
  - Date: 2023.04.28
  */
 class OKZeroPayCardView: UIView {
+    var viewModel : OKZeroViewModel = OKZeroViewModel()
     /// 배너 뷰어어 입니다.
     @IBOutlet weak var bannerView: UIView!
     /// 카드하단 디스플레이 안내 뷰어 입니다.
@@ -259,14 +260,29 @@ class OKZeroPayCardView: UIView {
         if let event = CARD_BTN_EVENT(rawValue: (sender as AnyObject).tag) {
             switch event {
                 case .payhidden:
-                    self.payInfoView.isHidden   = true
-                    self.payHiddenView.isHidden = false
-                    self.bottomDisplayMoneyOnoffBtn.setTitle("보기", for: .normal)
+                    /// 잔액 정보 보기를 요청 합니다.
+                    self.viewModel.setZeroPayMoneyHidden( hidden: "Y" ).sink { result in
+                        
+                    } receiveValue: { model in
+                        if let onoff = model {
+                            self.payInfoView.isHidden   = true
+                            self.payHiddenView.isHidden = false
+                            self.bottomDisplayMoneyOnoffBtn.setTitle("보기", for: .normal)
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
                     break
                 case .paydisplay:
-                    self.payInfoView.isHidden   = false
-                    self.payHiddenView.isHidden = true
-                    self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
+                    /// 잔액 정보 숨김을 요청 합니다.
+                    self.viewModel.setZeroPayMoneyHidden( hidden: "N" ).sink { result in
+                        
+                    } receiveValue: { model in
+                        if let onoff = model {
+                            self.payInfoView.isHidden   = false
+                            self.payHiddenView.isHidden = true
+                            self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
+                    
                     break
                 case .bankchoice:
                     /// 은행 선택 페이지 입니다.
@@ -298,17 +314,21 @@ class OKZeroPayCardView: UIView {
                     OKZeroViewModel.zeroPayShared.cardDisplay = .bottom
                     break
                 case .bottompayonoff:
-                    /// 카드 잔앱 타입이 "보기" 경우 입니다.
-                    if self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "보기"
-                    {
-                        self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
-                    }
-                    else
-                    {
-                        self.bottomDisplayMoneyOnoffBtn.setTitle("보기", for: .normal)
-                    }
-                    /// 화면을 리로드 합니다.
-                    self.setDisplayChange( bottomMode: true )
+                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "보기" ? "Y" : "N"
+                    /// 잔액 정보 보기/숨김 여부를 요청 합니다.
+                    self.viewModel.setZeroPayMoneyHidden( hidden: hidden).sink { result in
+                        
+                    } receiveValue: { model in
+                        if let onoff = model {
+                            self.bottomDisplayMoneyOnoffBtn.setTitle( hidden == "Y" ?  "숨김": "보기", for: .normal)
+                            /// 화면을 리로드 합니다.
+                            self.setDisplayChange( bottomMode: true )
+                            
+                            self.payInfoView.isHidden   = false
+                            self.payHiddenView.isHidden = true
+                            self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
                     break
                 case .fullDisplay:
                     OKZeroViewModel.zeroPayShared.cardDisplay = .full

@@ -511,8 +511,7 @@ extension AllMoreMenuListCell
             {
                 
             }
-        }
-        
+        }        
     }
 }
 

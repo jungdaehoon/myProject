@@ -38,6 +38,7 @@ enum BOTTOM_ACCOUNT_EVENT {
  */
 class BottomAccountListView: BaseView {
 
+    let viewModel : BottomAccountModel = BottomAccountModel()
     /// 계좌 리스트 기본 높이 입니다.
     let ACCOUNT_DEFAULT_HEIGHT  = 102.0
     /// 계좌 리스트 기본 하단 위치 입니다.
@@ -85,7 +86,15 @@ class BottomAccountListView: BaseView {
         self.tableViewHeight.constant       = ACCOUNT_CELL_HEIGHT * 5
         /// 계좌 선택 리스트 뷰어 전체 높이를 아래로 이동 합니다.
         self.accountListViewBottom.constant = ACCOUNT_DEFAULT_HEIGHT + (ACCOUNT_CELL_HEIGHT * 5) * -1
-        
+        /// 계좌 리스트 정보를 요청 합니다.
+        self.viewModel.getAccountList().sink { result in
+            
+        } receiveValue: { model in
+            if let accounts = model {
+                self.tableView.reloadData()
+            }
+        }.store(in: &self.viewModel.cancellableSet)
+
     }
 
 

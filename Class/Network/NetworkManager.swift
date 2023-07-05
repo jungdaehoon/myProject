@@ -36,6 +36,23 @@ class NetworkManager {
     
     
     /**
+     기본 파라미터 정보를 설정합니다.
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        토큰 정보 , 유저 넘버를 리턴 합니다.  [String:Any]
+     */
+    static func getDefaultParams() -> [String:Any]
+    {
+        if let item = SharedDefaults.getKeyChainCustItem()
+        {
+            return ["token":NC.S(item.token),"user_no":NC.S(item.user_no)]
+        }
+        return [:]
+    }
+    
+    /**
      전체 탭 요청 합니다.( J.D.H  VER : 1.0.0 )
      - API ID: /all/selectMyInfo.do
      - API 명: 하단 전체 탭에 데이터 정보를 요청 합니다.
@@ -47,7 +64,7 @@ class NetworkManager {
         전체 탭 상세 정보 데에터 입니다. ( AnyPublisher<AllMoreResponse, ResponseError> )
      */
     static func requestAllMore( token : String = NetworkManager.getToken() ) -> AnyPublisher<AllMoreResponse, ResponseError> {
-        let parameters: Parameters = ["token": token]
+        let parameters: Parameters = ["token": token, "type":"N"]
         return AlamofireAgent.request(APIConstant.API_MYALL_MENU, parameters: parameters)
     }
     
@@ -202,8 +219,25 @@ class NetworkManager {
         let parameters: Parameters = ["token": token]
         return AlamofireAgent.request(APIConstant.API_ACCOUNT_LIST, parameters: parameters)
     }
-
     
+    
+    /**
+     연결된 은행 계좌 리스트 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     - API ID: myp/accounts.do
+     - API 명: 은행 계좌 요청 입니다.
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        계좌 리스트 정보를 받습니다. (AnyPublisher<AccountsResponse, ResponseError>)
+     */
+    static func requestAccounts() -> AnyPublisher<AccountsResponse, ResponseError> {
+        /// 기본 파라미터 정보를 설정 합니다.
+        let parameters: Parameters = self.getDefaultParams()
+        return AlamofireAgent.request(APIConstant.API_ACCOUNTS, parameters: parameters)
+    }
+    
+
     /**
      만보기 수령 합니다. ( J.D.H  VER : 1.0.0 )
      - API ID: myp/selectMyPedometer.do
@@ -266,6 +300,23 @@ class NetworkManager {
     
     
     /**
+     세션이 활성화 상태인지를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - API ID: /api/checkLoginInfo
+     - API 명: 현 세션이 활성화 상태인지를 체크 합니다.
+     - Date: 2023.05.26
+     - Parameters:
+        - token : 기본 토큰 정보 입니다.
+     - Throws:False
+     - Returns:
+        세션 유지 여부를 받습니다. ( AnyPublisher<SessionCheckResponse, ResponseError> )
+     */
+    static func requestSessionCheck( token : String = NetworkManager.getToken() ) -> AnyPublisher<SessionCheckResponse, ResponseError> {
+        let parameters: Parameters = [ "token": token ]
+        return AlamofireAgent.request(APIConstant.API_SESSION_CHECK, parameters: parameters)
+    }
+    
+    
+    /**
      제로페이 인증 정보와 QRCode 정보로 제로페이에 리턴할 스크립트를 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - API ID: /api/v1/zeropay/qrcode.do
      - API 명: QRCode 인증 할 제로페이 스크립트를 요청 합니다.
@@ -288,19 +339,105 @@ class NetworkManager {
     
     
     /**
-     세션이 활성화 상태인지를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - API ID: /api/checkLoginInfo
-     - API 명: 현 세션이 활성화 상태인지를 체크 합니다.
-     - Date: 2023.05.26
+     제로페이 간편결제 약관 동의 여부를 체크 합니다.. ( J.D.H  VER : 1.0.0 )
+     - API ID: /api/v1/zeropay/qr/agree
+     - API 명: 제로페이 간편결제 약관동의 체크 입니다.
+     - Date: 2023.07.05
      - Parameters:
-        - token : 기본 토큰 정보 입니다.
-     - Throws:False
+        - params : 파라미터 정보를 넘깁니다.
+     - Throws: False
      - Returns:
-        세션 유지 여부를 받습니다. ( AnyPublisher<SessionCheckResponse, ResponseError> )
+        약관동의 여부를 받습니다.  ( AnyPublisher<ZeroPayTermsCheckResponse, ResponseError> )
      */
-    static func requestSessionCheck( token : String = NetworkManager.getToken() ) -> AnyPublisher<SessionCheckResponse, ResponseError> {
-        let parameters: Parameters = [ "token": token ]
-        return AlamofireAgent.request(APIConstant.API_SESSION_CHECK, parameters: parameters)
+    static func requestZeroPayTermsCheck( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayTermsCheckResponse, ResponseError> {
+        var getParams = "?"
+        for (key,value) in params
+        {
+            getParams += "\(key)=\(value)&"
+        }
+        getParams.remove(at: getParams.index(before: getParams.endIndex))
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_TERMS_CHECK + getParams, method : .get, parameters: nil)
     }
+    
+    
+    /**
+     제로페이 간편결제 약관 동의를 요청 합니다. "POST" 요청 하여야 하며 해당 경우는 동의로 판단 합니다.( J.D.H  VER : 1.0.0 )
+     - API ID: /api/v1/zeropay/qr/agree
+     - API 명: 제로페이 간편결제 약관동의 저장 입니다.
+     - Date: 2023.07.05
+     - Parameters:
+        - params : 파라미터 정보를 넘깁니다.
+     - Throws: False
+     - Returns:
+        약관동의 정상 처리 여부를 받습니다.  ( AnyPublisher<ZeroPayTermsAgreeResponse, ResponseError> )
+     */
+    static func requestZeroPayTermsAgree( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayTermsAgreeResponse, ResponseError> {
+        var parameters: Parameters = [ "token": token ]
+        for (key,value) in params
+        {
+            parameters.updateValue(value, forKey: key)
+        }
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_TERMS_AGREE, parameters: parameters)
+    }
+    
+    
+    /**
+     제로페이 간편결제 카드 머니 정보 숨김/보기 입니다 ( J.D.H  VER : 1.0.0 )
+     - API ID: /all/updateBalanceView.do
+     - API 명: 카드 머니 정보 숨김/보기 정보 업데이트 입니다.
+     - Date: 2023.07.05
+     - Parameters:
+        - params : 파라미터 정보를 넘깁니다.
+     - Throws: False
+     - Returns:
+        정상 처리 여부를 받습니다.  ( AnyPublisher<ZeroPayMoneyOnOffResponse, ResponseError> )
+     */
+    static func requestZeroPayMoneyOnOff( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayMoneyOnOffResponse, ResponseError> {
+        var parameters: Parameters = [ "token": token ]
+        for (key,value) in params
+        {
+            parameters.updateValue(value, forKey: key)
+        }
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_MONEY_ONOFF, parameters: parameters)
+    }
+    
+    
+    /**
+     제로페이 간편결제 QR/BarCode 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     - API ID: /api/v1/zeropay/qr/code
+     - API 명: 간편결제 사용될 코드 정보를 요청 합니다.
+     - Date: 2023.07.05
+     - Parameters:
+        - params : token , user_no 정보를 받습니다.
+     - Throws: False
+     - Returns:
+        QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> )
+     */
+    static func requestZeroPayQRBarCode( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> {
+        var getParams = "?"
+        for (key,value) in params
+        {
+            getParams += "\(key)=\(value)&"
+        }
+        getParams.remove(at: getParams.index(before: getParams.endIndex))
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_QR_BARCODE + getParams, method :.get, parameters: nil)
+    }
+    
+    
+    /**
+     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     - API ID: /api/v1/zeropay/qr/fixed
+     - API 명: MPM 고정형 QR코드 정상여부 인식 입니다.  ( S : 정지, A : 사용가능 )
+     - Date: 2023.07.05
+     - Parameters:
+        - qrcode : 스캔한 QRCode 정보 입니다.
+     - Throws: False
+     - Returns:
+        QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayQRCodeStatusResponse, ResponseError> )
+     */
+    static func requestZeroPayQRCodeCheck( qrcode : String ) -> AnyPublisher<ZeroPayQRCodeStatusResponse, ResponseError> {
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_QRCODE_CHECK + "/\(qrcode)", method :.get, parameters: nil)
+    }
+    
     
 }

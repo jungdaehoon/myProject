@@ -85,6 +85,8 @@ class OKZeroViewModel : BaseViewModel
     var captureSession          : AVCaptureSession?
     /// 제로페이 QRCode 인증 정보를 받습니다.
     var zeroPayQrCodeResponse   : ZeroPayQRCodeResponse?
+    /// 제로페이 간편 결제 사용될 qrcode/brCode 정보 입니다.
+    var zeroPayQRBarCodeResponse: ZeroPayQRBarCodeResponse?
     /// 스캔한 바코드 정보를 가져 옵니다.
     @Published var qrCodeValue  : QRCODE_CB = .start
     /// 코드 타임진행 상태를 가집니다.
@@ -261,6 +263,95 @@ class OKZeroViewModel : BaseViewModel
         }
         return subject.eraseToAnyPublisher()
     }
+    
+    
+    /**
+     제로페이 간편결제 QR/BarCode 정보를 요청 합니다 ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+     QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> )
+     */
+    func getQRCodeZeroPayQRBarcode() -> AnyPublisher<ZeroPayQRBarCodeResponse?, ResponseError>
+    {
+        let item    = SharedDefaults.getKeyChainCustItem()
+        var parameters  : [String:Any] = [:]
+        parameters  = ["token"   : NC.S(item!.token),
+                      "user_no" : NC.S(item!.user_no)]
+        let subject             = PassthroughSubject<ZeroPayQRBarCodeResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 스캔한 QRCode  정상여부를 체크  요청 합니다.
+            return NetworkManager.requestZeroPayQRBarCode(params:parameters)
+        } completion: { model in
+            self.zeroPayQRBarCodeResponse = model
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     디스플레이할 QR/BarCode 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:
+        - qrcode : 스캔한 qrcode 정보 입니다.
+     - Throws: False
+     - Returns:
+        ( S : 정지, A : 사용가능 ) 정상 여부를 받습니다. (AnyPublisher<ZeroPayQRCodeStatusResponse?, ResponseError>)
+     */
+    func getQRCodeZeroPayStatus( qrcode : String ) -> AnyPublisher<ZeroPayQRCodeStatusResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<ZeroPayQRCodeStatusResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 스캔한 QRCode  정상여부를 체크  요청 합니다.
+            return NetworkManager.requestZeroPayQRCodeCheck(qrcode: qrcode)
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     제로페이 간편결제 카드 머니 정보 숨김/보기 요청 입니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:
+        - hidden : 숨김 요쳥 여부 입니다.  ( Y : 숨김. N : 보기 )
+     - Throws: False
+     - Returns:
+        정상 여부를 받습니다. (AnyPublisher<ZeroPayMoneyOnOffResponse?, ResponseError>)
+     */
+    func setZeroPayMoneyHidden(  hidden : String ) -> AnyPublisher<ZeroPayMoneyOnOffResponse?, ResponseError>
+    {
+        let item    = SharedDefaults.getKeyChainCustItem()
+        var parameters  : [String:Any] = [:]
+        parameters  = ["token"   : NC.S(item!.token),
+                       "user_no" : NC.S(item!.user_no),
+                       "balance_view_yn": hidden]
+        let subject             = PassthroughSubject<ZeroPayMoneyOnOffResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 스캔한 QRCode  정상여부를 체크  요청 합니다.
+            return NetworkManager.requestZeroPayMoneyOnOff(params: parameters)
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
 }
 
 

@@ -366,7 +366,7 @@ class LoginViewController: BaseViewController {
                         {
                             self.ingIDPW_FailedCount            += 1
                             self.idpwFailedInfoHegith.constant  = 40
-                            self.idpwFailedText.text = "ID, 비밀번호가 일치하지 않습니다. (\(self.ingIDPW_FailedCount)/\(IDPW_FAILED_MAX))"
+                            self.idpwFailedText.text            = "ID, 비밀번호가 일치하지 않습니다. (\(self.ingIDPW_FailedCount)/\(IDPW_FAILED_MAX))"
                             self.setAppShield()
                             return
                         }

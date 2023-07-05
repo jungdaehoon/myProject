@@ -117,6 +117,8 @@ class BaseViewModel : NSObject {
     static var appStartResponse         : AppStartResponse? = AppStartResponse()
     /// 로그인 정보를 받습니다.
     static var loginResponse            : LoginResponse?    = LoginResponse()
+    /// 안티디버깅 여부를 가집니다.
+    static var isAntiDebugging          : Bool              = false
     /// 앱 실드 데이터를 저장 합니다.
     var appShield                       : AppShield         = AppShield()
     /// 만보게 약관 동의 여부 데이터를 가집니다.
@@ -363,7 +365,7 @@ class BaseViewModel : NSObject {
         
         if BaseViewModel.shared.savePushUrl.isValid
         {
-            let pushLink = BaseViewModel.shared.savePushUrl
+            let pushLink = WebPageConstants.baseURL + BaseViewModel.shared.savePushUrl
             BaseViewModel.shared.savePushUrl = ""
             return pushLink
         }
@@ -522,6 +524,56 @@ class BaseViewModel : NSObject {
     
     
     /**
+     제로페이 간편결제 약관동의 여부 확인 입니다.  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        약관동의 여부를 리턴 합니다. (AnyPublisher<ZeroPayTermsCheckResponse?, ResponseError>)
+     */
+    func getZeroPayTermsCheck() -> AnyPublisher<ZeroPayTermsCheckResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<ZeroPayTermsCheckResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 제로페이 약관 동의 여부를 요청 합니다.
+            return NetworkManager.requestZeroPayTermsCheck()
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     제로페이 간편결제 약관동의 요청 입니다.  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        약관동의 요청 정상처리 여부를 받습니다. (AnyPublisher<ZeroPayTermsAgreeResponse?, ResponseError>)
+     */
+    func setZeroPayTermsAgree() -> AnyPublisher<ZeroPayTermsAgreeResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<ZeroPayTermsAgreeResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 만보게 약관 동의를 요청 합니다.
+            return NetworkManager.requestZeroPayTermsAgree()
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
      만보기 약관 동의 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.03.09
      - Parameters:False
@@ -621,7 +673,7 @@ class BaseViewModel : NSObject {
                         custItem.last_login_time    = info.Last_login_time
                         custItem.token              = info.token
                         custItem.user_no            = info.user_no
-                        custItem.user_hp            = user_hp
+                        custItem.user_hp            = user_hp//.setLastMasking()!
                         SharedDefaults.setKeyChainCustItem(custItem)
                         promise(.success(true))
                         return
@@ -1037,6 +1089,60 @@ class BaseViewModel : NSObject {
                 exit(0)
             }else {
                 Slog("Normal")
+            }
+        }
+    }
+    
+    
+    /**
+     안티디버깅 여부를 체크 합니다.
+     - Date: 2023.07.04
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:
+        디버깅접근 여부를 체크하여 리턴 합니다.
+     */
+    func isDebugger() -> Bool {
+        /// 취약점 점검인 경우 입니다.
+        if APP_INSPECTION == false { return false }
+        if getppid() != 1 { return true }
+        var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
+        var info: kinfo_proc = kinfo_proc()
+        var info_size = MemoryLayout<kinfo_proc>.size
+
+        let success = name.withUnsafeMutableBytes { (nameBytePtr: UnsafeMutableRawBufferPointer) -> Bool in
+            guard let nameBytesBlindMemory = nameBytePtr.bindMemory(to: Int32.self).baseAddress else { return false }
+            return -1 != sysctl(nameBytesBlindMemory, 4, &info, &info_size, nil, 0)
+        }
+        return (success && (info.kp_proc.p_flag & P_TRACED) != 0) ? true : false
+    }
+
+    
+    /**
+     안티디버깅 여부를 체크 합니다.
+     - Description: 안티디버깅 접근 여부를 앱 사용하는 동안 체크하며 외부 디버깅 접근이 체크되면 안내 팝업 오픈후 강제 종료 됩니다.
+     - Date: 2023.07.04
+     - Parameters:Fasle
+     - Throws: False
+     - DispatchQueue : True
+     - Returns:Fasle
+     */
+    func setAntiDebuggingChecking(){
+        DispatchQueue.global(qos: .background).async {
+            while(true)
+            {
+                Thread.sleep(forTimeInterval: 0.5)
+                if self.isDebugger()
+                {
+                    BaseViewModel.isAntiDebugging = true
+                    break
+                }
+            }
+            DispatchQueue.main.async {
+                /// 앱 실드 비정상 처리 안내 팝업 입니다.
+                CMAlertView().setAlertView(detailObject: "안티 디버깅이 체크되어 앱을 강제 종료 합니다." as AnyObject, cancelText: "확인") { event in
+                    exit(0)
+                }
             }
         }
     }

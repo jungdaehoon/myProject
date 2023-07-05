@@ -292,6 +292,14 @@ class WebMessagCallBackHandler : NSObject  {
             case .accoutsPopup               :
                 self.setAccountsPopup( body )
                 break
+                /// 제로페이 약관동의 팝업 오픈 이벤트 입니다.
+            case .openZeropayQRAgreement     :
+                self.setZeroPayTermsViewDisplay()
+                break
+                /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
+            case .openZeropayQRAIntro        :
+                self.setBottomZeroPayInfoView()
+                break
             default: break
             }
         }
@@ -1081,8 +1089,7 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                 }
             }
-        }
-        
+        }        
     }
     
     
@@ -1255,7 +1262,7 @@ class WebMessagCallBackHandler : NSObject  {
     func setHybridOpenBank( _ body : [Any?] ){
         let params          = body[2] as! [Any]
         /// 오픈 뱅킹 웹 페이지를 디스플레이 합니다.
-        let _ = HybridOpenBankViewController.init(pageURL: params[0] as! String ) { value in
+        let vc = HybridOpenBankViewController.init(pageURL: params[0] as! String ) { value in
             /// 웹페이지에 오픈 뱅킹 처리관련 부분을 스크립트로 넘깁니다.
             self.webView!.evaluateJavaScript(value) { ( anyData , error) in
                 if (error != nil)
@@ -1265,6 +1272,7 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }
         }
+        self.target!.pushController(vc, animated: true,animatedType: .up)
     }
     
     
@@ -1820,6 +1828,90 @@ class WebMessagCallBackHandler : NSObject  {
             }
         }
     }
+    
+    
+    /**
+     제로페이 약관동의 페이지를 디스플레이 합니다.
+     - Date: 2023.03.16
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func setZeroPayTermsViewDisplay()
+    {
+        /// 제로페이 약관 동의 체크 입니다.
+        self.viewModel.getZeroPayTermsCheck().sink { result in
+        } receiveValue: { model in
+            if let check = model,
+               let data = check._data {
+                if data._isAgree == "Y"
+                {
+                    /// 제로페이 이동전 하단 팝업 오픈 합니다.
+                    self.setBottomZeroPayInfoView()
+                    return
+                }
+            }
+            /// 약관 동의 팝업을 오픈 합니다.
+            if let controller = self.target {
+                let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
+                BottomTermsView().setDisplay( target: controller, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
+                                             termsList: terms) { value in
+                    /// 동의/취소 여부를 받습니다.
+                    if value == .success
+                    {
+                        /// 제로페이 약관에 동의함을 저장 요청 합니다.
+                        self.viewModel.setZeroPayTermsAgree().sink { result in
+                        } receiveValue: { model in
+                            if let agree = model,
+                               agree.code == "0000"
+                            {
+                                /// 제로페이 이동전 하단 팝업 오픈 합니다.
+                                self.setBottomZeroPayInfoView()
+                            }
+                        }.store(in: &self.viewModel.cancellableSet)
+                    }
+                }
+            }
+        }.store(in: &self.viewModel.cancellableSet)
+    }
+    
+    
+    /**
+     제로페이 결제 이동 하단 팝업뷰를 오픈 합니다.
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func setBottomZeroPayInfoView()
+    {
+        /// 제로페이 선택 안내 팝업 디스플레이 합니다.
+        OKZeroPayTypeBottomView().setDisplay { event in
+            switch event
+            {
+                /// 결제 페이지로 이동 합니다.
+                case .paymeny:
+                    if let controller = self.target {
+                        let viewController = OkPaymentViewController()
+                        viewController.modalPresentationStyle = .overFullScreen
+                        controller.pushController(viewController, animated: true, animatedType: .up)
+                    }
+                    break
+                    /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
+                case .location:
+                    if let controller = self.target {
+                        /// 제로페이 가맹점 검색 URL 입니다.
+                        let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                        /// 제로페이 가맹점 네이버 지도를 요청 합니다.
+                        controller.view.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                    }
+                    break
+                default:break
+            }
+        }
+        return
+    }
+    
 }
 
 

@@ -39,6 +39,6 @@ class HomeViewController: BaseViewController {
     override func setDisplayData() {
         super.setDisplayData()
         Slog("HomeViewController setDisplayData loadTabPageURL")
-        self.loadTabPageURL(WebPageConstants.URL_MAIN)
+        self.loadTabPageURL(WebPageConstants.URL_MAIN)        
     }
 }

@@ -169,8 +169,9 @@ class BaseWebViewController: UIViewController {
         - url : 디스플레이할 웹 페이지 입니다.
      - Returns:False
      */
-    func loadTabPageURL( _ url: String ) {
-        if self.webView?.url?.absoluteString == "about:blank"
+    func loadTabPageURL( _ url: String, load : Bool = false ) {
+        if let utrStr = self.webView?.url?.absoluteString,
+           utrStr == "about:blank"
         {
             self.loadMainURL(url)
         }
@@ -420,7 +421,14 @@ extension BaseWebViewController: WKScriptMessageHandler {
      - Date: 2023.03.28
      */
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        Slog("wkwebview run javascript name = \(message.name) body = \(message.body)", category: .network)
+        let weblog = """
+        _\n\n----------------------------- WebView Script Open -------------------------------
+        [Script Name]: \n\(message.name)
+        [Script Bady]: \n\(message.body)
+        ----------------------------- WebView Script End --------------------------------
+        _\n
+        """
+        Slog("\(weblog)", category: .network)
         /// 쿠키 업데이트 메세지 이벤트 입니다.
         if message.name == "\(SCRIPT_MESSAGE_HANDLER_TYPE.updateCookies)"
         {

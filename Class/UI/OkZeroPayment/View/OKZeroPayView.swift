@@ -140,6 +140,23 @@ class OKZeroPayView: UIView {
             {
             case .qr_success(let qrcode):
                 Slog("qrcode : \(qrcode!)")
+                /// 스캔한 QRCode 정상여부를 체크 합니다.
+                self.viewModel.getQRCodeZeroPayStatus(qrcode: NC.S(qrcode)).sink { result in
+                    
+                } receiveValue: { model in
+                    if let qrStatus = model,
+                       let data = qrStatus._data{
+                        /// 정상 여부에 따라 분기 처리합니다.
+                        if data._status == "A"
+                        {
+                            
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                }.store(in: &self.viewModel.cancellableSet)
                 break
             default:break
             }
@@ -449,18 +466,18 @@ class OKZeroPayView: UIView {
     
     /**
      코드생성으로 결제 코드를 생성 합니다.
-     - Date: 2023.04.26
-     - Parameters:False
+     - Date: 2023.07.05
+     - Parameters:
+        - qrCode : 화면에 그릴 QRCode 정보를 받습니다.
+        - barCode : 화면에 그릴 BarCode 정보를 받습니다.
      - Throws: False
      - Returns:False
      */
-    func setCodeCreationView(){
-        /// 코드 정보를 요청해서 받는 API 추가 예정 입니다.
-        let sampleCode = "8809276714800"
+    func setCodeCreationView( qrCode : String = "", barCode : String = "" ){
         if self.zeroPayCodeType == .barcode
         {
             /// 바코드를 제작 합니다.
-            self.barCodeGenerator.setCodeDisplay(.barcode, code: NC.S(sampleCode)) { success in
+            self.barCodeGenerator.setCodeDisplay(.barcode, code: NC.S(barCode)) { success in
                 if success
                 {
                     /// 결제 뷰어를 활성화 합니다.
@@ -479,13 +496,13 @@ class OKZeroPayView: UIView {
                     }
                 }
             } btnEvent: { success in
-                self.openFullCodeDisplay( codeType: .barcode, code : sampleCode )
+                self.openFullCodeDisplay( codeType: .barcode, code : barCode )
             }
         }
         else
         {
             /// QRCode 를 제작 합니다.
-            self.qrCodeGenerator.setCodeDisplay(.qrcode,code: NC.S(sampleCode)) { success in
+            self.qrCodeGenerator.setCodeDisplay(.qrcode,code: NC.S(qrCode)) { success in
                 if success
                 {
                     /// 결제 뷰어를 활성화 합니다.
@@ -504,7 +521,7 @@ class OKZeroPayView: UIView {
                     }
                 }
             } btnEvent: { success in
-                self.openFullCodeDisplay( codeType: .qrcode, code: sampleCode )
+                self.openFullCodeDisplay( codeType: .qrcode, code: qrCode )
             }
         }
     }
@@ -714,8 +731,17 @@ class OKZeroPayView: UIView {
                     self.setZeroPayCodeDisplay( type: .qrcode, animation: false )
                 /// 코드 생성 요청 입니다.
                 case .creation_code:
-                    /// 결제할 코드생성을 디스플레이 합니다.
-                    self.setCodeCreationView()
+                    /// 간편결제 QR/BarCode 정보를 요청 합니다.
+                    self.viewModel.getQRCodeZeroPayQRBarcode().sink { result in
+                        
+                    } receiveValue: { model in
+                        if let qrBarcode = model,
+                           let codeData = qrBarcode._data
+                        {
+                            /// 결제할 코드생성을 디스플레이 합니다.
+                            self.setCodeCreationView( qrCode: NC.S(codeData._qrcode), barCode: NC.S(codeData._barcode))
+                        }
+                    }.store(in: &self.viewModel.cancellableSet)
                     break
                 case .location_search:
                     /// 제로페이 가맹점 검색 URL 입니다.

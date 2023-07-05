@@ -252,6 +252,32 @@ extension String {
         return predicate.evaluate(with: self)
     }
     
+    
+    /**
+     해당 마지막 정보들의 일부 영역을 마스킹 처리 합니다..( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:
+        - maskStr : 마스킹할 정보 입니다. ( default : * )
+        - maskCnt : 뒤에서 부터 마스킹할 카운트 입니다. ( default : 4 )
+     - Throws: False
+     - Returns:
+        마스킹 처리된 문구를 리턴 합니다. ( String? )
+     */
+    func setLastMasking( maskStr : String = "*", maskCnt : Int = 4 ) -> String?{
+        if self.count > maskCnt
+        {
+            let first = self.left( self.count - maskCnt )
+            var last : String = ""
+            for _ in 0..<maskCnt
+            {
+                last += maskStr
+            }
+            return first+last
+        }
+        return self
+    }
+    
+    
     var phoneNumberDash: String {
         let left = self.left(3)
         let middle = self.count == 11 ? self.mid(3, amount: 4) : self.mid(3, amount: 3)

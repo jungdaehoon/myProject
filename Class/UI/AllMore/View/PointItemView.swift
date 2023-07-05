@@ -87,6 +87,8 @@ class PointItemView: UIView {
             /// 계좌 정보가 있는 경우입니다.
             else
             {
+                /// 계좌 정보 마지막 정보 4자리를 디스플레이 용으로 사용 합니다.
+                let accno = model.allModeResponse!.result!._acc_no!.count > 4 ? model.allModeResponse!.result!._acc_no!.right(4) : model.allModeResponse!.result!._acc_no!
                 /// 오픈 뱅킹 사용여부를 체크 합니다.
                 if result._openbank!
                 {
@@ -116,14 +118,14 @@ class PointItemView: UIView {
                         }
                         else
                         {
-                            self.bankingNumber.text = "\(model.allModeResponse!.result!._bank_nm!)\(model.allModeResponse!.result!._acc_no!)"
+                            self.bankingNumber.text = "\(model.allModeResponse!.result!._bank_nm!)\(accno)"
                             self.bankingNumber.font = UIFont(name: "Pretendard-Medium", size: 16.0)!
                         }
                     }
                 }
                 else
                 {
-                    self.bankingNumber.text = "\(model.allModeResponse!.result!._bank_nm!)\(model.allModeResponse!.result!._acc_no!)"
+                    self.bankingNumber.text = "\(model.allModeResponse!.result!._bank_nm!)\(accno)"
                     self.bankingNumber.font = UIFont(name: "Pretendard-Medium", size: 16.0)!
                 }
             }
@@ -169,8 +171,12 @@ class PointItemView: UIView {
                         {
                             /// 오픈 뱅킹 웹 페이지를 디스플레이 합니다.
                             let vc = HybridOpenBankViewController.init(pageURL: response!.gateWayURL! ) { value in
+                                if value.contains( "true" ) == true
+                                {
+                                    TabBarView.setReloadSeleted(pageIndex: 4)
+                                }
                             }
-                            self.viewController.present(vc, animated: true)
+                            self.viewController.pushController(vc, animated: true, animatedType: .up)
                         }
                         else
                         {

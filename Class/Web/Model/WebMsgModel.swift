@@ -141,6 +141,10 @@ enum SCRIPT_MESSAGES : String
     case queryWKakao                = "queryWKakao"
     /// 계좌 목록 팝업 오픈 요청 입니다.
     case accoutsPopup               = "accoutsPopup"
+    /// 제로페이 약관동의 팝업 오픈 이벤트 입니다.
+    case openZeropayQRAgreement     = "openZeropayQRAgreement"
+    /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
+    case openZeropayQRAIntro        = "openZeropayQRAIntro"
 }
 
 
@@ -148,17 +152,6 @@ enum SCRIPT_MESSAGES : String
 /**
  웹 헨들러 지원 모델 입니다. ( J.D.H  VER : 1.0.0 )
  - Date: 2023.03.20
- ex )
- psg test:getw  retJsonStr = {
-   "msg" : "",
-   "result" : "true",
-   "data" : "YZo\/lO2AX+FPn0hRW2H0zw=="
- }
- retString:iOSPluginJSNI.callbackFromNative('showWRestoreText0',{
-   "msg" : "",
-   "result" : "true",
-   "data" : "YZo\/lO2AX+FPn0hRW2H0zw=="
- })
 */
 class WebMsgModel : BaseViewModel {
     

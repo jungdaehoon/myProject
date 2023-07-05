@@ -37,6 +37,8 @@ class IntroViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        /// 안티디버깅이 확인시 인트로를 진행하지 않습니다.
+        if BaseViewModel.isAntiDebugging{ return }
         /// 네트워크가 사용 가능한지 여부를 체크 합니다.
         self.viewModel.isConnectedToNetwork().sink { [self] ret in
             switch ret {

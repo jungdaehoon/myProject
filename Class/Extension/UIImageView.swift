@@ -61,4 +61,73 @@ extension UIImageView {
     }
      
     
+    /**
+     이미지를 육각형으로 설정 합니다.
+     - Date: 2022.08.08
+     - Parameters:
+        - rect : 육각형 영역을 설정할 전체 영역을 받습니다.
+     - Throws:False
+     - Returns:
+        육각형 영역 설정된 path 정보를 리턴 합니다. (UIBezierPath?)
+     */
+    func setHexagonImage(){
+        if let path = self.setHexagon(rect: CGRect(x: 5, y: 5, width: self.frame.size.width - 10, height: self.frame.size.height - 10)) {
+            let drawinglayer   = CAShapeLayer()
+            drawinglayer.frame = CGRect(origin: CGPoint(x: 5, y: 5), size:.zero)
+            drawinglayer.path  = path.cgPath
+            self.layer.mask    = drawinglayer
+        }
+    }
+    
+    /**
+     육각형 영역을 설정 합니다.
+     - Date: 2022.08.08
+     - Parameters:
+        - rect : 육각형 영역을 설정할 전체 영역을 받습니다.
+     - Throws:False
+     - Returns:
+        육각형 영역 설정된 path 정보를 리턴 합니다. (UIBezierPath?)
+     */
+    func setHexagon( rect : CGRect ) -> UIBezierPath?{
+        let path = UIBezierPath(rect: rect)
+        UIColor.lightGray.setFill()
+        path.fill()
+        path.close()
+
+        let pentagonPath = UIBezierPath()
+
+        let width = rect.width
+        let height = rect.height
+        let center = CGPoint(x: width/2, y: height/2)
+
+        let sides = 6
+        let cornerRadius: CGFloat = 1
+        let rotationOffset = CGFloat(Double.pi / 2.0)
+        let theta: CGFloat = CGFloat(2.0 * Double.pi) / CGFloat(sides)
+        let radius = (width + cornerRadius - (cos(theta) * cornerRadius)) / 2.0
+
+        var angle = CGFloat(rotationOffset)
+
+        let corner = CGPoint(x: center.x + (radius - cornerRadius) * cos(angle), y: center.y + (radius - cornerRadius) * sin(angle))
+        pentagonPath.move(to: CGPoint(x: corner.x + cornerRadius * cos(angle + theta), y: corner.y + cornerRadius * sin(angle + theta)))
+        for _ in 0 ..< sides {
+            angle += theta
+            let corner = CGPoint(x: center.x + (radius - cornerRadius) * cos(angle), y: center.y + (radius - cornerRadius) * sin(angle))
+            let tip = CGPoint(x: center.x + radius * cos(angle), y: center.y + radius * sin(angle))
+            let start = CGPoint(x: corner.x + cornerRadius * cos(angle - theta), y: corner.y + cornerRadius * sin(angle - theta))
+            let end = CGPoint(x: corner.x + cornerRadius * cos(angle + theta), y: corner.y + cornerRadius * sin(angle + theta))
+            pentagonPath.addLine(to: start)
+            pentagonPath.addQuadCurve(to: end, controlPoint: tip)
+        }
+
+        var pathTransform  = CGAffineTransform.identity
+        pathTransform = pathTransform.translatedBy(x: 0, y: -(rect.height-pentagonPath.bounds.height)/2)
+        pentagonPath.apply(pathTransform)
+
+        UIColor.black.set()
+        pentagonPath.stroke()
+        pentagonPath.close()
+        return pentagonPath
+    }
+    
 }

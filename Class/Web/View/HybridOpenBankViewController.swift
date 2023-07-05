@@ -74,7 +74,7 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
                 Slog("rsp_code::\(rsp_code)")
                 if rsp_code == "0000"
                 {
-                    self.dismiss(animated: true) {
+                    self.popController(animated: true, animatedType: .down) { firstViewController in
                         self.completion!("fnAccAggree(true);")
                     }
                 }
@@ -104,16 +104,15 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
     @IBAction func onTappedBtn(_ sender: UIButton) {
         if sender.tag == 0
         {
-            self.dismiss(animated: true) {
+            self.popController(animated: true, animatedType: .down) { firstViewController in
                 self.completion!("fnAccAggree(false);")
             }
         }
-        
     }
+    
     @IBAction func onTappedClose(_ sender: UIButton) {
-        self.dismiss(animated: true) {
+        self.popController(animated: true, animatedType: .down) { firstViewController in
             self.completion!("fnAccAggree(false);")
         }
-        
     }
 }
