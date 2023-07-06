@@ -142,18 +142,24 @@ class OKZeroPayView: UIView {
                 Slog("qrcode : \(qrcode!)")
                 /// 스캔한 QRCode 정상여부를 체크 합니다.
                 self.viewModel.getQRCodeZeroPayStatus(qrcode: NC.S(qrcode)).sink { result in
-                    
+                    self.viewModel.captureSession!.startRunning()
                 } receiveValue: { model in
                     if let qrStatus = model,
-                       let data = qrStatus._data{
+                       let data = qrStatus._data {
                         /// 정상 여부에 따라 분기 처리합니다.
                         if data._status == "A"
                         {
-                            
+                            /// QRCode 정보로 제로페이 간편 결제 웹페이지를 호출 합니다.
+                            self.setDisplayWebView( WebPageConstants.URL_ZERO_PAY_QR_OKMONEY_PAYMENT + "/\(NC.S(qrcode))", modalPresent: true, pageType: .zeropay_type, animatedType: .left) { value in
+                                self.viewModel.captureSession!.startRunning()
+                            }
                         }
                         else
                         {
-                            
+                            CMAlertView().setAlertView(detailObject: "정지된 QR코드 입니다.\n다시 인증 받으시기 바랍니다." as AnyObject, cancelText: "확인") { event in
+                                self.viewModel.qrCodeValue = .qr_fail
+                                self.viewModel.captureSession!.startRunning()
+                            }
                         }
                     }
                 }.store(in: &self.viewModel.cancellableSet)
@@ -227,16 +233,70 @@ class OKZeroPayView: UIView {
         }.store(in: &OKZeroViewModel.zeroPayShared.cancellableSet)
         
         
+        /// 초기 기본 바코드/QRCode 뷰어를 설정 합니다.
+        self.setDefaultCodeView()
         /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
         self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
-        /// 결제 가능 카드 리스트 뷰어를 디스플레이 합니다.
-        self.payCardListView.setDisplay { success in
+        /// 카드 정보의 이벤트를 연결 합니다.
+        self.payCardListView.setEvent { success in
             /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
             self.setCardFullDisplay( display: true )
         }
+        
+        
     }
     
+    /**
+    간편결제 진입후 상세정보를 서버요청 디스플레이를 하도록 합니다.
+     - Date: 2023.07.06
+     - Parameters:
+        - completion : 결과 여부를 리턴 합니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setZeroPayDisplay( completion : (( _ success : Bool ) -> Void)? = nil ){
+        /// 제로페이 간편결제 해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다
+        self.viewModel.getZeroPayMoney().sink { result in
+            completion!(false)
+        } receiveValue: { model in
+            if let money = model {
+                OKZeroViewModel.zeroPayOKMoneyResponse = money
+                self.payCardListView.setCardDisplay( model: model )
+                return
+            }
+            completion!(false)
+        }.store(in: &self.viewModel.cancellableSet)
+    }
+    
+    
+    /**
+    화면 진입시 기본 code 이미지를 미리 생성 합니다.
+     - Date: 2023.07.06
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func setDefaultCodeView(){
+        /// 기본 바코드를 제작 합니다.
+        self.barCodeGenerator.setCodeDisplay(.barcode, code: "12345678903412123",completion: { success in
+            if success
+            {
+                self.barCodeGenerator.imageView.isHidden = false
+                self.barCodeGenerator.imageView.alpha    = 0.2
+            }
+        })
+        
+        /// 기본 바코드를 제작 합니다.
+        self.qrCodeGenerator.setCodeDisplay(.qrcode, code: "12345678903412123",completion: { success in
+            if success
+            {
+                self.qrCodeGenerator.imageView.isHidden = false
+                self.qrCodeGenerator.imageView.alpha    = 0.2
+            }
+        })
+    }
 
+    
     /**
      프리뷰 화면과 캡쳐할 영역 설정 합니다.
      - Date: 2023.03.13
@@ -400,15 +460,11 @@ class OKZeroPayView: UIView {
     func releaseCodeView(){
         /// 바코드 라운드 컬러를 활성화 컬러로 변경 합니다.
         self.barCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
-        /// 코드 이미지를 비활성화 합니다.
-        self.barCodeGenerator.imageView.isHidden = true
         /// 바코드 결제 비활성화 합니다.
         self.isBarCodePayEnabled                 = false
         
         /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
         self.qrCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
-        /// 코드 이미지를 활성화 합니다.
-        self.qrCodeGenerator.imageView.isHidden = true
         /// QRCode 결제 비활성화 합니다.
         self.isQrCodePayEnabled                 = false
         
@@ -470,10 +526,11 @@ class OKZeroPayView: UIView {
      - Parameters:
         - qrCode : 화면에 그릴 QRCode 정보를 받습니다.
         - barCode : 화면에 그릴 BarCode 정보를 받습니다.
+        - maxTime : 코드 유지될 최대 타임 정보를 받습니다.
      - Throws: False
      - Returns:False
      */
-    func setCodeCreationView( qrCode : String = "", barCode : String = "" ){
+    func setCodeCreationView( qrCode : String = "", barCode : String = "", maxTime : Int = 180 ){
         if self.zeroPayCodeType == .barcode
         {
             /// 바코드를 제작 합니다.
@@ -492,7 +549,7 @@ class OKZeroPayView: UIView {
                         /// 타이머를 활성화 합니다.
                         self.isTimer = true
                         /// 코드 타이머 활성화 합니다.
-                        self.viewModel.startCodeTimerEnabeld()
+                        self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
                     }
                 }
             } btnEvent: { success in
@@ -517,7 +574,7 @@ class OKZeroPayView: UIView {
                         /// 타이머를 활성화 합니다.
                         self.isTimer = true
                         /// 코드 타이머 활성화 합니다.
-                        self.viewModel.startCodeTimerEnabeld()
+                        self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
                     }
                 }
             } btnEvent: { success in
@@ -598,7 +655,7 @@ class OKZeroPayView: UIView {
         self.codeFullDisplayView.releaseCodeView()
         /// QR결제 위치로 선택 배경을 이동 합니다.
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
-            self.detaileViewTop.constant        = 315.0
+            self.detaileViewTop.constant        = 355.0
             self.layoutIfNeeded()
         } completion: { _ in
             
@@ -619,7 +676,7 @@ class OKZeroPayView: UIView {
         self.payCardListTop.constant    = (self.payCardListView.frame.origin.y * -1) + 48
         /// QR결제 위치로 선택 배경을 이동 합니다.
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
-            self.detaileViewTop.constant        = 315.0
+            self.detaileViewTop.constant        = 355.0
             self.layoutIfNeeded()
         } completion: { _ in
             
@@ -681,7 +738,7 @@ class OKZeroPayView: UIView {
     @objc func setCardFullAniDelayClose(){
         UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseOut) {
             self.payCardListTop.constant        = (self.payCardListView.frame.origin.y * -1) + 48
-            self.detaileViewTop.constant        = 315.0
+            self.detaileViewTop.constant        = 355.0
             /// 카드리스트가 다시 하단 위치 변경으로 카드 시작 위치값을 변경 합니다.
             self.payCardListView.setCardListPosition()            
             self.layoutIfNeeded()
@@ -731,17 +788,24 @@ class OKZeroPayView: UIView {
                     self.setZeroPayCodeDisplay( type: .qrcode, animation: false )
                 /// 코드 생성 요청 입니다.
                 case .creation_code:
-                    /// 간편결제 QR/BarCode 정보를 요청 합니다.
-                    self.viewModel.getQRCodeZeroPayQRBarcode().sink { result in
-                        
-                    } receiveValue: { model in
-                        if let qrBarcode = model,
-                           let codeData = qrBarcode._data
+                    /// URL 파라미터를 GET 데이터로 가져 옵니다.
+                    let param = NetworkManager.getDefaultParams(method: .get) as! String
+                    /// QRCode 정보로 제로페이 간편 결제 웹페이지를 호출 합니다.
+                    self.setDisplayWebView( WebPageConstants.URL_ZERO_PAY_QR_KEYPAD_SHOW + "\(param)", modalPresent: true, pageType: .zeropay_keypad, animatedType: .up) { value in
+                        switch value
                         {
-                            /// 결제할 코드생성을 디스플레이 합니다.
-                            self.setCodeCreationView( qrCode: NC.S(codeData._qrcode), barCode: NC.S(codeData._barcode))
+                            case .zeroPaykeyPad( let barcode, let qrcode, let maxValidTime ):
+                                if barcode.isValid,
+                                   qrcode.isValid,
+                                   maxValidTime.isValid
+                                {
+                                    /// 결제할 코드생성을 디스플레이 합니다.
+                                    self.setCodeCreationView( qrCode: NC.S(barcode), barCode: NC.S(qrcode), maxTime: Int(maxValidTime)! )
+                                }
+                                break
+                            default:break
                         }
-                    }.store(in: &self.viewModel.cancellableSet)
+                    }
                     break
                 case .location_search:
                     /// 제로페이 가맹점 검색 URL 입니다.

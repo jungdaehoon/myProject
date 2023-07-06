@@ -151,170 +151,161 @@ class AllMoreMenuListCell: UITableViewCell {
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
         Slog("title name : \(self.menuInfo!.title!)")
-        
-        if self.menuInfo!.title! == "이번달 결제"
-        {
-            /// 결제 페이지는 추후 개발 후 연동 예정 입니다.
-            self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
-        }
-
-        if self.menuInfo!.title! == "이번달 적립"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_POINT_TRANSFER_LIST + "?tran_kn=1")
-        }
-        
-        if self.menuInfo!.title! == "OK마켓"
-        {
-            ///  OK마켓 URL 정보를 가져 옵니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_GIFTYCON).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
-        
-        if self.menuInfo!.title! == "제로페이 QR"
-        {
-            if let response  = self.viewModel!.allModeResponse,
-               let result    = response.result,
-               result._zeropayPaymentYn == "Y"
+        if let model = self.viewModel {
+            if self.menuInfo!.title! == "이번달 결제"
             {
-                /// 제로페이 현장 결제 뷰어로 이동합니다.
-                self.toQRZeroPayPage()
+                /// 결제 페이지는 추후 개발 후 연동 예정 입니다.
+                self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
             }
-            else
+
+            if self.menuInfo!.title! == "이번달 적립"
             {
-                /// 인증 처리 팝업 입니다.
+                self.setDisplayWebView(WebPageConstants.URL_POINT_TRANSFER_LIST + "?tran_kn=1")
+            }
+            
+            if self.menuInfo!.title! == "OK마켓"
+            {
+                ///  OK마켓 URL 정보를 가져 옵니다.
+                model.getAppMenuList(menuID: .ID_GIFTYCON).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
+            
+            if self.menuInfo!.title! == "제로페이 QR"
+            {
+                /// 간편 결제 인증 처리 팝업 입니다.
                 self.setZeroPayTermsViewDisplay()
             }
-             
-        }
-     
-        if self.menuInfo!.title! == "제로페이 상품권"
-        {
-            /// 제로페이 상품권 URL 정보를 가져 옵니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
-        if self.menuInfo!.title! == "거래내역"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
+         
+            if self.menuInfo!.title! == "제로페이 상품권"
+            {
+                /// 제로페이 상품권 URL 정보를 가져 옵니다.
+                model.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
+            if self.menuInfo!.title! == "거래내역"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
+            }
+            
+            if self.menuInfo!.title! == "OK머니 충전"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_RECHARE_MONEY)
+            }
+            
+            if self.menuInfo!.title! == "OK머니 송금"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_REMITTANCE_MONEY)
+            }
+            
+            if self.menuInfo!.title! == "OK머니 받기"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_MYP_RECEIVE)
+            }
+            
+            if self.menuInfo!.title! == "보유중인 NFT"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_NFT_OWN_LIST)
+            }
+            
+            if self.menuInfo!.title! == "NFT 거래내역"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_NFT_TRANS_LIST)
+            }
+            
+            if self.menuInfo!.title! == "발행한 NFT"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_NFT_ISSUED_LIST)
+            }
+            
+            if self.menuInfo!.title! == "수집한 NFT"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_NFT_COLLECTED_LIST)
+            }
+            
+            if self.menuInfo!.title! == "만보Go"
+            {
+                self.toPedometerPage()
+            }
+            
+            if self.menuInfo!.title! == "올림pick"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_OLIMPICK_LIST)
+            }
+            
+            if self.menuInfo!.title! == "친구추천"
+            {
+                /// 친추추천 URL 정보를 가져 옵니다.
+                model.getAppMenuList(menuID: .ID_RECOMMEND_USER).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
+            
+            if self.menuInfo!.title! == "뿌리Go"
+            {
+                self.setDisplayWebView(WebPageConstants.URL_MY_RELATIONSHIP)
+            }
+            
+            if self.menuInfo!.title! == "이벤트"
+            {
+                /// 이벤트 URL 정보를 가져 옵니다.
+                model.getAppMenuList(menuID: .ID_EVENT).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
+            
+            if self.menuInfo!.title! == "고객센터"
+            {
+                WebPageConstants.URL_KAKAO_CONTACT.openUrl()
+            }
+            
+            if self.menuInfo!.title! == "FAQ"
+            {
+                /// FAQ URL 정보 입니다.
+                model.getAppMenuList(menuID: .ID_FAQ).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
+            
+            if self.menuInfo!.title! == "서비스안내"
+            {
+                /// 포인트안내 (서비스안내) URL 입니다.
+                model.getAppMenuList(menuID: .ID_POINT).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
+            
+            if self.menuInfo!.title! == "공지사항"
+            {
+                /// 공지사항 URL 입니다.
+                model.getAppMenuList(menuID: .ID_NOTICE).sink(receiveValue: { url in
+                    if url.isValid
+                    {
+                        self.setDisplayWebView( url )
+                    }
+                }).store(in: &model.cancellableSet)
+            }
         }
         
-        if self.menuInfo!.title! == "OK머니 충전"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_RECHARE_MONEY)
-        }
-        
-        if self.menuInfo!.title! == "OK머니 송금"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_REMITTANCE_MONEY)
-        }
-        
-        if self.menuInfo!.title! == "OK머니 받기"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_MYP_RECEIVE)
-        }
-        
-        if self.menuInfo!.title! == "보유중인 NFT"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_NFT_OWN_LIST)
-        }
-        
-        if self.menuInfo!.title! == "NFT 거래내역"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_NFT_TRANS_LIST)
-        }
-        
-        if self.menuInfo!.title! == "발행한 NFT"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_NFT_ISSUED_LIST)
-        }
-        
-        if self.menuInfo!.title! == "수집한 NFT"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_NFT_COLLECTED_LIST)
-        }
-        
-        if self.menuInfo!.title! == "만보Go"
-        {
-            self.toPedometerPage()
-        }
-        
-        if self.menuInfo!.title! == "올림pick"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_OLIMPICK_LIST)
-        }
-        
-        if self.menuInfo!.title! == "친구추천"
-        {
-            /// 친추추천 URL 정보를 가져 옵니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_RECOMMEND_USER).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
-        
-        if self.menuInfo!.title! == "뿌리Go"
-        {
-            self.setDisplayWebView(WebPageConstants.URL_MY_RELATIONSHIP)
-        }
-        
-        if self.menuInfo!.title! == "이벤트"
-        {
-            /// 이벤트 URL 정보를 가져 옵니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_EVENT).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
-        
-        if self.menuInfo!.title! == "고객센터"
-        {            
-            WebPageConstants.URL_KAKAO_CONTACT.openUrl()
-        }
-        
-        if self.menuInfo!.title! == "FAQ"
-        {
-            /// FAQ URL 정보 입니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_FAQ).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
-        
-        if self.menuInfo!.title! == "서비스안내"
-        {
-            /// 포인트안내 (서비스안내) URL 입니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_POINT).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
-        
-        if self.menuInfo!.title! == "공지사항"
-        {
-            /// 공지사항 URL 입니다.
-            self.viewModel!.getAppMenuList(menuID: .ID_NOTICE).sink(receiveValue: { url in
-                if url.isValid
-                {
-                    self.setDisplayWebView( url )
-                }
-            }).store(in: &self.viewModel!.cancellableSet)
-        }
         
     }
 }
@@ -499,19 +490,73 @@ extension AllMoreMenuListCell
      */
     func setZeroPayTermsViewDisplay()
     {
-        let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
-        BottomTermsView().setDisplay( target: self.viewController, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
-                                     termsList: terms) { value in
-            /// 동의/취소 여부를 받습니다.
-            if value == .success
-            {
-                self.toQRZeroPayPage()
+        /// 제로페이 약관 동의 체크 입니다.
+        self.viewModel!.getZeroPayTermsCheck().sink { result in
+        } receiveValue: { model in
+            if let check = model,
+               let data = check._data {
+                if data._didAgree!
+                {
+                    /// 제로페이 이동전 하단 팝업 오픈 합니다.
+                    self.setBottomZeroPayInfoView()
+                    return
+                }
             }
-            else
-            {
-                
+            /// 약관 동의 팝업을 오픈 합니다.
+            let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
+            BottomTermsView().setDisplay( target: self.viewController, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
+                                         termsList: terms) { value in
+                /// 동의/취소 여부를 받습니다.
+                if value == .success
+                {
+                    /// 제로페이 약관에 동의함을 저장 요청 합니다.
+                    self.viewModel!.setZeroPayTermsAgree().sink { result in
+                    } receiveValue: { model in
+                        if let agree = model,
+                           agree.code == "0000"
+                        {
+                            /// 제로페이 이동전 하단 팝업 오픈 합니다.
+                            self.setBottomZeroPayInfoView()
+                        }
+                    }.store(in: &self.viewModel!.cancellableSet)
+                }
             }
-        }        
+            
+        }.store(in: &self.viewModel!.cancellableSet)
+    }
+    
+    
+    /**
+     제로페이 결제 이동 하단 팝업뷰를 오픈 합니다.
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func setBottomZeroPayInfoView()
+    {
+        /// 제로페이 선택 안내 팝업 디스플레이 합니다.
+        OKZeroPayTypeBottomView().setDisplay { event in
+            switch event
+            {
+                /// 결제 페이지로 이동 합니다.
+                case .paymeny:
+                    let viewController = OkPaymentViewController()
+                    viewController.modalPresentationStyle = .overFullScreen
+                    self.viewController.pushController(viewController, animated: true, animatedType: .up)
+                    break
+                    /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
+                case .location:
+                    /// 제로페이 가맹점 검색 URL 입니다.
+                    let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    /// 제로페이 가맹점 네이버 지도를 요청 합니다.
+                    self.viewController.view.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                    
+                    break
+                default:break
+            }
+        }
+        return
     }
 }
 

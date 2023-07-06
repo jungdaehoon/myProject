@@ -107,7 +107,6 @@ class AllMoreViewController: BaseViewController {
                 /// 서버에서 받은 데이터 기준으로 한번더 디스플레이 합니다.
                 self.setDisplayView()
             }
-            
         }.store(in: &cancellableSet)
     }
     

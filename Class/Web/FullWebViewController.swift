@@ -10,7 +10,10 @@ import UIKit
 import WebKit
 
 
-
+/**
+ 전체 웹 버튼 이벤트  입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.03.21
+*/
 enum FULL_BTN : Int {
     /// 페이지 아래로 종료 입니다.
     case page_close = 10
@@ -19,6 +22,18 @@ enum FULL_BTN : Int {
 }
 
 
+/**
+ 보안키패드 이벤트 입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.03.21
+*/
+enum KEY_PAD_CLOSE_TYPE : Int {
+    /// 페이지 강제 종료 입니다.
+    case close
+    /// 인증 정상처리 입니다.
+    case success
+    /// 인증 실패 입니다.
+    case fail
+}
 
 
 /**
@@ -30,6 +45,10 @@ enum FULL_WEB_CB {
     case loginCall
     /// 페이지 종료후 바로 홈으로 이동합니다.
     case goToHome
+    /// 보안 키패드 타입 입니다.
+    case keyPadSucces( type : KEY_PAD_CLOSE_TYPE )
+    /// 제로페이 인증용 보안 키패드 타입 입니다.
+    case zeroPaykeyPad( barcode : String, qrcode : String, maxValidTime : String )
     /// 페이지 닫기 입니다.
     case pageClose
     /// URL 정보를 넘깁니다
@@ -52,6 +71,10 @@ enum FULL_PAGE_TYPE : String {
     case pg_type            = "PG"
     /// 제로페이 연동 타입 입니다.
     case zeropay_type       = "ZP"
+    /// 인증용 보안키패드 연동 타입 입니다.
+    case auth_keypad        = "AUTH_KEY_PAD"
+    /// 제로페이 인증용 보안키패드 연동 타입 입니다.
+    case zeropay_keypad     = "ZEROPAY_KEYPAD"
     /// 인증 관련 페이지 입니다.
     case auth_type          = "AUTH"
     /// 외부 웹페이지 접근으로 내부 도메인을 사용하지 않습니다.

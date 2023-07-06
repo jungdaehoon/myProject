@@ -137,14 +137,16 @@ enum SCRIPT_MESSAGES : String
     case showWRestoreText           = "showWRestoreText"
     /// 지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다.
     case readQRInfo                 = "readQRInfo"
-    /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
+    /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출 합니다.
     case queryWKakao                = "queryWKakao"
     /// 계좌 목록 팝업 오픈 요청 입니다.
     case accoutsPopup               = "accoutsPopup"
     /// 제로페이 약관동의 팝업 오픈 이벤트 입니다.
     case openZeropayQRAgreement     = "openZeropayQRAgreement"
     /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
-    case openZeropayQRAIntro        = "openZeropayQRAIntro"
+    case openZeropayQRIntro         = "openZeropayQRIntro"
+    /// 제로페이 간편결제에 보안키패드 인증후 정상처리시 코드정보를 받습니다.
+    case drawCode                   = "drawCode"
 }
 
 

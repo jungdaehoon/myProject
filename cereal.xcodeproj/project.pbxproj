@@ -212,6 +212,7 @@
 		8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2029DD35E2004E5021 /* LoadingView.swift */; };
 		8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2229DD35EC004E5021 /* LoadingView.xib */; };
 		8DFB9D2629DD5CB5004E5021 /* RemittanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2529DD5CB5004E5021 /* RemittanceModel.swift */; };
+		F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */; };
 		F2C5E4CB2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */; };
 		F2C5E4CD2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */; };
 		F2C5E4CF2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */; };
@@ -454,6 +455,7 @@
 		8DFB9D2029DD35E2004E5021 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8DFB9D2229DD35EC004E5021 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		8DFB9D2529DD5CB5004E5021 /* RemittanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemittanceModel.swift; sourceTree = "<group>"; };
+		F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayOKMoneyResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsAgreeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsCheckResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayMoneyOnOffResponse.swift; sourceTree = "<group>"; };
@@ -902,6 +904,7 @@
 		8D205EE729D1346E00F43C99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F25323CC2A564C9E005267E2 /* ZeroPayOKMoney */,
 				F2C5E4D42A555746005660F1 /* Accounts */,
 				F2C5E4C72A55385A005660F1 /* ZeroPayQRCodeStatus */,
 				F2C5E4C42A55342A005660F1 /* ZeroPayQRBarCode */,
@@ -1307,6 +1310,14 @@
 			path = ZeroPayTermsAgree;
 			sourceTree = "<group>";
 		};
+		F25323CC2A564C9E005267E2 /* ZeroPayOKMoney */ = {
+			isa = PBXGroup;
+			children = (
+				F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */,
+			);
+			path = ZeroPayOKMoney;
+			sourceTree = "<group>";
+		};
 		F2C5E4BE2A5530C8005660F1 /* ZeroPayTermsCheck */ = {
 			isa = PBXGroup;
 			children = (
@@ -1655,6 +1666,7 @@
 				8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */,
 				F2C5E4CD2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift in Sources */,
 				8D205F7229D1346F00F43C99 /* APIConstant.swift in Sources */,
+				F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */,
 				8D205F2329D1346F00F43C99 /* HomeViewController.swift in Sources */,
 				8D205F6329D1346F00F43C99 /* URL.swift in Sources */,
 				8D205F6129D1346F00F43C99 /* Int.swift in Sources */,

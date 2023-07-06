@@ -87,6 +87,8 @@ class OKZeroViewModel : BaseViewModel
     var zeroPayQrCodeResponse   : ZeroPayQRCodeResponse?
     /// 제로페이 간편 결제 사용될 qrcode/brCode 정보 입니다.
     var zeroPayQRBarCodeResponse: ZeroPayQRBarCodeResponse?
+    /// 제로페이 간편결제 사용될 OKMoney 정보 입니다.
+    static var zeroPayOKMoneyResponse : ZeroPayOKMoneyResponse?
     /// 스캔한 바코드 정보를 가져 옵니다.
     @Published var qrCodeValue  : QRCODE_CB = .start
     /// 코드 타임진행 상태를 가집니다.
@@ -146,23 +148,22 @@ class OKZeroViewModel : BaseViewModel
     /**
      결제 코드 사용가능 타임을 체크 합니다.( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.27
-     - Parameters:False
+     - Parameters:
+        - maxTime : 결제 코드 최대 타임 정보를 받습니다.
      - Timer : true
      - Returns:False
      */
-    func startCodeTimerEnabeld()
+    func startCodeTimerEnabeld( maxTime : Int = 180 )
     {
-        /// 최대 타임 입니다.
-        let maxtime     = 180
         /// 오버 되는 타임 정보 입니다.
         var overtime    = 0
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
             overtime += 1
             DispatchQueue.main.async {
                 /// 인식가능한 "분" 정보를 설정 합니다.
-                let hour        = (maxtime - overtime)/60
+                let hour        = (maxTime - overtime)/60
                 /// 인식 가능한 "초" 정보를 설정 합니다.
-                let min         = (maxtime - overtime)%60
+                let min         = (maxTime - overtime)%60
                 /// 디스플레이할 "초" 정보를 2자리수로 설정 합니다.
                 let minute      = min < 10 ? "0\(min)" : "\(min)"
                 /// 최종 디스플레이할 타임 정보를 설정 합니다.
@@ -170,7 +171,7 @@ class OKZeroViewModel : BaseViewModel
                 Slog(displayTime)
                 
                 /// 인식 가능 타임을 종료 합니다.
-                if maxtime == overtime ||
+                if maxTime == overtime ||
                     self.codeTimer == .exit_time
                 {
                     /// 인식 불가능으로 타임을 종료 합니다.
@@ -345,12 +346,44 @@ class OKZeroViewModel : BaseViewModel
             /// 스캔한 QRCode  정상여부를 체크  요청 합니다.
             return NetworkManager.requestZeroPayMoneyOnOff(params: parameters)
         } completion: { model in
+            if var model = OKZeroViewModel.zeroPayOKMoneyResponse,
+               var data = model._data {
+                data.balanceViewYn  = hidden
+                data.isBalanceShow  = hidden == "Y" ? false : true
+                model.data          = data
+                OKZeroViewModel.zeroPayOKMoneyResponse = model
+            }
             // 앱 인터페이스 정상처리 여부를 넘깁니다.
             subject.send(model)
         }
         return subject.eraseToAnyPublisher()
     }
     
+    /**
+     제로페이 간편결제 해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다 ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        정상 여부를 받습니다. (AnyPublisher<ZeroPayOKMoneyResponse?, ResponseError>)
+     */
+    func getZeroPayMoney() -> AnyPublisher<ZeroPayOKMoneyResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<ZeroPayOKMoneyResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다
+            return NetworkManager.requestZeroPayOKMoney()
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    //
     
 }
 

@@ -61,14 +61,14 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     카드 리스트 뷰어어 디스플레이를 요청 합니다.( J.D.H  VER : 1.0.0 )
+     카드 정보의 이벤트를 연결 합니다..( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.28
      - Parameters:
         - btnEvent : 버튼 이벤트를 넘깁니다.
      - Throws: False
      - Returns:False
      */
-    func setDisplay( btnEvent : (( _ success : Bool ) -> Void)? = nil ){
+    func setEvent( btnEvent : (( _ success : Bool ) -> Void)? = nil ){
         self.btnEvent = btnEvent
     }
     
@@ -80,7 +80,12 @@ class OKZeroPayCardListView: UIView {
      - Throws: False
      - Returns:False
      */
-    func setCardDisplay(){
+    func setCardDisplay( model : ZeroPayOKMoneyResponse? = nil ) {
+        if self.scrollView != nil {
+            let _ = self.scrollView.subviews.map { $0.removeFromSuperview() }
+        }
+        self.cardViews.removeAll()
+        
         /// 카드 그라데이션 컬러 입니다.
         let colors : [(start : UIColor, end : UIColor)]  = [(UIColor(hex: 0x666666),UIColor(hex: 0xF6F6F6)),(UIColor(hex: 0xFF5300),UIColor(hex: 0xFD9200))]
         /// 최대 카운트 3개 입니다.
@@ -102,7 +107,7 @@ class OKZeroPayCardListView: UIView {
                     break
                 default:break
             }
-            cardview.setDisplayChange(bottomMode: true)
+            cardview.setDisplayChange(bottomMode: true, model: model)
             self.cardViews.append(cardview)
             self.scrollView.addSubview(cardview)
         }
@@ -164,7 +169,7 @@ class OKZeroPayCardListView: UIView {
                 frame.size.width = width
                 cardView.frame   = frame
                 cardView.setCardBGColor()
-                cardView.setDisplayChange(bottomMode: startPosition == 0.0 ? true : false)                
+                cardView.setDisplayChange(bottomMode: startPosition == 0.0 ? true : false, model: OKZeroViewModel.zeroPayOKMoneyResponse)
             }
         }
         self.scrollView.layoutSubviews()

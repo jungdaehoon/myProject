@@ -63,7 +63,7 @@ extension UIImageView {
     
     /**
      이미지를 육각형으로 설정 합니다.
-     - Date: 2022.08.08
+     - Date: 2023.07.05
      - Parameters:
         - rect : 육각형 영역을 설정할 전체 영역을 받습니다.
      - Throws:False
@@ -71,17 +71,18 @@ extension UIImageView {
         육각형 영역 설정된 path 정보를 리턴 합니다. (UIBezierPath?)
      */
     func setHexagonImage(){
-        if let path = self.setHexagon(rect: CGRect(x: 5, y: 5, width: self.frame.size.width - 10, height: self.frame.size.height - 10)) {
+        if let path = self.setHexagon(rect: CGRect(x: 8, y: 8, width: self.frame.size.width - 16, height: self.frame.size.height - 16)) {
             let drawinglayer   = CAShapeLayer()
-            drawinglayer.frame = CGRect(origin: CGPoint(x: 5, y: 5), size:.zero)
+            drawinglayer.frame = CGRect(origin: CGPoint(x: 8, y: 8), size:.zero)
             drawinglayer.path  = path.cgPath
             self.layer.mask    = drawinglayer
         }
     }
     
+    
     /**
      육각형 영역을 설정 합니다.
-     - Date: 2022.08.08
+     - Date: 2023.07.05
      - Parameters:
         - rect : 육각형 영역을 설정할 전체 영역을 받습니다.
      - Throws:False

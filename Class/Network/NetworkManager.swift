@@ -43,13 +43,17 @@ class NetworkManager {
      - Returns:
         토큰 정보 , 유저 넘버를 리턴 합니다.  [String:Any]
      */
-    static func getDefaultParams() -> [String:Any]
+    static func getDefaultParams( method : HTTPMethod = .post ) -> Any?
     {
         if let item = SharedDefaults.getKeyChainCustItem()
         {
+            if method == .get
+            {
+                return "?token=\(NC.S(item.token))&user_no=\(NC.S(item.user_no))"
+            }
             return ["token":NC.S(item.token),"user_no":NC.S(item.user_no)]
         }
-        return [:]
+        return ["":""]
     }
     
     /**
@@ -233,7 +237,7 @@ class NetworkManager {
      */
     static func requestAccounts() -> AnyPublisher<AccountsResponse, ResponseError> {
         /// 기본 파라미터 정보를 설정 합니다.
-        let parameters: Parameters = self.getDefaultParams()
+        let parameters: Parameters = self.getDefaultParams() as! Parameters
         return AlamofireAgent.request(APIConstant.API_ACCOUNTS, parameters: parameters)
     }
     
@@ -440,4 +444,19 @@ class NetworkManager {
     }
     
     
+    /**
+     해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다.( J.D.H  VER : 1.0.0 )
+     - API ID: /api/v1/okmoney
+     - API 명:   OK머니 정보 조회 입니다.
+     - Date: 2023.07.06
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayOKMoneyResponse, ResponseError> )
+     */
+    static func requestZeroPayOKMoney() -> AnyPublisher<ZeroPayOKMoneyResponse, ResponseError> {
+        /// 기본 파라미터 정보를 설정 합니다.
+        let parameters = self.getDefaultParams(method: .get) as! String
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_OkMONEY + "/\(parameters)", method :.get, parameters: nil)
+    }
 }

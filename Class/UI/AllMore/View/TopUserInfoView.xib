@@ -116,6 +116,7 @@
             <connections>
                 <outlet property="nickNameText" destination="fv9-Ii-V69" id="ah2-fd-VPm"/>
                 <outlet property="profileImage" destination="guE-sq-9Ca" id="BmG-k4-GwR"/>
+                <outlet property="profileImageLeft" destination="ZxH-I5-B6O" id="OCn-n1-foL"/>
             </connections>
             <point key="canvasLocation" x="-318" y="-107"/>
         </view>

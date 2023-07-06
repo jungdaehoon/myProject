@@ -297,11 +297,41 @@ class WebMessagCallBackHandler : NSObject  {
                 self.setZeroPayTermsViewDisplay()
                 break
                 /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
-            case .openZeropayQRAIntro        :
+            case .openZeropayQRIntro         :
                 self.setBottomZeroPayInfoView()
+                break
+            case .drawCode                   :
                 break
             default: break
             }
+        }
+    }
+    
+    
+    func setDrawCode( _ body : [Any?] ){
+        // 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks = body[0] as! [Any]
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params = body[2] as? [Any]
+        {
+            if let info = params[0] as? [String:String]
+            {
+                /// 전체 웹뷰 타입 경우인지를 체크 합니다.
+                if let controller = self.target as? FullWebViewController {
+                    switch controller.pageType
+                    {
+                        /// 제로페이 간편결제 인증 키패드 타입 입니다.
+                        case .zeropay_keypad:
+                            if let completion = controller.completion {
+                                completion(.zeroPaykeyPad(barcode: NC.S(info["barcode"]), qrcode: NC.S(info["qrcode"]), maxValidTime: NC.S(info["maxValidTime"])))
+                            }
+                            return
+                        default:break
+                    }
+                    return
+                }
+            }
+            
         }
     }
     
@@ -1844,7 +1874,7 @@ class WebMessagCallBackHandler : NSObject  {
         } receiveValue: { model in
             if let check = model,
                let data = check._data {
-                if data._isAgree == "Y"
+                if data._didAgree!
                 {
                     /// 제로페이 이동전 하단 팝업 오픈 합니다.
                     self.setBottomZeroPayInfoView()
@@ -1984,6 +2014,17 @@ extension WebMessagCallBackHandler{
     func setTargetDismiss( _ callback : String = "", param : String = "" ){
         /// 전체 웹뷰 타입 경우인지를 체크 합니다.
         if let controller = self.target as? FullWebViewController {
+            switch controller.pageType
+            {
+                /// 보안 키패드 타입입니다.
+                case .auth_keypad:
+                    if let completion = controller.completion {
+                        completion(.keyPadSucces(type: .close))
+                    }
+                    return
+                default:break
+            }
+            
             controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
             controller.popController(animated: true, animatedType: .down)
             return
@@ -1995,6 +2036,7 @@ extension WebMessagCallBackHandler{
         }
     }
 
+    
     /**
      사용자명을 CNContact 의  property 속성을 문자로 리턴 합니다.
      - Date: 2023.04.17

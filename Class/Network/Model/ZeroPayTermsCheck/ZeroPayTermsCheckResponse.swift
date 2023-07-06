@@ -31,8 +31,8 @@ struct ZeroPayTermsCheckResponse: BaseResponse {
 struct agressdata : Codable
 {
     /// 동의여부 입니다.
-    var _isAgree  : String? { get { return  NC.S(isAgree) } }
+    var _didAgree  : Bool? { get { return  NC.B(didAgree) } }
     /// 동의여부 입니다.
-    var isAgree   : String?
+    var didAgree   : Bool?
 }
 

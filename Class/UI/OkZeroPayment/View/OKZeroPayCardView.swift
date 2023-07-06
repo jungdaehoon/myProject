@@ -125,14 +125,14 @@ class OKZeroPayCardView: UIView {
         case .okmoney:
             self.titleText.text         = "OK머니로 제로페이 결제"
             self.subInfoText.text       = "부족한 금액은 충전 후 결제 됩니다."
-            self.accountInfoText.text   = "OK저축은행 3456"
+            self.accountInfoText.text   = ""
             break
         case .account:
             self.payInfoView.isHidden   = true
             self.payHiddenView.isHidden = true
             self.titleText.text         = "은행계좌에서 제로페이 결제"
             self.subInfoText.text       = "결제금액만큼 즉시 출금되어 결제됩니다."
-            self.accountInfoText.text   = "신한은행 3456"
+            self.accountInfoText.text   = ""
             break
         case .banner:
             self.cardView.isHidden      = true
@@ -143,89 +143,110 @@ class OKZeroPayCardView: UIView {
     }
     
     
-    func setDisplayChange( bottomMode : Bool = true){
-        if bottomMode == true
-        {
-            /// 하단 모드  정보를 받아 하단 모드 뷰어를 온오프 합니다.
-            self.bottomDisplayInfoView.isHidden = false
-            switch displayType {
-            case .okmoney:
-                /// 계좌 연결 카드 상세 정보를 히든 처리 합니다.
-                self.bottomDisplayAccountInfoText.isHidden  = true
-                /// 카드 타입 문구를 디스플레이 합니다.
-                self.bottomDisplayTypeText.text            = "머니"
-                /// 카드 잔액 온오프 뷰어를 디스플레이 합니다.
-                self.bottomDisplayMoneyOnOff.isHidden       = false
-                /// 카드 안내 정보를 디스플레이 합니다.
-                self.bottomDisplayInfoText.text             = "부족한 금액은 충전 후 결제 됩니다."
-                /// 카드 잔앱 타입이 "보기" 경우 입니다.
-                if self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김"
-                {
-                    /// 카드 잔액 정보 뷰어를 디스플레이 합니다.
-                    self.bottomDisplayMoneyView.isHidden        = false
-                    /// 카드 잔액정보를 추가합니다.
-                    self.bottomDisplayMoneyText.text            = "2,012,800"
-                    /// 카드 "잔액 숨김" 뷰어를 히든 처리 합니다.
-                    self.bottomDisplayMoneyHiddenText.isHidden  = true
-                }
-                /// 카드 잔액 타입이 "숨김" 경우 입니다.
-                else
-                {
-                    /// 카드 잔액정보를 "잔액 숨김" 으로 변경 합니다.
-                    self.bottomDisplayMoneyText.text            = "잔액 숨김"
+    /**
+     카드 디스플레이 할 정보를 받아 설정 합니다.
+     - Description:디스플레이 타입은 기본. "okmoney" 로 사용되며 배너 타입 경우 카드를 히든 처리 하며, 컬러값을 "setCardBGColor" 에 전달해 배경 컬러를 적용 합니다.
+     - Date: 2023.06.15
+     - Parameters:
+        - displayType : 화면에 그려질 타입을 받습니다. ( default : okmoney )
+        - colors : 그라데이션 적용할 컬러값을 받습니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setDisplayChange( bottomMode : Bool = true, model : ZeroPayOKMoneyResponse? = nil ){
+        if let okmoney = model,
+           let card = okmoney._data {
+            if bottomMode == true
+            {
+                /// 하단 모드  정보를 받아 하단 모드 뷰어를 온오프 합니다.
+                self.bottomDisplayInfoView.isHidden = false
+                switch displayType {
+                case .okmoney:
+                    /// 계좌 연결 카드 상세 정보를 히든 처리 합니다.
+                    self.bottomDisplayAccountInfoText.isHidden  = true
+                    /// 카드 타입 문구를 디스플레이 합니다.
+                    self.bottomDisplayTypeText.text            = "머니"
+                    /// 카드 잔액 온오프 뷰어를 디스플레이 합니다.
+                    self.bottomDisplayMoneyOnOff.isHidden       = false
+                    /// 카드 안내 정보를 디스플레이 합니다.
+                    self.bottomDisplayInfoText.text             = "부족한 금액은 충전 후 결제 됩니다."
+                    if card._isBalanceShow!
+                    {
+                        /// 숨김 문구로 변경 합니다.
+                        self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
+                        /// 카드 잔액 정보 뷰어를 디스플레이 합니다.
+                        self.bottomDisplayMoneyView.isHidden        = false
+                        /// 카드 잔액정보를 추가합니다.
+                        self.bottomDisplayMoneyText.text            = "\(card._balance!.addComma())"
+                        /// 카드 "잔액 숨김" 뷰어를 히든 처리 합니다.
+                        self.bottomDisplayMoneyHiddenText.isHidden  = true
+                    }
+                    else
+                    {
+                        /// 보기 문구로 변경 합니다.
+                        self.bottomDisplayMoneyOnoffBtn.setTitle("보기", for: .normal)
+                        /// 카드 잔액정보를 "잔액 숨김" 으로 변경 합니다.
+                        self.bottomDisplayMoneyText.text            = "잔액 숨김"
+                        /// 카드 잔액 정보 뷰어를 히든 처리 합니다.
+                        self.bottomDisplayMoneyView.isHidden        = true
+                        /// 카드 잔액정보 "잔액 숨김" 문구를 디스플레이 합니다.
+                        self.bottomDisplayMoneyHiddenText.isHidden  = false
+                    }
+                    
+                    break
+                case .account:
+                    /// 계좌 연결 카드 상세 정보를 디스플레이 합니다.
+                    self.bottomDisplayAccountInfoText.isHidden  = false
+                    /// 카드 타입 문구를 디스플레이 합니다.
+                    self.bottomDisplayTypeText.text             = "출금"
                     /// 카드 잔액 정보 뷰어를 히든 처리 합니다.
                     self.bottomDisplayMoneyView.isHidden        = true
-                    /// 카드 잔액정보 "잔액 숨김" 문구를 디스플레이 합니다.
-                    self.bottomDisplayMoneyHiddenText.isHidden  = false
+                    /// 카드 "잔액 숨김" 문구도 히든 처리 합니다.
+                    self.bottomDisplayMoneyHiddenText.isHidden  = true
+                    /// 카드 안내정보를 디스플레이 합니다.
+                    self.bottomDisplayInfoText.text             = "결제금액만큼 즉시 출금되어 결제됩니다."
+                    break
+                case .banner:
+                    self.cardView.isHidden      = true
+                    self.bannerView.isHidden    = false
+                    break
                 }
-                break
-            case .account:
-                /// 계좌 연결 카드 상세 정보를 디스플레이 합니다.
-                self.bottomDisplayAccountInfoText.isHidden  = false
-                /// 카드 타입 문구를 디스플레이 합니다.
-                self.bottomDisplayTypeText.text             = "출금"
-                /// 카드 잔액 정보 뷰어를 히든 처리 합니다.
-                self.bottomDisplayMoneyView.isHidden        = true
-                /// 카드 "잔액 숨김" 문구도 히든 처리 합니다.
-                self.bottomDisplayMoneyHiddenText.isHidden  = true
-                /// 카드 안내정보를 디스플레이 합니다.
-                self.bottomDisplayInfoText.text             = "결제금액만큼 즉시 출금되어 결제됩니다."
-                break
-            case .banner:
-                self.cardView.isHidden      = true
-                self.bannerView.isHidden    = false
-                break
+                
             }
-            
-        }
-        else
-        {
-            /// 하단 모드  정보를 받아 하단 모드 뷰어를 온오프 합니다.
-            self.bottomDisplayInfoView.isHidden = true
-            switch displayType {
-            case .okmoney:
-                /// 카드 잔앱 타입이 "보기" 경우 입니다.
-                if self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김"
-                {
-                    self.payInfoView.isHidden   = false
-                    self.payHiddenView.isHidden = true
-                    
+            else
+            {
+                /// 하단 모드  정보를 받아 하단 모드 뷰어를 온오프 합니다.
+                self.bottomDisplayInfoView.isHidden = true
+                switch displayType {
+                case .okmoney:
+                    /// 카드 잔앱 타입이 "보기" 경우 입니다.
+                    if card._isBalanceShow!
+                    {
+                        /// 숨김 문구로 변경 합니다.
+                        self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
+                        /// 카드 잔액정보를 추가합니다.
+                        self.payInfoMoney.text      = "\(card._balance!.addComma())"
+                        self.payInfoView.isHidden   = false
+                        self.payHiddenView.isHidden = true
+                        
+                    }
+                    else
+                    {
+                        /// 숨김 문구로 변경 합니다.
+                        self.bottomDisplayMoneyOnoffBtn.setTitle("보기", for: .normal)
+                        self.payInfoView.isHidden   = true
+                        self.payHiddenView.isHidden = false
+                    }
+                    break
+                case .account:
+                    break
+                case .banner:
+                    break
                 }
-                /// 카드 잔액 타입이 "숨김" 경우 입니다.
-                else
-                {
-                    self.payInfoView.isHidden   = true
-                    self.payHiddenView.isHidden = false
-                }
-                break
-            case .account:
-                break
-            case .banner:
-                break
+                return
             }
-            
-            return
         }
+        
     }
     
     /**
@@ -259,30 +280,17 @@ class OKZeroPayCardView: UIView {
     @IBAction func btn_action(_ sender: Any) {
         if let event = CARD_BTN_EVENT(rawValue: (sender as AnyObject).tag) {
             switch event {
-                case .payhidden:
+                case .payhidden, .paydisplay:
                     /// 잔액 정보 보기를 요청 합니다.
-                    self.viewModel.setZeroPayMoneyHidden( hidden: "Y" ).sink { result in
+                    self.viewModel.setZeroPayMoneyHidden( hidden: event == .payhidden ? "Y" : "N" ).sink { result in
                         
                     } receiveValue: { model in
-                        if let onoff = model {
-                            self.payInfoView.isHidden   = true
-                            self.payHiddenView.isHidden = false
-                            self.bottomDisplayMoneyOnoffBtn.setTitle("보기", for: .normal)
+                        if let onoff = model,
+                           onoff.code == "0000"{
+                            /// 화면을 리로드 합니다.
+                            self.setDisplayChange( bottomMode: false, model: OKZeroViewModel.zeroPayOKMoneyResponse )
                         }
                     }.store(in: &self.viewModel.cancellableSet)
-                    break
-                case .paydisplay:
-                    /// 잔액 정보 숨김을 요청 합니다.
-                    self.viewModel.setZeroPayMoneyHidden( hidden: "N" ).sink { result in
-                        
-                    } receiveValue: { model in
-                        if let onoff = model {
-                            self.payInfoView.isHidden   = false
-                            self.payHiddenView.isHidden = true
-                            self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
-                        }
-                    }.store(in: &self.viewModel.cancellableSet)
-                    
                     break
                 case .bankchoice:
                     /// 은행 선택 페이지 입니다.
@@ -310,23 +318,20 @@ class OKZeroPayCardView: UIView {
                     break
                 case .cardchoice, .bannerchoice:
                     /// 선탠된 카드에 현 카드정보를 넘깁니다.
-                    OKZeroViewModel.zeroPayShared.cardChoice = self
+                    OKZeroViewModel.zeroPayShared.cardChoice  = self
                     OKZeroViewModel.zeroPayShared.cardDisplay = .bottom
                     break
                 case .bottompayonoff:
-                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "보기" ? "Y" : "N"
+                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김" ? "Y" : "N"
                     /// 잔액 정보 보기/숨김 여부를 요청 합니다.
                     self.viewModel.setZeroPayMoneyHidden( hidden: hidden).sink { result in
                         
                     } receiveValue: { model in
-                        if let onoff = model {
-                            self.bottomDisplayMoneyOnoffBtn.setTitle( hidden == "Y" ?  "숨김": "보기", for: .normal)
+                        if let onoff = model,
+                           onoff.code == "0000" {
                             /// 화면을 리로드 합니다.
-                            self.setDisplayChange( bottomMode: true )
-                            
-                            self.payInfoView.isHidden   = false
-                            self.payHiddenView.isHidden = true
-                            self.bottomDisplayMoneyOnoffBtn.setTitle("숨김", for: .normal)
+                            self.setDisplayChange( bottomMode: true, model: OKZeroViewModel.zeroPayOKMoneyResponse )
+                        
                         }
                     }.store(in: &self.viewModel.cancellableSet)
                     break
