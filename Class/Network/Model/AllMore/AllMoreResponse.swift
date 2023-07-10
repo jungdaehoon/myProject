@@ -99,7 +99,7 @@ struct allData: Codable {
     /// NFT 구매 카운트 입니다.
     var _own_nft_cnt            : Int? { get { return  NC.I(own_nft_cnt)  } }
     /// NFT 아이디 정보 입니다.
-    var _nft_id                 : Int? { get { return  NC.I(nft_id)  } }
+    var _nft_id                 : String? { get { return  NC.S(nft_id)  } }
     
     
     
@@ -166,7 +166,7 @@ struct allData: Codable {
     /// NFT 보유 카운트 입니다.
     var own_nft_cnt             : Int?
     /// NFT 아이디 정보 입니다.
-    var nft_id                  : Int?
+    var nft_id                  : String?
 }
 
 

@@ -117,14 +117,39 @@ class OKZeroPayCardView: UIView {
      - Parameters:
         - displayType : 화면에 그려질 타입을 받습니다. ( default : okmoney )
         - colors : 그라데이션 적용할 컬러값을 받습니다.
+        - model : 제로페이 간편결제 머니 상세 정보 모델을 받습니다.
      - Throws: False
      - Returns:False
      */
-    func setDisplayView( displayType : DISPLAY_TYPE = .okmoney, colors : ( start : UIColor, end : UIColor)? = nil ){
+    func setDisplayView( displayType : DISPLAY_TYPE = .okmoney, colors : ( start : UIColor, end : UIColor)? = nil, model : ZeroPayOKMoneyResponse? = nil  ){
+        self.setCardBGColor(colors: colors)
         switch displayType {
         case .okmoney:
             self.titleText.text         = "OK머니로 제로페이 결제"
             self.subInfoText.text       = "부족한 금액은 충전 후 결제 됩니다."
+            if let okmoney = model,
+               let data    = okmoney._data,
+               let account = data._mainAccount
+            {
+                /// 계좌 미존재 여부 입니다.
+                if account._hasNoMainAccount!
+                {
+                    /// 안내 정보를 디스플레이 합니다.
+                    self.accountInfoText.text   = account._noMainAccountMsg!
+                    return
+                }
+                
+                /// 계좌 재인증 여부 입니다.
+                if account._isNeedToReauthorize!
+                {
+                    /// 안내 정보를 디스플레이 합니다.
+                    self.accountInfoText.text   = account._needToReAuthorizeMsg!
+                    return
+                }
+                                
+                /// 계좌 정보를 디스플레이 합니다.
+                self.accountInfoText.text   = "\(account._bankName!) \(account._lastAccountNo!)"
+            }
             self.accountInfoText.text   = ""
             break
         case .account:
@@ -139,7 +164,7 @@ class OKZeroPayCardView: UIView {
             self.bannerView.isHidden    = false
             break
         }
-        self.setCardBGColor(colors: colors)
+        
     }
     
     
@@ -150,6 +175,7 @@ class OKZeroPayCardView: UIView {
      - Parameters:
         - displayType : 화면에 그려질 타입을 받습니다. ( default : okmoney )
         - colors : 그라데이션 적용할 컬러값을 받습니다.
+        - model : 제로페이 간편결제 머니 상세 정보 모델을 받습니다.
      - Throws: False
      - Returns:False
      */
@@ -300,26 +326,72 @@ class OKZeroPayCardView: UIView {
                     }
                     else
                     {
-                        /// 계좌 선택 페이지 입니다.
-                        BottomAccountListView().show { event in
-                            switch event
+                        if let okmoney = OKZeroViewModel.zeroPayOKMoneyResponse,
+                           let data    = okmoney._data,
+                           let account = data._mainAccount
+                        {
+                            /// 계좌 미존재 여부 입니다.
+                            if account._hasNoMainAccount!
                             {
-                            case .add_account :
                                 self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
-                                break
-                            case .account( let account ):
-                                if let account = account {
-                                    /// 받은 계좌 정보로 서버에 카드 상세 정보를 요청 합니다.
+                                return
+                            }
+                            
+                            /// 계좌 재인증 여부 입니다.
+                            if account._isNeedToReauthorize!
+                            {
+                                /// 계좌 재인증 요청 합니다.
+                                self.viewModel.setReBankAuth().sink { result in
+                                    
+                                } receiveValue: { response in
+                                    
+                                    if !response!.gateWayURL!.contains("{")
+                                    {
+                                        /// 오픈 뱅킹 웹 페이지를 디스플레이 합니다.
+                                        let vc = HybridOpenBankViewController.init(pageURL: response!.gateWayURL! ) { value in
+                                            if value.contains( "true" ) == true
+                                            {
+                                                TabBarView.setReloadSeleted(pageIndex: 4)
+                                            }
+                                        }
+                                        self.viewController.pushController(vc, animated: true, animatedType: .up)
+                                    }
+                                    else
+                                    {
+                                        if response!.gateWayURL!.contains("O00")
+                                        {
+                                            let message: String = "계좌 등록 1년경과 시\n재인증이 필요해요."
+                                            /// 계좌 재인증 안내 팝업을 오픈 합니다.
+                                            CMAlertView().setAlertView(detailObject: message as AnyObject, cancelText: "확인") { event in
+                                                self.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2)
+                                            }
+                                        }
+                                    }
+                                }.store(in: &self.viewModel.cancellableSet)
+                                return
+                            }
+                                            
+                            /// 계좌 선택 페이지 입니다.
+                            BottomAccountListView().show { event in
+                                switch event
+                                {
+                                case .add_account :
+                                    self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                                    break
+                                case .account( let account ):
+                                    if let account = account {
+                                        /// 받은 계좌 정보로 서버에 카드 상세 정보를 요청 합니다.
+                                    }
+                                    break
                                 }
-                                break
                             }
                         }
                     }
                     break
                 case .cardchoice, .bannerchoice:
                     /// 선탠된 카드에 현 카드정보를 넘깁니다.
-                    OKZeroViewModel.zeroPayShared.cardChoice  = self
-                    OKZeroViewModel.zeroPayShared.cardDisplay = .bottom
+                    OKZeroViewModel.zeroPayShared!.cardChoice  = self
+                    OKZeroViewModel.zeroPayShared!.cardDisplay = .bottom
                     break
                 case .bottompayonoff:
                     let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김" ? "Y" : "N"
@@ -336,7 +408,7 @@ class OKZeroPayCardView: UIView {
                     }.store(in: &self.viewModel.cancellableSet)
                     break
                 case .fullDisplay:
-                    OKZeroViewModel.zeroPayShared.cardDisplay = .full
+                    OKZeroViewModel.zeroPayShared!.cardDisplay = .full
                     break
             }
         }

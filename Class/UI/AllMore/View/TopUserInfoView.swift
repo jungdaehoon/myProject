@@ -52,7 +52,7 @@ class TopUserInfoView: UIView {
             /// 닉네임 정보를 디스플레이 합니다.
             self.nickNameText.text  = "\(result._nickname!)"
             /// NFT ID 정보가 있는지를 체크 합니다.
-            if result._nft_id! > 0
+            if result._nft_id!.isValid
             {
                 if let url = URL(string: WebPageConstants.baseURL + "/all/profileImage?userNo=" + result._user_no!) {
                     UIImageView.loadImage(from: url).sink { image in

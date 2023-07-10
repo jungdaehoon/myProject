@@ -101,12 +101,19 @@ class AllMoreViewController: BaseViewController {
         self.viewModel.getAllMoreInfo().sink { result in
             
         } receiveValue: { response  in
-            if response != nil
+            if let allInfo = response
             {
-                self.scrollView.contentOffset = .zero
-                /// 서버에서 받은 데이터 기준으로 한번더 디스플레이 합니다.
-                self.setDisplayView()
+                if let result = allInfo.result,
+                   let code = result._code,
+                   code == "0000"
+                {
+                    self.scrollView.contentOffset = .zero
+                    /// 서버에서 받은 데이터 기준으로 한번더 디스플레이 합니다.
+                    self.setDisplayView()
+                    return
+                }
             }
+            HttpErrorPop().show()            
         }.store(in: &cancellableSet)
     }
     
@@ -135,7 +142,7 @@ class AllMoreViewController: BaseViewController {
         /// 연결출금 및 포인트 머니 관련 뷰어를 추가합니다.
         if self.pointItemView == nil
         {
-            self.pointItemView                              = PointItemView.instanceFromNib()
+            self.pointItemView = PointItemView.instanceFromNib()
             self.stackView.addArrangedSubview(self.pointItemView!)
         }
         else
@@ -219,7 +226,7 @@ class AllMoreViewController: BaseViewController {
         }
         else
         {
-            self.myOKMoneyInfo!.viewModel = self.viewModel
+            self.myOKMoneyInfo!.setDisplay(self.viewModel)
         }
         
         
@@ -238,7 +245,7 @@ class AllMoreViewController: BaseViewController {
         /// NFT 영역 뷰어를 추가 합니다.
         if self.myNFTInfo == nil
         {
-            self.myNFTInfo                = AllMoreMenuListView.instanceFromNib()
+            self.myNFTInfo = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo] = []
             menus.append(self.viewModel.getMenuInfo(title: "보유중인 NFT" ))
             menus.append(self.viewModel.getMenuInfo(title: "NFT 거래내역" ))
@@ -249,7 +256,7 @@ class AllMoreViewController: BaseViewController {
         }
         else
         {
-            self.myNFTInfo!.viewModel = self.viewModel
+            self.myNFTInfo!.setDisplay(self.viewModel)
         }
         
         

@@ -25,6 +25,16 @@ extension UIViewController {
     
     
     /**
+     컨트롤러 데이터 초기화 메서드 입니다.
+     - Date: 2023.07.10
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    @objc func setRelease(){}
+    
+    
+    /**
      컨트롤러를 받아 다음 페이지로 이동 합니다.
      - Date: 2023.04.12
      - Parameters:
@@ -63,6 +73,7 @@ extension UIViewController {
      */
     func popController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
         if let navigation = self.navigationController {
+            self.setRelease()
             navigation.popViewController(animated: animated, animatedType: .down) {
                 if let viewController = navigation.viewControllers.last
                 {
@@ -72,6 +83,7 @@ extension UIViewController {
         }
         else
         {
+            self.setRelease()
             let viewController = self.presentingViewController
             self.dismiss(animated: animated) {
                 if let contollelr = viewController
@@ -96,6 +108,7 @@ extension UIViewController {
      */
     func popToController( _ viewController: UIViewController, animated: Bool, animatedType: AnimationType? = .down, completion: @escaping () -> Void = {}) {
         if let navigation = self.navigationController {
+            self.setRelease()
             navigation.popToViewController(viewController, animated: animated, animatedType:animatedType,completion: completion)
         }
     }
@@ -113,6 +126,12 @@ extension UIViewController {
      */
     func popToRootController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
         if let navigation = self.navigationController {
+            /// 이동할 0번째를 제외한 나머지 컨트롤러의 데이터를 초기화 합니다.
+            for index in 0..<navigation.viewControllers.count {
+                if index == 0 { continue }
+                let controller = navigation.viewControllers[index]
+                controller.setRelease()
+            }
             navigation.popToRootViewController(animated: animated, animatedType: .down) {
                 if let viewController = navigation.viewControllers.last
                 {
@@ -141,10 +160,12 @@ extension UIViewController {
      */
     func replaceController( viewController: UIViewController, animated : Bool = true, animatedType: AnimationType? = .down, completion: @escaping () -> Void = {}) {
         if let navigation = self.navigationController {
+            self.setRelease()
             navigation.replaceViewController(viewController: viewController, animated: animated, animatedType: animatedType, completion: completion)
         }
         else
         {
+            self.setRelease()
             if let viewcontroller = self.presentingViewController
             {
                 self.dismiss(animated: false){
@@ -182,6 +203,8 @@ extension UIViewController {
         {
             if let pvc = presents[index]
             {
+                /// 닫을 컨트롤러 데이터를 초기화 합니다.
+                pvc.setRelease()
                 if index == presents.count - 2
                 {
                     /// 0번째 ViewController 입니다.

@@ -45,9 +45,7 @@ enum MENU_TYPE : Codable {
 */
 class AllMoreModel : BaseViewModel{
     /// 전체 탭 데이터를 가집니다.
-    var allModeResponse     : AllMoreResponse?    
-    /// 만료된 계좌 재인증 데이터를 받습니다.
-    var reBankAuthResponse  : ReBankAuthResponse?
+    var allModeResponse     : AllMoreResponse?        
     
     
     
@@ -99,29 +97,4 @@ class AllMoreModel : BaseViewModel{
         }
         return subject.eraseToAnyPublisher()
     }
-        
-    
-    /**
-     은행 계좌 재인증 요청 입니다. ( J.D.H  VER : 1.0.0 )
-     - Date: 2023.03.21
-     - Parameters:False
-     - Throws: False
-     - Returns:
-        은행 계좌 재인증 처리 결과를 받습니다. (AnyPublisher<ReBankAuthResponse?, ResponseError>)
-     */
-    func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
-        let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()
-        requst() { error in
-            subject.send(completion: .failure(error))
-            return false
-        } publisher: {
-            /// 계좌 재인증 요청 합니다.
-            return NetworkManager.requestReBankAuth()
-        } completion: { model in
-            self.reBankAuthResponse = model
-            // 앱 인터페이스 정상처리 여부를 넘깁니다.
-            subject.send(model)
-        }
-        return subject.eraseToAnyPublisher()
-    }    
 }

@@ -100,6 +100,7 @@ class OKZeroPayView: UIView {
     /// 결제 가능한 카드 리스트 뷰어 입니다.
     @IBOutlet weak var payCardListView      : OKZeroPayCardListView!
     
+    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,12 +115,17 @@ class OKZeroPayView: UIView {
     
     
     //MARK: - 지원 메서드 입니다.
+    
+    
+    
     /**
      제로페이 QRCode 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
      - Date: 2023.03.13
      */
     func initZeroPayView(){
         self.commonInit()
+        /// 제로페이 공용 연결 합니다.
+        OKZeroViewModel.zeroPayShared = OKZeroViewModel()
         /// 캡쳐 세션 사용 여부를 체크 합니다.
         self.viewModel.isAVCaptureSession().sink { result in
             
@@ -202,10 +208,11 @@ class OKZeroPayView: UIView {
             }
         }.store(in: &self.viewModel.cancellableSet)
                 
+        
         /// 카드 디스플레이 값을 초기화 합니다.
-        OKZeroViewModel.zeroPayShared.cardDisplay = .start
+        OKZeroViewModel.zeroPayShared!.cardDisplay = .start
         /// 카드 디스플레이 타입이 맞춰 카드 리스트를  다시 그립니다.
-        OKZeroViewModel.zeroPayShared.$cardDisplay.sink { type in
+        OKZeroViewModel.zeroPayShared!.$cardDisplay.sink { type in
             switch type
             {
             case .bottom:
@@ -218,19 +225,20 @@ class OKZeroPayView: UIView {
                 break
             default:break
             }
-        }.store(in: &OKZeroViewModel.zeroPayShared.cancellableSet)
+        }.store(in: &OKZeroViewModel.zeroPayShared!.cancellableSet)
         
         
         /// 카드 선택 값을 초기화 합니다.
-        OKZeroViewModel.zeroPayShared.cardChoice = nil
+        OKZeroViewModel.zeroPayShared!.cardChoice = nil
         /// 카드 전체 화면 뷰에서 카드선택시 이벤트 입니다.
-        OKZeroViewModel.zeroPayShared.$cardChoice.sink { value in
+        OKZeroViewModel.zeroPayShared!.$cardChoice.sink { value in
             if let card = value {
                 Slog("cardChoice : \(card.displayType)")
                 /// 선택된 카드를 초기화 합니다.
-                OKZeroViewModel.zeroPayShared.cardChoice = nil
+                OKZeroViewModel.zeroPayShared!.cardChoice = nil
             }
-        }.store(in: &OKZeroViewModel.zeroPayShared.cancellableSet)
+        }.store(in: &OKZeroViewModel.zeroPayShared!.cancellableSet)
+        
         
         
         /// 초기 기본 바코드/QRCode 뷰어를 설정 합니다.
@@ -243,7 +251,8 @@ class OKZeroPayView: UIView {
             self.setCardFullDisplay( display: true )
         }
         
-        
+        /// 제로페이 화면 데이터를 로드 합니다.
+        OKZeroViewModel.zeroPayShared!.okZeroPayReload = true
     }
     
     /**
@@ -817,6 +826,25 @@ class OKZeroPayView: UIView {
             }
             
         }
+    }
+    
+    
+    //MARK: - setRelease
+    /**
+     데이터를 초기화합니다.  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.10
+     */
+    func setRelease(){
+        /// 카메라 캡쳐 세션을 초기화 합니다.
+        self.viewModel.setReleaseAVCaptrueSession()
+        /// 카드 리스트 뷰어를 초기화 합니다.
+        self.payCardListView.setRelease()
+        self.payCardListView                    = nil
+        /// 프리뷰 를 초기화 합니다.
+        self.previewLayer                       = nil
+        /// 공용 선언된 것을 초기화 합니다.
+        OKZeroViewModel.zeroPayShared           = nil
+        OKZeroViewModel.zeroPayOKMoneyResponse  = nil
     }
     
 }

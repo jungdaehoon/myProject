@@ -78,9 +78,7 @@ enum CARD_DISPLAY  : Equatable {
 */
 class OKZeroViewModel : BaseViewModel
 {
-    static let zeroPayShared    : OKZeroViewModel     = OKZeroViewModel()
-    /// 카드 리스트 들입니다.
-    var cards : [String]        = ["OK저축은행","우리은행","광고","국민은행","NH농협"]
+    static var zeroPayShared    : OKZeroViewModel?
     /// 바코드 인식 세션 입니다.
     var captureSession          : AVCaptureSession?
     /// 제로페이 QRCode 인증 정보를 받습니다.
@@ -97,6 +95,9 @@ class OKZeroViewModel : BaseViewModel
     @Published var cardChoice   : OKZeroPayCardView? = nil
     /// 카드 디스플레이 타입을 가집니다.
     @Published var cardDisplay  : CARD_DISPLAY = .bottom
+    /// 제로페이를 새로고침 합니다. ( OkPaymentViewController / viewDidAppear)
+    @Published var okZeroPayReload  : Bool = false
+    
     
     
     /**
@@ -142,7 +143,6 @@ class OKZeroViewModel : BaseViewModel
         })
         return checkTimer
     }
-    
     
     
     /**
@@ -239,6 +239,17 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
+     캡쳐 세션을 초기화합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.10
+     */
+    func setReleaseAVCaptrueSession()
+    {
+        self.captureSession!.stopRunning()
+        self.captureSession = nil
+    }
+    
+    
+    /**
      QRCode 인증 할 제로페이 스크립트를 요청 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.19
      - Parameters:
@@ -297,7 +308,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     디스플레이할 QR/BarCode 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.07.05
      - Parameters:
         - qrcode : 스캔한 qrcode 정보 입니다.
@@ -359,6 +370,7 @@ class OKZeroViewModel : BaseViewModel
         return subject.eraseToAnyPublisher()
     }
     
+    
     /**
      제로페이 간편결제 해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다 ( J.D.H  VER : 1.0.0 )
      - Date: 2023.07.05
@@ -382,9 +394,6 @@ class OKZeroViewModel : BaseViewModel
         }
         return subject.eraseToAnyPublisher()
     }
-    
-    //
-    
 }
 
 

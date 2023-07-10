@@ -260,47 +260,49 @@ class WebMessagCallBackHandler : NSObject  {
             case .callZeroPayCallBack       :
                 self.setZeroPayCB ( body )
                 break
-                /// 지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다.
+            /// 지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다.
             case .getWAddress                :
                 self.getWalletAddress( body )
                 break
-                /// 지갑 : 개인키가져오기 : 지갑에서 개인키를 획득후 전달 합니다.
+            /// 지갑 : 개인키가져오기 : 지갑에서 개인키를 획득후 전달 합니다.
             case .checkWInfo                 :
                 self.setPrivateKeyWithWalletFile( body )
                 break
-                /// 지갑 : 생성후 정보 전달 : 지갑생성 후 주소+개인키 전달 합니다.
+            /// 지갑 : 생성후 정보 전달 : 지갑생성 후 주소+개인키 전달 합니다.
             case .createWInfo                :
                 self.setCreateWallet( body )
                 break
-                /// 지갑 : 복구 : 니모닉을 받아 지갑을 복구 하고 주소 전달 합니다.
+            /// 지갑 : 복구 : 니모닉을 받아 지갑을 복구 하고 주소 전달 합니다.
             case .restoreWInfo               :
                 self.setRestoreWInfo( body )
                 break
-                /// 지갑 : 복구구문 보기 : 니모닉 정보를 화면에 표시 합니다.
+            /// 지갑 : 복구구문 보기 : 니모닉 정보를 화면에 표시 합니다.
             case .showWRestoreText           :
                 self.setMnemonicDisplay( body )
                 break
-                /// 지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다.
+            /// 지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다.
             case .readQRInfo                 :
                 self.setQRCodeReadDisplay( body )
                 break
-                /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
+            /// 지갑 : 카카오 채널 연결: 대화를 위해 카카오 채널을 호출
             case .queryWKakao                :
                 self.setQueryWKakao()
                 break
-                /// 계좌 목록 팝업 오픈 요청 입니다.
+            /// 계좌 목록 팝업 오픈 요청 입니다.
             case .accoutsPopup               :
                 self.setAccountsPopup( body )
                 break
-                /// 제로페이 약관동의 팝업 오픈 이벤트 입니다.
+            /// 제로페이 약관동의 팝업 오픈 이벤트 입니다.
             case .openZeropayQRAgreement     :
                 self.setZeroPayTermsViewDisplay()
                 break
-                /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
+            /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
             case .openZeropayQRIntro         :
                 self.setBottomZeroPayInfoView()
                 break
+            /// 제로페이 간편결제 바코드 및 QRCode 정보를 받습니다.
             case .drawCode                   :
+                self.setDrawCode( body )
                 break
             default: break
             }
@@ -308,6 +310,14 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
+    /**
+     제로페이 간편결제 바코드 및 QRCode 정보를 받습니다.
+    - Date: 2023.07.05
+    - Parameters:
+        - body : 스크립트에서 받은 메세지 입니다.
+    - Throws: False
+    - Returns:False
+    */
     func setDrawCode( _ body : [Any?] ){
         // 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks = body[0] as! [Any]
@@ -1883,7 +1893,7 @@ class WebMessagCallBackHandler : NSObject  {
             }
             /// 약관 동의 팝업을 오픈 합니다.
             if let controller = self.target {
-                let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
+                let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT)]
                 BottomTermsView().setDisplay( target: controller, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
                                              termsList: terms) { value in
                     /// 동의/취소 여부를 받습니다.

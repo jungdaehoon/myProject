@@ -40,8 +40,7 @@ class OKZeroPayCardListView: UIView {
         super.init(coder: coder)
         self.initZeroPayCardList()
     }
-    
-    
+        
     
     //MARK: - draw
     override func draw(_ rect: CGRect) {
@@ -100,10 +99,10 @@ class OKZeroPayCardListView: UIView {
             cardview.frame                      = CGRect(origin: point, size: size)
             switch index {
                 case 1 :
-                    cardview.setDisplayView(displayType: .okmoney, colors: colors[index])
+                    cardview.setDisplayView(displayType: .okmoney, colors: colors[index], model: model)
                     break
                 case 0 :
-                    cardview.setDisplayView(displayType: .banner)
+                    cardview.setDisplayView(displayType: .banner, model: model)
                     break
                 default:break
             }
@@ -323,4 +322,18 @@ class OKZeroPayCardListView: UIView {
             }
         }
     }
+    
+    
+    //MARK: - setRelease
+    /**
+     데이터를 초기화합니다.  ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.10
+     */
+    func setRelease(){
+        self.cardViews.removeAll()
+        if let scrollView = self.scrollView {
+           let _ = scrollView.subviews.map { $0.removeFromSuperview() }
+        }
+    }
+    
 }

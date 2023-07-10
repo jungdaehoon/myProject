@@ -71,7 +71,7 @@ class HttpErrorPop: BaseView {
     }
     
     @IBAction func btn_action(_ sender: Any) {
-        self.hide()
+        TabBarView.setReloadSeleted(pageIndex: 2)
     }
     
 }

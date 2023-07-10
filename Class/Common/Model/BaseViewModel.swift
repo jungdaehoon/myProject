@@ -129,6 +129,8 @@ class BaseViewModel : NSObject {
     var logoutResponse                  : LogOutResponse?
     /// FCM 토큰 업로드 입니다.
     var fcmPushResponse                 : FcmPushUpdateResponse?
+    /// 만료된 계좌 재인증 데이터를 받습니다.
+    var reBankAuthResponse              : ReBankAuthResponse?
     
     
     
@@ -310,11 +312,6 @@ class BaseViewModel : NSObject {
             })
         }
     }
-    
-    
-    
-    
-    
     
     
     /**
@@ -655,6 +652,30 @@ class BaseViewModel : NSObject {
     
     
     /**
+     은행 계좌 재인증 요청 입니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.03.21
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        은행 계좌 재인증 처리 결과를 받습니다. (AnyPublisher<ReBankAuthResponse?, ResponseError>)
+     */
+    func setReBankAuth() ->  AnyPublisher<ReBankAuthResponse?, ResponseError> {
+        let subject             = PassthroughSubject<ReBankAuthResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 계좌 재인증 요청 합니다.
+            return NetworkManager.requestReBankAuth()
+        } completion: { model in
+            self.reBankAuthResponse = model
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    /**
      정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.17
      - Parameters:
@@ -673,7 +694,7 @@ class BaseViewModel : NSObject {
                         custItem.last_login_time    = info.Last_login_time
                         custItem.token              = info.token
                         custItem.user_no            = info.user_no
-                        custItem.user_hp            = user_hp//.setLastMasking()!
+                        custItem.user_hp            = user_hp.setLastMasking()!
                         SharedDefaults.setKeyChainCustItem(custItem)
                         promise(.success(true))
                         return
@@ -952,6 +973,15 @@ class BaseViewModel : NSObject {
     }
     
     
+    /**
+     제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다.
+     - Date: 2023.06.08
+     - Parameters:
+        - url : URL 정보 입니다.
+     - Throws: False
+     - Returns:
+        파라미터 정보를 정리하여 리턴 합니다. (Future <[String : Any]?,Naver>)
+     */
     func getZeroPayURLParams( url : URL ) -> Future<[String : Any]?, Never>
     {
         return Future<[String : Any]?, Never> { promise in

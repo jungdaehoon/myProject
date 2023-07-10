@@ -503,7 +503,7 @@ extension AllMoreMenuListCell
                 }
             }
             /// 약관 동의 팝업을 오픈 합니다.
-            let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_PEDO_TERMS + "?terms_cd=S001")]
+            let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT)]
             BottomTermsView().setDisplay( target: self.viewController, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
                                          termsList: terms) { value in
                 /// 동의/취소 여부를 받습니다.

@@ -798,8 +798,8 @@
 			children = (
 				8D205EB229D1346E00F43C99 /* Model */,
 				8D205EB429D1346E00F43C99 /* View */,
-				8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */,
 				8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */,
+				8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */,
 			);
 			path = OkZeroPayment;
 			sourceTree = "<group>";

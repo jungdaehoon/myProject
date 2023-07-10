@@ -418,13 +418,9 @@ class NetworkManager {
         QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> )
      */
     static func requestZeroPayQRBarCode( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> {
-        var getParams = "?"
-        for (key,value) in params
-        {
-            getParams += "\(key)=\(value)&"
-        }
-        getParams.remove(at: getParams.index(before: getParams.endIndex))
-        return AlamofireAgent.request(APIConstant.API_ZEROPAY_QR_BARCODE + getParams, method :.get, parameters: nil)
+        /// 기본 파라미터 정보를 설정 합니다.
+        let parameters = self.getDefaultParams(method: .get) as! String
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_QR_BARCODE + "/\(parameters)", method :.get, parameters: nil)
     }
     
     
