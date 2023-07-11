@@ -58,7 +58,4 @@ class APIConstant {
     static let API_ZEROPAY_QRCODE_CHECK = "/api/v1/zeropay/qr/fixed"
     /// 제로페이 간편결제 메인화면 OK머니 잔액 조회 입니다.
     static let API_ZEROPAY_OkMONEY      = "/api/v1/okmoney"
-    
-    
-    
 }

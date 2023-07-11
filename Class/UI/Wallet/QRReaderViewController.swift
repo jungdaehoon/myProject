@@ -47,7 +47,7 @@ class QRReaderViewController: UIViewController {
     }
     
     /**
-     데이터 세팅 입니다.
+     데이터 세팅 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.

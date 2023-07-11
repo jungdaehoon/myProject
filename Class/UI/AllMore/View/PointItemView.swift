@@ -41,7 +41,7 @@ class PointItemView: UIView {
 
     //MARK: - 지원 메서드 입니다.
     /**
-     모델 데이터 기준으로 포인트 영역 디스플레이 합니다.
+     모델 데이터 기준으로 포인트 영역 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.08
      - Parameters:False
      - Throws: False

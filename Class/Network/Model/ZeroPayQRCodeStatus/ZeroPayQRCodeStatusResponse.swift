@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- 캔된 QRCode 정보를 정상여부 체크 합니다. (  ( J.D.H  VER : 1.0.0 )
+ 제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. (  ( J.D.H  VER : 1.0.0 )
  - Date: 2023.07.05
 */
 struct ZeroPayQRCodeStatusResponse: BaseResponse {
@@ -22,13 +22,17 @@ struct ZeroPayQRCodeStatusResponse: BaseResponse {
     var msg                 : String?
     
     /// 메인 데이터 입니다.
-    var _data        : statusdata?    { get { return data != nil ? data : nil } }
+    var _data        : codeStatusData?    { get { return data != nil ? data : nil } }
     /// 메인 데이터 입니다.
-    var data        : statusdata?
+    var data         : codeStatusData?
 }
 
 
-struct statusdata : Codable
+/**
+ 제로페이 간편결제 스캔된 QRCode 정보를 정상여부 데이터 입니다.(  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.07.05
+*/
+struct codeStatusData : Codable
 {
     /// 사용 가능여부를 받습니다. ( S : 정지, A : 사용가능 )
     var _status  : String? { get { return  NC.S(status) } }

@@ -93,7 +93,7 @@ class AllMoreMenuListView: UIView {
     
     
     /**
-     모델 데이터 기준으로 화면에 추가 디스플레이 합니다.
+     모델 데이터 기준으로 화면에 추가 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - viewModel : 데이터 모델 입니다.

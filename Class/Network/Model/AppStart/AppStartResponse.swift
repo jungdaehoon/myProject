@@ -31,7 +31,7 @@ struct AppStartResponse: BaseResponse {
 
 
 /**
- 메뉴 연결할 정보를 받습니다.
+ 메뉴 연결할 정보를 받습니다. ( J.D.H VER : 1.0.0 )
  - Description : 메뉴 연결할 정보들을 받습니다
      ex ) 정보들
       "menu_nm" : "알림",

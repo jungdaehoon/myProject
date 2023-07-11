@@ -96,7 +96,7 @@ enum MENU_LIST : String  {
 
 
 /**
- 기본 베이스 모델 입니다.
+ 기본 베이스 모델 입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.03.15
  */
 class BaseViewModel : NSObject {
@@ -249,7 +249,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     이미지를 서버에 전송 합니다.
+     이미지를 서버에 전송 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.23
      - Parameters:
         - image : 서버에 업로드할 이미지 입니다.
@@ -951,7 +951,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다.
+     URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.08
      - Parameters:
         - url : URL 정보 입니다.
@@ -974,7 +974,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다.
+     제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.08
      - Parameters:
         - url : URL 정보 입니다.
@@ -993,7 +993,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     GET 방식 URL 파라미터를 설정하여 리턴 합니다.
+     GET 방식 URL 파라미터를 설정하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.19
      - Parameters:
         - mainUrl : 메인 URL 정보 입니다.
@@ -1043,7 +1043,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     FCM PUSH 수신을 등록합니다.
+     FCM PUSH 수신을 등록합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1079,7 +1079,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱 삭제 후 설치 . 기존 키체인 내용을 삭제 )
+     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱 삭제 후 설치 . 기존 키체인 내용을 삭제 ) ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1102,7 +1102,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     탈옥 방지 체크 합니다.
+     탈옥 방지 체크 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1125,7 +1125,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     안티디버깅 여부를 체크 합니다.
+     안티디버깅 여부를 체크 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.07.04
      - Parameters:Fasle
      - Throws: False
@@ -1149,7 +1149,7 @@ class BaseViewModel : NSObject {
 
     
     /**
-     안티디버깅 여부를 체크 합니다.
+     안티디버깅 여부를 체크 합니다. ( J.D.H VER : 1.0.0 )
      - Description: 안티디버깅 접근 여부를 앱 사용하는 동안 체크하며 외부 디버깅 접근이 체크되면 안내 팝업 오픈후 강제 종료 됩니다.
      - Date: 2023.07.04
      - Parameters:Fasle

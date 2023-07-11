@@ -68,7 +68,7 @@ class OKZeroPayCodeFullView: UIView {
     
     
     /**
-     전체 화면에 코드정보를 빈값으로 초기화 합니다.
+     전체 화면에 코드정보를 빈값으로 초기화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
@@ -97,7 +97,7 @@ class OKZeroPayCodeFullView: UIView {
     
     
     /**
-     결제 코드를 전체 화면에 설정 합니다.
+     결제 코드를 전체 화면에 설정 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )

@@ -158,7 +158,7 @@ enum SCRIPT_MESSAGES : String
 class WebMsgModel : BaseViewModel {
     
     /**
-      NFI 이미지를  전송 합니다.
+      NFI 이미지를  전송 합니다. ( J.D.H VER : 1.0.0 )
      - Description: NFT 등록시 이미지 업로드 용으로 사용 합니다.
      - Date: 2023.06.23
      - Parameters:

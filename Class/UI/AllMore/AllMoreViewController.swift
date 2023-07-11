@@ -70,7 +70,7 @@ class AllMoreViewController: BaseViewController {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.
+     전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.17
      */
     func setInitWebView()

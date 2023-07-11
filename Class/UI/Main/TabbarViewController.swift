@@ -247,7 +247,7 @@ class TabbarViewController: UITabBarController {
     
     // MARK: - NotificationCenter
     /**
-     앱 백그라운드 이동하는 경우 입니다.
+     앱 백그라운드 이동하는 경우 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.04
      - Throws:False
      - returns:False
@@ -258,7 +258,7 @@ class TabbarViewController: UITabBarController {
     
     
     /**
-     앱 백그라운드 에서 호출되는 경우 입니다.
+     앱 백그라운드 에서 호출되는 경우 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.04
      - Throws:False
      - returns:False

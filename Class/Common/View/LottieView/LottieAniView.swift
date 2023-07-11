@@ -8,7 +8,7 @@ import Lottie
 
 
 /**
- Lottie.json 파일 디스플레이 뷰어입니다.
+ Lottie.json 파일 디스플레이 뷰어입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.05.04
  */
 @objc class LottieAniView: UIView {

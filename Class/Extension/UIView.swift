@@ -138,7 +138,7 @@ extension UIView {
     
     
     /**
-     링크 기준으로 전체 화면 웹뷰를 디스플레이 합니다.
+     링크 기준으로 전체 화면 웹뷰를 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - linkUrl : 도메인 포함된 URL 을 받습니다.
@@ -219,7 +219,7 @@ extension UIView {
     
     
     /**
-     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다.
+     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.05.19
      - Parameters:
         - viewController : 이동할 ViewController 입니다.
@@ -249,7 +249,7 @@ extension UIView {
     
     
     /**
-     현 페이지를 삭제하고 추가할 페이지로 변경합니다.
+     현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.05.11
      - Parameters:
         - viewController : 이동할 페이지 입니다.

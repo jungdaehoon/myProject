@@ -67,7 +67,7 @@ class OKZeroPayQRCaptureView: UIView {
     
     
     /**
-     프리뷰 화면 설정 메서드 입니다.
+     프리뷰 화면 설정 메서드 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.

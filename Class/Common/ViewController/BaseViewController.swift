@@ -11,7 +11,7 @@ import Combine
 
 
 /**
- 기본 베이스 컨트롤뷰 입니다.
+ 기본 베이스 컨트롤뷰 입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.03.20
  */
 class BaseViewController: BaseWebViewController {

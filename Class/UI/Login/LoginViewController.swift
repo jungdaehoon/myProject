@@ -10,7 +10,7 @@ import WebKit
 
 
 /**
- 로그인 페이지 버튼 이벤트 타입 입니다.
+ 로그인 페이지 버튼 이벤트 타입 입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.03.24
  */
 enum LOGIN_BTN_ACTION : Int {
@@ -35,7 +35,7 @@ enum LOGIN_BTN_ACTION : Int {
 
 
 /**
- 로그인 페이지 입니다.
+ 로그인 페이지 입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.03.24
  */
 class LoginViewController: BaseViewController {
@@ -87,7 +87,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - init
     /**
-     전체 웹뷰 초기화 메서드 입니다.
+     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.04
      - Parameters:
         - completion :  페이지 종료시 콜백 핸들러 입니다.
@@ -461,7 +461,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     로그인 페이지를 종료 합니다.
+     로그인 페이지를 종료 합니다. ( J.D.H VER : 1.0.0 )
      - Description : 종료후 메인 홈으로 이동하며 딥링크나/PUSH 정보를 가지고 있다면 홈으로 이동 후 해당 웹페이지를 디스플레이 하도록 합니다.
      - Date: 2023.05.31
      - Parameters:False

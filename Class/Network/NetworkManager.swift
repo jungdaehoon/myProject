@@ -36,7 +36,7 @@ class NetworkManager {
     
     
     /**
-     기본 파라미터 정보를 설정합니다.
+     기본 파라미터 정보를 설정합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False
@@ -55,6 +55,7 @@ class NetworkManager {
         }
         return ["":""]
     }
+    
     
     /**
      전체 탭 요청 합니다.( J.D.H  VER : 1.0.0 )

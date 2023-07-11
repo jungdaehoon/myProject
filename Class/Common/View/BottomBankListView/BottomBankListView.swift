@@ -51,7 +51,7 @@ class BottomBankListView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     계좌 리스트 뷰어 초기화 입니다.
+     계좌 리스트 뷰어 초기화 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.05.02
      */
     func initBottomAccountListView(){

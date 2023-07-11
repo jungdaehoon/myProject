@@ -22,13 +22,17 @@ struct ZeroPayTermsCheckResponse: BaseResponse {
     var msg                 : String?
         
     /// 메인 데이터 입니다.
-    var _data        : agressdata?    { get { return data != nil ? data : nil } }
+    var _data        : AgressData?    { get { return data != nil ? data : nil } }
     /// 메인 데이터 입니다.
-    var data        : agressdata?
+    var data        : AgressData?
 }
 
 
-struct agressdata : Codable
+/**
+ 제로페이 간편결제 약관동의 여부 데이터 입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.07.05
+*/
+struct AgressData : Codable
 {
     /// 동의여부 입니다.
     var _didAgree  : Bool? { get { return  NC.B(didAgree) } }

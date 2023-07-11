@@ -8,9 +8,16 @@
 import UIKit
 import WebKit
 
-
+/**
+ 월렛 메인 페이지 입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.06.01
+*/
 class WalletViewController: BaseViewController {
+    /// 웹 화면 디스플레이할 영역 뷰어 입니다.
     @IBOutlet weak var webDisplayView: UIView!
+    
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initWebView(self.webDisplayView, target: self)
@@ -31,18 +38,6 @@ class WalletViewController: BaseViewController {
         Slog("WalletViewController setDisplayData loadTabPageURL")
         self.loadTabPageURL(WebPageConstants.URL_WALLET_HOME)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 

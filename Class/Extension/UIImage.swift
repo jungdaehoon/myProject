@@ -10,7 +10,7 @@ import UIKit
 extension UIImage
 {
     /**
-     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다.
+     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.26
      - parameters:
         - size : 이미지를 넓이 기준으로 리사이징 합니다.
@@ -28,7 +28,7 @@ extension UIImage
     
     
     /**
-     이미지를 넓이 기준으로 리사이징 하여 리턴 합니다.
+     이미지를 넓이 기준으로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.26
      - parameters:
         - newWidth : 이미지를 넓이 기준으로 리사이징 합니다.
@@ -50,7 +50,7 @@ extension UIImage
     
     
     /**
-     회전된 이미지를 계산하여 리턴 합니다.
+     회전된 이미지를 계산하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.26
      - parameters:
         - radians : 회전 각도 값입니다. ( CGFloat(angle * .pi) / 180 as CGFloat 설정된 값 )

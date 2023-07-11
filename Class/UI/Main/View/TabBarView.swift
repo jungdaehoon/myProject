@@ -59,7 +59,7 @@ class TabBarView : UIView
      - Parameters:False
      - Returns:False
      */
-    func setDefault(){
+    private func setDefault(){
         let itemViews = self.subviews[0].subviews
         for views in itemViews
         {
@@ -153,6 +153,44 @@ class TabBarView : UIView
             Slog("TabBarView.tabSeletedIndex : \(TabBarView.tabSeletedIndex)")
             self.setDefault()
             self.setSeleted(subView, enabled: true)
+        }
+    }
+    
+    
+    /**
+     홈 탭으로 이동 합니다..   ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.10
+     - Parameters:
+        - pageTag : 활성화될 아이템 넘버 입니다.
+     - Returns:False
+     */
+    static func setTabBarHome() {
+        // 현 페이지 초기화합니다.
+        if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController  {
+            if let navigationController = viewController.navigationController {
+                if let controller = navigationController.viewControllers.last {
+                    /// 0번째 페이지로 이동 후 홈으로 이동 합니다.
+                    controller.popToRootController(animated: true, animatedType: .down) { firstViewController in
+                        /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+                        if let tabbar = TabBarView.tabbar {
+                            /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                            tabbar.setCommonViewRemove()
+                            /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                            tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
+                        }
+                    }
+                }
+            }
+            else
+            {
+                /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+                if let tabbar = TabBarView.tabbar {
+                    /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                    tabbar.setCommonViewRemove()
+                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                    tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
+                }
+            }
         }
     }
     

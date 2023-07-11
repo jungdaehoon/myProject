@@ -19,8 +19,9 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
     var pushAnimation   : AnimationType?    = nil
     var popAnimation    : AnimationType?    = nil
     
+    
     /**
-     애니 효과 타입 받아 페이지 집인 이동시 효과를 주는 클래스를 초기화 합니다.
+     애니 효과 타입 받아 페이지 집인 이동시 효과를 주는 클래스를 초기화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - animationType : 페이지 이동할 효과 정보를 받습니다.
@@ -31,8 +32,9 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
         self.pushAnimation = pushAnimation
     }
     
+    
     /**
-     애니 효과 타입 받아 페이지 종료 이동시 효과를 주는 클래스를 초기화 합니다.
+     애니 효과 타입 받아 페이지 종료 이동시 효과를 주는 클래스를 초기화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - animationType : 페이지 이동할 효과 정보를 받습니다.
@@ -42,6 +44,7 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
     init( popAnimation: AnimationType  ) {
         self.popAnimation = popAnimation
     }
+    
     
     
     // MARK: - UIViewControllerAnimatedTransitioning

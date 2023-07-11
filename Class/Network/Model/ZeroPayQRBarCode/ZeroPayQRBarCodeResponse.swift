@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- 제로페이 간편결제 약관동의 여부 확인 입니다.  ( J.D.H  VER : 1.0.0 )
+ 제로페이 간편결제 QR/BarCode 정보를 요청 합니다.  ( J.D.H  VER : 1.0.0 )
  - Date: 2023.07.05
 */
 struct ZeroPayQRBarCodeResponse: BaseResponse {
@@ -22,13 +22,16 @@ struct ZeroPayQRBarCodeResponse: BaseResponse {
     var msg                 : String?
         
     /// 메인 데이터 입니다.
-    var _data        : codedata?    { get { return data != nil ? data : nil } }
+    var _data        : CodeData?    { get { return data != nil ? data : nil } }
     /// 메인 데이터 입니다.
-    var data        : codedata?
+    var data        : CodeData?
 }
 
-
-struct codedata : Codable
+/**
+ 제로페이 간편결제 QR/BarCode 정보 데이터 입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.07.05
+*/
+struct CodeData : Codable
 {
     /// 바코드 정보 입니다.
     var _barcode  : String? { get { return  NC.S(barcode) } }

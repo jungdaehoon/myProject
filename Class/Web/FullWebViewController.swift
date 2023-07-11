@@ -125,7 +125,7 @@ class FullWebViewController: BaseViewController {
     
     // MARK: - init
     /**
-     전체 웹뷰 초기화 메서드 입니다.
+     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - pageType      : 상단 네비 활성화시 타이틀 문구 입니다.
@@ -200,7 +200,7 @@ class FullWebViewController: BaseViewController {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     웹뷰 설정 및 디스플레이 메서드 입니다.
+     웹뷰 설정 및 디스플레이 메서드 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.17
      - Parameters:False
      - Throws: False
@@ -344,7 +344,7 @@ extension FullWebViewController {
     
     
     /**
-     제로페이 WebApp 스키마를 처리 합니다.
+     제로페이 WebApp 스키마를 처리 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.25
      - Parameters:
         - url : URL 정보 입니다.

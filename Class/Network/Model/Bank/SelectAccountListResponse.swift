@@ -36,6 +36,10 @@ struct SelectAccountListResponse: BaseResponse {
 }
 
 
+/**
+ 계좌 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.03.22
+*/
 struct Account : Codable {
     /// 고객번호 입니다.
     var _user_no             : String? { get { return  NC.S(user_no) } }

@@ -62,7 +62,7 @@ extension UIImageView {
      
     
     /**
-     이미지를 육각형으로 설정 합니다.
+     이미지를 육각형으로 설정 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.07.05
      - Parameters:
         - rect : 육각형 영역을 설정할 전체 영역을 받습니다.
@@ -81,7 +81,7 @@ extension UIImageView {
     
     
     /**
-     육각형 영역을 설정 합니다.
+     육각형 영역을 설정 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.07.05
      - Parameters:
         - rect : 육각형 영역을 설정할 전체 영역을 받습니다.

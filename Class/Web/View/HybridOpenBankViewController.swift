@@ -29,7 +29,7 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
     
     // MARK: - init
     /**
-     전체 웹뷰 초기화 메서드 입니다.
+     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - pageURL : 연결할 페이지 URL 입니다.

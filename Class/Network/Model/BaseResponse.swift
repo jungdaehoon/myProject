@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- 기본 베이스 네트워크 인터페이스 Response 입니다.
+ 기본 베이스 네트워크 인터페이스 Response 입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.03.15
  */
 protocol BaseResponse: Codable {

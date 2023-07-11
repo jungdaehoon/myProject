@@ -25,7 +25,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     정보를 받아 AES 암호화 합니다.
+     정보를 받아 AES 암호화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - message : 변경 할 문자 정보를 받습니다.
@@ -50,7 +50,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     ENC 데이터를 복호화 합니다.
+     ENC 데이터를 복호화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - encryptedData : 복호화할 데이터 입니다.
@@ -74,7 +74,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     지갑 비밀번호 ENC 데이터를 복호화 합니다.
+     지갑 비밀번호 ENC 데이터를 복호화 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - encInfo : 복호화할 데이터 입니다.
@@ -93,7 +93,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     지갑을 복구할 pass 정보를 찾아 리턴 합니다.
+     지갑을 복구할 pass 정보를 찾아 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - walletPass : enc 정보를 받습니다.
@@ -136,7 +136,7 @@ class WalletViewModel : BaseViewModel {
 
     
     /**
-     신규로 생성된 wallet 닉모닉을 생성 합니다.
+     신규로 생성된 wallet 닉모닉을 생성 합니다. ( J.D.H VER : 1.0.0 )
      - description: 웹에서 신규 wallet 생성후 정보를 받아 로컬에 파일로 저장 합니다. (/keystore.json)
      - Date: 2023.06.02
      - Parameters:
@@ -192,7 +192,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     로컬 저장된 wallet 파일을 삭제 합니다.
+     로컬 저장된 wallet 파일을 삭제 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - path : 파일 위치 정보 입니다.
@@ -224,7 +224,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     Encrypt 정보로 변경하여 리턴 합니다.
+     Encrypt 정보로 변경하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - description: NFT 에 사용할 정보를 받아 Enc 정보로 AES 암호화 하여 리턴 합니다. 사용되는 키정보는 "W_ENCKEY", "W_ENCIV" 정보를 사용 합니다.
      - Date: 2023.06.02
      - Parameters:
@@ -248,7 +248,7 @@ class WalletViewModel : BaseViewModel {
     
 
     /**
-     지갑 복구를 요청 합니다.
+     지갑 복구를 요청 합니다. ( J.D.H VER : 1.0.0 )
      - description: 웹에서 복구 요청으로 받은 encinfo 정보와 유저가 입력한 닉모닉 정보를 받아 복구구분을 진행 복구된 지갑 정보를 리턴 합니다.
      - Date: 2023.06.20
      - Parameters:
@@ -284,7 +284,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     로컬에 저장된 wallet 정보를 리턴 합니다.
+     로컬에 저장된 wallet 정보를 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - encInfo : enc 정보를 받습니다.
@@ -320,7 +320,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     로컬에 저장된 Wallet 개인 키정보를 리턴 합니다.
+     로컬에 저장된 Wallet 개인 키정보를 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.02
      - Parameters:
         - encInfo : enc 정보를 받습니다.
@@ -355,7 +355,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     로컬에 저장된 개인 키정보를 리턴 합니다.
+     로컬에 저장된 개인 키정보를 리턴 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.20
      - Parameters:
         - walletPass : 지갑 주소 정보를 받습니다.
@@ -393,7 +393,7 @@ class WalletViewModel : BaseViewModel {
     
     
     /**
-     신규 생성된 지갑 정보를 로컬에 저장 합니다.
+     신규 생성된 지갑 정보를 로컬에 저장 합니다. ( J.D.H VER : 1.0.0 )
      - Description: 웹에서 신규 Wallet 생성후 정보를 받아 로컬에 파일로 저장 합니다. (/keystore.json) 저장후 주소 + 개인 키 정보를 리턴 합니다.
      - Date: 2023.06.02
      - Parameters:

@@ -61,7 +61,7 @@ class AllMoreMenuListCell: UITableViewCell {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     메뉴 인포정보를 받아 디스플레이 합니다.
+     메뉴 인포정보를 받아 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.07
      - Parameters:
         - menuInfo : 메뉴 리스트 인포 정보 입니다.
@@ -316,7 +316,7 @@ extension AllMoreMenuListCell
 {
     //MARK: - 지원 메서드 입니다.
     /**
-     제로페이 결제 페이지로 이동 합니다.
+     제로페이 결제 페이지로 이동 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.07
      - Parameters:False
      - Throws: False
@@ -350,7 +350,7 @@ extension AllMoreMenuListCell
     
     
     /**
-     만보고 페이지로 이동 합니다.
+     만보고 페이지로 이동 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.20
      - Parameters:False
      - Throws: False
@@ -404,7 +404,7 @@ extension AllMoreMenuListCell
     
     
     /**
-     만보고 약관동의 페이지를 디스플레이 합니다.
+     만보고 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.20
      - Parameters:False
      - Throws: False
@@ -456,7 +456,7 @@ extension AllMoreMenuListCell
     
     
     /**
-     올림pick 약관동의 페이지를 디스플레이 합니다.
+     올림pick 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.16
      - Parameters:False
      - Throws: False
@@ -482,7 +482,7 @@ extension AllMoreMenuListCell
     
     
     /**
-     제로페이 약관동의 페이지를 디스플레이 합니다.
+     제로페이 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.16
      - Parameters:False
      - Throws: False
@@ -527,7 +527,7 @@ extension AllMoreMenuListCell
     
     
     /**
-     제로페이 결제 이동 하단 팝업뷰를 오픈 합니다.
+     제로페이 결제 이동 하단 팝업뷰를 오픈 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False

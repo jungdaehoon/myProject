@@ -9,7 +9,7 @@ import Foundation
 
 extension URL {
     /**
-     URL 파라미터를Dic 형태의 데이터 변경합니다.
+     URL 파라미터를Dic 형태의 데이터 변경합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.06.09
      */
     public var getQueries: [String: String] {

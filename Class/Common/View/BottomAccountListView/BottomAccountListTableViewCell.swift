@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ 하단 계좌 선택 뷰어 계좌 리스트 Cell  입니다.. ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.06.27
+*/
 class BottomAccountListTableViewCell: UITableViewCell {
 
     /// 은행 아이콘 입니다.
