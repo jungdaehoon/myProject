@@ -88,7 +88,6 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
                     alertController.addAction(alertAction)
                     self.present(alertController, animated: true, completion: nil)
                 }
-                
             }
         }
 

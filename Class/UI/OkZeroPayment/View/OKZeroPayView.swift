@@ -754,8 +754,7 @@ class OKZeroPayView: UIView {
         } completion: { _ in
             /// 카드리스트 뷰어 선택을 활성화 합니다.
             self.payCardListView.isUserInteractionEnabled = true
-        }
-        
+        }        
     }
     
     

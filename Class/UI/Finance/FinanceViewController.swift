@@ -15,6 +15,7 @@ import WebKit
 */
 class FinanceViewController: BaseViewController {
 
+    /// 웹 화면 디스플레이할 영역 뷰어 입니다.
     @IBOutlet weak var webDisplayView: UIView!
     
     // MARK: - viewDidLoad
@@ -37,19 +38,6 @@ class FinanceViewController: BaseViewController {
         super.setDisplayData()
         self.loadTabPageURL(WebPageConstants.URL_FINANCE_MAIN)
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
@@ -64,7 +52,7 @@ extension FinanceViewController {
             else {
                 return decisionHandler(.cancel, preferences)
         }
-        Slog("BenefitViewController url : \(url)")
+        Slog("FinanceViewController url : \(url)")
 
         /// 해당 페이지에서 메인 URL 호출시 메인 탭으로 이동 합니다.
         if url.description.contains("matcs/main.do")

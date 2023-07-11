@@ -50,22 +50,28 @@ class BannerView: UIView {
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        let result = self.viewModel!.allModeResponse!.result!
+        let result  = self.viewModel!.allModeResponse!.result!
+        var openBankUrl = ""
         /// 오픈뱅킹 여부를 체크 합니다.
         if result._openbank!
         {
             if result._user_seq_no!.isEmpty
             {
-                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                openBankUrl = WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER
             }
             else
             {
-                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                openBankUrl = WebPageConstants.URL_ACCOUNT_REGISTER
             }
         }
         else
         {
-            self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+            openBankUrl = WebPageConstants.URL_ACCOUNT_REGISTER
         }
+        
+        /// 오픈 뱅킹 페이지를 호출 합니다.
+        self.setDisplayWebView(openBankUrl, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+        }
+        
     }    
 }

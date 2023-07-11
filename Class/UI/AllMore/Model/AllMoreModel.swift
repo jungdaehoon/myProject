@@ -45,8 +45,7 @@ enum MENU_TYPE : Codable {
 */
 class AllMoreModel : BaseViewModel{
     /// 전체 탭 데이터를 가집니다.
-    var allModeResponse     : AllMoreResponse?        
-    
+    var allModeResponse     : AllMoreResponse?
     
     
     /**

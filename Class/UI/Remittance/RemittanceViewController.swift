@@ -75,6 +75,7 @@ class RemittanceViewController: BaseViewController {
                     if mainAccount!._fintech_use_num!.isEmpty
                     {
                         DispatchQueue.main.async {
+                            /// 오픈 뱅킹 페이지를 연결 합니다.
                             self.view.setDisplayWebView( WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2 ) { value in
                                 switch value
                                 {
@@ -151,6 +152,7 @@ class RemittanceViewController: BaseViewController {
                 else
                 {
                     DispatchQueue.main.async {
+                        /// 오픈 뱅킹 페이지를 연결 합니다.
                         self.view.setDisplayWebView( WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2 ) { value in
                             switch value
                             {

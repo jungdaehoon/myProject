@@ -13,8 +13,11 @@ import WebKit
  - Date: 2023.03.21
 */
 class BenefitViewController: BaseViewController {
-
+    /// 웹 화면 디스플레이할 영역 뷰어 입니다.
     @IBOutlet weak var webDisplayView: UIView!
+    
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initWebView(self.webDisplayView, target: self)
@@ -35,17 +38,6 @@ class BenefitViewController: BaseViewController {
         super.setDisplayData()
         self.loadTabPageURL(WebPageConstants.URL_BENEFIT_MAIN)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension BenefitViewController {

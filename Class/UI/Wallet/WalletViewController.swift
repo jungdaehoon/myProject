@@ -53,7 +53,7 @@ extension WalletViewController {
             else {
                 return decisionHandler(.cancel, preferences)
         }
-        Slog("BenefitViewController url : \(url)")
+        Slog("WalletViewController url : \(url)")
 
         /// 해당 페이지에서 메인 URL 호출시 메인 탭으로 이동 합니다.
         if url.description.contains("matcs/main.do")

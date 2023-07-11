@@ -37,6 +37,20 @@ enum KEY_PAD_CLOSE_TYPE : Int {
 
 
 /**
+ 보안키패드 이벤트 입니다.  ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.03.21
+*/
+enum OPENBANK_CLOSE_TYPE : Int {
+    /// 페이지 강제 종료 입니다.
+    case add_account
+    /// 인증 정상처리 입니다.
+    case page_close
+    /// 인증 실패 입니다.
+    case fail
+}
+
+
+/**
  전체 웹 종료 콜백 입니다.  ( J.D.H  VER : 1.0.0 )
  - Date: 2023.03.21
 */
@@ -45,9 +59,11 @@ enum FULL_WEB_CB {
     case loginCall
     /// 페이지 종료후 바로 홈으로 이동합니다.
     case goToHome
-    /// 보안 키패드 타입 입니다.
+    /// 오픈 뱅킹 디스플레이  입니다. ( success : 계좌 연동  정상 처리 여부  )
+    case openBank ( success : Bool )
+    /// 보안 키패드 타입 입니다. ( type : 보안 키패드 이벤트 타입 )
     case keyPadSucces( type : KEY_PAD_CLOSE_TYPE )
-    /// 제로페이 인증용 보안 키패드 타입 입니다.
+    /// 제로페이 인증용 보안 키패드 타입 입니다. ( barcode : 바코드, qrcode : QR코드 데이터 , maxValidTime : 최대 유지 타임 정보 )
     case zeroPaykeyPad( barcode : String, qrcode : String, maxValidTime : String )
     /// 페이지 닫기 입니다.
     case pageClose
@@ -71,6 +87,8 @@ enum FULL_PAGE_TYPE : String {
     case pg_type            = "PG"
     /// 제로페이 연동 타입 입니다.
     case zeropay_type       = "ZP"
+    /// 오픈뱅킹 연동 타입 입니다.
+    case openbank_type      = "OPENBANK"
     /// 인증용 보안키패드 연동 타입 입니다.
     case auth_keypad        = "AUTH_KEY_PAD"
     /// 제로페이 인증용 보안키패드 연동 타입 입니다.
@@ -246,6 +264,24 @@ class FullWebViewController: BaseViewController {
                     self.popController(animated: true, animatedType: .right) { firstViewController in
                         if self.completion != nil
                         {
+                            /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
+                            if self.pageType == .openbank_type
+                            {
+                                if let webview = self.webView {
+                                    /// 오픈 뱅킹 처리가 정상 처리 되었는지를 체크 합니다.
+                                    webview.evaluateJavaScript("window.isSuccess()") { (value, error) in
+                                        if let success = value as? Bool {
+                                            self.completion!(.openBank(success: success))
+                                            return
+                                        }
+                                        self.completion!(.openBank(success: false))
+                                    }
+                                }
+                                else
+                                {
+                                    self.completion!(.openBank(success: false))
+                                }                                
+                            }
                             self.completion!(.pageClose)
                         }
                     }
@@ -254,11 +290,30 @@ class FullWebViewController: BaseViewController {
                     self.popController(animated: true, animatedType: .down) { firstViewController in
                         if self.completion != nil
                         {
+                            /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
+                            if self.pageType == .openbank_type
+                            {
+                                if let webview = self.webView {
+                                    /// 오픈 뱅킹 처리가 정상 처리 되었는지를 체크 합니다.
+                                    webview.evaluateJavaScript("window.isSuccess()") { (value, error) in
+                                        if let success = value as? Bool {
+                                            self.completion!(.openBank(success: success))
+                                            return
+                                        }
+                                        self.completion!(.openBank(success: false))
+                                    }
+                                }
+                                else
+                                {
+                                    self.completion!(.openBank(success: false))
+                                }
+                                return
+                            }
                             self.completion!(.pageClose)
                         }
                     }
-                    
                     break
+                
             }
         }
         

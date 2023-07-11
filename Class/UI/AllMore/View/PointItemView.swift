@@ -138,7 +138,7 @@ class PointItemView: UIView {
     @IBAction func btn_action(_ sender: Any) {
         let btn : UIButton  = sender as! UIButton
         if self.viewModel == nil { return }
-        if let result = self.viewModel!.allModeResponse!.result {
+        if let _ = self.viewModel!.allModeResponse!.result {
             switch btn.tag {
                 /// OK머니 버튼 이벤트 입니다.
             case 10:
@@ -149,15 +149,16 @@ class PointItemView: UIView {
                 self.setDisplayWebView(WebPageConstants.URL_POINT_TRANSFER_LIST)
                 break
             case 12:
+                var openBankUrl = ""
                 /// 오픈 뱅킹 계좌 연결 경우 입니다.
                 if self.bankingNumber.text == OPEN_BANK_LINK
                 {
-                    self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                    openBankUrl = WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER
                 }
                 /// 연결된 계좌 정보가 없는 경우 입니다.
                 else if self.bankingNumber.text == NOT_BANK_LINK
                 {
-                    self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                    openBankUrl = WebPageConstants.URL_ACCOUNT_REGISTER
                 }
                 /// 계좌 재인증 경우 입니다.
                 else if self.bankingNumber.text == RE_BACK_AUTH
@@ -190,11 +191,32 @@ class PointItemView: UIView {
                             }
                         }
                     }.store(in: &self.viewModel!.cancellableSet)
+                    return
                 }
-                /// 계좌 정상 디스플레이로 선택시 리스트 페이지로 이동합니다.
-                else
+                
+                /// 오픈 뱅킹 이동 할 URL 정보가 있는지를 체크 합니다.
+                if openBankUrl.isValid
                 {
-                    self.setDisplayWebView(WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, titleBarType: 0, titleBarHidden: true)
+                    /// 오픈 뱅킹 페이지를 호출 합니다.
+                    self.setDisplayWebView(openBankUrl, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+                        switch value
+                        {
+                        case .openBank( let success ):
+                            if success
+                            {
+                                TabBarView.setReloadSeleted(pageIndex: 4)
+                            }
+                            break
+                        default:break
+                        }
+                    }
+                    return
+                }
+                
+                /// 연결 계좌 리스트로 이동 합니다.
+                self.setDisplayWebView( WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, titleName: "연결계좌", titleBarType: 2) { value in
+                    /// 메인 계좌가 변경되는 경우 새로고침은 어떻게 할지 미정 입니다. 일단 새로고침 합니다.
+                    TabBarView.setReloadSeleted(pageIndex: 4)
                 }
                 break
             case 13:

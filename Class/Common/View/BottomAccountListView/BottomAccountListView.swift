@@ -86,6 +86,19 @@ class BottomAccountListView: BaseView {
         self.tableViewHeight.constant       = ACCOUNT_CELL_HEIGHT * 5
         /// 계좌 선택 리스트 뷰어 전체 높이를 아래로 이동 합니다.
         self.accountListViewBottom.constant = ACCOUNT_DEFAULT_HEIGHT + (ACCOUNT_CELL_HEIGHT * 5) * -1
+        /// 계좌 디스플레이 입니다.
+        self.setDataDisplay()
+    }
+
+
+    /**
+     계좌 정보를 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.05.02
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    func setDataDisplay(){
         /// 계좌 리스트 정보를 요청 합니다.
         self.viewModel.getAccountList().sink { result in
             
@@ -94,10 +107,9 @@ class BottomAccountListView: BaseView {
                 self.tableView.reloadData()
             }
         }.store(in: &self.viewModel.cancellableSet)
-
     }
-
-
+    
+    
     /**
      뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
      - Date: 2023.05.02

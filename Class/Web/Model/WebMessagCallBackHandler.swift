@@ -319,7 +319,7 @@ class WebMessagCallBackHandler : NSObject  {
     - Returns:False
     */
     func setDrawCode( _ body : [Any?] ){
-        // 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks = body[0] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
         if let params = body[2] as? [Any]
@@ -341,7 +341,6 @@ class WebMessagCallBackHandler : NSObject  {
                     return
                 }
             }
-            
         }
     }
     
@@ -369,13 +368,27 @@ class WebMessagCallBackHandler : NSObject  {
     func setAccountsPopup( _ body : [Any?] ) {
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks   = body[0] as! [Any]
+        let accounts = BottomAccountListView()        
         /// 계좌 선택 페이지 입니다.
-        BottomAccountListView().show { event in
+        accounts.show { event in
             switch event
             {
             case .add_account :
                 if let controller = self.target {
-                    controller.view.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                    /// 오픈 뱅킹 페이지를 연결 합니다.
+                    controller.view.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+                        switch value
+                        {
+                        case .openBank( let success ):
+                            if success
+                            {
+                                /// 계좌 리스트 다시 디스플레이 합니다.
+                                accounts.setDataDisplay()
+                            }
+                            break
+                        default:break
+                        }
+                    }
                 }
                 break
             case .account( let account ):
@@ -858,6 +871,17 @@ class WebMessagCallBackHandler : NSObject  {
                             controller.pushController(viewController, animated: true, animatedType: .up)
                         }
                         return
+                        /// 오픈뱅킹 타입 입니다.
+                    case .openbank_type:
+                        if let controller = self.target {
+                            /// 전체 화면 오픈뱅킹 페이지 오픈 합니다.
+                            let viewController  = FullWebViewController.init( pageType: .openbank_type, title: title, titleBarType: titleBarType, pageURL: url ) { cbType in
+                                /// 앱웹으로 콜백을 요청 합니다.
+                                self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                            }
+                            controller.pushController(viewController, animated: true, animatedType: .up)
+                        }
+                        break;
                     default:
                         break
                     }
@@ -890,6 +914,13 @@ class WebMessagCallBackHandler : NSObject  {
                 break
             case .loginCall :
                 self.setLoginDisplay()
+                break
+            case .openBank( let success ):
+                if success
+                {
+                    self.setEvaluateJavaScript(callback: callHybridPopupCB, message:"", isJson: true)
+                }
+                break
             case .scriptCall( let callback , let message, _ ) :
                 self.setEvaluateJavaScript(callback: callback == "" ? callHybridPopupCB : callback, message: message, isJson: true)
             default:break
@@ -916,17 +947,17 @@ class WebMessagCallBackHandler : NSObject  {
                 switch type
                 {
                     /// PG 결제 요청을 리턴 합니다.
-                case "PG":
-                    /// 결제 정보를 받습니다.
-                    do {
-                        /// 결제 정보를 문자 형태로 변환하여 리턴 합니다.
-                        if let message = try Utils.toJSONString(info)
-                        {
-                            self.setTargetDismiss( param: message )
-                        }
-                    } catch { }
-                    return
-                default:break;
+                    case "PG":
+                        /// 결제 정보를 받습니다.
+                        do {
+                            /// 결제 정보를 문자 형태로 변환하여 리턴 합니다.
+                            if let message = try Utils.toJSONString(info)
+                            {
+                                self.setTargetDismiss( param: message )
+                            }
+                        } catch { }
+                        return
+                    default:break;
                 }
                                 
                 /// 데이터 문자 타입 여부를 체크 합니다.
@@ -2036,13 +2067,25 @@ extension WebMessagCallBackHandler{
             }
             
             controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
-            controller.popController(animated: true, animatedType: .down)
+            controller.popController(animated: true, animatedType: .down) { firstViewController in
+                /// 이동 후 디스플레이 되는 페이지가 탭바 페이지라면 해당 페이지를 새로고침 합니다.
+                if firstViewController is UITabBarController
+                {
+                    TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
+                }
+            }
             return
         }
         
         /// 연결된 타켓 정보가 있는지를 체크 합니다.
         if let controller = self.target {
-            controller.popController(animated: true, animatedType: .down)
+            controller.popController(animated: true, animatedType: .down) { firstViewController in
+                /// 이동 후 디스플레이 되는 페이지가 탭바 페이지라면 해당 페이지를 새로고침 합니다.
+                if firstViewController is UITabBarController
+                {
+                    TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
+                }
+            }
         }
     }
 

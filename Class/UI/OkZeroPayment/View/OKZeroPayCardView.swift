@@ -333,7 +333,22 @@ class OKZeroPayCardView: UIView {
                             /// 계좌 미존재 여부 입니다.
                             if account._hasNoMainAccount!
                             {
-                                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                                /// 오픈 뱅킹 페이지를 연결 합니다.
+                                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+                                    switch value
+                                    {
+                                    case .openBank( let success ):
+                                        if success
+                                        {
+                                            /// 카드 위치를 하단으로 내립니다.
+                                            OKZeroViewModel.zeroPayShared!.cardDisplay      = .bottom
+                                            /// 카드 정보를 새로고침 합니다.
+                                            OKZeroViewModel.zeroPayShared!.okZeroPayReload  = true
+                                        }
+                                        break
+                                    default:break
+                                    }
+                                }
                                 return
                             }
                             
@@ -351,7 +366,10 @@ class OKZeroPayCardView: UIView {
                                         let vc = HybridOpenBankViewController.init(pageURL: response!.gateWayURL! ) { value in
                                             if value.contains( "true" ) == true
                                             {
-                                                TabBarView.setReloadSeleted(pageIndex: 4)
+                                                /// 카드 위치를 하단으로 내립니다.
+                                                OKZeroViewModel.zeroPayShared!.cardDisplay      = .bottom
+                                                /// 카드 정보를 새로고침 합니다.
+                                                OKZeroViewModel.zeroPayShared!.okZeroPayReload  = true
                                             }
                                         }
                                         self.viewController.pushController(vc, animated: true, animatedType: .up)
@@ -370,13 +388,27 @@ class OKZeroPayCardView: UIView {
                                 }.store(in: &self.viewModel.cancellableSet)
                                 return
                             }
-                                            
+                            
+                            let accounts = BottomAccountListView()
                             /// 계좌 선택 페이지 입니다.
-                            BottomAccountListView().show { event in
+                            accounts.show { event in
                                 switch event
                                 {
                                 case .add_account :
-                                    self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, titleBarType: 2)
+                                    /// 오픈 뱅킹 페이지를 연결 합니다.
+                                    self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+                                        switch value
+                                        {
+                                        case .openBank( let success ):
+                                            if success
+                                            {
+                                                /// 계좌 리스트 다시 디스플레이 합니다.
+                                                accounts.setDataDisplay()
+                                            }
+                                            break
+                                        default:break
+                                        }
+                                    }
                                     break
                                 case .account( let account ):
                                     if let account = account {
