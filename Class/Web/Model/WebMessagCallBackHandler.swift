@@ -310,6 +310,7 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
+    // MARK: - 지원 메서드 입니다.
     /**
      제로페이 간편결제 바코드 및 QRCode 정보를 받습니다. ( J.D.H VER : 1.0.0 )
     - Date: 2023.07.05
@@ -797,7 +798,6 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
-    // MARK: - 지원 메서드 입니다.
     /**
      전체 화면 웹뷰를 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.03.28
@@ -2055,6 +2055,7 @@ extension WebMessagCallBackHandler{
     func setTargetDismiss( _ callback : String = "", param : String = "" ){
         /// 전체 웹뷰 타입 경우인지를 체크 합니다.
         if let controller = self.target as? FullWebViewController {
+            print("pg_type : \(controller.pageType)")
             switch controller.pageType
             {
                 /// 보안 키패드 타입입니다.
@@ -2068,11 +2069,6 @@ extension WebMessagCallBackHandler{
             
             controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
             controller.popController(animated: true, animatedType: .down) { firstViewController in
-                /// 이동 후 디스플레이 되는 페이지가 탭바 페이지라면 해당 페이지를 새로고침 합니다.
-                if firstViewController is UITabBarController
-                {
-                    TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
-                }
             }
             return
         }
@@ -2080,11 +2076,6 @@ extension WebMessagCallBackHandler{
         /// 연결된 타켓 정보가 있는지를 체크 합니다.
         if let controller = self.target {
             controller.popController(animated: true, animatedType: .down) { firstViewController in
-                /// 이동 후 디스플레이 되는 페이지가 탭바 페이지라면 해당 페이지를 새로고침 합니다.
-                if firstViewController is UITabBarController
-                {
-                    TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
-                }
             }
         }
     }
