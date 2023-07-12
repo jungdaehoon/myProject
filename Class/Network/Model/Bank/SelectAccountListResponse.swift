@@ -32,7 +32,6 @@ struct SelectAccountListResponse: BaseResponse {
     var result      : Bool?
     /// 계좌 목록 입니다.
     var list        : [Account]?
-    
 }
 
 

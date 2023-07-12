@@ -212,6 +212,9 @@
 		8DFB9D2129DD35E2004E5021 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2029DD35E2004E5021 /* LoadingView.swift */; };
 		8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2229DD35EC004E5021 /* LoadingView.xib */; };
 		8DFB9D2629DD5CB5004E5021 /* RemittanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB9D2529DD5CB5004E5021 /* RemittanceModel.swift */; };
+		F243AAAF2A5E5E8F00B42A4B /* AppStartEventPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */; };
+		F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */; };
+		F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */; };
 		F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */; };
 		F2C5E4CB2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */; };
 		F2C5E4CD2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */; };
@@ -455,6 +458,9 @@
 		8DFB9D2029DD35E2004E5021 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8DFB9D2229DD35EC004E5021 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		8DFB9D2529DD5CB5004E5021 /* RemittanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemittanceModel.swift; sourceTree = "<group>"; };
+		F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventPopup.swift; sourceTree = "<group>"; };
+		F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppStartEventPopup.xib; sourceTree = "<group>"; };
+		F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventViewModel.swift; sourceTree = "<group>"; };
 		F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayOKMoneyResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsAgreeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsCheckResponse.swift; sourceTree = "<group>"; };
@@ -987,6 +993,7 @@
 		8D205EFE29D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F243AAAD2A5E5E6700B42A4B /* AppStartEventPopup */,
 				8D1C97F22A01DEF900A4BA50 /* BottomBankListView */,
 				8DE310512A00F86100DF9653 /* BottomAccountListView */,
 				8D91E26529E5250F0015E5E7 /* DatePickerView */,
@@ -1310,6 +1317,24 @@
 			path = ZeroPayTermsAgree;
 			sourceTree = "<group>";
 		};
+		F243AAAD2A5E5E6700B42A4B /* AppStartEventPopup */ = {
+			isa = PBXGroup;
+			children = (
+				F243AAB22A5E6E2D00B42A4B /* Model */,
+				F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */,
+				F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */,
+			);
+			path = AppStartEventPopup;
+			sourceTree = "<group>";
+		};
+		F243AAB22A5E6E2D00B42A4B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F25323CC2A564C9E005267E2 /* ZeroPayOKMoney */ = {
 			isa = PBXGroup;
 			children = (
@@ -1504,6 +1529,7 @@
 				8DBA445829D41C7D00A2E5C1 /* LevelPopView.xib in Resources */,
 				8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */,
 				8D205F2629D1346F00F43C99 /* Intro.storyboard in Resources */,
+				F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */,
 				8D205F4229D1346F00F43C99 /* TopUserInfoView.xib in Resources */,
 				8D205F2829D1346F00F43C99 /* PermissionInfoView.xib in Resources */,
 				8DE3105C2A01010600DF9653 /* BottomAccountListTableViewCell.xib in Resources */,
@@ -1637,6 +1663,7 @@
 				8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
+				F243AAAF2A5E5E8F00B42A4B /* AppStartEventPopup.swift in Sources */,
 				8D205F8B29D1346F00F43C99 /* Utils.swift in Sources */,
 				8D205F7029D1346F00F43C99 /* WebMessagCallBackHandler.swift in Sources */,
 				8D205F7129D1346F00F43C99 /* ResponseError.swift in Sources */,
@@ -1671,6 +1698,7 @@
 				8D205F6329D1346F00F43C99 /* URL.swift in Sources */,
 				8D205F6129D1346F00F43C99 /* Int.swift in Sources */,
 				8D205F5F29D1346F00F43C99 /* DataResponse.swift in Sources */,
+				F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */,
 				8D205F2529D1346F00F43C99 /* IntroViewController.swift in Sources */,
 				F2C5E4D32A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift in Sources */,
 				8DCB18A529F6641E000645D3 /* QRReaderViewController.swift in Sources */,

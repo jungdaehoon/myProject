@@ -241,6 +241,7 @@ extension BaseWebViewController: WKNavigationDelegate
         /// 빈 배경 설정으로 리턴 합니다.
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didFinish url : \(webView.url!.absoluteString)", category: .network)
+        Slog("webView backForwardList count : \(webView.backForwardList.backList.count)", category: .network)
         /// 웹 로드 완료 리턴 CB 체크 입니다.
         if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.

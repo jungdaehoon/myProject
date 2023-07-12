@@ -91,7 +91,9 @@ class SecureKeyPadView: BaseView {
         xkPasswordTextField.subTitle        = "비밀번호"
         xkPasswordTextField.e2eURL          = WebPageConstants.URL_KEYBOARD_E2E        
         self.target!.view.addSubview(xkPasswordTextField)
-        self.setResignFirstResponder()
+        self.xkPasswordTextField.resignFirstResponder()
+        self.target!.view.endEditing(true)
+        
         Slog("xkKeypadType!:\(xkKeypadType!)")
         Slog("xkKeypadViewType!!:\(xkKeypadViewType!)")
         Slog("e2eURLString!!:\(WebPageConstants.URL_KEYBOARD_E2E)")
@@ -127,6 +129,7 @@ class SecureKeyPadView: BaseView {
     func setResignFirstResponder() {
         self.xkPasswordTextField.resignFirstResponder()
         self.target!.view.endEditing(true)
+        self.xkPasswordTextField.removeFromSuperview()
     }
     
     
@@ -244,13 +247,6 @@ extension SecureKeyPadView : XKTextFieldDelegate{
         /// 세션만료 안내 팝업 오픈 입니다.
         CMAlertView().setAlertView(detailObject: "보안 세션이 만료되었습니다.\n다시 실행해 주세요." as AnyObject, cancelText: "확인") { event in
             self.setResignFirstResponder()
-            self.target!.popController(animated: true, animatedType: .down) { firstViewController in
-                /// 이동 후 디스플레이 되는 페이지가 탭바 페이지라면 해당 페이지를 새로고침 합니다.
-                if firstViewController is UITabBarController
-                {
-                    TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
-                }
-            }
         }
     }
     

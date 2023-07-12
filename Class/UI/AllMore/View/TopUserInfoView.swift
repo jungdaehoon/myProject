@@ -51,33 +51,25 @@ class TopUserInfoView: UIView {
         {
             /// 닉네임 정보를 디스플레이 합니다.
             self.nickNameText.text  = "\(result._nickname!)"
-            /// NFT ID 정보가 있는지를 체크 합니다.
-            if result._nft_id!.isValid
-            {
-                if let url = URL(string: WebPageConstants.baseURL + "/all/profileImage?userNo=" + result._user_no!) {
-                    UIImageView.loadImage(from: url).sink { image in
-                        if let profileImage = image {
+            /// 이미지 URL 을 생성 합니다.
+            if let url = URL(string: WebPageConstants.baseURL + "/all/profileImage?userNo=" + result._user_no!) {
+                UIImageView.loadImage(from: url).sink { image in
+                    if let profileImage = image {
+                        /// NFT ID 정보가 있는지를 체크 합니다.
+                        if result._nft_id!.isValid
+                        {
                             /// 뷰어를 6각 형으로 변경 합니다.
                             self.profileImage.setHexagonImage()
-                            self.profileImage.image         = profileImage
                             self.profileImageLeft.constant  = 12.0
+                            self.profileImage.image         = profileImage
                         }
-                    }.store(in: &self.viewModel!.cancellableSet)
-                }
-            }
-            else
-            {
-                /// 프로필 이미지를 다운로드 합니다.
-                if result._user_img_url!.isValid,
-                   let url = URL(string: WebPageConstants.baseURL + result._user_img_url!)
-                {
-                    UIImageView.loadImage(from: url).sink { image in
-                        if let profileImage = image {
-                            self.profileImage.image = profileImage
+                        else
+                        {
+                            self.profileImage.image         = profileImage
                             self.profileImage.layer.mask = nil
                         }
-                    }.store(in: &self.viewModel!.cancellableSet)
-                }
+                    }
+                }.store(in: &self.viewModel!.cancellableSet)
             }
         }
     }

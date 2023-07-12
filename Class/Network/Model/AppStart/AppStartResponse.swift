@@ -83,12 +83,19 @@ struct menudata : Codable
     var _menu_list          : [menu_list]? { get { menu_list != nil ? menu_list : [] } }
     /// 버전 정보를 받습니다.
     var _versionInfo        : versionInfo? { get { return versionInfo != nil ? versionInfo : nil } }
+    /// 이벤트 정보를 받습니다.
+    var _eventInfo          : [eventInfo]? { get { return eventInfo != nil ? eventInfo : [] } }
     
     /// 메뉴 리스트 정보를 받습니다.
     var menu_list          : [menu_list]?
     /// 버전 정보를 받습니다.
     var versionInfo        : versionInfo?
+    /// 이벤트 정보를 받습니다.
+    var eventInfo          : [eventInfo]?
 }
+
+
+
 
 /**
  메뉴 상세 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
@@ -141,3 +148,41 @@ struct versionInfo :Codable
     var market_url : String?
 }
 
+
+/**
+ 앱 시작시 이벤트 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.03.27
+*/
+struct eventInfo :Codable
+{
+    /// 타입 넘버 입니다.
+    var _ord : String?          { get { return NC.S(ord) } }
+    /// 내용 입니다.
+    var _note : String?      { get { return NC.S(note) } }
+    /// 이벤트 아이디 입니다.
+    var _event_id : Int?  { get { return NC.I(event_id) } }
+    /// 이미지 URL 입니다.
+    var _img_url : String?   { get { return NC.S(img_url) } }
+    /// 링크 URL 입니다. ( popup_kn 타입 3인 경우 예/아니오 버튼 선택 정보를 url 같이 넘겨주는 형태로 사용, "예 : agreeFlag=Y " )
+    var _link_url : String?  { get { return NC.S(link_url) } }
+    /// 타이틀 정보 입니다.
+    var _title : String?     { get { return NC.S(title) } }
+    /// 팝업 타입 입니다. ( 1 : 시스템 공지, 2 : 이벤트, 3 : 확인/취소 버튼 )
+    var _popup_kn : String?     { get { return NC.S(popup_kn) } }
+    
+    
+    /// 타입 넘버 입니다.
+    var ord : String?
+    /// 내용 입니다.
+    var note : String?
+    /// 이벤트 아이디 입니다.
+    var event_id : Int?
+    /// 이미지 URL 입니다.
+    var img_url : String?
+    /// 링크 URL 입니다. ( popup_kn 타입 3인 경우 예/아니오 버튼 선택 정보를 url 같이 넘겨주는 형태로 사용, "예 : agreeFlag=Y " )
+    var link_url : String?
+    /// 타이틀 정보 입니다.
+    var title : String?
+    /// 팝업 타입 입니다. ( 1 : 시스템 공지, 2 : 하단 이벤트, 3/4 : 중앙 마케팅 동의 확인/취소 버튼,  )
+    var popup_kn : String?
+}

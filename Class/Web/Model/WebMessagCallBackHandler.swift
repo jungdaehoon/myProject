@@ -2068,15 +2068,13 @@ extension WebMessagCallBackHandler{
             }
             
             controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
-            controller.popController(animated: true, animatedType: .down) { firstViewController in
-            }
+            controller.popController(animated: true, animatedType: .down)
             return
         }
         
         /// 연결된 타켓 정보가 있는지를 체크 합니다.
         if let controller = self.target {
-            controller.popController(animated: true, animatedType: .down) { firstViewController in
-            }
+            controller.popController(animated: true, animatedType: .down)
         }
     }
 
