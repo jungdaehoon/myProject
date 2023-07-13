@@ -123,6 +123,7 @@ class RemittanceViewController: BaseViewController {
                                             /// 계좌 재인증 안내 팝업을 오픈 합니다.
                                             CMAlertView().setAlertView(detailObject: message as AnyObject, cancelText: "확인") { event in
                                                 self.view.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2) { value in
+                                                    
                                                     switch value
                                                     {
                                                     case .pageClose:

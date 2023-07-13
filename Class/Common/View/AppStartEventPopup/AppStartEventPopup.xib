@@ -28,6 +28,8 @@
                 <outlet property="centerPopupImage" destination="Q7G-Jl-OMI" id="8Oa-e4-viB"/>
                 <outlet property="centerPopupView" destination="nHg-b2-jMw" id="zOC-7m-OpQ"/>
                 <outlet property="sysytemPopView" destination="YBc-3T-WMF" id="XJV-KV-cNb"/>
+                <outlet property="sysytemViewMessge" destination="LUs-I9-QIl" id="XDp-QG-127"/>
+                <outlet property="sysytemViewTitle" destination="Sez-Fw-QbK" id="Vum-Zc-dhb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -116,13 +118,16 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kau-eO-BOT">
                                                     <rect key="frame" x="0.0" y="1.6666666666666288" width="312" height="43.333333333333336"/>
                                                     <subviews>
-                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guv-by-bRf">
+                                                        <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guv-by-bRf">
                                                             <rect key="frame" x="0.0" y="0.0" width="156" height="43.333333333333336"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="13"/>
                                                             <state key="normal" title="오늘은 그만 보기">
                                                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="lL0-st-6ih"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wv-Ac-dhh">
                                                             <rect key="frame" x="156" y="0.0" width="1" height="43.333333333333336"/>
@@ -141,13 +146,16 @@
                                                                 <constraint firstItem="Y9z-UT-HZY" firstAttribute="top" secondItem="4wv-Ac-dhh" secondAttribute="top" constant="15" id="yhY-Aa-Izc"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJm-Ds-bkT">
+                                                        <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJm-Ds-bkT">
                                                             <rect key="frame" x="157" y="0.0" width="155" height="43.333333333333336"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="13"/>
                                                             <state key="normal" title="확인">
                                                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="L5R-Q7-cAM"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -184,16 +192,16 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdA-xb-PIb" userLabel="Bottom Popup View">
-                    <rect key="frame" x="0.0" y="473" width="393" height="369"/>
+                    <rect key="frame" x="0.0" y="773" width="393" height="69"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12k-VP-gHr" userLabel="Image View">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sQo-4d-0bR">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
                                 </imageView>
                                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbg-Y6-HLM">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
                                     <connections>
                                         <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="D6j-pG-ufs"/>
                                     </connections>
@@ -201,7 +209,7 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="300" id="0gm-IN-MmM"/>
+                                <constraint firstAttribute="height" id="0gm-IN-MmM"/>
                                 <constraint firstAttribute="trailing" secondItem="cbg-Y6-HLM" secondAttribute="trailing" id="9A8-RM-wWV"/>
                                 <constraint firstItem="sQo-4d-0bR" firstAttribute="top" secondItem="12k-VP-gHr" secondAttribute="top" id="Ku4-6S-bAH"/>
                                 <constraint firstItem="sQo-4d-0bR" firstAttribute="leading" secondItem="12k-VP-gHr" secondAttribute="leading" id="Pf5-p8-RS6"/>
@@ -213,7 +221,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qK4-pK-XEY" userLabel="Bottom View">
-                            <rect key="frame" x="0.0" y="300" width="393" height="45"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="45"/>
                             <subviews>
                                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNJ-d6-dMe">
                                     <rect key="frame" x="0.0" y="0.0" width="196" height="45"/>
@@ -264,7 +272,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="344" id="L1S-NP-eld"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="L1S-NP-eld"/>
                         <constraint firstAttribute="trailing" secondItem="12k-VP-gHr" secondAttribute="trailing" id="Rg8-1f-553"/>
                         <constraint firstItem="12k-VP-gHr" firstAttribute="top" secondItem="OdA-xb-PIb" secondAttribute="top" id="ceG-E6-eJe"/>
                         <constraint firstItem="qK4-pK-XEY" firstAttribute="leading" secondItem="OdA-xb-PIb" secondAttribute="leading" id="fDa-Rl-VSo"/>
@@ -298,6 +306,9 @@
                                                         <constraint firstAttribute="height" constant="22" id="DVt-EY-Jgj"/>
                                                     </constraints>
                                                     <state key="normal" image="icon_cancel"/>
+                                                    <connections>
+                                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="VBH-db-oaE"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -313,7 +324,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_banner" translatesAutoresizingMaskIntoConstraints="NO" id="Q7G-Jl-OMI">
                                                     <rect key="frame" x="0.0" y="0.0" width="328" height="200"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9d-4R-haT">
+                                                <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9d-4R-haT">
                                                     <rect key="frame" x="0.0" y="0.0" width="328" height="200"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -322,6 +333,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="M76-90-c8j"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -343,13 +357,16 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsy-c8-N6x">
                                                     <rect key="frame" x="0.0" y="0.0" width="328" height="42"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-oH-pqp">
+                                                        <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-oH-pqp">
                                                             <rect key="frame" x="0.0" y="0.0" width="164" height="42"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="13"/>
                                                             <state key="normal" title="오늘은 그만 보기">
                                                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="kz8-RC-uf6"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5u-9D-fMn">
                                                             <rect key="frame" x="164" y="0.0" width="1" height="42"/>
@@ -368,13 +385,16 @@
                                                                 <constraint firstItem="8Eb-k3-JaL" firstAttribute="leading" secondItem="x5u-9D-fMn" secondAttribute="leading" id="oQQ-Co-QmG"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bo0-Gk-3Hq">
+                                                        <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bo0-Gk-3Hq">
                                                             <rect key="frame" x="165" y="0.0" width="163" height="42"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="13"/>
                                                             <state key="normal" title="확인">
                                                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="AMW-yT-QEc"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>

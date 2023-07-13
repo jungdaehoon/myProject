@@ -823,8 +823,10 @@ class WebMessagCallBackHandler : NSObject  {
                 let titleBarType    = NC.S( info["button"] as? String ).isValid == true ? Int(NC.S( info["button"] as? String ))! : 0
                 /// 현 페이지 종료 여부를 받습니다.
                 let ingPageClose    = NC.B( info["ingPageClose"] as? Bool )
+                /// 웹 데이터 체크 콜백 스크립트를 받습니다.
+                let closeScript     = NC.S(info["closeScript"] as? String)
                 /// 페이지 타입을 받습니다.
-                if let type    = info["type"] as? String {
+                if let type = info["type"] as? String {
                     /// 페이지 타입을 설정 합니다.
                     let pageType = FULL_PAGE_TYPE(rawValue: type) ?? .default_type
                     switch pageType {
@@ -834,7 +836,7 @@ class WebMessagCallBackHandler : NSObject  {
                         if let controller = self.target {
                             let linkUrl         = WebPageConstants.baseURL + url
                             /// 전체 화면 웹뷰를 오픈 합니다.
-                            let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title,titleBarType: titleBarType, pageURL: linkUrl) { cbType in
+                            let viewController  = FullWebViewController.init(pageType: FULL_PAGE_TYPE(rawValue: type) ?? .default_type, title: title,titleBarType: titleBarType, pageURL: linkUrl, closeScript: closeScript) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
                                 self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
@@ -853,7 +855,7 @@ class WebMessagCallBackHandler : NSObject  {
                     case .db_type:
                         if let controller = self.target {
                             /// 전체 화면 웹뷰를 오픈 합니다.
-                            let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: WebPageConstants.baseURL +  url, returnParam: NC.S(params[1] as? String)) { cbType in
+                            let viewController = FullWebViewController.init( titleBarType: titleBarType , pageURL: WebPageConstants.baseURL +  url, returnParam: NC.S(params[1] as? String), closeScript: closeScript) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
                                 self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
@@ -864,7 +866,7 @@ class WebMessagCallBackHandler : NSObject  {
                     case .outdside_type:
                         if let controller = self.target {
                             /// 전체 화면 웹뷰를 오픈 합니다.
-                            let viewController  = FullWebViewController.init( title: title, titleBarType: titleBarType, pageURL: url ) { cbType in
+                            let viewController  = FullWebViewController.init( title: title, titleBarType: titleBarType, pageURL: url, closeScript: closeScript ) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
                                 self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
@@ -875,7 +877,7 @@ class WebMessagCallBackHandler : NSObject  {
                     case .openbank_type:
                         if let controller = self.target {
                             /// 전체 화면 오픈뱅킹 페이지 오픈 합니다.
-                            let viewController  = FullWebViewController.init( pageType: .openbank_type, title: title, titleBarType: titleBarType, pageURL: url ) { cbType in
+                            let viewController  = FullWebViewController.init( pageType: .openbank_type, title: title, titleBarType: titleBarType, pageURL: url, closeScript: closeScript ) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
                                 self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
@@ -886,9 +888,10 @@ class WebMessagCallBackHandler : NSObject  {
                         break
                     }
                 }
+                
                 if let controller = self.target {
                     /// 전체 화면 웹뷰를 오픈 합니다.
-                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: WebPageConstants.baseURL +  url, returnParam: NC.S(params[1] as? String)) { cbType in
+                    let viewController  = FullWebViewController.init(  title: title, titleBarType: titleBarType,pageURL: WebPageConstants.baseURL +  url, returnParam: NC.S(params[1] as? String), closeScript: closeScript) { cbType in
                         /// 앱웹으로 콜백을 요청 합니다.
                         self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                     }

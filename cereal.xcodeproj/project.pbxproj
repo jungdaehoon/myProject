@@ -2055,7 +2055,7 @@
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
 				MARKETING_VERSION = 1.24.42;
-				OS_LOG_ENABLED = NO;
+				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고";

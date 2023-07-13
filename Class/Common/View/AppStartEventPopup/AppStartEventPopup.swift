@@ -11,16 +11,28 @@ import UIKit
 
 /**
  제로페이 페이지 버튼 타입 입니다. ( J.D.H  VER : 1.0.0 )
- - Date: 2023.04.26
+ - Date: 2023.07.13
 */
 enum APPSTART_EVENT_BTN : Int {
-    case close              = 0
     /// 페이지 종료 입니다.
+    case close              = 0
+    /// 하단 이벤트 뷰어 "오늘은 그만 보기" 선택시  입니다.
     case be_notToday        = 10
-    /// 바코드 결제 버튼 입니다.
+    /// 하단 이벤트 "확인" 선택시 입니다.
     case be_success         = 11
-    /// QR 결제 타입 입니다.
+    /// 하단 이벤트 선택시 입니다.
     case be_eventChoice     = 12
+    /// 시스템 안내 팝업  "오늘은 그만 보기" 선택시  입니다.
+    case st_notToday        = 13
+    /// 시스템 안내 팝업 "확인" 선택시 입니다.
+    case st_success         = 14
+    /// 중앙 이벤트  선택시  입니다.
+    case ct_eventChoice     = 15
+    /// 중앙 이벤트 팝업  "오늘은 그만 보기" 선택시  입니다.
+    case ct_notToday        = 16
+    /// 중앙 이벤트  팝업 "확인" 선택시 입니다.
+    case ct_success         = 17
+    
 }
 
 
@@ -37,10 +49,13 @@ class AppStartEventPopup: UIView {
     var completion : (( _ event : APPSTART_EVENT_BTN ) -> Void )? = nil
     /// 시스템 점검 안내 공지 팝업 입니다.
     @IBOutlet weak var sysytemPopView: UIView!
+    /// 시스템 안내 공지 타이틀 문구 입니다.
     @IBOutlet weak var sysytemViewTitle: UILabel!
+    /// 시스템 안내 공지 상세 문구 입니다.
     @IBOutlet weak var sysytemViewMessge: UILabel!
     /// 중앙 이벤트 팝업 입니다.
     @IBOutlet weak var centerPopupView: UIView!
+    /// 중앙 이벤트 팝업 이미지 입니다.
     @IBOutlet weak var centerPopupImage: UIImageView!
     /// 하단 이벤트 팝업 입니다.
     @IBOutlet weak var bottomPopupView: UIView!
@@ -83,7 +98,7 @@ class AppStartEventPopup: UIView {
      - Returns:False
      */
     func setDataDisplay( eventmModel : eventInfo? = nil, completion : (( _ event : APPSTART_EVENT_BTN ) -> Void )? = nil ) {
-        if let model = eventmModel {
+        if let model = eventmModel {            
             /// 모델 데이터를 추가합니다.
             self.eventModel = model
             /// 리턴 이벤트를 연결 합니다.
@@ -92,15 +107,29 @@ class AppStartEventPopup: UIView {
             {
                 /// 중앙 이벤트 타입 입니다.
             case "0" :
-                self.setCenterEventDisplay(eventmModel: model)
+                /// 오늘 다시보기 가능 여부를 체크 합니다.
+                if Date.getTodayString()! > SharedDefaults.default.appStartCenterPopup {
+                    self.setCenterEventDisplay(eventmModel: model)
+                    self.show()
+                }
                 break
                 /// 시스템. 공지 타입 입니다.
             case "1" :
-                self.setSystemPopup(eventmModel: model)
+                /// 오늘 다시보기 가능 여부를 체크 합니다.
+                if Date.getTodayString()! > SharedDefaults.default.appStartSystemPopup {
+                    self.setSystemPopup(eventmModel: model)
+                    self.show()
+                }
                 break
                 /// 하단 이벤트 타입 입니다.
             case "2" :
-                self.setBottomEventDisplay(eventmModel: model)
+                Slog("Date.getTodayString()! : \(Date.getTodayString()!)")
+                Slog("SharedDefaults.default.appStartEventPopup : \(SharedDefaults.default.appStartEventPopup)")
+                /// 오늘 다시보기 가능 여부를 체크 합니다.
+                if Date.getTodayString()! > SharedDefaults.default.appStartEventPopup {
+                    self.setBottomEventDisplay(eventmModel: model)
+                    self.show()
+                }
                 break
             default:break
             }
@@ -178,7 +207,13 @@ class AppStartEventPopup: UIView {
                         /// 이미지 사이즈 기준으로 변경 할 사이즈 정보를 받습니다.
                         self.viewModel.getEventImageDisplaySize(image: eventImage, displaySize: self.bottomPopupImage.frame.size).sink { value in
                             if let resize = value {
-                                self.bottomPopupImageHeight.constant = resize.height
+                                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                                UIView.animate(withDuration:0.3, delay: 0.0, options: .curveEaseOut) { [self] in
+                                    self.bottomPopupImageHeight.constant = resize.height
+                                    self.layoutIfNeeded()
+                                } completion: { _ in
+                                }
+                                
                             }
                         }.store(in: &self.viewModel.cancellableSet)
                         
@@ -191,7 +226,7 @@ class AppStartEventPopup: UIView {
     
     /**
      뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date: 2023.05.02
+     - Date: 2023.07.13
      - Parameters:False
      - Throws: False
      - Returns:False
@@ -207,7 +242,7 @@ class AppStartEventPopup: UIView {
     
     /**
      뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
-     - Date: 2023.05.02
+     - Date: 2023.07.13
      - Parameters:False
      - Throws: False
      - Returns:False
@@ -234,20 +269,36 @@ class AppStartEventPopup: UIView {
                 case .be_eventChoice:
                     if let completion = self.completion {
                         completion(.be_eventChoice)
-                        self.hide()
                     }
                     break
                 case .be_notToday:
-                    self.hide()
+                    /// 오늘은 하단 이벤트 팝업 디스플레이 되지 않도록 날짜 정보를 추가합니다.
+                    SharedDefaults.default.appStartEventPopup = Date.getTodayString()!
                     break
                 case .be_success:
-                    self.hide()
                     break
                 case .close:
-                    self.hide()
+                    break
+                case .st_notToday:
+                    /// 오늘은 시스탬 팝업 디스플레이 되지 않도록 날짜 정보를 추가합니다.
+                    SharedDefaults.default.appStartSystemPopup = Date.getTodayString()!
+                    break
+                case .st_success:
+                    break
+                case .ct_eventChoice:
+                    if let completion = self.completion {
+                        completion(.ct_eventChoice)
+                    }
+                    break
+                case .ct_success:
+                    break
+                case .ct_notToday:
+                    /// 오늘은 중앙 이벤트 팝업 디스플레이 되지 않도록 날짜 정보를 추가합니다.
+                    SharedDefaults.default.appStartCenterPopup = Date.getTodayString()!
                     break
                 }
             }
+            self.hide()
         }
             
     }

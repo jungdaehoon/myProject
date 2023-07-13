@@ -23,22 +23,23 @@ extension Date {
 
     /**
      받은 DateFormat  정보 기준으로 해당 날짜 정보를 String 리턴 됩니다. ( J.D.H  VER : 1.0.0 )
-    - Date: 2023.02.23
+    - Date: 2023.07.13
     - Parameters:
-        - typetText : 날짜 타입 스타일 정보를 받습니다. ( DateFormat )
+        - typetText : 날짜 타입 스타일 정보를 받습니다. ( default : yyyyMMdd  )
     - Returns
         - String Type
             > 변경된 날짜 정보를 리턴 합니다.
      */
-    func getTypeString( _ typetText : String ) -> String?
+    static func getTodayString( _ typetText : String = "yyyyMMdd") -> String?
     {
         let formatter           = DateFormatter()
         formatter.calendar      = Calendar(identifier: .gregorian)
         formatter.dateFormat    = typetText
-        let dateStr : String?   = formatter.string(from: self)
+        let dateStr : String?   = formatter.string(from: Date())
         if  dateStr == nil { return typetText }
         return dateStr!
     }
+    
     
     // YYYYMM
     var yyyyMMString: String {

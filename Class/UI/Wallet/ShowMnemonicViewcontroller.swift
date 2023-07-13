@@ -60,7 +60,6 @@ class ShowMnemonicViewController: UIViewController {
         }else{
             btnNext.titleLabel?.text = "확인"
         }
-        
     }
 
     

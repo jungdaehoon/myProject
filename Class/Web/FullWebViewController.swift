@@ -138,7 +138,8 @@ class FullWebViewController: BaseViewController {
     var titleBarType                    : Int           = 0
     /// 웹 디스플레이 여부를 체크 합니다.
     var startWebDisplay                 : Bool          = false
-    
+    /// 페이지 종료시 웹 데이터 체크할 스크립트 호출명 입니다.
+    var closeScript                     : String?       = ""
     
     
     // MARK: - init
@@ -150,6 +151,7 @@ class FullWebViewController: BaseViewController {
         - titleBarType  : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
         - pageURL       : 연결할 페이지 URL 입니다.
         - returnParam   : 이전 페이지 그대로 넘겨줄 파라미터 정보 입니다.
+        - closeScript   : 페이지 종료시 웹 데이터 체크 할 스크립트 입니다.
         - completion    : 페이지 종료시 콜백 핸들러 입니다.
      - Throws: False
      - Returns:False
@@ -160,6 +162,7 @@ class FullWebViewController: BaseViewController {
           titleBarHidden    : Bool = false,
           pageURL           : String = "",
           returnParam       : String = "",
+          closeScript       : String = "",
           completion        : (( _ webCBType : FULL_WEB_CB ) -> Void )? = nil ) {
         super.init(nibName: nil, bundle: nil)
         /// 페이지 타입을 받습니다.
@@ -176,6 +179,8 @@ class FullWebViewController: BaseViewController {
         self.pageURL            = pageURL
         /// 리턴 파라미터 정보를 연결 합니다.
         self.returnParam        = returnParam
+        /// 페이지 종료시 웹 데이터 체크 할 스크립트 입니다.
+        self.closeScript        = closeScript
         /// 웹뷰 히든 처리를 디폴트 false 값으로 설정 합니다.
         self.isWebViewHidden    = false
     }
@@ -253,6 +258,42 @@ class FullWebViewController: BaseViewController {
     }
     
     
+    /**
+     종료 선택시 리턴 타입 체크 입니다.  ( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.13
+     - Parameters:
+        - closeType : 종료시 리턴 타입을 받습니다.
+     - Throws: False
+     - Returns:False
+     */
+    func setCloseCompletion( closeType : FULL_WEB_CB? = nil ) {
+        if self.completion != nil
+        {
+            /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
+            if self.pageType == .openbank_type
+            {
+                if let webview = self.webView,
+                   let script  = self.closeScript
+                {
+                    /// 오픈 뱅킹 처리가 정상 처리 되었는지를 체크 합니다. ( "window.isSuccess()" )
+                    webview.evaluateJavaScript(script) { (value, error) in
+                        if let success = value as? Bool {
+                            self.completion!(.openBank(success: success))
+                            return
+                        }
+                        self.completion!(.openBank(success: false))
+                    }
+                }
+                else
+                {
+                    self.completion!(.openBank(success: false))
+                }
+            }
+            self.completion!(closeType!)
+        }
+    }
+    
+    
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
@@ -262,62 +303,18 @@ class FullWebViewController: BaseViewController {
             {
                 case .page_back:
                     self.popController(animated: true, animatedType: .right) { firstViewController in
-                        if self.completion != nil
-                        {
-                            /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
-                            if self.pageType == .openbank_type
-                            {
-                                if let webview = self.webView {
-                                    /// 오픈 뱅킹 처리가 정상 처리 되었는지를 체크 합니다.
-                                    webview.evaluateJavaScript("window.isSuccess()") { (value, error) in
-                                        if let success = value as? Bool {
-                                            self.completion!(.openBank(success: success))
-                                            return
-                                        }
-                                        self.completion!(.openBank(success: false))
-                                    }
-                                }
-                                else
-                                {
-                                    self.completion!(.openBank(success: false))
-                                }                                
-                            }
-                            self.completion!(.pageClose)
-                        }
+                        /// 종료 콜백을 체크 합니다.
+                        self.setCloseCompletion(closeType: .pageClose)
                     }
                     break
                 case .page_close:
                     self.popController(animated: true, animatedType: .down) { firstViewController in
-                        if self.completion != nil
-                        {
-                            /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
-                            if self.pageType == .openbank_type
-                            {
-                                if let webview = self.webView {
-                                    /// 오픈 뱅킹 처리가 정상 처리 되었는지를 체크 합니다.
-                                    webview.evaluateJavaScript("window.isSuccess()") { (value, error) in
-                                        if let success = value as? Bool {
-                                            self.completion!(.openBank(success: success))
-                                            return
-                                        }
-                                        self.completion!(.openBank(success: false))
-                                    }
-                                }
-                                else
-                                {
-                                    self.completion!(.openBank(success: false))
-                                }
-                                return
-                            }
-                            self.completion!(.pageClose)
-                        }
+                        /// 종료 콜백을 체크 합니다.
+                        self.setCloseCompletion(closeType: .pageClose)
                     }
                     break
-                
             }
         }
-        
-        
     }
 }
 
@@ -340,10 +337,8 @@ extension FullWebViewController {
         if url.description.contains("matcs/main.do")
         {
             self.popController(animated: true, animatedType: .down) { firstViewController in
-                if self.completion != nil
-                {
-                    self.completion!(.pageClose)
-                }
+                /// 종료 콜백을 체크 합니다.
+                self.setCloseCompletion(closeType: .pageClose)
             }
             decisionHandler(.allow, preferences)
             return

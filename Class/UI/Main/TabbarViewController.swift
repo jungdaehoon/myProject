@@ -105,29 +105,26 @@ class TabbarViewController: UITabBarController {
             /// 앱 시작시 받을수 있는 딥링크 데이터를 초기화 합니다.
             BaseViewModel.shared.saveDeepLinkUrl = ""
             /// 로그인 정보가 있는지를 체크 합니다.
-            if let login = BaseViewModel.loginResponse
+            if BaseViewModel.isLogin()
             {
-                if login.islogin!
+                /// 해당 URL 로 이동합니다.
+                if NC.S(url).isValid
                 {
-                    /// 해당 URL 로 이동합니다.
-                    if NC.S(url).isValid
-                    {
-                        /// 진행중인 탭 인덱스를 초기화 합니다.
-                        self.setIngTabToRootController()
-                        /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
-                        self.setSelectedIndex(.home, seletedItem: url)
-                        BaseViewModel.shared.deepLinkUrl = ""
-                    }
+                    /// 진행중인 탭 인덱스를 초기화 합니다.
+                    self.setIngTabToRootController()
+                    /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
+                    self.setSelectedIndex(.home, seletedItem: url)
+                    BaseViewModel.shared.deepLinkUrl = ""
                 }
-                else
-                {
-                    /// 로그인 페이지를 오픈 합니다.
-                    self.setDisplayLogin { success in
-                        /// 딥링크 URL 을 다시 넘깁니다.
-                        BaseViewModel.shared.deepLinkUrl = url
-                    } puchCompletion: {
-                        
-                    }
+            }
+            else
+            {
+                /// 로그인 페이지를 오픈 합니다.
+                self.setDisplayLogin { success in
+                    /// 딥링크 URL 을 다시 넘깁니다.
+                    BaseViewModel.shared.deepLinkUrl = url
+                } puchCompletion: {
+                    
                 }
             }
         }.store(in: &self.viewModel.cancellableSet)
@@ -138,30 +135,28 @@ class TabbarViewController: UITabBarController {
             if self.loginDisplayFirst || !url.isValid  { return }
             /// 앱 시작시 받을수 있는 PUSH 데이터를 초기화 합니다.
             BaseViewModel.shared.savePushUrl = ""
-            /// 로그인 정보가 있는지를 체크 합니다.
-            if let login = BaseViewModel.loginResponse {
-                if login.islogin!
+            /// 로그인 상태 인지를 체크 합니다.
+            if BaseViewModel.isLogin()
+            {
+                /// 해당 URL 로 이동합니다.
+                if NC.S(url).isValid
                 {
-                    /// 해당 URL 로 이동합니다.
-                    if NC.S(url).isValid
-                    {
-                        /// 진행중인 탭 인덱스를 초기화 합니다.
-                        self.setIngTabToRootController()
-                        /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                        self.setSelectedIndex( .home, seletedItem: WebPageConstants.baseURL + url)
-                        /// PUSH 에서 받은 연결 정보를 초기화 합니다.
-                        BaseViewModel.shared.pushUrl = ""
-                    }
+                    /// 진행중인 탭 인덱스를 초기화 합니다.
+                    self.setIngTabToRootController()
+                    /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
+                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.baseURL + url)
+                    /// PUSH 에서 받은 연결 정보를 초기화 합니다.
+                    BaseViewModel.shared.pushUrl = ""
                 }
-                else
-                {
-                    /// 로그인 페이지를 오픈 합니다.
-                    self.setDisplayLogin { success in
-                        /// 딥링크 URL 을 다시 넘깁니다.
-                        BaseViewModel.shared.pushUrl = url
-                    } puchCompletion: {
-                        
-                    }
+            }
+            else
+            {
+                /// 로그인 페이지를 오픈 합니다.
+                self.setDisplayLogin { success in
+                    /// 딥링크 URL 을 다시 넘깁니다.
+                    BaseViewModel.shared.pushUrl = url
+                } puchCompletion: {
+                    
                 }
             }
         }.store(in: &self.viewModel.cancellableSet)

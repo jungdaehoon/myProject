@@ -30,6 +30,12 @@ class SharedDefaults {
     static let WALLET_ADDRESS                   = "WALLET_ADDRESS"
     /// 키체인 정보를 읽었는지를 체크 합니다.
     static let IS_KEYCHAIN_READ                 = "IS_KEYCHAIN_READ"
+    /// 이벤트 팝업 오픈 여부 입니다.
+    static let APP_START_EVENT_POPUP            = "APP_START_EVENT_POPUP"
+    /// 중앙 이벤트  팝업 오픈 여부 입니다.
+    static let APP_START_CENTER_POPUP           = "APP_START_CENTER_POPUP"
+    /// 시스템 팝업 오픈 여부 입니다.
+    static let APP_START_SYSTEM_POPUP           = "APP_START_SYSTEM_POPUP"
     
     
     /// 키체인을 연결 합니다.
@@ -84,6 +90,47 @@ class SharedDefaults {
         }
     }
     
+        
+    private var _appStartSystemPopup : String = ""
+    /// 시스템 팝업 오픈 여부 입니다.
+    var appStartSystemPopup : String {
+        get {
+            _appStartSystemPopup = defaults.string(forKey: SharedDefaults.APP_START_SYSTEM_POPUP) ?? "19500101"
+            return _appStartSystemPopup
+        }
+        set {
+            _appStartSystemPopup = newValue
+            defaults.set(_appStartSystemPopup, forKey: SharedDefaults.APP_START_SYSTEM_POPUP)
+        }
+    }
+    
+    
+    private var _appStartCenterPopup : String = ""
+    /// 중앙 이벤트 팝업 오픈 여부 입니다.
+    var appStartCenterPopup : String {
+        get {
+            _appStartCenterPopup = defaults.string(forKey: SharedDefaults.APP_START_CENTER_POPUP) ?? "19500101"
+            return _appStartCenterPopup
+        }
+        set {
+            _appStartCenterPopup = newValue
+            defaults.set(_appStartCenterPopup, forKey: SharedDefaults.APP_START_CENTER_POPUP)
+        }
+    }
+    
+    
+    private var _appStartEventPopup : String = ""
+    /// 이벤트 팝업 오픈 여부 입니다.
+    var appStartEventPopup : String {
+        get {
+            _appStartEventPopup = defaults.string(forKey: SharedDefaults.APP_START_EVENT_POPUP) ?? "19500101"
+            return _appStartEventPopup
+        }
+        set {
+            _appStartEventPopup = newValue
+            defaults.set(_appStartEventPopup, forKey: SharedDefaults.APP_START_EVENT_POPUP)
+        }
+    }
     
     
     private var _pedometerFirstDate : String = ""

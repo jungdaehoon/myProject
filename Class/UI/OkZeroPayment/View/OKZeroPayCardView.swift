@@ -381,7 +381,12 @@ class OKZeroPayCardView: UIView {
                                             let message: String = "계좌 등록 1년경과 시\n재인증이 필요해요."
                                             /// 계좌 재인증 안내 팝업을 오픈 합니다.
                                             CMAlertView().setAlertView(detailObject: message as AnyObject, cancelText: "확인") { event in
-                                                self.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2)
+                                                self.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2) { value in
+                                                    /// 카드 위치를 하단으로 내립니다.
+                                                    OKZeroViewModel.zeroPayShared!.cardDisplay      = .bottom
+                                                    /// 카드 정보를 새로고침 합니다.
+                                                    OKZeroViewModel.zeroPayShared!.okZeroPayReload  = true
+                                                }
                                             }
                                         }
                                     }
@@ -396,7 +401,7 @@ class OKZeroPayCardView: UIView {
                                 {
                                 case .add_account :
                                     /// 오픈 뱅킹 페이지를 연결 합니다.
-                                    self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+                                    self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
                                         switch value
                                         {
                                         case .openBank( let success ):

@@ -166,22 +166,17 @@ extension AppDelegate : MessagingDelegate
 {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        /// 로그인 정보가 있는지를 체크합니다.
-        if let login = BaseViewModel.loginResponse
+        /// 로그인 상태 인지를 체크 합니다.
+        if BaseViewModel.isLogin()
         {
-            /// 현 로그인 유지 상태인지를 체크 합니다.
-            if let islogin = login.islogin,
-               islogin == true
+            if let custItem = SharedDefaults.getKeyChainCustItem()
             {
-                if let custItem = SharedDefaults.getKeyChainCustItem()
-                {
-                    Slog("MessagingDelegate token: \(fcmToken!)", category: .push )
-                    /// FCM 토큰 정보를 신규로 추가 합니다.
-                    custItem.fcm_token = fcmToken
-                    SharedDefaults.setKeyChainCustItem(custItem)
-                    /// FCM PUSH Token 정보를 업로드 합니다.
-                    let _ = self.viewModel.setFcmTokenRegister()
-                }
+                Slog("MessagingDelegate token: \(fcmToken!)", category: .push )
+                /// FCM 토큰 정보를 신규로 추가 합니다.
+                custItem.fcm_token = fcmToken
+                SharedDefaults.setKeyChainCustItem(custItem)
+                /// FCM PUSH Token 정보를 업로드 합니다.
+                let _ = self.viewModel.setFcmTokenRegister()
             }
         }
     }

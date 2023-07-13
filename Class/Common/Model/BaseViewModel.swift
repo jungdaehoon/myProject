@@ -383,8 +383,7 @@ class BaseViewModel : NSObject {
     func isAppEnabled( inAppStartType : IN_APP_START_TYPE ) -> Future<Bool, Never> {
         return Future<Bool, Never> { promise in
             /// 로그인 여부를 체크 합니다.
-            if let login = BaseViewModel.loginResponse,
-               login.islogin! == true
+            if BaseViewModel.isLogin()
             {
                 /// 로그인 상태에서 세션이 유지되고 있는지를 체크 합니다.
                 self.isSessionEnabeld().sink { result in
@@ -1177,4 +1176,40 @@ class BaseViewModel : NSObject {
         }
     }
     
+    
+    /**
+     앱 시작시 안내 팝업 정보를 요청 합니다.( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.13
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:
+     안내 팝업 정보를 리턴 합니다. ([eventInfo]?)
+     */
+    static func appStartEventInfos() -> [eventInfo]? {
+        /// 앱 시작시 팝업 !!
+        if let start      = BaseViewModel.appStartResponse,
+           let data       = start._data,
+           let eventInfos = data.eventInfo {
+            return eventInfos
+        }
+        return nil
+    }
+    
+    
+    /**
+     로그인 여부를 리턴 합니다. ( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.13
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:
+     안내 팝업 정보를 리턴 합니다. ([eventInfo]?)
+     */
+    static func isLogin() -> Bool {
+        /// 로그인 정보가 있는지를 체크합니다.
+        if let login   = BaseViewModel.loginResponse,
+           let islogin = login.islogin {
+            return islogin
+        }
+        return false
+    }
 }

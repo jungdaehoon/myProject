@@ -156,11 +156,11 @@ struct versionInfo :Codable
 struct eventInfo :Codable
 {
     /// 타입 넘버 입니다.
-    var _ord : String?          { get { return NC.S(ord) } }
+    var _ord : String?       { get { return NC.S(ord) } }
     /// 내용 입니다.
     var _note : String?      { get { return NC.S(note) } }
     /// 이벤트 아이디 입니다.
-    var _event_id : Int?  { get { return NC.I(event_id) } }
+    var _event_id : Int?     { get { return NC.I(event_id) } }
     /// 이미지 URL 입니다.
     var _img_url : String?   { get { return NC.S(img_url) } }
     /// 링크 URL 입니다. ( popup_kn 타입 3인 경우 예/아니오 버튼 선택 정보를 url 같이 넘겨주는 형태로 사용, "예 : agreeFlag=Y " )
@@ -168,7 +168,10 @@ struct eventInfo :Codable
     /// 타이틀 정보 입니다.
     var _title : String?     { get { return NC.S(title) } }
     /// 팝업 타입 입니다. ( 1 : 시스템 공지, 2 : 이벤트, 3 : 확인/취소 버튼 )
-    var _popup_kn : String?     { get { return NC.S(popup_kn) } }
+    var _popup_kn : String?  { get { return NC.S(popup_kn) } }
+    /// 이벤트 유지 날짜 정보 입니다.
+    var _post_ed_dt: String? { get { return NC.S(post_ed_dt) } }
+    
     
     
     /// 타입 넘버 입니다.
@@ -185,4 +188,6 @@ struct eventInfo :Codable
     var title : String?
     /// 팝업 타입 입니다. ( 1 : 시스템 공지, 2 : 하단 이벤트, 3/4 : 중앙 마케팅 동의 확인/취소 버튼,  )
     var popup_kn : String?
+    /// 이벤트 유지 날짜 정보 입니다.
+    var post_ed_dt: String?
 }
