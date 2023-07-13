@@ -876,14 +876,15 @@ class WebMessagCallBackHandler : NSObject  {
                         /// 오픈뱅킹 타입 입니다.
                     case .openbank_type:
                         if let controller = self.target {
+                            let linkUrl         = WebPageConstants.baseURL + url
                             /// 전체 화면 오픈뱅킹 페이지 오픈 합니다.
-                            let viewController  = FullWebViewController.init( pageType: .openbank_type, title: title, titleBarType: titleBarType, pageURL: url, closeScript: closeScript ) { cbType in
+                            let viewController  = FullWebViewController.init( pageType: .openbank_type, title: title, titleBarType: titleBarType, pageURL: linkUrl, closeScript: closeScript ) { cbType in
                                 /// 앱웹으로 콜백을 요청 합니다.
                                 self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
                             }
                             controller.pushController(viewController, animated: true, animatedType: .up)
                         }
-                        break;
+                        return
                     default:
                         break
                     }
@@ -1341,7 +1342,6 @@ class WebMessagCallBackHandler : NSObject  {
             self.webView!.evaluateJavaScript(value) { ( anyData , error) in
                 if (error != nil)
                 {
-                    //self.hideHudView()
                     Slog("error___1")
                 }
             }

@@ -344,6 +344,24 @@ extension FullWebViewController {
             return
         }
         
+        /// 지갑 탭으로 이동 합니다.
+        if url.description.contains("matcs/walletHome.do")
+        {
+            /// 0번째 페이지로 이동 후 월렛 홈으로 이동 합니다.
+            self.popToRootController(animated: true, animatedType: .down) { firstViewController in
+                /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+                if let tabbar = TabBarView.tabbar {
+                    /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                    tabbar.setCommonViewRemove()
+                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                    tabbar.setSelectedIndex( .wallet )
+                }
+            }
+            decisionHandler(.allow, preferences)
+            return
+        }
+        
+        
         /// 접근된 웹뷰 타입 체크 합니다.
         switch self.pageType
         {

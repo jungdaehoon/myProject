@@ -80,13 +80,11 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
                 }
                 else
                 {
-                    let msg: String = "출금/조회 동의에 실패하였습니다."
-                    let alertController = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "확인", style: .default){(action) in
-                          self.dismiss(animated: true)
-                    }
-                    alertController.addAction(alertAction)
-                    self.present(alertController, animated: true, completion: nil)
+                    CMAlertView().setAlertView(detailObject: "출금/조회 동의에 실패하였습니다." as AnyObject, cancelText: "확인") { event in
+                        self.popController(animated: true, animatedType: .down) { firstViewController in
+                            self.completion!("fnAccAggree(false);")
+                        }
+                    }                    
                 }
             }
         }
