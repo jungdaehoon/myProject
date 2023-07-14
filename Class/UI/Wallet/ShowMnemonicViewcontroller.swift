@@ -27,13 +27,14 @@ class ShowMnemonicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initControl()
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        initControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,9 +57,9 @@ class ShowMnemonicViewController: UIViewController {
 
         tfMnemonic.text = SharedDefaults.default.walletMnemonic.isValid == true ? SharedDefaults.default.walletMnemonic : "니모닉 정보가 없습니다."
         if(showNext){
-            btnNext.titleLabel?.text = "다음"
+            btnNext.setTitle("다음", for: .normal)
         }else{
-            btnNext.titleLabel?.text = "확인"
+            btnNext.setTitle("확인", for: .normal)
         }
     }
 

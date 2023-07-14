@@ -320,8 +320,6 @@ class WebMessagCallBackHandler : NSObject  {
     - Returns:False
     */
     func setDrawCode( _ body : [Any?] ){
-        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
-        let callBacks = body[0] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
         if let params = body[2] as? [Any]
         {
@@ -380,7 +378,7 @@ class WebMessagCallBackHandler : NSObject  {
                     controller.view.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
                         switch value
                         {
-                        case .openBank( let success ):
+                        case .openBank( let success, _ ):
                             if success
                             {
                                 /// 계좌 리스트 다시 디스플레이 합니다.
@@ -914,15 +912,16 @@ class WebMessagCallBackHandler : NSObject  {
      */
     func setFullWebCB( callHybridPopupCB : String = "", webCBType : FULL_WEB_CB ){
         switch webCBType {
-            case .pageClose :
+            case .pageClose( let message ) :
+                self.setEvaluateJavaScript(callback: callHybridPopupCB, message:message, isJson: true)
                 break
             case .loginCall :
                 self.setLoginDisplay()
                 break
-            case .openBank( let success ):
+            case .openBank( let success, let message ):
                 if success
                 {
-                    self.setEvaluateJavaScript(callback: callHybridPopupCB, message:"", isJson: true)
+                    self.setEvaluateJavaScript(callback: callHybridPopupCB, message:message, isJson: true)
                 }
                 break
             case .scriptCall( let callback , let message, _ ) :

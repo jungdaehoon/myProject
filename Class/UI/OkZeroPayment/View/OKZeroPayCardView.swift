@@ -334,10 +334,10 @@ class OKZeroPayCardView: UIView {
                             if account._hasNoMainAccount!
                             {
                                 /// 오픈 뱅킹 페이지를 연결 합니다.
-                                self.setDisplayWebView(WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
+                                self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
                                     switch value
                                     {
-                                    case .openBank( let success ):
+                                    case .openBank( let success, _ ):
                                         if success
                                         {
                                             /// 카드 위치를 하단으로 내립니다.
@@ -404,7 +404,7 @@ class OKZeroPayCardView: UIView {
                                     self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_REGISTER, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
                                         switch value
                                         {
-                                        case .openBank( let success ):
+                                        case .openBank( let success, _ ):
                                             if success
                                             {
                                                 /// 계좌 리스트 다시 디스플레이 합니다.

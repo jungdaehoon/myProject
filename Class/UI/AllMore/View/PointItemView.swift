@@ -203,7 +203,7 @@ class PointItemView: UIView {
                     self.setDisplayWebView(openBankUrl, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
                         switch value
                         {
-                        case .openBank( let success ):
+                        case .openBank( let success, _ ):
                             if success
                             {
                                 TabBarView.setReloadSeleted(pageIndex: 4)

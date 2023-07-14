@@ -59,14 +59,14 @@ enum FULL_WEB_CB {
     case loginCall
     /// 페이지 종료후 바로 홈으로 이동합니다.
     case goToHome
-    /// 오픈 뱅킹 디스플레이  입니다. ( success : 계좌 연동  정상 처리 여부  )
-    case openBank ( success : Bool )
+    /// 오픈 뱅킹 디스플레이  입니다. ( success : 계좌 연동  정상 처리 여부, 종료시 웹 전송할 데이터 입니다.   )
+    case openBank ( success : Bool, message : String  )
     /// 보안 키패드 타입 입니다. ( type : 보안 키패드 이벤트 타입 )
     case keyPadSucces( type : KEY_PAD_CLOSE_TYPE )
     /// 제로페이 인증용 보안 키패드 타입 입니다. ( barcode : 바코드, qrcode : QR코드 데이터 , maxValidTime : 최대 유지 타임 정보 )
     case zeroPaykeyPad( barcode : String, qrcode : String, maxValidTime : String )
-    /// 페이지 닫기 입니다.
-    case pageClose
+    /// 페이지 닫기 입니다. ( 종료시 콜백 메세지 정보 입니다.)
+    case pageClose ( message : String  )
     /// URL 정보를 넘깁니다
     case urlLink ( url : String )
     /// 스크립트 전송 입니다.
@@ -142,6 +142,7 @@ class FullWebViewController: BaseViewController {
     var closeScript                     : String?       = ""
     
     
+    
     // MARK: - init
     /**
      전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
@@ -211,7 +212,6 @@ class FullWebViewController: BaseViewController {
         {
             self.setWebViewDisplay()
         }
-        
     }
     
     
@@ -269,27 +269,19 @@ class FullWebViewController: BaseViewController {
     func setCloseCompletion( closeType : FULL_WEB_CB? = nil ) {
         if self.completion != nil
         {
-            /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
-            if self.pageType == .openbank_type
+            switch closeType
             {
-                if let webview = self.webView,
-                   let script  = self.closeScript
-                {
-                    /// 오픈 뱅킹 처리가 정상 처리 되었는지를 체크 합니다. ( "window.isSuccess()" )
-                    webview.evaluateJavaScript(script) { (value, error) in
-                        if let success = value as? Bool {
-                            self.completion!(.openBank(success: success))
-                            return
-                        }
-                        self.completion!(.openBank(success: false))
+                case .pageClose( let message) :
+                    /// 오픈 뱅킹 여부 경우 타입을  openbank 으로 리턴 합니다.
+                    if self.pageType == .openbank_type
+                    {
+                        self.completion!(.openBank(success: true, message: message))
+                        return
                     }
-                }
-                else
-                {
-                    self.completion!(.openBank(success: false))
-                }
+                    self.completion!(closeType!)
+                    break
+                default:break
             }
-            self.completion!(closeType!)
         }
     }
     
@@ -299,18 +291,24 @@ class FullWebViewController: BaseViewController {
     @IBAction func btn_action(_ sender: Any) {
         if let type =  FULL_BTN(rawValue: (sender as AnyObject).tag)
         {
+            /// 종료시 리턴 메세지 입니다.
+            var closeMessage = ""
+            /// 종료시 기본 타입 정보를 스크립트로 넘깁니다.
+            do {
+                if let message = try Utils.toJSONString(["type":"\(self.pageType)","result":"CLOSE"]) { closeMessage = message }
+            } catch {}
             switch type
             {
                 case .page_back:
                     self.popController(animated: true, animatedType: .right) { firstViewController in
                         /// 종료 콜백을 체크 합니다.
-                        self.setCloseCompletion(closeType: .pageClose)
+                        self.setCloseCompletion(closeType:.pageClose( message: closeMessage ))
                     }
                     break
                 case .page_close:
                     self.popController(animated: true, animatedType: .down) { firstViewController in
                         /// 종료 콜백을 체크 합니다.
-                        self.setCloseCompletion(closeType: .pageClose)
+                        self.setCloseCompletion(closeType:.pageClose( message: closeMessage ))
                     }
                     break
             }
@@ -338,7 +336,7 @@ extension FullWebViewController {
         {
             self.popController(animated: true, animatedType: .down) { firstViewController in
                 /// 종료 콜백을 체크 합니다.
-                self.setCloseCompletion(closeType: .pageClose)
+                self.setCloseCompletion(closeType:.pageClose( message: "" ))
             }
             decisionHandler(.allow, preferences)
             return
@@ -361,7 +359,6 @@ extension FullWebViewController {
             return
         }
         
-        
         /// 접근된 웹뷰 타입 체크 합니다.
         switch self.pageType
         {
@@ -372,27 +369,7 @@ extension FullWebViewController {
             default:break
         }
         
-        /// 계좌 등록 페이지 호출시 입니다. ( 추후 WebToApp 으로 변경예정 )
-        if url.description.contains("myp/mypAccountList.do")
-        {
-            if self.pageURL.contains("myp/mypAccountList.do") {
-                decisionHandler(.allow, preferences)
-                return
-            }
-            
-            self.popController(animated: true, animatedType: .down) { firstViewController in
-                if self.completion != nil
-                {
-                    self.completion!( .urlLink(url: "myp/mypAccountList.do"))
-                }
-            }
-            decisionHandler(.allow, preferences)
-            return
-        }
-        
-        
-        
-        
+        ///. PG 결제 타입 경우 입니다.
         if( scheme != "http" && scheme != "https" ) {
             if( scheme == "ispmobile" && !UIApplication.shared.canOpenURL(url) ) {  //ISP 미설치 시
                 "http://itunes.apple.com/kr/app/id369125087?mt=8".openUrl()
