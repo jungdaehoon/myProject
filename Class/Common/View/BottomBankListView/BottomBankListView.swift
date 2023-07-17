@@ -15,13 +15,13 @@ import UIKit
 class BottomBankListView: BaseView {
 
     /// 은행 리스트 뷰어의 최하단 위치 값입니다.
-    @IBOutlet weak var bankListViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var bankListViewBottom   : NSLayoutConstraint!
     /// 은행 리스트 입니다.
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView       : UICollectionView!
     /// 계좌 등록 상단 그라데이션 배경 입니다.
-    @IBOutlet weak var accountTopGB: UILabel!
+    @IBOutlet weak var accountTopGB         : UILabel!
     /// 화면에 그려질 은행들 사이즈를 가집니다.
-    var collectionCellSize : CGSize  = CGSize(width: 108, height: 96)
+    var collectionCellSize                  : CGSize  = CGSize(width: 108, height: 96)
     
     
     

@@ -1131,7 +1131,7 @@ class BaseViewModel : NSObject {
      - Returns:
         디버깅접근 여부를 체크하여 리턴 합니다.
      */
-    func isDebugger() -> Bool {
+    private func isDebugger() -> Bool {
         /// 취약점 점검인 경우 입니다.
         if APP_INSPECTION == false { return false }
         if getppid() != 1 { return true }

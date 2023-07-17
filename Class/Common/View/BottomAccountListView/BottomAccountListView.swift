@@ -45,15 +45,16 @@ class BottomAccountListView: BaseView {
     let ACCOUNT_DEFAULT_BOTTOM  = -24.0
     /// 계좌 기본 높이 입니다.
     let ACCOUNT_CELL_HEIGHT     = 64.0
-    var completion                : (( _ event : BOTTOM_ACCOUNT_EVENT ) -> Void )? = nil
+    /// 이벤트 콜백 입니다.
+    var completion                          : (( _ event : BOTTOM_ACCOUNT_EVENT ) -> Void )? = nil
     /// 계좌 리스트뷰 최하단 포지션 입니다.
     @IBOutlet weak var accountListViewBottom: NSLayoutConstraint!
     /// 계좌 리스트 뷰어 입니다.
     @IBOutlet weak var tableView            : UITableView!
     /// 계좌 리스트 최대 높이 입니다.
     @IBOutlet weak var tableViewHeight      : NSLayoutConstraint!
-    /// 선택 인덱스 입니다.
-    var seletedIndex : Int = 0
+    /// 계좌 선택 인덱스 입니다.
+    var seletedIndex                        : Int = 0
     
     
     //MARK: - Init

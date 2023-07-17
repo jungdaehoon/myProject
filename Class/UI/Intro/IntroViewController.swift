@@ -202,7 +202,7 @@ class IntroViewController: BaseViewController {
             {
                 /// 자동로그인을 요청 합니다.
                 self.viewModel.setAutoLogin().sink { result in
-                    self.setMainDisplay( loginEnabled: true )
+                    self.setMainDisplay( loginDisplay: true )
                 } receiveValue: { response in
                     if response != nil
                     {
@@ -231,17 +231,17 @@ class IntroViewController: BaseViewController {
                             /// 자동 로그인을 비활성화 합니다.
                             custItem.auto_login = false
                             SharedDefaults.setKeyChainCustItem(custItem)
-                            self.setMainDisplay( loginEnabled: true )
+                            self.setMainDisplay( loginDisplay: true )
                         }
                     }
                 }.store(in: &self.viewModel.cancellableSet)
                 return
             }
-            self.setMainDisplay( loginEnabled: true )
+            self.setMainDisplay( loginDisplay: true )
         }
         else
         {
-            self.setMainDisplay( loginEnabled: true )
+            self.setMainDisplay( loginDisplay: true )
         }
     }
     
@@ -250,17 +250,17 @@ class IntroViewController: BaseViewController {
      메인 화면 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.04.04
      - Parameters:
-        - loginEnabled : 로그인 페이지 디스플레이 여부를 받습니다.
+        - loginDisplay : 로그인 페이지 디스플레이 여부를 받습니다.
      - Throws: False
      - Returns:False
      */
-    func setMainDisplay( loginEnabled : Bool = false ){
+    func setMainDisplay( loginDisplay : Bool = false ){
         /// 탭바 컨트롤러를 호출 합니다.
         if let controller = TabbarViewController.instantiate(withStoryboard: "Main")
         {
             /// 최초 진입을 홈으로 설정 합니다. ( 기본 설정은 0 번으로 진행 됩니다. )
             controller.selectedIndex             = 2
-            if loginEnabled == true
+            if loginDisplay == true
             {
                 controller.loginDisplayFirst     = true
             }
@@ -269,7 +269,7 @@ class IntroViewController: BaseViewController {
             self.replaceController(viewController: controller, animated: false) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                     /// 자동 로그인으로 딥링크나 PUSH정보의 외부 데이터로 앱이 실행 되는 경우 입니다.
-                    if loginEnabled == false,
+                    if loginDisplay == false,
                        let link = BaseViewModel.shared.getInDataAppStartURL(),
                        link.isValid
                     {

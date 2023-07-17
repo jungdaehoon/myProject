@@ -175,11 +175,9 @@
 		8DCB189829F64FDB000645D3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCB189729F64FDB000645D3 /* AdSupport.framework */; };
 		8DCB189A29F663DD000645D3 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB189929F663DD000645D3 /* splash.json */; };
 		8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB189C29F6641E000645D3 /* Wallet.storyboard */; };
-		8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */; };
 		8DCB18A529F6641E000645D3 /* QRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */; };
 		8DCB18A629F6641E000645D3 /* CheckMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */; };
 		8DCB18A729F6641E000645D3 /* RestoreWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */; };
-		8DCB18A829F6641E000645D3 /* WalletHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB18A129F6641E000645D3 /* WalletHelper.swift */; };
 		8DCB18A929F6641E000645D3 /* ShowMnemonicViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB18A229F6641E000645D3 /* ShowMnemonicViewcontroller.swift */; };
 		8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */; };
 		8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */; };
@@ -418,11 +416,9 @@
 		8DCB189729F64FDB000645D3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8DCB189929F663DD000645D3 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		8DCB189C29F6641E000645D3 /* Wallet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
-		8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTestViewController.swift; sourceTree = "<group>"; };
 		8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRReaderViewController.swift; sourceTree = "<group>"; };
 		8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckMnemonicViewController.swift; sourceTree = "<group>"; };
 		8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoreWalletViewController.swift; sourceTree = "<group>"; };
-		8DCB18A129F6641E000645D3 /* WalletHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHelper.swift; sourceTree = "<group>"; };
 		8DCB18A229F6641E000645D3 /* ShowMnemonicViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMnemonicViewcontroller.swift; sourceTree = "<group>"; };
 		8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
@@ -1139,7 +1135,6 @@
 		8D9855B12A11F0C700AE86B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8DCB18A129F6641E000645D3 /* WalletHelper.swift */,
 				8D9855B22A11F0D800AE86B9 /* WalletViewModel.swift */,
 			);
 			path = Model;
@@ -1197,7 +1192,6 @@
 			children = (
 				8D9855B12A11F0C700AE86B9 /* Model */,
 				8DCB189C29F6641E000645D3 /* Wallet.storyboard */,
-				8DCB189D29F6641E000645D3 /* WalletTestViewController.swift */,
 				8DCB189E29F6641E000645D3 /* QRReaderViewController.swift */,
 				8DCB189F29F6641E000645D3 /* CheckMnemonicViewController.swift */,
 				8DCB18A029F6641E000645D3 /* RestoreWalletViewController.swift */,
@@ -1659,7 +1653,6 @@
 				F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */,
 				8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */,
 				8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */,
-				8DCB18A429F6641E000645D3 /* WalletTestViewController.swift in Sources */,
 				8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
@@ -1747,7 +1740,6 @@
 				8D205F5C29D1346F00F43C99 /* NSObject.swift in Sources */,
 				8D205F3E29D1346F00F43C99 /* TopUserInfoView.swift in Sources */,
 				8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */,
-				8DCB18A829F6641E000645D3 /* WalletHelper.swift in Sources */,
 				8DE3105B2A01010600DF9653 /* BottomAccountListTableViewCell.swift in Sources */,
 				8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */,
 				8D205F3729D1346F00F43C99 /* AllMoreModel.swift in Sources */,

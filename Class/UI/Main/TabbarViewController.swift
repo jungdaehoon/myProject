@@ -81,7 +81,7 @@ class TabbarViewController: UITabBarController {
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !value { return }
             /// 진행중인 탭 인덱스를 초기화 합니다.
-            self.setIngTabToRootController()            
+            self.setIngTabToRootController()
             /// 로그인 페이지를 오픈 합니다.
             self.setDisplayLogin( animation: true ) { success in
                 if success
@@ -112,6 +112,7 @@ class TabbarViewController: UITabBarController {
                     self.setIngTabToRootController()
                     /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
                     self.setSelectedIndex(.home, seletedItem: url)
+                    /// 딥링크 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.deepLinkUrl = ""
                 }
             }
@@ -268,6 +269,7 @@ extension UITabBarController
     
     /**
      현 진행중인 안내 뷰어 를 전부 초기화 합니다. ( J.D.H  VER : 1.0.0 )
+     - Description: UIApplication.shared.windows 상에 추가된 UIView(BaseView) 타입의 모든 안내 팝업류는 전부 삭제 합니다.
      - Date: 2023.05.17
      - Parameters:False
      - Returns:False
@@ -284,6 +286,7 @@ extension UITabBarController
     
     /**
      현 진행중인 페이지를 root 페이지로 초기화 합니다. ( J.D.H  VER : 1.0.0 )
+     - Description: Root 페이지 이동시 현 보여지는 페이지와 이전 연결되었던 모든 ViewController/UIView 페이지를 전부 삭제 후 Root 페이지로 이동 합니다.
      - Date: 2023.05.17
      - Parameters:False
      - Returns:False

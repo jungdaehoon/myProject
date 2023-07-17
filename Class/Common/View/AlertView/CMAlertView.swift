@@ -12,7 +12,7 @@ import UIKit
  전체화면에 센터 안내 버튼 팝업 입니다.   ( J.D.H  VER : 1.0.0 )
  - Date: 2023.03.16
  */
-class CMAlertView: UIView {
+class CMAlertView: BaseView {
     /// 왼쪽 버튼 팝업 종료 이벤트를 넘깁니다.
     var leftCompletion                  : (( _ result : String ) -> Void )? = nil
     /// 오른쪽 버튼 팝업 종료 이벤트를 넘깁니다.

@@ -40,7 +40,7 @@ enum APPSTART_EVENT_BTN : Int {
  앱 시작시 이벤트 뷰어 입니다. ( J.D.H VER : 1.0.0 )
  - Date: 2023.07.12
  */
-class AppStartEventPopup: UIView {
+class AppStartEventPopup: BaseView {
 
     let viewModel  : AppStartEventViewModel = AppStartEventViewModel()
     /// 이벤트 모델 정보 입니다.
@@ -48,19 +48,19 @@ class AppStartEventPopup: UIView {
     /// 이벤트 리턴 합니다.
     var completion : (( _ event : APPSTART_EVENT_BTN ) -> Void )? = nil
     /// 시스템 점검 안내 공지 팝업 입니다.
-    @IBOutlet weak var sysytemPopView: UIView!
+    @IBOutlet weak var sysytemPopView       : UIView!
     /// 시스템 안내 공지 타이틀 문구 입니다.
-    @IBOutlet weak var sysytemViewTitle: UILabel!
+    @IBOutlet weak var sysytemViewTitle     : UILabel!
     /// 시스템 안내 공지 상세 문구 입니다.
-    @IBOutlet weak var sysytemViewMessge: UILabel!
+    @IBOutlet weak var sysytemViewMessge    : UILabel!
     /// 중앙 이벤트 팝업 입니다.
-    @IBOutlet weak var centerPopupView: UIView!
+    @IBOutlet weak var centerPopupView      : UIView!
     /// 중앙 이벤트 팝업 이미지 입니다.
-    @IBOutlet weak var centerPopupImage: UIImageView!
+    @IBOutlet weak var centerPopupImage     : UIImageView!
     /// 하단 이벤트 팝업 입니다.
-    @IBOutlet weak var bottomPopupView: UIView!
+    @IBOutlet weak var bottomPopupView      : UIView!
     /// 하단 이벤트 팝업 이미지 뷰어 입니다.
-    @IBOutlet weak var bottomPopupImage: UIImageView!
+    @IBOutlet weak var bottomPopupImage     : UIImageView!
     /// 하단 이벤트 팝업 이미지 높이 가변에따른 높이 정보 입니다.
     @IBOutlet weak var bottomPopupImageHeight: NSLayoutConstraint!
     
