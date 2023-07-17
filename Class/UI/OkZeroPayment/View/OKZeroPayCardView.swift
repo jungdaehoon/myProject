@@ -127,6 +127,7 @@ class OKZeroPayCardView: UIView {
         case .okmoney:
             self.titleText.text         = "OK머니로 제로페이 결제"
             self.subInfoText.text       = "부족한 금액은 충전 후 결제 됩니다."
+            self.accountInfoText.text   = ""
             if let okmoney = model,
                let data    = okmoney._data,
                let account = data._mainAccount
@@ -150,7 +151,6 @@ class OKZeroPayCardView: UIView {
                 /// 계좌 정보를 디스플레이 합니다.
                 self.accountInfoText.text   = "\(account._bankName!) \(account._lastAccountNo!)"
             }
-            self.accountInfoText.text   = ""
             break
         case .account:
             self.payInfoView.isHidden   = true

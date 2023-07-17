@@ -818,7 +818,6 @@ class OKZeroPayView: UIView {
                 case .location_search:
                     /// 제로페이 가맹점 검색 URL 입니다.
                     let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                    
                         /// 제로페이 가맹점 네이버 지도를 요청 합니다.
                     self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
                     break

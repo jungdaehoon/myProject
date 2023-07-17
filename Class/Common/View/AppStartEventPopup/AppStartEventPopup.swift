@@ -123,8 +123,6 @@ class AppStartEventPopup: BaseView {
                 break
                 /// 하단 이벤트 타입 입니다.
             case "2" :
-                Slog("Date.getTodayString()! : \(Date.getTodayString()!)")
-                Slog("SharedDefaults.default.appStartEventPopup : \(SharedDefaults.default.appStartEventPopup)")
                 /// 오늘 다시보기 가능 여부를 체크 합니다.
                 if Date.getTodayString()! > SharedDefaults.default.appStartEventPopup {
                     self.setBottomEventDisplay(eventmModel: model)

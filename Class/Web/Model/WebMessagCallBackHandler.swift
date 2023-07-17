@@ -302,7 +302,7 @@ class WebMessagCallBackHandler : NSObject  {
                 break
             /// 제로페이 간편결제 바코드 및 QRCode 정보를 받습니다.
             case .drawCode                   :
-                self.setDrawCode( body )
+                //self.setDrawCode( body )
                 break
             default: break
             }
@@ -960,6 +960,33 @@ class WebMessagCallBackHandler : NSObject  {
                             }
                         } catch { }
                         return
+                    /// 제로페이 QRCode/BarCode 요청 정보 리턴 합니다. ( 해당 정보는 네이티브에서 사용 합니다. )
+                    case "ZEROPAY":
+                        if let jsonStr  = info["param"] as? String,
+                           let params   = Utils.toJSON( jsonStr ) {
+                            /// 전체 웹뷰 타입 경우 인지를 체크 합니다.
+                            if let controller = self.target as? FullWebViewController {
+                                switch controller.pageType
+                                {
+                                    /// 제로페이 간편결제 인증 키패드 타입 입니다.
+                                    case .zeropay_keypad:
+                                        /// 바코드 정보 입니다.
+                                        let barcode         = NC.S(params["barcode"] as? String)
+                                        /// QRCode 정보 입니다.
+                                        let qrcode          = NC.S(params["qrcode"] as? String)
+                                        /// 코드 사용 최대 타임 입니다.
+                                        let maxValidTime    = NC.S(params["maxValidTime"] as? String)
+                                        /// 콜백 메서드가 연결된 경우 입니다.
+                                        if let completion = controller.completion {
+                                            completion(.zeroPaykeyPad(barcode: barcode, qrcode: qrcode, maxValidTime:maxValidTime))
+                                        }
+                                        controller.popController(animated: true, animatedType: .down)
+                                        return
+                                    default:break
+                                }
+                                return
+                            }
+                        }
                     default:break;
                 }
                                 
