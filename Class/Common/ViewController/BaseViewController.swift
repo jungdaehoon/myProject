@@ -16,10 +16,8 @@ import Combine
  */
 class BaseViewController: BaseWebViewController {
     var cancellableSet = Set<AnyCancellable>()
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        super.viewDidLoad()        
         /// 앱 공용 키체인 정보가 nil 경우 최기화를 합니다.
         if SharedDefaults.getKeyChainCustItem() == nil
         {

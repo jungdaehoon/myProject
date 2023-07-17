@@ -57,9 +57,6 @@ class AllMoreViewController: BaseViewController {
         /// 기본 화면을 먼저 디스플레이 합니다.
         self.setDisplayView()
         self.initWebView(self.webDisplayView, target: self)
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,11 +191,13 @@ class AllMoreViewController: BaseViewController {
             {
                 menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
             }
+            
             /// 제로페이 QR 결제 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
             {
                 menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", menuType: .rightimg))
             }
+             
             /// 제로페이 상품권 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_GIFT)
             {

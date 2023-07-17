@@ -722,7 +722,7 @@ class BaseViewModel : NSObject {
             {
                 /// 파라미터  user_no : 고객번호, push_token : FCM 토큰 파라미터를 생성 합니다.
                 let parameters  = ["user_no" : NC.S(custItem.user_no) , "push_token" : fcm_token]
-                requst( showLoading : false ) { error in
+                requst( showLoading : false, errorPopEnabled: false ) { error in
                     subject.send(completion: .failure(error))
                     return false
                 } publisher: {

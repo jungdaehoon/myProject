@@ -167,13 +167,12 @@ extension WKWebView {
         }
     }
     
-    class func clean() {
+    static func removeCookies() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})                
                 Slog("WKWebsiteDataStore record deleted: \(record)")
-                
             }
         }
     }

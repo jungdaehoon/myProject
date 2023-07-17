@@ -213,7 +213,6 @@ class AppStartEventPopup: UIView {
                                     self.layoutIfNeeded()
                                 } completion: { _ in
                                 }
-                                
                             }
                         }.store(in: &self.viewModel.cancellableSet)
                         

@@ -42,6 +42,8 @@ class BottomLogOutView: UIView {
             }, receiveValue: { response in
                 if response!.code == "0000"
                 {
+                    /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.
+                    TabBarView.setTabBarHome()
                     let custItem                            = SharedDefaults.getKeyChainCustItem()
                     custItem!.auto_login                    = false
                     SharedDefaults.setKeyChainCustItem(custItem!)

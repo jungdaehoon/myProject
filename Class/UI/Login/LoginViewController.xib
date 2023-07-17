@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -182,7 +182,7 @@
                             <state key="selected">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
-                            <state key="highlighted" backgroundImage="btn_login_r6">
+                            <state key="highlighted">
                                 <color key="titleColor" red="0.5450980392" green="0.79607843140000001" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -358,14 +358,13 @@
         </view>
     </objects>
     <resources>
-        <image name="btn_login_r6" width="6.5" height="6.5"/>
         <image name="header_close" width="40" height="40"/>
         <image name="login_check_off" width="24" height="24"/>
         <image name="login_check_on" width="24" height="24"/>
         <image name="logoOkLogin" width="160" height="64"/>
         <image name="textInputClear" width="24" height="24"/>
         <namedColor name="OKColor">
-            <color red="1" green="0.32549019607843138" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.32549019607843138" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

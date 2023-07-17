@@ -80,17 +80,15 @@ class TabbarViewController: UITabBarController {
         BaseViewModel.shared.$reLogin.sink { value in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
             if self.loginDisplayFirst || !value { return }
-            /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
-            self.setCommonViewRemove()
             /// 진행중인 탭 인덱스를 초기화 합니다.
-            self.setIngTabToRootController()
+            self.setIngTabToRootController()            
             /// 로그인 페이지를 오픈 합니다.
             self.setDisplayLogin( animation: true ) { success in
                 if success
                 {
                     /// 재로그인 요청을 비활성화 합니다.
                     BaseViewModel.shared.reLogin = false
-                    /// 탭 인덱스를 기본 홈으로 설정 합니다.
+                    /// 메인 홈으로 이동 합니다.
                     self.selectedIndex          = 2
                 }
             } puchCompletion: {
