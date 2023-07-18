@@ -975,7 +975,7 @@ class WebMessagCallBackHandler : NSObject  {
                                         /// QRCode 정보 입니다.
                                         let qrcode          = NC.S(params["qrcode"] as? String)
                                         /// 코드 사용 최대 타임 입니다.
-                                        let maxValidTime    = NC.S(params["maxValidTime"] as? String)
+                                        let maxValidTime    = "180"
                                         /// 콜백 메서드가 연결된 경우 입니다.
                                         if let completion = controller.completion {
                                             completion(.zeroPaykeyPad(barcode: barcode, qrcode: qrcode, maxValidTime:maxValidTime))

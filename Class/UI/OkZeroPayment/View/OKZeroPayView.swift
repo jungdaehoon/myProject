@@ -115,9 +115,6 @@ class OKZeroPayView: UIView {
     
     
     //MARK: - 지원 메서드 입니다.
-    
-    
-    
     /**
      제로페이 QRCode 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
      - Date: 2023.03.13
@@ -484,6 +481,8 @@ class OKZeroPayView: UIView {
         /// 코드 활성화 타임 뷰어를 히든 합니다.
         self.codeEnabledTimeWidth.constant      = 0
         
+        /// 초기 기본 바코드/QRCode 뷰어를 설정 합니다.
+        self.setDefaultCodeView()
         /// 타임 초과로 오버타입을 추가하고 코드 디스플레이 합니다.
         self.setZeroPayCodeDisplay(type: self.zeroPayCodeType == .qrcode ? .barcode : .qrcode, overTime: true, viewEnabled: true)
         /// 타임 초과로 오버타입을 추가하고 코드 디스플레이 합니다.
@@ -540,55 +539,54 @@ class OKZeroPayView: UIView {
      - Returns:False
      */
     func setCodeCreationView( qrCode : String = "", barCode : String = "", maxTime : Int = 180 ){
-        if self.zeroPayCodeType == .barcode
-        {
-            /// 바코드를 제작 합니다.
-            self.barCodeGenerator.setCodeDisplay(.barcode, code: NC.S(barCode)) { success in
-                if success
+        /// 바코드를 제작 합니다.
+        self.barCodeGenerator.setCodeDisplay(.barcode, code: NC.S(barCode)) { success in
+            if success
+            {
+                /// 결제 뷰어를 활성화 합니다.
+                self.setPayViewEnabled(codeType: .barcode)
+                /// 바코드 결제를 활성화 합니다.
+                self.isBarCodePayEnabled                 = true
+                /// 코드 이미지를 활성화 합니다.
+                self.barCodeGenerator.imageView.isHidden = false
+                /// 코드 이미지 알파값을 정상처리 되도록 하였습니다.
+                self.barCodeGenerator.imageView.alpha    = 1.0
+                /// 타이머 비활성화 를 체크 합니다.
+                if !self.isTimer
                 {
-                    /// 결제 뷰어를 활성화 합니다.
-                    self.setPayViewEnabled(codeType: .barcode)
-                    /// 바코드 결제를 활성화 합니다.
-                    self.isBarCodePayEnabled            = true
-                    /// 코드 이미지를 활성화 합니다.
-                    self.barCodeGenerator.imageView.isHidden = false
-                    /// 타이머 비활성화 를 체크 합니다.
-                    if !self.isTimer
-                    {
-                        /// 타이머를 활성화 합니다.
-                        self.isTimer = true
-                        /// 코드 타이머 활성화 합니다.
-                        self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
-                    }
+                    /// 타이머를 활성화 합니다.
+                    self.isTimer = true
+                    /// 코드 타이머 활성화 합니다.
+                    self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
                 }
-            } btnEvent: { success in
-                self.openFullCodeDisplay( codeType: .barcode, code : barCode )
             }
+        } btnEvent: { success in
+            self.openFullCodeDisplay( codeType: .barcode, code : barCode )
         }
-        else
-        {
-            /// QRCode 를 제작 합니다.
-            self.qrCodeGenerator.setCodeDisplay(.qrcode,code: NC.S(qrCode)) { success in
-                if success
+    
+        /// QRCode 를 제작 합니다.
+        self.qrCodeGenerator.setCodeDisplay(.qrcode,code: NC.S(qrCode)) { success in
+            if success
+            {
+                /// 결제 뷰어를 활성화 합니다.
+                self.setPayViewEnabled(codeType: .qrcode)
+                /// 코드 이미지를 활성화 합니다.
+                self.qrCodeGenerator.imageView.isHidden = false
+                /// QRCode 결제 활성화 입니다.
+                self.isQrCodePayEnabled                 = true
+                /// 코드 이미지 알파값을 정상처리 되도록 하였습니다.
+                self.qrCodeGenerator.imageView.alpha    = 1.0
+                /// 타이머 비활성화 를 체크 합니다.
+                if !self.isTimer
                 {
-                    /// 결제 뷰어를 활성화 합니다.
-                    self.setPayViewEnabled(codeType: .qrcode)
-                    /// 코드 이미지를 활성화 합니다.
-                    self.qrCodeGenerator.imageView.isHidden = false
-                    ///  QRCode 결제 활성화 입니다.
-                    self.isQrCodePayEnabled                 = true
-                    /// 타이머 비활성화 를 체크 합니다.
-                    if !self.isTimer
-                    {
-                        /// 타이머를 활성화 합니다.
-                        self.isTimer = true
-                        /// 코드 타이머 활성화 합니다.
-                        self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
-                    }
+                    /// 타이머를 활성화 합니다.
+                    self.isTimer = true
+                    /// 코드 타이머 활성화 합니다.
+                    self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
                 }
-            } btnEvent: { success in
-                self.openFullCodeDisplay( codeType: .qrcode, code: qrCode )
             }
+        } btnEvent: { success in
+            self.openFullCodeDisplay( codeType: .qrcode, code: qrCode )
         }
     }
     
@@ -808,7 +806,7 @@ class OKZeroPayView: UIView {
                                    maxValidTime.isValid
                                 {
                                     /// 결제할 코드생성을 디스플레이 합니다.
-                                    self.setCodeCreationView( qrCode: NC.S(barcode), barCode: NC.S(qrcode), maxTime: Int(maxValidTime)! )
+                                    self.setCodeCreationView( qrCode: NC.S(qrcode), barCode: NC.S(barcode), maxTime: Int(maxValidTime)! )
                                 }
                                 break
                             default:break

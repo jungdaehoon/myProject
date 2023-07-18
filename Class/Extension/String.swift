@@ -254,6 +254,36 @@ extension String {
     
     
     /**
+     문자 중간중간에 빈칸을 추가 합니다.( J.D.H  VER : 1.0.0 )
+     - Date: 2023.07.18
+     - Parameters:
+        - distance : 간격 정보를 받습니다.  간격정보는 요청 한 간격 정보의 -1 값으로 적용 됩니다.( default : 5 )
+     - Throws: False
+     - Returns:
+        간격별 빈찬 추가된 문자를 리턴 합니다. ( String? )
+     */
+    func addSpace( distance : Int = 5 ) -> String? {
+        var allStr : String = "\(self)"
+        let space: Character = " "
+
+        /// 4번째 위치마다 빈 칸 추가 합니다.
+        var currentIndex = allStr.startIndex
+        while currentIndex < allStr.endIndex {
+            if allStr.distance(from: allStr.startIndex, to: currentIndex) % distance == 0 {
+                allStr.insert(space, at: currentIndex)
+            }
+            currentIndex = allStr.index(after: currentIndex)
+        }
+
+        /// 총 문자 길이 체크 합니다.
+        while allStr.count < self.count {
+            allStr.append(space)
+        }
+        return allStr
+    }
+    
+    
+    /**
      해당 마지막 정보들의 일부 영역을 마스킹 처리 합니다..( J.D.H  VER : 1.0.0 )
      - Date: 2023.07.05
      - Parameters:
