@@ -117,6 +117,8 @@ class BaseViewModel : NSObject {
     static var appStartResponse         : AppStartResponse? = AppStartResponse()
     /// 로그인 정보를 받습니다.
     static var loginResponse            : LoginResponse?    = LoginResponse()
+    /// 로그인 페이지 디스플레이 중인지를 체크 합니다.
+    static var isLoginPageDisplay       : Bool              = false
     /// 안티디버깅 여부를 가집니다.
     static var isAntiDebugging          : Bool              = false
     /// 앱 실드 데이터를 저장 합니다.
@@ -372,8 +374,8 @@ class BaseViewModel : NSObject {
     
     /**
      앱 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
-     - Description: 세션여부를 체크 하며 세션이 유지 상태로 체크 되었을시에 추가로 저장된 PUSH/Deep 링크 정보가 있을 경우 이전 비활성화에서 받은 정보가 있는것으로 보고 앱 비활성화 타입을 리턴 합니다.
-     - Date: 2023.05.17
+     - Description: 세션여부를 체크 하여 세션이 유지 상태인 경우 저장된 PUSH/Deep 링크 정보가 있다면 앱 실행중이 아니였다고 판단하여 앱 비활성으로 false 를 리턴 합니다. 앱 실행중에 세션 체크가 되어 세션이 비정상일 경우 로그아웃을 요청, 로그인 페이지로 이동 합니다.
+     - Date: 2023.07.18
      - Parameters:
         - inAppStartType : 앱 활성화 여부를 체크하는 타입 입니다.
      - Throws: False
@@ -389,8 +391,8 @@ class BaseViewModel : NSObject {
                 self.isSessionEnabeld().sink { result in
                     /// 요청 비정상 처리로 세션 유지 실패로 리턴 합니다.
                     promise(.success(false))
-                    /// 재로그인 요청 합니다.
-                    BaseViewModel.shared.reLogin = true
+                    /// 로그아웃 요청 합니다.
+                    BaseViewModel.setLogoutData()
                 } receiveValue: { sessionSesponse in
                     /// 앱 활성화 여부를 체크 합니다.
                     var isEnabled = true
@@ -420,8 +422,8 @@ class BaseViewModel : NSObject {
                     {
                         /// 앱 비활성화 타입으로 변경 합니다.
                         isEnabled                    = false
-                        /// 재로그인 요청 합니다.
-                        BaseViewModel.shared.reLogin = true
+                        /// 로그아웃 요청 합니다.
+                        BaseViewModel.setLogoutData()
                     }
                     /// 앱 타입을 리턴 합니다.
                     promise(.success(isEnabled))
@@ -1195,6 +1197,8 @@ class BaseViewModel : NSObject {
      - Returns:False
      */
     static func setLogoutData() {
+        /// 현 로그인 페이지 경우에는 로그아웃 처리 하지 않습니다.
+        if BaseViewModel.isLoginPageDisplay { return }
         /// 로그아웃을 요청 합니다.
         BaseViewModel.shared.setLogOut().sink(receiveCompletion: { result in
             /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.

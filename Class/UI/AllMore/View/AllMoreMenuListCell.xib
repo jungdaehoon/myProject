@@ -47,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJd-Be-i3H" userLabel="Type Icon View">
-                        <rect key="frame" x="30" y="19.666666666666668" width="34.666666666666657" height="17.000000000000004"/>
+                        <rect key="frame" x="29.999999999999996" y="19.666666666666668" width="34.666666666666657" height="17.000000000000004"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BF-yV-iht">
                                 <rect key="frame" x="4.0000000000000018" y="4" width="26.666666666666671" height="10"/>
@@ -140,9 +140,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="backBtn" destination="liq-hn-C0f" id="BsU-Y5-EgA"/>
                 <outlet property="rightImage" destination="yVj-m2-OnH" id="Xlw-Q6-a7X"/>
                 <outlet property="rightSubText" destination="fvs-qI-che" id="eUZ-Co-NBQ"/>
+                <outlet property="seletedBtn" destination="liq-hn-C0f" id="7Oi-JK-eXZ"/>
                 <outlet property="subTitle" destination="56H-9G-MuK" id="a5z-p7-Jpx"/>
                 <outlet property="titleName" destination="5QA-XD-haF" id="8yH-h7-hEx"/>
                 <outlet property="typeiConText" destination="6BF-yV-iht" id="zm8-LS-x25"/>

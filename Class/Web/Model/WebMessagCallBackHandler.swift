@@ -1078,7 +1078,7 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                 }
             }
-            
+                        
             /// 로그아웃 데이터 처리 합니다.
             BaseViewModel.setLogoutData()
         }

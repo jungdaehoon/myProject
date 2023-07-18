@@ -165,24 +165,13 @@ class TabBarView : UIView
      - Returns:False
      */
     static func setTabBarHome() {
-        // 현 페이지 초기화합니다.
-        if let viewController = TabBarView.tabbar!.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController  {
-            if let navigationController = viewController.navigationController {
-                if let controller = navigationController.viewControllers.last {
-                    /// 0번째 페이지로 이동 후 홈으로 이동 합니다.
-                    controller.popToRootController(animated: true, animatedType: .down) { firstViewController in
-                        /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
-                        if let tabbar = TabBarView.tabbar {
-                            /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
-                            tabbar.setCommonViewRemove()
-                            /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
-                            tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
-                        }
-                    }
-                }
-            }
-            else
-            {
+        /// 현 페이지 초기화합니다.
+        if let tarber               = TabBarView.tabbar,
+           let viewController       = tarber.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController,
+           let navigationController = viewController.navigationController,
+           let controller           = navigationController.viewControllers.last {
+            /// 0번째 페이지로 이동 후 홈으로 이동 합니다.
+            controller.popToRootController(animated: true, animatedType: .down) { firstViewController in
                 /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
                 if let tabbar = TabBarView.tabbar {
                     /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
@@ -192,6 +181,17 @@ class TabBarView : UIView
                 }
             }
         }
+        else
+        {
+            /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+            if let tabbar = TabBarView.tabbar {
+                /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                tabbar.setCommonViewRemove()
+                /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
+            }
+        }
+        
     }
     
     

@@ -94,7 +94,7 @@ class AllMoreViewController: BaseViewController {
     override func setDisplayData(){
         /// 전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.
         self.setInitWebView()
-        /// 서버에 전제 상세 데이터를 요청 합니다.
+        /// 서버에 상세 데이터를 요청 합니다.
         self.viewModel.getAllMoreInfo().sink { result in
             
         } receiveValue: { response  in
