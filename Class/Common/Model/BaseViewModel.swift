@@ -623,34 +623,6 @@ class BaseViewModel : NSObject {
     
     
     /**
-     로그아웃 처리 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date: 2023.03.20
-     - Parameters:False
-     - Throws: False
-     - Returns:
-        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
-     */
-    func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
-        let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
-        requst() { error in
-            subject.send(completion: .failure(error))
-            return false
-        } publisher: {
-            /// 로그아웃 요청 합니다.
-            return NetworkManager.requestLogOut()
-        } completion: { model in
-            /// 로그인 정보를 초기화 합니다.
-            BaseViewModel.loginResponse = nil
-            BaseViewModel.loginResponse = LoginResponse()
-            self.logoutResponse = model
-            // 앱 인터페이스 정상처리 여부를 넘깁니다.
-            subject.send(model)
-        }
-        return subject.eraseToAnyPublisher()
-    }
-    
-    
-    /**
      은행 계좌 재인증 요청 입니다. ( J.D.H  VER : 1.0.0 )
      - Date: 2023.03.21
      - Parameters:False
@@ -1212,4 +1184,65 @@ class BaseViewModel : NSObject {
         }
         return false
     }
+    
+    
+    /**
+     로그아웃 처리 후 데이터를 초기화 하며,  홈 탭 이동 및 로그인 페이지를 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
+     - Description: 로그아웃 인터페이스를 요청하여 로그인중 관련된 정보를 초기화 합니다. 로그아웃 실패 경우에도 하단 탭은 "홈" 탭으로 이동 하며, 로그인 창을 디스플레이 합니다. 해당 경우는 웹에서 callLogin 및 logout 요청 및 네이티브 일부 영역에서 로그아웃을 요청할 때도 동일 하게 사용 됩니다.
+     - Date: 2023.07.18
+     - Parameters:False
+     - Throws: False
+     - Returns:False
+     */
+    static func setLogoutData() {
+        /// 로그아웃을 요청 합니다.
+        BaseViewModel.shared.setLogOut().sink(receiveCompletion: { result in
+            /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.
+            TabBarView.setTabBarHome()
+            /// 재로그인 요청 합니다.
+            BaseViewModel.shared.reLogin             = true
+        }, receiveValue: { response in
+            if response!.code == "0000"
+            {
+                /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.
+                TabBarView.setTabBarHome()
+                /// 재로그인 요청 합니다.
+                BaseViewModel.shared.reLogin             = true
+            }
+        }).store(in: &BaseViewModel.shared.cancellableSet)
+    }
+    
+    
+    /**
+     로그아웃 처리 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.03.20
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
+     */
+    func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
+        let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
+        /// 자동 로그인 값을 false 변경 합니다.
+        let custItem                = SharedDefaults.getKeyChainCustItem()
+        custItem!.auto_login        = false
+        SharedDefaults.setKeyChainCustItem(custItem!)
+        
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 로그아웃 요청 합니다.
+            return NetworkManager.requestLogOut()
+        } completion: { model in
+            /// 로그인 정보를 초기화 합니다.
+            BaseViewModel.loginResponse = nil
+            BaseViewModel.loginResponse = LoginResponse()
+            self.logoutResponse         = model
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
 }

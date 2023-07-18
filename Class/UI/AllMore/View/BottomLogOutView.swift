@@ -36,24 +36,8 @@ class BottomLogOutView: UIView {
             
         })
         alert?.addAlertBtn(btnTitleText: "확인", completion: { result in
-            /// 로그아웃을 요청 합니다.
-            self.viewModel?.setLogOut().sink(receiveCompletion: { result in
-                
-            }, receiveValue: { response in
-                if response!.code == "0000"
-                {
-                    /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.
-                    TabBarView.setTabBarHome()
-                    let custItem                            = SharedDefaults.getKeyChainCustItem()
-                    custItem!.auto_login                    = false
-                    SharedDefaults.setKeyChainCustItem(custItem!)
-                    /// 재로그인 요청 합니다.
-                    BaseViewModel.shared.reLogin             = true
-                    /// 계좌 여부를 비활성화 합니다.
-                    SharedDefaults.default.accountEnabled   = false
-                }
-                
-            }).store(in: &self.viewModel!.cancellableSet)
+            /// 로그아웃 데이터 처리 합니다.
+            BaseViewModel.setLogoutData()            
         })
         alert?.show()
         

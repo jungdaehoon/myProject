@@ -1079,14 +1079,8 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }
             
-            controller.popToRootController(animated: true) { firstViewController in
-                if let rootController = firstViewController
-                {
-                    /// 로그인 페이지로 이동합니다.
-                    let viewController = LoginViewController()
-                    rootController.pushController(viewController, animated: true, animatedType: .up)
-                }
-            }
+            /// 로그아웃 데이터 처리 합니다.
+            BaseViewModel.setLogoutData()
         }
     }
     
@@ -1449,32 +1443,8 @@ class WebMessagCallBackHandler : NSObject  {
      - Returns:False
      */
     func setLogOut( _ body : [Any?] ){
-        /// 로그아웃 요청 합니다.
-        self.viewModel.setLogOut().sink { result in
-            
-        } receiveValue: { response in
-            if response != nil
-            {
-                let custItem                            = SharedDefaults.getKeyChainCustItem()
-                custItem!.auto_login                    = false
-                SharedDefaults.setKeyChainCustItem(custItem!)
-                /// 계좌 여부를 비활성화 합니다.
-                SharedDefaults.default.accountEnabled   = false
-                /// 연결된 타켓 정보가 있는지를 체크 합니다.
-                if let controller = self.target
-                {
-                    controller.popToRootController(animated: true) { firstViewController in
-                        /// 재로그인 요청 합니다.
-                        BaseViewModel.shared.reLogin = true
-                    }
-                }
-                else
-                {
-                    /// 재로그인 요청 합니다.
-                    BaseViewModel.shared.reLogin = true
-                }
-            }
-        }.store(in: &self.cancellableSet)
+        /// 로그아웃 데이터 처리 합니다.
+        BaseViewModel.setLogoutData()
     }
     
     
