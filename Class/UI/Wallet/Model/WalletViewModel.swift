@@ -581,7 +581,6 @@ class WalletViewModel : BaseViewModel {
     
     /**
      파일에 object 데이터를 추가 합니다.
-     - Desi
      - Date: 2023.05.22
      - Parameters:
         - object : 파일에 추가할 NSObject 데이터 정보 입니다.

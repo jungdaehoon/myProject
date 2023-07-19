@@ -98,7 +98,7 @@ class ShowMnemonicViewController: UIViewController {
     
     @IBAction func onClose(_ sender: Any) {
         self.delegate?.showMnemonicResult(self, action: .close, info: nil)
-        if let completion = self.completion { completion("true") }
+        if let completion = self.completion { completion(nil) }
         self.popController(animated: true, animatedType: .down)
     }
     
@@ -122,7 +122,9 @@ extension ShowMnemonicViewController : CheckMnemonicVcDelegate  {
         // 닫기 버튼
         case .close:
             self.dismiss(animated: true, completion: {
-                self.onClose("")
+                self.delegate?.showMnemonicResult(self, action: .close, info: nil)
+                if let completion = self.completion { completion("true") }
+                self.popController(animated: true, animatedType: .down)
             })
         default:
             ()
