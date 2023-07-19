@@ -697,14 +697,17 @@ class WebMessagCallBackHandler : NSObject  {
                     if loginType == "Y"
                     {
                         custItem.auto_login = true
-                        self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: "Y")
                     }
                     else
                     {
                         custItem.auto_login = false
-                        self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: "N")
                     }
+                    self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: "Y")
                     SharedDefaults.setKeyChainCustItem(custItem)
+                }
+                else
+                {
+                    self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: "N")
                 }
             }
         }

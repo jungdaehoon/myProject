@@ -831,6 +831,8 @@ class OKZeroPayView: UIView {
      - Date: 2023.07.10
      */
     func setRelease(){
+        /// 타이머가 돌고있을경우 강제종료하고 페이지를 닫습니다.
+        self.viewModel.codeTimer = .exit_time
         /// 카메라 캡쳐 세션을 초기화 합니다.
         self.viewModel.setReleaseAVCaptrueSession()
         /// 카드 리스트 뷰어를 초기화 합니다.

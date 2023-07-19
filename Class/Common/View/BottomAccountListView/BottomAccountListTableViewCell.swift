@@ -14,11 +14,13 @@ import UIKit
 class BottomAccountListTableViewCell: UITableViewCell {
 
     /// 은행 아이콘 입니다.
-    @IBOutlet weak var bankIcon     : UIImageView!
+    @IBOutlet weak var bankIcon         : UIImageView!
+    /// 메인 계좌 체크 아이콘 입니다.
+    @IBOutlet weak var mainAccountIcon  : UIImageView!
     /// 계좌 넘버 입니다.
-    @IBOutlet weak var accountNum   : UILabel!
+    @IBOutlet weak var accountNum       : UILabel!
     /// 선택 아이콘 입니다.
-    @IBOutlet weak var seletedIcon  : UIImageView!
+    @IBOutlet weak var seletedIcon      : UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

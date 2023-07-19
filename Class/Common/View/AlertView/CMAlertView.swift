@@ -195,7 +195,7 @@ class CMAlertView: BaseView {
     {
         let textLabel                   = UILabel()
         textLabel.text                  = text
-        textLabel.font                  = UIFont(name: "Pretendard-Regular", size: 16)
+        textLabel.font                  = UIFont(name: "Pretendard-Regular", size: 18)
         textLabel.textAlignment         = NSTextAlignment.center
         textLabel.textColor             = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1)
         textLabel.numberOfLines         = 0
