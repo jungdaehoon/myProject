@@ -22,6 +22,9 @@ class WalletViewModel : BaseViewModel {
     static let W_ENCKEY : String = Bundle.main.infoDictionary?["W_ENCKEY"] as? String ?? ""
     /// CBC IV 정보 입니다.
     static let W_ENCIV  : String = Bundle.main.infoDictionary?["W_ENCIV"] as? String ?? ""    
+    /// 기본 폴더 정보 입니다.
+    static let defaultFolder        : String            = "/keystore"
+    
     
     
     /**
@@ -102,38 +105,81 @@ class WalletViewModel : BaseViewModel {
      - Returns:
         복구된 지갑 Pass 정보를 리턴 합니다. (String?)
      */
-    private func setWalletWithMnemonuc( walletPass : String = "", mnemonics : String = "" ) -> String?
-    {
-        do {
-            let twalletAddressKeyStore = try? BIP32Keystore(mnemonics: mnemonics, password: walletPass, mnemonicsPassword : walletPass, prefixPath: HDNode.defaultPath)
-            let addrStr = "\(twalletAddressKeyStore?.addresses?.first?.address ?? "0x")"
-            /// 블럭체인에서 대문자가 있으면 오류발생으로 전부 소문자로 변경 합니다.
-            let lowerWalletAddress = addrStr.lowercased()
-            
-            guard let wa = twalletAddressKeyStore?.addresses?.first else {
-                CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+    private func setWalletWithMnemonuc( walletPass : String = "", mnemonics : String = "" ) -> Future<String?, Never> {
+        return Future<String?, Never> { promise in
+            do {
+                let twalletAddressKeyStore = try? BIP32Keystore(mnemonics: mnemonics, password: walletPass, mnemonicsPassword : walletPass, prefixPath: HDNode.defaultPath)
+                let addrStr = "\(twalletAddressKeyStore?.addresses?.first?.address ?? "0x")"
+                /// 블럭체인에서 대문자가 있으면 오류발생으로 전부 소문자로 변경 합니다.
+                let lowerWalletAddress = addrStr.lowercased()
+                
+                guard let wa = twalletAddressKeyStore?.addresses?.first else {
+                    CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                        promise(.success(""))
+                    }
+                    return
                 }
-                return ""
+                
+                let privateKey = try twalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: wa)
+                
+                Slog("import: mnemonics  = \(mnemonics)", category: .wallet)
+                Slog("import: password  = \(walletPass)", category: .wallet)
+                Slog("import: twalletAddressKeyStore?.addresses  = \(twalletAddressKeyStore?.addresses)", category: .wallet)
+                Slog("import: lowerWalletAddress  = \(lowerWalletAddress)", category: .wallet)
+                Slog("import: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
+                
+                let keyData = try? JSONEncoder().encode(twalletAddressKeyStore?.keystoreParams)
+                /// 월렛 관련 키스토어 폴더 여부를 체크 합니다.
+                self.isFolder().sink { success in
+                    if success
+                    {
+                        /// 월렛 관련 키 파일을 추가 합니다.
+                        self.addFile(keyData).sink { success in
+                            if success
+                            {
+                                SharedDefaults.default.walletMnemonic = mnemonics
+                                SharedDefaults.default.walletAddress  = lowerWalletAddress
+                                promise(.success(lowerWalletAddress))
+                            }
+                            else
+                            {
+                                promise(.success(""))
+                            }
+                        }.store(in: &self.cancellableSet)
+                    }
+                    else
+                    {
+                        /// 월렛 관련 키스토어 폴더 를 생성 합니다.
+                        self.addFolder().sink { success in
+                            if success
+                            {
+                                /// 월렛 관련 키 파일을 추가 합니다.
+                                self.addFile(keyData).sink { success in
+                                    if success
+                                    {
+                                        SharedDefaults.default.walletMnemonic = mnemonics
+                                        SharedDefaults.default.walletAddress  = lowerWalletAddress
+                                        promise(.success(lowerWalletAddress))
+                                    }
+                                    else
+                                    {
+                                        promise(.success(""))
+                                    }
+                                }.store(in: &self.cancellableSet)
+                            }
+                            else
+                            {
+                                promise(.success(""))
+                            }
+                        }.store(in: &self.cancellableSet)
+                    }
+                }.store(in: &self.cancellableSet)
+            } catch {
+                promise(.success(""))
             }
-            
-            let privateKey = try twalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: wa)
-            
-            Slog("import: mnemonics  = \(mnemonics)", category: .wallet)
-            Slog("import: password  = \(walletPass)", category: .wallet)
-            Slog("import: twalletAddressKeyStore?.addresses  = \(twalletAddressKeyStore?.addresses)", category: .wallet)
-            Slog("import: lowerWalletAddress  = \(lowerWalletAddress)", category: .wallet)
-            Slog("import: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
-            let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let keyData = try? JSONEncoder().encode(twalletAddressKeyStore?.keystoreParams)
-            FileManager.default.createFile(atPath: userDir + "/keystore" + "/key.json", contents: keyData, attributes: nil)
-            SharedDefaults.default.walletMnemonic = mnemonics
-            SharedDefaults.default.walletAddress  = lowerWalletAddress
-            return lowerWalletAddress
-        } catch {
-            return ""
         }
     }
-
+        
     
     /**
      신규로 생성된 wallet 닉모닉을 생성 합니다. ( J.D.H VER : 1.0.0 )
@@ -145,49 +191,94 @@ class WalletViewModel : BaseViewModel {
      - Returns:
         신규로 생성된 wallet 주소 + 개인키 를 리턴 합니다. (String?)
      */
-    private func setCreateMnemonics( walletPass : String = "" ) -> String? {
-        SharedDefaults.default.walletMnemonic = ""
-        SharedDefaults.default.walletAddress  = ""
-        let userDir             = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let web3KeystoreManager = KeystoreManager.managerForPath(userDir + "/keystore", scanForHDwallets: true, suffix: "json")
-        let tcount              = web3KeystoreManager?.addresses?.count ?? 0
-        do {
-            if tcount >= 1 { self.removeAllKeystorefiles(path: userDir + "/keystore") }
-            if web3KeystoreManager?.addresses?.count ?? 0 >= 0
-            {
-                let tempMnemonics = try? BIP39.generateMnemonics(bitsOfEntropy: 128, language: .english)
-                guard let tMnemonics = tempMnemonics else {
-                    CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+    private func setCreateMnemonics( walletPass : String = "" ) -> Future<String?, Never> {
+        return Future<String?, Never> { promise in
+            SharedDefaults.default.walletMnemonic = ""
+            SharedDefaults.default.walletAddress  = ""
+            let userDir             = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let web3KeystoreManager = KeystoreManager.managerForPath(userDir + "/keystore", scanForHDwallets: true, suffix: "json")
+            let tcount              = web3KeystoreManager?.addresses?.count ?? 0
+            do {
+                /// 기존 파일 정보가 있다면 삭제 합니다.
+                if tcount >= 1 { self.removeAllKeystorefiles(path: userDir + "/keystore") }
+                if web3KeystoreManager?.addresses?.count ?? 0 >= 0
+                {
+                    let tempMnemonics = try? BIP39.generateMnemonics(bitsOfEntropy: 128, language: .english)
+                    guard let tMnemonics = tempMnemonics else {
+                        CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                        }
+                        return
                     }
-                    return ""
-                }
-                
-                let tempWalletAddressKeyStore = try? BIP32Keystore(mnemonics: tMnemonics, password: walletPass, mnemonicsPassword : walletPass, prefixPath: HDNode.defaultPath)
-                guard let walletAddress = tempWalletAddressKeyStore?.addresses?.first else {
-                    CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                    
+                    let tempWalletAddressKeyStore = try? BIP32Keystore(mnemonics: tMnemonics, password: walletPass, mnemonicsPassword : walletPass, prefixPath: HDNode.defaultPath)
+                    guard let walletAddress = tempWalletAddressKeyStore?.addresses?.first else {
+                        CMAlertView().setAlertView(detailObject: "지갑을 생성할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                        }
+                        return
                     }
-                    return ""
+     
+                    let lowerWalletAddress      = walletAddress.address.lowercased()
+                    let privateKey              = try tempWalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: walletAddress)
+                    let keyData                 = try? JSONEncoder().encode(tempWalletAddressKeyStore?.keystoreParams)
+                    let pForcedStr : String!    =  privateKey?.toHexString()
+                    /// 월렛 관련 키스토어 폴더 여부를 체크 합니다.
+                    self.isFolder().sink { success in
+                        if success
+                        {
+                            /// 월렛 관련 키 파일을 추가 합니다.
+                            self.addFile(keyData).sink { success in
+                                if success
+                                {
+                                    SharedDefaults.default.walletMnemonic = tMnemonics
+                                    SharedDefaults.default.walletAddress  = lowerWalletAddress
+                                    Slog("create: mnemonics     = \(tMnemonics)", category: .wallet)
+                                    Slog("create: password      = \(walletPass)", category: .wallet)
+                                    Slog("create: address key   = \(lowerWalletAddress)", category: .wallet)
+                                    Slog("create: private key   = \(String(describing: privateKey?.toHexString()))", category: .wallet)
+                                    promise(.success(lowerWalletAddress + ":" + pForcedStr))
+                                }
+                                else
+                                {
+                                    promise(.success(""))
+                                }
+                            }.store(in: &self.cancellableSet)
+                        }
+                        else
+                        {
+                            /// 월렛 관련 키스토어 폴더 를 생성 합니다.
+                            self.addFolder().sink { success in
+                                if success
+                                {
+                                    /// 월렛 관련 키 파일을 추가 합니다.
+                                    self.addFile(keyData).sink { success in
+                                        if success
+                                        {
+                                            SharedDefaults.default.walletMnemonic = tMnemonics
+                                            SharedDefaults.default.walletAddress  = lowerWalletAddress
+                                            Slog("create: mnemonics  = \(tMnemonics)", category: .wallet)
+                                            Slog("create: password  = \(walletPass)", category: .wallet)
+                                            Slog("create: address key  = \(lowerWalletAddress)", category: .wallet)
+                                            Slog("create: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
+                                            promise(.success(lowerWalletAddress + ":" + pForcedStr))
+                                        }
+                                        else
+                                        {
+                                            promise(.success(""))
+                                        }
+                                    }.store(in: &self.cancellableSet)
+                                }
+                                else
+                                {
+                                    promise(.success(""))
+                                }
+                            }.store(in: &self.cancellableSet)
+                        }
+                    }.store(in: &self.cancellableSet)
                 }
- 
-                let lowerWalletAddress = walletAddress.address.lowercased()
-                SharedDefaults.default.walletMnemonic = tMnemonics
-                SharedDefaults.default.walletAddress  = lowerWalletAddress
-                
-                let privateKey  = try tempWalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: walletAddress)
-                let keyData     = try? JSONEncoder().encode(tempWalletAddressKeyStore?.keystoreParams)
-                FileManager.default.createFile(atPath: userDir + "/keystore" + "/key.json", contents: keyData, attributes: nil)
-                
-                Slog("create: mnemonics  = \(tMnemonics)", category: .wallet)
-                Slog("create: password  = \(walletPass)", category: .wallet)
-                Slog("create: address key  = \(lowerWalletAddress)", category: .wallet)
-                Slog("create: private key  = \(String(describing: privateKey?.toHexString()))", category: .wallet)
-                let pForcedStr : String!    =  privateKey?.toHexString()
-                return lowerWalletAddress + ":" + pForcedStr
+            } catch {
+                promise(.success(""))
             }
-        } catch {
-            return ""
         }
-        return ""
     }
     
     
@@ -261,22 +352,17 @@ class WalletViewModel : BaseViewModel {
      */
     func getRestoreWallet( encInfo : String = "", mnemonic : String = "" ) -> Future<String?, Never> {
         return Future<String?, Never> { promise in
-            
             /// 복호화된 password 를 가져 옵니다.
             if let walletPass = self.getDecryptedWalletPasswdFromInfo(encInfo) {
-                var wallet : String? = nil
+                var privateKey : String? = nil
                 DispatchQueue.global(qos: .userInteractive).async {
                     /// 복구된 지갑 정보를 가져 옵니다.
-                    wallet = self.setWalletWithMnemonuc(walletPass: walletPass, mnemonics: mnemonic)
-                    DispatchQueue.main.async {
-                        if let wallet = wallet {
-                            promise(.success(wallet))
+                    self.setWalletWithMnemonuc(walletPass: walletPass, mnemonics: mnemonic).sink(receiveValue: { wallet in
+                        privateKey = wallet
+                        DispatchQueue.main.async {
+                            promise(.success(privateKey))
                         }
-                        else
-                        {
-                            promise(.success(""))
-                        }
-                    }
+                    }).store(in: &self.cancellableSet)
                 }
             } else { promise(.success("")) }
         }
@@ -407,23 +493,118 @@ class WalletViewModel : BaseViewModel {
         return Future<String?, Never> { promise in
             /// 복호화된 password 를 가져 옵니다.
             if let walletPass = self.getDecryptedWalletPasswdFromInfo(encInfo) {
-                var walletAddrKey : String? = nil
                 DispatchQueue.global(qos: .userInteractive).async {
                     /// 신규로 저장된 Wallet 주소+ 개인키 를 받습니다.
-                    walletAddrKey = self.setCreateMnemonics( walletPass: walletPass )
-                    DispatchQueue.main.async {
-                        if let walletAddrKey = walletAddrKey {
+                    self.setCreateMnemonics( walletPass: walletPass ).sink { walletAddrKey in
+                        DispatchQueue.main.async {
                             promise(.success(walletAddrKey))
                         }
-                        else
-                        {
-                            promise(.success(""))
-                        }
-                    }
+                    }.store(in: &self.cancellableSet)
                 }
             } else { promise(.success("")) }
-            
         }
     }
+    
+    
+    /**
+     폴더 존재 여부를 체크 합니다.
+     - Date: 2023.05.22
+     - Parameters:
+        - folderName : 폴더명 입니다.
+     - Throws:False
+     - returns:
+        폴더 존재 여부를 리턴 합니다. Future<Bool, Never>
+     */
+    func isFolder( folderName : String = WalletViewModel.defaultFolder ) -> Future<Bool, Never>
+    {
+        return Future<Bool, Never> { promise in
+            /// 기본 디렉토리 정보를 가져 옵니다.
+            var dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            /// 가져온 디렉토리 정보가 있는지를 체크 합니다.
+            if dirPaths.count > 0
+            {
+                /// 폴더명을 추가합니다.
+                dirPaths[0].append(folderName)
+                /// 해당 폴더 여부를 체크 합니다.
+                if FileManager.default.fileExists(atPath: dirPaths[0] as String)
+                {
+                    promise(.success(true))
+                }
+                else
+                {
+                    promise(.success(false))
+                }
+            }
+            else
+            {
+                promise(.success(false))
+            }
+        }
+    }
+    
+    
+    /**
+    폴더를 생성 합니다.
+     - Date: 2023.05.22
+     - Parameters:
+        - folderName : 폴더명 입니다. ( default : "/keystore" )
+     - Throws:False
+     - Returns:
+        폴더 생성 정상처리 여부를 리턴 합니다. ( Future<Bool, Never> )
+     */
+    func addFolder( folderName : String = WalletViewModel.defaultFolder ) -> Future<Bool, Never>
+    {
+        return Future<Bool, Never> { promise in
+            /// 기본 디렉토리 정보를 가져 옵니다.
+            var dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            /// 폴더명을 추가합니다.
+            dirPaths[0].append(folderName)
+            let dirPath = dirPaths[0] as String
+            /// 폴더가 존재 하는지를 체크 합니다.
+            if FileManager.default.fileExists(atPath: dirPath)
+            {
+                promise(.success(true))
+            }
+            else
+            {
+                do {
+                    /// 신규 폴더를 생성 합니다.
+                    try FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true, attributes: nil)
+                    promise(.success(true))
+                } catch {
+                    promise(.success(false))
+                }
+            }
+        }
+    }
+    
+    
+    /**
+     파일에 object 데이터를 추가 합니다.
+     - Desi
+     - Date: 2023.05.22
+     - Parameters:
+        - object : 파일에 추가할 NSObject 데이터 정보 입니다.
+     - Throws:False
+     - DispatchQueue:.global.qos.userInitiated
+     - Returns:
+        파일 작성 정상처리 여부 리턴 힙니다. Future<Bool, Never>
+     */
+    func addFile( _ object : Any? ) -> Future<Bool, Never>
+    {
+        return Future<Bool, Never> { promise in
+            let userDir   = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let filePath  = userDir + "/keystore/key.json"
+            var isWrite : Bool = false
+            DispatchQueue.global(qos: .userInitiated).async {
+                isWrite = FileManager.default.createFile(atPath: filePath, contents: object as? Data, attributes: nil)
+                Slog("addFile isWrite : \(isWrite)")
+                DispatchQueue.main.async {
+                    promise(.success(isWrite))
+                }
+            }
+        }
+    }
+    
 }
 

@@ -148,12 +148,12 @@ class FullWebViewController: BaseViewController {
      전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
      - Date: 2023.04.12
      - Parameters:
-        - pageType      : 상단 네비 활성화시 타이틀 문구 입니다.
-        - titleBarType  : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
-        - pageURL       : 연결할 페이지 URL 입니다.
+        - pageType          : 상단 네비 활성화시 타이틀 문구 입니다.
+        - titleBarType : 타이틀바 디스플레이 타입 입니다. ( 0 : 타이틀바 히든, 1 : 뒤로가기버튼, 2 : 종료 버튼 ) default : 0
+        - pageURL            : 연결할 페이지 URL 입니다.
         - returnParam   : 이전 페이지 그대로 넘겨줄 파라미터 정보 입니다.
         - closeScript   : 페이지 종료시 웹 데이터 체크 할 스크립트 입니다.
-        - completion    : 페이지 종료시 콜백 핸들러 입니다.
+        - completion     : 페이지 종료시 콜백 핸들러 입니다.
      - Throws: False
      - Returns:False
      */

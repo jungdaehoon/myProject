@@ -300,50 +300,14 @@ class WebMessagCallBackHandler : NSObject  {
             case .openZeropayQRIntro         :
                 self.setBottomZeroPayInfoView()
                 break
-            /// 제로페이 간편결제 바코드 및 QRCode 정보를 받습니다.
-            case .drawCode                   :
-                //self.setDrawCode( body )
-                break
             default: break
             }
         }
     }
     
     
+    
     // MARK: - 지원 메서드 입니다.
-    /**
-     제로페이 간편결제 바코드 및 QRCode 정보를 받습니다. ( J.D.H VER : 1.0.0 )
-    - Date: 2023.07.05
-    - Parameters:
-        - body : 스크립트에서 받은 메세지 입니다.
-    - Throws: False
-    - Returns:False
-    */
-    func setDrawCode( _ body : [Any?] ){
-        /// 파라미터 정보가 있는 경우 입니다.
-        if let params = body[2] as? [Any]
-        {
-            if let info = params[0] as? [String:String]
-            {
-                /// 전체 웹뷰 타입 경우인지를 체크 합니다.
-                if let controller = self.target as? FullWebViewController {
-                    switch controller.pageType
-                    {
-                        /// 제로페이 간편결제 인증 키패드 타입 입니다.
-                        case .zeropay_keypad:
-                            if let completion = controller.completion {
-                                completion(.zeroPaykeyPad(barcode: NC.S(info["barcode"]), qrcode: NC.S(info["qrcode"]), maxValidTime: NC.S(info["maxValidTime"])))
-                            }
-                            return
-                        default:break
-                    }
-                    return
-                }
-            }
-        }
-    }
-    
-    
     /**
      올리고 카카오톡 채널로 이동 합니다. ( J.D.H VER : 1.0.0 )
     - Date: 2023.06.29

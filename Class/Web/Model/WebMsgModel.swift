@@ -145,8 +145,6 @@ enum SCRIPT_MESSAGES : String
     case openZeropayQRAgreement     = "openZeropayQRAgreement"
     /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
     case openZeropayQRIntro         = "openZeropayQRIntro"
-    /// 제로페이 간편결제에 보안키패드 인증후 정상처리시 코드정보를 받습니다.
-    case drawCode                   = "drawCode"
 }
 
 
@@ -261,7 +259,7 @@ class WebMsgModel : BaseViewModel {
         }
 
         let resultStr : String = isSuccess ? "true" :  "false"
-        let errorStr : String = isSuccess ? "" :  "파일 업로드 오류 입니다."
+        let errorStr  : String = isSuccess ? "" :  "파일 업로드 오류 입니다."
         
         // 앱버전 조회
         let message : [String:Any] = [

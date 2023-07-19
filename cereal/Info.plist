@@ -97,6 +97,8 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<false/>
 	<key>W_ENCIV</key>
 	<string>${WALLET_ENC_IV}</string>
 	<key>W_ENCKEY</key>
