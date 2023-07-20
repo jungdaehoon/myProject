@@ -193,7 +193,9 @@ class WebMessagCallBackHandler : NSObject  {
                 self.setDatePickerView( body )
                 break
             /// GA 이벤트 정보를 넘깁니다.
-            case .sendGAEvent                : break
+            case .sendGAEvent                :
+                self.setSendGAEvent( body )
+                break
             /// 네이티브 기본 상단 인디게이터 ( 상태바 ) 높이 값을 요청 합니다.
             case .getStatusBarHeight         : break
             /// 복사 요청 입니다. ( UIPasteboard 에 데이터 복사 합니다. )
@@ -317,6 +319,31 @@ class WebMessagCallBackHandler : NSObject  {
     */
     func setQueryWKakao(){
         WebPageConstants.URL_KAKAO_CONTACT.openUrl()
+    }
+    
+    
+    /**
+     GA  Event 값을 받아 추가 합니다. ( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.20
+     - Parameters:
+       - body : 스크립트에서 받은 메세지 입니다.
+     - Throws: False
+     - Returns:False
+    */
+    func setSendGAEvent( _ body : [Any?] ){
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks = body[0] as! [Any]
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params = body[2] as? [Any] {
+            /// GA 이벤트 명 입니다.
+            let gaEvent     = params[0] as! String //  이벤트명
+            if let gaParams = Utils.toJSON(params[1] as! String) {
+                /// GA 이벤트 정보를 보냅니다.
+                BaseViewModel.setGAEvent( eventName: gaEvent, parameters: gaParams )
+                /// 서버에 GA 이벤트 정보를 전달 합니다.
+                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: "success" )
+            }
+        }
     }
     
     

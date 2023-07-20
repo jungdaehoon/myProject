@@ -153,11 +153,11 @@ class OKZeroViewModel : BaseViewModel
      - Timer : true
      - Returns:False
      */
-    func startCodeTimerEnabeld( maxTime : Int = 180 )
-    {
+    func startCodeStayTimer( maxTime : Int = 180 ){
         /// 오버 되는 타임 정보 입니다.
         var overtime    = 0
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
+        let timePublish = Timer.publish(every: 1.0, on: .main, in: .default).autoconnect()
+        timePublish.sink { date in
             overtime += 1
             DispatchQueue.main.async {
                 /// 인식가능한 "분" 정보를 설정 합니다.
@@ -176,13 +176,13 @@ class OKZeroViewModel : BaseViewModel
                 {
                     /// 인식 불가능으로 타임을 종료 합니다.
                     self.codeTimer = .end_time
-                    timer.invalidate()
+                    timePublish.upstream.connect().cancel()
                     return
                 }
                 /// 진행중인 타임 정보를 리턴 합니다.
                 self.codeTimer = .ing_time(timer: displayTime)
             }
-        })
+        }.store(in: &self.cancellableSet)
     }
     
     

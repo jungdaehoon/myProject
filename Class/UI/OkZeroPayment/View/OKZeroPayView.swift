@@ -557,7 +557,7 @@ class OKZeroPayView: UIView {
                     /// 타이머를 활성화 합니다.
                     self.isTimer = true
                     /// 코드 타이머 활성화 합니다.
-                    self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
+                    self.viewModel.startCodeStayTimer(maxTime: 10)
                 }
             }
         } btnEvent: { success in
@@ -582,7 +582,7 @@ class OKZeroPayView: UIView {
                     /// 타이머를 활성화 합니다.
                     self.isTimer = true
                     /// 코드 타이머 활성화 합니다.
-                    self.viewModel.startCodeTimerEnabeld( maxTime: maxTime )
+                    self.viewModel.startCodeStayTimer(maxTime: 10)
                 }
             }
         } btnEvent: { success in

@@ -73,6 +73,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.10)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
+  - GoogleAnalytics (3.21.0)
   - GoogleAppMeasurement (10.11.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.11.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -143,6 +144,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Crashlytics
   - Firebase/Messaging
+  - GoogleAnalytics
   - lottie-ios (= 3.1.9)
   - SwiftKeychainWrapper
   - web3swift
@@ -163,6 +165,7 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseSessions
+    - GoogleAnalytics
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -191,6 +194,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 2a2c6859354cbec0a228a863d4daf6de7c74ced4
   FirebaseMessaging: 06253e9669434df0a40718fc82a90c78090f4704
   FirebaseSessions: a62ba5c45284adb7714f4126cfbdb32b17c260bd
+  GoogleAnalytics: abbea91ce20faea66c5b2305aa040d3f9992f66a
   GoogleAppMeasurement: d3dabccdb336fc0ae44b633c8abaa26559893cd9
   GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
@@ -204,6 +208,6 @@ SPEC CHECKSUMS:
   Web3Core: 050eb18f0434ac16c42eb7b2270fbce325935128
   web3swift: 8496f6615c3a1f86e7c9e5fe16c5422ef181527b
 
-PODFILE CHECKSUM: 5f3fa2529754f6e5b66fb2260e201c3521822995
+PODFILE CHECKSUM: 9573539130ac1b2892c0b8e0c0853dd4ce1eab14
 
 COCOAPODS: 1.12.0

@@ -12,6 +12,9 @@ import Combine
 import Photos
 import Contacts
 import AdSupport
+import GoogleAnalytics
+import Firebase
+import FirebaseMessaging
 
 
 /**
@@ -1070,6 +1073,43 @@ class BaseViewModel : NSObject {
                 /// 신규 정보를 세팅 합니다.
                 SharedDefaults.setKeyChainCustItem(KeyChainCustItem())
             }
+        }
+    }
+    
+    
+    /**
+     GA 트레킹을 활성화 합니다. ( J.D.H VER : 1.0.0 )     
+     - Date: 2023.07.20
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:False
+     */
+    func setGATracker()
+    {
+        guard let gai = GAI.sharedInstance() else {
+            assert(false, "Google Analytics not configured correctly")
+            return
+        }
+        gai.tracker(withTrackingId: APP_GA_TRACKING_KEY)
+    }
+    
+    
+    /**
+     GA 트레킹을 활성화 합니다. ( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.20
+     - Parameters:
+        - eventName : 이벤트 명 입니다.
+        - parameters : 이벤트 파라미터 정보들 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    static func setGAEvent( eventName : String = "", parameters : [String:Any]? ){
+        if let params = parameters {
+            Analytics.logEvent(eventName, parameters:params)
+        }
+        else
+        {
+            Analytics.logEvent(eventName, parameters:["":""])
         }
     }
     

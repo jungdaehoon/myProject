@@ -341,6 +341,8 @@ class LoginViewController: BaseViewController {
                             {
                                 /// 로그인 여부를 활성화 합니다.
                                 BaseViewModel.loginResponse!.islogin = true
+                                /// GA 이벤트 정보를 보냅니다.
+                                BaseViewModel.setGAEvent( eventName: "login", parameters: ["sign_up_method" : "P"] )
                                 /// FCM TOKEN 정보를 서버에 등록 합니다.
                                 let _ = self.viewModel.setFcmTokenRegister()
                                 /// 닉네임 변경 여부를 체크 합니다.
