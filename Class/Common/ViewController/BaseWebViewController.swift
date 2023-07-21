@@ -232,6 +232,8 @@ extension BaseWebViewController: WKNavigationDelegate
         if webView.url!.absoluteString == "about:blank" { return }
         Slog("webView didStartProvisionalNavigation url : \(webView.url!.absoluteString)", category: .network)
         LoadingView.default.show()
+        /// 네트웤 가용가능 여부 체크 합니다.
+        BaseViewModel.shared.isNetConnected = .checking
     }
     
     
@@ -277,6 +279,8 @@ extension BaseWebViewController: WKNavigationDelegate
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
         if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
         LoadingView.default.hide()
+        /// 에러 코드값을 체크 합니다.
+        self.webViewFailErrorCode(withError: error)
     }
     
     
@@ -291,6 +295,8 @@ extension BaseWebViewController: WKNavigationDelegate
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
         if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
         LoadingView.default.hide()
+        /// 에러 코드값을 체크 합니다.
+        self.webViewFailErrorCode(withError: error)
     }
     
     
@@ -309,6 +315,17 @@ extension BaseWebViewController: WKNavigationDelegate
         else
         {
             completionHandler(.performDefaultHandling, nil)
+        }
+    }
+    
+    
+    func webViewFailErrorCode( withError error: Error )
+    {
+        if(error._code == -1001/*request time out*/
+           || error._code == -1103/*resource exceeds maximum size.*/
+           || error._code == -1004/*Could not connect to the server.*/
+           || error._code == -999 /* NSURLErrorDomain */) {
+            Slog("webViewFailErrorCode : \(error._code)", category: .network)
         }
     }
 }

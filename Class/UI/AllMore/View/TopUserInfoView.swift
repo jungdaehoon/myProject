@@ -78,7 +78,7 @@ class TopUserInfoView: UIView {
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
         self.viewModel!.getAppMenuList(menuID: .ID_MYINFO).sink { url in
-            self.setDisplayWebView(url + "?flag=2" )
+            self.setDisplayWebView(url)
         }.store(in: &self.viewModel!.cancellableSet)
     }
 }

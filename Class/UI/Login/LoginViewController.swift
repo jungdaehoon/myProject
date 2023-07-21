@@ -322,6 +322,8 @@ class LoginViewController: BaseViewController {
                     if NC.S(response!.code).count == 0 {return}
                     /// 팝업 안내 문구 입니다.
                     var msg     : String        = ""
+                    /// URL 뒤에 추가되는 GET 파라미터 입니다.
+                    var getParam: String     = ""
                     /// 팝업 안내후 이동할 웹페이지 id 정보 입니다.
                     var menu_id : MENU_LIST     = .ID_MAIN
                     let code    : LOGIN_CODE    = LOGIN_CODE(rawValue: NC.S(response!.code))!
@@ -374,7 +376,7 @@ class LoginViewController: BaseViewController {
                             return
                         }
                         menu_id     = .ID_LOG_FIND_PW
-                        return
+                        break
                         /// 휴먼회원 입니다.
                     case ._code_0010_:
                         self.view.setDisplayWebView(WebPageConstants.URL_WAKE_SLEEP_USER, modalPresent: true, titleBarType: 2) { value in
@@ -394,7 +396,7 @@ class LoginViewController: BaseViewController {
                         menu_id     = .ID_LOG_CHANG_PW_90
                         self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
                             /// 비밀번호 변경 요청 페이지로 이동합니다.
-                            self.view.setDisplayWebView(url + "?flag=2", modalPresent: true, pageType: .PW90_NOT_CHANGE, titleBarType: 0) { value in
+                            self.view.setDisplayWebView(url, modalPresent: true, pageType: .PW90_NOT_CHANGE, titleBarType: 0) { value in
                                 /// 콜백 타입을 체크 합니다.
                                 switch value
                                 {
@@ -435,6 +437,7 @@ class LoginViewController: BaseViewController {
                     case ._code_1004_:
                         msg         = "고객님의 안전한 정보보호를 위해 앱 재설치 시, 휴대폰 본인인증이 필요합니다."
                         menu_id     = .ID_LOG_FIND_ID
+                        getParam    = "?flag=2"
                         break
                     }
                     
@@ -442,7 +445,7 @@ class LoginViewController: BaseViewController {
                     if msg == ""
                     {
                         self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
-                            self.view.setDisplayWebView(url + "?flag=2", modalPresent: true, titleBarHidden: true) { value in
+                            self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true) { value in
                                 self.setAppShield()
                             }
                         }.store(in: &self.viewModel.cancellableSet)
@@ -452,7 +455,7 @@ class LoginViewController: BaseViewController {
                     /// 안내 팝업 오픈 합니다.
                     CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
                         self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
-                            self.view.setDisplayWebView(url + "?flag=2", modalPresent: true, titleBarHidden: true) { value in
+                            self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true) { value in
                                 self.setAppShield()
                             }
                         }.store(in: &self.viewModel.cancellableSet)

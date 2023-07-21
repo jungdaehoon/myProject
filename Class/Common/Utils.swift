@@ -61,6 +61,8 @@ let APP_BUNDLE_ID       = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? 
 let APP_VERSION         = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
 /// 앱 취약점검 여부 입니다.
 let APP_INSPECTION      = Bundle.main.infoDictionary?["AppInspection"] as? String ?? "" == "YES" ? true : false
+/// 앱 안티디버깅 체크 여부 입니다.
+let APP_ANTI_DEBUG      = Bundle.main.infoDictionary?["ANTI_DEBUG"] as? String ?? "" == "YES" ? true : false
 /// GA 트래킹 키 값입니다.
 let APP_GA_TRACKING_KEY = Bundle.main.infoDictionary?["GAI_TRACKING_KEY"] as? String ?? ""
 

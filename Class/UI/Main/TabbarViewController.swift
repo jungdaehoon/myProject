@@ -76,6 +76,32 @@ class TabbarViewController: UITabBarController {
         tabBar.layer.applyShadow(color: .gray, alpha: 0.2, x: 0, y: 0, blur: 12)
         /// Notification 관련 이벤트를 연결 합니다.
         self.setNotification()
+        
+        /// 네트워크 사용 가능 여부를 체크 합니다.
+        BaseViewModel.shared.$isNetConnected.sink { checking in
+            /// 네트워크 체킹 타입 경우인지를 체크 합니다.
+            if checking == .checking
+            {
+                /// 네트워크 사용 불가능 경우 입니다.
+                if BaseViewModel.isNetworkCheck() == .fail
+                {
+                    /// 네트워크 연결 불가능 타입 설정 합니다.
+                    BaseViewModel.shared.isNetConnected = .fail
+                    /// 로딩바 디스플레이 중일 경우 히든 처리 합니다.
+                    LoadingView.default.hide()
+                    /// 네트워크 사용 불가능으로 안내 팝업을 오픈 합니다.
+                    CMAlertView().setAlertView( detailObject: NETWORK_ERR_MSG_DETAIL as AnyObject, cancelText: "확인") {  result in
+                        HttpErrorPop().show()
+                    }
+                }
+                else
+                {
+                    /// 네트워크 연결 가능 타입 설정 합니다.
+                    BaseViewModel.shared.isNetConnected = .connecting
+                }
+            }
+        }.store(in: &BaseViewModel.shared.cancellableSet)
+        
         /// 재로그인 이벤트 입니다.
         BaseViewModel.shared.$reLogin.sink { value in
             /// 로그인 최초 디스플레이 이후에 적용 됩니다.
@@ -94,7 +120,7 @@ class TabbarViewController: UITabBarController {
             } puchCompletion: {
                 
             }
-        }.store(in: &self.viewModel.cancellableSet)
+        }.store(in: &BaseViewModel.shared.cancellableSet)
         
         /// 딥링크 URL 이벤트 입니다.
         BaseViewModel.shared.$deepLinkUrl.sink { url in
@@ -126,7 +152,7 @@ class TabbarViewController: UITabBarController {
                     
                 }
             }
-        }.store(in: &self.viewModel.cancellableSet)
+        }.store(in: &BaseViewModel.shared.cancellableSet)
         
         /// 푸시 URL 링크 입니다.
         BaseViewModel.shared.$pushUrl.sink { url in
@@ -158,7 +184,7 @@ class TabbarViewController: UITabBarController {
                     
                 }
             }
-        }.store(in: &self.viewModel.cancellableSet)
+        }.store(in: &BaseViewModel.shared.cancellableSet)
     }
     
     

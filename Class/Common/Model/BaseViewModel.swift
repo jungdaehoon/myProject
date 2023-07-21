@@ -8,6 +8,7 @@
 import Foundation
 import AppTrackingTransparency
 import FirebaseMessaging
+import SystemConfiguration
 import Combine
 import Photos
 import Contacts
@@ -108,11 +109,13 @@ class BaseViewModel : NSObject {
     public static let shared            : BaseViewModel     = BaseViewModel()
     /// 로그아웃 여부를 가집니다. ( TabbarViewController:viewDidLoad $reLogin 이벤트 입니다.   )
     @Published public var reLogin       : Bool              = false
+    /// 네트워크 채킹 값입니다.  ( TabbarViewController:viewDidLoad $isNetConnected 이벤트 입니다.   )
+    @Published var isNetConnected       : IS_CHECKING       = .checking
     /// 딥링크 URL 정보를 가집니다. ( TabbarViewController:viewDidLoad $deepLinkUrl 이벤트 입니다.   )
     @Published public var deepLinkUrl   : String            = ""
     /// 딥링크 정보를 미리 저장하는 정보 입니다. ( 로그인 이후 사용 합니다. )
     public var saveDeepLinkUrl          : String            = ""
-    ///  PUSH URL 정보를 가집니다.
+    ///  PUSH URL 정보를 가집니다.  ( TabbarViewController:viewDidLoad $pushUrl 이벤트 입니다.   )
     @Published public var pushUrl       : String            = ""
     ///  PUSH 정보를 미리 저장하는 정보 입니다. ( 로그인 이후 사용 합니다. )
     public var savePushUrl              : String            = ""
@@ -136,7 +139,6 @@ class BaseViewModel : NSObject {
     var fcmPushResponse                 : FcmPushUpdateResponse?
     /// 만료된 계좌 재인증 데이터를 받습니다.
     var reBankAuthResponse              : ReBankAuthResponse?
-    
     
     
     
@@ -165,6 +167,8 @@ class BaseViewModel : NSObject {
         if showLoading {
             LoadingView.default.show()
         }
+        /// 네트웤 가용가능 여부 체크 합니다.
+        BaseViewModel.shared.isNetConnected = .checking
         curCancellable = publisher()
             .handleEvents(receiveOutput: { received in
             }, receiveCancel: {
@@ -341,6 +345,39 @@ class BaseViewModel : NSObject {
             return NetworkManager.requestAppStart(params: parameters)
         } completion: { model in
             BaseViewModel.appStartResponse = model
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     로그아웃 처리 합니다. ( J.D.H  VER : 1.0.0 )
+     - Date: 2023.03.20
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
+     */
+    func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
+        let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
+        /// 자동 로그인 값을 false 변경 합니다.
+        let custItem                = SharedDefaults.getKeyChainCustItem()
+        custItem!.auto_login        = false
+        SharedDefaults.setKeyChainCustItem(custItem!)
+        
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 로그아웃 요청 합니다.
+            return NetworkManager.requestLogOut()
+        } completion: { model in
+            /// 로그인 정보를 초기화 합니다.
+            BaseViewModel.loginResponse = nil
+            BaseViewModel.loginResponse = LoginResponse()
+            self.logoutResponse         = model
             // 앱 인터페이스 정상처리 여부를 넘깁니다.
             subject.send(model)
         }
@@ -1146,8 +1183,6 @@ class BaseViewModel : NSObject {
         디버깅접근 여부를 체크하여 리턴 합니다.
      */
     private func isDebugger() -> Bool {
-        /// 취약점 점검인 경우 입니다.
-        if APP_INSPECTION == false { return false }
         if getppid() != 1 { return true }
         var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
         var info: kinfo_proc = kinfo_proc()
@@ -1171,6 +1206,8 @@ class BaseViewModel : NSObject {
      - Returns:Fasle
      */
     func setAntiDebuggingChecking(){
+        /// 안티디버깅 여부를 체크 합니다.
+        if APP_ANTI_DEBUG == false { return }
         DispatchQueue.global(qos: .background).async {
             while(true)
             {
@@ -1188,6 +1225,41 @@ class BaseViewModel : NSObject {
                 }
             }
         }
+    }
+    
+    
+    /**
+     네트워크 사용 가능 여부를 체크 합니다. ( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.21
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:
+     네트워크 사용 가능 정보를 리턴 합니다. (IS_CHECKING?)
+     */
+    static func isNetworkCheck() -> IS_CHECKING?{
+        /// 네크워크 정보 구조체를 가져 옵니다.
+        var zeroAddress         = sockaddr_in()
+        zeroAddress.sin_len     = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family  = sa_family_t(AF_INET)
+        
+        /// 연결 가능한 호스트 정보를 가져 옵니다.
+        guard let reachability  = withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else { return .fail }
+        
+        /// 현재 네트워크 구성을 사용하여 지정된 네트워크 대상에 연결할 수 있는지 확인합니다.
+        var flags: SCNetworkReachabilityFlags? = SCNetworkReachabilityFlags()
+        if SCNetworkReachabilityGetFlags(reachability, &flags!) == false
+        {
+            return .fail
+        }
+        
+        /// 해당 플레그가 네트워크 연결을 사용 할수 있는지 여부를 체크 합니다.
+        let isReachable         = (flags!.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection     = (flags!.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection) ? .connecting : .fail
     }
     
     
@@ -1216,7 +1288,7 @@ class BaseViewModel : NSObject {
      - Parameters:Fasle
      - Throws: False
      - Returns:
-     안내 팝업 정보를 리턴 합니다. ([eventInfo]?)
+     로그인 여부를 리턴 합니다. ( Bool )
      */
     static func isLogin() -> Bool {
         /// 로그인 정보가 있는지를 체크합니다.
@@ -1257,36 +1329,5 @@ class BaseViewModel : NSObject {
     }
     
     
-    /**
-     로그아웃 처리 합니다. ( J.D.H  VER : 1.0.0 )
-     - Date: 2023.03.20
-     - Parameters:False
-     - Throws: False
-     - Returns:
-        로그아웃 처리 결과를 받습니다. (AnyPublisher<LogOutResponse?, ResponseError>)
-     */
-    func setLogOut() ->  AnyPublisher<LogOutResponse?, ResponseError> {
-        let subject             = PassthroughSubject<LogOutResponse?,ResponseError>()
-        /// 자동 로그인 값을 false 변경 합니다.
-        let custItem                = SharedDefaults.getKeyChainCustItem()
-        custItem!.auto_login        = false
-        SharedDefaults.setKeyChainCustItem(custItem!)
-        
-        requst() { error in
-            subject.send(completion: .failure(error))
-            return false
-        } publisher: {
-            /// 로그아웃 요청 합니다.
-            return NetworkManager.requestLogOut()
-        } completion: { model in
-            /// 로그인 정보를 초기화 합니다.
-            BaseViewModel.loginResponse = nil
-            BaseViewModel.loginResponse = LoginResponse()
-            self.logoutResponse         = model
-            // 앱 인터페이스 정상처리 여부를 넘깁니다.
-            subject.send(model)
-        }
-        return subject.eraseToAnyPublisher()
-    }
     
 }
