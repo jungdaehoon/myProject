@@ -53,11 +53,11 @@ class PointItemView: UIView {
         self.viewModel = model
         if let result = self.viewModel!.allModeResponse!.result {
             /// OK머니 정보입니다.
-            self.okMoneyText.text   = "\(result._balance!.addComma())"
+            self.okMoneyText.text   = "\(result._balance!.addComma())원"
             /// OK포인트 정보 입니다.
-            self.okPointText.text   = "\(result._user_point!.addComma())"
+            self.okPointText.text   = "\(result._user_point!.addComma())원"
             /// NFT 보유 카운트 입니다.
-            self.nftCount.text      = "\(result._own_nft_cnt!)"
+            self.nftCount.text      = "\(result._own_nft_cnt!)개"
             
             /// 계좌 정보가 없는 경우입니다.
             if result._acc_no!.isEmpty
@@ -69,19 +69,16 @@ class PointItemView: UIView {
                     if result._user_seq_no!.isEmpty
                     {
                         self.bankingNumber.text = OPEN_BANK_LINK
-                        self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
                     }
                     /// 사용자 일련번호가 있을경우 계좌 연결 안내를 합니다.
                     else
                     {
                         self.bankingNumber.text = NOT_BANK_LINK
-                        self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
                     }
                 }
                 else
                 {
                     self.bankingNumber.text = NOT_BANK_LINK
-                    self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
                 }
             }
             /// 계좌 정보가 있는 경우입니다.
@@ -99,13 +96,11 @@ class PointItemView: UIView {
                         if result._user_seq_no!.isEmpty
                         {
                             self.bankingNumber.text = OPEN_BANK_LINK
-                            self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
                         }
                         /// 사용자 일련번호가 있을경우 계좌 연결 안내를 합니다.
                         else
                         {
                             self.bankingNumber.text = NOT_BANK_LINK
-                            self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
                         }
                     }
                     else
@@ -114,19 +109,16 @@ class PointItemView: UIView {
                         if result._acc_aggre_yn == "N" || result._inquiry_agree_yn == "N" || result._transfer_agree_yn == "N"
                         {
                             self.bankingNumber.text = RE_BACK_AUTH
-                            self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
                         }
                         else
                         {
                             self.bankingNumber.text = "\(model.allModeResponse!.result!._bank_nm!)\(accno)"
-                            self.bankingNumber.font = UIFont(name: "Pretendard-Medium", size: 16.0)!
                         }
                     }
                 }
                 else
                 {
                     self.bankingNumber.text = "\(model.allModeResponse!.result!._bank_nm!)\(accno)"
-                    self.bankingNumber.font = UIFont(name: "Pretendard-Medium", size: 16.0)!
                 }
             }
         }

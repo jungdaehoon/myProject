@@ -14,7 +14,7 @@ import Foundation
 */
 class WebPageConstants {
     /// 도메인 URL 정보를 가져 옵니다.
-    static let baseURL                          = Bundle.main.infoDictionary?["Server"] as? String ?? ""
+    static let baseURL                          = Bundle.main.infoDictionary?["HOST_SERVER_URL"] as? String ?? ""
     /// 메인 페이지 입니다.
     static let URL_MAIN                         = baseURL + "/main.do"
     /// 휴먼 회원 페이지 입니다.

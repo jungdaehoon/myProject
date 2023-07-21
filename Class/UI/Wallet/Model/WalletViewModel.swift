@@ -23,7 +23,7 @@ class WalletViewModel : BaseViewModel {
     /// CBC IV 정보 입니다.
     static let W_ENCIV  : String = Bundle.main.infoDictionary?["W_ENCIV"] as? String ?? ""    
     /// 기본 폴더 정보 입니다.
-    static let defaultFolder        : String            = "/keystore"
+    static let defaultFolder : String = "/keystore"
     
     
     
@@ -597,7 +597,7 @@ class WalletViewModel : BaseViewModel {
             var isWrite : Bool = false
             DispatchQueue.global(qos: .userInitiated).async {
                 isWrite = FileManager.default.createFile(atPath: filePath, contents: object as? Data, attributes: nil)
-                Slog("addFile isWrite : \(isWrite)")
+                Slog("addFile isWrite : \(isWrite)",category: .wallet)
                 DispatchQueue.main.async {
                     promise(.success(isWrite))
                 }

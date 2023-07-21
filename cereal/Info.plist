@@ -4,9 +4,9 @@
 <dict>
 	<key>ANTI_DEBUG</key>
 	<string>$(ANTI_DEBUG)</string>
-	<key>AppInspection</key>
+	<key>APP_INSPECTION</key>
 	<string>$(APP_INSPECTION)</string>
-	<key>AppSuitServer</key>
+	<key>APPIRON_URL</key>
 	<string>${APPIRON_URL}</string>
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CONSOLE_OS_LOG</key>
-	<string>$(OS_LOG_ENABLED)</string>
+	<string>$(CONSOLE_OS_LOG)</string>
 	<key>GAI_TRACKING_KEY</key>
 	<string>UA-153393422-1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -92,7 +92,7 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>Server</key>
+	<key>HOST_SERVER_URL</key>
 	<string>${HOST_SERVER_URL}</string>
 	<key>UIBackgroundModes</key>
 	<array>
@@ -102,8 +102,8 @@
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>W_ENCIV</key>
-	<string>${WALLET_ENC_IV}</string>
+	<string>${W_ENCIV}</string>
 	<key>W_ENCKEY</key>
-	<string>${WALLET_ENC_KEY}</string>
+	<string>${W_ENCKEY}</string>
 </dict>
 </plist>

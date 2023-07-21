@@ -1124,6 +1124,7 @@ class BaseViewModel : NSObject {
     func setGATracker()
     {
         guard let gai = GAI.sharedInstance() else {
+            Slog("Google Analytics not configured correctly", category: .gaevent)
             assert(false, "Google Analytics not configured correctly")
             return
         }
@@ -1141,7 +1142,9 @@ class BaseViewModel : NSObject {
      - Returns:False
      */
     static func setGAEvent( eventName : String = "", parameters : [String:Any]? ){
+        Slog("setGAEvent eventName : \(eventName)", category: .gaevent)
         if let params = parameters {
+            Slog("setGAEvent parameters : \(params)", category: .gaevent)
             Analytics.logEvent(eventName, parameters:params)
         }
         else

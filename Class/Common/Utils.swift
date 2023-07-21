@@ -28,6 +28,8 @@ extension OSLog
     static let okpay    = OSLog(subsystem: log_subtype!, category: "OKPay")
     /// Console Log 확인시 "Wallet" 카테고리 구분 입니다.
     static let wallet   = OSLog(subsystem: log_subtype!, category: "Wallet")
+    /// Console Log 확인시 "GA Event" 카테고리 구분 입니다.
+    static let gaevent  = OSLog(subsystem: log_subtype!, category: "GAEvent")
     /// Console App Log 활성화 여부 입니다.
     static let OS_LOG   = Bundle.main.infoDictionary?["CONSOLE_OS_LOG"] as? String ?? "" == "YES" ? true : false
 }
@@ -60,7 +62,7 @@ let APP_BUNDLE_ID       = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? 
 /// 앱 버전 정보 입니다.
 let APP_VERSION         = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
 /// 앱 취약점검 여부 입니다.
-let APP_INSPECTION      = Bundle.main.infoDictionary?["AppInspection"] as? String ?? "" == "YES" ? true : false
+let APP_INSPECTION      = Bundle.main.infoDictionary?["APP_INSPECTION"] as? String ?? "" == "YES" ? true : false
 /// 앱 안티디버깅 체크 여부 입니다.
 let APP_ANTI_DEBUG      = Bundle.main.infoDictionary?["ANTI_DEBUG"] as? String ?? "" == "YES" ? true : false
 /// GA 트래킹 키 값입니다.

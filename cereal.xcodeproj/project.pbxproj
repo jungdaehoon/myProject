@@ -1945,6 +1945,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CONSOLE_OS_LOG = YES;
 				CURRENT_PROJECT_VERSION = 1.25.2.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UR9BW3835D;
@@ -1984,7 +1985,6 @@
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
 				MARKETING_VERSION = 1.25.2;
-				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고 개발";
@@ -1996,8 +1996,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				WALLET_ENC_IV = tPAG8Ru1SS5qjyEo;
-				WALLET_ENC_KEY = CpUzZ08BAcn46Ie1;
+				W_ENCIV = tPAG8Ru1SS5qjyEo;
+				W_ENCKEY = CpUzZ08BAcn46Ie1;
 			};
 			name = Debug;
 		};
@@ -2013,6 +2013,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CONSOLE_OS_LOG = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2051,7 +2052,6 @@
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
 				MARKETING_VERSION = 1.24.42;
-				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고";
@@ -2062,8 +2062,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/cereal/cereal-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				WALLET_ENC_IV = HghM24SDlb7ilX9V;
-				WALLET_ENC_KEY = T6t4iN4q1AUWzDBz;
+				W_ENCIV = HghM24SDlb7ilX9V;
+				W_ENCKEY = T6t4iN4q1AUWzDBz;
 			};
 			name = Release;
 		};
@@ -2215,6 +2215,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CONSOLE_OS_LOG = YES;
 				CURRENT_PROJECT_VERSION = 1.25.2.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UR9BW3835D;
@@ -2254,7 +2255,6 @@
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
 				MARKETING_VERSION = 1.25.2;
-				OS_LOG_ENABLED = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "올리고 개발";
@@ -2266,8 +2266,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				WALLET_ENC_IV = tPAG8Ru1SS5qjyEo;
-				WALLET_ENC_KEY = CpUzZ08BAcn46Ie1;
+				W_ENCIV = tPAG8Ru1SS5qjyEo;
+				W_ENCKEY = CpUzZ08BAcn46Ie1;
 			};
 			name = Stage;
 		};
