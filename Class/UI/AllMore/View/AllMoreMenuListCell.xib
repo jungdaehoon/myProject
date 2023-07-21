@@ -81,7 +81,7 @@
                         <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="allMore_ArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="yVj-m2-OnH">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="allMore_ArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="yVj-m2-OnH">
                         <rect key="frame" x="310" y="16" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="Bb7-2F-Zk2"/>

@@ -159,11 +159,6 @@ class AllMoreMenuListCell: UITableViewCell {
                 /// 결제 페이지는 추후 개발 후 연동 예정 입니다.
                 self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
             }
-
-            if self.menuInfo!.title! == "이번달 적립"
-            {
-                self.setDisplayWebView(WebPageConstants.URL_POINT_TRANSFER_LIST + "?tran_kn=1")
-            }
             
             if self.menuInfo!.title! == "OK마켓"
             {

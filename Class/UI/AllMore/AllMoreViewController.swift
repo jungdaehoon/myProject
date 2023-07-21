@@ -153,7 +153,7 @@ class AllMoreViewController: BaseViewController {
             self.monthInfo                                  = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "0원", menuType: .rightimg))
-            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "0원", menuType: .rightimg))
+            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "0원", menuType: .null))
             self.monthInfo!.setDisplay(menus: menus)
             self.stackView.addArrangedSubview(self.monthInfo!)
         }
@@ -162,7 +162,7 @@ class AllMoreViewController: BaseViewController {
             let result = self.viewModel.allModeResponse!.result!
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "\(result._current_month_pay_amt!.addComma())원", menuType: .rightimg))
-            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "\(result._current_month_save_amt!.addComma())원", menuType: .rightimg))
+            menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "\(result._current_month_save_amt!.addComma())원", menuType: .null))
             
             /// 화면 다시 디스플레이 요청 합니다.
             self.monthInfo!.reloadDisplay(menus, viewModel: self.viewModel)
@@ -217,9 +217,9 @@ class AllMoreViewController: BaseViewController {
             self.myOKMoneyInfo                = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo] = []
             menus.append(self.viewModel.getMenuInfo(title: "거래내역" ))
-            menus.append(self.viewModel.getMenuInfo(title: "OK머니 충전" ))
-            menus.append(self.viewModel.getMenuInfo(title: "OK머니 송금" ))
-            menus.append(self.viewModel.getMenuInfo(title: "OK머니 받기" ))
+            menus.append(self.viewModel.getMenuInfo(title: "OK머니 충전", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "OK머니 송금", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "OK머니 받기", menuType: .rightimg ))
             self.myOKMoneyInfo!.setDisplay(titleName: "MY OK머니", menus: menus)
             self.stackView.addArrangedSubview(self.myOKMoneyInfo!)
         }
@@ -246,10 +246,10 @@ class AllMoreViewController: BaseViewController {
         {
             self.myNFTInfo = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo] = []
-            menus.append(self.viewModel.getMenuInfo(title: "보유중인 NFT" ))
-            menus.append(self.viewModel.getMenuInfo(title: "NFT 거래내역" ))
-            menus.append(self.viewModel.getMenuInfo(title: "발행한 NFT" ))
-            menus.append(self.viewModel.getMenuInfo(title: "수집한 NFT" ))
+            menus.append(self.viewModel.getMenuInfo(title: "보유중인 NFT", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "NFT 거래내역", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "발행한 NFT", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "수집한 NFT", menuType: .rightimg ))
             self.myNFTInfo!.setDisplay(titleName: "MY NFT", menus: menus)
             self.stackView.addArrangedSubview(self.myNFTInfo!)
         }
