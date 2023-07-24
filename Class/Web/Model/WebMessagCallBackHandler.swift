@@ -311,7 +311,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     올리고 카카오톡 채널로 이동 합니다. ( J.D.H VER : 1.0.0 )
+     OKPay 카카오톡 채널로 이동 합니다. ( J.D.H VER : 1.0.0 )
     - Date: 2023.06.29
     - Parameters:False
     - Throws: False

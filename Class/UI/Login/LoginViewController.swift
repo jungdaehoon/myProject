@@ -435,7 +435,7 @@ class LoginViewController: BaseViewController {
                         return
                         /// 휴대폰 본인 재인증 입니다.
                     case ._code_1004_:
-                        msg         = "고객님의 안전한 정보보호를 위해 앱 재설치 시, 휴대폰 본인인증이 필요합니다."
+                        msg         = "고객님의 안전한 정보보호를 위해, 휴대폰 본인인증이 필요합니다."
                         menu_id     = .ID_LOG_FIND_ID
                         getParam    = "?flag=2"
                         break

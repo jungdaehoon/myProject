@@ -1957,7 +1957,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -1987,7 +1987,7 @@
 				MARKETING_VERSION = 1.25.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = "올리고 개발";
+				PROJECT_NAME = "OKpay 개발";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2024,7 +2024,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://m.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2054,7 +2054,7 @@
 				MARKETING_VERSION = 1.24.42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = "올리고";
+				PROJECT_NAME = OKpay;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2227,7 +2227,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:28443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "올리고 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2257,7 +2257,7 @@
 				MARKETING_VERSION = 1.25.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = "올리고 개발";
+				PROJECT_NAME = "OKpay개발";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

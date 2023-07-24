@@ -78,7 +78,7 @@ class LoginModel : BaseViewModel {
         parameters["wallet_address"]    = SharedDefaults.default.walletAddress
         
         let subject             = PassthroughSubject<LoginResponse?,ResponseError>()
-        requst() { error in
+        requst( errorPopEnabled: false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
