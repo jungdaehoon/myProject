@@ -4,10 +4,10 @@
 <dict>
 	<key>ANTI_DEBUG</key>
 	<string>$(ANTI_DEBUG)</string>
-	<key>APP_INSPECTION</key>
-	<string>$(APP_INSPECTION)</string>
 	<key>APPIRON_URL</key>
 	<string>${APPIRON_URL}</string>
+	<key>APP_INSPECTION</key>
+	<string>$(APP_INSPECTION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -29,8 +29,14 @@
 	</array>
 	<key>CONSOLE_OS_LOG</key>
 	<string>$(CONSOLE_OS_LOG)</string>
+	<key>FirebaseAutomaticScreenReportingEnabled</key>
+	<false/>
 	<key>GAI_TRACKING_KEY</key>
 	<string>UA-153393422-1</string>
+	<key>GA_DEBUG</key>
+	<string>$(GA_DEBUG)</string>
+	<key>HOST_SERVER_URL</key>
+	<string>${HOST_SERVER_URL}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>KAKAO_APP_KEY</key>
@@ -92,8 +98,6 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>HOST_SERVER_URL</key>
-	<string>${HOST_SERVER_URL}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

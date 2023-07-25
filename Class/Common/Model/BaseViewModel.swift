@@ -127,6 +127,8 @@ class BaseViewModel : NSObject {
     static var isLoginPageDisplay       : Bool              = false
     /// 안티디버깅 여부를 가집니다.
     static var isAntiDebugging          : Bool              = false
+    /// GA 클라이언트 ID 정보 입니다. GA  업데이트시 사용 합니다.
+    static var GAClientID               : String            = ""
     /// 앱 실드 데이터를 저장 합니다.
     var appShield                       : AppShield         = AppShield()
     /// 만보게 약관 동의 여부 데이터를 가집니다.
@@ -1113,6 +1115,24 @@ class BaseViewModel : NSObject {
         }
     }
     
+    /**
+     GA 트레킹을 디버깅 활성화 합니다. ( J.D.H VER : 1.0.0 )
+     - Date: 2023.07.20
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:False
+     */
+    func setFIRDebugEnabled(){
+        /// GA 디버킹 여부 체크 입니다.
+        if APP_GA_DEBUG_ENABLED
+        {
+            var debugMode = ProcessInfo.processInfo.arguments
+            debugMode.append("-FIRDebugEnabled")
+            ProcessInfo.processInfo.setValue(debugMode, forKey: "arguments")
+            
+        }
+    }
+    
     
     /**
      GA 트레킹을 활성화 합니다. ( J.D.H VER : 1.0.0 )     
@@ -1128,7 +1148,10 @@ class BaseViewModel : NSObject {
             assert(false, "Google Analytics not configured correctly")
             return
         }
+        gai.logger.logLevel         = GAILogLevel.verbose
+        gai.dispatchInterval        = 1
         gai.tracker(withTrackingId: APP_GA_TRACKING_KEY)
+        BaseViewModel.GAClientID    = gai.defaultTracker.get(kGAIClientId)
     }
     
     

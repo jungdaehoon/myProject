@@ -52,7 +52,7 @@ class LoadingView: UIView {
         commonInit()
         /// 로띠 뷰어를 추가합니다.
         self.aniView = LottieAniView(frame: CGRect(origin: .zero, size: self.loadingView.frame.size))
-        self.aniView!.setAnimationView(name: "loadingbar", loop: true)
+        self.aniView!.setAnimationView(name: "loadingbar", loop: true, animationSpeed: 2.0)
         self.loadingView.addSubview(self.aniView!)
     }
     

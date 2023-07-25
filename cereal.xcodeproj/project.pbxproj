@@ -1390,6 +1390,7 @@
 				8D205E2E29D133FA00F43C99 /* Resources */,
 				F2EBF4732A3C1CCB009BF601 /* ShellScript */,
 				E25F146BED29A7FCBF6FD22C /* [CP] Embed Pods Frameworks */,
+				79F4A123FC218B40BB3B8988 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1578,6 +1579,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		79F4A123FC218B40BB3B8988 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A06062C907C1B477BD0771CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1954,10 +1972,11 @@
 					"$(PROJECT_DIR)/Libs/XecureKeypad",
 					"$(PROJECT_DIR)/Libs/KakaoLink",
 				);
+				GA_DEBUG = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2021,10 +2040,11 @@
 					"$(PROJECT_DIR)/Libs/XecureKeypad",
 					"$(PROJECT_DIR)/Libs/KakaoLink",
 				);
+				GA_DEBUG = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://m.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2224,10 +2244,11 @@
 					"$(PROJECT_DIR)/Libs/XecureKeypad",
 					"$(PROJECT_DIR)/Libs/KakaoLink",
 				);
+				GA_DEBUG = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:28443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";

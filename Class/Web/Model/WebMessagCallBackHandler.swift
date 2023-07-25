@@ -18,6 +18,15 @@ import AddressBookUI
 
 
 /**
+ GA Error 타입 입니다. . ( J.D.H  VER : 1.0.0 )
+ - Date: 2023.07.25
+*/
+enum GAError : Error {
+    case requiredType
+}
+
+
+/**
  WebMessagCallBackHandler 에서 지원하지 않는 message handler 를 등록하여 처리합니다.
 1. 생성자 호출(init(webView: WKWebView), init(baseView: BaseWebViewController)
 2. addHandler 로 등록
@@ -62,6 +71,60 @@ class WebMessagCallBackHandler : NSObject  {
     init( webViewController : BaseWebViewController ) {            
     }
 
+    
+    /**
+     웹 인터페이스 GA 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 1.0.0 )
+     - Description : okpaygascriptCallbackHandler WebAPP 인터페이스 정보를 받아 처리 합니다.
+     - Date: 2023.07.25
+     - Parameters:
+        - message : 스크립트 메세지 정보를 받습니다.
+     - Throws: False
+     - Returns:False
+     */
+    func didReceiveGAMessage(message: WKScriptMessage) throws {
+        /// GA 데이터를 체크 합니다.
+        if let data = (message.body as AnyObject).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false) {
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] else {
+                fatalError("\(Error.self)")
+            }
+            /// GA 전송할 데이터 입니다.
+            var GAData:[String:Any] = [:]
+            do {
+                /// json 정보 중에 type 정보를 체크 합니다.
+                guard let type = json["type"] as? String else { throw GAError.requiredType}
+                /// GA 데이터를 세팅 합니다.
+                for(key,value) in json
+                {
+                    if key == "title"
+                    {
+                        if let value = value as? String {
+                            GAData[AnalyticsParameterScreenName] = value
+                        }
+                    }
+                    else if key.contains("ep_") || key.contains("up_")
+                    {
+                        if let value = value as? String {
+                            GAData[key] = value
+                        }
+                    }
+                }
+                /// 클라이언트 아이디 정보를 세팅 합니다.
+                GAData.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
+                /// 이벤트를 넘깁니다.
+                Analytics.logEvent(type == "P" ? "screenview" : "event", parameters: GAData)
+                
+            } catch {
+                switch error
+                {
+                case GAError.requiredType:
+                    Slog("GA4 Error : type 값이 확인 부탁드립ㄴ디ㅏ.")
+                    break
+                default:break
+                }
+            }
+        }
+    }
+    
     
     /** 
      웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 1.0.0 )

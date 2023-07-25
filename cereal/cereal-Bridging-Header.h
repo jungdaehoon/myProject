@@ -11,5 +11,15 @@
 #import <KakaoMessageTemplate/KakaoMessageTemplate.h>
 /// 탈옥 단말 체크 입니다.
 #import "IxSecureManager.h"
-/// 제로페이 암호관련 입니다.
-//#import "SEED.h"
+/// GA 관련  업체 요청으로 아래 라이브러리를 전부 연결 합니다. 
+#import "GoogleAnalytics/GAI.h"
+#import "GoogleAnalytics/GAIDictionaryBuilder.h"
+#import "GoogleAnalytics/GAIDictionaryBuilder.h"
+#import "GoogleAnalytics/GAIEcommerceFields.h"
+#import "GoogleAnalytics/GAIEcommerceProduct.h"
+#import "GoogleAnalytics/GAIEcommerceProductAction.h"
+#import "GoogleAnalytics/GAIEcommercePromotion.h"
+#import "GoogleAnalytics/GAIFields.h"
+#import "GoogleAnalytics/GAILogger.h"
+#import "GoogleAnalytics/GAITrackedViewController.h"
+#import "GoogleAnalytics/GAITracker.h"

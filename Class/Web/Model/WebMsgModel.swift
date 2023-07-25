@@ -15,9 +15,11 @@ import Combine
  */
 enum SCRIPT_MESSAGE_HANDLER_TYPE : String, CaseIterable {
     /// OKPay 기본 하이브리드 스크립트 입니다.
-    case hybridscript               = "hybridscript"
+    case hybridscript                   = "hybridscript"
     /// 웹 쿠키 업데이트 입니다.
-    case updateCookies              = "updateCookies"
+    case updateCookies                  = "updateCookies"
+    /// GA 스크립트 용 입니다.
+    case okpaygascriptCallbackHandler   = "okpaygascriptCallbackHandler"
 }
 
 

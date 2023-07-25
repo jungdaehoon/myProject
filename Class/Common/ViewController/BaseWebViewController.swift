@@ -95,6 +95,7 @@ class BaseWebViewController: UIViewController {
                 contentController.add(self, name: scriptmsg.rawValue)
             }
             self.messageHandler!.config.userContentController       = contentController
+            self.messageHandler!.config.applicationNameForUserAgent = "/GA_iOS_WK"
             self.webView                                            = WKWebView(frame: self.view.frame, configuration: self.messageHandler!.config)
             self.webView!.uiDelegate                                = self
             self.webView!.navigationDelegate                        = self
@@ -248,6 +249,7 @@ extension BaseWebViewController: WKNavigationDelegate
         if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
         if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
+        /*
         /// 웹페이지 정상 디스플레이 완료후 쿠키를 업데이트 합니다.
         if self.updateCookies == true
         {
@@ -264,6 +266,7 @@ extension BaseWebViewController: WKNavigationDelegate
                 webView.configuration.userContentController.removeAllUserScripts()
             }.store(in: &self.baseViewModel.cancellableSet)
         }
+         */
         LoadingView.default.hide()
     }
     
@@ -462,6 +465,17 @@ extension BaseWebViewController: WKScriptMessageHandler {
             }.store(in: &self.baseViewModel.cancellableSet)
             return
         }
+        
+        // 쿠키 업데이트 메세지 이벤트 입니다.
+        if message.name == "\(SCRIPT_MESSAGE_HANDLER_TYPE.okpaygascriptCallbackHandler)"
+        {
+            Slog("\(SCRIPT_MESSAGE_HANDLER_TYPE.okpaygascriptCallbackHandler) : \(message.body)")
+            /// GA 이벤트를 넘깁니다.
+            do { try messageHandler?.didReceiveGAMessage(message: message) }
+            catch{}
+            return
+        }
+        
         /// hybridscript 메세지 이벤트를 넘깁니다.
         messageHandler?.didReceiveMessage(message: message)
     }

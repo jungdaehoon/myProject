@@ -21,5 +21,6 @@ target 'cereal' do
   # Wallet SDK ( BigInt, CryptoSwift, Starscream, Web3Core, secp256k1 전부 지원 합니다. )
   pod 'web3swift'
   # GA sdk
-  pod 'GoogleAnalytics'
+  pod 'FirebaseAnalytics'
+  pod 'GoogleTagManager','~>7.0'
 end

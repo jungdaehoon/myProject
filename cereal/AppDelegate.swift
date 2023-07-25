@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// 시큐온 키패드 HotFix (23.04.10)
         /// 이전 프레임워크를 제거하고, 전달받은 프레임워크로 교체 이후, 아래 코드를 호출합니다.
         (XKConfigure.sharedInstance()! as AnyObject).setTlsCoinfgWithModule(TLS_MODULE_EXTERNAL_0, version: TLS_VERSION_1_2)
-        /// FirebaseApp (FCM,Crashlystics) 설정관련 연결 입니다.
+        /// GA 트래킹 디버깅 활성화 입니다.
+        self.viewModel.setFIRDebugEnabled()
+        /// FirebaseApp (FCM,Crashlystics,GA) 설정관련 연결 입니다.
         FirebaseApp.configure()
         /// GA 트래킹을 활성화 합니다.
         self.viewModel.setGATracker()
