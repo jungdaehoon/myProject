@@ -75,6 +75,10 @@ class HomeViewController: BaseViewController {
     override func setDisplayData() {
         super.setDisplayData()
         Slog("HomeViewController setDisplayData loadTabPageURL")
-        self.loadTabPageURL(WebPageConstants.URL_MAIN)        
+        /// 로그인 상태 인지를 체크 합니다.
+        if BaseViewModel.isLogin()
+        {
+            self.loadTabPageURL(WebPageConstants.URL_MAIN)
+        }                
     }
 }

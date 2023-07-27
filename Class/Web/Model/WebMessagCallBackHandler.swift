@@ -762,6 +762,14 @@ class WebMessagCallBackHandler : NSObject  {
                 picker.predicateForEnablingContact  = NSPredicate(format: "phoneNumbers.@count > 0 ")
                 self.target!.present(picker, animated:true)
             }
+            else
+            {
+                /// 연락처 이용활성화를 위해 설정으로 이동 안내 팝업 오픈 입니다.
+                CMAlertView().setAlertView(detailObject: "연락처 접근 서비스이용을 위해  \n 데이터 접근 권한을 허용해주세요." as AnyObject, cancelText: "확인") { event in
+                    UIApplication.openSettingsURLString.openUrl()
+                    
+                }
+            }
         }.store(in: &self.viewModel.cancellableSet)        
     }
     
@@ -1303,6 +1311,13 @@ class WebMessagCallBackHandler : NSObject  {
                 /// 겔러리 이미지 저장 요청 합니다.
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)),nil)
             }
+            else
+            {
+                /// 사진앨범 접근 안내 팝업 입니다.
+                CMAlertView().setAlertView(detailObject: "사진 보관함 접근 서비스이용을 위해  \n 데이터 접근 권한을 허용해주세요." as AnyObject, cancelText: "확인") { event in
+                    UIApplication.openSettingsURLString.openUrl()
+                }
+            }
         }.store(in: &self.viewModel.cancellableSet)
     }
     
@@ -1367,6 +1382,13 @@ class WebMessagCallBackHandler : NSObject  {
                     picker.allowsEditing    = true
                     self.target!.present(picker, animated: true)
                 }
+                else
+                {
+                    /// 카메라 접근 안내 팝업 입니다.
+                    CMAlertView().setAlertView(detailObject: "카메라 접근 서비스이용을 위해  \n 데이터 접근 권한을 허용해주세요." as AnyObject, cancelText: "확인") { event in
+                        UIApplication.openSettingsURLString.openUrl()
+                    }
+                }
             }.store(in: &self.viewModel.cancellableSet)
         }
         else
@@ -1382,6 +1404,13 @@ class WebMessagCallBackHandler : NSObject  {
                     picker.delegate         = self
                     picker.allowsEditing    = true
                     self.target!.present(picker, animated: true)
+                }
+                else
+                {
+                    /// 사진앨범 접근 안내 팝업 입니다.
+                    CMAlertView().setAlertView(detailObject: "갤러리 접근 서비스이용을 위해  \n 데이터 접근 권한을 허용해주세요." as AnyObject, cancelText: "확인") { event in
+                        UIApplication.openSettingsURLString.openUrl()
+                    }
                 }
             }.store(in: &self.viewModel.cancellableSet)
         }
