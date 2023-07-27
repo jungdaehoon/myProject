@@ -531,69 +531,75 @@ extension FullWebViewController {
                 {
                     /// 제로페이에 데이터 리턴할 콜백 스크립트를 저장 합니다.
                     var scricptCB   = NC.S(params["callbackUrl"] as? String)
-                    OKZeroPayQRCaptureView(params: params) { qrCodeCB in
-                        switch qrCodeCB
-                        {
-                            /// QRCdoe 읽기 실패 입니다.
-                        case .qr_fail,.cb_fail,.close :
-                                /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
-                                params.updateValue("N", forKey: "result")
-                                params.updateValue("", forKey: "qrCode")
-                                DispatchQueue.main.async {
-                                    do
-                                    {
-                                        /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
-                                        if let cbParam = try Utils.toJSONString(params)
+                    
+                    /// 카메라 사용 권한을 체크 합니다.
+                    self.viewModel.isCameraAuthorization().sink { value in
+                        OKZeroPayQRCaptureView(params: params) { qrCodeCB in
+                            switch qrCodeCB
+                            {
+                                /// QRCdoe 읽기 실패 입니다.
+                            case .qr_fail,.cb_fail,.close :
+                                    /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                                    params.updateValue("N", forKey: "result")
+                                    params.updateValue("", forKey: "qrCode")
+                                    DispatchQueue.main.async {
+                                        do
                                         {
-                                            scricptCB += "('\(cbParam)')"
-                                            self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                Slog(anyData as Any)
-                                                Slog(error as Any)
+                                            /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
+                                            if let cbParam = try Utils.toJSONString(params)
+                                            {
+                                                scricptCB += "('\(cbParam)')"
+                                                self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
+                                                    Slog(anyData as Any)
+                                                    Slog(error as Any)
+                                                }
                                             }
+                                        }catch{
+                                            Slog("QrCode toJSONString Error")
                                         }
-                                    }catch{
-                                        Slog("QrCode toJSONString Error")
+                                        OKZeroPayQRCaptureView().hide()
                                     }
-                                    OKZeroPayQRCaptureView().hide()
-                                }
-                            /// QRCode 정보를 넘깁니다
-                            case .qr_success(let qrcode) :
-                                /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
-                                params.updateValue("Y", forKey: "result")
-                                params.updateValue(NC.S(qrcode), forKey: "qrCode")
-                                DispatchQueue.main.async {
-                                    do
-                                    {
-                                        /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
-                                        if let cbParam = try Utils.toJSONString(params)
+                                /// QRCode 정보를 넘깁니다
+                                case .qr_success(let qrcode) :
+                                    /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                                    params.updateValue("Y", forKey: "result")
+                                    params.updateValue(NC.S(qrcode), forKey: "qrCode")
+                                    DispatchQueue.main.async {
+                                        do
                                         {
-                                            scricptCB += "('\(cbParam)')"
-                                            Slog("QrCode Success : \(scricptCB)")
-                                            self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                Slog(anyData as Any)
-                                                Slog(error as Any)
+                                            /// 총 파라미터를 문자로 변경 합니다. (.utf8 인코딩 )
+                                            if let cbParam = try Utils.toJSONString(params)
+                                            {
+                                                scricptCB += "('\(cbParam)')"
+                                                Slog("QrCode Success : \(scricptCB)")
+                                                self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
+                                                    Slog(anyData as Any)
+                                                    Slog(error as Any)
+                                                }
                                             }
+                                        }catch{
+                                            Slog("QrCode toJSONString Error")
                                         }
-                                    }catch{
-                                        Slog("QrCode toJSONString Error")
+                                        OKZeroPayQRCaptureView().hide()
                                     }
-                                    OKZeroPayQRCaptureView().hide()
-                                }
-                                break
-                            /// QRCode 인증 정상처리 후 받은 스크립트를 넘깁니다.
-                            case .cb_success( let scricpt ) :
-                                /// 제로페이에 QRCode 데이터를 전송 합니다.
-                                DispatchQueue.main.async {
-                                    self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
-                                        Slog(anyData as Any)
-                                        Slog(error as Any)
+                                    break
+                                /// QRCode 인증 정상처리 후 받은 스크립트를 넘깁니다.
+                                case .cb_success( let scricpt ) :
+                                    /// 제로페이에 QRCode 데이터를 전송 합니다.
+                                    DispatchQueue.main.async {
+                                        self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
+                                            Slog(anyData as Any)
+                                            Slog(error as Any)
+                                        }
+                                        OKZeroPayQRCaptureView().hide()
                                     }
-                                    OKZeroPayQRCaptureView().hide()
-                                }
-                            default:break
-                        }
-                        return
-                    }.show()
+                                default:break
+                            }
+                            return
+                        }.show()
+                    }.store(in: &self.viewModel.cancellableSet)
+                    
+                    
                 }
                 else
                 {

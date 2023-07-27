@@ -2228,15 +2228,15 @@
 			baseConfigurationReference = 19D41EB7ECEBA3711544E792 /* Pods-cereal.stage.xcconfig */;
 			buildSettings = {
 				ANTI_DEBUG = NO;
-				APPIRON_URL = "https://dm.mycereal.co.kr:8445/appiron-inspect_test/authCheck.call";
-				APP_INSPECTION = YES;
+				APPIRON_URL = "https://m.mycereal.co.kr:8445/appiron-inspect_real/authCheck.call";
+				APP_INSPECTION = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CONSOLE_OS_LOG = YES;
-				CURRENT_PROJECT_VERSION = 1.25.2.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2246,7 +2246,7 @@
 				);
 				GA_DEBUG = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				HOST_SERVER_URL = "https://dm.mycereal.co.kr:28443/matcs";
+				HOST_SERVER_URL = "https://staged.mycereal.co.kr:9443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -2275,7 +2275,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 1.25.2;
+				MARKETING_VERSION = 1.24.42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "OKpay개발";

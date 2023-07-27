@@ -117,7 +117,7 @@ class WebMessagCallBackHandler : NSObject  {
                 switch error
                 {
                 case GAError.requiredType:
-                    Slog("GA4 Error : type 값이 확인 부탁드립ㄴ디ㅏ.")
+                    Slog("GA4 Error : type 값이 확인 부탁드립ㄴ디ㅏ.", category: .gaevent)
                     break
                 default:break
                 }

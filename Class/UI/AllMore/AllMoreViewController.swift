@@ -210,7 +210,7 @@ class AllMoreViewController: BaseViewController {
         {
             self.payServiceInfo!.setDisplay(self.viewModel)
         }
-        
+        /*
         /// MY OK머니 영역 뷰어를 추가 합니다.
         if self.myOKMoneyInfo == nil
         {
@@ -227,7 +227,7 @@ class AllMoreViewController: BaseViewController {
         {
             self.myOKMoneyInfo!.setDisplay(self.viewModel)
         }
-        
+        */
         
         /// 중간 배너 뷰어를 추가 합니다.
         if self.bannerView == nil
@@ -240,7 +240,7 @@ class AllMoreViewController: BaseViewController {
             self.bannerView!.viewModel = self.viewModel
         }
         
-        
+        /*
         /// NFT 영역 뷰어를 추가 합니다.
         if self.myNFTInfo == nil
         {
@@ -257,9 +257,7 @@ class AllMoreViewController: BaseViewController {
         {
             self.myNFTInfo!.setDisplay(self.viewModel)
         }
-        
-        
-        
+        */
         
         /// 혜택 뷰어를 추가합니다.
         if self.boonInfo == nil

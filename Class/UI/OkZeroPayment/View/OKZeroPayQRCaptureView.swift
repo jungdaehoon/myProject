@@ -57,7 +57,7 @@ class OKZeroPayQRCaptureView: UIView {
                 }
             }
         }.store(in: &self.viewModel.cancellableSet)
-    
+        
         /// QR 코드 정보를 받습니다.
         self.viewModel.$qrCodeValue.sink { value in
             if value == .start { return }

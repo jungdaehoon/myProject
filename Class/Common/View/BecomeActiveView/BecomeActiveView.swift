@@ -17,6 +17,8 @@ class BecomeActiveView: UIView {
     @IBOutlet weak var logoView: UIView!
     /// 로고 애니 효과 뷰어 입니다.
     var aniView : LottieAniView?
+    /// 시스템 팝업 경우 로그 뷰어를 디스플레이 하지 않도록 체크 합니다.
+    static var systemPopupEnabled : Bool = false
     
     //MARK: - Init
     init(){
@@ -42,6 +44,8 @@ class BecomeActiveView: UIView {
      - Returns:False
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
+        /// 시스템 팝업 경우 예외 처리 입니다.
+        if BecomeActiveView.systemPopupEnabled { return }
         if let base = base {
             DispatchQueue.main.async {
                 base.addSubview(self)

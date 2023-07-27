@@ -71,6 +71,10 @@ class HttpErrorPop: BaseView {
     }
     
     @IBAction func btn_action(_ sender: Any) {
+        if TabBarView.tabbar == nil {
+            hide()
+            return
+        }
         TabBarView.setTabBarHome()        
     }
 }

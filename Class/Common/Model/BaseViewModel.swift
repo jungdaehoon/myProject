@@ -178,11 +178,12 @@ class BaseViewModel : NSObject {
                 //self?.action = .navigation(.close)
             })
             .sink(receiveCompletion: { [weak self] completion in
+                /// 로딩을 종료 합니다.
+                if showLoading { LoadingView.default.hide() }
                 /// Http Error 공통 팝업을 사용하지 않을 경우 입니다.
                 if errorPopEnabled == false { return }
                 guard self != nil else { return }
-                /// 로딩을 종료 합니다.
-                if showLoading { LoadingView.default.hide() }
+                
                 switch completion {
                 case .finished:
                     Slog("completion")
@@ -214,14 +215,14 @@ class BaseViewModel : NSObject {
                     }
                 }
             }, receiveValue: { value in
+                /// 로딩을 종료 합니다.
+                if showLoading { LoadingView.default.hide() }
                 /// Http Error 공통 팝업을 사용하지 않을 경우 입니다.
                 if errorPopEnabled == false
                 {
                     completion?(value)
                     return
                 }
-                /// 로딩을 종료 합니다.
-                if showLoading { LoadingView.default.hide() }
                 let code = value.code == nil ? NC.S(value.result_cd) : NC.S(value.code)
                 /// 정상 처리가 아닌 경우 입니다.
                 if code != "0000"
@@ -336,10 +337,10 @@ class BaseViewModel : NSObject {
     func setAppStart() -> AnyPublisher<AppStartResponse?, ResponseError> {
         var parameters  : [String:Any] = [:]
         parameters = ["os_cd"                   : "I",
-                      "appshield_session_id"    : self.appShield.session_id! ,
-                      "appshield_token"         : self.appShield.token!]
+                      "appshield_session_id"    : NC.S(self.appShield.session_id) ,
+                      "appshield_token"         : NC.S(self.appShield.token)]
         let subject             = PassthroughSubject<AppStartResponse?,ResponseError>()
-        requst( showLoading : false ) { error in
+        requst( showLoading : false, errorPopEnabled: false ) { error in
             subject.send(completion: .failure(error))
             return false
         } publisher: {
@@ -809,8 +810,12 @@ class BaseViewModel : NSObject {
     func isCameraAuthorization() -> Future<Bool, Never>
     {
         return Future<Bool, Never> { promise in
+            /// 시스템 팝업 여부 체크 입니다.
+            BecomeActiveView.systemPopupEnabled = true
             AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
                 DispatchQueue.main.async {
+                    /// 시스템 팝업 여부 체크 입니다.
+                    BecomeActiveView.systemPopupEnabled = false
                     promise(.success(granted))
                 }
             })
@@ -828,6 +833,8 @@ class BaseViewModel : NSObject {
     func isPhotoSaveAuthorization() -> Future<Bool, Never>
     {
         return Future<Bool, Never> { promise in
+            /// 시스템 팝업 여부 체크 입니다.
+            BecomeActiveView.systemPopupEnabled = true
             PHPhotoLibrary.requestAuthorization( { status in
                 var check : Bool = false
                 switch status{
@@ -845,6 +852,8 @@ class BaseViewModel : NSObject {
                 }
                 
                 DispatchQueue.main.async {
+                    /// 시스템 팝업 여부 체크 입니다.
+                    BecomeActiveView.systemPopupEnabled = false
                     promise(.success(check))
                 }
             })
@@ -862,9 +871,13 @@ class BaseViewModel : NSObject {
     func isContactAuthorization() -> Future<Bool, Never>
     {
         return Future<Bool, Never> { promise in
+            /// 시스템 팝업 여부 체크 입니다.
+            BecomeActiveView.systemPopupEnabled = true
             CNContactStore().requestAccess(for: .contacts, completionHandler: {
                 success, error in
                 DispatchQueue.main.async {
+                    /// 시스템 팝업 여부 체크 입니다.
+                    BecomeActiveView.systemPopupEnabled = false
                     promise(.success(success))
                 }
             })
@@ -882,9 +895,13 @@ class BaseViewModel : NSObject {
     func isAPNSAuthorization() -> Future<Bool, Never>
     {
         return Future<Bool, Never> { promise in
+            /// 시스템 팝업 여부 체크 입니다.
+            BecomeActiveView.systemPopupEnabled = true
             /// PUSH 사용 할지 인증을 요청 합니다.
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: { bool,Error in
                 DispatchQueue.main.async {
+                    /// 시스템 팝업 여부 체크 입니다.
+                    BecomeActiveView.systemPopupEnabled = false
                     UIApplication.shared.registerForRemoteNotifications()
                     promise(.success(bool))
                 }
@@ -906,9 +923,13 @@ class BaseViewModel : NSObject {
             /// iOS 14 버전 이후부터  앱 추적 접근 허용 여부를 요청 합니다.
             if #available(iOS 14, *)
             {
+                /// 시스템 팝업 여부 체크 입니다.
+                BecomeActiveView.systemPopupEnabled = true
                 /// 앱 추적 (IDFA) 허용 여부를 요청 합니다
                 /// 난독화 안할떄 버젼.
                 ATTrackingManager.requestTrackingAuthorization { status in
+                    /// 시스템 팝업 여부 체크 입니다.
+                    BecomeActiveView.systemPopupEnabled = false
                     /// 승인 되었습니다.
                     if status == .authorized
                     {
