@@ -50,8 +50,15 @@ class BannerView: UIView {
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        if let tabbar = TabBarView.tabbar {
+            tabbar.setSelectedIndex(.finance)
+        }
+        
+        
+        /* /// 일단 금융 탭으로 이동 하도록 하며 아래는 주석 합니다.
         let result  = self.viewModel!.allModeResponse!.result!
         var openBankUrl = ""
+         
         /// 오픈뱅킹 여부를 체크 합니다.
         if result._openbank!
         {
@@ -72,6 +79,7 @@ class BannerView: UIView {
         /// 오픈 뱅킹 페이지를 호출 합니다.
         self.setDisplayWebView(openBankUrl, modalPresent: true, pageType: .openbank_type, titleBarType: 2) { value in
         }
+         */
         
     }    
 }

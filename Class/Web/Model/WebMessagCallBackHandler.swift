@@ -1970,17 +1970,8 @@ class WebMessagCallBackHandler : NSObject  {
                                 }
                             }
                         }
-                        /// 약관 동의 요청에 실패 하였습니다.
-                        else
-                        {
-                            
-                        }
                     }
                 }.store(in: &self.viewModel.cancellableSet)
-            }
-            else
-            {
-                
             }
         }
     }

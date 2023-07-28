@@ -301,7 +301,7 @@ class AllMoreViewController: BaseViewController {
             /// 서비스안내 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_POINT)
             {
-                menus.append(self.viewModel.getMenuInfo(title: "서비스안내", menuType: .rightimg ))
+                menus.append(self.viewModel.getMenuInfo(title: "OK포인트 안내", menuType: .rightimg ))
             }
             /// 공지사항 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_NOTICE)

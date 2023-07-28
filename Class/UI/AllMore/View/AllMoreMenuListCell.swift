@@ -280,9 +280,9 @@ class AllMoreMenuListCell: UITableViewCell {
                 }).store(in: &model.cancellableSet)
             }
             
-            if self.menuInfo!.title! == "서비스안내"
+            if self.menuInfo!.title! == "OK포인트 안내"
             {
-                /// 포인트안내 (서비스안내) URL 입니다.
+                /// OK포인트 안내 (서비스안내) URL 입니다.
                 model.getAppMenuList(menuID: .ID_POINT).sink(receiveValue: { url in
                     if url.isValid
                     {
