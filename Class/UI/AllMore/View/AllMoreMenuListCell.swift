@@ -302,8 +302,6 @@ class AllMoreMenuListCell: UITableViewCell {
                 }).store(in: &model.cancellableSet)
             }
         }
-        
-        
     }
 }
 

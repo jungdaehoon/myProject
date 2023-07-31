@@ -47,10 +47,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJd-Be-i3H" userLabel="Type Icon View">
-                        <rect key="frame" x="29.999999999999996" y="19.666666666666668" width="34.666666666666657" height="17.000000000000004"/>
+                        <rect key="frame" x="30.000000000000004" y="19.666666666666668" width="33.333333333333343" height="17.000000000000004"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BF-yV-iht">
-                                <rect key="frame" x="4.0000000000000018" y="4" width="26.666666666666671" height="10"/>
+                                <rect key="frame" x="3.9999999999999982" y="4" width="25.333333333333329" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="Dbb-DX-sk0"/>
                                 </constraints>

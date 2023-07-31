@@ -249,7 +249,7 @@ extension BaseWebViewController: WKNavigationDelegate
         if let loadCompletion = self.webLoadCompletion { loadCompletion(true) }
         /// 새로고침 중인지를 체크 후 새로고침 뷰어를 종료 합니다.
         if self.webViewRefresh!.isRefreshing == true { self.webViewRefresh!.endRefreshing() }
-        /*
+        
         /// 웹페이지 정상 디스플레이 완료후 쿠키를 업데이트 합니다.
         if self.updateCookies == true
         {
@@ -266,7 +266,7 @@ extension BaseWebViewController: WKNavigationDelegate
                 webView.configuration.userContentController.removeAllUserScripts()
             }.store(in: &self.baseViewModel.cancellableSet)
         }
-         */
+         
         LoadingView.default.hide()
     }
     
