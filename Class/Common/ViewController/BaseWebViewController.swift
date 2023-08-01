@@ -211,8 +211,6 @@ class BaseWebViewController: UIViewController {
     func initWebPage(){
         if self.messageHandler != nil
         {
-            /// 웹 화면 케시를 전부 삭제 합니다.
-            self.messageHandler!.setWebViewClearCache()
             /// 웹 화면 히스토리를 초기화 합니다.
             self.webView!.clearHistory()
             /// 화면을 초기화 합니다.

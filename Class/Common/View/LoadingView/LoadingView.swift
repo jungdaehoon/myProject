@@ -14,7 +14,7 @@ import UIKit
  */
 class LoadingView: UIView {
     /// 최대 로딩 타임 입니다.
-    private var LOADING_MAX_TIME            = 10.0
+    private var LOADING_MAX_TIME            = 20.0
     /// 로딩 디스플레이 뷰어 입니다.
     @IBOutlet weak var loadingView  : UIImageView!
     /// 로딩중 이미지를 체크 합니다.

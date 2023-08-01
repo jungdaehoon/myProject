@@ -78,8 +78,6 @@ class AllMoreViewController: BaseViewController {
         self.isWebViewHidden         = true
         /// 화면 데이터 요청후 디스플레이로 웹뷰 화면을 히든처리 힙니다.
         self.webDisplayView.isHidden = self.isWebViewHidden
-        /// 웹 화면 케시를 전부 삭제 합니다.
-        self.messageHandler!.setWebViewClearCache()
         /// 웹 화면 히스토리를 초기화 합니다.
         self.webView!.clearHistory()
         /// 화면을 초기화 합니다.
