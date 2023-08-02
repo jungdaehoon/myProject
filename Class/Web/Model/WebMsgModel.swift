@@ -170,21 +170,58 @@ class WebMsgModel : BaseViewModel {
     func setUpdateImage( image : UIImage ) -> Future<String?, Never>
     {
         return Future<String?, Never> { promise in
-            /// 서버에 이미지를 전송 합니다.
-            self.request(image: image, url: APIConstant.API_NFT_IMAGE).sink { value in
-                /// NFT 업로드 결과용 스크립트 데이터를 기본 정보로 설정 합니다.
-                var retJsonStr = self.getNftReturnJsonMsg()
-                if let value = value,
-                   let data  = value["data"] as? [String:Any],
-                   let url   = data["url"] as? String
-                {
-                    let infoStr = data["info"] as? String ?? ""
-                    /// NFT 업로드 결과용 스크립트를 가져 옵니다.
-                    retJsonStr  = self.getNftReturnJsonMsg(url,infoStr)
-                }
-                promise(.success(retJsonStr))
-            }.store(in: &self.cancellableSet)
+            /// 업로드 가능 사이즈를 체크하여 리턴 합니다.
+            if let uploadImage = self.setNFTUploadCheckingImg(image: image) {
+                /// 서버에 이미지를 전송 합니다.
+                self.request(image: uploadImage, url: APIConstant.API_NFT_IMAGE).sink { value in
+                    /// NFT 업로드 결과용 스크립트 데이터를 기본 정보로 설정 합니다.
+                    var retJsonStr = self.getNftReturnJsonMsg()
+                    if let value = value,
+                       let data  = value["data"] as? [String:Any],
+                       let url   = data["url"] as? String
+                    {
+                        let infoStr = data["info"] as? String ?? ""
+                        /// NFT 업로드 결과용 스크립트를 가져 옵니다.
+                        retJsonStr  = self.getNftReturnJsonMsg(url,infoStr)
+                    }
+                    promise(.success(retJsonStr))
+                }.store(in: &self.cancellableSet)
+            }
         }
+    }
+    
+    
+    /**
+     이미지가 를 등록 가능한 사이즈로 체크 후 리턴 합니다.( J.D.H VER : 1.0.0 )
+     - Description: 월렛 이미지 업로드 기준 사이즈는 600*600 사이즈로 업로드 되어 해당 이미지 사이즈를 체크 후 기준 사이즈에 맞춰 리턴 하도록 합니다.
+     - Date: 2023.08.02
+     - parameters:
+        - image : 원본 이미지를 받습니다.
+     - Throws:False
+     - returns:
+         NFT 업로드에 맞춰 리사이징 된 이미지를 리턴 합니다. (UIImage)
+    */
+    func setNFTUploadCheckingImg( image : UIImage ) -> UIImage? {
+        if image.size.height < 600
+        {
+            let newimage = image.resize(newHeight: 600)
+            if newimage.size.width < 600
+            {
+                return newimage.resize(newWidth: 600)
+            }
+            return newimage
+        }
+        
+        if image.size.width < 600
+        {
+            let newimage = image.resize(newWidth: 600)
+            if newimage.size.width < 600
+            {
+                return newimage.resize(newHeight: 600)
+            }
+            return newimage.resize(newWidth: 600)
+        }
+        return nil
     }
     
     

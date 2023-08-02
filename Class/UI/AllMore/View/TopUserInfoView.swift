@@ -53,6 +53,7 @@ class TopUserInfoView: UIView {
             self.nickNameText.text  = "\(result._nickname!)"
             /// 이미지 URL 을 생성 합니다.
             if let url = URL(string: WebPageConstants.baseURL + "/all/profileImage?userNo=" + result._user_no!) {
+                Slog("load image : \(url.absoluteString)")
                 UIImageView.loadImage(from: url).sink { image in
                     if let profileImage = image {
                         /// NFT ID 정보가 있는지를 체크 합니다.
@@ -69,7 +70,17 @@ class TopUserInfoView: UIView {
                             self.profileImage.layer.mask = nil
                         }
                     }
+                    else
+                    {
+                        self.profileImage.image = UIImage(named: "allMore_UserDefault")
+                        self.profileImage.layer.mask = nil
+                    }
                 }.store(in: &self.viewModel!.cancellableSet)
+            }
+            else
+            {
+                self.profileImage.image = UIImage(named: "allMore_UserDefault")
+                self.profileImage.layer.mask = nil
             }
         }
     }

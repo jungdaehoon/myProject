@@ -1976,7 +1976,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2044,7 +2044,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://m.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2248,7 +2248,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://staged.mycereal.co.kr:9443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "OKpay 개발";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2278,7 +2278,7 @@
 				MARKETING_VERSION = 1.24.42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = "OKpay개발";
+				PROJECT_NAME = "OKpay Stage";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2287,8 +2287,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				W_ENCIV = tPAG8Ru1SS5qjyEo;
-				W_ENCKEY = CpUzZ08BAcn46Ie1;
+				W_ENCIV = HghM24SDlb7ilX9V;
+				W_ENCKEY = T6t4iN4q1AUWzDBz;
 			};
 			name = Stage;
 		};
