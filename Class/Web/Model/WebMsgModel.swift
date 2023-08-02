@@ -221,7 +221,7 @@ class WebMsgModel : BaseViewModel {
             }
             return newimage.resize(newWidth: 600)
         }
-        return nil
+        return image
     }
     
     

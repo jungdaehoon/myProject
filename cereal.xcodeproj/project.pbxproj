@@ -2042,7 +2042,7 @@
 				);
 				GA_DEBUG = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				HOST_SERVER_URL = "https://m.mycereal.co.kr:8443/matcs";
+				HOST_SERVER_URL = "https://m.okaypay.co.kr/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
