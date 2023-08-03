@@ -12,7 +12,7 @@ import os
 
 
 /**
- Console App Log 확인을 위해 사용 합니다. ( J.D.H VER : 1.24.43 )
+ Console App Log 확인을 위해 사용 합니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.05.03
  */
 extension OSLog
@@ -36,7 +36,7 @@ extension OSLog
 
 
 /**
- Log 확인을 위해 사용 합니다. ( J.D.H VER : 1.24.43 )
+ Log 확인을 위해 사용 합니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.05.03
  - Parameters:
     - object : 로그 정보 입니다.
@@ -290,13 +290,13 @@ class Utils {
 
 
 /**
- Nil 체크 하는 클래스 입니다.  ( J.D.H VER : 1.24.43 )
+ Nil 체크 하는 클래스 입니다.  ( J.D.H VER : 2.0.0 )
 - Date: 2023.03.16
 */
 class NC {
 
     /**
-     NIL 체크 후 안내 팝업을 오픈 하며 앱을 강제 종료 합니다. ( J.D.H VER : 1.24.43 )
+     NIL 체크 후 안내 팝업을 오픈 하며 앱을 강제 종료 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
@@ -317,7 +317,7 @@ class NC {
     
     
     /**
-     NIL 체크 후 안내 팝업을 오픈 하며 현 페이지를  종료 하며 이전 페이지로 돌아 갑니다.  ( J.D.H VER : 1.24.43 )
+     NIL 체크 후 안내 팝업을 오픈 하며 현 페이지를  종료 하며 이전 페이지로 돌아 갑니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
@@ -372,7 +372,7 @@ class NC {
     
     
     /**
-     Int 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
+     Int 형 데이터를 체크  합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:
         - object : 체크할 Int 형 데이터 입니다.
@@ -389,7 +389,7 @@ class NC {
     
     
     /**
-     Double 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
+     Double 형 데이터를 체크  합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:
         - object : 체크할 Double 형 데이터 입니다.
@@ -406,7 +406,7 @@ class NC {
     
     
     /**
-     String 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
+     String 형 데이터를 체크  합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:
         - object : 체크할 String 형 데이터 입니다.
@@ -424,7 +424,7 @@ class NC {
     
     
     /**
-     Bool 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
+     Bool 형 데이터를 체크  합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.03
      - Parameters:
         - object : 체크할 Bool 형 데이터 입니다.

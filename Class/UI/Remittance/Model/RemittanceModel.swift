@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 /**
- 송금 웹뷰 모델 입니다.  ( J.D.H VER : 1.24.43 )
+ 송금 웹뷰 모델 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.22
 */
 class RemittanceModel : BaseViewModel{
@@ -17,7 +17,7 @@ class RemittanceModel : BaseViewModel{
     var selectAccountListResponse : SelectAccountListResponse?    
     
     /**
-     은행 계좌 리스트 정보를 요청 입니다. ( J.D.H VER : 1.24.43 )
+     은행 계좌 리스트 정보를 요청 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.21
      - Parameters:False
      - Throws: False

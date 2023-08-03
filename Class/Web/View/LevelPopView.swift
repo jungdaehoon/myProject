@@ -9,7 +9,7 @@ import UIKit
 
 
 /**
- 레벨 팝업 입니다.   ( J.D.H VER : 1.24.43 )
+ 레벨 팝업 입니다.   ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.29
  */
 class LevelPopView: BaseView {
@@ -36,7 +36,7 @@ class LevelPopView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:False
      - Throws: False
@@ -60,7 +60,7 @@ class LevelPopView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:False
      - Throws: False
@@ -76,7 +76,7 @@ class LevelPopView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:False
      - Throws: False

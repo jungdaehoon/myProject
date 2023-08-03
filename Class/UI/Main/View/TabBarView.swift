@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 탭바 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
+ 탭바 뷰어 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
  */
 class TabBarView : UIView
@@ -41,7 +41,7 @@ class TabBarView : UIView
     
     //MARK: - 지원 메서드 입니다
     /**
-     탭바  뷰어 초기화 메서드 입니다.  ( J.D.H VER : 1.24.43 )
+     탭바  뷰어 초기화 메서드 입니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      */
     func initTabBarView(){
@@ -54,7 +54,7 @@ class TabBarView : UIView
     
     
     /**
-     탭 아이템 기본 상태로 설정 합니다.   ( J.D.H VER : 1.24.43 )
+     탭 아이템 기본 상태로 설정 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:False
      - Returns:False
@@ -69,7 +69,7 @@ class TabBarView : UIView
     
     
     /**
-     탭 아이템 활성화 여부를 받아 활성화 합니다..   ( J.D.H VER : 1.24.43 )
+     탭 아이템 활성화 여부를 받아 활성화 합니다..   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:
         - subViews : 활성화될 아이템 뷰어 입니다.
@@ -136,7 +136,7 @@ class TabBarView : UIView
     
     
     /**
-     변경할 탭 카운트를 받아 활성화 합니다..   ( J.D.H VER : 1.24.43 )
+     변경할 탭 카운트를 받아 활성화 합니다..   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:
         - pageTag : 활성화될 아이템 넘버 입니다.
@@ -158,7 +158,7 @@ class TabBarView : UIView
     
     
     /**
-     홈 탭으로 이동 합니다..   ( J.D.H VER : 1.24.43 )
+     홈 탭으로 이동 합니다..   ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.10
      - Parameters:
         - pageTag : 활성화될 아이템 넘버 입니다.
@@ -196,7 +196,7 @@ class TabBarView : UIView
     
     
     /**
-     변경할 탭 카운트를 받아 이동하며 해당 페이지를 새로고침 합니다. ( J.D.H VER : 1.24.43 )
+     변경할 탭 카운트를 받아 이동하며 해당 페이지를 새로고침 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.08
      - Parameters:
         - pageIndex : 활성화될 아이템 넘버 입니다.
@@ -233,7 +233,7 @@ class TabBarView : UIView
 
 
 /**
- 탭바 상단 쉐도우 라인을 그립니다. ( J.D.H VER : 1.24.43 )
+ 탭바 상단 쉐도우 라인을 그립니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
  */
 extension CALayer {

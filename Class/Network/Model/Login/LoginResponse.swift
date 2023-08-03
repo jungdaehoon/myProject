@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- 로그인 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+ 로그인 정보를 받습니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.13
 */
 struct LoginResponse: BaseResponse {
@@ -43,7 +43,7 @@ struct LoginResponse: BaseResponse {
 }
 
 /**
- 로그인 주요 정보 입니다. ( J.D.H VER : 1.24.43 )
+ 로그인 주요 정보 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.13
 */
 struct loginInfo: Codable
@@ -98,7 +98,7 @@ struct loginInfo: Codable
 
 
 /**
- 유저의 제휴사 금액 정보 입니다.. ( J.D.H VER : 1.24.43 )
+ 유저의 제휴사 금액 정보 입니다.. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.13
 */
 struct asset_info: Codable

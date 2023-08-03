@@ -18,7 +18,7 @@ import AddressBookUI
 
 
 /**
- GA Error 타입 입니다. . ( J.D.H VER : 1.24.43 )
+ GA Error 타입 입니다. . ( J.D.H VER : 2.0.0 )
  - Date: 2023.07.25
 */
 enum GAError : Error {
@@ -42,7 +42,7 @@ enum GAError : Error {
 
 
 /**
- 웹 인터페이스 컨트롤 입니다. ( J.D.H VER : 1.24.43 )
+ 웹 인터페이스 컨트롤 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.28
  */
 class WebMessagCallBackHandler : NSObject  {
@@ -61,7 +61,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     // MARK: - init
     /**
-     웹 인터페이스 헨들러 초기화를 진행 합니다.  ( J.D.H VER : 1.24.43 )
+     웹 인터페이스 헨들러 초기화를 진행 합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:
         - webViewController : 연결 컨트롤 뷰어 입니다.
@@ -73,7 +73,7 @@ class WebMessagCallBackHandler : NSObject  {
 
     
     /**
-     웹 인터페이스 GA 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 1.24.43 )
+     웹 인터페이스 GA 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Description : okpaygascriptCallbackHandler WebAPP 인터페이스 정보를 받아 처리 합니다.
      - Date: 2023.07.25
      - Parameters:
@@ -127,7 +127,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /** 
-     웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 1.24.43 )
+     웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Description : hybridscript WebAPP 인터페이스 정보를 받아 처리 합니다.
      - Date: 2023.03.28
      - Parameters:
@@ -374,7 +374,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     OKPay 카카오톡 채널로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     OKPay 카카오톡 채널로 이동 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.29
     - Parameters:False
     - Throws: False
@@ -386,7 +386,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     GA  Event 값을 받아 추가 합니다. ( J.D.H VER : 1.24.43 )
+     GA  Event 값을 받아 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.20
      - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -411,7 +411,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     하단에 계좌 선택  팝업을 오픈 합니다. ( J.D.H VER : 1.24.43 )
+     하단에 계좌 선택  팝업을 오픈 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.27
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -456,7 +456,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다. ( J.D.H VER : 1.24.43 )
+     지갑 : QR주소 읽기 : QR코드에서 주소를 읽어 전달 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -484,7 +484,7 @@ class WebMessagCallBackHandler : NSObject  {
         
     
     /**
-     지갑 : 복구구문 보기 : 니모닉 정보를 화면에 표시 합니다. ( J.D.H VER : 1.24.43 )
+     지갑 : 복구구문 보기 : 니모닉 정보를 화면에 표시 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -525,7 +525,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     지갑 : 복구 : 니모닉을 받아 지갑을 복구 하고 주소 전달 합니다. ( J.D.H VER : 1.24.43 )
+     지갑 : 복구 : 니모닉을 받아 지갑을 복구 하고 주소 전달 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -561,7 +561,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     지갑 생성후 "주소+개인키" 정보를 전달 합니다. ( J.D.H VER : 1.24.43 )
+     지갑 생성후 "주소+개인키" 정보를 전달 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -601,7 +601,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     지갑 : 개인키가져오기 : 지갑에서 개인키를 획득 후 전달 합니다. ( J.D.H VER : 1.24.43 )
+     지갑 : 개인키가져오기 : 지갑에서 개인키를 획득 후 전달 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -640,7 +640,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다. ( J.D.H VER : 1.24.43 )
+     지갑 : 주소가져오기 : 존재유무 및 동일 확인 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.01
     - Parameters:
        - body : 스크립트에서 받은 메세지 입니다.
@@ -675,7 +675,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     제로페이에 리턴할 콜백 스크립트를 받습니다. ( J.D.H VER : 1.24.43 )
+     제로페이에 리턴할 콜백 스크립트를 받습니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.19
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -707,7 +707,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     하단 탭 인덱스 정보를 받아 탭 페이지를 변경 합니다. ( J.D.H VER : 1.24.43 )
+     하단 탭 인덱스 정보를 받아 탭 페이지를 변경 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.18
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -729,7 +729,7 @@ class WebMessagCallBackHandler : NSObject  {
     /// 추가할 연락처 정보를 받습니다.
     @Published var contactInfo : [String] = []
     /**
-     연락처 정보를 조회해 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     연락처 정보를 조회해 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.17
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -775,7 +775,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     자동로그인 타입을 변경 합니다. ( J.D.H VER : 1.24.43 )
+     자동로그인 타입을 변경 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -813,7 +813,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     로그인 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     로그인 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -830,7 +830,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     날짜 선택 피커뷰를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     날짜 선택 피커뷰를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -862,7 +862,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     전체 화면 웹뷰를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     전체 화면 웹뷰를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -967,7 +967,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     전체 화면 종료시 콜백 처리 입니다. ( J.D.H VER : 1.24.43 )
+     전체 화면 종료시 콜백 처리 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.08
      - Parameters:
         - callHybridPopupCB : callHybridPopup 에서 받은 콜백 정보 입니다.
@@ -997,7 +997,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     페이지 종료후 이전 웹뷰에 데이터를 넘깁니다. ( J.D.H VER : 1.24.43 )
+     페이지 종료후 이전 웹뷰에 데이터를 넘깁니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1101,7 +1101,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     이전에 웹 호출시에 받은 데이터를 다시 현 웹에게 전송합니다. ( J.D.H VER : 1.24.43 )
+     이전에 웹 호출시에 받은 데이터를 다시 현 웹에게 전송합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1118,7 +1118,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     로그인 페이지를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     로그인 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.19
      - Parameters:False
      - Throws: False
@@ -1151,7 +1151,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     웹뷰 캐시를 삭제 합니다. ( J.D.H VER : 1.24.43 )
+     웹뷰 캐시를 삭제 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:False
      - Throws: False
@@ -1165,7 +1165,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     문자 외부 공유 입니다. ( J.D.H VER : 1.24.43 )
+     문자 외부 공유 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 바디 데이터 입니다.
@@ -1198,7 +1198,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     보안키패드 오픈 입니다. ( J.D.H VER : 1.24.43 )
+     보안키패드 오픈 입니다. ( J.D.H VER : 2.0.0 )
      - Description: 보안 키패드 오픈시 web url 연결 finish 전에 키패드 오픈 경우 정상 오픈이 안되는 경우가 있어 finish 확인후 오픈 하도록 합니다.
      - Date: 2023.03.28
      - Parameters:
@@ -1254,7 +1254,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     문자 보내기를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     문자 보내기를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1285,7 +1285,7 @@ class WebMessagCallBackHandler : NSObject  {
     /// 이미지 정상 저장 여부를 체크 합니다.
     @Published var imgSavePhoto : Bool = false
     /**
-     웹 전체 화면 캡쳐 입니다. ( 저장 여부는 imgSavePhoto 여부로 체크 합니다. ) ( J.D.H VER : 1.24.43 )
+     웹 전체 화면 캡쳐 입니다. ( 저장 여부는 imgSavePhoto 여부로 체크 합니다. ) ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1323,7 +1323,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     겔러리에 이미지 저장 여부를 확인 합니다. ( J.D.H VER : 1.24.43 )
+     겔러리에 이미지 저장 여부를 확인 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      */
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -1341,7 +1341,7 @@ class WebMessagCallBackHandler : NSObject  {
     /// 업로드할 이미지를 받습니다.
     @Published var uploadImg : UIImage? = nil
     /**
-     카메라 및. 사진첩에. 이미지를. 찾아. 업로드 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. ) ( J.D.H VER : 1.24.43 )
+     카메라 및. 사진첩에. 이미지를. 찾아. 업로드 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. ) ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.23
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1425,7 +1425,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     사진첩에 이미지를 찾아 업도르 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. ) ( J.D.H VER : 1.24.43 )
+     사진첩에 이미지를 찾아 업도르 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. ) ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1440,7 +1440,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     오픈뱅킹 관련 외부 웹페이지 입니다. ( J.D.H VER : 1.24.43 )
+     오픈뱅킹 관련 외부 웹페이지 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1464,7 +1464,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     닉네임 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+     닉네임 정보를 받습니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1483,7 +1483,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     페이지 종료 후 메인 홈으로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     페이지 종료 후 메인 홈으로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Description : 종료후 메인 홈으로 이동하며 딥링크나/PUSH 정보를 가지고 있다면 홈으로 이동 후 해당 웹페이지를 디스플레이 하도록 합니다.
      - Date: 2023.05.31
      - Parameters:
@@ -1528,7 +1528,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     로그아웃 요청 입니다. ( J.D.H VER : 1.24.43 )
+     로그아웃 요청 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1542,7 +1542,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     토큰 정보를 저장 합니다. ( J.D.H VER : 1.24.43 )
+     토큰 정보를 저장 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1561,7 +1561,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     키체인에 데이터를 추가 합니다. ( J.D.H VER : 1.24.43 )
+     키체인에 데이터를 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1578,7 +1578,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     키체인에서 데이터를 가져 옵니다. ( J.D.H VER : 1.24.43 )
+     키체인에서 데이터를 가져 옵니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1597,7 +1597,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     날짜 선택 피커뷰를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     날짜 선택 피커뷰를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1666,7 +1666,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     문자를 복사 합니다. ( J.D.H VER : 1.24.43 )
+     문자를 복사 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1681,7 +1681,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     OS 타입을 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     OS 타입을 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1695,7 +1695,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     Device 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     Device 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1709,7 +1709,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     AppVer 을 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     AppVer 을 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1742,7 +1742,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     PUSH Token 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     PUSH Token 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1764,7 +1764,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     PUSH 사용여부 값을 리턴합니다. ( J.D.H VER : 1.24.43 )
+     PUSH 사용여부 값을 리턴합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1780,7 +1780,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     디바이스 설정으로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     디바이스 설정으로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1793,7 +1793,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     카카오톡 설치 여부를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     카카오톡 설치 여부를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1808,7 +1808,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     앱 업데이트로 Apple Store 이동 합니다. ( J.D.H VER : 1.24.43 )
+     앱 업데이트로 Apple Store 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.31
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1827,7 +1827,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     외부 브라우저를 실행 합니다. ( J.D.H VER : 1.24.43 )
+     외부 브라우저를 실행 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1847,7 +1847,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     현 페이지 POST 방식 새로고침 입니다. ( J.D.H VER : 1.24.43 )
+     현 페이지 POST 방식 새로고침 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - body : 스크립트에서 받은 메세지 입니다.
@@ -1884,7 +1884,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     만보고 페이지로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     만보고 페이지로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:False
      - Throws: False
@@ -1941,7 +1941,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     만보고 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     만보고 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:False
      - Throws: False
@@ -1985,7 +1985,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     제로페이 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     제로페이 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:False
      - Throws: False
@@ -2031,7 +2031,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     제로페이 결제 이동 하단 팝업뷰를 오픈 합니다. ( J.D.H VER : 1.24.43 )
+     제로페이 결제 이동 하단 팝업뷰를 오픈 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False
@@ -2074,7 +2074,7 @@ class WebMessagCallBackHandler : NSObject  {
 // MARK: - 공용 메서드 입니다.
 extension WebMessagCallBackHandler{
     /**
-     앱에서 웹으로 스크립트 처리 입니다. ( J.D.H VER : 1.24.43 )
+     앱에서 웹으로 스크립트 처리 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Parameters:
         - callback : 콜백 타입입니다.
@@ -2127,7 +2127,7 @@ extension WebMessagCallBackHandler{
     
     
     /**
-     페이지 종료처리 부분 입니다. ( J.D.H VER : 1.24.43 )
+     페이지 종료처리 부분 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.28
      - Parameters:
         - callback : 콜백 메서드 입니다.
@@ -2163,7 +2163,7 @@ extension WebMessagCallBackHandler{
 
     
     /**
-     사용자명을 CNContact 의  property 속성을 문자로 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     사용자명을 CNContact 의  property 속성을 문자로 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.17
      - Parameters:
         - contact : 선택된 연락처 정보 입니다.

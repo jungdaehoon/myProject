@@ -19,7 +19,7 @@ import FirebaseMessaging
 
 
 /**
- 앱실드 데이터를 가집니다. ( J.D.H VER : 1.24.43 )
+ 앱실드 데이터를 가집니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.27
 */
 struct AppShield  {
@@ -34,7 +34,7 @@ struct AppShield  {
 }
 
 /**
- 앱 활성화 여부를 체크 타입 합니다. ( J.D.H VER : 1.24.43 )
+ 앱 활성화 여부를 체크 타입 합니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.05.17
  */
 enum IN_APP_START_TYPE : Int {
@@ -45,7 +45,7 @@ enum IN_APP_START_TYPE : Int {
 }
 
 /**
- 앱 시작시 관련 정보 메뉴 리스트 URL 정보 타입 입니다. ( J.D.H VER : 1.24.43 )
+ 앱 시작시 관련 정보 메뉴 리스트 URL 정보 타입 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.03
 */
 enum MENU_LIST : String  {
@@ -100,7 +100,7 @@ enum MENU_LIST : String  {
 
 
 /**
- 기본 베이스 모델 입니다. ( J.D.H VER : 1.24.43 )
+ 기본 베이스 모델 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.15
  */
 class BaseViewModel : NSObject {
@@ -146,7 +146,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     상황별 인터페이스를 요청 합니다.( J.D.H VER : 1.24.43 )
+     상황별 인터페이스를 요청 합니다.( J.D.H VER : 2.0.0 )
      - Description          : Http 네트워크 요청시 공통 지원 메서드 입니다. "errorPopEnabled" 에 따라 공통 오류 코드에 따른 안내 팝업 처리 및 공통 이벤트 처리가 될수 있습니다. 별도 이벤트 처리는 "errorPopEnabled = false"  처리시 별도 이벤트 처리가 가능합니다.
      - Date: 2023.05.23
      - Parameters:
@@ -181,7 +181,10 @@ class BaseViewModel : NSObject {
                 /// 로딩을 종료 합니다.
                 if showLoading { LoadingView.default.hide() }
                 /// Http Error 공통 팝업을 사용하지 않을 경우 입니다.
-                if errorPopEnabled == false { return }
+                if errorPopEnabled == false {
+                    let _ =  errorHandler!(.unknown(""))
+                    return
+                }
                 guard self != nil else { return }
                 
                 switch completion {
@@ -211,9 +214,9 @@ class BaseViewModel : NSObject {
                             let _ =  errorHandler!(.timeout(errMsg))
                             Slog("[ NETWORK_ERROR_DATA_Timeout ]\n\(errMsg)")
                         }
-                        HttpErrorPop().show()
                     }
                 }
+                HttpErrorPop().show()
             }, receiveValue: { value in
                 /// 로딩을 종료 합니다.
                 if showLoading { LoadingView.default.hide() }
@@ -261,7 +264,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     이미지를 서버에 전송 합니다. ( J.D.H VER : 1.24.43 )
+     이미지를 서버에 전송 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.23
      - Parameters:
         - image : 서버에 업로드할 이미지 입니다.
@@ -327,7 +330,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 시작시 관련 정보를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     앱 시작시 관련 정보를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.03
      - Parameters:False
      - Throws: False
@@ -356,7 +359,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     로그아웃 처리 합니다. ( J.D.H VER : 1.24.43 )
+     로그아웃 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:False
      - Throws: False
@@ -389,7 +392,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     DeepLink,Push 선택으로 들어 온 경우 데이터 찾아 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     DeepLink,Push 선택으로 들어 온 경우 데이터 찾아 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.17
      - Parameters:False
      - Throws: False
@@ -416,7 +419,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 활성화 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     앱 활성화 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Description: 세션여부를 체크 하여 세션이 유지 상태인 경우 저장된 PUSH/Deep 링크 정보가 있다면 앱 실행중이 아니였다고 판단하여 앱 비활성으로 false 를 리턴 합니다. 앱 실행중에 세션 체크가 되어 세션이 비정상일 경우 로그아웃을 요청, 로그인 페이지로 이동 합니다.
      - Date: 2023.07.18
      - Parameters:
@@ -482,7 +485,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 세션 활성화 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     앱 세션 활성화 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Description: 세션 여부 체크만 하는 것으로 네트워크 통신 오류시에 공통 오류 팝업 처리 하지 않으며. 세션 실패로 리턴 하도록 합니다.
      - Date: 2023.05.26
      - Parameters:False
@@ -508,7 +511,7 @@ class BaseViewModel : NSObject {
     
 
     /**
-     메뉴 활성화 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     메뉴 활성화 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.02
      - Parameters:
         - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
@@ -535,7 +538,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     연동할 URL 정보를 가져 옵니다.( J.D.H VER : 1.24.43 )
+     연동할 URL 정보를 가져 옵니다.( J.D.H VER : 2.0.0 )
      - Date: 2023.04.03
      - Parameters:
         - menuID : 연동할 URL 정보 타입 ID 값을 넣습니다.
@@ -565,7 +568,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     제로페이 간편결제 약관동의 여부 확인 입니다.  ( J.D.H VER : 1.24.43 )
+     제로페이 간편결제 약관동의 여부 확인 입니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False
@@ -590,7 +593,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     제로페이 간편결제 약관동의 요청 입니다.  ( J.D.H VER : 1.24.43 )
+     제로페이 간편결제 약관동의 요청 입니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False
@@ -615,7 +618,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     만보기 약관 동의 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     만보기 약관 동의 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.09
      - Parameters:False
      - Throws: False
@@ -642,7 +645,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     만보기 약관 동의 요청 합니다. ( J.D.H VER : 1.24.43 )
+     만보기 약관 동의 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.09
      - Parameters:False
      - Throws: False
@@ -668,7 +671,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     은행 계좌 재인증 요청 입니다. ( J.D.H VER : 1.24.43 )
+     은행 계좌 재인증 요청 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.21
      - Parameters:False
      - Throws: False
@@ -692,7 +695,7 @@ class BaseViewModel : NSObject {
     }
     
     /**
-     정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.( J.D.H VER : 1.24.43 )
+     정상 로그인된 정보를 KeyChainCustItem 정보에 세팅 합니다.( J.D.H VER : 2.0.0 )
      - Date: 2023.04.17
      - Parameters:
         - user_hp : 유저 휴대폰 정보를 받습니다.
@@ -723,7 +726,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     FCM TOKEN 정보를 서버에 등록 합니다. ( J.D.H VER : 1.24.43 )
+     FCM TOKEN 정보를 서버에 등록 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.13
      - Parameters:False
      - Throws: False
@@ -765,7 +768,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 실드 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     앱 실드 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.27
      - Throws: False
      - Returns:
@@ -801,7 +804,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 카메라 접근 허용 여부를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     앱 카메라 접근 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Throws: False
      - Returns:
@@ -824,7 +827,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 이미지 저장소 접근 허용 여부를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     앱 이미지 저장소 접근 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Throws: False
      - Returns:
@@ -862,7 +865,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     연락처 접근 허용 여부를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     연락처 접근 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Throws: False
      - Returns:
@@ -886,7 +889,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 PUSH 사용 허용 여부를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     앱 PUSH 사용 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Throws: False
      - Returns:
@@ -911,7 +914,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 추적 (IDFA) 허용 여부를 요청 합니다. ( J.D.H VER : 1.24.43 )
+     앱 추적 (IDFA) 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Throws: False
      - Returns:
@@ -957,7 +960,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     Deeplink URL 정보를 체크하여 이동 할 URL 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     Deeplink URL 정보를 체크하여 이동 할 URL 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Throws: False
      - Returns:
@@ -987,7 +990,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     URL 에서 받은 정보르 파라미터로 세팅하여 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.08
      - Parameters:
         - url : URL 정보 입니다.
@@ -1010,7 +1013,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다. ( J.D.H VER : 1.24.43 )
+     제로페이에서 GET 방식 URL 접근시 파라미터 정보를 정리하여 받아옵니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.08
      - Parameters:
         - url : URL 정보 입니다.
@@ -1029,7 +1032,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     GET 방식 URL 파라미터를 설정하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     GET 방식 URL 파라미터를 설정하여 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.19
      - Parameters:
         - mainUrl : 메인 URL 정보 입니다.
@@ -1053,7 +1056,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     Session 유지를 위해 쿠키 업데이트 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     Session 유지를 위해 쿠키 업데이트 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.25
      - Parameters:
         - cookies : 업데이트할 쿠키 정보입니다.
@@ -1079,7 +1082,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     FCM PUSH 수신을 등록합니다. ( J.D.H VER : 1.24.43 )
+     FCM PUSH 수신을 등록합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1115,7 +1118,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱 삭제 후 설치 . 기존 키체인 내용을 삭제 ) ( J.D.H VER : 1.24.43 )
+     키체인 사용 정보를 체크 합니다. ( 신규설치하거나, 앱 삭제 후 설치 . 기존 키체인 내용을 삭제 ) ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1138,7 +1141,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     GA 트레킹을 디버깅 활성화 합니다. ( J.D.H VER : 1.24.43 )
+     GA 트레킹을 디버깅 활성화 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.20
      - Parameters:Fasle
      - Throws: False
@@ -1157,7 +1160,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     GA 트레킹을 활성화 합니다. ( J.D.H VER : 1.24.43 )     
+     GA 트레킹을 활성화 합니다. ( J.D.H VER : 2.0.0 )     
      - Date: 2023.07.20
      - Parameters:Fasle
      - Throws: False
@@ -1178,7 +1181,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     GA 트레킹을 활성화 합니다. ( J.D.H VER : 1.24.43 )
+     GA 트레킹을 활성화 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.20
      - Parameters:
         - eventName : 이벤트 명 입니다.
@@ -1200,7 +1203,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     탈옥 방지 체크 합니다. ( J.D.H VER : 1.24.43 )
+     탈옥 방지 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      - Parameters:Fasle
      - Throws: False
@@ -1223,7 +1226,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     안티디버깅 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     안티디버깅 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.04
      - Parameters:Fasle
      - Throws: False
@@ -1245,7 +1248,7 @@ class BaseViewModel : NSObject {
 
     
     /**
-     안티디버깅 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     안티디버깅 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Description: 안티디버깅 접근 여부를 앱 사용하는 동안 체크하며 외부 디버깅 접근이 체크되면 안내 팝업 오픈후 강제 종료 됩니다.
      - Date: 2023.07.04
      - Parameters:Fasle
@@ -1277,7 +1280,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     네트워크 사용 가능 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
+     네트워크 사용 가능 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.21
      - Parameters:Fasle
      - Throws: False
@@ -1312,7 +1315,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 시작시 안내 팝업 정보를 요청 합니다.( J.D.H VER : 1.24.43 )
+     앱 시작시 안내 팝업 정보를 요청 합니다.( J.D.H VER : 2.0.0 )
      - Date: 2023.07.13
      - Parameters:Fasle
      - Throws: False
@@ -1331,7 +1334,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     로그인 여부를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     로그인 여부를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.13
      - Parameters:Fasle
      - Throws: False
@@ -1349,7 +1352,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     로그아웃 처리 후 데이터를 초기화 하며,  홈 탭 이동 및 로그인 페이지를 디스플레이 합니다.  ( J.D.H VER : 1.24.43 )
+     로그아웃 처리 후 데이터를 초기화 하며,  홈 탭 이동 및 로그인 페이지를 디스플레이 합니다.  ( J.D.H VER : 2.0.0 )
      - Description: 로그아웃 인터페이스를 요청하여 로그인중 관련된 정보를 초기화 합니다. 로그아웃 실패 경우에도 하단 탭은 "홈" 탭으로 이동 하며, 로그인 창을 디스플레이 합니다. 해당 경우는 웹에서 callLogin 및 logout 요청 및 네이티브 일부 영역에서 로그아웃을 요청할 때도 동일 하게 사용 됩니다.
      - Date: 2023.07.18
      - Parameters:False

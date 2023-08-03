@@ -12,7 +12,7 @@ import Combine
 
 
 /**
- 제로페이 페이지 버튼 타입 입니다. ( J.D.H VER : 1.24.43 )
+ 제로페이 페이지 버튼 타입 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.26
 */
 enum ZEROPAY_BTN_TYPE : Int {
@@ -30,7 +30,7 @@ enum ZEROPAY_BTN_TYPE : Int {
 
 
 /**
- 제로페이 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+ 제로페이 뷰어 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
 */
 class OKZeroPayView: UIView {
@@ -116,7 +116,7 @@ class OKZeroPayView: UIView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     제로페이 QRCode 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
+     제로페이 QRCode 뷰어 입니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      */
     func initZeroPayView(){
@@ -253,7 +253,7 @@ class OKZeroPayView: UIView {
     }
     
     /**
-    간편결제 진입후 상세정보를 서버요청 디스플레이를 하도록 합니다. ( J.D.H VER : 1.24.43 )
+    간편결제 진입후 상세정보를 서버요청 디스플레이를 하도록 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.06
      - Parameters:
         - completion : 결과 여부를 리턴 합니다.
@@ -276,7 +276,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-    화면 진입시 기본 code 이미지를 미리 생성 합니다. ( J.D.H VER : 1.24.43 )
+    화면 진입시 기본 code 이미지를 미리 생성 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.06
      - Parameters:False
      - Throws: False
@@ -304,7 +304,7 @@ class OKZeroPayView: UIView {
 
     
     /**
-     프리뷰 화면과 캡쳐할 영역 설정 합니다. ( J.D.H VER : 1.24.43 )
+     프리뷰 화면과 캡쳐할 영역 설정 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
@@ -356,7 +356,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     결제 코드별 타입을 화면 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     결제 코드별 타입을 화면 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.26
      - Parameters:
         - type : 코드 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
@@ -457,7 +457,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     생성된 결제 코드를 빈값으로 전부 초기화 합니다. ( J.D.H VER : 1.24.43 )
+     생성된 결제 코드를 빈값으로 전부 초기화 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:False
      - Throws: False
@@ -497,7 +497,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     결제타입 뷰어를 활성화 합니다. ( J.D.H VER : 1.24.43 )
+     결제타입 뷰어를 활성화 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
@@ -529,7 +529,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     코드생성으로 결제 코드를 생성 합니다. ( J.D.H VER : 1.24.43 )
+     코드생성으로 결제 코드를 생성 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.05
      - Parameters:
         - qrCode : 화면에 그릴 QRCode 정보를 받습니다.
@@ -592,7 +592,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     결제 코드를 전체 화면 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     결제 코드를 전체 화면 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:
         - codeType : 디스플레이 할 타입을 받습니다. ( .barcode : 바코드 타입 , .qrcode : QRCode 타입 )
@@ -639,7 +639,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     결제 코드 전체 화면을 종료 합니다. ( J.D.H VER : 1.24.43 )
+     결제 코드 전체 화면을 종료 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:False
      - Throws: False
@@ -671,7 +671,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     결제 카드 리스트 전체 화면을 종료 합니다. ( J.D.H VER : 1.24.43 )
+     결제 카드 리스트 전체 화면을 종료 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:False
      - Throws: False
@@ -692,7 +692,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     결제 카드 리스트 전체 화면을 온오프 합니다. ( J.D.H VER : 1.24.43 )
+     결제 카드 리스트 전체 화면을 온오프 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:
         - display : 디스플레이 여부 값을 받습니다. ( true : 카드 리스트 전체화면, false : 카드 하단 디스플레이 )
@@ -736,7 +736,7 @@ class OKZeroPayView: UIView {
     
     
     /**
-     하단 순차적으로 디스플레이후 최종 배경 위치 값을 초기화 합니다. ( J.D.H VER : 1.24.43 )
+     하단 순차적으로 디스플레이후 최종 배경 위치 값을 초기화 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.27
      - Parameters:False
      - Throws: False
@@ -827,7 +827,7 @@ class OKZeroPayView: UIView {
     
     //MARK: - setRelease
     /**
-     데이터를 초기화합니다.  ( J.D.H VER : 1.24.43 )
+     데이터를 초기화합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.10
      */
     func setRelease(){

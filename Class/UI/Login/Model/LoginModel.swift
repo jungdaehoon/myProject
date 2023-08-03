@@ -10,7 +10,7 @@ import Combine
 
 
 /**
- 로그인 코드 입니다. ( J.D.H VER : 1.24.43 )
+ 로그인 코드 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.03
 */
 enum LOGIN_CODE : String {
@@ -34,13 +34,13 @@ enum LOGIN_CODE : String {
 
 
 /**
- 로그인 페이지 모델 입니다. ( J.D.H VER : 1.24.43 )
+ 로그인 페이지 모델 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
 */
 class LoginModel : BaseViewModel {
     
     /**
-     로그인 처리 합니다. ( J.D.H VER : 1.24.43 )
+     로그인 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:
         - id : 아이디 정보를 받습니다.

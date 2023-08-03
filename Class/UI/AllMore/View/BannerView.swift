@@ -10,7 +10,7 @@ import UIKit
 
 
 /**
- 베너 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
+ 베너 뷰어 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.07
 */
 class BannerView: UIView {
@@ -31,7 +31,7 @@ class BannerView: UIView {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     "전체" 탭 에서 스크롤시 이벤트 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+     "전체" 탭 에서 스크롤시 이벤트 정보를 받습니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.08
      - Parameters:
         - scrollView : 스크롤 정보를 받습니다

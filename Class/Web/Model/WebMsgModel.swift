@@ -10,7 +10,7 @@ import Combine
 
 
 /**
- 웹 인터페이스 헨들러들 입니다.  ( J.D.H VER : 1.24.43 )
+ 웹 인터페이스 헨들러들 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.28
  */
 enum SCRIPT_MESSAGE_HANDLER_TYPE : String, CaseIterable {
@@ -24,7 +24,7 @@ enum SCRIPT_MESSAGE_HANDLER_TYPE : String, CaseIterable {
 
 
 /**
- 웹 인터페이스 메세지 입니다.  ( J.D.H VER : 1.24.43 )
+ 웹 인터페이스 메세지 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.28
  */
 enum SCRIPT_MESSAGES : String
@@ -152,13 +152,13 @@ enum SCRIPT_MESSAGES : String
 
 
 /**
- 웹 헨들러 지원 모델 입니다. ( J.D.H VER : 1.24.43 )
+ 웹 헨들러 지원 모델 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
 */
 class WebMsgModel : BaseViewModel {
     
     /**
-      NFI 이미지를  전송 합니다. ( J.D.H VER : 1.24.43 )
+      NFI 이미지를  전송 합니다. ( J.D.H VER : 2.0.0 )
      - Description: NFT 등록시 이미지 업로드 용으로 사용 합니다.
      - Date: 2023.06.23
      - Parameters:
@@ -192,7 +192,7 @@ class WebMsgModel : BaseViewModel {
     
     
     /**
-     이미지가 를 등록 가능한 사이즈로 체크 후 리턴 합니다.( J.D.H VER : 1.24.43 )
+     이미지가 를 등록 가능한 사이즈로 체크 후 리턴 합니다.( J.D.H VER : 2.0.0 )
      - Description: 월렛 이미지 업로드 기준 사이즈는 600*600 사이즈로 업로드 되어 해당 이미지 사이즈를 체크 후 기준 사이즈에 맞춰 리턴 하도록 합니다.
      - Date: 2023.08.02
      - parameters:
@@ -226,7 +226,7 @@ class WebMsgModel : BaseViewModel {
     
     
     /**
-     Wallet 스크립트 Message 데이터를 설정 합니다. ( J.D.H VER : 1.24.43 )
+     Wallet 스크립트 Message 데이터를 설정 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.24
      - Throws: False
      - Parameters :
@@ -251,7 +251,7 @@ class WebMsgModel : BaseViewModel {
     
     
     /**
-     Wallet 리턴 데이터를 설정 합니다. ( J.D.H VER : 1.24.43 )
+     Wallet 리턴 데이터를 설정 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.24
      - Throws: False
      - Parameters :
@@ -281,7 +281,7 @@ class WebMsgModel : BaseViewModel {
     }
 
     /**
-     NFT 이미지 업로드 결과를 JSon 형태로 웹 스크립트 Message 를 생성 합니다.  ( J.D.H VER : 1.24.43 )
+     NFT 이미지 업로드 결과를 JSon 형태로 웹 스크립트 Message 를 생성 합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.23
      - Throws: False
      - Parameters :

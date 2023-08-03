@@ -14,7 +14,7 @@ private let CARD_DEFUALT_HEIGHT : CGFloat = 208.0
 private let CARD_DEFUALT_WIDTH  : CGFloat = 350.0
 
 /**
- 제로페이 결제 가능 카드 리스트 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+ 제로페이 결제 가능 카드 리스트 뷰어 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.28
  */
 class OKZeroPayCardListView: UIView {
@@ -51,7 +51,7 @@ class OKZeroPayCardListView: UIView {
 
     //MARK: - 지원 메서드 입니다.
     /**
-     제로페이 결제 가능 카드뷰어 초기화 합니다.  ( J.D.H VER : 1.24.43 )
+     제로페이 결제 가능 카드뷰어 초기화 합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.28
      */
     func initZeroPayCardList(){
@@ -60,7 +60,7 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     카드 정보의 이벤트를 연결 합니다..( J.D.H VER : 1.24.43 )
+     카드 정보의 이벤트를 연결 합니다..( J.D.H VER : 2.0.0 )
      - Date: 2023.04.28
      - Parameters:
         - btnEvent : 버튼 이벤트를 넘깁니다.
@@ -73,7 +73,7 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     최초 카드 정보를 화면에 추가 합니다. ( J.D.H VER : 1.24.43 )
+     최초 카드 정보를 화면에 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.28
      - Parameters:False
      - Throws: False
@@ -114,7 +114,7 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     카드 디스플레이 입니다. ( J.D.H VER : 1.24.43 )
+     카드 디스플레이 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.28
      - Parameters:
         - position_y : 카드 y 좌표 위치 입니다.
@@ -134,7 +134,7 @@ class OKZeroPayCardListView: UIView {
 
     
     /**
-     카드 위치 값을 변경 합니다.  ( J.D.H VER : 1.24.43 )
+     카드 위치 값을 변경 합니다.  ( J.D.H VER : 2.0.0 )
      - Description: 카드 전체 뷰어인 스크롤 뷰어의 높이 값 변경되기 전에 카드 애니 효과로 이동하기전 시작 위치 값을 설정 합니다.
      - Date: 2023.05.10
      - Parameters:
@@ -176,7 +176,7 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     결제 카드 정보를 하단에 순차적으로 디스플레이 되도록 합니다. ( J.D.H VER : 1.24.43 )
+     결제 카드 정보를 하단에 순차적으로 디스플레이 되도록 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.10
      - Parameters:
         - index : 순차적으로 보여질 카드 인덱스 정보 입니다.
@@ -236,7 +236,7 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     카드의 Frame 정보를 변경 합니다.. ( J.D.H VER : 1.24.43 )
+     카드의 Frame 정보를 변경 합니다.. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.10
      - Parameters:
         - index : 순차적으로 보여질 카드 인덱스 정보 입니다.
@@ -264,7 +264,7 @@ class OKZeroPayCardListView: UIView {
     
     
     /**
-     결제 카드 전체 화면에 순차적으로 디스플레이 입니다. ( J.D.H VER : 1.24.43 )
+     결제 카드 전체 화면에 순차적으로 디스플레이 입니다. ( J.D.H VER : 2.0.0 )
      - Description: setCardListPosition 에서 카드위치 변경된 정보를 전체화면에 순차적으로 카드를 상단으로 하나씩 올리는 효과로 디스플레이 합니다.
      - Date: 2023.05.10
      - Parameters:
@@ -326,7 +326,7 @@ class OKZeroPayCardListView: UIView {
     
     //MARK: - setRelease
     /**
-     데이터를 초기화합니다.  ( J.D.H VER : 1.24.43 )
+     데이터를 초기화합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.10
      */
     func setRelease(){

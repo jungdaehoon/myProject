@@ -10,7 +10,7 @@ import Foundation
 
 
 /**
- 계좌 리스트 조회 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+ 계좌 리스트 조회 정보를 받습니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.22
 */
 struct SelectAccountListResponse: BaseResponse {
@@ -36,7 +36,7 @@ struct SelectAccountListResponse: BaseResponse {
 
 
 /**
- 계좌 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+ 계좌 정보를 받습니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.22
 */
 struct Account : Codable {

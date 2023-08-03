@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 /**
- 전체 서비스의 메뉴별 ( 이번달 결제/적립부터 이용안내 까지 영역 ) 디스플레이 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+ 전체 서비스의 메뉴별 ( 이번달 결제/적립부터 이용안내 까지 영역 ) 디스플레이 뷰어 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.07
 */
 class AllMoreMenuListView: UIView {
@@ -38,7 +38,7 @@ class AllMoreMenuListView: UIView {
     
     // MARK: - 지원메서드 입니다.
     /**
-     유저 상세 뷰어 초기화 메서드 입니다.  ( J.D.H VER : 1.24.43 )
+     유저 상세 뷰어 초기화 메서드 입니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.25
      */
     func setDisplay( titleName : String = "", menus : [AllModeMenuListInfo] = [] ){
@@ -93,7 +93,7 @@ class AllMoreMenuListView: UIView {
     
     
     /**
-     모델 데이터 기준으로 화면에 추가 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     모델 데이터 기준으로 화면에 추가 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - viewModel : 데이터 모델 입니다.

@@ -1389,8 +1389,8 @@
 				8D205E2D29D133FA00F43C99 /* Frameworks */,
 				8D205E2E29D133FA00F43C99 /* Resources */,
 				F2EBF4732A3C1CCB009BF601 /* ShellScript */,
-				E25F146BED29A7FCBF6FD22C /* [CP] Embed Pods Frameworks */,
-				79F4A123FC218B40BB3B8988 /* [CP] Copy Pods Resources */,
+				AA1AB5B1EA70A28DC034E2C4 /* [CP] Embed Pods Frameworks */,
+				94D22ED45F0735B71F74A187 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1579,7 +1579,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		79F4A123FC218B40BB3B8988 /* [CP] Copy Pods Resources */ = {
+		94D22ED45F0735B71F74A187 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1618,7 +1618,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E25F146BED29A7FCBF6FD22C /* [CP] Embed Pods Frameworks */ = {
+		AA1AB5B1EA70A28DC034E2C4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2024,7 +2024,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80C3106D529C4F05193371E0 /* Pods-cereal.release.xcconfig */;
 			buildSettings = {
-				ANTI_DEBUG = YES;
+				ANTI_DEBUG = NO;
 				APPIRON_URL = "https://m.mycereal.co.kr:8445/appiron-inspect_real/authCheck.call";
 				APP_INSPECTION = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2032,7 +2032,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CONSOLE_OS_LOG = NO;
+				CONSOLE_OS_LOG = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2071,7 +2071,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 1.24.43;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = OKpay;

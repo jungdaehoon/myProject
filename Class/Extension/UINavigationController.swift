@@ -18,7 +18,7 @@ public enum AnimationType
 }
 
 /**
- 내비게이션 커스텀된 페이지 이동 타입을 가집니다. ( J.D.H VER : 1.24.43 )
+ 내비게이션 커스텀된 페이지 이동 타입을 가집니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.12
  */
 class UINavigationControllerExtensionModel : NSObject
@@ -50,7 +50,7 @@ extension UINavigationController : UINavigationControllerExtension {
     var rootViewController: UIViewController? { return viewControllers.first }
     
     /**
-     내비게이션 컨트롤로 push 이동시 타입을 받아 처리 합니다. ( J.D.H VER : 1.24.43 )
+     내비게이션 컨트롤로 push 이동시 타입을 받아 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
@@ -79,7 +79,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     내비게이션 컨트롤로 현 페이지를 종료 합니다. ( J.D.H VER : 1.24.43 )
+     내비게이션 컨트롤로 현 페이지를 종료 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
@@ -105,7 +105,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     이동할 ViewController 을 받아 해당 위치로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     이동할 ViewController 을 받아 해당 위치로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.17
      - Parameters:
         - viewController : 뒤로 이동할 컨트롤 입니다.
@@ -133,7 +133,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     내비게이션 컨트롤로 0번 페이지로 이동합니다. ( J.D.H VER : 1.24.43 )
+     내비게이션 컨트롤로 0번 페이지로 이동합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
@@ -160,7 +160,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     내비게이션 컨트롤로 이동시 현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 1.24.43 )
+     내비게이션 컨트롤로 이동시 현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.03
      - Parameters:
         - viewController : 이동할 페이지 입니다.
@@ -187,7 +187,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     내비게이션 컨트롤로 이동시 0번재 root 페이지 다음에 추가할 페이지로 변경합니다. ( J.D.H VER : 1.24.43 )
+     내비게이션 컨트롤로 이동시 0번재 root 페이지 다음에 추가할 페이지로 변경합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
@@ -204,7 +204,7 @@ extension UINavigationController : UINavigationControllerExtension {
     
     
     /**
-     내비게이션 컨트롤로 이동시 0번재 root 페이지 다음에 추가할 페이지들로 변경합니다. ( J.D.H VER : 1.24.43 )
+     내비게이션 컨트롤로 이동시 0번재 root 페이지 다음에 추가할 페이지들로 변경합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - viewControllers : 이동할 페이지들 입니다.

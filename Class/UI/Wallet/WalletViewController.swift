@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 /**
- 월렛 메인 페이지 입니다.  ( J.D.H VER : 1.24.43 )
+ 월렛 메인 페이지 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.06.01
 */
 class WalletViewController: BaseViewController {
@@ -30,7 +30,7 @@ class WalletViewController: BaseViewController {
     }
     
     /**
-     화면 새로고침 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     화면 새로고침 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      */
     override func setDisplayData() {

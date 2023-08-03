@@ -10,14 +10,14 @@ import Combine
 
 
 /**
- 앱 시작시 이벤트 뷰 모델 입니다.    ( J.D.H VER : 1.24.43 )
+ 앱 시작시 이벤트 뷰 모델 입니다.    ( J.D.H VER : 2.0.0 )
  - Date: 2023.07.12
  */
 class AppStartEventViewModel : BaseViewModel{
     
     
     /**
-     이벤트 이미지 기준으로 디스플레이 할 이미지 사이즈를 받습니다. ( J.D.H VER : 1.24.43 )
+     이벤트 이미지 기준으로 디스플레이 할 이미지 사이즈를 받습니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.12
      - Parameters:
         - image               : 디스플레이 할 원본 이미지 입니다.

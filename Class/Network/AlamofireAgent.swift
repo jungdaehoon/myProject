@@ -12,7 +12,7 @@ import os
 
 
 /**
- HTTP 인터페이스 연결할 기본 메서드를 지원 합니다. ( J.D.H VER : 1.24.43 )
+ HTTP 인터페이스 연결할 기본 메서드를 지원 합니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.07
  */
 enum AlamofireAgent {
@@ -53,7 +53,7 @@ enum AlamofireAgent {
     
     
     /**
-    HTTP 연결할 세션 정보를 설정 합니다. ( J.D.H VER : 1.24.43 )
+    HTTP 연결할 세션 정보를 설정 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.03.07
     */
     static func urlSessionConfiguration() -> URLSessionConfiguration {
@@ -66,7 +66,7 @@ enum AlamofireAgent {
     
     
     /**
-     상황별 인터페이스를 요청 합니다.( J.D.H VER : 1.24.43 )
+     상황별 인터페이스를 요청 합니다.( J.D.H VER : 2.0.0 )
      - Date: 2023.03.07
      - Parameters:
         - operation     : 요청할 인터페이스 타입 입니다.
@@ -124,7 +124,7 @@ enum AlamofireAgent {
     
     
     /**
-     Error 발생시 이벤트 핸들러 입니다..( J.D.H VER : 1.24.43 )
+     Error 발생시 이벤트 핸들러 입니다..( J.D.H VER : 2.0.0 )
      - Date: 2023.03.07
      - Parameters:
         - error     : 에러 타입을 받습니다.
@@ -176,7 +176,7 @@ enum AlamofireAgent {
     
     
     /**
-     멀티파트 파일 업로드 입니다. ( J.D.H VER : 1.24.43 )
+     멀티파트 파일 업로드 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.07
      - Parameters:
         - url : 업로드할 위치 정보입니다.

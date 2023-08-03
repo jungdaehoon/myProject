@@ -11,7 +11,7 @@ import UIKit
 
 
 /**
- QRcode 및 바코드 생성 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+ QRcode 및 바코드 생성 뷰어 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
 */
 class QRorBarCodeGeneratorView: UIView {
@@ -43,7 +43,7 @@ class QRorBarCodeGeneratorView: UIView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     제로페이 QRCode 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+     제로페이 QRCode 뷰어 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      */
     func initGeneratorView(){
@@ -53,7 +53,7 @@ class QRorBarCodeGeneratorView: UIView {
     
     
     /**
-     코드별 디스플레이할 이미지 세팅 입니다. ( J.D.H VER : 1.24.43 )
+     코드별 디스플레이할 이미지 세팅 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:
         - codeType : 코드 타입 정보를 받습니다.
@@ -94,7 +94,7 @@ class QRorBarCodeGeneratorView: UIView {
     
     
     /**
-     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.26
      - parameters:
         - image : 원본 이미지를 받습니다.
@@ -122,7 +122,7 @@ class QRorBarCodeGeneratorView: UIView {
     
     
     /**
-     바코드 이미지 생성 입니다. ( J.D.H VER : 1.24.43 )
+     바코드 이미지 생성 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - barcode : 이미지로 생성될 바코드 정보 입니다.
@@ -146,7 +146,7 @@ class QRorBarCodeGeneratorView: UIView {
     
     
     /**
-     QR코드 이미지 생성 입니다. ( J.D.H VER : 1.24.43 )
+     QR코드 이미지 생성 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - qrcode : 이미지로 생성될 QRCode 정보 입니다.

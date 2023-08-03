@@ -12,7 +12,7 @@ extension WKWebView {
     private var httpCookieStore: WKHTTPCookieStore  { return WKWebsiteDataStore.default().httpCookieStore }
 
     /**
-     기본 URL 연결 지원 메서드 입니다. ( J.D.H VER : 1.24.43 )
+     기본 URL 연결 지원 메서드 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.09
      - Parameters:
         - url : 연결할 URL 정보 입니다.

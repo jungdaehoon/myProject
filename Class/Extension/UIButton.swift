@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
     /**
-     컬러정보를 받아 이미지로 적용 합니다. ( on/off 타입에 주로 사용 ) ( J.D.H VER : 1.24.43 )
+     컬러정보를 받아 이미지로 적용 합니다. ( on/off 타입에 주로 사용 ) ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.09
      - Parameters:
         - color : 적용할 컬러 타입입니다.

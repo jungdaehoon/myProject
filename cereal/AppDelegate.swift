@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     /**
-     앱 최초 실행 진입 입니다. ( J.D.H VER : 1.24.43 )
+     앱 최초 실행 진입 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     /**
-     앱 실행중 딥링크 진입 입니다. ( J.D.H VER : 1.24.43 )
+     앱 실행중 딥링크 진입 입니다. ( J.D.H VER : 2.0.0 )
      - Description
         - cereal://movepage?url=URL정보로 약속합니다.
      - Date: 2023.05.17
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     /**
-     APNS Device Token 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+     APNS Device Token 정보를 받습니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      */
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate
 {
     /**
-     PUSH 적용할 설정 정보를 추가 합니다. ( J.D.H VER : 1.24.43 )
+     PUSH 적용할 설정 정보를 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.06
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
@@ -136,7 +136,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate
     
     
     /**
-     실시간 PUSH 정보를 처리 합니다. ( J.D.H VER : 1.24.43 )
+     실시간 PUSH 정보를 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.17
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)

@@ -10,7 +10,7 @@ import WebKit
 
 
 /**
- 금융 페이지 입니다. ( J.D.H VER : 1.24.43 )
+ 금융 페이지 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.23
 */
 class FinanceViewController: BaseViewController {
@@ -31,7 +31,7 @@ class FinanceViewController: BaseViewController {
     }
 
     /**
-     화면 새로고침 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     화면 새로고침 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      */
     override func setDisplayData() {

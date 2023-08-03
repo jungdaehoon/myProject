@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- 전체화면에 센터 안내 버튼 팝업 입니다.   ( J.D.H VER : 1.24.43 )
+ 전체화면에 센터 안내 버튼 팝업 입니다.   ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.16
  */
 class CMAlertView: BaseView {
@@ -59,7 +59,7 @@ class CMAlertView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     싱글 버튼 형태의 안내 팝업 입니다.   ( J.D.H VER : 1.24.43 )
+     싱글 버튼 형태의 안내 팝업 입니다.   ( J.D.H VER : 2.0.0 )
      - Description : 버튼이 1개인 안내 팝업으로 Show() 추가 호출없이 바로 팝업 오픈 합니다.
      - Date: 2023.03.16
      - Parameters:
@@ -81,7 +81,7 @@ class CMAlertView: BaseView {
     
     
     /**
-     안내 팝업 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+     안내 팝업 뷰어 입니다. ( J.D.H VER : 2.0.0 )
      - Description : 버튼을 별도로 추가하는 형태의 안내 팝업 오픈을 위한 기본 정보를 받아 디스플레이 하는 메서드 입니다.
                      별도로 버튼  'addAlertBtn'  으로 추가 해야하며 최대 2개까지 추가 가능합니다. 별도로 show 메서드를 호출해야 합니다.
      - Date: 2023.03.16
@@ -127,7 +127,7 @@ class CMAlertView: BaseView {
     
     
     /**
-     팝업에 사용될 버튼을 추가 합니다.   ( J.D.H VER : 1.24.43 )
+     팝업에 사용될 버튼을 추가 합니다.   ( J.D.H VER : 2.0.0 )
      - Description : 버튼을 별도로 추가하며 최대 2개까지만 추가됩니다.
      - Date: 2023.03.16
      - Parameters:
@@ -169,7 +169,7 @@ class CMAlertView: BaseView {
     
     
     /**
-     안내 팝업의 상세 뷰어에  받아온 뷰어를  추가합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업의 상세 뷰어에  받아온 뷰어를  추가합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:
         - view : 상세 뷰어 입니다.
@@ -184,7 +184,7 @@ class CMAlertView: BaseView {
     
     
     /**
-     안내 팝업의 상세 뷰어에  받아온 문자정보를  추가합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업의 상세 뷰어에  받아온 문자정보를  추가합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:
         - text : 상세 문자 정보 입니다.
@@ -213,7 +213,7 @@ class CMAlertView: BaseView {
     
 
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:False
      - Throws: False
@@ -229,7 +229,7 @@ class CMAlertView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
+     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
      - Parameters:False
      - Throws: False

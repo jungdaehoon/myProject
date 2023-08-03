@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 날짜 디스플레이 타입 입니다. ( J.D.H VER : 1.24.43 )
+ 날짜 디스플레이 타입 입니다. ( J.D.H VER : 2.0.0 )
  - Description
     - YMD : 년/월/일, YM : 년/월, Y : 년, D : 일
  - Date: 2023.04.20
@@ -26,7 +26,7 @@ enum DATE_TYPE : String {
 
 
 /**
- 날짜 디스플레이 데이터 입니다. ( J.D.H VER : 1.24.43 )
+ 날짜 디스플레이 데이터 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.20
 */
 struct picker_info {
@@ -59,7 +59,7 @@ struct picker_info {
 
 
 /**
- DatePickerView 에 사용되는 UIPickerView 오버라이딩 뷰어 입니다. ( J.D.H VER : 1.24.43 )
+ DatePickerView 에 사용되는 UIPickerView 오버라이딩 뷰어 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.20
 */
 class PickerView: UIPickerView {
@@ -113,7 +113,7 @@ class PickerView: UIPickerView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     디스플레이할 날짜 정보를 설정 합니다.  ( J.D.H VER : 1.24.43 )
+     디스플레이할 날짜 정보를 설정 합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:
         - maxDate : 최대 날짜 입니다.
@@ -147,7 +147,7 @@ class PickerView: UIPickerView {
     
     
     /**
-     문자형 날짜 정보를 Date 형으로 변환 하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     문자형 날짜 정보를 Date 형으로 변환 하여 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:
         - dateText : 변환할 String 날짜 정보 합니다.
@@ -164,7 +164,7 @@ class PickerView: UIPickerView {
     
     
     /**
-     현 "월" 정보에 따른 디스플레이 가능한 "일" 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     현 "월" 정보에 따른 디스플레이 가능한 "일" 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:
         - year : 년도 정보를 받습니다.
@@ -198,7 +198,7 @@ class PickerView: UIPickerView {
     
     
     /**
-     현 "년" 정보에 따른 디스플레이 가능한 "월" 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     현 "년" 정보에 따른 디스플레이 가능한 "월" 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:
         - year : 년도 정보를 받습니다.
@@ -234,7 +234,7 @@ class PickerView: UIPickerView {
     
     
     /**
-     최대 디스플레이 가능한 "년" 정보를 리턴 합니다. ( J.D.H VER : 1.24.43 )
+     최대 디스플레이 가능한 "년" 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:False
      - Throws: False
@@ -260,7 +260,7 @@ class PickerView: UIPickerView {
     
     
     /**
-     seletedDate 정보로 PickerView 디스플레이 Row 설정 합니다.  ( J.D.H VER : 1.24.43 )
+     seletedDate 정보로 PickerView 디스플레이 Row 설정 합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:
         - animation : PickerView Row 데이터 설정시 애니 효과 여부 입니다.
@@ -299,7 +299,7 @@ class PickerView: UIPickerView {
     
     
     /**
-    선택된 날짜 정보를 정리하여 Date 정보로 리턴합니다.  ( J.D.H VER : 1.24.43 )
+    선택된 날짜 정보를 정리하여 Date 정보로 리턴합니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.20
      - Parameters:
         - component : 선택 인덱스 입니다.

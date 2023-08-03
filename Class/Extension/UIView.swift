@@ -69,7 +69,7 @@ extension UIView {
     }
     
     /**
-     Xib View 를 가져 옵니다. ( J.D.H VER : 1.24.43 )
+     Xib View 를 가져 옵니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.0211
      - returns
         - UIView Type
@@ -83,7 +83,7 @@ extension UIView {
     
     
     /**
-     Xib View Layout  상위뷰 사이즈에 맞춰 고정 합니다. ( J.D.H VER : 1.24.43 )
+     Xib View Layout  상위뷰 사이즈에 맞춰 고정 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.0211
      - Parameters :
             - view : 상위 뷰어에 사이즈 맞춰 고정할 뷰어 입니다.
@@ -102,7 +102,7 @@ extension UIView {
     
     
     /**
-     Xib 와 UIView Class 를 연결 합니다. ( J.D.H VER : 1.24.43 )
+     Xib 와 UIView Class 를 연결 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.0211
      */
     func initView()
@@ -114,7 +114,7 @@ extension UIView {
     
     
     /**
-     연결된 UIViewcontroller 를 사용 합니다. ( J.D.H VER : 1.24.43 )
+     연결된 UIViewcontroller 를 사용 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.02.16
      */
     var viewController : UIViewController
@@ -138,7 +138,7 @@ extension UIView {
     
     
     /**
-     링크 기준으로 전체 화면 웹뷰를 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
+     링크 기준으로 전체 화면 웹뷰를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13
      - Parameters:
         - linkUrl : 도메인 포함된 URL 을 받습니다.
@@ -187,7 +187,7 @@ extension UIView {
     
     
     /**
-     UIViewController 를 받아 페이지 이동 합니다. ( J.D.H VER : 1.24.43 )
+     UIViewController 를 받아 페이지 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.11
      - Parameters:
         - controller : 이동할 타켓 컨트롤 뷰어 입니다.
@@ -205,7 +205,7 @@ extension UIView {
     
     
     /**
-     이전 페이지로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     이전 페이지로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.11
      - Parameters:
         - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
@@ -219,7 +219,7 @@ extension UIView {
     
     
     /**
-     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다. ( J.D.H VER : 1.24.43 )
+     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.19
      - Parameters:
         - viewController : 이동할 ViewController 입니다.
@@ -235,7 +235,7 @@ extension UIView {
     
     
     /**
-     최 앞단 페이지로 이동 합니다. ( J.D.H VER : 1.24.43 )
+     최 앞단 페이지로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.11
      - Parameters:
         - animated : 페이지 이동 애니 효과 입니다.  ( default : true )
@@ -249,7 +249,7 @@ extension UIView {
     
     
     /**
-     현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 1.24.43 )
+     현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.11
      - Parameters:
         - viewController : 이동할 페이지 입니다.
@@ -264,7 +264,7 @@ extension UIView {
     
     
     /**
-     배경에 쉐도우 를 추가 합니다. ( J.D.H VER : 1.24.43 )
+     배경에 쉐도우 를 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.03
      - Parameters:
         - rect : 배경 넓이 입니다.
@@ -283,7 +283,7 @@ extension UIView {
     
     
     /**
-     배경에 그라데이션 컬러를 하단에서 상단으로 추가 합니다. ( J.D.H VER : 1.24.43 )
+     배경에 그라데이션 컬러를 하단에서 상단으로 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.03
      - Parameters:
         - starColor : 시작 컬러 입니다.
@@ -302,7 +302,7 @@ extension UIView {
     
     
     /**
-     배경에 그라데이션 컬러를 오른쪽 하단에서 왼쪽 상단으로 추가 합니다. ( J.D.H VER : 1.24.43 )
+     배경에 그라데이션 컬러를 오른쪽 하단에서 왼쪽 상단으로 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.03
      - Parameters:
         - starColor : 시작 컬러 입니다.

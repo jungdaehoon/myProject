@@ -9,7 +9,7 @@ import UIKit
 
 
 /**
- 하단 계좌 선택 뷰어  버튼 타입 입니다. ( J.D.H VER : 1.24.43 )
+ 하단 계좌 선택 뷰어  버튼 타입 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.06.27
 */
 enum BOTTOM_ACCOUNT_LIET_BTN_ACTION : Int {
@@ -21,7 +21,7 @@ enum BOTTOM_ACCOUNT_LIET_BTN_ACTION : Int {
 
 
 /**
- 이벤트 타입 입니다.    ( J.D.H VER : 1.24.43 )
+ 이벤트 타입 입니다.    ( J.D.H VER : 2.0.0 )
  - Date: 2023.06.27
  */
 enum BOTTOM_ACCOUNT_EVENT {
@@ -33,7 +33,7 @@ enum BOTTOM_ACCOUNT_EVENT {
 
 
 /**
- 하단 계좌 선택 뷰어 입니다.   ( J.D.H VER : 1.24.43 )
+ 하단 계좌 선택 뷰어 입니다.   ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.05
  */
 class BottomAccountListView: BaseView {
@@ -70,7 +70,7 @@ class BottomAccountListView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     계좌 리스트 뷰어 초기화 입니다. ( J.D.H VER : 1.24.43 )
+     계좌 리스트 뷰어 초기화 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.02
      */
     func initBottomAccountListView(){
@@ -93,7 +93,7 @@ class BottomAccountListView: BaseView {
 
 
     /**
-     계좌 정보를 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
+     계좌 정보를 디스플레이 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.02
      - Parameters:False
      - Throws: False
@@ -112,7 +112,7 @@ class BottomAccountListView: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
+     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.02
      - Parameters:False
      - Throws: False
@@ -136,7 +136,7 @@ class BottomAccountListView: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
+     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.05.02
      - Parameters:False
      - Throws: False

@@ -11,7 +11,7 @@ import WebKit
 
 
 /**
- 전체 웹 버튼 이벤트  입니다.  ( J.D.H VER : 1.24.43 )
+ 전체 웹 버튼 이벤트  입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.21
 */
 enum FULL_BTN : Int {
@@ -23,7 +23,7 @@ enum FULL_BTN : Int {
 
 
 /**
- 보안키패드 이벤트 입니다.  ( J.D.H VER : 1.24.43 )
+ 보안키패드 이벤트 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.21
 */
 enum KEY_PAD_CLOSE_TYPE : Int {
@@ -37,7 +37,7 @@ enum KEY_PAD_CLOSE_TYPE : Int {
 
 
 /**
- 보안키패드 이벤트 입니다.  ( J.D.H VER : 1.24.43 )
+ 보안키패드 이벤트 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.21
 */
 enum OPENBANK_CLOSE_TYPE : Int {
@@ -51,7 +51,7 @@ enum OPENBANK_CLOSE_TYPE : Int {
 
 
 /**
- 전체 웹 종료 콜백 입니다.  ( J.D.H VER : 1.24.43 )
+ 전체 웹 종료 콜백 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.21
 */
 enum FULL_WEB_CB {
@@ -75,7 +75,7 @@ enum FULL_WEB_CB {
 
 
 /**
- 전체 웹 페이지 타입 입니다.  ( J.D.H VER : 1.24.43 )
+ 전체 웹 페이지 타입 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.11
 */
 enum FULL_PAGE_TYPE : String {
@@ -106,7 +106,7 @@ enum FULL_PAGE_TYPE : String {
 
 
 /**
- 전체 웹 연동 페이지 입니다.  ( J.D.H VER : 1.24.43 )
+ 전체 웹 연동 페이지 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.28
 */
 class FullWebViewController: BaseViewController {
@@ -145,7 +145,7 @@ class FullWebViewController: BaseViewController {
     
     // MARK: - init
     /**
-     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.24.43 )
+     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12
      - Parameters:
         - pageType          : 상단 네비 활성화시 타이틀 문구 입니다.
@@ -223,7 +223,7 @@ class FullWebViewController: BaseViewController {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     웹뷰 설정 및 디스플레이 메서드 입니다. ( J.D.H VER : 1.24.43 )
+     웹뷰 설정 및 디스플레이 메서드 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.17
      - Parameters:False
      - Throws: False
@@ -259,7 +259,7 @@ class FullWebViewController: BaseViewController {
     
     
     /**
-     종료 선택시 리턴 타입 체크 입니다.  ( J.D.H VER : 1.24.43 )
+     종료 선택시 리턴 타입 체크 입니다.  ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.13
      - Parameters:
         - closeType : 종료시 리턴 타입을 받습니다.
@@ -389,7 +389,7 @@ extension FullWebViewController {
     
     
     /**
-     제로페이 WebApp 스키마를 처리 합니다. ( J.D.H VER : 1.24.43 )
+     제로페이 WebApp 스키마를 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.25
      - Parameters:
         - url : URL 정보 입니다.

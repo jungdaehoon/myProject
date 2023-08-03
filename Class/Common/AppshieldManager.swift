@@ -11,7 +11,7 @@ import UIKit
 
 
 /**
- 앱 실드 지원 메니저 입니다. ( J.D.H VER : 1.24.43 )
+ 앱 실드 지원 메니저 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.27
  */
 class AppshieldManager

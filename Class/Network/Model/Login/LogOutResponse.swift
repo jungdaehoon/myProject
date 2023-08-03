@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- 로그아웃 정보를 받습니다. ( J.D.H VER : 1.24.43 )
+ 로그아웃 정보를 받습니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
 */
 struct LogOutResponse: BaseResponse {

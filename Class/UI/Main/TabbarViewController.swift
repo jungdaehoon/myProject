@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 노티 이벤트 이름을 가집니다. ( J.D.H VER : 1.24.43 )
+ 노티 이벤트 이름을 가집니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
  */
 extension Notification.Name {
@@ -20,7 +20,7 @@ extension Notification.Name {
 
 
 /**
- 텝 별 인덱스 입니다. ( J.D.H VER : 1.24.43 )
+ 텝 별 인덱스 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.21
  */
 enum TAB_STATUS : Int {
@@ -38,7 +38,7 @@ enum TAB_STATUS : Int {
 
 
 /**
- 메인 탭바 컨트롤러 입니다. ( J.D.H VER : 1.24.43 )
+ 메인 탭바 컨트롤러 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.20
  */
 class TabbarViewController: UITabBarController {
@@ -220,7 +220,7 @@ class TabbarViewController: UITabBarController {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     탭 아이템  활성화 여부를 받아 활성화 합니다..   ( J.D.H VER : 1.24.43 )
+     탭 아이템  활성화 여부를 받아 활성화 합니다..   ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.25
      - Parameters:
         - selectedIndex : 탭 변경 인덱스 정보 입니다.
@@ -233,7 +233,7 @@ class TabbarViewController: UITabBarController {
     
     
     /**
-     로그인 페이지 디스플레이 입니다. ( J.D.H VER : 1.24.43 )
+     로그인 페이지 디스플레이 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.24
      - Parameters:
         - animation : 디스플레이시 애니 효과 적용 여부 입니다.
@@ -250,7 +250,7 @@ class TabbarViewController: UITabBarController {
     
     
     /**
-     Notification 관련 이벤트를 연결 합니다. ( J.D.H VER : 1.24.43 )
+     Notification 관련 이벤트를 연결 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.23
      - Parameters:False
      - Throws: False
@@ -267,7 +267,7 @@ class TabbarViewController: UITabBarController {
     
     // MARK: - NotificationCenter
     /**
-     앱 백그라운드 이동하는 경우 입니다. ( J.D.H VER : 1.24.43 )
+     앱 백그라운드 이동하는 경우 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.04
      - Throws:False
      - returns:False
@@ -278,7 +278,7 @@ class TabbarViewController: UITabBarController {
     
     
     /**
-     앱 백그라운드 에서 호출되는 경우 입니다. ( J.D.H VER : 1.24.43 )
+     앱 백그라운드 에서 호출되는 경우 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.04
      - Throws:False
      - returns:False
@@ -294,7 +294,7 @@ extension UITabBarController
 {
     
     /**
-     현 진행중인 안내 뷰어 를 전부 초기화 합니다. ( J.D.H VER : 1.24.43 )
+     현 진행중인 안내 뷰어 를 전부 초기화 합니다. ( J.D.H VER : 2.0.0 )
      - Description: UIApplication.shared.windows 상에 추가된 UIView(BaseView) 타입의 모든 안내 팝업류는 전부 삭제 합니다.
      - Date: 2023.05.17
      - Parameters:False
@@ -311,7 +311,7 @@ extension UITabBarController
     
     
     /**
-     현 진행중인 페이지를 root 페이지로 초기화 합니다. ( J.D.H VER : 1.24.43 )
+     현 진행중인 페이지를 root 페이지로 초기화 합니다. ( J.D.H VER : 2.0.0 )
      - Description: Root 페이지 이동시 현 보여지는 페이지와 이전 연결되었던 모든 ViewController/UIView 페이지를 전부 삭제 후 Root 페이지로 이동 합니다.
      - Date: 2023.05.17
      - Parameters:False
@@ -329,7 +329,7 @@ extension UITabBarController
     
     
     /**
-     하단 탭바 위치를 이동합니다.  ( J.D.H VER : 1.24.43 )
+     하단 탭바 위치를 이동합니다.  ( J.D.H VER : 2.0.0 )
      - Description      : 탭을 이동시 추가 정보를 받아 디스플레이 할 수 있으며, 기본 위치 정보를 넘길 경우 해당 위치의 기본 데이터가 새로고침 됩니다. 추가 정보가 있는 경우에는 해당 정보가 정상 처리된 후 "completion" 콜백으로 최종 처리 이벤트를 받을 수 있습니다. 이벤트에는 탭 이동된 "BaseViewController" 정보를 파라미터로 받습니다.
      - Date: 2023.04.24
      - Parameters:
