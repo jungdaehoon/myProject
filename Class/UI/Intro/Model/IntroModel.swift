@@ -14,7 +14,7 @@ import Photos
 
 
 /**
- 연결 체크 타입 입니다..  ( J.D.H  VER : 1.0.0 )
+ 연결 체크 타입 입니다..  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.20
  
         + checking   : 체킹을 시작 합니다.
@@ -32,7 +32,7 @@ enum IS_CHECKING {
 
 
 /**
- 인트로 뷰어 지원 모델 입니다.    ( J.D.H  VER : 1.0.0 )
+ 인트로 뷰어 지원 모델 입니다.    ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.05
  */
 class IntroModel : BaseViewModel{
@@ -41,7 +41,7 @@ class IntroModel : BaseViewModel{
     
     
     /**
-     네크워크  연결 상태를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     네크워크  연결 상태를 체크 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Returns:
         네트워크 연결 가능 여부를 리턴 합니다. (CurrentValueSubject<IS_CHECKING, Never>)
@@ -94,7 +94,7 @@ class IntroModel : BaseViewModel{
     
     
     /**
-     자동로그인 처리 합니다. ( J.D.H  VER : 1.0.0 )
+     자동로그인 처리 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Parameters:False
      - Throws: False

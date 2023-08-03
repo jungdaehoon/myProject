@@ -2,7 +2,7 @@
 //  UIViewController.swift
 //  MyData
 //
-//  Created by UMCios on 2022/01/06.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import UIKit
@@ -25,7 +25,7 @@ extension UIViewController {
     
     
     /**
-     컨트롤러 데이터 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
+     컨트롤러 데이터 초기화 메서드 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.10
      - Parameters:False
      - Throws: False
@@ -35,7 +35,7 @@ extension UIViewController {
     
     
     /**
-     컨트롤러를 받아 다음 페이지로 이동 합니다. ( J.D.H VER : 1.0.0 )
+     컨트롤러를 받아 다음 페이지로 이동 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.12
      - Parameters:
         - viewController : 이동할 페이지 입니다.
@@ -62,7 +62,7 @@ extension UIViewController {
     
     
     /**
-     컨트롤로 현 페이지를 종료 합니다. ( J.D.H VER : 1.0.0 )
+     컨트롤로 현 페이지를 종료 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
@@ -96,7 +96,7 @@ extension UIViewController {
     
     
     /**
-     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다. ( J.D.H VER : 1.0.0 )
+     이동할 컨트롤러를 받아 해당 컨트롤로러 이동합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.19
      - Parameters:
         - viewController : 이동할 ViewController 입니다.
@@ -115,7 +115,7 @@ extension UIViewController {
     
     
     /**
-     컨트롤로 0번 페이지로 이동합니다. ( J.D.H VER : 1.0.0 )
+     컨트롤로 0번 페이지로 이동합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.17
      - Parameters:
         - animated : 효과 여부 입니다.
@@ -149,7 +149,7 @@ extension UIViewController {
     
     
     /**
-     현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 1.0.0 )
+     현 페이지를 삭제하고 추가할 페이지로 변경합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.03
      - Parameters:
         - viewController : 이동할 페이지 입니다.
@@ -178,7 +178,7 @@ extension UIViewController {
     
     
     /**
-     present로 연결된 ViewControllers 를 0번째 Root ViewController 이동 하도록 합니다. ( J.D.H VER : 1.0.0 )
+     present로 연결된 ViewControllers 를 0번째 Root ViewController 이동 하도록 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.03
      - Parameters:
         - animated : 종료시 애니 효과 적용 입니다.

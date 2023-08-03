@@ -1,9 +1,10 @@
 //
-//  Date.swift
-//  MyData
+//  BaseViewModel.swift
+//  OkPay
 //
-//  Created by UMCios on 2022/01/06.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
+
 
 import Foundation
 
@@ -22,7 +23,7 @@ extension Date {
     }
 
     /**
-     받은 DateFormat  정보 기준으로 해당 날짜 정보를 String 리턴 됩니다. ( J.D.H  VER : 1.0.0 )
+     받은 DateFormat  정보 기준으로 해당 날짜 정보를 String 리턴 됩니다. ( J.D.H VER : 1.24.43 )
     - Date: 2023.07.13
     - Parameters:
         - typetText : 날짜 타입 스타일 정보를 받습니다. ( default : yyyyMMdd  )

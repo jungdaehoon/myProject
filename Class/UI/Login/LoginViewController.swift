@@ -10,7 +10,7 @@ import WebKit
 
 
 /**
- 로그인 페이지 버튼 이벤트 타입 입니다. ( J.D.H VER : 1.0.0 )
+ 로그인 페이지 버튼 이벤트 타입 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.24
  */
 enum LOGIN_BTN_ACTION : Int {
@@ -35,7 +35,7 @@ enum LOGIN_BTN_ACTION : Int {
 
 
 /**
- 로그인 페이지 입니다. ( J.D.H VER : 1.0.0 )
+ 로그인 페이지 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.24
  */
 class LoginViewController: BaseViewController {
@@ -87,7 +87,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - init
     /**
-     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
+     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.04
      - Parameters:
         - completion :  페이지 종료시 콜백 핸들러 입니다.
@@ -142,7 +142,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     로그인 페이지 초기화 입니다. ( J.D.H  VER : 1.0.0 )
+     로그인 페이지 초기화 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:Fasle
      - Throws: False
@@ -168,7 +168,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     입력 필드 및 안내 초기화 설정 합니다. ( J.D.H  VER : 1.0.0 )
+     입력 필드 및 안내 초기화 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.17
      - Parameters:Fasle
      - Throws: False
@@ -185,7 +185,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     입력 필드 Placeholder Font 정보를 설정 합니다. ( J.D.H  VER : 1.0.0 )
+     입력 필드 Placeholder Font 정보를 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:Fasle
      - Throws: False
@@ -208,7 +208,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     앱 가이드 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
+     앱 가이드 디스플레이 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:Fasle
      - Throws: False
@@ -252,7 +252,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     로그인 버튼 활성화 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     로그인 버튼 활성화 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.22
      - Parameters:
         - linkUrl : 연결할 페이지 URL 정보 입니다.
@@ -280,7 +280,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     앱 실드로 정상 여부를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     앱 실드로 정상 여부를 체크 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.27
      - Parameters:False
      - Throws: False
@@ -304,7 +304,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     로그인 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     로그인 요청 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.27
      - Parameters:False
      - Throws: False
@@ -467,7 +467,7 @@ class LoginViewController: BaseViewController {
     
     
     /**
-     로그인 페이지를 종료 합니다. ( J.D.H VER : 1.0.0 )
+     로그인 페이지를 종료 합니다. ( J.D.H VER : 1.24.43 )
      - Description : 종료후 메인 홈으로 이동하며 딥링크나/PUSH 정보를 가지고 있다면 홈으로 이동 후 해당 웹페이지를 디스플레이 하도록 합니다.
      - Date: 2023.05.31
      - Parameters:False
@@ -620,7 +620,7 @@ extension LoginViewController : UITextFieldDelegate {
 // MARK: - 보안 키패드 초기화 관련 입니다.
 extension LoginViewController {
     /**
-     보안 키페드 를 초기화 합니다.  ( J.D.H  VER : 1.0.0 )
+     보안 키페드 를 초기화 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:Fasle
      - Throws: False
@@ -646,7 +646,7 @@ extension LoginViewController {
      
     
     /**
-     보안 키페드 를 활성화 합니다.  ( J.D.H  VER : 1.0.0 )
+     보안 키페드 를 활성화 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.27
      - Parameters:Fasle
      - Throws: False
@@ -660,7 +660,7 @@ extension LoginViewController {
     
     
     /**
-     키페드 를 종료 합니다.  ( J.D.H  VER : 1.0.0 )
+     키페드 를 종료 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.27
      - Parameters:Fasle
      - Throws: False
@@ -677,7 +677,7 @@ extension LoginViewController {
     
     
     /**
-     보안키패드 입력 될 때 마다 받는 콜백 메서드 입니다.  ( J.D.H  VER : 1.0.0 )
+     보안키패드 입력 될 때 마다 받는 콜백 메서드 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:
         - aCount: 입력된 카운트 정보 입니다.

@@ -11,7 +11,7 @@ import AVFoundation
 
 
 /**
- 제로페이 QRCode 체크 전체 화면 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
+ 제로페이 QRCode 체크 전체 화면 뷰어 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.11
 */
 class OKZeroPayQRCaptureView: UIView {
@@ -67,7 +67,7 @@ class OKZeroPayQRCaptureView: UIView {
     
     
     /**
-     프리뷰 화면 설정 메서드 입니다. ( J.D.H VER : 1.0.0 )
+     프리뷰 화면 설정 메서드 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
@@ -119,7 +119,7 @@ class OKZeroPayQRCaptureView: UIView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False
@@ -136,7 +136,7 @@ class OKZeroPayQRCaptureView: UIView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False

@@ -11,7 +11,7 @@ import Combine
 
 
 /**
- 결제 코드 활성화 타임별 타입 입니다. ( J.D.H  VER : 1.0.0 )
+ 결제 코드 활성화 타임별 타입 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.26
 */
 enum CODE_ENABLED_TIME : Equatable {
@@ -26,7 +26,7 @@ enum CODE_ENABLED_TIME : Equatable {
 
 
 /**
- 코드 타입 입니다. ( J.D.H  VER : 1.0.0 )
+ 코드 타입 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.13
 */
 enum ZEROPAY_CODE_TYPE
@@ -39,7 +39,7 @@ enum ZEROPAY_CODE_TYPE
 
 
 /**
- 전체 웹 종료 콜백 입니다.  ( J.D.H  VER : 1.0.0 )
+ 전체 웹 종료 콜백 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.19
 */
 enum QRCODE_CB : Equatable {
@@ -59,7 +59,7 @@ enum QRCODE_CB : Equatable {
 
 
 /**
- 카드 디스플레이 타입  입니다.  ( J.D.H  VER : 1.0.0 )
+ 카드 디스플레이 타입  입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.06.27
 */
 enum CARD_DISPLAY  : Equatable {
@@ -73,7 +73,7 @@ enum CARD_DISPLAY  : Equatable {
 
 
 /**
- 제로페이 뷰어 관련 모델 입니다. ( J.D.H  VER : 1.0.0 )
+ 제로페이 뷰어 관련 모델 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.06.16
 */
 class OKZeroViewModel : BaseViewModel
@@ -101,7 +101,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     싱글 결제 코드 인식 가능한 타임 여부를 체크 합니다.( J.D.H  VER : 1.0.0 )
+     싱글 결제 코드 인식 가능한 타임 여부를 체크 합니다.( J.D.H VER : 1.24.43 )
      - Date: 2023.04.26
      - Parameters:False
      - Throws: False
@@ -146,7 +146,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     결제 코드 사용가능 타임을 체크 합니다.( J.D.H  VER : 1.0.0 )
+     결제 코드 사용가능 타임을 체크 합니다.( J.D.H VER : 1.24.43 )
      - Date: 2023.04.27
      - Parameters:
         - maxTime : 결제 코드 최대 타임 정보를 받습니다.
@@ -187,7 +187,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     바코드 인식할 캡쳐 세션 연결 입니다.( J.D.H  VER : 1.0.0 )
+     바코드 인식할 캡쳐 세션 연결 입니다.( J.D.H VER : 1.24.43 )
      - Date: 2023.03.13
      - Throws: False
      - Returns:
@@ -239,7 +239,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     캡쳐 세션을 초기화합니다. ( J.D.H  VER : 1.0.0 )
+     캡쳐 세션을 초기화합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.10
      */
     func setReleaseAVCaptrueSession()
@@ -250,7 +250,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     QRCode 인증 할 제로페이 스크립트를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     QRCode 인증 할 제로페이 스크립트를 요청 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.19
      - Parameters:
         - params : 제로페이에서 받은 파라미터 정보 입니다.
@@ -278,7 +278,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     제로페이 간편결제 QR/BarCode 정보를 요청 합니다 ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 QR/BarCode 정보를 요청 합니다 ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False
@@ -308,7 +308,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:
         - qrcode : 스캔한 qrcode 정보 입니다.
@@ -334,7 +334,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     제로페이 간편결제 카드 머니 정보 숨김/보기 요청 입니다. ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 카드 머니 정보 숨김/보기 요청 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:
         - hidden : 숨김 요쳥 여부 입니다.  ( Y : 숨김. N : 보기 )
@@ -372,7 +372,7 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     제로페이 간편결제 해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다 ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다 ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False

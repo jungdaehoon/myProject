@@ -10,7 +10,7 @@ import Combine
 
 
 /**
- 만보고 모델 정보 입니다. ( J.D.H VER : 1.0.0 )
+ 만보고 모델 정보 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.23
  */
 class PedometerModel : BaseViewModel
@@ -25,7 +25,7 @@ class PedometerModel : BaseViewModel
     
     
     /**
-     만보기 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 요청 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.23
      - Parameters:False
      - Throws: False
@@ -53,7 +53,7 @@ class PedometerModel : BaseViewModel
     
     
     /**
-     만보기 리워드 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 리워드 요청 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.23
      - Parameters:False
      - Throws: False
@@ -81,7 +81,7 @@ class PedometerModel : BaseViewModel
     
     
     /**
-     만보기 데이터 업데이트 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 데이터 업데이트 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.23
      - Parameters:
         - params : 업데이트할 만보기 정보 입니다.

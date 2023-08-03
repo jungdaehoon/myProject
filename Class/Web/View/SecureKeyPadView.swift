@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 키패드 상황별 리턴 타입입니다. ( J.D.H  VER : 1.0.0 )
+ 키패드 상황별 리턴 타입입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.29
 */
 enum SecureKeyPadCBType {
@@ -24,7 +24,7 @@ enum SecureKeyPadCBType {
 
 
 /**
- 키패드 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
+ 키패드 뷰어 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.29
 */
 class SecureKeyPadView: BaseView {
@@ -73,7 +73,7 @@ class SecureKeyPadView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     보안 키페드 를 초기화 합니다.  ( J.D.H  VER : 1.0.0 )
+     보안 키페드 를 초기화 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:Fasle
      - Throws: False
@@ -107,7 +107,7 @@ class SecureKeyPadView: BaseView {
      
     
     /**
-     보안 키페드 를 활성화 합니다.  ( J.D.H  VER : 1.0.0 )
+     보안 키페드 를 활성화 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.27
      - Parameters:Fasle
      - Throws: False
@@ -120,7 +120,7 @@ class SecureKeyPadView: BaseView {
     
     
     /**
-     키페드 를 종료 합니다.  ( J.D.H  VER : 1.0.0 )
+     키페드 를 종료 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.27
      - Parameters:Fasle
      - Throws: False
@@ -134,7 +134,7 @@ class SecureKeyPadView: BaseView {
     
     
     /**
-     보안키패드 입력 될 때 마다 받는 콜백 메서드 입니다.  ( J.D.H  VER : 1.0.0 )
+     보안키패드 입력 될 때 마다 받는 콜백 메서드 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:
         - aCount: 입력된 카운트 정보 입니다.

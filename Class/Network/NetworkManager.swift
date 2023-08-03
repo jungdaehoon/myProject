@@ -12,13 +12,13 @@ import CoreMedia
 
 
 /**
- Request 관련 API 메서드를 관리 합니다. ( J.D.H  VER : 1.0.0 )
+ Request 관련 API 메서드를 관리 합니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.09
  */
 class NetworkManager {
     
     /**
-     토큰 정보를 가져 옵니다. ( J.D.H  VER : 1.0.0 )
+     토큰 정보를 가져 옵니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.09
      - Parameters:False
      - Throws: False
@@ -36,7 +36,7 @@ class NetworkManager {
     
     
     /**
-     기본 파라미터 정보를 설정합니다. ( J.D.H VER : 1.0.0 )
+     기본 파라미터 정보를 설정합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False
@@ -58,7 +58,7 @@ class NetworkManager {
     
     
     /**
-     전체 탭 요청 합니다.( J.D.H  VER : 1.0.0 )
+     전체 탭 요청 합니다.( J.D.H VER : 1.24.43 )
      - API ID: /all/selectMyInfo.do
      - API 명: 하단 전체 탭에 데이터 정보를 요청 합니다.
      - Date: 2023.03.09
@@ -75,7 +75,7 @@ class NetworkManager {
     
     
     /**
-     만보게 약관 동의 여부 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     만보게 약관 동의 여부 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /popup/selectPedometerTerms.do
      - API 명: 만보게 페이지 진입전 약관 동의 여부를 확인 합니다.
      - Date: 2023.03.09
@@ -93,7 +93,7 @@ class NetworkManager {
     
     
     /**
-     만보게 약관 동의 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     만보게 약관 동의 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /popup/insertPedometerTerms.do
      - API 명: 만보기 약관동의 팝업에서 "동의" 선택으로 약관동의를 요청 합니다.
      - Date: 2023.03.15
@@ -110,7 +110,7 @@ class NetworkManager {
     
     
     /**
-     앱 시작 기본 정보 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     앱 시작 기본 정보 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/start.do
      - API 명: 앱 시작 기본 정보 요청 합니다.
      - Date: 2023.03.27
@@ -132,7 +132,7 @@ class NetworkManager {
     
     
     /**
-      Fcm PUSH 토큰 정보를 업로드 합니다. ( J.D.H  VER : 1.0.0 )
+      Fcm PUSH 토큰 정보를 업로드 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/pushToken.do
      - API 명: FCM Token 업데이트 합니다.
      - Date: 2023.04.12
@@ -154,7 +154,7 @@ class NetworkManager {
     
     
     /**
-     로그인을 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     로그인을 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/login.do
      - API 명: 로그아웃을 요청 합니다.
      - Date: 2023.03.27
@@ -176,7 +176,7 @@ class NetworkManager {
     
     
     /**
-     로그아웃을 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     로그아웃을 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/logout.do
      - API 명: 로그아웃을 요청 합니다.
      - Date: 2023.03.20
@@ -193,7 +193,7 @@ class NetworkManager {
     
     
     /**
-     만료된 은행 계좌 재인증 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     만료된 은행 계좌 재인증 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: openbank/authorizeAccount
      - API 명: 계좌 재인증 요청 입니다.
      - Date: 2023.03.21
@@ -210,7 +210,7 @@ class NetworkManager {
     
     
     /**
-     연결된 은행 계좌 리스트 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     연결된 은행 계좌 리스트 정보를 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: myp/selectAccountList.do
      - API 명: 은행 계좌 요청 입니다.
      - Date: 2023.03.22
@@ -227,7 +227,7 @@ class NetworkManager {
     
     
     /**
-     연결된 은행 계좌 리스트 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     연결된 은행 계좌 리스트 정보를 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: myp/accounts.do
      - API 명: 은행 계좌 요청 입니다.
      - Date: 2023.07.05
@@ -244,7 +244,7 @@ class NetworkManager {
     
 
     /**
-     만보기 수령 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 수령 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: myp/selectMyPedometer.do
      - API 명: 만보기 수령 요청 입니다.
      - Date: 2023.03.22
@@ -261,7 +261,7 @@ class NetworkManager {
     
     
     /**
-     만보기 리워드 수령 합니다.  ( J.D.H  VER : 1.0.0 )
+     만보기 리워드 수령 합니다.  ( J.D.H VER : 1.24.43 )
      - API ID: myp/insertPedometer.do
      - API 명: 만보기 리워드 수령 요청 입니다.
      - Date: 2023.03.22
@@ -283,7 +283,7 @@ class NetworkManager {
     
     
     /**
-     만보기 데이터를 업데이트 합니다. ( J.D.H  VER : 1.0.0 )
+     만보기 데이터를 업데이트 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: myp/updateDailyPedometer.do
      - API 명: 만보기 데이터를 업데이트 합니다.
      - Date: 2023.03.22
@@ -305,7 +305,7 @@ class NetworkManager {
     
     
     /**
-     세션이 활성화 상태인지를 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     세션이 활성화 상태인지를 체크 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/checkLoginInfo
      - API 명: 현 세션이 활성화 상태인지를 체크 합니다.
      - Date: 2023.05.26
@@ -322,7 +322,7 @@ class NetworkManager {
     
     
     /**
-     제로페이 인증 정보와 QRCode 정보로 제로페이에 리턴할 스크립트를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     제로페이 인증 정보와 QRCode 정보로 제로페이에 리턴할 스크립트를 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/v1/zeropay/qrcode.do
      - API 명: QRCode 인증 할 제로페이 스크립트를 요청 합니다.
      - Date: 2023.04.19
@@ -344,7 +344,7 @@ class NetworkManager {
     
     
     /**
-     제로페이 간편결제 약관 동의 여부를 체크 합니다.. ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 약관 동의 여부를 체크 합니다.. ( J.D.H VER : 1.24.43 )
      - API ID: /api/v1/zeropay/qr/agree
      - API 명: 제로페이 간편결제 약관동의 체크 입니다.
      - Date: 2023.07.05
@@ -366,7 +366,7 @@ class NetworkManager {
     
     
     /**
-     제로페이 간편결제 약관 동의를 요청 합니다. "POST" 요청 하여야 하며 해당 경우는 동의로 판단 합니다.( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 약관 동의를 요청 합니다. "POST" 요청 하여야 하며 해당 경우는 동의로 판단 합니다.( J.D.H VER : 1.24.43 )
      - API ID: /api/v1/zeropay/qr/agree
      - API 명: 제로페이 간편결제 약관동의 저장 입니다.
      - Date: 2023.07.05
@@ -387,7 +387,7 @@ class NetworkManager {
     
     
     /**
-     제로페이 간편결제 카드 머니 정보 숨김/보기 입니다 ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 카드 머니 정보 숨김/보기 입니다 ( J.D.H VER : 1.24.43 )
      - API ID: /all/updateBalanceView.do
      - API 명: 카드 머니 정보 숨김/보기 정보 업데이트 입니다.
      - Date: 2023.07.05
@@ -408,7 +408,7 @@ class NetworkManager {
     
     
     /**
-     제로페이 간편결제 QR/BarCode 정보를 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 QR/BarCode 정보를 요청 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/v1/zeropay/qr/code
      - API 명: 간편결제 사용될 코드 정보를 요청 합니다.
      - Date: 2023.07.05
@@ -426,7 +426,7 @@ class NetworkManager {
     
     
     /**
-     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H  VER : 1.0.0 )
+     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H VER : 1.24.43 )
      - API ID: /api/v1/zeropay/qr/fixed
      - API 명: MPM 고정형 QR코드 정상여부 인식 입니다.  ( S : 정지, A : 사용가능 )
      - Date: 2023.07.05
@@ -442,7 +442,7 @@ class NetworkManager {
     
     
     /**
-     해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다.( J.D.H  VER : 1.0.0 )
+     해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다.( J.D.H VER : 1.24.43 )
      - API ID: /api/v1/okmoney
      - API 명:   OK머니 정보 조회 입니다.
      - Date: 2023.07.06

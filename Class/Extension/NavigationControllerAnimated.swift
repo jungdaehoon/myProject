@@ -2,14 +2,14 @@
 //  NavigationControllerAnimated.swift
 //  MyData
 //
-//  Created by daehoon on 2022/05/24.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import UIKit
 
 
 /**
- 내비 컨트롤러 페이지 이동시 애니 타입별 효과 지원 클래스 입니다.  ( J.D.H  VER : 1.0.0 )
+ 내비 컨트롤러 페이지 이동시 애니 타입별 효과 지원 클래스 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.12
  */
 class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitioning {
@@ -21,7 +21,7 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
     
     
     /**
-     애니 효과 타입 받아 페이지 집인 이동시 효과를 주는 클래스를 초기화 합니다. ( J.D.H VER : 1.0.0 )
+     애니 효과 타입 받아 페이지 집인 이동시 효과를 주는 클래스를 초기화 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.12
      - Parameters:
         - animationType : 페이지 이동할 효과 정보를 받습니다.
@@ -34,7 +34,7 @@ class NavigationControllerAnimated : NSObject, UIViewControllerAnimatedTransitio
     
     
     /**
-     애니 효과 타입 받아 페이지 종료 이동시 효과를 주는 클래스를 초기화 합니다. ( J.D.H VER : 1.0.0 )
+     애니 효과 타입 받아 페이지 종료 이동시 효과를 주는 클래스를 초기화 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.12
      - Parameters:
         - animationType : 페이지 이동할 효과 정보를 받습니다.

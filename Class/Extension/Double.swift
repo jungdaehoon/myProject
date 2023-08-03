@@ -2,7 +2,7 @@
 //  Double.swift
 //  MyData
 //
-//  Created by INTAEK HAN on 2022/04/20.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import Foundation

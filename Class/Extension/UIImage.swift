@@ -2,7 +2,7 @@
 //  UIImage+.swift
 //  mNote
 //
-//  Created by daehoon on 2022/08/08.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import UIKit
 extension UIImage
 {
     /**
-     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
+     이미지를 원하는 사이즈로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.26
      - parameters:
         - size : 이미지를 넓이 기준으로 리사이징 합니다.
@@ -27,7 +27,7 @@ extension UIImage
     }
     
     /**
-     이미지 사이즈를  높이 기준으로 조정 합니다. ( J.D.H VER : 1.0.0 )
+     이미지 사이즈를  높이 기준으로 조정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.08.02
      - parameters:
         - newHeight : 이미지를 높이 기준으로 리사이징 합니다.
@@ -51,7 +51,7 @@ extension UIImage
     
     
     /**
-     이미지 사이즈를  넓이 기준으로 조정 합니다. ( J.D.H VER : 1.0.0 )
+     이미지 사이즈를  넓이 기준으로 조정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.08.02
      - parameters:
         - newWidth : 이미지를 넓이 기준으로 리사이징 합니다.
@@ -77,7 +77,7 @@ extension UIImage
     
     
     /**
-     이미지 Pix 사이즈를 조정 합니다. ( J.D.H VER : 1.0.0 )
+     이미지 Pix 사이즈를 조정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.08.02
      - parameters:
         - newHeight : 이미지를 높이 기준으로 리사이징 합니다.
@@ -99,7 +99,7 @@ extension UIImage
     
     
     /**
-     이미지를 넓이 기준으로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
+     이미지를 넓이 기준으로 리사이징 하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.26
      - parameters:
         - newWidth : 이미지를 넓이 기준으로 리사이징 합니다.
@@ -121,7 +121,7 @@ extension UIImage
     
     
     /**
-     회전된 이미지를 계산하여 리턴 합니다. ( J.D.H VER : 1.0.0 )
+     회전된 이미지를 계산하여 리턴 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.26
      - parameters:
         - radians : 회전 각도 값입니다. ( CGFloat(angle * .pi) / 180 as CGFloat 설정된 값 )

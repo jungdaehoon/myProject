@@ -2,14 +2,14 @@
 //  URL.swift
 //  MyData
 //
-//  Created by UMCios on 2022/01/07.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import Foundation
 
 extension URL {
     /**
-     URL 파라미터를Dic 형태의 데이터 변경합니다. ( J.D.H VER : 1.0.0 )
+     URL 파라미터를Dic 형태의 데이터 변경합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.06.09
      */
     public var getQueries: [String: String] {

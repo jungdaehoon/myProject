@@ -9,7 +9,7 @@ import Foundation
 
 
 /**
- 웹 화면 연결 URL 정보입니다. ( J.D.H  VER : 1.0.0 )
+ 웹 화면 연결 URL 정보입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.23
 */
 class WebPageConstants {

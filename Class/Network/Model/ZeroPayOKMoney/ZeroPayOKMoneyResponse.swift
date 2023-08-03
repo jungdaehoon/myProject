@@ -9,7 +9,7 @@ import Foundation
 
 
 /**
- 제로페이 진입시 OK 머니 카드  상세 정보 입니다.  (  ( J.D.H  VER : 1.0.0 )
+ 제로페이 진입시 OK 머니 카드  상세 정보 입니다.  (  ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.10
 */
 struct ZeroPayOKMoneyResponse: BaseResponse {
@@ -30,7 +30,7 @@ struct ZeroPayOKMoneyResponse: BaseResponse {
 
 
 /**
- 제로페이 진입시 OK 머니 카드  데이터 입니다.  ( J.D.H  VER : 1.0.0 )
+ 제로페이 진입시 OK 머니 카드  데이터 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.10
 */
 struct okmoneydata : Codable
@@ -56,7 +56,7 @@ struct okmoneydata : Codable
 
 
 /**
- 제로페이 진입시 OK 머니 카드  메인 계좌 정보 입니다.  ( J.D.H  VER : 1.0.0 )
+ 제로페이 진입시 OK 머니 카드  메인 계좌 정보 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.10
 */
 struct mainaccount : Codable

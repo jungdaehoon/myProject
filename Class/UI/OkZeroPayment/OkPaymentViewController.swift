@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- 제로페이 간편결제 페이지 입니다.  ( J.D.H  VER : 1.0.0 )
+ 제로페이 간편결제 페이지 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.10
 */
 class OkPaymentViewController: UIViewController {

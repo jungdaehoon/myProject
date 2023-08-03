@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 전체 상단 유저 안내뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+ 전체 상단 유저 안내뷰어 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.07
 */
 class TopUserInfoView: UIView {
@@ -36,7 +36,7 @@ class TopUserInfoView: UIView {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     데이터 기준으로 유저 정보를 디스플레이 합니다 ( J.D.H  VER : 1.0.0 )
+     데이터 기준으로 유저 정보를 디스플레이 합니다 ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.08
      - Parameters:
         - model : 데이터 모델 정보를 받습니다.

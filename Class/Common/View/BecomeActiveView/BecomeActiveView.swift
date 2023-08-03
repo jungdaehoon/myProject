@@ -9,7 +9,7 @@ import UIKit
 
 
 /**
- 백그라운드 및 현 화면 보이지 않도록 하는 로고 뷰어 입니다.   ( J.D.H  VER : 1.0.0 )
+ 백그라운드 및 현 화면 보이지 않도록 하는 로고 뷰어 입니다.   ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.05
  */
 class BecomeActiveView: UIView {
@@ -37,7 +37,7 @@ class BecomeActiveView: UIView {
 
     
     /**
-     로고 뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     로고 뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False
@@ -55,7 +55,7 @@ class BecomeActiveView: UIView {
     
     
     /**
-     로고 뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
+     로고 뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False

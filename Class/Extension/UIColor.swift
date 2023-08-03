@@ -2,7 +2,7 @@
 //  UIColor.swift
 //  MyData
 //
-//  Created by daehoon on 2022/02/11.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import UIKit

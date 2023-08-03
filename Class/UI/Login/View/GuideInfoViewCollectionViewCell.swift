@@ -10,7 +10,7 @@ import UIKit
 
 
 /**
- 가이드 셀별 페이지 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+ 가이드 셀별 페이지 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.24
 */
 class GuideInfoViewCollectionViewCell: UICollectionViewCell {
@@ -34,7 +34,7 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
     
     
     /**
-     가이드 인덱스에 맞춰 화면을 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     가이드 인덱스에 맞춰 화면을 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.29
      - Parameters:
         - index : 가이드 인덱스 정보 입니다.

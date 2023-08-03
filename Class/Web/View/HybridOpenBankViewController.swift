@@ -29,7 +29,7 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
     
     // MARK: - init
     /**
-     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.0.0 )
+     전체 웹뷰 초기화 메서드 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.28
      - Parameters:
         - pageURL : 연결할 페이지 URL 입니다.
@@ -88,13 +88,12 @@ class HybridOpenBankViewController: UIViewController, WKUIDelegate, WKNavigation
                 }
             }
         }
-
     }
     
     
     func getParameterFrom(url: String, param: String) -> String? {
         guard let url = URLComponents(string: url) else { return nil }
-        return url.queryItems?.first(where: { $0.name == param })?.value
+        return url.queryItems?.first( where: { $0.name == param } )?.value
     }
     
         

@@ -10,7 +10,7 @@ import Foundation
 
 
 /**
- 전체 탭 영역 정보를 처리합니다. ( J.D.H  VER : 1.0.0 )
+ 전체 탭 영역 정보를 처리합니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.21
 */
 struct AllMoreResponse: BaseResponse {
@@ -32,7 +32,7 @@ struct AllMoreResponse: BaseResponse {
 
 
 /**
- 전체 탭 주요 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ 전체 탭 주요 데이터 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.21
 */
 struct allData: Codable {
@@ -171,7 +171,7 @@ struct allData: Codable {
 
 
 /**
- 제휴사 예치금 정보 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ 제휴사 예치금 정보 데이터 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.21
 */
 struct inv_balance_list: Codable
@@ -186,7 +186,7 @@ struct inv_balance_list: Codable
 
 
 /**
- 포인트 거래내역 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ 포인트 거래내역 데이터 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.21
 */
 struct point_trans_list: Codable
@@ -252,7 +252,7 @@ struct point_trans_list: Codable
 
 
 /**
- 거래내역 데이터 입니다. ( J.D.H  VER : 1.0.0 )
+ 거래내역 데이터 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.21
 */
 struct acc_trans_list: Codable

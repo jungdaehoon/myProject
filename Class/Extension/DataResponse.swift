@@ -14,7 +14,7 @@ import os
 extension DataResponse {
 
     public var debugDescription: String {
-        /// Console Log 활성화 여부 입니다. ( J.D.H  VER : 1.0.0 )
+        /// Console Log 활성화 여부 입니다. ( J.D.H VER : 1.24.43 )
         if OSLog.OS_LOG == true
         {
             func getHttpBody( _ rawData: Data? ) -> String?

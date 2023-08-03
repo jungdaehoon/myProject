@@ -2,7 +2,7 @@
 //  String.swift
 //  MyData
 //
-//  Created by UMCios on 2022/01/06.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import UIKit
 extension String {
     
     /**
-     문자 내부에 Html 문구가 들어있는 경우 해당 문구를 제외 합니다. ( J.D.H  VER : 1.0.0 )
+     문자 내부에 Html 문구가 들어있는 경우 해당 문구를 제외 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.06
      - Parameters:
         - htmlEncodedString : 체크할 문자 정보를 받습니다.
@@ -254,7 +254,7 @@ extension String {
     
     
     /**
-     문자 중간중간에 빈칸을 추가 합니다.( J.D.H  VER : 1.0.0 )
+     문자 중간중간에 빈칸을 추가 합니다.( J.D.H VER : 1.24.43 )
      - Date: 2023.07.18
      - Parameters:
         - distance : 간격 정보를 받습니다.  간격정보는 요청 한 간격 정보의 -1 값으로 적용 됩니다.( default : 5 )
@@ -284,7 +284,7 @@ extension String {
     
     
     /**
-     해당 마지막 정보들의 일부 영역을 마스킹 처리 합니다..( J.D.H  VER : 1.0.0 )
+     해당 마지막 정보들의 일부 영역을 마스킹 처리 합니다..( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:
         - maskStr : 마스킹할 정보 입니다. ( default : * )
@@ -691,8 +691,8 @@ extension String {
     }
     
     /**
-     문자의 화면 기준 그려길  CGSize 정보를 받습니다.  ( J.D.H  VER : 1.0.0 )
-     - Date: 2022.04.14
+     문자의 화면 기준 그려길  CGSize 정보를 받습니다.  ( J.D.H VER : 1.24.43 )
+     - Date: 2023.04.14
      - Parameters:
         - maxSize : 화면에 그릴 최대 사이즈 정보를 받습니다.
         - font : 화면에 그릴 폰트 정보를 받습니다.
@@ -721,7 +721,7 @@ extension String {
     
     
     /**
-     URL 사파리 외부 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+     URL 사파리 외부 오픈 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.16
      - Parameters:False
      - Returns:False

@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 입 최초 실행시 인트로 입니다.  ( J.D.H  VER : 1.0.0 )
+ 입 최초 실행시 인트로 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.20
  */
 class IntroViewController: BaseViewController {
@@ -69,7 +69,7 @@ class IntroViewController: BaseViewController {
     
     // MARK: - 지원 메서드 입니다.
     /**
-     앱 기본 체크 사항을 확인 하고 디스플레이 합니다..  ( J.D.H  VER : 1.0.0 )
+     앱 기본 체크 사항을 확인 하고 디스플레이 합니다..  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Parameters:False
      - Throws: False
@@ -112,7 +112,7 @@ class IntroViewController: BaseViewController {
 
     
     /**
-     앱 업데이트 및 변경사항을 서버 요청후 체크 합니다..  ( J.D.H  VER : 1.0.0 )
+     앱 업데이트 및 변경사항을 서버 요청후 체크 합니다..  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Parameters:False
      - Throws: False
@@ -141,7 +141,7 @@ class IntroViewController: BaseViewController {
                                 version._market_url!.openUrl()
                             })
                             alert?.addAlertBtn(btnTitleText: "다음에하기", completion: { result in
-                                /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+                                /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H VER : 1.24.43 )
                                 self.permissionInfoView.setOpenView { value in
                                     /// 접근권한 "확인" 일 경우 입니다.
                                     if value == true
@@ -172,7 +172,7 @@ class IntroViewController: BaseViewController {
                 }
             }
                                 
-            /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H  VER : 1.0.0 )
+            /// 접근 권한 안내 팝업 오픈 합니다. ( J.D.H VER : 1.24.43 )
             self.permissionInfoView.setOpenView { value in
                 /// 접근권한 "확인" 일 경우 입니다.
                 if value == true
@@ -187,7 +187,7 @@ class IntroViewController: BaseViewController {
     
     
     /**
-     OKPay 앱을 시작 합니다. ( J.D.H  VER : 1.0.0 )
+     OKPay 앱을 시작 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Throws: False
      - Returns:False
@@ -249,7 +249,7 @@ class IntroViewController: BaseViewController {
     
     
     /**
-     메인 화면 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     메인 화면 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.04
      - Parameters:
         - loginDisplay : 로그인 페이지 디스플레이 여부를 받습니다.

@@ -9,7 +9,7 @@ import UIKit
 
 
 /**
- 서비스 불가능 안내팝업 입니다.   ( J.D.H  VER : 1.0.0 )
+ 서비스 불가능 안내팝업 입니다.   ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.05
  */
 class ServiceErrorPop: BaseView {
@@ -27,7 +27,7 @@ class ServiceErrorPop: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     뷰어를 초기화 하며 Xib 를 연결 합니다.    ( J.D.H  VER : 1.0.0 )
+     뷰어를 초기화 하며 Xib 를 연결 합니다.    ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      */
     func setErrorView(){
@@ -36,7 +36,7 @@ class ServiceErrorPop: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False
@@ -52,7 +52,7 @@ class ServiceErrorPop: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False

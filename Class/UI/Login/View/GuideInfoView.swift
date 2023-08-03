@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- 가이드 안내 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+ 가이드 안내 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.24
 */
 class GuideInfoView: UIView {
@@ -64,7 +64,7 @@ class GuideInfoView: UIView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     접근 권한 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+     접근 권한 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.07
      */
     func initGuideInfo(){
@@ -83,7 +83,7 @@ class GuideInfoView: UIView {
     
     
     /**
-     가이드 디스플레이를 시작 하며 버튼 이벤트를 연결 합니다.  ( J.D.H  VER : 1.0.0 )
+     가이드 디스플레이를 시작 하며 버튼 이벤트를 연결 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:
         - animation :
@@ -99,7 +99,7 @@ class GuideInfoView: UIView {
     
     
     /**
-     하단 카드 올리는 화살표 애니 이미지 입니다.  ( J.D.H  VER : 1.0.0 )
+     하단 카드 올리는 화살표 애니 이미지 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:False
      - Throws: False
@@ -115,7 +115,7 @@ class GuideInfoView: UIView {
     
     
     /**
-     애니 효과로 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
+     애니 효과로 디스플레이 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다.
@@ -135,7 +135,7 @@ class GuideInfoView: UIView {
     
     
     /**
-     애니 효과로 종료 합니다.  ( J.D.H  VER : 1.0.0 )
+     애니 효과로 종료 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.24
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다.
@@ -156,7 +156,7 @@ class GuideInfoView: UIView {
     
     
     /**
-     가이드 디스플레이 순서를 초기화 합니다. ( J.D.H  VER : 1.0.0 )
+     가이드 디스플레이 순서를 초기화 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.29
      - Parameters:
         - animation : 애니 효과를 활성화 할지 여부를 받습니다. ( 기본 : false )

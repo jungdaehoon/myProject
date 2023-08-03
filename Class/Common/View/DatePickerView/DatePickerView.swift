@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- 날짜 정보를 PickerView 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
+ 날짜 정보를 PickerView 디스플레이 합니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.17
  */
 class DatePickerView: BaseView {
@@ -36,7 +36,7 @@ class DatePickerView: BaseView {
     }
 
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.17
      - Parameters:
         - displayType   : 날짜 디스플레이 모드 값입니다. ( YMD : 년/월/일, YM : 년/월, Y : 년, D : 일 )
@@ -60,7 +60,7 @@ class DatePickerView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.17
      - Parameters:False
      - Throws: False
@@ -76,7 +76,7 @@ class DatePickerView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.05
      - Parameters:False
      - Throws: False

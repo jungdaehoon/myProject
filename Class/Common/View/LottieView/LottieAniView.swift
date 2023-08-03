@@ -8,7 +8,7 @@ import Lottie
 
 
 /**
- Lottie.json 파일 디스플레이 뷰어입니다. ( J.D.H VER : 1.0.0 )
+ Lottie.json 파일 디스플레이 뷰어입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.05.04
  */
 @objc class LottieAniView: UIView {
@@ -30,7 +30,7 @@ import Lottie
     
     // MARK: - override
     /**
-     설정된 로띠 화면 layout 을 전체 화면으로 연결 합니다. ( J.D.H  VER : 1.0.0 )
+     설정된 로띠 화면 layout 을 전체 화면으로 연결 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.04
      */
     override func updateConstraints() {
@@ -42,7 +42,7 @@ import Lottie
     
     // MARK: - 지원 메서드 입니다.
     /**
-     연결할 기본 정보를 받아 설정 합니다. ( J.D.H  VER : 1.0.0 )
+     연결할 기본 정보를 받아 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.04
      - Parameters:
         - name : 연결 할 파일명 입니다.
@@ -61,7 +61,7 @@ import Lottie
     
     
     /**
-     플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.04
      - Parameters:
         - completion : 플레이 처리후 완료시 리턴 됩니다.
@@ -76,7 +76,7 @@ import Lottie
     
     
     /**
-     중단 합니다. ( J.D.H  VER : 1.0.0 )
+     중단 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.04
      - Parameters:
         - completion : 플레이 처리후 완료시 리턴 됩니다.

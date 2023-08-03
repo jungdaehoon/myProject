@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 카드 뷰어에 버튼 이벤트 값 입니다.  ( J.D.H  VER : 1.0.0 )
+ 카드 뷰어에 버튼 이벤트 값 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.06.15
  */
 enum CARD_BTN_EVENT : Int {
@@ -29,7 +29,7 @@ enum CARD_BTN_EVENT : Int {
 }
 
 /**
- 디스플레이 타입  값 입니다.  ( J.D.H  VER : 1.0.0 )
+ 디스플레이 타입  값 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.06.15
  */
 enum DISPLAY_TYPE : Int {
@@ -43,7 +43,7 @@ enum DISPLAY_TYPE : Int {
 
 
 /**
- 제로페이 결제 가능 카드 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
+ 제로페이 결제 가능 카드 뷰어 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.28
  */
 class OKZeroPayCardView: UIView {
@@ -111,7 +111,7 @@ class OKZeroPayCardView: UIView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     카드 디스플레이 할 정보를 받아 설정 합니다. ( J.D.H VER : 1.0.0 )
+     카드 디스플레이 할 정보를 받아 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Description:디스플레이 타입은 기본. "okmoney" 로 사용되며 배너 타입 경우 카드를 히든 처리 하며, 컬러값을 "setCardBGColor" 에 전달해 배경 컬러를 적용 합니다.
      - Date: 2023.06.15
      - Parameters:
@@ -169,7 +169,7 @@ class OKZeroPayCardView: UIView {
     
     
     /**
-     카드 디스플레이 할 정보를 받아 설정 합니다. ( J.D.H VER : 1.0.0 )
+     카드 디스플레이 할 정보를 받아 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Description:디스플레이 타입은 기본. "okmoney" 로 사용되며 배너 타입 경우 카드를 히든 처리 하며, 컬러값을 "setCardBGColor" 에 전달해 배경 컬러를 적용 합니다.
      - Date: 2023.06.15
      - Parameters:
@@ -276,7 +276,7 @@ class OKZeroPayCardView: UIView {
     }
     
     /**
-     그라데이션 컬러값을 받아 카드 배경에 컬러를 추가 합니다. ( J.D.H VER : 1.0.0 )
+     그라데이션 컬러값을 받아 카드 배경에 컬러를 추가 합니다. ( J.D.H VER : 1.24.43 )
      - Description: 그라데이션 컬러 값을 받아 배경 컬러를 적용하며, "colors" 를 "nil" 값으로 받을 경우 이전 "saveBgColors" 값을 활용하여 컬러값을 적용 하도록 합니다.
      - Date: 2023.06.15
      - Parameters:

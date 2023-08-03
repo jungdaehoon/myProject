@@ -10,7 +10,7 @@ import UIKit
 
 
 /**
- 제로페이 페이지 버튼 타입 입니다. ( J.D.H  VER : 1.0.0 )
+ 제로페이 페이지 버튼 타입 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.05.03
 */
 enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
@@ -26,7 +26,7 @@ enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
 }
 
 /**
- 제로페이 서비스 안내 뷰어 입니다. ( J.D.H  VER : 1.0.0 )
+ 제로페이 서비스 안내 뷰어 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.28
  */
 class OKZeroPayTypeBottomView: BaseView {
@@ -50,7 +50,7 @@ class OKZeroPayTypeBottomView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     제로페이 선택 안내 팝업을 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     제로페이 선택 안내 팝업을 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.03
      - Parameters:
         - completion : 페이지에서 이벤트를 리턴하는 CB 을 받습니다.
@@ -64,7 +64,7 @@ class OKZeroPayTypeBottomView: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.03
      - Parameters:False
      - Throws: False
@@ -80,7 +80,7 @@ class OKZeroPayTypeBottomView: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
+     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.03
      - Parameters:False
      - Throws: False

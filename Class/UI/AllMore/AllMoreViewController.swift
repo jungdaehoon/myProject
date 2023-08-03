@@ -11,7 +11,7 @@ import WebKit
 
 
 /**
- 전체 (더보기) 페이지 입니다.  ( J.D.H  VER : 1.0.0 )
+ 전체 (더보기) 페이지 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.07
 */
 class AllMoreViewController: BaseViewController {
@@ -67,7 +67,7 @@ class AllMoreViewController: BaseViewController {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다. ( J.D.H VER : 1.0.0 )
+     전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.17
      */
     func setInitWebView()
@@ -86,7 +86,7 @@ class AllMoreViewController: BaseViewController {
     
     
     /**
-     화면 유닛 데이터를 가져와 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     화면 유닛 데이터를 가져와 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.16
      */
     override func setDisplayData(){
@@ -114,7 +114,7 @@ class AllMoreViewController: BaseViewController {
     
     
     /**
-     "전체" 탭에 하단 메뉴 디스플레이 합니다. ( J.D.H  VER : 1.0.0 )
+     "전체" 탭에 하단 메뉴 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.21
      - Parameters:False
      - Throws: False
@@ -189,7 +189,7 @@ class AllMoreViewController: BaseViewController {
             {
                 menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
             }
-            
+            /*
             /// 제로페이 QR 결제 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
             {
@@ -201,6 +201,7 @@ class AllMoreViewController: BaseViewController {
             {
                 menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권", menuType: .rightimg))
             }
+             */
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
         }
@@ -341,7 +342,7 @@ class AllMoreViewController: BaseViewController {
     
     
     /**
-     내자산 뷰어 새로고침 컨트롤러를 생성 합니다. ( J.D.H  VER : 1.0.0 )
+     내자산 뷰어 새로고침 컨트롤러를 생성 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.17
      - Returns:
         내 자산 정보 새로고침 컨트롤을 리턴 합니다. (UIRefreshControl)
@@ -358,7 +359,7 @@ class AllMoreViewController: BaseViewController {
     
     
     /**
-     내자산 뷰어 새로고침 이벤트 요청 액션 입니다.  ( J.D.H  VER : 1.0.0 )
+     내자산 뷰어 새로고침 이벤트 요청 액션 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.17
      - Parameters:
         - refresh : 내자산 새로고침 컨트롤러 입니다.

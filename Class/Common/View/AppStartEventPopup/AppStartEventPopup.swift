@@ -10,7 +10,7 @@ import UIKit
 
 
 /**
- 제로페이 페이지 버튼 타입 입니다. ( J.D.H  VER : 1.0.0 )
+ 제로페이 페이지 버튼 타입 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.13
 */
 enum APPSTART_EVENT_BTN : Int {
@@ -37,7 +37,7 @@ enum APPSTART_EVENT_BTN : Int {
 
 
 /**
- 앱 시작시 이벤트 뷰어 입니다. ( J.D.H VER : 1.0.0 )
+ 앱 시작시 이벤트 뷰어 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.12
  */
 class AppStartEventPopup: BaseView {
@@ -80,7 +80,7 @@ class AppStartEventPopup: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     앱 시작시 이벤트 뷰어 연결 입니다. ( J.D.H VER : 1.0.0 )
+     앱 시작시 이벤트 뷰어 연결 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.12
      */
     func initAppStartEventPopupView( ){
@@ -90,7 +90,7 @@ class AppStartEventPopup: BaseView {
 
     
     /**
-     앱 시작시 데이터 정보를 받아 상황별 이벤트 뷰어를 디스플레이 합니다.  ( J.D.H  VER : 1.0.0 )
+     앱 시작시 데이터 정보를 받아 상황별 이벤트 뷰어를 디스플레이 합니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.12
      - Parameters:
         - eventmModel  : 이벤트 데이터 모델 입니다.
@@ -136,7 +136,7 @@ class AppStartEventPopup: BaseView {
     
     
     /**
-     시스템 팝업 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+     시스템 팝업 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.12
      - Parameters:
         - eventmModel  : 이벤트 데이터 모델 입니다.
@@ -156,7 +156,7 @@ class AppStartEventPopup: BaseView {
     
     
     /**
-     중앙 이벤트 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+     중앙 이벤트 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.12
      - Parameters:
         - eventmModel  : 이벤트 데이터 모델 입니다.
@@ -183,7 +183,7 @@ class AppStartEventPopup: BaseView {
     
     
     /**
-     하단 이벤트 뷰어 입니다.  ( J.D.H  VER : 1.0.0 )
+     하단 이벤트 뷰어 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.12
      - Parameters:
         - eventmModel  : 이벤트 데이터 모델 입니다.
@@ -222,7 +222,7 @@ class AppStartEventPopup: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.13
      - Parameters:False
      - Throws: False
@@ -238,7 +238,7 @@ class AppStartEventPopup: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H  VER : 1.0.0 )
+     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.13
      - Parameters:False
      - Throws: False

@@ -2,7 +2,7 @@
 //  UIImageView.swift
 //  MyData
 //
-//  Created by daehoon on 2022/04/04.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ import Alamofire
 extension UIImageView {
     
     /**
-     이미지를 다운로드 하여 리턴 합니다.   ( J.D.H  VER : 1.0.0 )
+     이미지를 다운로드 하여 리턴 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.04
      - Parameters:
         - url : 이미지 url 정보를 받습니다.
@@ -62,7 +62,7 @@ extension UIImageView {
      
     
     /**
-     이미지를 육각형으로 설정 합니다. ( J.D.H VER : 1.0.0 )
+     이미지를 육각형으로 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:
         - rect : 육각형 영역을 설정할 전체 영역을 받습니다.
@@ -81,7 +81,7 @@ extension UIImageView {
     
     
     /**
-     육각형 영역을 설정 합니다. ( J.D.H VER : 1.0.0 )
+     육각형 영역을 설정 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:
         - rect : 육각형 영역을 설정할 전체 영역을 받습니다.

@@ -9,7 +9,7 @@ import Foundation
 
 
 /**
- 앱 시작시 기본 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
+ 앱 시작시 기본 정보를 받습니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.27
 */
 struct AppStartResponse: BaseResponse {
@@ -31,7 +31,7 @@ struct AppStartResponse: BaseResponse {
 
 
 /**
- 메뉴 연결할 정보를 받습니다. ( J.D.H VER : 1.0.0 )
+ 메뉴 연결할 정보를 받습니다. ( J.D.H VER : 1.24.43 )
  - Description : 메뉴 연결할 정보들을 받습니다
      ex ) 정보들
       "menu_nm" : "알림",
@@ -98,7 +98,7 @@ struct menudata : Codable
 
 
 /**
- 메뉴 상세 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
+ 메뉴 상세 정보를 받습니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.27
 */
 struct menu_list : Codable {
@@ -124,7 +124,7 @@ struct menu_list : Codable {
 
 
 /**
- 앱 시작시 버전 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
+ 앱 시작시 버전 정보를 받습니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.27
 */
 struct versionInfo :Codable
@@ -150,7 +150,7 @@ struct versionInfo :Codable
 
 
 /**
- 앱 시작시 이벤트 정보를 받습니다. ( J.D.H  VER : 1.0.0 )
+ 앱 시작시 이벤트 정보를 받습니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.27
 */
 struct eventInfo :Codable

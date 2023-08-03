@@ -10,7 +10,7 @@ import Combine
 
 
 /**
- 메뉴 리스트별 인포 정보 입니다.  ( J.D.H  VER : 1.0.0 )
+ 메뉴 리스트별 인포 정보 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.07
 */
 struct AllModeMenuListInfo: Codable {
@@ -26,7 +26,7 @@ struct AllModeMenuListInfo: Codable {
 
 
 /**
- 메뉴 리스트 타입 정보 입니다.  ( J.D.H  VER : 1.0.0 )
+ 메뉴 리스트 타입 정보 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.05.02
 */
 enum MENU_TYPE : Codable {
@@ -40,7 +40,7 @@ enum MENU_TYPE : Codable {
 
 
 /**
- 전체 상세정보를 모델 입니다.  ( J.D.H  VER : 1.0.0 )
+ 전체 상세정보를 모델 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.07
 */
 class AllMoreModel : BaseViewModel{
@@ -49,7 +49,7 @@ class AllMoreModel : BaseViewModel{
     
     
     /**
-     메뉴 리스트별 디스플레이 할 정보를 넘깁니다. ( J.D.H  VER : 1.0.0 )
+     메뉴 리스트별 디스플레이 할 정보를 넘깁니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.07
      - Parameters:
         - title     : 메뉴 리스트 타이틀 정보 입니다.
@@ -72,7 +72,7 @@ class AllMoreModel : BaseViewModel{
     
     
     /**
-     전체 탭 상세 정보를 서버에 요청 합니다. ( J.D.H  VER : 1.0.0 )
+     전체 탭 상세 정보를 서버에 요청 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.09
      - Parameters:False
      - Throws: False

@@ -10,7 +10,7 @@ import WebKit
 
 
 /**
- 웹 링크 연결시 진행 타입 값입니다. ( J.D.H  VER : 1.0.0 )
+ 웹 링크 연결시 진행 타입 값입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.06.23
 */
 enum WEBVIEW_DID_STATUS {
@@ -29,7 +29,7 @@ enum WEBVIEW_DID_STATUS {
 
 
 /**
- 기본 베이스 웹 컨트롤뷰 입니다. ( J.D.H VER : 1.0.0 )
+ 기본 베이스 웹 컨트롤뷰 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.20
  */
 class BaseWebViewController: UIViewController {
@@ -67,7 +67,7 @@ class BaseWebViewController: UIViewController {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     WebView 를 초기화 합니다.. ( J.D.H  VER : 1.0.0 )
+     WebView 를 초기화 합니다.. ( J.D.H VER : 1.24.43 )
      - description: WKWebView 를 초기화 하며  javaScript 이벤트를 등록 할 messagwhandler 를 초기화 합니다. 추가되는 핸들러는 "SCRIPT_MESSAGE_HANDLER_TYPE" 의 핸들러를 추가 합니다.
      - Date: 2023.06.08
      - Parameters:
@@ -133,7 +133,7 @@ class BaseWebViewController: UIViewController {
     
     
     /**
-     내자산 뷰어 새로고침 컨트롤러를 생성 합니다. ( J.D.H  VER : 1.0.0 )
+     내자산 뷰어 새로고침 컨트롤러를 생성 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.06.08
      - Returns:
         내 자산 정보 새로고침 컨트롤을 리턴 합니다. (UIRefreshControl)
@@ -150,7 +150,7 @@ class BaseWebViewController: UIViewController {
     
     
     /**
-     웹뷰 새로고침 이벤트 요청 액션 입니다.  ( J.D.H  VER : 1.0.0 )
+     웹뷰 새로고침 이벤트 요청 액션 입니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.06.08
      - Parameters:
         - webViewRefresh : 내자산 새로고침 컨트롤러 입니다.
@@ -163,7 +163,7 @@ class BaseWebViewController: UIViewController {
     
     
     /**
-     탭 이동시 현 페이지가 빈화면으로 새로고침을 해야하는 상황인지를 체크후 URL 로드 합니다.   ( J.D.H  VER : 1.0.0 )
+     탭 이동시 현 페이지가 빈화면으로 새로고침을 해야하는 상황인지를 체크후 URL 로드 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.21
      - Parameters:
         - url : 디스플레이할 웹 페이지 입니다.
@@ -179,7 +179,7 @@ class BaseWebViewController: UIViewController {
     
     
     /**
-     URL 정보를 받아 화면에 디스플레이 합니다.   ( J.D.H  VER : 1.0.0 )
+     URL 정보를 받아 화면에 디스플레이 합니다.   ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Parameters:
         - url : 디스플레이할 웹 페이지 입니다.
@@ -203,7 +203,7 @@ class BaseWebViewController: UIViewController {
     
         
     /**
-     웹 페이지를 빈화면으로 설정 합니다 ( J.D.H  VER : 1.0.0 )
+     웹 페이지를 빈화면으로 설정 합니다 ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.20
      - Parameters:False
      - Returns:False
@@ -434,7 +434,7 @@ extension BaseWebViewController: WKUIDelegate {
 //MARK: - WKScriptMessageHandler
 extension BaseWebViewController: WKScriptMessageHandler {
     /**
-     Web 에서 ScriptMessage 받는 메서드 입니다. ( J.D.H  VER : 1.0.0 )
+     Web 에서 ScriptMessage 받는 메서드 입니다. ( J.D.H VER : 1.24.43 )
      - Description : hybridscript, updateCookies 헨들러 이벤트를 받아 WebAPP 인터페이스를 처리 합니다.
      - Date: 2023.03.28
      */

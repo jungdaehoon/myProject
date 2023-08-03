@@ -2024,7 +2024,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80C3106D529C4F05193371E0 /* Pods-cereal.release.xcconfig */;
 			buildSettings = {
-				ANTI_DEBUG = NO;
+				ANTI_DEBUG = YES;
 				APPIRON_URL = "https://m.mycereal.co.kr:8445/appiron-inspect_real/authCheck.call";
 				APP_INSPECTION = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2071,7 +2071,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 1.24.42;
+				MARKETING_VERSION = 1.24.43;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = OKpay;

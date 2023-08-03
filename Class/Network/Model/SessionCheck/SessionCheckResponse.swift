@@ -10,7 +10,7 @@ import Foundation
 
 
 /**
- 현 세션이 활성화 되어있는지를 체크 정보를 가집니다. ( J.D.H  VER : 1.0.0 )
+ 현 세션이 활성화 되어있는지를 체크 정보를 가집니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.05.26
 */
 struct SessionCheckResponse: BaseResponse {

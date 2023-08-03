@@ -2,7 +2,7 @@
 //  Utils.swift
 //  MyData
 //
-//  Created by UMCios on 2022/01/05.
+//  Created by DaeHoon Chung on 2023/03/07.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import os
 
 
 /**
- Console App Log 확인을 위해 사용 합니다. ( J.D.H  VER : 1.0.0 )
+ Console App Log 확인을 위해 사용 합니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.05.03
  */
 extension OSLog
@@ -31,12 +31,12 @@ extension OSLog
     /// Console Log 확인시 "GA Event" 카테고리 구분 입니다.
     static let gaevent  = OSLog(subsystem: log_subtype!, category: "GAEvent")
     /// Console App Log 활성화 여부 입니다.
-    static let OS_LOG   = Bundle.main.infoDictionary?["CONSOLE_OS_LOG"] as? String ?? "" == "YES" ? true : false
+    static let OS_LOG   = true//Bundle.main.infoDictionary?["CONSOLE_OS_LOG"] as? String ?? "" == "YES" ? true : false
 }
 
 
 /**
- Log 확인을 위해 사용 합니다. ( J.D.H  VER : 1.0.0 )
+ Log 확인을 위해 사용 합니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.05.03
  - Parameters:
     - object : 로그 정보 입니다.
@@ -290,13 +290,13 @@ class Utils {
 
 
 /**
- Nil 체크 하는 클래스 입니다.  ( J.D.H  VER : 1.0.0 )
+ Nil 체크 하는 클래스 입니다.  ( J.D.H VER : 1.24.43 )
 - Date: 2023.03.16
 */
 class NC {
 
     /**
-     NIL 체크 후 안내 팝업을 오픈 하며 앱을 강제 종료 합니다. ( J.D.H  VER : 1.0.0 )
+     NIL 체크 후 안내 팝업을 오픈 하며 앱을 강제 종료 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
@@ -317,7 +317,7 @@ class NC {
     
     
     /**
-     NIL 체크 후 안내 팝업을 오픈 하며 현 페이지를  종료 하며 이전 페이지로 돌아 갑니다.  ( J.D.H  VER : 1.0.0 )
+     NIL 체크 후 안내 팝업을 오픈 하며 현 페이지를  종료 하며 이전 페이지로 돌아 갑니다.  ( J.D.H VER : 1.24.43 )
      - Date: 2023.04.01
      - Parameters:
         - object : 체크할 데이터를 받습니다.
@@ -372,7 +372,7 @@ class NC {
     
     
     /**
-     Int 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
+     Int 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.16
      - Parameters:
         - object : 체크할 Int 형 데이터 입니다.
@@ -389,7 +389,7 @@ class NC {
     
     
     /**
-     Double 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
+     Double 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.16
      - Parameters:
         - object : 체크할 Double 형 데이터 입니다.
@@ -406,7 +406,7 @@ class NC {
     
     
     /**
-     String 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
+     String 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.16
      - Parameters:
         - object : 체크할 String 형 데이터 입니다.
@@ -424,7 +424,7 @@ class NC {
     
     
     /**
-     Bool 형 데이터를 체크  합니다. ( J.D.H  VER : 1.0.0 )
+     Bool 형 데이터를 체크  합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.05.03
      - Parameters:
         - object : 체크할 Bool 형 데이터 입니다.

@@ -10,7 +10,7 @@ import Combine
 
 
 /**
- 하단 계좌 리스트 모델 입니다.    ( J.D.H  VER : 1.0.0 )
+ 하단 계좌 리스트 모델 입니다.    ( J.D.H VER : 1.24.43 )
  - Date: 2023.04.05
  */
 class BottomAccountModel : BaseViewModel{
@@ -18,7 +18,7 @@ class BottomAccountModel : BaseViewModel{
     var accountResponse : AccountsResponse?
     
     /**
-     은행 계좌 리스트 정보를 요청 입니다. ( J.D.H  VER : 1.0.0 )
+     은행 계좌 리스트 정보를 요청 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.07.05
      - Parameters:False
      - Throws: False

@@ -1,5 +1,5 @@
 /**
- 제로페이 간편결제 약관동의 요청 입니다.  ( J.D.H  VER : 1.0.0 )
+ 제로페이 간편결제 약관동의 요청 입니다.  ( J.D.H VER : 1.24.43 )
  - Date: 2023.07.05
 */
 struct ZeroPayTermsAgreeResponse: BaseResponse {
