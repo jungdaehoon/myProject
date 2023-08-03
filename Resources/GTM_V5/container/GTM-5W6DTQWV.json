@@ -1,0 +1,69 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2023-08-03 08:08:24",
+    "containerVersion": {
+        "path": "accounts/6000147310/containers/137582601/versions/0",
+        "accountId": "6000147310",
+        "containerId": "137582601",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/6000147310/containers/137582601",
+            "accountId": "6000147310",
+            "containerId": "137582601",
+            "name": "OKpay_iOS",
+            "publicId": "GTM-5W6DTQWV",
+            "usageContext": [
+                "IOS_SDK_5"
+            ],
+            "fingerprint": "1691049667703",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6000147310/containers/137582601/workspaces?apiLink=container",
+            "features": {
+                "supportUserPermissions": true,
+                "supportEnvironments": true,
+                "supportWorkspaces": true,
+                "supportGtagConfigs": false,
+                "supportBuiltInVariables": true,
+                "supportClients": false,
+                "supportFolders": true,
+                "supportTags": true,
+                "supportTemplates": true,
+                "supportTriggers": true,
+                "supportVariables": true,
+                "supportVersions": true,
+                "supportZones": true,
+                "supportTransformations": false
+            },
+            "tagIds": [
+                "GTM-5W6DTQWV"
+            ]
+        },
+        "builtInVariable": [
+            {
+                "accountId": "6000147310",
+                "containerId": "137582601",
+                "type": "APP_ID",
+                "name": "App ID"
+            },
+            {
+                "accountId": "6000147310",
+                "containerId": "137582601",
+                "type": "APP_NAME",
+                "name": "App Name"
+            },
+            {
+                "accountId": "6000147310",
+                "containerId": "137582601",
+                "type": "APP_VERSION_CODE",
+                "name": "App Version Code"
+            },
+            {
+                "accountId": "6000147310",
+                "containerId": "137582601",
+                "type": "EVENT_NAME",
+                "name": "Event Name"
+            }
+        ],
+        "fingerprint": "1691050104576",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6000147310/containers/137582601/versions/0?apiLink=version"
+    }
+}
