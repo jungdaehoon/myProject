@@ -74,7 +74,6 @@ class LoadingView: UIView {
      - Returns:False
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow }), maxTime : CGFloat = 10.0 ) {
-        return
         /// 로그인 중에 추가 로그인 요청을 하지 않습니다.
         if self.isLoading { return }
         if let base = base {
