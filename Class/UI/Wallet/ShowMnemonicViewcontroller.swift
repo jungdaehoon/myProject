@@ -65,7 +65,7 @@ class ShowMnemonicViewController: UIViewController {
 
     
     /**
-     데이터 세팅 입니다. ( J.D.H VER : 1.0.0 )
+     데이터 세팅 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.06.01
      - Parameters:
         - showNext : 다음 페이지 여부를 체크 합니다.

@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- 하단 디스플레이 할 약관 동의 관련 안내 팝업에 리스트 셀 뷰어 입니다. ( J.D.H VER : 1.0.0 )
+ 하단 디스플레이 할 약관 동의 관련 안내 팝업에 리스트 셀 뷰어 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.15
  */
 class BottomTermsTableViewCell: UITableViewCell {

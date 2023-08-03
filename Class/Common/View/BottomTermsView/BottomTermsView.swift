@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- 약관동의/취소 관련 버튼 이벤트 타입 입니다. ( J.D.H VER : 1.0.0 )
+ 약관동의/취소 관련 버튼 이벤트 타입 입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.15
  */
 enum BTN_ACTION : Int {
@@ -20,7 +20,7 @@ enum BTN_ACTION : Int {
 }
 
 /**
- 약관동의 관련 데이터 정보를 관리합니다. ( J.D.H VER : 1.0.0 )
+ 약관동의 관련 데이터 정보를 관리합니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.15
  */
 struct TERMS_INFO {
@@ -32,7 +32,7 @@ struct TERMS_INFO {
 
 
 /**
- 하단 디스플레이 할 약관 동의 관련 안내 팝업입니다. ( J.D.H VER : 1.0.0 )
+ 하단 디스플레이 할 약관 동의 관련 안내 팝업입니다. ( J.D.H VER : 1.24.43 )
  - Date: 2023.03.15
  */
 class BottomTermsView: BaseView {
@@ -65,7 +65,7 @@ class BottomTermsView: BaseView {
     
     //MARK: - 지원 메서드 입니다.
     /**
-     하단 약관동의 뷰어 입니다. ( J.D.H VER : 1.0.0 )
+     하단 약관동의 뷰어 입니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.15
      */
     func initBottomTermsView(){
@@ -82,7 +82,7 @@ class BottomTermsView: BaseView {
 
     
     /**
-     안내 팝업 데이터를 설정 하고 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
+     안내 팝업 데이터를 설정 하고 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.15
      - Parameters:
         - target : 디스플레이할 타켓 뷰컨트롤러를 받습니다.
@@ -106,7 +106,7 @@ class BottomTermsView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다. ( J.D.H VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에 디스플레이 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.15
      - Parameters:False
      - Throws: False
@@ -122,7 +122,7 @@ class BottomTermsView: BaseView {
     
     
     /**
-     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다. ( J.D.H VER : 1.0.0 )
+     안내 팝업을 윈도우 최상단 뷰어에서 삭제 합니다. ( J.D.H VER : 1.24.43 )
      - Date: 2023.03.15
      - Parameters:False
      - Throws: False
