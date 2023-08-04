@@ -218,6 +218,7 @@
 		F2C5E4D12A554070005660F1 /* ZeroPayQRBarCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */; };
 		F2C5E4D32A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */; };
 		F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */; };
+		F2D726B92A7CAE670073AB56 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D726B82A7CAE670073AB56 /* Data.swift */; };
 		F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */; };
 		F2F084322A7898AB005EC9CC /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */; };
 /* End PBXBuildFile section */
