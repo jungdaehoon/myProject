@@ -75,7 +75,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzT-4M-lbe">
                                 <rect key="frame" x="20" y="209" width="353" height="57.333333333333314"/>
                                 <string key="text">PC나 앱을 이용하여 이미지나 
-텍스트로 저장하지 마세요. 외부 노출 시, Wallet이 탈취 될 수 있습니다.</string>
+텍스트로 저장하지 마세요. 외부 노출 시, 월렛이 해킹될 수 있습니다.</string>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -102,7 +102,7 @@
                                             <constraint firstItem="IO9-HM-Dc5" firstAttribute="top" secondItem="hIK-T8-YsN" secondAttribute="top" constant="24" id="fgh-Op-KeZ"/>
                                         </constraints>
                                     </view>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDE-bP-FWi">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDE-bP-FWi">
                                         <rect key="frame" x="134" y="233" width="125" height="32"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain">

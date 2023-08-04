@@ -227,7 +227,7 @@ class AllMoreMenuListCell: UITableViewCell {
                 self.setDisplayWebView(WebPageConstants.URL_NFT_COLLECTED_LIST)
             }
             
-            if self.menuInfo!.title! == "만보Go"
+            if self.menuInfo!.title! == "만보GO"
             {
                 self.toPedometerPage()
             }
@@ -248,7 +248,7 @@ class AllMoreMenuListCell: UITableViewCell {
                 }).store(in: &model.cancellableSet)
             }
             
-            if self.menuInfo!.title! == "뿌리Go"
+            if self.menuInfo!.title! == "뿌리GO"
             {
                 self.setDisplayWebView(WebPageConstants.URL_MY_RELATIONSHIP)
             }

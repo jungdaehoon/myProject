@@ -50,7 +50,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="56" id="1Ok-9t-BEW"/>
                             </constraints>
-                            <string key="text">OKpay를 이용하시려면
+                            <string key="text">OK pay를 이용하시려면
 접근권한을 꼭 허용해주세요</string>
                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="20"/>
                             <nil key="textColor"/>

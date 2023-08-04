@@ -463,6 +463,7 @@
 		F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRBarCodeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeStatusResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsResponse.swift; sourceTree = "<group>"; };
+		F2D726B82A7CAE670073AB56 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
 		FD740F24DF294204F2C066E1 /* Pods_cereal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cereal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -877,6 +878,7 @@
 				8DF117A029E7996300D7A095 /* NavigationControllerAnimated.swift */,
 				8D205EDD29D1346E00F43C99 /* Float.swift */,
 				8DAEFAF429F907850057215C /* UIImage.swift */,
+				F2D726B82A7CAE670073AB56 /* Data.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1390,8 +1392,8 @@
 				8D205E2D29D133FA00F43C99 /* Frameworks */,
 				8D205E2E29D133FA00F43C99 /* Resources */,
 				F2EBF4732A3C1CCB009BF601 /* ShellScript */,
-				AA1AB5B1EA70A28DC034E2C4 /* [CP] Embed Pods Frameworks */,
-				94D22ED45F0735B71F74A187 /* [CP] Copy Pods Resources */,
+				01BE266886DBDA6BEBB10CB4 /* [CP] Embed Pods Frameworks */,
+				C76E91163A3DC204DD6176F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1580,21 +1582,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		94D22ED45F0735B71F74A187 /* [CP] Copy Pods Resources */ = {
+		01BE266886DBDA6BEBB10CB4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A06062C907C1B477BD0771CE /* [CP] Check Pods Manifest.lock */ = {
@@ -1619,21 +1621,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AA1AB5B1EA70A28DC034E2C4 /* [CP] Embed Pods Frameworks */ = {
+		C76E91163A3DC204DD6176F1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cereal/Pods-cereal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F2EBF4732A3C1CCB009BF601 /* ShellScript */ = {
@@ -1735,6 +1737,7 @@
 				8D91D99829DFC6C600B5D9AE /* HttpErrorPop.swift in Sources */,
 				8DBA445429D4176200A2E5C1 /* AlertViewController.swift in Sources */,
 				8D205F8729D1346F00F43C99 /* BottomTermsTableViewCell.swift in Sources */,
+				F2D726B92A7CAE670073AB56 /* Data.swift in Sources */,
 				8D205F5329D1346F00F43C99 /* FinanceViewController.swift in Sources */,
 				8DCB18A729F6641E000645D3 /* RestoreWalletViewController.swift in Sources */,
 				F2F084322A7898AB005EC9CC /* PickerViewViewController.swift in Sources */,
@@ -1979,14 +1982,14 @@
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "NFT 발행 및 QR코드 스캔을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
-				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 및 상품 이미지 등록을 위해 접근이 필요합니다. 설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "NFT 발행을 위한 이미지 등록을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2007,7 +2010,7 @@
 				MARKETING_VERSION = 1.25.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = "OKpay 개발";
+				PROJECT_NAME = "OK pay 개발";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2034,7 +2037,7 @@
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CONSOLE_OS_LOG = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2047,14 +2050,14 @@
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "NFT 발행 및 QR코드 스캔을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
-				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 및 상품 이미지 등록을 위해 접근이 필요합니다. 설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "NFT 발행을 위한 이미지 등록을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2075,7 +2078,7 @@
 				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = OKpay;
+				PROJECT_NAME = "OK pay";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2251,14 +2254,14 @@
 				INFOPLIST_FILE = cereal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 및 상품 사진을 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "NFT 발행 및 QR코드 스캔을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "사용자의 하루동안 걸음 수를 기록하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 하루동안 걸음 수를 공유하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 하루동안 걸음 수를 업데이트하기 위해 권한이 필요합니다.";
-				INFOPLIST_KEY_NSMotionUsageDescription = "사용자의 걸음 수를 측정하기 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "걸음 수를 측정하기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "바코드 저장을 위해 사진앨범 추가 권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 및 상품 이미지 등록을 위해 접근이 필요합니다. 설정에서 이를 구성할 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "NFT 발행을 위한 이미지 등록을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맟춤형 콘텐츠나 , 보다 나은 서비스를 가능하게 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2279,7 +2282,7 @@
 				MARKETING_VERSION = 1.24.42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROJECT_NAME = "OKpay Stage";
+				PROJECT_NAME = "OK pay Stage";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

@@ -45,7 +45,7 @@ class PermissionInfoView: UIView {
         /// Xib 연결 합니다.
         self.commonInit()
         
-        let attributedString = NSMutableAttributedString(string: "OKpay를 이용하시려면\n접근권한을 꼭 허용해주세요", attributes: [
+        let attributedString = NSMutableAttributedString(string: "OK pay를 이용하시려면\n접근권한을 꼭 허용해주세요", attributes: [
           .font: UIFont(name: "Pretendard-SemiBold", size: 20.0)!,
           .foregroundColor: UIColor(white: 34.0 / 255.0, alpha: 1.0)
         ])

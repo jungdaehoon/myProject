@@ -223,7 +223,7 @@ class LoginViewController: BaseViewController {
                 /// 가이드 유저 호가인 여부 체크 입니다. ( 미가입자 다시 실행시 가이드 부터로 아래 영역은 아직 체크하지 않도록 합니다. )
                 //SharedDefaults.default.guideShowFinished = true
                 /// 업데이트 안내 팝업 입니다.
-                let alert = CMAlertView().setAlertView( detailObject: "OKpay가 처음인가요?" as AnyObject )
+                let alert = CMAlertView().setAlertView( detailObject: "OK pay가 처음인가요?" as AnyObject )
                 alert?.addAlertBtn(btnTitleText: "아니요", completion: { result in
                     /// 가이드뷰 활성화 여부 입니다.
                     self.guideViewEnabled = false

@@ -263,14 +263,14 @@ class AllMoreViewController: BaseViewController {
         {
             self.boonInfo                     = AllMoreMenuListView.instanceFromNib()
             var menus : [AllModeMenuListInfo] = []
-            menus.append(self.viewModel.getMenuInfo(title: "만보Go", menuType: .rightimg ))
+            menus.append(self.viewModel.getMenuInfo(title: "만보GO", menuType: .rightimg ))
             menus.append(self.viewModel.getMenuInfo(title: "올림pick", menuType: .rightimg ))
             /// 친구추천 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_RECOMMEND_USER)
             {
                 menus.append(self.viewModel.getMenuInfo(title: "친구추천", menuType: .rightimg))
             }
-            menus.append(self.viewModel.getMenuInfo(title: "뿌리Go",menuType: .rightimg))
+            menus.append(self.viewModel.getMenuInfo(title: "뿌리GO",menuType: .rightimg))
             self.boonInfo!.setDisplay(titleName: "혜택", menus: menus)
             self.stackView.addArrangedSubview(self.boonInfo!)
         }
