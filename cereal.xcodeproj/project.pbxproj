@@ -2037,7 +2037,7 @@
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CONSOLE_OS_LOG = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

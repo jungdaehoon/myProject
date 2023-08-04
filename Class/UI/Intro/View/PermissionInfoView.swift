@@ -49,7 +49,7 @@ class PermissionInfoView: UIView {
           .font: UIFont(name: "Pretendard-SemiBold", size: 20.0)!,
           .foregroundColor: UIColor(white: 34.0 / 255.0, alpha: 1.0)
         ])
-        attributedString.addAttribute(.foregroundColor, value: UIColor.OKColor, range: NSRange(location: 22, length: 2))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.OKColor, range: NSRange(location: 23, length: 2))
         
         self.titleText.attributedText   = attributedString
         self.infoViewTop.constant       = UIScreen.main.bounds.size.height
