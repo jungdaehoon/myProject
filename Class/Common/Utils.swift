@@ -31,7 +31,7 @@ extension OSLog
     /// Console Log 확인시 "GA Event" 카테고리 구분 입니다.
     static let gaevent  = OSLog(subsystem: log_subtype!, category: "GAEvent")
     /// Console App Log 활성화 여부 입니다.
-    static let OS_LOG   = true//Bundle.main.infoDictionary?["CONSOLE_OS_LOG"] as? String ?? "" == "YES" ? true : false
+    static let OS_LOG   = Bundle.main.infoDictionary?["CONSOLE_OS_LOG"] as? String ?? "" == "YES" ? true : false
 }
 
 
@@ -243,7 +243,7 @@ class Utils {
         return model
     }
     
-    
+    static var deviceName : String? = nil
     func deviceModelName() -> String? {
             Slog("")
             Slog("===============================")
@@ -264,14 +264,26 @@ class Utils {
                 // [리턴 반환 실시]
                 return modelName
             }
-            
+        
             // [2]. 실제 디바이스 체크 수행 실시
-            let device = UIDevice.current
-            let selName = "_\("deviceInfo")ForKey:"
-            let selector = NSSelectorFromString(selName)
+            let device      = UIDevice.current
+            let selName     = "_\("deviceInfo")ForKey:"
+            let selector    = NSSelectorFromString(selName)
             
-            if device.responds(to: selector) { // [옵셔널 체크 실시]
-                modelName = String(describing: device.perform(selector, with: "marketing-name").takeRetainedValue())
+            if let deviename = Utils.deviceName {
+                modelName = deviename
+            }
+            else
+            {
+                if device.responds(to: selector),
+                   let value = device.perform(selector, with: "marketing-name") { // [옵셔널 체크 실시]
+                    modelName       = String(describing: value.takeRetainedValue())
+                    Utils.deviceName = modelName
+                }
+                else
+                {
+                    Utils.deviceName = self.getModel()
+                }
             }
             
             Slog("")

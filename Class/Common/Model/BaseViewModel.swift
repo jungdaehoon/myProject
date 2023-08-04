@@ -265,21 +265,34 @@ class BaseViewModel : NSObject {
     
     /**
      이미지를 서버에 전송 합니다. ( J.D.H VER : 2.0.0 )
-     - Date: 2023.06.23
+     - Description:
+     - Date: 2023.08.04
      - Parameters:
         - image : 서버에 업로드할 이미지 입니다.
         - url : 업로드할 URL 정보 입니다.
+        - maxMByte :최대 등록 가능 메가 바이트 단위 입니다. ( default : 10MB )
      - Throws: False
      - Returns:서버로 리턴할 스크립트를 리턴 합니다.  Future<[String:Any]?, Never>
      */
-    func request( image : UIImage, url : String )  -> Future<[String:Any]?, Never>
+    func request( image : UIImage, url : String, maxByte : Int = (1024*1024) * 10 )  -> Future<[String:Any]?, Never>
     {
         return Future<[String:Any]?, Never> { promise in
-            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            guard let imageData = image.jpegData(compressionQuality: 1.0) else {
                 Slog("Could not get JPEG representation of UIImage", category: .network)
                 return
             }
+            /// 이미지 데이터 maxByte 이상일 경우 안내 팝업을 오픈후 업로드를 중단 합니다.
+            if imageData.count > maxByte
+            {
+                /// 로그인 요청을 다시 안내하는 팝업을 오픈 합니다.
+                CMAlertView().setAlertView(detailObject: "파일 크기가 10MB를 초과하여 등록할 수 없습니다." as AnyObject, cancelText: "확인") { event in
+                    promise(.success(nil))
+                }
+                return
+            }
+            
             let custItem = SharedDefaults.getKeyChainCustItem()
+            LoadingView.default.show(maxTime: 20.0)
             // Multi-part 형태로 보낸다.
             AlamofireAgent.upload( WebPageConstants.baseURL + url, multipartFormData: { (multipartFormData) in
                 multipartFormData.append(imageData,  withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
@@ -289,39 +302,53 @@ class BaseViewModel : NSObject {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.uploadProgress { progress in
-                        Slog(progress.fractionCompleted, category: .network)
+                        Slog("uploadProgress : \(progress.fractionCompleted)", category: .network)
                     }
                     _ = upload.log()
                     
                     upload.response(completionHandler: { (defaultData) in
                         if let data =  defaultData.data {
                             let responseData = String(data: data, encoding: .utf8)
-                            Slog(defaultData.response?.statusCode as Any, category: .network)
-                            Slog(responseData as Any, category: .network)
+                            Slog("upload.response(completionHandler : \(defaultData.response?.statusCode as Any)", category: .network)
+                            Slog("upload.response(completionHandler : \(responseData as Any)", category: .network)
                         }
                     })
                     
                     upload.responseJSON { response in
+                        LoadingView.default.hide()
                         guard response.result.isSuccess else {
                             Slog("Error while uploading file: \(String(describing: response.result.error))", category: .network)
-                            promise(.success(nil))
-                            /// 스크립트 실패 보내기
+                            /// 다시 안내하는 팝업을 오픈 합니다.
+                            CMAlertView().setAlertView(detailObject: "일시적으로 문제가 발생했습니다.\n잠시 후에 다시 시도하여 주십시오." as AnyObject, cancelText: "확인") { event in
+                                /// 스크립트 실패 보내기
+                                promise(.success(nil))
+                            }
                             return
                         }
                        
                         if let value = response.result.value as? [String:Any] {
+                            Slog("uploading file success: \(value as Any)", category: .network)
                             promise(.success(value))
                             return
                         }
                         else
                         {
-                            promise(.success(nil))
+                            /// 다시 안내하는 팝업을 오픈 합니다.
+                            CMAlertView().setAlertView(detailObject: "일시적으로 문제가 발생했습니다.\n잠시 후에 다시 시도하여 주십시오." as AnyObject, cancelText: "확인") { event in
+                                /// 스크립트 실패 보내기
+                                promise(.success(nil))
+                            }
                             return
                         }
                     }
                 case .failure(let encodingError):
+                    LoadingView.default.hide()
                     Slog(encodingError, category: .network)
-                    promise(.success(nil))
+                    /// 다시 안내하는 팝업을 오픈 합니다.
+                    CMAlertView().setAlertView(detailObject: "일시적으로 문제가 발생했습니다.\n잠시 후에 다시 시도하여 주십시오." as AnyObject, cancelText: "확인") { event in
+                        /// 스크립트 실패 보내기
+                        promise(.success(nil))
+                    }
                     return
                 }
             })

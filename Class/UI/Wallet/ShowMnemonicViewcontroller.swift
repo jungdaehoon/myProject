@@ -23,6 +23,7 @@ class ShowMnemonicViewController: UIViewController {
     var completion  : (( _ value : Any? ) -> Void )? = nil
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var tfMnemonic: UILabel!
+    @IBOutlet weak var mnemonicCopyBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

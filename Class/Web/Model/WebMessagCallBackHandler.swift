@@ -1731,11 +1731,11 @@ class WebMessagCallBackHandler : NSObject  {
             "os" : UIDevice.current.systemVersion, //  iOS, Android 버전
             "devname" : NC.S(Utils().deviceModelName()), // 디바이스명
         ]
-        
+
         do {
             if let script = try Utils.toJSONString(message)
             {
-                self.setEvaluateJavaScript(callback: NC.S(callback[0]), message: script)
+                self.setEvaluateJavaScript(callback: NC.S(callback[0]), message: script, isJson: true)
             }
         } catch { }
     }
