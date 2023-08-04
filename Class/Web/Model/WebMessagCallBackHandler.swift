@@ -1340,6 +1340,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     /// 업로드할 이미지를 받습니다.
     @Published var uploadImg : UIImage? = nil
+    var uploadCB : String = ""
     /**
      카메라 및. 사진첩에. 이미지를. 찾아. 업로드 합니다. ( 업로드 이미지는 uploadImg 를 사용합니다. ) ( J.D.H VER : 2.0.0 )
      - Date: 2023.06.23
@@ -1351,6 +1352,9 @@ class WebMessagCallBackHandler : NSObject  {
      */
     func setPhotoImageToServer( _ body : [Any?], sourceCamera : Bool = false  ){
         guard self.target != nil else { return }
+        /// 타입별 리턴 콜백을 받습니다.
+        let callBacks = body[0] as! Array<String>
+        self.uploadCB = callBacks[0]
         if self.uploadImg == nil
         {
             self.uploadImg = UIImage()
@@ -1363,10 +1367,8 @@ class WebMessagCallBackHandler : NSObject  {
                     /// 이미지를 업로드 합니다.
                     self.viewModel.setUpdateImage(image: uploadImage).sink { value in
                         if let message = value {
-                            /// 타입별 리턴 콜백을 받습니다.
-                            let callBacks = body[0] as! Array<String>
                             /// 콜백으로 데이터를 리턴 합니다.
-                            self.setEvaluateJavaScript(callback: callBacks[0] , message: message, isJson: true)
+                            self.setEvaluateJavaScript(callback: self.uploadCB , message: message, isJson: true)
                         }
                     }.store(in: &self.cancellableSet)
                 }
