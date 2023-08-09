@@ -427,8 +427,8 @@ class NetworkManager {
     
     /**
      제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H VER : 2.0.0 )
-     - API ID: /api/v1/zeropay/qr/fixed
-     - API 명: MPM 고정형 QR코드 정상여부 인식 입니다.  ( S : 정지, A : 사용가능 )
+     - API ID: /api/v1/zeropay/qr
+     - API 명: MPM 고정형 QR코드 정상여부 인식 입니다.  ( S : 정지, A : 사용가능, N :  존재하지 않는 QR코드 )
      - Date: 2023.07.05
      - Parameters:
         - qrcode : 스캔한 QRCode 정보 입니다.

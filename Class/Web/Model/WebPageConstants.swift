@@ -40,7 +40,7 @@ class WebPageConstants {
     /// 결제 페이지 입니다.
     static let URL_TOTAL_PAY_LIST               = baseURL + "/all/totalPaymentList.do"    
     /// 카카오톡 문의하기 페이지 입니다.
-    static let URL_KAKAO_CONTACT                = "https://pf.kakao.com/_jxcxgaK"
+    static let URL_KAKAO_CONTACT                = "https://pf.kakao.com/_hxcrZG"
     /// 올림pick 페이지 입니다.
     static let URL_OLIMPICK_LIST                = baseURL + "/community/communityQuiz.do"
     /// 계좌 재인증 페이지 입니다.

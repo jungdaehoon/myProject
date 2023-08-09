@@ -218,6 +218,7 @@
 		F2C5E4D12A554070005660F1 /* ZeroPayQRBarCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */; };
 		F2C5E4D32A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */; };
 		F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */; };
+		F2C9E20C2A83192F00A68593 /* GTM-5W6DTQWV.json in Resources */ = {isa = PBXBuildFile; fileRef = F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */; };
 		F2D726B92A7CAE670073AB56 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D726B82A7CAE670073AB56 /* Data.swift */; };
 		F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */; };
 		F2F084322A7898AB005EC9CC /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */; };
@@ -463,6 +464,7 @@
 		F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRBarCodeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeStatusResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsResponse.swift; sourceTree = "<group>"; };
+		F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-5W6DTQWV.json"; sourceTree = "<group>"; };
 		F2D726B82A7CAE670073AB56 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 		8D205E3229D133FA00F43C99 /* cereal */ = {
 			isa = PBXGroup;
 			children = (
+				F2C9E2092A83191400A68593 /* GTM_V5 */,
 				8D205F9029D14B1300F43C99 /* cereal.entitlements */,
 				8D205E7929D1346E00F43C99 /* Class */,
 				8D205E6329D1346E00F43C99 /* Resources */,
@@ -1371,6 +1374,22 @@
 			path = Accounts;
 			sourceTree = "<group>";
 		};
+		F2C9E2092A83191400A68593 /* GTM_V5 */ = {
+			isa = PBXGroup;
+			children = (
+				F2C9E20A2A83191F00A68593 /* container */,
+			);
+			path = GTM_V5;
+			sourceTree = "<group>";
+		};
+		F2C9E20A2A83191F00A68593 /* container */ = {
+			isa = PBXGroup;
+			children = (
+				F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */,
+			);
+			path = container;
+			sourceTree = "<group>";
+		};
 		F2F0842E2A7898AB005EC9CC /* PickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1551,6 +1570,7 @@
 				8DE3260529D567C8006E3B69 /* guide_ani_1.json in Resources */,
 				8D1C97FE2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib in Resources */,
 				8DE3260729D567C8006E3B69 /* guide_ani_2.json in Resources */,
+				F2C9E20C2A83192F00A68593 /* GTM-5W6DTQWV.json in Resources */,
 				8D205F1129D1346F00F43C99 /* Pretendard-Light.otf in Resources */,
 				8DD916BE29FB56A300805A7E /* OKZeroPayCardListView.xib in Resources */,
 				8D205F0F29D1346F00F43C99 /* Pretendard-Black.otf in Resources */,

@@ -104,7 +104,11 @@ class BaseWebViewController: UIViewController {
             } else {
                 self.webView!.configuration.preferences.javaScriptEnabled = true
             }
-            self.webView!.allowsBackForwardNavigationGestures       = false            
+            self.webView!.allowsBackForwardNavigationGestures       = false
+            if #available(iOS 16.4, *) {
+                /// 사파리 디버깅을 위해 적용 합니다.
+                self.webView!.isInspectable = true
+            }
             self.webView!.evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
                 if error == nil
                 {

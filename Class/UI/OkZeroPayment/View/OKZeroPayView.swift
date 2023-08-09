@@ -149,6 +149,7 @@ class OKZeroPayView: UIView {
                 } receiveValue: { model in
                     if let qrStatus = model,
                        let data = qrStatus._data {
+                        var msg = ""
                         /// 정상 여부에 따라 분기 처리합니다.
                         if data._status == "A"
                         {
@@ -156,14 +157,24 @@ class OKZeroPayView: UIView {
                             self.setDisplayWebView( WebPageConstants.URL_ZERO_PAY_QR_OKMONEY_PAYMENT + "/\(NC.S(qrcode))", modalPresent: true, pageType: .zeropay_type, animatedType: .left) { value in
                                 self.viewModel.captureSession!.startRunning()
                             }
+                            return
                         }
-                        else
+                        /// 정지된 QRCode 입니다.
+                        else if data._status == "S"
                         {
-                            CMAlertView().setAlertView(detailObject: "정지된 QR코드 입니다.\n다시 인증 받으시기 바랍니다." as AnyObject, cancelText: "확인") { event in
-                                self.viewModel.qrCodeValue = .qr_fail
-                                self.viewModel.captureSession!.startRunning()
-                            }
+                            msg = "결제가 불가한 코드입니다.\n(정지된 가맹정 QR코드)"
                         }
+                        /// 존재하지 않는 QRCode 입니다.
+                        else if data._status == "N"
+                        {
+                            msg = "결제가 불가한 코드입니다.\n(존재하지 않는 QR코드)"
+                        }
+                        /// 상황 별 안내 팝업 오픈 합니다.
+                        CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
+                            self.viewModel.qrCodeValue = .qr_fail
+                            self.viewModel.captureSession!.startRunning()
+                        }
+                        
                     }
                 }.store(in: &self.viewModel.cancellableSet)
                 break

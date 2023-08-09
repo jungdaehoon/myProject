@@ -55,7 +55,7 @@ class APIConstant {
     /// 제로페이 간편결제 결제 금액 정보 숨김/보기 입니다.
     static let API_ZEROPAY_MONEY_ONOFF  = "/all/updateBalanceView.do"
     /// 제로페이 간편결제 (고정형)MPM 스캔한 QRCode 정상여부 체크 입니다.
-    static let API_ZEROPAY_QRCODE_CHECK = "/api/v1/zeropay/qr/fixed"
+    static let API_ZEROPAY_QRCODE_CHECK = "/api/v1/zeropay/qr"
     /// 제로페이 간편결제 메인화면 OK머니 잔액 조회 입니다.
     static let API_ZEROPAY_OkMONEY      = "/api/v1/okmoney"
 }
