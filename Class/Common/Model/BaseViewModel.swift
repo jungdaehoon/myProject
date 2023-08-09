@@ -1096,10 +1096,10 @@ class BaseViewModel : NSObject {
         return Future<String, Never> { promise in
             var source = String()
             cookies?.forEach { cookie in
-                Slog("cookie.name : \(cookie.name))")
-                Slog("cookie.value : \(cookie.value))")
-                Slog("cookie.path : \(cookie.path))")
-                Slog("cookie.domain : \(cookie.domain))")
+                Slog("cookie.name : \(cookie.name)")
+                Slog("cookie.value : \(cookie.value)")
+                Slog("cookie.path : \(cookie.path)")
+                Slog("cookie.domain : \(cookie.domain)")
                 source.append("document.cookie = '")
                 source.append("\(cookie.name)=\(cookie.value); path=\(cookie.path); domain=\(cookie.domain);'\n")
             }

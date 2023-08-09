@@ -3,4 +3,54 @@
    uuid = "AD18889A-1C38-4775-852A-98890D0BDBFD"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9032E882-9FB3-4C15-927A-DB05BE8B6E2C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Web/View/SecureKeyPadView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "mainKeypadInputCompleted(_:finished:tuple:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9032E882-9FB3-4C15-927A-DB05BE8B6E2C - b65a09de3819e6d5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.SecureKeyPadView.mainKeypadInputCompleted(_: Swift.Int, finished: Swift.Bool, tuple: Swift.Optional&lt;(Swift.String, Swift.String)&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/View/SecureKeyPadView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "428">
+               </Location>
+               <Location
+                  uuid = "9032E882-9FB3-4C15-927A-DB05BE8B6E2C - b65a09de3819e6b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.SecureKeyPadView.mainKeypadInputCompleted(_: Swift.Int, finished: Swift.Bool, tuple: Swift.Optional&lt;(Swift.String, Swift.String)&gt;) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/View/SecureKeyPadView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "1484">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
