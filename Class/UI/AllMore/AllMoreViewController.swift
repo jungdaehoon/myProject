@@ -90,6 +90,8 @@ class AllMoreViewController: BaseViewController {
      - Date: 2023.03.16
      */
     override func setDisplayData(){
+        /// 웹뷰가 초기화 되어 없을 경우 웹뷰를 다시 설정 합니다.
+        if self.webView == nil { self.initWebView( self.webDisplayView, target: self ) }        
         /// 전체 탭 페이지에 웹뷰를 히든 처리 하며 초기화 합니다.
         self.setInitWebView()
         /// 서버에 상세 데이터를 요청 합니다.

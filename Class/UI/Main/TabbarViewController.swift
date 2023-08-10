@@ -115,7 +115,7 @@ class TabbarViewController: UITabBarController {
                     /// 재로그인 요청을 비활성화 합니다.
                     BaseViewModel.shared.reLogin = false
                     /// 메인 홈으로 이동 합니다.
-                    self.selectedIndex          = 2
+                    TabBarView.setReloadSeleted(pageIndex: 2)
                 }
             } puchCompletion: {
                 
@@ -274,6 +274,10 @@ class TabbarViewController: UITabBarController {
      */
     @objc func applicationBackground(){
         BecomeActiveView().show()
+        /*
+        BaseViewModel.saveTimerCheck = Int(Date().timeIntervalSince1970)
+        Slog("Date().timeIntervalSince1970 Int : \(Int(Date().timeIntervalSince1970))")
+         */
     }
     
     
@@ -285,6 +289,19 @@ class TabbarViewController: UITabBarController {
      */
     @objc func applicationForeground(){
         BecomeActiveView().hide()
+        /*
+        if BaseViewModel.saveTimerCheck > 0
+        {
+            let overTime = Int(Date().timeIntervalSince1970) - BaseViewModel.saveTimerCheck
+            if overTime > 60 * 10
+            {
+                BaseViewModel.setLogoutData()
+                Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.saveTimerCheck)")
+            }
+            Slog("Ing Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.saveTimerCheck)")
+            BaseViewModel.saveTimerCheck = 0
+        }
+         */
     }
 }
 
@@ -379,19 +396,10 @@ extension UITabBarController
                     /// 해당 탭 실 데이터를 초기화 합니다.
                     contrller.setDisplayData()
                 }
-                /// 해당 탭의 웹뷰가 초기화 되지 않은 경우 탭을 먼저 이동 후 실 데이터롤 초기화 합니다.
-                else
-                {
-                    /// 탭을 이동 합니다.
-                    self.selectedIndex = tabIndex.rawValue
-                    /// 해당 탭 실 데이터를 초기화 합니다.
-                    contrller.setDisplayData()
-                    return
-                }
             }
         }
         /// 탭을 이동 합니다.
-        self.selectedIndex = tabIndex.rawValue
+        TabBarView.setReloadSeleted(pageIndex: tabIndex.rawValue)
     }
 }
 

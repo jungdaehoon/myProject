@@ -35,6 +35,8 @@ class BenefitViewController: BaseViewController {
      - Date: 2023.03.16
      */
     override func setDisplayData() {
+        /// 웹뷰가 초기화 되어 없을 경우 웹뷰를 다시 설정 합니다.
+        if self.webView == nil { self.initWebView( self.webDisplayView, target: self ) }
         super.setDisplayData()
         self.loadTabPageURL(WebPageConstants.URL_BENEFIT_MAIN)
     }

@@ -16,6 +16,7 @@ import AdSupport
 import GoogleAnalytics
 import Firebase
 import FirebaseMessaging
+import WebKit
 
 
 /**
@@ -141,6 +142,10 @@ class BaseViewModel : NSObject {
     var fcmPushResponse                 : FcmPushUpdateResponse?
     /// 만료된 계좌 재인증 데이터를 받습니다.
     var reBankAuthResponse              : ReBankAuthResponse?
+    /// App 활성화 가능 Timer 정보를 체크 합니다.
+    static var saveTimerCheck           : Int    = 0
+    /// App 활성화 여부를 가집니다.
+    static var isAppEnabled             : Bool   = false
     
     
     
@@ -1082,6 +1087,10 @@ class BaseViewModel : NSObject {
     }
     
     
+    func okPayRemoveAllCookies(){
+        WKWebView.removeCookies()
+    }
+    
     /**
      Session 유지를 위해 쿠키 업데이트 정보를 리턴 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.25
@@ -1307,6 +1316,37 @@ class BaseViewModel : NSObject {
     
     
     /**
+     앱 활성화 유지 가능 타입을 체크  합니다. ( J.D.H VER : 2.0.0 )
+     - Description: 정상 로그인후 앱을 사용할 수 있는 시간을 체크 하도록합니다.
+     - Date: 2023.08.10
+     - Parameters:Fasle
+     - Throws: False
+     - DispatchQueue : True
+     - Returns:Fasle
+     */
+    func isAppEnabled(){
+        /// 앱 활성화 여부를 체크 합니다.
+        if BaseViewModel.isAppEnabled == true { return }
+        BaseViewModel.isAppEnabled = true
+        DispatchQueue.global(qos: .background).async {
+            var enabledCtn = 0
+            while(true)
+            {
+                Thread.sleep(forTimeInterval: 1.0)
+                if enabledCtn > 60 * 1 { break }
+                enabledCtn += 1
+            }
+            DispatchQueue.main.async {
+                if BaseViewModel.saveTimerCheck == 0
+                {
+                    BaseViewModel.setLogoutData()
+                }
+            }
+        }
+    }
+    
+    
+    /**
      네트워크 사용 가능 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.21
      - Parameters:Fasle
@@ -1391,15 +1431,15 @@ class BaseViewModel : NSObject {
         if BaseViewModel.isLoginPageDisplay { return }
         /// 로그아웃을 요청 합니다.
         BaseViewModel.shared.setLogOut().sink(receiveCompletion: { result in
-            /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.
-            TabBarView.setTabBarHome()
+            /// 탭바 연결된 webView 를 전부 초기화 합니다..
+            TabBarView.removeTabContrllersWebView()
             /// 재로그인 요청 합니다.
             BaseViewModel.shared.reLogin             = true
         }, receiveValue: { response in
             if response!.code == "0000"
             {
-                /// 메인 탭바로 이동 후 로그아웃 쿠키 정보를 웹 세팅 하도록 합니다. 다시 로그인시 정상적으로 로그인 되도록 하기 위해 합니다.
-                TabBarView.setTabBarHome()
+                /// 탭바 연결된 webView 를 전부 초기화 합니다..
+                TabBarView.removeTabContrllersWebView()
                 /// 재로그인 요청 합니다.
                 BaseViewModel.shared.reLogin             = true
             }

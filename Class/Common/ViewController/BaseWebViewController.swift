@@ -221,6 +221,27 @@ class BaseWebViewController: UIViewController {
             self.webView!.load(URLRequest(url: URL(string: "about:blank")!))
         }
     }
+    
+    
+    /**
+     WebView 삭제 합니다.. ( J.D.H VER : 2.0.0 )
+     - description: 생성된 WKWebView 연결된 모든 정보를 삭제 요청 합니다.
+     - Date: 2023.08.10
+     - Parameters:False
+     - Returns:False
+     */
+    func removeWebView()
+    {
+        if let webview = self.webView
+        {
+            webview.uiDelegate          = nil
+            webview.navigationDelegate  = nil
+            webview.removeFromSuperview()
+        }
+        self.webView        = nil
+        self.messageHandler = nil
+        self.webViewRefresh = nil
+    }
 }
 
 

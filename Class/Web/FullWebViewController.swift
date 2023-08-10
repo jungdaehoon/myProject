@@ -300,12 +300,14 @@ class FullWebViewController: BaseViewController {
             switch type
             {
                 case .page_back:
+                    self.removeWebView()
                     self.popController(animated: true, animatedType: .right) { firstViewController in
                         /// 종료 콜백을 체크 합니다.
                         self.setCloseCompletion(closeType:.pageClose( message: closeMessage ))
                     }
                     break
                 case .page_close:
+                    self.removeWebView()
                     self.popController(animated: true, animatedType: .down) { firstViewController in
                         /// 종료 콜백을 체크 합니다.
                         self.setCloseCompletion(closeType:.pageClose( message: closeMessage ))
@@ -411,6 +413,8 @@ extension FullWebViewController {
                 /// 제로페이 진입후 제로페이에서 화면 종료 이벤트 발생 입니다.
                 if NC.S(event).contains("close")
                 {
+                    /// 웹뷰를 초기화 합니다.
+                    self.removeWebView()
                     /// 현 페이지를 종료 합니다.
                     self.popController(animated: true, animatedType: .down)
                     decisionHandler(.allow, preferences)
@@ -507,6 +511,8 @@ extension FullWebViewController {
                     }
                     else
                     {
+                        /// 웹 초기화 합니다.
+                        self.removeWebView()
                         /// 현 페이지를 종료 합니다.
                         self.popController(animated: true, animatedType: .down)
                     }

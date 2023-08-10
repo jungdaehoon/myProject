@@ -34,6 +34,8 @@ class WalletViewController: BaseViewController {
      - Date: 2023.03.16
      */
     override func setDisplayData() {
+        /// 웹뷰가 초기화 되어 없을 경우 입니다.
+        if self.webView == nil { self.initWebView( self.webDisplayView, target: self ) }
         super.setDisplayData()
         Slog("WalletViewController setDisplayData loadTabPageURL")
         self.loadTabPageURL(WebPageConstants.URL_WALLET_HOME)

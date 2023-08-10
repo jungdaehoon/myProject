@@ -114,10 +114,28 @@ class SecureKeyPadView: BaseView {
      - Returns:False
      */
     func xkKeyPadBecomeFirstResponder() {
-        self.target!.view.endEditing(true)
-        self.xkPasswordTextField.becomeFirstResponder()
+        if let target = self.target {
+            target.view.endEditing(true)
+            self.xkPasswordTextField.becomeFirstResponder()
+        }
     }
     
+    
+    /**
+     보안 키페드 를 삭제 합니다.  ( J.D.H VER : 2.0.0 )
+     - Date: 2023.03.27
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:False
+     */
+    func setKeypadRelease(){
+        self.setResignFirstResponder()
+        self.xkPasswordTextField.returnDelegate = nil
+        self.xkPasswordTextField.cancelKeypad()
+        self.xkPasswordTextField.e2eURL = ""
+        self.target = nil
+        self.removeFromSuperview()
+    }
     
     /**
      키페드 를 종료 합니다.  ( J.D.H VER : 2.0.0 )
@@ -127,9 +145,12 @@ class SecureKeyPadView: BaseView {
      - Returns:False
      */
     func setResignFirstResponder() {
-        self.xkPasswordTextField.resignFirstResponder()
-        self.target!.view.endEditing(true)
-        self.xkPasswordTextField.removeFromSuperview()
+        if let target = self.target {
+            self.xkPasswordTextField.resignFirstResponder()
+            target.view.endEditing(true)
+            self.xkPasswordTextField.removeFromSuperview()
+        }
+        
     }
     
     
@@ -207,7 +228,11 @@ extension SecureKeyPadView : XKTextFieldDelegate{
         Slog("ABC keypadE2EInputCompleted aSessionID \(aSessionID) aToken \(aToken) aCount \(aCount)")
         //self.mainKeypadInputCompleted(aCount,finished: true,tuple: (aSessionID, aToken ) )
         xkPasswordTextField.cancelKeypad()
-        self.target!.view.endEditing(true)
+        if let target = self.target
+        {
+            target.view.endEditing(true)
+        }
+        
     }
     
     func keypadCanceled() {

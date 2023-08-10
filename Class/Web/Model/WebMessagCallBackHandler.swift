@@ -1045,6 +1045,7 @@ class WebMessagCallBackHandler : NSObject  {
                                         if let completion = controller.completion {
                                             completion(.zeroPaykeyPad(barcode: barcode, qrcode: qrcode, maxValidTime:maxValidTime))
                                         }
+                                        controller.removeWebView()
                                         controller.popController(animated: true, animatedType: .down)
                                         return
                                     default:break
@@ -1196,7 +1197,7 @@ class WebMessagCallBackHandler : NSObject  {
         self.target!.present(avc, animated:true)
     }
     
-    
+    var secureKeyPadView : SecureKeyPadView?
     /**
      보안키패드 오픈 입니다. ( J.D.H VER : 2.0.0 )
      - Description: 보안 키패드 오픈시 web url 연결 finish 전에 키패드 오픈 경우 정상 오픈이 안되는 경우가 있어 finish 확인후 오픈 하도록 합니다.
@@ -1234,8 +1235,9 @@ class WebMessagCallBackHandler : NSObject  {
                 }
                 
                 DispatchQueue.main.async {
+                    
                     /// 보인 키패드를 오픈 합니다.
-                    let _ = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
+                    self.secureKeyPadView = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
                         switch cbType {
                         case .progress( let message ) :
                             self.setEvaluateJavaScript(callback: callback[0], message: message)
@@ -1247,6 +1249,7 @@ class WebMessagCallBackHandler : NSObject  {
                             break
                         }
                     }
+                     
                 }
             }
         }        
@@ -2152,7 +2155,14 @@ extension WebMessagCallBackHandler{
                 default:break
             }
             
+            
             controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
+            controller.removeWebView()
+            /// 보안 키패드를 사용한 경우 입니다.
+            if let secureKeyPadView =  self.secureKeyPadView {
+                secureKeyPadView.setKeypadRelease()                
+                self.secureKeyPadView = nil
+            }
             controller.popController(animated: true, animatedType: .down)
             return
         }

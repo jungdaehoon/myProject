@@ -220,6 +220,23 @@ class TabBarView : UIView
     }
     
     
+    /**
+     탭바 연결된 webView 를 전부 초기화 합니다.. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.08.10
+     - Parameters:Fasle
+     - Returns:False
+     */
+    static func removeTabContrllersWebView()
+    {
+        for controller in TabBarView.tabbar!.viewControllers!
+        {
+            if let webViewController = controller as? BaseWebViewController
+            {
+                webViewController.removeWebView()
+            }
+        }
+    }
+    
     
     //MARK: - 버튼 이벤트 입니다.
     @IBAction func btn_action(_ sender: Any) {
