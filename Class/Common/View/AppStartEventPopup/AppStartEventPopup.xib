@@ -300,12 +300,12 @@
                                             <rect key="frame" x="0.0" y="-42" width="328" height="42"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rG4-hc-4HI">
-                                                    <rect key="frame" x="310" y="10" width="18" height="22"/>
+                                                    <rect key="frame" x="288" y="1" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="18" id="2i7-Hr-Y8X"/>
-                                                        <constraint firstAttribute="height" constant="22" id="DVt-EY-Jgj"/>
+                                                        <constraint firstAttribute="width" constant="40" id="2i7-Hr-Y8X"/>
+                                                        <constraint firstAttribute="height" constant="40" id="DVt-EY-Jgj"/>
                                                     </constraints>
-                                                    <state key="normal" image="icon_cancel"/>
+                                                    <state key="normal" image="header_close"/>
                                                     <connections>
                                                         <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="VBH-db-oaE"/>
                                                     </connections>
@@ -321,7 +321,7 @@
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kf-mv-Bbk" userLabel="TopView">
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="200"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_banner" translatesAutoresizingMaskIntoConstraints="NO" id="Q7G-Jl-OMI">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q7G-Jl-OMI">
                                                     <rect key="frame" x="0.0" y="0.0" width="328" height="200"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9d-4R-haT">
@@ -457,8 +457,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_cancel" width="18" height="18"/>
-        <image name="img_banner" width="272" height="310"/>
+        <image name="header_close" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

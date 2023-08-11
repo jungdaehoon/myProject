@@ -229,8 +229,6 @@ class LoginViewController: BaseViewController {
                     self.guideViewEnabled = false
                     /// 가이드 뷰어를 종료 합니다.
                     self.guideView.setAniClose()
-                    /// 앱 실드 체크 합니다.
-                    self.setAppShield()
                 })
                 alert?.addAlertBtn(btnTitleText: "네", completion: { result in
                     self.guideView.setZeroPage()
@@ -266,6 +264,7 @@ class LoginViewController: BaseViewController {
         if self.idField.text!.count >= ID_MAX_LEN &&
             self.pwField.text!.count >= PW_MAX_LEN
         {
+            self.setAppShield()
             loginEnabled = true
         }
         else
@@ -287,18 +286,20 @@ class LoginViewController: BaseViewController {
      - Returns:False
      */
     func setAppShield(){
+        LoadingView.default.show()
         /// 앱 실드 체크 합니다.
         self.viewModel.getAppShield().sink { appShield in
-            /// error 이 아닌 경우 정상 처리 합니다.
-            if appShield.error != nil
-            {
-                DispatchQueue.main.async(execute: {
+            DispatchQueue.main.async(execute: {
+                LoadingView.default.hide()
+                /// error 이 아닌 경우 정상 처리 합니다.
+                if appShield.error != nil
+                {
                     /// 앱 실드 비정상 처리 안내 팝업 입니다.
                     CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
                         exit(0)
                     }
-                })
-            }
+                }
+            })
         }.store(in: &self.viewModel.cancellableSet)
     }
     
@@ -372,23 +373,18 @@ class LoginViewController: BaseViewController {
                             self.ingIDPW_FailedCount            += 1
                             self.idpwFailedInfoHegith.constant  = 40
                             self.idpwFailedText.text            = "ID, 비밀번호가 일치하지 않습니다. (\(self.ingIDPW_FailedCount)/\(IDPW_FAILED_MAX))"
-                            self.setAppShield()
                             return
                         }
                         menu_id     = .ID_LOG_FIND_PW
                         break
                         /// 휴먼회원 입니다.
                     case ._code_0010_:
-                        self.view.setDisplayWebView(WebPageConstants.URL_WAKE_SLEEP_USER, modalPresent: true, titleBarType: 2) { value in
-                            self.setAppShield()
-                        }
+                        self.view.setDisplayWebView(WebPageConstants.URL_WAKE_SLEEP_USER, modalPresent: true, titleBarType: 2)
                         return
                         /// 인증 만료 코드 입니다. ( 계좌인증 만료 )
                     case ._code_0011_:
                         CMAlertView().setAlertView(detailObject: "인증이 만료되었습니다.\n다시 인증 받으시기 바랍니다." as AnyObject, cancelText: "확인") { event in
-                            self.view.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2) { value in
-                                self.setAppShield()
-                            }
+                            self.view.setDisplayWebView(WebPageConstants.URL_TOKEN_REISSUE, modalPresent: true, titleBarType: 2)
                         }
                         return
                         /// 90일 동안 비밀번호 변경 요청 없는 경우 입니다.
@@ -402,7 +398,6 @@ class LoginViewController: BaseViewController {
                                 {
                                     /// 비밀번호 변경 후 진입 경우 입니다.
                                     case .loginCall:
-                                        self.setAppShield()
                                         return
                                     default:break
                                 }
@@ -445,9 +440,7 @@ class LoginViewController: BaseViewController {
                     if msg == ""
                     {
                         self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
-                            self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true) { value in
-                                self.setAppShield()
-                            }
+                            self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true)
                         }.store(in: &self.viewModel.cancellableSet)
                         return
                     }
@@ -455,9 +448,7 @@ class LoginViewController: BaseViewController {
                     /// 안내 팝업 오픈 합니다.
                     CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
                         self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
-                            self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true) { value in
-                                self.setAppShield()
-                            }
+                            self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true)
                         }.store(in: &self.viewModel.cancellableSet)
                     }
                 }
@@ -532,32 +523,28 @@ class LoginViewController: BaseViewController {
             break
         case .join:
             self.viewModel.getAppMenuList(menuID: .ID_MEM_INTRO).sink { url in
-                self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)  { _ in
-                    self.setAppShield()
-                }
+                self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .id_change:
             self.viewModel.getAppMenuList(menuID: .ID_LOG_FIND_ID).sink { url in
-                self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)  { _ in
-                    self.setAppShield()
-                }
+                self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .pw_change:
             self.viewModel.getAppMenuList(menuID: .ID_LOG_FIND_PW).sink { url in
-                self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)  { _ in
-                    self.setAppShield()
-                }
+                self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .pw_Clear:
             self.pwField.text               = ""
             self.pwFieldClearBtn.isHidden   = true
+            self.setLoginBtn()
             break
         case .id_Clear:
             self.idField.text               = ""
             self.idFieldClearBtn.isHidden   = true
+            self.setLoginBtn()
             break
         }
     }

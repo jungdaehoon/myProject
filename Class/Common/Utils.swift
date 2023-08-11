@@ -58,17 +58,19 @@ func Slog(_ object: Any, category : OSLog = .okpay, logType : OSLogType = .defau
 
 
 /// 앱 버튼 ID 정보 입니다.
-let APP_BUNDLE_ID           = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String ?? ""
+let APP_BUNDLE_ID               = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String ?? ""
 /// 앱 버전 정보 입니다.
-let APP_VERSION             = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
+let APP_VERSION                 = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
 /// 앱 취약점검 여부 입니다.
-let APP_INSPECTION          = Bundle.main.infoDictionary?["APP_INSPECTION"] as? String ?? "" == "YES" ? true : false
+let APP_INSPECTION              = Bundle.main.infoDictionary?["APP_INSPECTION"] as? String ?? "" == "YES" ? true : false
 /// 앱 안티디버깅 체크 여부 입니다.
-let APP_ANTI_DEBUG          = Bundle.main.infoDictionary?["ANTI_DEBUG"] as? String ?? "" == "YES" ? true : false
+let APP_ANTI_DEBUG              = Bundle.main.infoDictionary?["ANTI_DEBUG"] as? String ?? "" == "YES" ? true : false
 /// GA 트래킹 키 값입니다.
-let APP_GA_TRACKING_KEY     = Bundle.main.infoDictionary?["GAI_TRACKING_KEY"] as? String ?? ""
+let APP_GA_TRACKING_KEY         = Bundle.main.infoDictionary?["GAI_TRACKING_KEY"] as? String ?? ""
 /// GA 트래킹 디버깅 여부 값 입니다.
-let APP_GA_DEBUG_ENABLED    = Bundle.main.infoDictionary?["GA_DEBUG"] as? String ?? "" == "YES" ? true : false
+let APP_GA_DEBUG_ENABLED        = Bundle.main.infoDictionary?["GA_DEBUG"] as? String ?? "" == "YES" ? true : false
+/// 앱 세션 유지 가능한 최대 MAX 타임 입니다.
+let APP_ING_SESSION_MAX_TIME    = 60 * 60
 
 
 class Utils {

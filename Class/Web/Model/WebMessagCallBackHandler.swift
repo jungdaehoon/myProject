@@ -1197,11 +1197,11 @@ class WebMessagCallBackHandler : NSObject  {
         self.target!.present(avc, animated:true)
     }
     
-    var secureKeyPadView : SecureKeyPadView?
+    var secureKeyPadView : SecureKeyPadView? = nil
     /**
-     보안키패드 오픈 입니다. ( J.D.H VER : 2.0.0 )
+     보안키패드 오픈 입니다. ( J.D.H VER : 2.0.2 )
      - Description: 보안 키패드 오픈시 web url 연결 finish 전에 키패드 오픈 경우 정상 오픈이 안되는 경우가 있어 finish 확인후 오픈 하도록 합니다.
-     - Date: 2023.03.28
+     - Date: 2023.08.11
      - Parameters:
         - body : 스크립트에서 받은 바디 데이터 입니다.
      - Throws: False
@@ -1235,21 +1235,27 @@ class WebMessagCallBackHandler : NSObject  {
                 }
                 
                 DispatchQueue.main.async {
-                    
-                    /// 보인 키패드를 오픈 합니다.
-                    self.secureKeyPadView = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
-                        switch cbType {
-                        case .progress( let message ) :
-                            self.setEvaluateJavaScript(callback: callback[0], message: message)
-                        case .success( let message ) :
-                            self.setEvaluateJavaScript(callback: callback[1], message: message, isJson: true)
-                        case .fail( let message ) :
-                            self.setEvaluateJavaScript(callback: callback[2], message: message)
-                        default:
-                            break
+                    if self.secureKeyPadView == nil
+                    {
+                        /// 보인 키패드를 오픈 합니다.
+                        self.secureKeyPadView = SecureKeyPadView.init(maxNumber: maxNumber!, padType: NC.S(padType), target: self.target!) { cbType in
+                            switch cbType {
+                            case .progress( let message ) :
+                                self.setEvaluateJavaScript(callback: callback[0], message: message)
+                            case .success( let message ) :
+                                self.setEvaluateJavaScript(callback: callback[1], message: message, isJson: true)
+                            case .fail( let message ) :
+                                self.setEvaluateJavaScript(callback: callback[2], message: message)
+                            case .cancel:
+                                /// 보안 키패드를 사용한 경우 입니다.
+                                if let secureKeyPadView =  self.secureKeyPadView {
+                                    secureKeyPadView.setKeypadRelease()
+                                    self.secureKeyPadView = nil
+                                }
+                                break
+                            }
                         }
                     }
-                     
                 }
             }
         }        

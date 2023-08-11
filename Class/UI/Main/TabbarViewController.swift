@@ -275,9 +275,9 @@ class TabbarViewController: UITabBarController {
     @objc func applicationBackground(){
         BecomeActiveView().show()
         /*
-        BaseViewModel.saveTimerCheck = Int(Date().timeIntervalSince1970)
+        BaseViewModel.appBackgroundSaveTimer = Int(Date().timeIntervalSince1970)
         Slog("Date().timeIntervalSince1970 Int : \(Int(Date().timeIntervalSince1970))")
-         */
+        */
     }
     
     
@@ -290,18 +290,18 @@ class TabbarViewController: UITabBarController {
     @objc func applicationForeground(){
         BecomeActiveView().hide()
         /*
-        if BaseViewModel.saveTimerCheck > 0
+        if BaseViewModel.appBackgroundSaveTimer > 0
         {
-            let overTime = Int(Date().timeIntervalSince1970) - BaseViewModel.saveTimerCheck
-            if overTime > 60 * 10
+            let overTime = Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer
+            if overTime > APP_ING_SESSION_MAX_TIME
             {
                 BaseViewModel.setLogoutData()
-                Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.saveTimerCheck)")
+                Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
             }
-            Slog("Ing Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.saveTimerCheck)")
-            BaseViewModel.saveTimerCheck = 0
+            Slog("Ing Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
+            BaseViewModel.appBackgroundSaveTimer = 0
         }
-         */
+        */
     }
 }
 

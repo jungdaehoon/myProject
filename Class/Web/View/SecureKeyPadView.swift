@@ -238,6 +238,7 @@ extension SecureKeyPadView : XKTextFieldDelegate{
     func keypadCanceled() {
         Slog("ABC keypadCanceled ")
         self.setResignFirstResponder()
+        self.completion!( .cancel )
     }
     
     

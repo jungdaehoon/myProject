@@ -46,6 +46,25 @@ enum IN_APP_START_TYPE : Int {
 }
 
 /**
+ 앱 세션 체크 타입 입니다.( J.D.H VER : 2.0.2 )
+ - Date: 2023.08.11
+ */
+enum APP_SESSION_TIME_CHECKING : Int {
+    /// 세션 체킹 초기 값입니다.
+    case wait           = 0
+    /// 세션 체크 시작 합니다.
+    case start          = 10
+    /// 세션 체크 중 모드로 변경 합니다.
+    case ing            = 11
+    /// 세션 체크를 타임을 초기화 합니다.
+    case refresh        = 12
+    /// 세션 체크를 중단 합니다.
+    case end            = 13
+    /// 세션 체크를 강제 종료 합니다.
+    case exit           = 14
+}
+
+/**
  앱 시작시 관련 정보 메뉴 리스트 URL 정보 타입 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.03
 */
@@ -142,10 +161,10 @@ class BaseViewModel : NSObject {
     var fcmPushResponse                 : FcmPushUpdateResponse?
     /// 만료된 계좌 재인증 데이터를 받습니다.
     var reBankAuthResponse              : ReBankAuthResponse?
-    /// App 활성화 가능 Timer 정보를 체크 합니다.
-    static var saveTimerCheck           : Int    = 0
-    /// App 활성화 여부를 가집니다.
-    static var isAppEnabled             : Bool   = false
+    /// App 백그라운드 내려 갈 경우 현 타임을 저장 합니다. 백그라운드에서 앱이 올라오는 시기에는 0 값으로 변경 됩니다.
+    static var appBackgroundSaveTimer   : Int    = 0
+    /// App 활성화 여부를 판단말 세션 체크 타입 입니다.
+    static var isSssionType             : APP_SESSION_TIME_CHECKING = .wait
     
     
     
@@ -1316,28 +1335,44 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 활성화 유지 가능 타입을 체크  합니다. ( J.D.H VER : 2.0.0 )
-     - Description: 정상 로그인후 앱을 사용할 수 있는 시간을 체크 하도록합니다.
-     - Date: 2023.08.10
+     앱 활성화 유지 가능 타입을 체크  합니다. ( J.D.H VER : 2.0.2 )
+     - Description: 앱이 활성화 된 상태로 계속 사용중인 경우에만 체크 되도록 합니다. 백그라운드로 앱이 내려 간다면 "appBackgroundSaveTimer" 값이 0보다 크게  설정 되며 세션 체크 값은 "exit" 로 모드가 변경 됩니다. "exit" 모드는 세션 체크를 강제 종료 합니다.
+     - Date: 2023.08.11
      - Parameters:Fasle
      - Throws: False
      - DispatchQueue : True
      - Returns:Fasle
      */
-    func isAppEnabled(){
-        /// 앱 활성화 여부를 체크 합니다.
-        if BaseViewModel.isAppEnabled == true { return }
-        BaseViewModel.isAppEnabled = true
+    func isAppSessionEnabled(){
+        /// 세션 활성화 여부를 체크 중인 경우는 추가 체크를 요청하지 않습니다.
+        if BaseViewModel.isSssionType == .start,
+           BaseViewModel.isSssionType == .ing { return }
+        /// 세션 체크를 시작 합니다.
+        BaseViewModel.isSssionType = .start
         DispatchQueue.global(qos: .background).async {
             var enabledCtn = 0
             while(true)
             {
                 Thread.sleep(forTimeInterval: 1.0)
-                if enabledCtn > 60 * 1 { break }
+                /// 세션 체크를 강제 종료 합니다.
+                if BaseViewModel.isSssionType == .exit { break }
+                /// 세션 체크 여부를 초기화 모드가 올경우 enabledCtn 값을 0 으로 초기화 합니다.
+                if BaseViewModel.isSssionType == .refresh { enabledCtn = 0}
+                /// 최대 세션 타임 경우 세션 체크를 중단 합니다.
+                if enabledCtn > APP_ING_SESSION_MAX_TIME
+                {
+                    /// 세션 체크 여부를 .end 모드로 변경 합니다.
+                    BaseViewModel.isSssionType = .end
+                    break
+                }
+                /// 세션 유지 중 값으로 변경 합니다.
+                else { BaseViewModel.isSssionType = .ing }
                 enabledCtn += 1
             }
+            
             DispatchQueue.main.async {
-                if BaseViewModel.saveTimerCheck == 0
+                /// 앱이 백그라운드로 내려 갔다면 0 값이 아니므로 체크 하지 않도록 합니다.
+                if BaseViewModel.appBackgroundSaveTimer == 0
                 {
                     BaseViewModel.setLogoutData()
                 }
