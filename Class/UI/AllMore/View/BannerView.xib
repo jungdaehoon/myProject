@@ -23,13 +23,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfI-jo-YCR">
                     <rect key="frame" x="20" y="16" width="353" height="160"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csJ-F1-YNL">
-                            <rect key="frame" x="24" y="24" width="158.33333333333334" height="52"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="요즘 뜨는" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csJ-F1-YNL">
+                            <rect key="frame" x="24" y="24" width="66.666666666666671" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="52" id="BXh-W1-LRU"/>
+                                <constraint firstAttribute="height" constant="18" id="BXh-W1-LRU"/>
                             </constraints>
-                            <string key="text">요즘 뜨는 
-OK저축은행 인기 상품</string>
+                            <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OK저축은행 인기 상품" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDz-r5-lkS">
+                            <rect key="frame" x="24" y="48" width="158.33333333333334" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="mif-Cm-YvD"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
                             <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -59,7 +66,7 @@ OK저축은행 인기 상품</string>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBk-mM-SDi">
-                            <rect key="frame" x="24" y="88" width="93" height="18"/>
+                            <rect key="frame" x="24" y="85" width="93" height="18"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ET-N3-Krd">
                                     <rect key="frame" x="0.0" y="0.0" width="77" height="18"/>
@@ -98,15 +105,17 @@ OK저축은행 인기 상품</string>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="dBk-mM-SDi" firstAttribute="top" secondItem="HDz-r5-lkS" secondAttribute="bottom" constant="13" id="30n-yh-WG0"/>
                         <constraint firstItem="alC-fc-6u7" firstAttribute="leading" secondItem="FfI-jo-YCR" secondAttribute="leading" id="Cxi-o2-cdY"/>
                         <constraint firstItem="dBk-mM-SDi" firstAttribute="leading" secondItem="FfI-jo-YCR" secondAttribute="leading" constant="24" id="F64-yy-VAm"/>
                         <constraint firstItem="csJ-F1-YNL" firstAttribute="top" secondItem="FfI-jo-YCR" secondAttribute="top" constant="24" id="HYa-Eh-1VD"/>
-                        <constraint firstItem="dBk-mM-SDi" firstAttribute="top" secondItem="csJ-F1-YNL" secondAttribute="bottom" constant="12" id="Iaq-Eo-sgL"/>
                         <constraint firstAttribute="bottom" secondItem="AgX-xb-2BY" secondAttribute="bottom" id="KPU-hx-cbr"/>
                         <constraint firstItem="AgX-xb-2BY" firstAttribute="top" secondItem="FfI-jo-YCR" secondAttribute="top" id="Qe5-IG-gKp"/>
+                        <constraint firstItem="HDz-r5-lkS" firstAttribute="top" secondItem="csJ-F1-YNL" secondAttribute="bottom" constant="6" id="Tx9-QV-MiP"/>
                         <constraint firstAttribute="bottom" secondItem="alC-fc-6u7" secondAttribute="bottom" id="VlT-Cd-Rqn"/>
                         <constraint firstItem="alC-fc-6u7" firstAttribute="top" secondItem="FfI-jo-YCR" secondAttribute="top" id="aVr-u8-FCZ"/>
                         <constraint firstAttribute="trailing" secondItem="AgX-xb-2BY" secondAttribute="trailing" constant="20" id="ngA-b5-a9V"/>
+                        <constraint firstItem="HDz-r5-lkS" firstAttribute="leading" secondItem="FfI-jo-YCR" secondAttribute="leading" constant="24" id="oJE-l7-HUJ"/>
                         <constraint firstItem="csJ-F1-YNL" firstAttribute="leading" secondItem="FfI-jo-YCR" secondAttribute="leading" constant="24" id="vP1-IB-QEq"/>
                         <constraint firstAttribute="trailing" secondItem="alC-fc-6u7" secondAttribute="trailing" id="xDy-4K-gP1"/>
                     </constraints>
