@@ -44,7 +44,7 @@ class BottomAccountListView: BaseView {
     /// 계좌 리스트 기본 하단 위치 입니다.
     let ACCOUNT_DEFAULT_BOTTOM  = -24.0
     /// 계좌 기본 높이 입니다.
-    let ACCOUNT_CELL_HEIGHT     = 64.0
+    let ACCOUNT_CELL_HEIGHT     = 76.0
     /// 이벤트 콜백 입니다.
     var completion                          : (( _ event : BOTTOM_ACCOUNT_EVENT ) -> Void )? = nil
     /// 계좌 리스트뷰 최하단 포지션 입니다.
@@ -54,7 +54,7 @@ class BottomAccountListView: BaseView {
     /// 계좌 리스트 최대 높이 입니다.
     @IBOutlet weak var tableViewHeight      : NSLayoutConstraint!
     /// 계좌 선택 인덱스 입니다.
-    var seletedIndex                        : Int = 0
+    var accountSeleted                      : Int = 0
     
     
     //MARK: - Init
@@ -84,11 +84,9 @@ class BottomAccountListView: BaseView {
         if #available(iOS 15, *) { self.tableView.sectionHeaderTopPadding = 0 }
       
         /// 계좌 리스트 기본 높이를 설정 합니다.
-        self.tableViewHeight.constant       = ACCOUNT_CELL_HEIGHT * 5
+        self.tableViewHeight.constant       = 0
         /// 계좌 선택 리스트 뷰어 전체 높이를 아래로 이동 합니다.
         self.accountListViewBottom.constant = ACCOUNT_DEFAULT_HEIGHT + (ACCOUNT_CELL_HEIGHT * 5) * -1
-        /// 계좌 디스플레이 입니다.
-        self.setDataDisplay()
     }
 
 
@@ -100,12 +98,21 @@ class BottomAccountListView: BaseView {
      - Returns:False
      */
     func setDataDisplay(){
+        self.isHidden = false
         /// 계좌 리스트 정보를 요청 합니다.
         self.viewModel.getAccountList().sink { result in
             
         } receiveValue: { model in
-            if let accounts = model {
-                self.tableView.reloadData()
+            if let _ = model {
+                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                UIView.animate(withDuration:0.3, delay: 0.1, options: .curveEaseOut) { [self] in
+                    let cell = self.viewModel.getAccountsHeight(model: model)
+                    self.tableViewHeight.constant       = cell
+                    self.accountListViewBottom.constant = ACCOUNT_DEFAULT_BOTTOM
+                    self.layoutIfNeeded()
+                    self.tableView.reloadData()
+                } completion: { _ in
+                }
             }
         }.store(in: &self.viewModel.cancellableSet)
     }
@@ -123,13 +130,8 @@ class BottomAccountListView: BaseView {
         if let base = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
             DispatchQueue.main.async {
                 base.addSubview(self)
-                /// 바코드 결제 위치로 선택 배경을 이동합니다.
-                UIView.animate(withDuration:0.3, delay: 0.1, options: .curveEaseOut) { [self] in
-                    self.accountListViewBottom.constant = ACCOUNT_DEFAULT_BOTTOM
-                    self.layoutIfNeeded()
-                } completion: { _ in
-                }
-                
+                /// 계좌 디스플레이 입니다.
+                self.setDataDisplay()
             }
         }
     }
@@ -163,13 +165,15 @@ class BottomAccountListView: BaseView {
             case .add_account:
                 if let event = self.completion {
                     event(.add_account)
+                    self.isHidden = true
                 }
                 break
             case .close:
+                self.hide()
                 break
             }
         }
-        self.hide()
+        
     }
 }
 
@@ -180,13 +184,30 @@ extension BottomAccountListView : UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let event = self.completion {
-            event(.account(account: "237829332348293"))
+            if let response = self.viewModel.accountResponse,
+               let accounts = response.list {
+                /// 해당 계좌 메인 등록 요청 합니다.
+                self.viewModel.setUpdateMainAccount(account: accounts[indexPath.row]).sink { result in
+                    
+                } receiveValue: { response in
+                    event(.account(account: NC.S(accounts[indexPath.row].acc_no)))
+                    /// 새로고침을 요청 합니다.
+                    self.setDataDisplay()
+                }.store(in: &self.viewModel.cancellableSet)
+            }
         }
-        self.hide()
+        /// 계좌 선택 여부를 체크 합니다.
+        self.accountSeleted = indexPath.row
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
+        if let response = self.viewModel.accountResponse,
+           let accounts = response.list {
+            /// 계좌 상세 정보에 따른 리스트 Height 값을 가져 옵니다.
+            return self.viewModel.getAccountHeight(account: accounts[indexPath.row])
+        }
         return ACCOUNT_CELL_HEIGHT
     }
 }
@@ -196,7 +217,6 @@ extension BottomAccountListView : UITableViewDelegate
 // MARK: - UITableViewDataSource
 extension BottomAccountListView : UITableViewDataSource
 {
-    
     func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
@@ -204,23 +224,16 @@ extension BottomAccountListView : UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if let response = self.viewModel.accountResponse,
+           let accounts = response.list {
+            return accounts.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BottomAccountListTableViewCell", for: indexPath) as! BottomAccountListTableViewCell
-        cell.seletedIcon.isHidden = true
-        
-        if self.seletedIndex == indexPath.row
-        {
-            cell.seletedIcon.isHidden = false
-        }
-        
-        /*
-        let termsinfo : TERMS_INFO  = self.termsList[indexPath.row]
-        cell.titleName.text         = termsinfo.title!
-        cell.selectionStyle         = .none
-         */
+        cell.setDisplay(indexPath, viewModel: self.viewModel, seleted: self.accountSeleted == indexPath.row ? true : false )
         return cell
     }
     

@@ -169,6 +169,11 @@ class OKZeroPayView: UIView {
                         {
                             msg = "결제가 불가한 코드입니다.\n(존재하지 않는 QR코드)"
                         }
+                        /// 변동형 QRCode 입니다.
+                        else if data._status == "V"
+                        {
+                            msg = "결제가 불가한 코드입니다.\n(변동형 MPM QR코드)"
+                        }
                         /// 상황 별 안내 팝업 오픈 합니다.
                         CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
                             self.viewModel.qrCodeValue = .qr_fail

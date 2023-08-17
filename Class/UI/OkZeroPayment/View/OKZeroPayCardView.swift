@@ -308,7 +308,7 @@ class OKZeroPayCardView: UIView {
             switch event {
                 case .payhidden, .paydisplay:
                     /// 잔액 정보 보기를 요청 합니다.
-                    self.viewModel.setZeroPayMoneyHidden( hidden: event == .payhidden ? "Y" : "N" ).sink { result in
+                    self.viewModel.setZeroPayMoneyDisplay( display: event == .payhidden ? false : true ).sink { result in
                         
                     } receiveValue: { model in
                         if let onoff = model,
@@ -417,6 +417,7 @@ class OKZeroPayCardView: UIView {
                                     break
                                 case .account( let account ):
                                     if let account = account {
+                                        
                                         /// 받은 계좌 정보로 서버에 카드 상세 정보를 요청 합니다.
                                     }
                                     break
@@ -431,9 +432,9 @@ class OKZeroPayCardView: UIView {
                     OKZeroViewModel.zeroPayShared!.cardDisplay = .bottom
                     break
                 case .bottompayonoff:
-                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김" ? "Y" : "N"
+                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김" ? false : true
                     /// 잔액 정보 보기/숨김 여부를 요청 합니다.
-                    self.viewModel.setZeroPayMoneyHidden( hidden: hidden).sink { result in
+                    self.viewModel.setZeroPayMoneyDisplay( display: hidden).sink { result in
                         
                     } receiveValue: { model in
                         if let onoff = model,

@@ -237,10 +237,10 @@ class BaseWebViewController: UIViewController {
             webview.uiDelegate          = nil
             webview.navigationDelegate  = nil
             webview.removeFromSuperview()
+            self.webView                = nil
         }
-        self.webView        = nil
-        self.messageHandler = nil
-        self.webViewRefresh = nil
+        if self.messageHandler != nil { self.messageHandler = nil}
+        if self.webViewRefresh != nil { self.webViewRefresh = nil}
     }
 }
 
@@ -289,7 +289,6 @@ extension BaseWebViewController: WKNavigationDelegate
                 webView.configuration.userContentController.removeAllUserScripts()
             }.store(in: &self.baseViewModel.cancellableSet)
         }
-         
         LoadingView.default.hide()
     }
     

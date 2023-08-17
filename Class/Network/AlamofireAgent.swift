@@ -124,6 +124,61 @@ enum AlamofireAgent {
     
     
     /**
+     상황별 Json 타입 인터페이스를 요청 합니다.( J.D.H VER : 2.0.0 )
+     - Date: 2023.08.17
+     - Parameters:
+        - url                   : 요청할 인터페이스 URL 타입 입니다.
+        - method            : 요청 http 타입 기본 post 타입입니다.
+        - parameters   : http 요청할 파라미터 정보 입니다.
+        - encoding       : encoding 타입으로 기본 타입을 사용 합니다.
+        - decoder         : 요청후 받은 데이터 디코딩 타입 입니다. 기본 JSONDecoder 를 사용 합니다.
+     - Throws: False
+     - Returns:
+        요청된 T 값을 리턴 합니다. (AnyPublisher<T, ResponseError>)
+     */
+    static func requestJson<T: Decodable>(
+        _ url: String ,
+        method: HTTPMethod = .post,
+        parameters: [String:Any] = [:],
+        encoding: ParameterEncoding = URLEncoding.default,
+        decoder: JSONDecoder = JSONDecoder())
+        -> AnyPublisher<T, ResponseError>  {
+            let publisher               = PassthroughSubject<T,ResponseError>()
+            let requestUrl              = URL(string: baseURL + url)!
+            var request                 = URLRequest (url:requestUrl)
+            request.httpMethod          = "POST"
+            request.httpBody            = try! JSONSerialization.data(withJSONObject: parameters as Any)
+            request.addValue ("XMLHttpRequest", forHTTPHeaderField: "x-requested-with" )
+            request.addValue ("application/json", forHTTPHeaderField: "Content-Type")
+            let response = defaultManager.request(request)
+            response.validate().responseJSON { (response) in
+                guard response.result.isSuccess,
+                    let _ = response.result.value else {
+                        Slog(response.debugDescription, category: .network, logType: .default)
+                        Slog("response.result.error value error", category: .network, logType: .error)
+                    publisher.send(completion: .failure( handleError(response.result.error!) ))
+                        return
+                }
+                
+                do {
+                    Slog(response.debugDescription, category: .network, logType: .default)
+                    let decoder         = JSONDecoder()
+                    guard let value     = try? decoder.decode(T.self, from: response.data!) else {
+                        throw ResponseError.parsing(PARSING_ERR_MSG)
+                    }
+                    publisher.send(value)
+                }
+                catch ( let error )
+                {
+                    Slog("response.result.error:::\(error)", category: .network, logType: .error)
+                }
+            }
+            return publisher.eraseToAnyPublisher()
+    }
+    
+    
+    
+    /**
      Error 발생시 이벤트 핸들러 입니다..( J.D.H VER : 2.0.0 )
      - Date: 2023.03.07
      - Parameters:

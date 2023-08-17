@@ -10,8 +10,8 @@ import Foundation
 
 
 /**
- 계좌 리스트 조회 정보를 받습니다. ( J.D.H VER : 2.0.0 )
- - Date: 2023.03.22
+ 계좌 리스트 조회 정보를 받습니다. ( J.D.H VER : 2.0.2 )
+ - Date: 2023.08.16
 */
 struct SelectAccountListResponse: BaseResponse {
     /// 세부 응답코드 입니다.
@@ -36,8 +36,8 @@ struct SelectAccountListResponse: BaseResponse {
 
 
 /**
- 계좌 정보를 받습니다. ( J.D.H VER : 2.0.0 )
- - Date: 2023.03.22
+ 계좌 정보를 받습니다. ( J.D.H VER : 2.0.2 )
+ - Date: 2023.08.16
 */
 struct Account : Codable {
     /// 고객번호 입니다.
@@ -70,6 +70,11 @@ struct Account : Codable {
     var _transfer_agree_yn   : String? { get { return  NC.S(transfer_agree_yn) } }
     /// 금일 출금액 입니다.
     var _sum_data            : Int? { get { return  NC.I(sum_data) } }
+    /// 은행 이미지 URL 입니다.
+    var _bank_r_image_url    : String? { get { return  NC.S(bank_r_image_url) } }
+    /// 은행 큰 둥근 이미지 URL 입니다.
+    var _bank_rb_img_url     : String? { get { return  NC.S(bank_rb_img_url) } }
+    
     
     /// 고객번호 입니다.
     var user_no             : String?
@@ -101,5 +106,10 @@ struct Account : Codable {
     var transfer_agree_yn   : String?
     /// 금일 출금액 입니다.
     var sum_data            : Int?
+    /// 은행 이미지 URL 입니다.
+    var bank_r_image_url      : String?
+    /// 은행 큰 둥근 이미지 URL 입니다.
+    var bank_rb_img_url     : String?
+    
 }
 

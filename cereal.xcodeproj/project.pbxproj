@@ -220,6 +220,7 @@
 		F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */; };
 		F2C9E20C2A83192F00A68593 /* GTM-5W6DTQWV.json in Resources */ = {isa = PBXBuildFile; fileRef = F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */; };
 		F2D726B92A7CAE670073AB56 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D726B82A7CAE670073AB56 /* Data.swift */; };
+		F2DEDB772A8CABCE003E502E /* UpdateMainAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */; };
 		F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */; };
 		F2F084322A7898AB005EC9CC /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */; };
 /* End PBXBuildFile section */
@@ -466,6 +467,7 @@
 		F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsResponse.swift; sourceTree = "<group>"; };
 		F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-5W6DTQWV.json"; sourceTree = "<group>"; };
 		F2D726B82A7CAE670073AB56 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainAccountResponse.swift; sourceTree = "<group>"; };
 		F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
 		FD740F24DF294204F2C066E1 /* Pods_cereal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cereal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -936,6 +938,7 @@
 			isa = PBXGroup;
 			children = (
 				8D205EEA29D1346E00F43C99 /* SelectAccountListResponse.swift */,
+				F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -1748,6 +1751,7 @@
 				8D205F5B29D1346F00F43C99 /* WKWebView.swift in Sources */,
 				8DDC3DEB29D161D3003C4F8F /* AppshieldManager.swift in Sources */,
 				8D205F6629D1346F00F43C99 /* UIViewController.swift in Sources */,
+				F2DEDB772A8CABCE003E502E /* UpdateMainAccountResponse.swift in Sources */,
 				8DFB9D2629DD5CB5004E5021 /* RemittanceModel.swift in Sources */,
 				8D205F6A29D1346F00F43C99 /* UIApplication.swift in Sources */,
 				8D51442429D54AE70019943D /* LottieAniView.swift in Sources */,

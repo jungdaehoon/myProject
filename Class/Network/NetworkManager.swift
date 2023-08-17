@@ -227,19 +227,23 @@ class NetworkManager {
     
     
     /**
-     연결된 은행 계좌 리스트 정보를 요청 합니다. ( J.D.H VER : 2.0.0 )
-     - API ID: myp/accounts.do
-     - API 명: 은행 계좌 요청 입니다.
-     - Date: 2023.07.05
-     - Parameters:False
+     계좌 정보를 메인 계좌로 등록 요청 합니다. ( J.D.H VER : 2.0.2 )
+     - API ID: /all/updateMainAccount.do
+     - API 명: 주계좌 업데이트 요청 입니다.
+     - Date: 2023.08.16
+     - Parameters:
+        - params : 파라미터 정보를 넘깁니다.
      - Throws: False
      - Returns:
-        계좌 리스트 정보를 받습니다. (AnyPublisher<AccountsResponse, ResponseError>)
+        주계좌 인증여부를 받습니다. ( AnyPublisher<UpdateMainAccountResponse, ResponseError> )
      */
-    static func requestAccounts() -> AnyPublisher<AccountsResponse, ResponseError> {
-        /// 기본 파라미터 정보를 설정 합니다.
-        let parameters: Parameters = self.getDefaultParams() as! Parameters
-        return AlamofireAgent.request(APIConstant.API_ACCOUNTS, parameters: parameters)
+    static func requestUpdateMainAccount( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<UpdateMainAccountResponse, ResponseError> {
+        var parameters: Parameters = [ "token": token ]
+        for (key,value) in params
+        {
+            parameters.updateValue(value, forKey: key)
+        }
+        return AlamofireAgent.request(APIConstant.API_ACCOUNT_MAIN_UPDATE, parameters: parameters)
     }
     
 
@@ -398,12 +402,12 @@ class NetworkManager {
         정상 처리 여부를 받습니다.  ( AnyPublisher<ZeroPayMoneyOnOffResponse, ResponseError> )
      */
     static func requestZeroPayMoneyOnOff( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayMoneyOnOffResponse, ResponseError> {
-        var parameters: Parameters = [ "token": token ]
+        var updateParam : [String:Any] = [ "token": token ]
         for (key,value) in params
         {
-            parameters.updateValue(value, forKey: key)
+            updateParam.updateValue(value, forKey: key)
         }
-        return AlamofireAgent.request(APIConstant.API_ZEROPAY_MONEY_ONOFF, parameters: parameters)
+        return AlamofireAgent.requestJson( APIConstant.API_ZEROPAY_MONEY_ONOFF, parameters: updateParam )
     }
     
     
