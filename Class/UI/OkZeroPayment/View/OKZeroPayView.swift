@@ -268,6 +268,7 @@ class OKZeroPayView: UIView {
         OKZeroViewModel.zeroPayShared!.okZeroPayReload = true
     }
     
+    
     /**
     간편결제 진입후 상세정보를 서버요청 디스플레이를 하도록 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.06
@@ -573,7 +574,7 @@ class OKZeroPayView: UIView {
                     /// 타이머를 활성화 합니다.
                     self.isTimer = true
                     /// 코드 타이머 활성화 합니다.
-                    self.viewModel.startCodeStayTimer(maxTime: 10)
+                    self.viewModel.startCodeStayTimer(maxTime: 180)
                 }
             }
         } btnEvent: { success in
@@ -598,7 +599,7 @@ class OKZeroPayView: UIView {
                     /// 타이머를 활성화 합니다.
                     self.isTimer = true
                     /// 코드 타이머 활성화 합니다.
-                    self.viewModel.startCodeStayTimer(maxTime: 10)
+                    self.viewModel.startCodeStayTimer(maxTime: 180)
                 }
             }
         } btnEvent: { success in
@@ -830,10 +831,13 @@ class OKZeroPayView: UIView {
                     }
                     break
                 case .location_search:
-                    /// 제로페이 가맹점 검색 URL 입니다.
-                    let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    /// 위치 측의 여부를 체크 합니다.
+                    BaseViewModel.shared.isLocationAuthorization().sink { success in
+                        /// 제로페이 가맹점 검색 URL 입니다.
+                        let urlString = "https://m.map.naver.com/search2/search.naver?query=제로페이 가맹점&sm=shistory&style=v5".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                         /// 제로페이 가맹점 네이버 지도를 요청 합니다.
-                    self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                        self.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                    }.store(in: &BaseViewModel.shared.cancellableSet)
                     break
             }
             

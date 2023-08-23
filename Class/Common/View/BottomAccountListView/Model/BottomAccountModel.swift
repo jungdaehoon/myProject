@@ -101,7 +101,8 @@ class BottomAccountModel : BaseViewModel{
     func getAccountHeight( account : Account? ) -> CGFloat {
         /// 제인증 여부를 받습니다.
         if self.getAccountReauth( account: account) {
-            return 76.0
+            /// 제인증 경우 높이가 다른것으로 진행하나 현 64.0 사이즈로 변경되어 진행 합니다.
+            return 64.0
         }
         return 64.0
     }

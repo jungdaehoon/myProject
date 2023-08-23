@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-
+import SafariServices
 
 /**
  전체 웹 버튼 이벤트  입니다.  ( J.D.H VER : 2.0.0 )
@@ -101,6 +101,8 @@ enum FULL_PAGE_TYPE : String {
     case PW90_NOT_CHANGE    = "PW90_NOT_CHANGE"
     /// 닉네임 변경 페이지 진입 입니다.
     case NICKNAME_CHANGE    = "NICKNAME_CHANGE"
+    /// 네이버 맵 모드 입니다.
+    case NAVER_MAP          = "NAVER_MAP"
 }
 
 
@@ -320,6 +322,7 @@ class FullWebViewController: BaseViewController {
 
 
 
+
 // MARK: - WKNavigationDelegate,WKUIDelegate
 extension FullWebViewController {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
@@ -332,6 +335,19 @@ extension FullWebViewController {
                 return decisionHandler(.cancel, preferences)
         }
         Slog("url : \(url)")
+        
+        
+        /// 페이지 타입이 네이버 맵 경우  네이버 블로그 진입시 예외로 별도의 화면을 디스플레이 합니다.
+        if self.pageType == .NAVER_MAP,
+           url.description.contains("m.blog.naver.com")
+        {
+            let naverBlogView = SFSafariViewController(url: url)
+            naverBlogView.modalPresentationStyle = .overFullScreen
+            self.present(naverBlogView, animated: true, completion: nil)
+            decisionHandler(.cancel, preferences)
+            return
+        }
+        
         
         /// 중간 중단으로 메인 페이지 이동 URL 확인 경우 입니다. ( 추후 WebToApp 으로 변경예정 )
         if url.description.contains("matcs/main.do")

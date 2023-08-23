@@ -44,7 +44,7 @@ class BottomAccountListView: BaseView {
     /// 계좌 리스트 기본 하단 위치 입니다.
     let ACCOUNT_DEFAULT_BOTTOM  = -24.0
     /// 계좌 기본 높이 입니다.
-    let ACCOUNT_CELL_HEIGHT     = 76.0
+    let ACCOUNT_CELL_HEIGHT     = 64.0
     /// 이벤트 콜백 입니다.
     var completion                          : (( _ event : BOTTOM_ACCOUNT_EVENT ) -> Void )? = nil
     /// 계좌 리스트뷰 최하단 포지션 입니다.

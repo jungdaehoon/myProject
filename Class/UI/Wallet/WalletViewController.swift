@@ -45,11 +45,24 @@ class WalletViewController: BaseViewController {
 
 
 extension WalletViewController {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        if let url = navigationAction.request.url {
+            Slog("url : \(url)")            
+        }
+        
+        decisionHandler(.allow)
+        
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
         preferences.preferredContentMode    = .mobile
         let request                         = navigationAction.request
         let optUrl                          = request.url
         let optUrlScheme                    = optUrl?.scheme
+        
+        Slog("decidePolicyFor optUrl : \(optUrl?.absoluteString)")
+        
         guard let url = optUrl,
               let _ = optUrlScheme
             else {

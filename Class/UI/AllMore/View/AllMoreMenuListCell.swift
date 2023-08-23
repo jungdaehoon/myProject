@@ -311,40 +311,6 @@ extension AllMoreMenuListCell
 {
     //MARK: - 지원 메서드 입니다.
     /**
-     제로페이 결제 페이지로 이동 합니다. ( J.D.H VER : 2.0.0 )
-     - Date: 2023.03.07
-     - Parameters:False
-     - Throws: False
-     - Returns:False
-     */
-    func toQRZeroPayPage()
-    {
-        /// 제로페이 선택 안내 팝업 디스플레이 합니다.
-        OKZeroPayTypeBottomView().setDisplay { event in
-            switch event
-            {
-                /// 결제 페이지로 이동 합니다.
-                case .paymeny:
-                    let viewController = OkPaymentViewController()
-                    viewController.modalPresentationStyle = .overFullScreen
-                    self.pushViewController(viewController, animated: true, animatedType: .up)
-                    break
-                    /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
-                case .location:
-                    /// 제로페이 가맹점 검색 URL 입니다.
-                    let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                    
-                        /// 제로페이 가맹점 네이버 지도를 요청 합니다.
-                    self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
-                    break
-                default:break
-            }
-        }
-        return
-    }
-    
-    
-    /**
      만보고 페이지로 이동 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.20
      - Parameters:False
@@ -497,12 +463,12 @@ extension AllMoreMenuListCell
                     return
                 }
             }
-            
+             
             /// 약관 동의 팝업을 오픈 합니다.
             let terms = [TERMS_INFO.init(title: "제로페이 서비스 이용약관", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z001"),
                          TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z002")]
             BottomTermsView().setDisplay( target: self.viewController, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
-                                         termsList: terms) { value in
+                                         termsList: terms, isCheckUI: true ) { value in
                 /// 동의/취소 여부를 받습니다.
                 if value == .success
                 {
@@ -544,11 +510,17 @@ extension AllMoreMenuListCell
                     break
                     /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
                 case .location:
-                    /// 제로페이 가맹점 검색 URL 입니다.
-                    let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                    /// 제로페이 가맹점 네이버 지도를 요청 합니다.
-                    self.viewController.view.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
-                    
+                    /// 위치 측의 여부를 체크 합니다.
+                    BaseViewModel.shared.isLocationAuthorization().sink { success in
+                        /// 제로페이 가맹점 검색 URL 입니다.
+                        let urlString = "https://m.map.naver.com/search2/search.naver?query=제로페이 가맹점&sm=shistory&style=v5".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                        /// 제로페이 가맹점 네이버 지도를 요청 합니다.
+                        self.viewController.view.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                    }.store(in: &BaseViewModel.shared.cancellableSet)
+                    break
+                case .faq:
+                    /// 제로페이 관련 FAQ 페이지로 이동 합니다.
+                    self.viewController.view.setDisplayWebView(WebPageConstants.baseURL + "/all/faqList.do?id=F006", modalPresent: true, animatedType: .up, titleBarType: 0)
                     break
                 default:break
             }

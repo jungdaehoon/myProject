@@ -77,37 +77,41 @@ class IntroViewController: BaseViewController {
      */
     func setAppChecking()
     {
-        /// 앱 추적 (IDFA) 허용 여부를 요청 합니다.
-        self.viewModel.isTrackingAuthorization().sink { success in
-            /// 취약점 점검인 경우 입니다.
-            if APP_INSPECTION
-            {
-                /// 앱 상태를 서버 통해 체크 합니다.
-                self.setOKPayInfoCheck()
-            }
-            else
-            {
-                /// 앱 실드 체크 합니다.
-                self.viewModel.getAppShield().sink { appShield in
-                    /// error 이 아닌 경우 error 안내 처리 합니다.
-                    if appShield.error != nil
-                    {
-                        DispatchQueue.main.async(execute: {
-                            /// 앱 실드 비정상 처리 안내 팝업 입니다.
-                            CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
-                                exit(0)
-                            }
-                        })
-                    }
-                    /// 앱 실드 정상처리 입니다.
-                    else
-                    {
-                        /// 앱 상태를 서버 통해 체크 합니다.
-                        self.setOKPayInfoCheck()
-                    }
-                }.store(in: &self.cancellableSet)
-            }
+        self.viewModel.isLocationAuthorization().sink { success in
+            /// 앱 추적 (IDFA) 허용 여부를 요청 합니다.
+            self.viewModel.isTrackingAuthorization().sink { success in
+                /// 취약점 점검인 경우 입니다.
+                if APP_INSPECTION
+                {
+                    /// 앱 상태를 서버 통해 체크 합니다.
+                    self.setOKPayInfoCheck()
+                }
+                else
+                {
+                    /// 앱 실드 체크 합니다.
+                    self.viewModel.getAppShield().sink { appShield in
+                        /// error 이 아닌 경우 error 안내 처리 합니다.
+                        if appShield.error != nil
+                        {
+                            DispatchQueue.main.async(execute: {
+                                /// 앱 실드 비정상 처리 안내 팝업 입니다.
+                                CMAlertView().setAlertView(detailObject: appShield.error_msg! as AnyObject, cancelText: "확인") { event in
+                                    exit(0)
+                                }
+                            })
+                        }
+                        /// 앱 실드 정상처리 입니다.
+                        else
+                        {
+                            /// 앱 상태를 서버 통해 체크 합니다.
+                            self.setOKPayInfoCheck()
+                        }
+                    }.store(in: &self.cancellableSet)
+                }
+            }.store(in: &self.viewModel.cancellableSet)
         }.store(in: &self.viewModel.cancellableSet)
+        
+        
     }
 
     

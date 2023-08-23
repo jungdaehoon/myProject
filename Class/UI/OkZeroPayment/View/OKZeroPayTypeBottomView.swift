@@ -109,18 +109,11 @@ class OKZeroPayTypeBottomView: BaseView {
                 /// 현
             case .page_exit:
                 self.hide()
-                break
-            case .paymeny:
-                self.btnEvent!(.paymeny)
-                self.hide()
-                break
-            case .location:
-                self.btnEvent!(.location)
-                self.hide()
-                break
-            case .faq:
-                break
+                return
+            default:break
             }
+            self.btnEvent!(type)
+            self.hide()
         }
     }
     /*

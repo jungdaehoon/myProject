@@ -16,6 +16,7 @@ import AdSupport
 import GoogleAnalytics
 import Firebase
 import FirebaseMessaging
+import CoreLocation
 import WebKit
 
 
@@ -861,6 +862,57 @@ class BaseViewModel : NSObject {
      - Returns:
         앱 카메라 접근 여부 값을 리턴 합니다. (Future<Bool, Never>)
      */
+    func isLocationAuthorization() -> Future<Bool, Never>
+    {
+        return Future<Bool, Never> { promise in
+            let locationManager = CLLocationManager()
+            guard CLLocationManager.locationServicesEnabled() else {
+                // 시스템 설정으로 유도하는 커스텀 얼럿
+                promise(.success(false))
+                return
+            }
+            let authorizationStatus: CLAuthorizationStatus
+            // 앱의 권한 상태 가져오는 코드 (iOS 버전에 따라 분기처리)
+            if #available(iOS 14.0, *) {
+                authorizationStatus = locationManager.authorizationStatus
+            }else {
+                authorizationStatus = CLLocationManager.authorizationStatus()
+            }
+            
+            switch authorizationStatus {
+                case .notDetermined:
+                    // 사용자가 권한에 대한 설정을 선택하지 않은 상태
+                    // 권한 요청을 보내기 전에 desiredAccuracy 설정 필요
+                    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                    // 권한 요청을 보낸다.
+                    locationManager.requestWhenInUseAuthorization()
+                    promise(.success(false))
+                case .denied, .restricted:
+                    // 사용자가 명시적으로 권한을 거부했거나, 위치 서비스 활성화가 제한된 상태
+                    // 시스템 설정에서 설정값을 변경하도록 유도한다.
+                    // 시스템 설정으로 유도하는 커스텀 얼럿
+                    promise(.success(false))
+                case .authorizedWhenInUse:
+                    // 앱을 사용중일 때, 위치 서비스를 이용할 수 있는 상태
+                    // manager 인스턴스를 사용하여 사용자의 위치를 가져온다.
+                    locationManager.startUpdatingLocation()
+                    promise(.success(true))
+                default:
+                    print("Default")
+                }
+            
+            
+        }
+    }
+    
+    
+    /**
+     앱 카메라 접근 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.03.29
+     - Throws: False
+     - Returns:
+        앱 카메라 접근 여부 값을 리턴 합니다. (Future<Bool, Never>)
+     */
     func isCameraAuthorization() -> Future<Bool, Never>
     {
         return Future<Bool, Never> { promise in
@@ -875,6 +927,8 @@ class BaseViewModel : NSObject {
             })
         }
     }
+    
+    
     
     
     /**
