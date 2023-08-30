@@ -183,7 +183,15 @@ class AllMoreMenuListCell: UITableViewCell {
                 model.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
                     if url.isValid
                     {
-                        self.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true )
+                        self.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true) { value in
+                            switch value
+                            {
+                            case .zeroPayClose:
+                                TabBarView.setReloadSeleted(pageIndex: 4)
+                                break
+                            default:break
+                            }
+                        }
                     }
                 }).store(in: &model.cancellableSet)
             }
@@ -515,7 +523,9 @@ extension AllMoreMenuListCell
                         /// 제로페이 가맹점 검색 URL 입니다.
                         let urlString = "https://m.map.naver.com/search2/search.naver?query=제로페이 가맹점&sm=shistory&style=v5".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                         /// 제로페이 가맹점 네이버 지도를 요청 합니다.
-                        self.viewController.view.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                        self.viewController.view.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false) { value in
+                            
+                        }
                     }.store(in: &BaseViewModel.shared.cancellableSet)
                     break
                 case .faq:

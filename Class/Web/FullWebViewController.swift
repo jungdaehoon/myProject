@@ -65,6 +65,8 @@ enum FULL_WEB_CB {
     case keyPadSucces( type : KEY_PAD_CLOSE_TYPE )
     /// 제로페이 인증용 보안 키패드 타입 입니다. ( barcode : 바코드, qrcode : QR코드 데이터 , maxValidTime : 최대 유지 타임 정보 )
     case zeroPaykeyPad( barcode : String, qrcode : String, maxValidTime : String )
+    /// 제로페이 관련 페이지 닫기 입니다. ( 종료시 콜백 메세지 정보 입니다.)
+    case zeroPayClose
     /// 페이지 닫기 입니다. ( 종료시 콜백 메세지 정보 입니다.)
     case pageClose ( message : String  )
     /// URL 정보를 넘깁니다
@@ -432,7 +434,10 @@ extension FullWebViewController {
                     /// 웹뷰를 초기화 합니다.
                     self.removeWebView()
                     /// 현 페이지를 종료 합니다.
-                    self.popController(animated: true, animatedType: .down)
+                    self.popController(animated: true, animatedType: .down) { firstViewController in
+                        /// 이동 후 탭바를 새로고침 합니다.
+                        TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
+                    }
                     decisionHandler(.allow, preferences)
                     return
                 }

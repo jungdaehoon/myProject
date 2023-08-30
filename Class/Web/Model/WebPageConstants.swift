@@ -81,4 +81,19 @@ class WebPageConstants {
     static let URL_MARKET_HISTORY               = baseURL + "/myp/mypGifticonList.do?tab=myTab"
         
     
+    /**
+     도메인 체크하여 URL 정보에 도메인을 추가하여 리턴 합니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.08.28
+     - Parameters:
+        - url : 체크 할 URL 정보 입니다.
+     - Returns:False
+     */
+    static func getDomainURL( _ url : String ) -> String {
+        if url.contains("https") ||
+           url.contains("http")
+        {
+            return url
+        }
+        return WebPageConstants.baseURL + url
+    }
 }

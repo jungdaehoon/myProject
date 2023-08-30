@@ -137,7 +137,7 @@ class TabbarViewController: UITabBarController {
                     /// 진행중인 탭 인덱스를 초기화 합니다.
                     self.setIngTabToRootController()
                     /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
-                    self.setSelectedIndex(.home, seletedItem: url)
+                    self.setSelectedIndex(.home, seletedItem: WebPageConstants.getDomainURL(url))
                     /// 딥링크 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.deepLinkUrl = ""
                 }
@@ -169,7 +169,7 @@ class TabbarViewController: UITabBarController {
                     /// 진행중인 탭 인덱스를 초기화 합니다.
                     self.setIngTabToRootController()
                     /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.baseURL + url)
+                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(url))
                     /// PUSH 에서 받은 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.pushUrl = ""
                 }
@@ -371,6 +371,8 @@ extension UITabBarController
                         if tabitem is String,
                            NC.S(tabitem as? String).isValid
                         {
+                            /// 홈 탭으로 먼저 이동 합니다.
+                            TabBarView.setReloadSeleted(pageIndex: tabIndex.rawValue)
                             /// 탭 이동시 해당 item 위치로 이동 합니다.
                             home.loadMainURL(NC.S(tabitem as? String), updateCookies: updateCookies) { success in
                                 if completion != nil
@@ -378,6 +380,7 @@ extension UITabBarController
                                     completion!(home)
                                 }
                             }
+                            return
                         }
                     }
                     break

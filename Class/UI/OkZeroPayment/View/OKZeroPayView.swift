@@ -800,7 +800,10 @@ class OKZeroPayView: UIView {
                         self.viewModel.codeTimer = .exit_time
                     }
 
-                    self.popViewController(animated: true, animatedType:  .down)
+                    self.popViewController(animated: true, animatedType:  .down) { firstViewController in
+                        /// 이동 후 탭바를 새로고침 합니다.
+                        TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
+                    }
                     break
                 /// 결제 타입 선택버튼 입니다.
                 case .barcode_pay:

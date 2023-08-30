@@ -2074,7 +2074,7 @@ class WebMessagCallBackHandler : NSObject  {
                             /// 제로페이 가맹점 네이버 지도를 요청 합니다.
                             controller.view.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
                         }
-                    }.store(in: &BaseViewModel.shared.cancellableSet)                
+                    }.store(in: &BaseViewModel.shared.cancellableSet)
                     break
                 case .faq:
                     if let controller = self.target {
