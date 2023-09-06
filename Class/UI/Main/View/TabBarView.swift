@@ -194,6 +194,13 @@ class TabBarView : UIView
     }
     
     
+    /**
+     URL  정보를 기준으로  탭으로 이동 합니다..   ( J.D.H VER : 2.0.2 )
+     - Date: 2023.08.23
+     - Parameters:
+        - url : 체크할 URL 정보 입니다.
+     - Returns:False
+     */
     static func setTabBarURLToRoot( url : String = "" ){
         var tabIndex : TAB_STATUS = .home
         if WebPageConstants.URL_WALLET_HOME.contains(url) { tabIndex = .wallet }
@@ -201,7 +208,6 @@ class TabBarView : UIView
         else if WebPageConstants.URL_MAIN.contains(url) { tabIndex = .home }
         else if WebPageConstants.URL_FINANCE_MAIN.contains(url) { tabIndex = .finance }
         else { tabIndex = .home }
-        
         
         /// 현 페이지 초기화합니다.
         if let tarber               = TabBarView.tabbar,

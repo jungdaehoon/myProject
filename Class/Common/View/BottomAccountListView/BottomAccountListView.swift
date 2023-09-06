@@ -53,6 +53,8 @@ class BottomAccountListView: BaseView {
     @IBOutlet weak var tableView            : UITableView!
     /// 계좌 리스트 최대 높이 입니다.
     @IBOutlet weak var tableViewHeight      : NSLayoutConstraint!
+    /// 계좌 리스트 하단 포지션 입니다.
+    @IBOutlet weak var tableViewBottom      : NSLayoutConstraint!
     /// 계좌 선택 인덱스 입니다.
     var accountSeleted                      : Int = 0
     
@@ -105,7 +107,7 @@ class BottomAccountListView: BaseView {
         } receiveValue: { model in
             if let _ = model {
                 /// 바코드 결제 위치로 선택 배경을 이동합니다.
-                UIView.animate(withDuration:0.3, delay: 0.1, options: .curveEaseOut) { [self] in
+                UIView.animate(withDuration:0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .curveEaseOut) { [self] in
                     let cell = self.viewModel.getAccountsHeight(model: model)
                     self.tableViewHeight.constant       = cell
                     self.accountListViewBottom.constant = ACCOUNT_DEFAULT_BOTTOM
@@ -150,7 +152,18 @@ class BottomAccountListView: BaseView {
             _ = base!.subviews.map({
                 if $0 is BottomAccountListView
                 {
-                    $0.removeFromSuperview()
+                    let view = $0 as! BottomAccountListView
+                    /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                    UIView.animate(withDuration:0.3, delay: 0.1, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) { [self] in
+                        self.tableViewHeight.constant       = 0
+                        self.accountListViewBottom.constant = 0
+                        self.tableViewBottom.constant       = 0
+                        self.alpha = 0.0
+                        self.layoutIfNeeded()
+                    } completion: { _ in
+                        view.removeFromSuperview()
+                    }
+                    
                 }
             })
         }

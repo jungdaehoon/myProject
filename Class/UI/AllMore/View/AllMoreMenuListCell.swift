@@ -471,7 +471,6 @@ extension AllMoreMenuListCell
                     return
                 }
             }
-             
             /// 약관 동의 팝업을 오픈 합니다.
             let terms = [TERMS_INFO.init(title: "제로페이 서비스 이용약관", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z001"),
                          TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z002")]

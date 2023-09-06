@@ -206,7 +206,7 @@ class AppStartEventPopup: BaseView {
                         self.viewModel.getEventImageDisplaySize(image: eventImage, displaySize: self.bottomPopupImage.frame.size).sink { value in
                             if let resize = value {
                                 /// 바코드 결제 위치로 선택 배경을 이동합니다.
-                                UIView.animate(withDuration:0.3, delay: 0.0, options: .curveEaseOut) { [self] in
+                                UIView.animate(withDuration:0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .curveEaseOut) { [self] in
                                     self.bottomPopupImageHeight.constant = resize.height
                                     self.layoutIfNeeded()
                                 } completion: { _ in
@@ -250,7 +250,16 @@ class AppStartEventPopup: BaseView {
             _ = base!.subviews.map({
                 if $0 is AppStartEventPopup
                 {
-                    $0.removeFromSuperview()
+                    let view = $0 as! AppStartEventPopup
+                    /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                    UIView.animate(withDuration:0.3, delay: 0.0, options: .curveEaseOut) { [self] in
+                        self.bottomPopupImageHeight.constant = 0
+                        self.alpha = 0.0
+                        self.layoutIfNeeded()
+                    } completion: { _ in
+                        view.removeFromSuperview()
+                    }
+                    
                 }
             })
         }

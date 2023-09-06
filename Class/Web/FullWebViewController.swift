@@ -567,7 +567,7 @@ extension FullWebViewController {
                                 switch qrCodeCB
                                 {
                                     /// QRCdoe 읽기 실패 입니다.
-                                case .qr_fail,.cb_fail,.close :
+                                    case .qr_fail,.cb_fail,.close :
                                         /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
                                         params.updateValue("N", forKey: "result")
                                         params.updateValue("", forKey: "qrCode")
@@ -579,8 +579,6 @@ extension FullWebViewController {
                                                 {
                                                     scricptCB += "('\(cbParam)')"
                                                     self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                        Slog(anyData as Any)
-                                                        Slog(error as Any)
                                                     }
                                                 }
                                             }catch{
@@ -602,8 +600,6 @@ extension FullWebViewController {
                                                     scricptCB += "('\(cbParam)')"
                                                     Slog("QrCode Success : \(scricptCB)")
                                                     self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                        Slog(anyData as Any)
-                                                        Slog(error as Any)
                                                     }
                                                 }
                                             }catch{
@@ -617,8 +613,6 @@ extension FullWebViewController {
                                         /// 제로페이에 QRCode 데이터를 전송 합니다.
                                         DispatchQueue.main.async {
                                             self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
-                                                Slog(anyData as Any)
-                                                Slog(error as Any)
                                             }
                                             OKZeroPayQRCaptureView().hide()
                                         }
@@ -642,8 +636,6 @@ extension FullWebViewController {
                                         {
                                             scricptCB += "('\(cbParam)')"
                                             self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                Slog(anyData as Any)
-                                                Slog(error as Any)
                                             }
                                         }
                                     }catch{

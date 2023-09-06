@@ -259,6 +259,8 @@ extension BaseWebViewController: WKNavigationDelegate
         LoadingView.default.show()
         /// 네트웤 가용가능 여부 체크 합니다.
         BaseViewModel.shared.isNetConnected = .checking
+        /// 세션 활성화 모드로 변경 합니다.
+        BaseViewModel.isSssionType          = BaseViewModel.isSssionType == .exitLogout ? .exitLogout : .refresh
     }
     
     

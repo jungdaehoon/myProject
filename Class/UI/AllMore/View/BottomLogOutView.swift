@@ -36,8 +36,7 @@ class BottomLogOutView: UIView {
             
         })
         alert?.addAlertBtn(btnTitleText: "확인", completion: { result in
-            /// 로그아웃 데이터 처리 합니다.
-            BaseViewModel.setLogoutData()            
+            BaseViewModel.isSssionType = .exitLogout
         })
         alert?.show()
         

@@ -33,7 +33,9 @@ class OKZeroPayTypeBottomView: BaseView {
 
     /// 타입 선택시 이벤트 입니다.
     var btnEvent                    : (( _ event : ZEROPAY_TYPE_BOTTOM_BTN ) -> Void)? = nil
-    
+    @IBOutlet weak var intoView     : UIView!
+    /// 최하단 위치 포지션 입니다.
+    @IBOutlet weak var safeBottom: NSLayoutConstraint!
     
     
     //MARK: - Init
@@ -72,8 +74,17 @@ class OKZeroPayTypeBottomView: BaseView {
      */
     func show() {
         if let base = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            self.intoView.alpha = 0.0
+            base.addSubview(self)
             DispatchQueue.main.async {
-                base.addSubview(self)
+                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                UIView.animate(withDuration:0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .curveEaseOut) { [self] in
+                    self.safeBottom.constant = 0
+                    self.intoView.alpha = 1.0
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                    
+                }
             }
         }
     }
@@ -92,7 +103,15 @@ class OKZeroPayTypeBottomView: BaseView {
             _ = base!.subviews.map({
                 if $0 is OKZeroPayTypeBottomView
                 {
-                    $0.removeFromSuperview()
+                    let view = $0 as! OKZeroPayTypeBottomView
+                    /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                    UIView.animate(withDuration:0.3, delay: 0.1,usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) { [self] in
+                        self.safeBottom.constant -= 320
+                        self.alpha = 0.0
+                        self.layoutIfNeeded()
+                    } completion: { _ in
+                        view.removeFromSuperview()
+                    }
                 }
             })
         }

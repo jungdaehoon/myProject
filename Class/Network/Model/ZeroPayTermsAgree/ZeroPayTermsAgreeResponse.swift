@@ -12,10 +12,10 @@ struct ZeroPayTermsAgreeResponse: BaseResponse {
     /// 세부 응답메세지 입니다.
     var msg                 : String?
         
-    /// 메인 데이터 입니다.
-    var _data        : String? { get { return  NC.S(data) } }
-    /// 메인 데이터 입니다.
-    var data        : String?
+    /// 약관 동의 요청 여부 입니다.
+    var _data        : Bool? { get { return  NC.B(data) } }
+    /// 약관 동의 요청 여부 입니다.
+    var data        : Bool?
 }
 
 

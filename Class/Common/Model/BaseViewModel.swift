@@ -62,7 +62,7 @@ enum APP_SESSION_TIME_CHECKING : Int {
     /// 세션 체크를 중단 합니다.
     case end            = 13
     /// 세션 체크를 강제 종료 합니다.
-    case exit           = 14
+    case exitLogout     = 14
 }
 
 /**
@@ -164,6 +164,10 @@ class BaseViewModel : NSObject {
     var reBankAuthResponse              : ReBankAuthResponse?
     /// App 백그라운드 내려 갈 경우 현 타임을 저장 합니다. 백그라운드에서 앱이 올라오는 시기에는 0 값으로 변경 됩니다.
     static var appBackgroundSaveTimer   : Int    = 0
+    /// App 백그라운드 내려 갈 경우 현 세션 체크 타임을 저장 합니다.
+    static var ingSessionSaveTimer      : Int    = 0
+    /// App 백그라운드 에서 올라올 경우 백그라운드 대기 타임 입니다.
+    static var backgroundOverTimer      : Int    = 0
     /// App 활성화 여부를 판단말 세션 체크 타입 입니다.
     static var isSssionType             : APP_SESSION_TIME_CHECKING = .wait
     
@@ -196,6 +200,8 @@ class BaseViewModel : NSObject {
         }
         /// 네트웤 가용가능 여부 체크 합니다.
         BaseViewModel.shared.isNetConnected = .checking
+        /// 세션 활성화 모드로 변경 합니다.
+        BaseViewModel.isSssionType          = BaseViewModel.isSssionType == .exitLogout ? .exitLogout : .refresh
         curCancellable = publisher()
             .handleEvents(receiveOutput: { received in
             }, receiveCancel: {
@@ -472,7 +478,7 @@ class BaseViewModel : NSObject {
     
     /**
      앱 활성화 여부를 체크 합니다. ( J.D.H VER : 2.0.0 )
-     - Description: 세션여부를 체크 하여 세션이 유지 상태인 경우 저장된 PUSH/Deep 링크 정보가 있다면 앱 실행중이 아니였다고 판단하여 앱 비활성으로 false 를 리턴 합니다. 앱 실행중에 세션 체크가 되어 세션이 비정상일 경우 로그아웃을 요청, 로그인 페이지로 이동 합니다.
+     - Description: 앱 로그인 상태에 맞춰 PUSH/DEEPLINK 정보를 체크하여  로그인 상태 여부를 리턴 합니다.
      - Date: 2023.07.18
      - Parameters:
         - inAppStartType : 앱 활성화 여부를 체크하는 타입 입니다.
@@ -485,47 +491,29 @@ class BaseViewModel : NSObject {
             /// 로그인 여부를 체크 합니다.
             if BaseViewModel.isLogin()
             {
-                /// 로그인 상태에서 세션이 유지되고 있는지를 체크 합니다.
-                self.isSessionEnabeld().sink { result in
-                    /// 요청 비정상 처리로 세션 유지 실패로 리턴 합니다.
-                    promise(.success(false))
-                    /// 로그아웃 요청 합니다.
-                    BaseViewModel.setLogoutData()
-                } receiveValue: { sessionSesponse in
-                    /// 앱 활성화 여부를 체크 합니다.
-                    var isEnabled = true
-                    /// 세션 유지가 정상인지를 체크 합니다.
-                    if let response = sessionSesponse,
-                       let code     = response.code,
-                       code         == "0000"
-                    {
-                        /// 활성화 여부 타입 입니다.
-                        switch inAppStartType
-                        {
-                            case .push_type:
-                                /// 저장된 PUSH 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
-                                if BaseViewModel.shared.savePushUrl.isValid {
-                                    /// 앱 비활성화 타입으로 변경 합니다.
-                                    isEnabled = false
-                                }
-                            case .deeplink_type:
-                                /// 저장된 DeepLink 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
-                                if BaseViewModel.shared.saveDeepLinkUrl.isValid{
-                                    /// 앱 비활성화 타입으로 변경 합니다.
-                                    isEnabled = false
-                                }
-                        }
-                    }
-                    else
-                    {
+                /// 활성화 여부 타입 입니다.
+                switch inAppStartType
+                {
+                case .push_type:
+                    /// 저장된 PUSH 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                    if BaseViewModel.shared.savePushUrl.isValid {
                         /// 앱 비활성화 타입으로 변경 합니다.
-                        isEnabled                    = false
-                        /// 로그아웃 요청 합니다.
-                        BaseViewModel.setLogoutData()
+                        promise(.success(false))
+                    } else {
+                        /// 앱 타입을 리턴 합니다.
+                        promise(.success(true))
                     }
-                    /// 앱 타입을 리턴 합니다.
-                    promise(.success(isEnabled))
-                }.store(in: &self.cancellableSet)
+                    
+                case .deeplink_type:
+                    /// 저장된 DeepLink 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                    if BaseViewModel.shared.saveDeepLinkUrl.isValid{
+                        /// 앱 비활성화 타입으로 변경 합니다.
+                        promise(.success(false))
+                    } else {
+                        /// 앱 타입을 리턴 합니다.
+                        promise(.success(true))
+                    }
+                }
             }
             else
             {
@@ -1366,6 +1354,8 @@ class BaseViewModel : NSObject {
      - Returns:Fasle
      */
     func setAntiDebuggingChecking(){
+        /// 취약점 점검인 경우 입니다.
+        if APP_INSPECTION { return }
         /// 안티디버깅 여부를 체크 합니다.
         if APP_ANTI_DEBUG == false { return }
         DispatchQueue.global(qos: .background).async {
@@ -1388,10 +1378,20 @@ class BaseViewModel : NSObject {
     }
     
     
+    static func getSessionMaxTime() -> Int{
+        /// 세션 맥스 타임을 체크 합니다.
+        var maxTime = APP_ING_SESSION_MAX_TIME
+        if let appStert = BaseViewModel.appStartResponse,
+           let data = appStert._data {
+            maxTime = data._sessionExpireTime!
+        }
+        return maxTime
+    }
+    
     /**
      앱 활성화 유지 가능 타입을 체크  합니다. ( J.D.H VER : 2.0.2 )
-     - Description: 앱이 활성화 된 상태로 계속 사용중인 경우에만 체크 되도록 합니다. 백그라운드로 앱이 내려 간다면 "appBackgroundSaveTimer" 값이 0보다 크게  설정 되며 세션 체크 값은 "exit" 로 모드가 변경 됩니다. "exit" 모드는 세션 체크를 강제 종료 합니다.
-     - Date: 2023.08.11
+     - Description: 앱이 활성화 된 상태로 계속 사용중인 경우에만 체크 되도록 합니다. 백그라운드로 앱이 내려 간다면 "appBackgroundSaveTimer" 값이 0보다 크게  설정 되며 세션 체크 값은 "wait" 로 모드가 변경 됩니다. "exitLogout" 모드는 세션 체크를 강제 종료 합니다.
+     - Date: 2023.09.06
      - Parameters:Fasle
      - Throws: False
      - DispatchQueue : True
@@ -1408,20 +1408,41 @@ class BaseViewModel : NSObject {
             while(true)
             {
                 Thread.sleep(forTimeInterval: 1.0)
+                /// 세션 체크를 대기 합니다.
+                if BaseViewModel.isSssionType == .wait { continue }
+                Slog("isAppSessionEnabled Ctn : \(enabledCtn)")
                 /// 세션 체크를 강제 종료 합니다.
-                if BaseViewModel.isSssionType == .exit { break }
-                /// 세션 체크 여부를 초기화 모드가 올경우 enabledCtn 값을 0 으로 초기화 합니다.
-                if BaseViewModel.isSssionType == .refresh { enabledCtn = 0}
+                if BaseViewModel.isSssionType == .exitLogout {
+                    break
+                }
+                /// 세션 체크 여부를 초기화 모드가 올 경우 enabledCtn 값을 0 으로 초기화 합니다.
+                if BaseViewModel.isSssionType == .refresh {
+                    BaseViewModel.isSssionType = .start
+                    enabledCtn = 0
+                }
+                                
                 /// 최대 세션 타임 경우 세션 체크를 중단 합니다.
-                if enabledCtn > APP_ING_SESSION_MAX_TIME
+                if enabledCtn > BaseViewModel.getSessionMaxTime()
                 {
                     /// 세션 체크 여부를 .end 모드로 변경 합니다.
                     BaseViewModel.isSssionType = .end
                     break
                 }
                 /// 세션 유지 중 값으로 변경 합니다.
-                else { BaseViewModel.isSssionType = .ing }
-                enabledCtn += 1
+                else
+                {
+                    if BaseViewModel.isSssionType == .start { BaseViewModel.isSssionType = .ing }
+                }
+                /// 앱이 백그라운드로 내려 갔다면 0 값이 아니므로 체크 하지 않도록 합니다.
+                if BaseViewModel.appBackgroundSaveTimer == 0 {enabledCtn += 1}
+                /// 백그라운드에서 올라 오는 경우 백그라운드 대기 타임을을 추가 합니다.
+                if BaseViewModel.backgroundOverTimer > 0
+                {
+                    enabledCtn += BaseViewModel.backgroundOverTimer
+                    BaseViewModel.backgroundOverTimer = 0
+                }
+                /// 앱 백그라운드 내려갔다 올라올 경우  진행 중인 타임을 추가 할려고 저장 합니다.
+                BaseViewModel.ingSessionSaveTimer = enabledCtn
             }
             
             DispatchQueue.main.async {
@@ -1518,6 +1539,8 @@ class BaseViewModel : NSObject {
     static func setLogoutData() {
         /// 현 로그인 페이지 경우에는 로그아웃 처리 하지 않습니다.
         if BaseViewModel.isLoginPageDisplay { return }
+        /// 로그인 타입을 False 변경 합니다.
+        BaseViewModel.loginResponse!.islogin = false
         /// 로그아웃을 요청 합니다.
         BaseViewModel.shared.setLogOut().sink(receiveCompletion: { result in
             /// 탭바 연결된 webView 를 전부 초기화 합니다..
@@ -1530,7 +1553,7 @@ class BaseViewModel : NSObject {
                 /// 탭바 연결된 webView 를 전부 초기화 합니다..
                 TabBarView.removeTabContrllersWebView()
                 /// 재로그인 요청 합니다.
-                BaseViewModel.shared.reLogin             = true
+                BaseViewModel.shared.reLogin         = true
             }
         }).store(in: &BaseViewModel.shared.cancellableSet)
     }

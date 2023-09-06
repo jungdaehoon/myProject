@@ -266,6 +266,8 @@ class OKZeroPayView: UIView {
         
         /// 제로페이 화면 데이터를 로드 합니다.
         OKZeroViewModel.zeroPayShared!.okZeroPayReload = true
+        /// 코드 풀 디스플레이 뷰어에 제로페이 뷰어를 연결 합니다.
+        self.codeFullDisplayView.zeroPayView = self
     }
     
     
@@ -644,7 +646,7 @@ class OKZeroPayView: UIView {
                 }
                 
                 /// QR결제 위치로 선택 배경을 이동 합니다.
-                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
                     self.detaileViewTop.constant        = 12.0
                     self.layoutIfNeeded()
                 } completion: { _ in
@@ -678,7 +680,7 @@ class OKZeroPayView: UIView {
         /// 디스플레이 정보를 초기화 합니다.
         self.codeFullDisplayView.releaseCodeView()
         /// QR결제 위치로 선택 배경을 이동 합니다.
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
             self.detaileViewTop.constant        = 355.0
             self.layoutIfNeeded()
         } completion: { _ in

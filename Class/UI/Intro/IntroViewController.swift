@@ -270,6 +270,11 @@ class IntroViewController: BaseViewController {
             {
                 controller.loginDisplayFirst     = true
             }
+            else
+            {
+                /// 세션 체크를 진행 합니다.
+                BaseViewModel.shared.isAppSessionEnabled()
+            }
             self.aniView!.stop()
             /// 현 페이지를 탭바 컨트롤로 변경 합니다.
             self.replaceController(viewController: controller, animated: false) {

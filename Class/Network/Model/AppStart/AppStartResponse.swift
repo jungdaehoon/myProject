@@ -85,6 +85,9 @@ struct menudata : Codable
     var _versionInfo        : versionInfo? { get { return versionInfo != nil ? versionInfo : nil } }
     /// 이벤트 정보를 받습니다.
     var _eventInfo          : [eventInfo]? { get { return eventInfo != nil ? eventInfo : [] } }
+    /// 세션 타임 정보 입니다.
+    var _sessionExpireTime  : Int?     { get { return NC.I(sessionExpireTime) == 0 ? APP_ING_SESSION_MAX_TIME : NC.I(sessionExpireTime) } }
+    
     
     /// 메뉴 리스트 정보를 받습니다.
     var menu_list          : [menu_list]?
@@ -92,6 +95,8 @@ struct menudata : Codable
     var versionInfo        : versionInfo?
     /// 이벤트 정보를 받습니다.
     var eventInfo          : [eventInfo]?
+    /// 세션 타임 정보 입니다.
+    var sessionExpireTime  : Int?
 }
 
 

@@ -39,21 +39,26 @@ struct TERMS_INFO {
  - Date: 2023.03.15
  */
 class BottomTermsView: BaseView {
-
-    
-    
     /// 버튼 팝업 종료 이벤트를 넘깁니다.
     var completion                      : (( _ value : BTN_ACTION ) -> Void )? = nil
     /// 연결되는 타켓 뷰 컨트롤 입니다.
     var target                          : UIViewController?
+    /// 메인 디스플레이 뷰어 입니다.
+    @IBOutlet weak var mainView         : UIView!
     /// 약관 타이틀 문구 입니다.
     @IBOutlet weak var titleText        : UILabel!
     /// 약관들 문구 디스플레이 뷰어 입니다.
     @IBOutlet weak var tableView        : UITableView!
     /// 약관들 문구 디스플레이 뷰어 높이 입니다.
     @IBOutlet weak var tableViewHeight  : NSLayoutConstraint!
+    /// 약관 동의 팝업 전체 높이 입니다.
+    @IBOutlet weak var termsHeight      : NSLayoutConstraint!
+    /// 약관 동의 팝업 하단 포지션 입니다.
+    @IBOutlet weak var termsBottom      : NSLayoutConstraint!
     /// 동의 버튼 입니다.
     @IBOutlet weak var successBtn       : UIButton!
+    /// 배경 컬러 버튼 입니다.
+    @IBOutlet weak var bgColorBtn       : UIButton!
     /// 약관들 문구를 받습니다.
     var termsList                       : [TERMS_INFO]    =   []
     /// 체크 박스 UI  활성화 여부 입니다.
@@ -81,9 +86,13 @@ class BottomTermsView: BaseView {
     func initBottomTermsView(){
         /// Xib 연결 합니다.
         self.commonInit()
+        /// 배경 애니 효과시 크기를 미리 설정하기 위해 합니다.
+        self.bgColorBtn.frame           = UIScreen.main.bounds
+        /// 애니 효과를 위해 기본. 사이즈를 미리 설정 합니다.
+        self.mainView.frame.size.width  = UIScreen.main.bounds.size.width
         /// 메뉴 리스트 정보 입니다.
-        tableView.dataSource                = self
-        tableView.delegate                  = self
+        tableView.dataSource            = self
+        tableView.delegate              = self
         tableView.register(UINib(nibName: "BottomTermsTableViewCell", bundle: nil), forCellReuseIdentifier: "BottomTermsTableViewCell")
         /// 해더 간격을 0 으로 설정 합니다.
         if #available(iOS 15, *) { tableView.sectionHeaderTopPadding = 0 }
@@ -132,7 +141,16 @@ class BottomTermsView: BaseView {
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
             DispatchQueue.main.async {
+                self.alpha = 0.0
                 base.addSubview(self)
+                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                UIView.animate(withDuration:0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .curveEaseOut) { [self] in
+                    self.termsBottom.constant = 0
+                    self.alpha = 1.0
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                    
+                }
             }
         }
     }
@@ -151,7 +169,15 @@ class BottomTermsView: BaseView {
             _ = base!.subviews.map({
                 if $0 is BottomTermsView
                 {
-                    $0.removeFromSuperview()
+                    let view = $0 as! BottomTermsView
+                    /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                    UIView.animate(withDuration:0.3, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: .curveEaseOut) { [self] in
+                        self.termsBottom.constant -= self.termsHeight.constant
+                        self.alpha = 0.0
+                        self.layoutIfNeeded()
+                    } completion: { _ in
+                        view.removeFromSuperview()
+                    }
                 }
             })
         }        
