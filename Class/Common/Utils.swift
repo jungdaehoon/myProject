@@ -69,8 +69,6 @@ let APP_ANTI_DEBUG              = Bundle.main.infoDictionary?["ANTI_DEBUG"] as? 
 let APP_GA_TRACKING_KEY         = Bundle.main.infoDictionary?["GAI_TRACKING_KEY"] as? String ?? ""
 /// GA 트래킹 디버깅 여부 값 입니다.
 let APP_GA_DEBUG_ENABLED        = Bundle.main.infoDictionary?["GA_DEBUG"] as? String ?? "" == "YES" ? true : false
-/// 앱 세션 유지 가능한 최대 MAX 타임 입니다.
-let APP_ING_SESSION_MAX_TIME    = 60 * 60
 
 
 class Utils {

@@ -36,7 +36,15 @@ class BottomLogOutView: UIView {
             
         })
         alert?.addAlertBtn(btnTitleText: "확인", completion: { result in
-            BaseViewModel.isSssionType = .exitLogout
+            if BaseViewModel.getSessionMaxTime() > 0
+            {
+                BaseViewModel.isSssionType = .exitLogout
+            }
+            else
+            {
+                BaseViewModel.setLogoutData()
+            }
+            
         })
         alert?.show()
         

@@ -1144,8 +1144,15 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }
             
-            /// 세션 체크를 강제 종료하며 로그아웃이 호출 됩니다.
-            BaseViewModel.isSssionType = .exitLogout
+            if BaseViewModel.getSessionMaxTime() > 0
+            {
+                /// 세션 체크를 강제 종료하며 로그아웃이 호출 됩니다.
+                BaseViewModel.isSssionType = .exitLogout
+            }
+            else
+            {
+                BaseViewModel.setLogoutData()
+            }
         }
     }
     
@@ -1546,8 +1553,16 @@ class WebMessagCallBackHandler : NSObject  {
      - Returns:False
      */
     func setLogOut( _ body : [Any?] ){
-        /// 세션 체크를 강제 종료하며 로그아웃이 호출 됩니다.
-        BaseViewModel.isSssionType = .exitLogout
+        if BaseViewModel.getSessionMaxTime() > 0
+        {
+            /// 세션 체크를 강제 종료하며 로그아웃이 호출 됩니다.
+            BaseViewModel.isSssionType = .exitLogout
+        }
+        else
+        {
+            BaseViewModel.setLogoutData()
+        }
+        
     }
     
     

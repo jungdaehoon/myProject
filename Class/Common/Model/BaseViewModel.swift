@@ -488,37 +488,92 @@ class BaseViewModel : NSObject {
      */
     func isAppEnabled( inAppStartType : IN_APP_START_TYPE ) -> Future<Bool, Never> {
         return Future<Bool, Never> { promise in
-            /// 로그인 여부를 체크 합니다.
-            if BaseViewModel.isLogin()
+            if BaseViewModel.getSessionMaxTime() > 0
             {
-                /// 활성화 여부 타입 입니다.
-                switch inAppStartType
+                /// 로그인 여부를 체크 합니다.
+                if BaseViewModel.isLogin()
                 {
-                case .push_type:
-                    /// 저장된 PUSH 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
-                    if BaseViewModel.shared.savePushUrl.isValid {
-                        /// 앱 비활성화 타입으로 변경 합니다.
-                        promise(.success(false))
-                    } else {
-                        /// 앱 타입을 리턴 합니다.
-                        promise(.success(true))
+                    /// 활성화 여부 타입 입니다.
+                    switch inAppStartType
+                    {
+                    case .push_type:
+                        /// 저장된 PUSH 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                        if BaseViewModel.shared.savePushUrl.isValid {
+                            /// 앱 비활성화 타입으로 변경 합니다.
+                            promise(.success(false))
+                        } else {
+                            /// 앱 타입을 리턴 합니다.
+                            promise(.success(true))
+                        }
+                    case .deeplink_type:
+                        /// 저장된 DeepLink 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                        if BaseViewModel.shared.saveDeepLinkUrl.isValid{
+                            /// 앱 비활성화 타입으로 변경 합니다.
+                            promise(.success(false))
+                        } else {
+                            /// 앱 타입을 리턴 합니다.
+                            promise(.success(true))
+                        }
                     }
-                    
-                case .deeplink_type:
-                    /// 저장된 DeepLink 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
-                    if BaseViewModel.shared.saveDeepLinkUrl.isValid{
-                        /// 앱 비활성화 타입으로 변경 합니다.
-                        promise(.success(false))
-                    } else {
-                        /// 앱 타입을 리턴 합니다.
-                        promise(.success(true))
-                    }
+                }
+                else
+                {
+                    /// 비로그인으로 앱 비활성화 타입으로 리턴 합니다.
+                    promise(.success(false))
                 }
             }
             else
             {
-                /// 비로그인으로 앱 비활성화 타입으로 리턴 합니다.
-                promise(.success(false))
+                /// 로그인 여부를 체크 합니다.
+                if BaseViewModel.isLogin()
+                {
+                    /// 로그인 상태에서 세션이 유지되고 있는지를 체크 합니다.
+                    self.isSessionEnabeld().sink { result in
+                        /// 요청 비정상 처리로 세션 유지 실패로 리턴 합니다.
+                        promise(.success(false))
+                        /// 로그아웃 요청 합니다.
+                        BaseViewModel.setLogoutData()
+                    } receiveValue: { sessionSesponse in
+                        /// 앱 활성화 여부를 체크 합니다.
+                        var isEnabled = true
+                        /// 세션 유지가 정상인지를 체크 합니다.
+                        if let response = sessionSesponse,
+                           let code     = response.code,
+                           code         == "0000"
+                        {
+                            /// 활성화 여부 타입 입니다.
+                            switch inAppStartType
+                            {
+                                case .push_type:
+                                    /// 저장된 PUSH 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                                    if BaseViewModel.shared.savePushUrl.isValid {
+                                        /// 앱 비활성화 타입으로 변경 합니다.
+                                        isEnabled = false
+                                    }
+                                case .deeplink_type:
+                                    /// 저장된 DeepLink 데이터가 있는 경우 앱 비활성화 상태로 판단 합니다.
+                                    if BaseViewModel.shared.saveDeepLinkUrl.isValid{
+                                        /// 앱 비활성화 타입으로 변경 합니다.
+                                        isEnabled = false
+                                    }
+                            }
+                        }
+                        else
+                        {
+                            /// 앱 비활성화 타입으로 변경 합니다.
+                            isEnabled                    = false
+                            /// 로그아웃 요청 합니다.
+                            BaseViewModel.setLogoutData()
+                        }
+                        /// 앱 타입을 리턴 합니다.
+                        promise(.success(isEnabled))
+                    }.store(in: &self.cancellableSet)
+                }
+                else
+                {
+                    /// 비로그인으로 앱 비활성화 타입으로 리턴 합니다.
+                    promise(.success(false))
+                }
             }
         }
     }
@@ -854,11 +909,6 @@ class BaseViewModel : NSObject {
     {
         return Future<Bool, Never> { promise in
             let locationManager = CLLocationManager()
-            guard CLLocationManager.locationServicesEnabled() else {
-                // 시스템 설정으로 유도하는 커스텀 얼럿
-                promise(.success(false))
-                return
-            }
             let authorizationStatus: CLAuthorizationStatus
             // 앱의 권한 상태 가져오는 코드 (iOS 버전에 따라 분기처리)
             if #available(iOS 14.0, *) {
@@ -1379,13 +1429,11 @@ class BaseViewModel : NSObject {
     
     
     static func getSessionMaxTime() -> Int{
-        /// 세션 맥스 타임을 체크 합니다.
-        var maxTime = APP_ING_SESSION_MAX_TIME
         if let appStert = BaseViewModel.appStartResponse,
            let data = appStert._data {
-            maxTime = data._sessionExpireTime!
+            return data._sessionExpireTime!
         }
-        return maxTime
+        return -1
     }
     
     /**
@@ -1398,6 +1446,8 @@ class BaseViewModel : NSObject {
      - Returns:Fasle
      */
     func isAppSessionEnabled(){
+        /// 세션 맥스 값이 0보다 작을 경우 세션 체크를 하지 않습니다.
+        if BaseViewModel.getSessionMaxTime() < 0 { return }
         /// 세션 활성화 여부를 체크 중인 경우는 추가 체크를 요청하지 않습니다.
         if BaseViewModel.isSssionType == .start,
            BaseViewModel.isSssionType == .ing { return }

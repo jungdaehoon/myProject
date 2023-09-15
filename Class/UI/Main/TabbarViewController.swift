@@ -274,10 +274,13 @@ class TabbarViewController: UITabBarController {
      */
     @objc func applicationBackground(){
         BecomeActiveView().show()
-        BaseViewModel.appBackgroundSaveTimer = Int(Date().timeIntervalSince1970)
-        /// 세션 체크를 대기 합니다.
-        BaseViewModel.isSssionType = .wait
-        Slog("Date().timeIntervalSince1970 Int : \(Int(Date().timeIntervalSince1970))")
+        if BaseViewModel.getSessionMaxTime() > 0
+        {
+            BaseViewModel.appBackgroundSaveTimer = Int(Date().timeIntervalSince1970)
+            /// 세션 체크를 대기 합니다.
+            BaseViewModel.isSssionType = .wait
+            Slog("Date().timeIntervalSince1970 Int : \(Int(Date().timeIntervalSince1970))")
+        }        
     }
     
     
@@ -289,34 +292,38 @@ class TabbarViewController: UITabBarController {
      */
     @objc func applicationForeground(){
         BecomeActiveView().hide()
-        if BaseViewModel.appBackgroundSaveTimer > 0
+        if BaseViewModel.getSessionMaxTime() > 0
         {
-            /// 백그라운드 대기했던 오버 타임 입니다.
-            BaseViewModel.backgroundOverTimer = Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer
-            /// 총 오버 타임을 추가 합니다.
-            let overTime = BaseViewModel.backgroundOverTimer + BaseViewModel.ingSessionSaveTimer
-            /// 최대 백스 타임보다 클경우 로그아웃 진행 합니다.
-            if overTime > BaseViewModel.getSessionMaxTime()
+            if BaseViewModel.appBackgroundSaveTimer > 0
             {
-                /// PUSH/DEEPLINK 들어올 경우 로그아웃 여부를 체크하기 위해 false 값을 선언 합니다.
-                BaseViewModel.loginResponse!.islogin = false
-                BaseViewModel.backgroundOverTimer    = 0
-                BaseViewModel.appBackgroundSaveTimer = 0
-                BaseViewModel.ingSessionSaveTimer    = 0
-                BaseViewModel.isSssionType           = .exitLogout
-                Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
-            }
-            else
-            {
-                BaseViewModel.appBackgroundSaveTimer = 0
-                BaseViewModel.ingSessionSaveTimer    = 0
-                /// 세션 체크를 다시 시작 합니다.
-                BaseViewModel.isSssionType           = .start
+                /// 백그라운드 대기했던 오버 타임 입니다.
+                BaseViewModel.backgroundOverTimer = Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer
+                /// 총 오버 타임을 추가 합니다.
+                let overTime = BaseViewModel.backgroundOverTimer + BaseViewModel.ingSessionSaveTimer
+                /// 최대 백스 타임보다 클경우 로그아웃 진행 합니다.
+                if overTime > BaseViewModel.getSessionMaxTime()
+                {
+                    /// PUSH/DEEPLINK 들어올 경우 로그아웃 여부를 체크하기 위해 false 값을 선언 합니다.
+                    BaseViewModel.loginResponse!.islogin = false
+                    BaseViewModel.backgroundOverTimer    = 0
+                    BaseViewModel.appBackgroundSaveTimer = 0
+                    BaseViewModel.ingSessionSaveTimer    = 0
+                    BaseViewModel.isSssionType           = .exitLogout
+                    Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
+                }
+                else
+                {
+                    BaseViewModel.appBackgroundSaveTimer = 0
+                    BaseViewModel.ingSessionSaveTimer    = 0
+                    /// 세션 체크를 다시 시작 합니다.
+                    BaseViewModel.isSssionType           = .start
+                    
+                }
+                Slog("Ing Time : \(overTime)")
                 
             }
-            Slog("Ing Time : \(overTime)")
-            
         }
+        
     }
 }
 
