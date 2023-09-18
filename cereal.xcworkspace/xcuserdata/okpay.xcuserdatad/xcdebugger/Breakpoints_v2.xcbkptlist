@@ -64,6 +64,21 @@
                   endingLineNumber = "1458"
                   offsetFromSymbolStart = "332">
                </Location>
+               <Location
+                  uuid = "C821104A-53B7-495D-B522-0CC55D352663 - afd543cc5ca9ee6d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of cereal.BaseViewModel.isAppSessionEnabled() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1455"
+                  endingLineNumber = "1455"
+                  offsetFromSymbolStart = "288">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -757,6 +772,21 @@
                   endingLineNumber = "531"
                   offsetFromSymbolStart = "176">
                </Location>
+               <Location
+                  uuid = "B32133A1-E9D7-4446-8ABA-2BB402BF919E - deae22ad72007676"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;Swift.Bool, Swift.Never&gt;) -&gt; ()) -&gt; () in cereal.BaseViewModel.isAppEnabled(inAppStartType: cereal.IN_APP_START_TYPE) -&gt; Combine.Future&lt;Swift.Bool, Swift.Never&gt;"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "531"
+                  endingLineNumber = "531"
+                  offsetFromSymbolStart = "208">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -884,6 +914,159 @@
                   startingLineNumber = "540"
                   endingLineNumber = "540"
                   offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Common/Model/BaseViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1432"
+            endingLineNumber = "1432"
+            landmarkName = "getSessionMaxTime()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - dd93f6de97c30dc1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of cereal.TabbarViewController.applicationBackground() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - cba1c1418dcd9eea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of cereal.TabbarViewController.applicationForeground() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - cba1c1418dcd9eea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of cereal.TabbarViewController.applicationForeground() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "356">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - 8e5b3bc95fa789b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.didReceiveMessage(message: __C.WKScriptMessage) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "720">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - 8330c38743955b9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.WebMessagCallBackHandler.setLoginDisplay() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - d92fb73bfb4605cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.String) -&gt; () in cereal.BottomLogOutView.btn_action(Any) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - deae22ad7203c253"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;Swift.Bool, Swift.Never&gt;) -&gt; ()) -&gt; () in cereal.BaseViewModel.isAppEnabled(inAppStartType: cereal.IN_APP_START_TYPE) -&gt; Combine.Future&lt;Swift.Bool, Swift.Never&gt;"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - a1787e848c6a54e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in cereal.BaseViewModel.isAppSessionEnabled() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "708">
+               </Location>
+               <Location
+                  uuid = "F93A71AE-7D05-418E-BB1B-D1E538DA7C6D - afd543cc5ca9d164"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of cereal.BaseViewModel.isAppSessionEnabled() -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1432"
+                  endingLineNumber = "1432"
+                  offsetFromSymbolStart = "216">
                </Location>
             </Locations>
          </BreakpointContent>

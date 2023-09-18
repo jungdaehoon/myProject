@@ -125,9 +125,9 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
-    /** 
+    /**
      웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
-     - Description : hybridscript WebAPP 인터페이스 정보를 받아 처리 합니다.
+     - Description: hybridscript WebAPP 인터페이스 정보를 받아 처리 합니다.
      - Date: 2023.03.28
      - Parameters:
         - message : 스크립트 메세지 정보를 받습니다.

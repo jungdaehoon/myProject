@@ -899,7 +899,7 @@ class BaseViewModel : NSObject {
     
     
     /**
-     앱 카메라 접근 허용 여부를 요청 합니다. ( J.D.H VER : 2.0.0 )
+     위치 서비스 접근권한 요청 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.29
      - Throws: False
      - Returns:
