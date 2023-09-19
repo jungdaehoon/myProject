@@ -88,12 +88,23 @@
                                     <rect key="frame" x="4" y="4" width="216" height="216"/>
                                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-2I-G7y">
+                                    <rect key="frame" x="4" y="4" width="216" height="216"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <connections>
+                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="InV-iR-613"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="Wbf-2I-G7y" firstAttribute="top" secondItem="oUe-Zz-bBA" secondAttribute="top" constant="4" id="Gdy-Xj-E9g"/>
                                 <constraint firstAttribute="height" constant="224" id="KJk-Xs-VNZ"/>
                                 <constraint firstAttribute="bottom" secondItem="Cdn-V0-lkk" secondAttribute="bottom" constant="4" id="KNB-Rb-oHU"/>
                                 <constraint firstItem="Cdn-V0-lkk" firstAttribute="leading" secondItem="oUe-Zz-bBA" secondAttribute="leading" constant="4" id="Vdp-gg-nff"/>
+                                <constraint firstAttribute="trailing" secondItem="Wbf-2I-G7y" secondAttribute="trailing" constant="4" id="Vvl-vT-Ss9"/>
+                                <constraint firstItem="Wbf-2I-G7y" firstAttribute="leading" secondItem="oUe-Zz-bBA" secondAttribute="leading" constant="4" id="YnJ-NQ-EwD"/>
+                                <constraint firstAttribute="bottom" secondItem="Wbf-2I-G7y" secondAttribute="bottom" constant="4" id="d9c-jh-Izs"/>
                                 <constraint firstItem="Cdn-V0-lkk" firstAttribute="top" secondItem="oUe-Zz-bBA" secondAttribute="top" constant="4" id="hTb-IT-xQa"/>
                                 <constraint firstAttribute="trailing" secondItem="Cdn-V0-lkk" secondAttribute="trailing" constant="4" id="ndQ-5j-0OW"/>
                                 <constraint firstAttribute="width" constant="224" id="qAu-Si-jOp"/>
@@ -188,14 +199,25 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRN-BU-gwZ">
+                                    <rect key="frame" x="4" y="4" width="496" height="148"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <connections>
+                                        <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="kjN-Xp-BRV"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="xWn-O3-fLU" secondAttribute="trailing" constant="4" id="0qt-1W-rWW"/>
                                 <constraint firstAttribute="height" constant="156" id="6f6-JY-AdN"/>
+                                <constraint firstItem="nRN-BU-gwZ" firstAttribute="top" secondItem="aCX-cF-ejp" secondAttribute="top" constant="4" id="M6S-SN-vDg"/>
+                                <constraint firstAttribute="bottom" secondItem="nRN-BU-gwZ" secondAttribute="bottom" constant="4" id="Psg-Tp-VwZ"/>
+                                <constraint firstItem="nRN-BU-gwZ" firstAttribute="leading" secondItem="aCX-cF-ejp" secondAttribute="leading" constant="4" id="Q4X-Nk-Pad"/>
                                 <constraint firstAttribute="bottom" secondItem="xWn-O3-fLU" secondAttribute="bottom" constant="4" id="aD6-nM-sdN"/>
                                 <constraint firstItem="xWn-O3-fLU" firstAttribute="top" secondItem="aCX-cF-ejp" secondAttribute="top" constant="4" id="ggJ-L7-t16"/>
                                 <constraint firstItem="xWn-O3-fLU" firstAttribute="leading" secondItem="aCX-cF-ejp" secondAttribute="leading" constant="4" id="lXZ-Ub-TXD"/>
+                                <constraint firstAttribute="trailing" secondItem="nRN-BU-gwZ" secondAttribute="trailing" constant="4" id="qLj-K2-e8C"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">

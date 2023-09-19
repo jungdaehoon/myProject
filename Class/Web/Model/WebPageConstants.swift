@@ -60,7 +60,7 @@ class WebPageConstants {
     /// 재로페이 상품권 환불웹뷰 입니다.
     static let URL_ZERO_PAY_PURCHASE_CANCEL     = baseURL + "/zeropay/giftcard/purchase/cancel.do"
     /// 재로페이 간편결제 약관동의 페이지 입니다.
-    static let URL_ZERO_PAY_AGREEMENT           = baseURL + "/zeropay/qr/agreement"
+    static let URL_ZERO_PAY_AGREEMENT           = baseURL + "/popup/termsView.do"
     /// 재로페이 간편결제 QRCode/BarCode 사용요청 전 거래 인증 체크용 키패드 웹뷰 입니다.
     static let URL_ZERO_PAY_QR_KEYPAD_SHOW      = baseURL + "/zeropay/qr/barcode"
     /// 재로페이 간편결제 QRCode 스캔 결제 요청 입니다.
@@ -81,4 +81,19 @@ class WebPageConstants {
     static let URL_MARKET_HISTORY               = baseURL + "/myp/mypGifticonList.do?tab=myTab"
         
     
+    /**
+     도메인 체크하여 URL 정보에 도메인을 추가하여 리턴 합니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.08.28
+     - Parameters:
+        - url : 체크 할 URL 정보 입니다.
+     - Returns:False
+     */
+    static func getDomainURL( _ url : String ) -> String {
+        if url.contains("https") ||
+           url.contains("http")
+        {
+            return url
+        }
+        return WebPageConstants.baseURL + url
+    }
 }

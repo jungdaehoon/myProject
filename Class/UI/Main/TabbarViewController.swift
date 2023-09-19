@@ -113,7 +113,7 @@ class TabbarViewController: UITabBarController {
                 if success
                 {
                     /// 재로그인 요청을 비활성화 합니다.
-                    BaseViewModel.shared.reLogin = false
+                    BaseViewModel.shared.reLogin = false                    
                     /// 메인 홈으로 이동 합니다.
                     TabBarView.setReloadSeleted(pageIndex: 2)
                 }
@@ -137,7 +137,7 @@ class TabbarViewController: UITabBarController {
                     /// 진행중인 탭 인덱스를 초기화 합니다.
                     self.setIngTabToRootController()
                     /// 탭 화면을 홈으로 이동하며 DeepLink 연동 페이지로 이동합니다.
-                    self.setSelectedIndex(.home, seletedItem: url)
+                    self.setSelectedIndex(.home, seletedItem: WebPageConstants.getDomainURL(url))
                     /// 딥링크 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.deepLinkUrl = ""
                 }
@@ -169,7 +169,7 @@ class TabbarViewController: UITabBarController {
                     /// 진행중인 탭 인덱스를 초기화 합니다.
                     self.setIngTabToRootController()
                     /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.baseURL + url)
+                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(url))
                     /// PUSH 에서 받은 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.pushUrl = ""
                 }
@@ -274,10 +274,13 @@ class TabbarViewController: UITabBarController {
      */
     @objc func applicationBackground(){
         BecomeActiveView().show()
-        /*
-        BaseViewModel.appBackgroundSaveTimer = Int(Date().timeIntervalSince1970)
-        Slog("Date().timeIntervalSince1970 Int : \(Int(Date().timeIntervalSince1970))")
-        */
+        if BaseViewModel.getSessionMaxTime() > 0
+        {
+            BaseViewModel.appBackgroundSaveTimer = Int(Date().timeIntervalSince1970)
+            /// 세션 체크를 대기 합니다.
+            BaseViewModel.isSssionType = .wait
+            Slog("Date().timeIntervalSince1970 Int : \(Int(Date().timeIntervalSince1970))")
+        }        
     }
     
     
@@ -289,19 +292,38 @@ class TabbarViewController: UITabBarController {
      */
     @objc func applicationForeground(){
         BecomeActiveView().hide()
-        /*
-        if BaseViewModel.appBackgroundSaveTimer > 0
+        if BaseViewModel.getSessionMaxTime() > 0
         {
-            let overTime = Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer
-            if overTime > APP_ING_SESSION_MAX_TIME
+            if BaseViewModel.appBackgroundSaveTimer > 0
             {
-                BaseViewModel.setLogoutData()
-                Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
+                /// 백그라운드 대기했던 오버 타임 입니다.
+                BaseViewModel.backgroundOverTimer = Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer
+                /// 총 오버 타임을 추가 합니다.
+                let overTime = BaseViewModel.backgroundOverTimer + BaseViewModel.ingSessionSaveTimer
+                /// 최대 백스 타임보다 클경우 로그아웃 진행 합니다.
+                if overTime > BaseViewModel.getSessionMaxTime()
+                {
+                    /// PUSH/DEEPLINK 들어올 경우 로그아웃 여부를 체크하기 위해 false 값을 선언 합니다.
+                    BaseViewModel.loginResponse!.islogin = false
+                    BaseViewModel.backgroundOverTimer    = 0
+                    BaseViewModel.appBackgroundSaveTimer = 0
+                    BaseViewModel.ingSessionSaveTimer    = 0
+                    BaseViewModel.isSssionType           = .exitLogout
+                    Slog("Over Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
+                }
+                else
+                {
+                    BaseViewModel.appBackgroundSaveTimer = 0
+                    BaseViewModel.ingSessionSaveTimer    = 0
+                    /// 세션 체크를 다시 시작 합니다.
+                    BaseViewModel.isSssionType           = .start
+                    
+                }
+                Slog("Ing Time : \(overTime)")
+                
             }
-            Slog("Ing Time : \(Int(Date().timeIntervalSince1970) - BaseViewModel.appBackgroundSaveTimer)")
-            BaseViewModel.appBackgroundSaveTimer = 0
         }
-        */
+        
     }
 }
 
@@ -371,6 +393,8 @@ extension UITabBarController
                         if tabitem is String,
                            NC.S(tabitem as? String).isValid
                         {
+                            /// 홈 탭으로 먼저 이동 합니다.
+                            TabBarView.setReloadSeleted(pageIndex: tabIndex.rawValue)
                             /// 탭 이동시 해당 item 위치로 이동 합니다.
                             home.loadMainURL(NC.S(tabitem as? String), updateCookies: updateCookies) { success in
                                 if completion != nil
@@ -378,6 +402,7 @@ extension UITabBarController
                                     completion!(home)
                                 }
                             }
+                            return
                         }
                     }
                     break

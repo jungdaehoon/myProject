@@ -191,7 +191,50 @@ class TabBarView : UIView
                 tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
             }
         }
+    }
+    
+    
+    /**
+     URL  정보를 기준으로  탭으로 이동 합니다..   ( J.D.H VER : 2.0.2 )
+     - Date: 2023.08.23
+     - Parameters:
+        - url : 체크할 URL 정보 입니다.
+     - Returns:False
+     */
+    static func setTabBarURLToRoot( url : String = "" ){
+        var tabIndex : TAB_STATUS = .home
+        if WebPageConstants.URL_WALLET_HOME.contains(url) { tabIndex = .wallet }
+        else if WebPageConstants.URL_BENEFIT_MAIN.contains(url) { tabIndex = .benefit }
+        else if WebPageConstants.URL_MAIN.contains(url) { tabIndex = .home }
+        else if WebPageConstants.URL_FINANCE_MAIN.contains(url) { tabIndex = .finance }
+        else { tabIndex = .home }
         
+        /// 현 페이지 초기화합니다.
+        if let tarber               = TabBarView.tabbar,
+           let viewController       = tarber.viewControllers![TabBarView.tabSeletedIndex] as? BaseViewController,
+           let navigationController = viewController.navigationController,
+           let controller           = navigationController.viewControllers.last {
+            /// 0번째 페이지로 이동 후 홈으로 이동 합니다.
+            controller.popToRootController(animated: true, animatedType: .down) { firstViewController in
+                /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+                if let tabbar = TabBarView.tabbar {
+                    /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                    tabbar.setCommonViewRemove()
+                    /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                    tabbar.setSelectedIndex(tabIndex, seletedItem: WebPageConstants.baseURL + url, updateCookies: true)
+                }
+            }
+        }
+        else
+        {
+            /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+            if let tabbar = TabBarView.tabbar {
+                /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                tabbar.setCommonViewRemove()
+                /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                tabbar.setSelectedIndex(tabIndex, seletedItem: WebPageConstants.baseURL + url, updateCookies: true)
+            }
+        }
     }
     
     

@@ -197,13 +197,14 @@ class AllMoreViewController: BaseViewController {
             {
                 menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", menuType: .rightimg))
             }
+             */
              
             /// 제로페이 상품권 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_GIFT)
             {
                 menus.append(self.viewModel.getMenuInfo(title: "제로페이 상품권", menuType: .rightimg))
             }
-             */
+            
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
         }

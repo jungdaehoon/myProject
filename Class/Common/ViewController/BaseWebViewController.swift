@@ -99,6 +99,7 @@ class BaseWebViewController: UIViewController {
             self.webView                                            = WKWebView(frame: self.view.frame, configuration: self.messageHandler!.config)
             self.webView!.uiDelegate                                = self
             self.webView!.navigationDelegate                        = self
+
             if #available(iOS 14.0, *) {
                 self.webView!.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
             } else {
@@ -225,7 +226,7 @@ class BaseWebViewController: UIViewController {
     
     /**
      WebView 삭제 합니다.. ( J.D.H VER : 2.0.0 )
-     - description: 생성된 WKWebView 연결된 모든 정보를 삭제 요청 합니다.
+     - Description: 생성된 WKWebView 연결된 모든 정보를 삭제 요청 합니다.
      - Date: 2023.08.10
      - Parameters:False
      - Returns:False
@@ -237,10 +238,10 @@ class BaseWebViewController: UIViewController {
             webview.uiDelegate          = nil
             webview.navigationDelegate  = nil
             webview.removeFromSuperview()
+            self.webView                = nil
         }
-        self.webView        = nil
-        self.messageHandler = nil
-        self.webViewRefresh = nil
+        if self.messageHandler != nil { self.messageHandler = nil}
+        if self.webViewRefresh != nil { self.webViewRefresh = nil}
     }
 }
 
@@ -258,6 +259,8 @@ extension BaseWebViewController: WKNavigationDelegate
         LoadingView.default.show()
         /// 네트웤 가용가능 여부 체크 합니다.
         BaseViewModel.shared.isNetConnected = .checking
+        /// 세션 활성화 모드로 변경 합니다.
+        BaseViewModel.isSssionType          = BaseViewModel.isSssionType == .exitLogout ? .exitLogout : .refresh
     }
     
     
@@ -289,7 +292,6 @@ extension BaseWebViewController: WKNavigationDelegate
                 webView.configuration.userContentController.removeAllUserScripts()
             }.store(in: &self.baseViewModel.cancellableSet)
         }
-         
         LoadingView.default.hide()
     }
     

@@ -61,7 +61,9 @@ class OKZeroPayQRCaptureView: UIView {
         /// QR 코드 정보를 받습니다.
         self.viewModel.$qrCodeValue.sink { value in
             if value == .start { return }
-            self.completion!(value)
+            if let completion = self.completion {
+                completion(value)
+            }
         }.store(in: &self.viewModel.cancellableSet)
     }
     

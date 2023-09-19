@@ -345,3 +345,66 @@ extension WKWebView {
         }
     }
 }
+
+
+public extension WKWebView {
+    /**
+     폰트 포멧 타입 입니다. ( J.D.H VER : 2.0.2 )
+     - Date: 2023.08.18
+     */
+    enum FontType: String {
+        case otf
+        case ttf
+        var format: String {
+            switch self {
+            case .otf:
+                return "opentype"
+            case .ttf:
+                return "truetype"
+            }
+        }
+    }
+    
+    
+    /**
+     웹에 폰트 정보를 추가 합니다. ( J.D.H VER : 2.0.2 )
+     - Date: 2023.08.18
+     - Parameters:
+        - fontFileName  : 폰트 명입니다.
+        - type : 폰트 포멧 타입 입니다.
+        - fontFamilyName : 폰트 대포 타입 명입니다.
+     - Returns:
+     폰트 추가된 유저 스크립트를 리턴 합니다. (WKUserScript?)
+     */
+    func initFontUserScript(fontFileName: String, type: FontType, fontFamilyName: String) -> WKUserScript? {
+        let fontFileUrl = bundleFileURL(name: fontFileName, type: type.rawValue)
+        guard let fontData = try? Data(contentsOf: fontFileUrl) else {
+            return nil
+        }
+        let css = """
+                @font-face {
+                    font-family: '\(fontFamilyName)';
+                    src: url(data:font/octet-stream;base64,\(fontData.base64EncodedString()))
+                    format('\(type.format)');
+                }
+                """
+        let cssStyle = """
+               javascript:(function() {
+               var parent = document.getElementsByTagName('head').item(0);
+               var style = document.createElement('style');
+               style.innerHTML = window.atob('\(encodeStringTo64(fromString: css)!)');
+               parent.appendChild(style)})()
+           """
+        return WKUserScript(source: cssStyle, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+    }
+    
+    private func bundleFileURL(name: String, type: String) -> URL {
+        let bundleURL = Bundle.main.bundleURL
+        return bundleURL.appendingPathComponent(name).appendingPathExtension(type)
+    }
+    
+    private func encodeStringTo64(fromString: String) -> String? {
+        let plainData = fromString.data(using: .utf8)
+        return plainData?.base64EncodedString(options: [])
+    }
+}

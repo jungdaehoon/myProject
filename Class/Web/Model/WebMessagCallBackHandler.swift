@@ -68,8 +68,7 @@ class WebMessagCallBackHandler : NSObject  {
      - Throws: False
      - Returns:False
      */
-    init( webViewController : BaseWebViewController ) {            
-    }
+    init( webViewController : BaseWebViewController ) {}
 
     
     /**
@@ -126,9 +125,9 @@ class WebMessagCallBackHandler : NSObject  {
     }
     
     
-    /** 
+    /**
      웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
-     - Description : hybridscript WebAPP 인터페이스 정보를 받아 처리 합니다.
+     - Description: hybridscript WebAPP 인터페이스 정보를 받아 처리 합니다.
      - Date: 2023.03.28
      - Parameters:
         - message : 스크립트 메세지 정보를 받습니다.
@@ -1144,9 +1143,16 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                 }
             }
-                        
-            /// 로그아웃 데이터 처리 합니다.
-            BaseViewModel.setLogoutData()
+            
+            if BaseViewModel.getSessionMaxTime() > 0
+            {
+                /// 세션 체크를 강제 종료하며 로그아웃이 호출 됩니다.
+                BaseViewModel.isSssionType = .exitLogout
+            }
+            else
+            {
+                BaseViewModel.setLogoutData()
+            }
         }
     }
     
@@ -1547,8 +1553,16 @@ class WebMessagCallBackHandler : NSObject  {
      - Returns:False
      */
     func setLogOut( _ body : [Any?] ){
-        /// 로그아웃 데이터 처리 합니다.
-        BaseViewModel.setLogoutData()
+        if BaseViewModel.getSessionMaxTime() > 0
+        {
+            /// 세션 체크를 강제 종료하며 로그아웃이 호출 됩니다.
+            BaseViewModel.isSssionType = .exitLogout
+        }
+        else
+        {
+            BaseViewModel.setLogoutData()
+        }
+        
     }
     
     
@@ -2018,7 +2032,9 @@ class WebMessagCallBackHandler : NSObject  {
             }
             /// 약관 동의 팝업을 오픈 합니다.
             if let controller = self.target {
-                let terms = [TERMS_INFO.init(title: "약관내용 보러가기", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT)]
+                /// 약관 동의 팝업을 오픈 합니다.
+                let terms = [TERMS_INFO.init(title: "제로페이 서비스 이용약관", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z001"),
+                             TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z002")]
                 BottomTermsView().setDisplay( target: controller, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
                                              termsList: terms) { value in
                     /// 동의/취소 여부를 받습니다.
@@ -2064,11 +2080,20 @@ class WebMessagCallBackHandler : NSObject  {
                     break
                     /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
                 case .location:
+                    /// 위치 측의 여부를 체크 합니다.
+                    BaseViewModel.shared.isLocationAuthorization().sink { success in
+                        if let controller = self.target {
+                            /// 제로페이 가맹점 검색 URL 입니다.
+                            let urlString = "https://m.map.naver.com/search2/search.naver?query=제로페이 가맹점&sm=shistory&style=v5".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                            /// 제로페이 가맹점 네이버 지도를 요청 합니다.
+                            controller.view.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                        }
+                    }.store(in: &BaseViewModel.shared.cancellableSet)
+                    break
+                case .faq:
                     if let controller = self.target {
-                        /// 제로페이 가맹점 검색 URL 입니다.
-                        let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                        /// 제로페이 가맹점 네이버 지도를 요청 합니다.
-                        controller.view.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                        /// 제로페이 관련 FAQ 페이지로 이동 합니다.
+                        controller.view.setDisplayWebView(WebPageConstants.baseURL + "/all/faqList.do?id=F006", modalPresent: true, animatedType: .up, titleBarType: 0)
                     }
                     break
                 default:break

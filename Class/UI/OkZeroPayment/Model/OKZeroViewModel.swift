@@ -334,21 +334,21 @@ class OKZeroViewModel : BaseViewModel
     
     
     /**
-     제로페이 간편결제 카드 머니 정보 숨김/보기 요청 입니다. ( J.D.H VER : 2.0.0 )
-     - Date: 2023.07.05
+     제로페이 간편결제 카드 머니 정보 숨김/보기 요청 입니다. ( J.D.H VER : 2.0.2 )
+     - Date: 2023.08.17
      - Parameters:
-        - hidden : 숨김 요쳥 여부 입니다.  ( Y : 숨김. N : 보기 )
+        - hidden : 숨김 요쳥 여부 입니다.  ( false : 숨김. true : 보기 )
      - Throws: False
      - Returns:
         정상 여부를 받습니다. (AnyPublisher<ZeroPayMoneyOnOffResponse?, ResponseError>)
      */
-    func setZeroPayMoneyHidden(  hidden : String ) -> AnyPublisher<ZeroPayMoneyOnOffResponse?, ResponseError>
+    func setZeroPayMoneyDisplay(  display : Bool ) -> AnyPublisher<ZeroPayMoneyOnOffResponse?, ResponseError>
     {
+        
         let item    = SharedDefaults.getKeyChainCustItem()
         var parameters  : [String:Any] = [:]
-        parameters  = ["token"   : NC.S(item!.token),
-                       "user_no" : NC.S(item!.user_no),
-                       "balance_view_yn": hidden]
+        parameters  = ["token" : NC.S(item!.token),
+                       "balanceShow": NSNumber(value: display)]
         let subject             = PassthroughSubject<ZeroPayMoneyOnOffResponse?,ResponseError>()
         requst() { error in
             subject.send(completion: .failure(error))
@@ -359,8 +359,8 @@ class OKZeroViewModel : BaseViewModel
         } completion: { model in
             if var model = OKZeroViewModel.zeroPayOKMoneyResponse,
                var data = model._data {
-                data.balanceViewYn  = hidden
-                data.isBalanceShow  = hidden == "Y" ? false : true
+                data.balanceViewYn  = display ? "Y" : "N"
+                data.isBalanceShow  = display
                 model.data          = data
                 OKZeroViewModel.zeroPayOKMoneyResponse = model
             }
@@ -394,6 +394,8 @@ class OKZeroViewModel : BaseViewModel
         }
         return subject.eraseToAnyPublisher()
     }
+    
+            
 }
 
 

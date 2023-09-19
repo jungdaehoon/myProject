@@ -24,7 +24,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OKZeroPayCardView" customModule="cereal" customModuleProvider="target">
             <connections>
                 <outlet property="accountInfoText" destination="CsH-kX-luG" id="kAU-Ag-OWN"/>
+                <outlet property="bannerBtn" destination="ilY-iq-11i" id="CeR-X5-C76"/>
+                <outlet property="bannerImg" destination="Lyp-wm-V6s" id="ROC-nO-jmJ"/>
+                <outlet property="bannerImgHeight" destination="zW9-Me-X0J" id="izx-Z1-8gC"/>
                 <outlet property="bannerView" destination="dcO-9M-ZsW" id="JI8-os-Akj"/>
+                <outlet property="bannerViewHeight" destination="8tL-Jh-oTM" id="KZ2-ZE-QZL"/>
                 <outlet property="bottomDisplayAccountInfoText" destination="7kx-G6-gKy" id="W85-e7-Fzo"/>
                 <outlet property="bottomDisplayCardBGColor" destination="zsP-1s-sP8" id="e8u-bI-7TD"/>
                 <outlet property="bottomDisplayInfoText" destination="LY7-IB-KxV" id="8kq-7m-pNy"/>
@@ -56,19 +60,28 @@
                         <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilY-iq-11i">
                             <rect key="frame" x="0.0" y="0.0" width="350" height="152"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" backgroundImage="bannerPay"/>
                             <connections>
                                 <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="mC3-L5-JZK"/>
                             </connections>
                         </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyp-wm-V6s">
+                            <rect key="frame" x="0.0" y="0.0" width="350" height="152"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="152" id="zW9-Me-X0J"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="152" id="8tL-Jh-oTM"/>
+                        <constraint firstAttribute="height" constant="152" id="8tL-Jh-oTM"/>
                         <constraint firstAttribute="trailing" secondItem="ilY-iq-11i" secondAttribute="trailing" id="Jdh-ed-TEi"/>
+                        <constraint firstAttribute="trailing" secondItem="Lyp-wm-V6s" secondAttribute="trailing" id="LFm-GB-2eE"/>
                         <constraint firstItem="ilY-iq-11i" firstAttribute="leading" secondItem="dcO-9M-ZsW" secondAttribute="leading" id="Mi3-T9-xCc"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Lyp-wm-V6s" secondAttribute="bottom" id="T6x-oI-lH5"/>
+                        <constraint firstItem="Lyp-wm-V6s" firstAttribute="top" secondItem="dcO-9M-ZsW" secondAttribute="top" id="T8T-oo-o1z"/>
                         <constraint firstItem="ilY-iq-11i" firstAttribute="top" secondItem="dcO-9M-ZsW" secondAttribute="top" id="TK6-9K-jUy"/>
                         <constraint firstAttribute="bottom" secondItem="ilY-iq-11i" secondAttribute="bottom" id="csY-2D-cF8"/>
+                        <constraint firstItem="Lyp-wm-V6s" firstAttribute="leading" secondItem="dcO-9M-ZsW" secondAttribute="leading" id="yH7-Df-FW6"/>
                     </constraints>
                 </view>
                 <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zef-Wr-dwG" userLabel="Card View">
@@ -147,7 +160,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H31-Lt-noI">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="38"/>
-                                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="32"/>
+                                    <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="32"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -451,7 +464,6 @@
         </view>
     </objects>
     <resources>
-        <image name="bannerPay" width="350" height="152"/>
         <image name="card_arrow_left" width="12" height="12.333333015441895"/>
     </resources>
 </document>

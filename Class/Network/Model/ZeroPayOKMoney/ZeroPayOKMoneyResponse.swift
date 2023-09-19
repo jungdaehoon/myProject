@@ -43,6 +43,8 @@ struct okmoneydata : Codable
     var _isBalanceShow   : Bool? { get { return  NC.B(isBalanceShow) } }
     /// 메인 계좌 정보를 받습니다.
     var _mainAccount     : mainaccount? { get { return mainAccount != nil ? mainAccount : nil } }
+    /// 배너 정보를 받습니다.
+    var _banner          : bannerInfo? { get { return banner != nil ? banner : nil } }
     
     /// Ok머니 잔액 정보 입니다.
     var balance         : Int?
@@ -51,7 +53,31 @@ struct okmoneydata : Codable
     /// 잔액 보기 여부 입니다. ( true / false )
     var isBalanceShow   : Bool?
     /// 메인 계좌 정보를 받습니다.
-    var mainAccount     : mainaccount? 
+    var mainAccount     : mainaccount?
+    /// 배너 정보를 받습니다.
+    var banner          : bannerInfo?
+}
+
+
+/**
+ 배너 정보를 받습니다. ( J.D.H VER : 2.0.0 )
+ - Date: 2023.08.22
+*/
+struct bannerInfo : Codable
+{
+    /// 배너 번호 입니다.
+    var _banNo    : String? { get { return  NC.S(banNo) } }
+    /// 배너 이미지 입니다.
+    var _banImg   : String? { get { return  NC.S(banImg) } }
+    /// 배너 선택시 URL 입니다.
+    var _banUrl   : String? { get { return  NC.S(banUrl) } }
+    
+    /// 배너 번호 입니다.
+    var banNo    : String?
+    /// 배너 이미지 입니다.
+    var banImg   : String?
+    /// 배너 선택시 URL 입니다.
+    var banUrl   : String?
 }
 
 

@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-
+import SafariServices
 
 /**
  전체 웹 버튼 이벤트  입니다.  ( J.D.H VER : 2.0.0 )
@@ -65,6 +65,8 @@ enum FULL_WEB_CB {
     case keyPadSucces( type : KEY_PAD_CLOSE_TYPE )
     /// 제로페이 인증용 보안 키패드 타입 입니다. ( barcode : 바코드, qrcode : QR코드 데이터 , maxValidTime : 최대 유지 타임 정보 )
     case zeroPaykeyPad( barcode : String, qrcode : String, maxValidTime : String )
+    /// 제로페이 관련 페이지 닫기 입니다. ( 종료시 콜백 메세지 정보 입니다.)
+    case zeroPayClose
     /// 페이지 닫기 입니다. ( 종료시 콜백 메세지 정보 입니다.)
     case pageClose ( message : String  )
     /// URL 정보를 넘깁니다
@@ -101,6 +103,8 @@ enum FULL_PAGE_TYPE : String {
     case PW90_NOT_CHANGE    = "PW90_NOT_CHANGE"
     /// 닉네임 변경 페이지 진입 입니다.
     case NICKNAME_CHANGE    = "NICKNAME_CHANGE"
+    /// 네이버 맵 모드 입니다.
+    case NAVER_MAP          = "NAVER_MAP"
 }
 
 
@@ -320,6 +324,7 @@ class FullWebViewController: BaseViewController {
 
 
 
+
 // MARK: - WKNavigationDelegate,WKUIDelegate
 extension FullWebViewController {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
@@ -332,6 +337,19 @@ extension FullWebViewController {
                 return decisionHandler(.cancel, preferences)
         }
         Slog("url : \(url)")
+        
+        
+        /// 페이지 타입이 네이버 맵 경우  네이버 블로그 진입시 예외로 별도의 화면을 디스플레이 합니다.
+        if self.pageType == .NAVER_MAP,
+           url.description.contains("m.blog.naver.com")
+        {
+            let naverBlogView = SFSafariViewController(url: url)
+            naverBlogView.modalPresentationStyle = .overFullScreen
+            self.present(naverBlogView, animated: true, completion: nil)
+            decisionHandler(.cancel, preferences)
+            return
+        }
+        
         
         /// 중간 중단으로 메인 페이지 이동 URL 확인 경우 입니다. ( 추후 WebToApp 으로 변경예정 )
         if url.description.contains("matcs/main.do")
@@ -416,7 +434,10 @@ extension FullWebViewController {
                     /// 웹뷰를 초기화 합니다.
                     self.removeWebView()
                     /// 현 페이지를 종료 합니다.
-                    self.popController(animated: true, animatedType: .down)
+                    self.popController(animated: true, animatedType: .down) { firstViewController in
+                        /// 이동 후 탭바를 새로고침 합니다.
+                        TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
+                    }
                     decisionHandler(.allow, preferences)
                     return
                 }
@@ -546,7 +567,7 @@ extension FullWebViewController {
                                 switch qrCodeCB
                                 {
                                     /// QRCdoe 읽기 실패 입니다.
-                                case .qr_fail,.cb_fail,.close :
+                                    case .qr_fail,.cb_fail,.close :
                                         /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
                                         params.updateValue("N", forKey: "result")
                                         params.updateValue("", forKey: "qrCode")
@@ -558,8 +579,6 @@ extension FullWebViewController {
                                                 {
                                                     scricptCB += "('\(cbParam)')"
                                                     self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                        Slog(anyData as Any)
-                                                        Slog(error as Any)
                                                     }
                                                 }
                                             }catch{
@@ -581,8 +600,6 @@ extension FullWebViewController {
                                                     scricptCB += "('\(cbParam)')"
                                                     Slog("QrCode Success : \(scricptCB)")
                                                     self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                        Slog(anyData as Any)
-                                                        Slog(error as Any)
                                                     }
                                                 }
                                             }catch{
@@ -596,8 +613,6 @@ extension FullWebViewController {
                                         /// 제로페이에 QRCode 데이터를 전송 합니다.
                                         DispatchQueue.main.async {
                                             self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
-                                                Slog(anyData as Any)
-                                                Slog(error as Any)
                                             }
                                             OKZeroPayQRCaptureView().hide()
                                         }
@@ -621,8 +636,6 @@ extension FullWebViewController {
                                         {
                                             scricptCB += "('\(cbParam)')"
                                             self.webView!.evaluateJavaScript(scricptCB) { ( anyData , error) in
-                                                Slog(anyData as Any)
-                                                Slog(error as Any)
                                             }
                                         }
                                     }catch{

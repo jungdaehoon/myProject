@@ -9,7 +9,7 @@ import Foundation
 
 
 /**
- 앱 시작시 기본 정보를 받습니다. ( J.D.H VER : 2.0.0 )
+ 앱 시작시 기본 정보를 받습니다. ( J.D.H VER : 2.0.2 )
  - Date: 2023.03.27
 */
 struct AppStartResponse: BaseResponse {
@@ -31,7 +31,7 @@ struct AppStartResponse: BaseResponse {
 
 
 /**
- 메뉴 연결할 정보를 받습니다. ( J.D.H VER : 2.0.0 )
+ 메뉴 연결할 정보를 받습니다. ( J.D.H VER : 2.0.2 )
  - Description : 메뉴 연결할 정보들을 받습니다
      ex ) 정보들
       "menu_nm" : "알림",
@@ -85,6 +85,9 @@ struct menudata : Codable
     var _versionInfo        : versionInfo? { get { return versionInfo != nil ? versionInfo : nil } }
     /// 이벤트 정보를 받습니다.
     var _eventInfo          : [eventInfo]? { get { return eventInfo != nil ? eventInfo : [] } }
+    /// 세션 타임 정보 입니다.
+    var _sessionExpireTime  : Int?     { get { return NC.I(sessionExpireTime) == 0 ? 60*10 : NC.I(sessionExpireTime) } }
+    
     
     /// 메뉴 리스트 정보를 받습니다.
     var menu_list          : [menu_list]?
@@ -92,6 +95,8 @@ struct menudata : Codable
     var versionInfo        : versionInfo?
     /// 이벤트 정보를 받습니다.
     var eventInfo          : [eventInfo]?
+    /// 세션 타임 정보 입니다.
+    var sessionExpireTime  : Int?
 }
 
 

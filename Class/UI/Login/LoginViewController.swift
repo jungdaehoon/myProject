@@ -111,7 +111,7 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// 로그인 페이지 디스플레이 여부를 "true" 활성화 합니다.
-        BaseViewModel.isLoginPageDisplay = true
+        BaseViewModel.isLoginPageDisplay = true        
         /// 아이디 키패드 활성화시 배경 터치 키패드 종료 이벤트 연결 입니다.
         let idGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(self.tapGestureRecognized(_ :)))
         self.view.addGestureRecognizer(idGesture)
@@ -128,7 +128,6 @@ class LoginViewController: BaseViewController {
         self.setGuideDisplay()
         /// 로그인 페이지 초기화 입니다.
         self.initLoginView()
-        
     }
     
     
@@ -470,6 +469,8 @@ class LoginViewController: BaseViewController {
         if self.completion != nil { self.completion!(true) }
         /// 로그인 페이지 디스플레이를 "false" 로 변경 합니다.
         BaseViewModel.isLoginPageDisplay = false
+        /// 세션 체크를 진행 합니다.
+        BaseViewModel.shared.isAppSessionEnabled()
         /// 현 페이지를 종료합니다.
         self.popController(animated: true,animatedType: .down) { firstViewController in
             /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.

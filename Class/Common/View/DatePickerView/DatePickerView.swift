@@ -17,7 +17,8 @@ class DatePickerView: BaseView {
     @IBOutlet weak var pickerView: PickerView!
     /// 왼쪽 버튼 팝업 종료 이벤트를 넘깁니다.
     var completion                  : (( _ value : Date ) -> Void )? = nil
-    
+    /// 최하단 포지션 뷰어 입니다.
+    @IBOutlet weak var dateBottom: NSLayoutConstraint!
     //MARK: - Init
     init(){
         super.init(frame: UIScreen.main.bounds)
@@ -68,8 +69,17 @@ class DatePickerView: BaseView {
      */
     func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })) {
         if let base = base {
+            self.alpha = 0.0
+            base.addSubview(self)
             DispatchQueue.main.async {
-                base.addSubview(self)
+                /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                UIView.animate(withDuration:0.5, delay: 0.1, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .curveEaseOut) { [self] in
+                    self.dateBottom.constant = 0
+                    self.alpha = 1.0
+                    self.layoutIfNeeded()
+                } completion: { _ in
+                    
+                }
             }
         }
     }
@@ -88,7 +98,15 @@ class DatePickerView: BaseView {
             _ = base!.subviews.map({
                 if $0 is DatePickerView
                 {
-                    $0.removeFromSuperview()
+                    let view = $0 as! DatePickerView
+                    /// 바코드 결제 위치로 선택 배경을 이동합니다.
+                    UIView.animate(withDuration:0.3, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: .curveEaseOut) { [self] in
+                        self.dateBottom.constant -= 300
+                        self.alpha = 0.0
+                        self.layoutIfNeeded()
+                    } completion: { _ in
+                        view.removeFromSuperview()
+                    }
                 }
             })
         }
@@ -98,7 +116,11 @@ class DatePickerView: BaseView {
     
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        self.completion!(self.pickerView.seletedDate!)
+        let btn = sender as! UIButton
+        if btn.tag == 0
+        {
+            self.completion!(self.pickerView.seletedDate!)
+        }
         self.hide()
     }
 }

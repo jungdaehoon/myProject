@@ -169,6 +169,11 @@ class OKZeroPayView: UIView {
                         {
                             msg = "결제가 불가한 코드입니다.\n(존재하지 않는 QR코드)"
                         }
+                        /// 변동형 QRCode 입니다.
+                        else if data._status == "V"
+                        {
+                            msg = "결제가 불가한 코드입니다.\n(변동형 MPM QR코드)"
+                        }
                         /// 상황 별 안내 팝업 오픈 합니다.
                         CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
                             self.viewModel.qrCodeValue = .qr_fail
@@ -261,7 +266,10 @@ class OKZeroPayView: UIView {
         
         /// 제로페이 화면 데이터를 로드 합니다.
         OKZeroViewModel.zeroPayShared!.okZeroPayReload = true
+        /// 코드 풀 디스플레이 뷰어에 제로페이 뷰어를 연결 합니다.
+        self.codeFullDisplayView.zeroPayView = self
     }
+    
     
     /**
     간편결제 진입후 상세정보를 서버요청 디스플레이를 하도록 합니다. ( J.D.H VER : 2.0.0 )
@@ -568,7 +576,7 @@ class OKZeroPayView: UIView {
                     /// 타이머를 활성화 합니다.
                     self.isTimer = true
                     /// 코드 타이머 활성화 합니다.
-                    self.viewModel.startCodeStayTimer(maxTime: 10)
+                    self.viewModel.startCodeStayTimer(maxTime: 180)
                 }
             }
         } btnEvent: { success in
@@ -593,7 +601,7 @@ class OKZeroPayView: UIView {
                     /// 타이머를 활성화 합니다.
                     self.isTimer = true
                     /// 코드 타이머 활성화 합니다.
-                    self.viewModel.startCodeStayTimer(maxTime: 10)
+                    self.viewModel.startCodeStayTimer(maxTime: 180)
                 }
             }
         } btnEvent: { success in
@@ -638,7 +646,7 @@ class OKZeroPayView: UIView {
                 }
                 
                 /// QR결제 위치로 선택 배경을 이동 합니다.
-                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
                     self.detaileViewTop.constant        = 12.0
                     self.layoutIfNeeded()
                 } completion: { _ in
@@ -672,7 +680,7 @@ class OKZeroPayView: UIView {
         /// 디스플레이 정보를 초기화 합니다.
         self.codeFullDisplayView.releaseCodeView()
         /// QR결제 위치로 선택 배경을 이동 합니다.
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
             self.detaileViewTop.constant        = 355.0
             self.layoutIfNeeded()
         } completion: { _ in
@@ -794,7 +802,10 @@ class OKZeroPayView: UIView {
                         self.viewModel.codeTimer = .exit_time
                     }
 
-                    self.popViewController(animated: true, animatedType:  .down)
+                    self.popViewController(animated: true, animatedType:  .down) { firstViewController in
+                        /// 이동 후 탭바를 새로고침 합니다.
+                        TabBarView.setReloadSeleted(pageIndex: TabBarView.tabSeletedIndex)
+                    }
                     break
                 /// 결제 타입 선택버튼 입니다.
                 case .barcode_pay:
@@ -825,10 +836,13 @@ class OKZeroPayView: UIView {
                     }
                     break
                 case .location_search:
-                    /// 제로페이 가맹점 검색 URL 입니다.
-                    let urlString = "https://map.naver.com/v5/search/%EC%A0%9C%EB%A1%9C%ED%8E%98%EC%9D%B4%20%EA%B0%80%EB%A7%B9%EC%A0%90?c=15,0,0,0,dh".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    /// 위치 측의 여부를 체크 합니다.
+                    BaseViewModel.shared.isLocationAuthorization().sink { success in
+                        /// 제로페이 가맹점 검색 URL 입니다.
+                        let urlString = "https://m.map.naver.com/search2/search.naver?query=제로페이 가맹점&sm=shistory&style=v5".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                         /// 제로페이 가맹점 네이버 지도를 요청 합니다.
-                    self.setDisplayWebView(urlString!, modalPresent: true, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                        self.setDisplayWebView(urlString!, modalPresent: true, pageType : .NAVER_MAP, animatedType: .left, titleName: "가맹점 찾기", titleBarType: 1, titleBarHidden: false)
+                    }.store(in: &BaseViewModel.shared.cancellableSet)
                     break
             }
             

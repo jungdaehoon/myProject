@@ -40,7 +40,8 @@ class OKZeroPayCodeFullView: UIView {
     @IBOutlet weak var qrCodeView               : UIView!
     /// QRCode 생성 뷰어 입니다.
     @IBOutlet weak var qrCodeGenerator          : QRorBarCodeGeneratorView!
-    
+    /// 제로페이 메인 뷰어 입니다.
+    var zeroPayView                             : OKZeroPayView?
     
     
     //MARK: - Init
@@ -162,4 +163,12 @@ class OKZeroPayCodeFullView: UIView {
             })
         }
     }
+    
+    
+    @IBAction func btn_action(_ sender: Any) {
+        if let zeroPay = self.zeroPayView {
+            zeroPay.closeFullCodeDisplay()
+        }
+    }
+    
 }

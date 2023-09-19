@@ -49,7 +49,15 @@ enum DISPLAY_TYPE : Int {
 class OKZeroPayCardView: UIView {
     var viewModel : OKZeroViewModel = OKZeroViewModel()
     /// 배너 뷰어어 입니다.
-    @IBOutlet weak var bannerView: UIView!
+    @IBOutlet weak var bannerView       : UIView!
+    /// 배너 뷰어의 높이 입니다.
+    @IBOutlet weak var bannerViewHeight : NSLayoutConstraint!
+    /// 배너 뷰어의 이미지 디스플레이 및 버튼 입니다.
+    @IBOutlet weak var bannerBtn        : UIButton!
+    /// 배너 이미지 뷰어 입니다.
+    @IBOutlet weak var bannerImg        : UIImageView!
+    /// 배너 이미지 높이 입니다.
+    @IBOutlet weak var bannerImgHeight: NSLayoutConstraint!
     /// 카드하단 디스플레이 안내 뷰어 입니다.
     @IBOutlet weak var bottomDisplayInfoView: UIView!
     /// 카드 하단 디스플레이시 잔액 보기/숨김 뷰어 입니다.
@@ -123,6 +131,7 @@ class OKZeroPayCardView: UIView {
      */
     func setDisplayView( displayType : DISPLAY_TYPE = .okmoney, colors : ( start : UIColor, end : UIColor)? = nil, model : ZeroPayOKMoneyResponse? = nil  ){
         self.setCardBGColor(colors: colors)
+        self.displayType = displayType
         switch displayType {
         case .okmoney:
             self.titleText.text         = "OK머니로 제로페이 결제"
@@ -162,9 +171,26 @@ class OKZeroPayCardView: UIView {
         case .banner:
             self.cardView.isHidden      = true
             self.bannerView.isHidden    = false
+            if let model = model,
+               let data  = model._data,
+               let banner = data._banner {
+                /// 이미지 URL 을 생성 합니다.
+                if let url = URL(string: WebPageConstants.baseURL + banner._banImg!)
+                {
+                    /// 배너 이미지를 추가 합니다.
+                    UIButton.loadImage(from: url).sink { image in
+                        let bannerImg                   = image!.resize(newWidth: self.frame.size.width, upScale: UIScreen.main.scale)
+                        self.bannerImgHeight.constant   = bannerImg.size.height
+                        self.bannerImg.image            = bannerImg
+                    }.store(in: &self.viewModel.cancellableSet)
+                }
+                else
+                {
+                    self.bannerImg.isHidden = true
+                }
+            }
             break
         }
-        
     }
     
     
@@ -235,6 +261,9 @@ class OKZeroPayCardView: UIView {
                 case .banner:
                     self.cardView.isHidden      = true
                     self.bannerView.isHidden    = false
+                    if let image = self.bannerImg.image {
+                        self.bannerImgHeight.constant   = image.size.height
+                    }
                     break
                 }
                 
@@ -267,6 +296,10 @@ class OKZeroPayCardView: UIView {
                 case .account:
                     break
                 case .banner:
+                    if let image = self.bannerImg.image {
+                        self.bannerImgHeight.constant   = image.size.height + 40
+                    }
+                    
                     break
                 }
                 return
@@ -308,7 +341,7 @@ class OKZeroPayCardView: UIView {
             switch event {
                 case .payhidden, .paydisplay:
                     /// 잔액 정보 보기를 요청 합니다.
-                    self.viewModel.setZeroPayMoneyHidden( hidden: event == .payhidden ? "Y" : "N" ).sink { result in
+                    self.viewModel.setZeroPayMoneyDisplay( display: event == .payhidden ? false : true ).sink { result in
                         
                     } receiveValue: { model in
                         if let onoff = model,
@@ -417,6 +450,7 @@ class OKZeroPayCardView: UIView {
                                     break
                                 case .account( let account ):
                                     if let account = account {
+                                        
                                         /// 받은 계좌 정보로 서버에 카드 상세 정보를 요청 합니다.
                                     }
                                     break
@@ -425,15 +459,23 @@ class OKZeroPayCardView: UIView {
                         }
                     }
                     break
-                case .cardchoice, .bannerchoice:
+                case .cardchoice:
                     /// 선탠된 카드에 현 카드정보를 넘깁니다.
                     OKZeroViewModel.zeroPayShared!.cardChoice  = self
                     OKZeroViewModel.zeroPayShared!.cardDisplay = .bottom
                     break
+                case .bannerchoice:
+                    if let okmoney = OKZeroViewModel.zeroPayOKMoneyResponse,
+                       let data    = okmoney._data,
+                       let banner  = data._banner
+                    {
+                        TabBarView.setTabBarURLToRoot( url: banner._banUrl! )
+                    }
+                    break
                 case .bottompayonoff:
-                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김" ? "Y" : "N"
+                    let hidden = self.bottomDisplayMoneyOnoffBtn.titleLabel!.text == "숨김" ? false : true
                     /// 잔액 정보 보기/숨김 여부를 요청 합니다.
-                    self.viewModel.setZeroPayMoneyHidden( hidden: hidden).sink { result in
+                    self.viewModel.setZeroPayMoneyDisplay( display: hidden).sink { result in
                         
                     } receiveValue: { model in
                         if let onoff = model,
