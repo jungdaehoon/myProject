@@ -553,7 +553,7 @@ class LoginViewController: BaseViewController {
             self.setLoginBtn()
             break
         case .id_Clear:
-            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "\(NC.S(self.pwField.text))_지우기")
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "\(NC.S(self.idField.text))_지우기")
             self.idField.text               = ""
             self.idFieldClearBtn.isHidden   = true
             self.setLoginBtn()

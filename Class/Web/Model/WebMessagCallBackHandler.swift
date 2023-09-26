@@ -110,9 +110,7 @@ class WebMessagCallBackHandler : NSObject  {
                 /// 클라이언트 아이디 정보를 세팅 합니다.
                 GAData.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
                 /// 이벤트를 넘깁니다.
-                Analytics.logEvent("event", parameters: GAData)
-                
-                
+                Analytics.logEvent(type == "P" ? "screenview" : "event", parameters: GAData)
             } catch {
                 switch error
                 {
