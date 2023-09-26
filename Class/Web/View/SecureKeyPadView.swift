@@ -220,6 +220,7 @@ class SecureKeyPadView: BaseView {
 //MARK: - XKTextFieldDelegate
 extension SecureKeyPadView : XKTextFieldDelegate{
     func keypadInputCompleted(_ aCount: Int) {
+        
         self.mainKeypadInputCompleted(aCount,finished: true)
     }
     
@@ -237,6 +238,7 @@ extension SecureKeyPadView : XKTextFieldDelegate{
     
     func keypadCanceled() {
         Slog("ABC keypadCanceled ")
+        //BaseViewModel.setGAEvent(page: "월렛 복구 안내",area: "거래 비밀번호 입력",label: "입력완료")
         self.setResignFirstResponder()
         self.completion!( .cancel )
     }
@@ -262,6 +264,7 @@ extension SecureKeyPadView : XKTextFieldDelegate{
     
     
     func textFieldShouldDeleteCharacter(_ textField: XKTextField!) -> Bool {
+        //BaseViewModel.setGAEvent(page: "월렛 복구 안내",area: "거래 비밀번호 입력",label: "지우기")
         Slog("ABC textFieldShouldDeleteCharacter length:\(String(describing: textField.text?.count))")
         self.mainKeypadInputCompleted((textField.text?.count)!)
         return true

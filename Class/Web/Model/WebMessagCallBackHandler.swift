@@ -73,7 +73,7 @@ class WebMessagCallBackHandler : NSObject  {
     
     /**
      웹 인터페이스 GA 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
-     - Description : okpaygascriptCallbackHandler WebAPP 인터페이스 정보를 받아 처리 합니다.
+     - Description: okpaygascriptCallbackHandler WebAPP 인터페이스 정보를 받아 처리 합니다.
      - Date: 2023.07.25
      - Parameters:
         - message : 스크립트 메세지 정보를 받습니다.
@@ -110,7 +110,8 @@ class WebMessagCallBackHandler : NSObject  {
                 /// 클라이언트 아이디 정보를 세팅 합니다.
                 GAData.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
                 /// 이벤트를 넘깁니다.
-                Analytics.logEvent(type == "P" ? "screenview" : "event", parameters: GAData)
+                Analytics.logEvent("event", parameters: GAData)
+                
                 
             } catch {
                 switch error

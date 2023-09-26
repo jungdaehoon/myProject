@@ -31,6 +31,7 @@ enum typeIconStatus {
 class AllMoreMenuListCell: UITableViewCell {
 
     var viewModel : AllMoreModel?
+    var menuTypeTitle : String = ""
     /// 타이틀 문구 입니다.
     @IBOutlet weak var titleName    : UILabel!
     /// 오른쪽 안내 정보 문구 입니다.
@@ -156,12 +157,14 @@ class AllMoreMenuListCell: UITableViewCell {
         if let model = self.viewModel {
             if self.menuInfo!.title! == "이번달 결제"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: NC.S(self.menuInfo!.title))
                 /// 결제 페이지는 추후 개발 후 연동 예정 입니다.
                 self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
             }
             
             if self.menuInfo!.title! == "OK마켓"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 ///  OK마켓 URL 정보를 가져 옵니다.
                 model.getAppMenuList(menuID: .ID_GIFTYCON).sink(receiveValue: { url in
                     if url.isValid
@@ -173,12 +176,14 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "제로페이 QR"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// 간편 결제 인증 처리 팝업 입니다.
                 self.setZeroPayTermsViewDisplay()
             }
          
             if self.menuInfo!.title! == "제로페이 상품권"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// 제로페이 상품권 URL 정보를 가져 옵니다.
                 model.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
                     if url.isValid
@@ -237,16 +242,19 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "만보GO"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 self.toPedometerPage()
             }
             
             if self.menuInfo!.title! == "올림pick"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 self.setDisplayWebView(WebPageConstants.URL_OLIMPICK_LIST)
             }
             
             if self.menuInfo!.title! == "친구추천"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// 친추추천 URL 정보를 가져 옵니다.
                 model.getAppMenuList(menuID: .ID_RECOMMEND_USER).sink(receiveValue: { url in
                     if url.isValid
@@ -258,11 +266,13 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "뿌리GO"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 self.setDisplayWebView(WebPageConstants.URL_MY_RELATIONSHIP)
             }
             
             if self.menuInfo!.title! == "이벤트"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// 이벤트 URL 정보를 가져 옵니다.
                 model.getAppMenuList(menuID: .ID_EVENT).sink(receiveValue: { url in
                     if url.isValid
@@ -274,11 +284,13 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "고객센터"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 WebPageConstants.URL_KAKAO_CONTACT.openUrl()
             }
             
             if self.menuInfo!.title! == "FAQ"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// FAQ URL 정보 입니다.
                 model.getAppMenuList(menuID: .ID_FAQ).sink(receiveValue: { url in
                     if url.isValid
@@ -290,6 +302,7 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "OK포인트 안내"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// OK포인트 안내 (서비스안내) URL 입니다.
                 model.getAppMenuList(menuID: .ID_POINT).sink(receiveValue: { url in
                     if url.isValid
@@ -301,6 +314,7 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "공지사항"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 /// 공지사항 URL 입니다.
                 model.getAppMenuList(menuID: .ID_NOTICE).sink(receiveValue: { url in
                     if url.isValid

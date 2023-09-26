@@ -98,6 +98,7 @@ class ShowMnemonicViewController: UIViewController {
     }
     
     @IBAction func onClose(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "복구구문기록",area: "상단" ,label: "뒤로가기")
         self.delegate?.showMnemonicResult(self, action: .close, info: nil)
         if let completion = self.completion { completion(nil) }
         self.popController(animated: true, animatedType: .down)
@@ -107,8 +108,10 @@ class ShowMnemonicViewController: UIViewController {
         let copyText = tfMnemonic.text ?? ""
         Slog("copy text = \(copyText)")
         UIPasteboard.general.string = copyText
+        BaseViewModel.setGAEvent(page: "복구구문기록",area: "단어기록" ,label: "클립보드 복사하기")
         /// 앱 실드 비정상 처리 안내 팝업 입니다.
         CMAlertView().setAlertView(detailObject: "복사되었습니다" as AnyObject, cancelText: "확인") { event in
+            BaseViewModel.setGAEvent(page: "복구구문기록",area: "클립보드 복사하기" ,label: "확인")
         }
     }
     

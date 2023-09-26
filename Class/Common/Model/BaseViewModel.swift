@@ -1329,6 +1329,31 @@ class BaseViewModel : NSObject {
     
     /**
      GA 트레킹을 활성화 합니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.09.22
+     - Parameters:
+        - eventName : 이벤트 명 입니다.
+        - page : 이벤트 페이지 명 입니다.
+        - area : 이벤트 영역 명 입니다.
+        - label : 이벤트 라벨 명 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    static func setGAEvent( eventName : String = "click_event",
+                            page : String = "",
+                            area : String = "",
+                            label : String = "") {
+        var params : [String:Any] = [:]
+        params.updateValue(page, forKey: "ep_click_page")
+        params.updateValue(area, forKey: "ep_click_area")
+        params.updateValue(label, forKey: "ep_click_label")
+        /// 클라이언트 아이디 정보를 세팅 합니다.
+        params.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
+        Analytics.logEvent(eventName, parameters:params)
+    }
+    
+    
+    /**
+     GA 트레킹을 활성화 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.20
      - Parameters:
         - eventName : 이벤트 명 입니다.
@@ -1428,6 +1453,15 @@ class BaseViewModel : NSObject {
     }
     
     
+    /**
+     세션 체크 최대 타임 정보를 요청 합니다.  ( J.D.H VER : 2.0.2 )
+     - Description: 앱 내부 세션 체크 최대 타임 정보를 체크하며 해당 정보가 nil 경우 "-1" 로 리턴, 내부 세션 체크를 하지 않도록 합니다.
+     - Date: 2023.07.04
+     - Parameters:Fasle
+     - Throws: False
+     - Returns:
+        세션 체크 최대 타임 정보를 리턴 합니다. (Int)
+     */
     static func getSessionMaxTime() -> Int{
         if let appStert = BaseViewModel.appStartResponse,
            let data = appStert._data {
@@ -1435,6 +1469,7 @@ class BaseViewModel : NSObject {
         }
         return -1
     }
+    
     
     /**
      앱 활성화 유지 가능 타입을 체크  합니다. ( J.D.H VER : 2.0.2 )

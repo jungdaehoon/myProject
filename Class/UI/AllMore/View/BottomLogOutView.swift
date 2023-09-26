@@ -36,6 +36,7 @@ class BottomLogOutView: UIView {
             
         })
         alert?.addAlertBtn(btnTitleText: "확인", completion: { result in
+            BaseViewModel.setGAEvent(page: "전체서비스",area: "하단" ,label: "로그아웃")
             if BaseViewModel.getSessionMaxTime() > 0
             {
                 BaseViewModel.isSssionType = .exitLogout

@@ -37,6 +37,7 @@ class QRReaderViewController: UIViewController {
     @IBOutlet weak var readView: UIView!
     
     @IBAction func onCloseBtn( sender: Any) {
+        BaseViewModel.setGAEvent(page: "OK머니 송금",area: "QR코드 인식",label: "닫기")
         self.closeCapture()
     }
     

@@ -134,27 +134,33 @@ class PointItemView: UIView {
             switch btn.tag {
                 /// OK머니 버튼 이벤트 입니다.
             case 10:
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "OK머니")
                 self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
                 break
                 /// OK포인트 버튼 이벤트 입니다.
             case 11:
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "OK포인트")
                 self.setDisplayWebView(WebPageConstants.URL_POINT_TRANSFER_LIST)
                 break
             case 12:
+                
                 var openBankUrl = ""
                 /// 오픈 뱅킹 계좌 연결 경우 입니다.
                 if self.bankingNumber.text == OPEN_BANK_LINK
                 {
+                    BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "오픈 뱅킹 계좌연결")
                     openBankUrl = WebPageConstants.URL_OPENBANK_ACCOUNT_REGISTER
                 }
                 /// 연결된 계좌 정보가 없는 경우 입니다.
                 else if self.bankingNumber.text == NOT_BANK_LINK
                 {
+                    BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "은행 계좌연결")
                     openBankUrl = WebPageConstants.URL_ACCOUNT_REGISTER
                 }
                 /// 계좌 재인증 경우 입니다.
                 else if self.bankingNumber.text == RE_BACK_AUTH
                 {
+                    BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "은행 계좌인증")
                     /// 계좌 재인증 요청 합니다.
                     self.viewModel!.setReBankAuth().sink { result in
                         
@@ -207,6 +213,7 @@ class PointItemView: UIView {
                     return
                 }
                 
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "연결계좌")
                 /// 연결 계좌 리스트로 이동 합니다.
                 self.setDisplayWebView( WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, pageType: .openbank_type, titleName: "", titleBarType: 2) { value in
                     /// 메인 계좌가 변경되는 경우 새로고침은 어떻게 할지 미정 입니다. 일단 새로고침 합니다.
@@ -214,10 +221,10 @@ class PointItemView: UIView {
                 }
                 break
             case 13:
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "NFT")
                 self.setDisplayWebView(WebPageConstants.URL_NFT_TRANS_LIST)
                 break
-            default:
-                break
+            default:break
             }
         }
     }
