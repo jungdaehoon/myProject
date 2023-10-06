@@ -7,33 +7,253 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7AF90FF1-0DB6-4E0A-ACD4-FF9B66CFB905"
+            uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/UI/Login/LoginViewController.swift"
+            filePath = "Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
-            landmarkName = "btn_action(_:)"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "setDisplay(_:viewModel:seleted:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5 - 2967a460119d144e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Dead&gt; of cereal.BottomAccountListTableViewCell.setDisplay(_: Foundation.IndexPath, viewModel: Swift.Optional&lt;cereal.BottomAccountModel&gt;, seleted: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "1488">
+               </Location>
+               <Location
+                  uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5 - 2967a460119d14e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Dead&gt; of cereal.BottomAccountListTableViewCell.setDisplay(_: Foundation.IndexPath, viewModel: Swift.Optional&lt;cereal.BottomAccountModel&gt;, seleted: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "836">
+               </Location>
+               <Location
+                  uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5 - 2967a460119d1408"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Dead&gt; of cereal.BottomAccountListTableViewCell.setDisplay(_: Foundation.IndexPath, viewModel: Swift.Optional&lt;cereal.BottomAccountModel&gt;, seleted: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1292">
+               </Location>
+               <Location
+                  uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5 - 2967a460119d1b8c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Dead&gt; of cereal.BottomAccountListTableViewCell.setDisplay(_: Foundation.IndexPath, viewModel: Swift.Optional&lt;cereal.BottomAccountModel&gt;, seleted: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1800">
+               </Location>
+               <Location
+                  uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5 - 2967a460119d1bb3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Dead&gt; of cereal.BottomAccountListTableViewCell.setDisplay(_: Foundation.IndexPath, viewModel: Swift.Optional&lt;cereal.BottomAccountModel&gt;, seleted: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "1528">
+               </Location>
+               <Location
+                  uuid = "41DC0DF9-F995-43B7-865F-804ACF6190F5 - 2967a460119d15c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Dead&gt; of cereal.BottomAccountListTableViewCell.setDisplay(_: Foundation.IndexPath, viewModel: Swift.Optional&lt;cereal.BottomAccountModel&gt;, seleted: Swift.Bool) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/View/BottomAccountListView/BottomAccountListTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "1528">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F1E8E1F0-5F2F-4356-8E5C-E75BE67288CD"
+            uuid = "49881414-31CB-4D58-AC2C-F2974F51A486"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/UI/Login/LoginViewController.swift"
+            filePath = "Class/Extension/UIImageView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "591"
-            endingLineNumber = "591"
-            landmarkName = "textFieldDidEndEditing(_:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "loadImage(from:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "49881414-31CB-4D58-AC2C-F2974F51A486 - 256d8193036d9112"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Alamofire.DownloadResponse&lt;Foundation.Data&gt;) -&gt; () in static __C.UIImageView.loadImage(from: Foundation.URL) -&gt; Combine.AnyPublisher&lt;Swift.Optional&lt;__C.UIImage&gt;, Swift.Never&gt;"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Extension/UIImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "620">
+               </Location>
+               <Location
+                  uuid = "49881414-31CB-4D58-AC2C-F2974F51A486 - 256d8193036d9741"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Alamofire.DownloadResponse&lt;Foundation.Data&gt;) -&gt; () in static __C.UIImageView.loadImage(from: Foundation.URL) -&gt; Combine.AnyPublisher&lt;Swift.Optional&lt;__C.UIImage&gt;, Swift.Never&gt;"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Extension/UIImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "620">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52DADC01-D62F-405F-A1E8-4F0ED3A7C480"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Extension/UIImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "loadImage(from:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "52DADC01-D62F-405F-A1E8-4F0ED3A7C480 - 256d8193036d9068"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Alamofire.DownloadResponse&lt;Foundation.Data&gt;) -&gt; () in static __C.UIImageView.loadImage(from: Foundation.URL) -&gt; Combine.AnyPublisher&lt;Swift.Optional&lt;__C.UIImage&gt;, Swift.Never&gt;"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Extension/UIImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  uuid = "52DADC01-D62F-405F-A1E8-4F0ED3A7C480 - 256d8193036d979f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Alamofire.DownloadResponse&lt;Foundation.Data&gt;) -&gt; () in static __C.UIImageView.loadImage(from: Foundation.URL) -&gt; Combine.AnyPublisher&lt;Swift.Optional&lt;__C.UIImage&gt;, Swift.Never&gt;"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Extension/UIImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "57B7F8D6-E38F-4B31-9A1E-A44AECB359D8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/Main/View/TabBarView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "btn_action(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "57B7F8D6-E38F-4B31-9A1E-A44AECB359D8 - 57976b8c89a8f432"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Dead&gt; of cereal.TabBarView.btn_action(Any) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/UI/Main/View/TabBarView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "318"
+                  endingLineNumber = "318"
+                  offsetFromSymbolStart = "792">
+               </Location>
+               <Location
+                  uuid = "57B7F8D6-E38F-4B31-9A1E-A44AECB359D8 - 57ee4ed669c3c0cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cereal.TabBarView.btn_action(Any) -&gt; ()"
+                  moduleName = "cereal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/UI/Main/View/TabBarView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "316"
+                  endingLineNumber = "316"
+                  offsetFromSymbolStart = "776">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

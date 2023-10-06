@@ -51,7 +51,7 @@ class BannerView: UIView {
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
         if let tabbar = TabBarView.tabbar {
-            BaseViewModel.setGAEvent(page: "전체서비스",area: "중간배너" ,label: "요즘 뜨는 OK저축은행 인기 상품")
+            BaseViewModel.setGAEvent(page: "전체서비스",area: "중간배너" ,label: "allservice_mid_banner")
             tabbar.setSelectedIndex(.finance)
         }
     }    

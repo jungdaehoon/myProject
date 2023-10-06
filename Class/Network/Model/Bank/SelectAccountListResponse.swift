@@ -44,10 +44,14 @@ struct Account : Codable {
     var _user_no             : String? { get { return  NC.S(user_no) } }
     /// 계좌번호 입니다.
     var _acc_no              : String? { get { return  NC.S(acc_no) } }
+    /// 마킹 계좌번호 입니다.
+    var _masking_acc_no      : String? { get { return  NC.S(masking_acc_no) } }
     /// 납부자 번호 입니다.
     var _payer_num           : String? { get { return  NC.S(payer_num) } }
     /// 은행 코드 입니다.
     var _bank_cd             : String? { get { return  NC.S(bank_cd) } }
+    /// 은행 명 입니다.
+    var _bank_nm             : String? { get { return  NC.S(bank_nm) } }
     /// 은행명 입니다.
     var _acc_nm              : String? { get { return  NC.S(acc_nm) } }
     /// 주계좌여부 입니다.
@@ -80,10 +84,14 @@ struct Account : Codable {
     var user_no             : String?
     /// 계좌번호 입니다.
     var acc_no              : String?
+    /// 마킹 계좌번호  입니다.
+    var masking_acc_no      : String?
     /// 납부자 번호 입니다.
     var payer_num           : String?
     /// 은행 코드 입니다.
     var bank_cd             : String?
+    /// 은행 명 입니다.
+    var bank_nm             : String?
     /// 은행명 입니다.
     var acc_nm              : String?
     /// 주계좌여부 입니다.

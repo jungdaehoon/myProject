@@ -681,7 +681,7 @@ class OKZeroPayView: UIView {
         self.codeFullDisplayView.releaseCodeView()
         /// QR결제 위치로 선택 배경을 이동 합니다.
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
-            self.detaileViewTop.constant        = 355.0
+            self.detaileViewTop.constant        = 345.0
             self.layoutIfNeeded()
         } completion: { _ in
             
@@ -702,7 +702,7 @@ class OKZeroPayView: UIView {
         self.payCardListTop.constant    = (self.payCardListView.frame.origin.y * -1) + 48
         /// QR결제 위치로 선택 배경을 이동 합니다.
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut) {
-            self.detaileViewTop.constant        = 355.0
+            self.detaileViewTop.constant        = 345.0
             self.layoutIfNeeded()
         } completion: { _ in
             
@@ -764,7 +764,7 @@ class OKZeroPayView: UIView {
     @objc func setCardFullAniDelayClose(){
         UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseOut) {
             self.payCardListTop.constant        = (self.payCardListView.frame.origin.y * -1) + 48
-            self.detaileViewTop.constant        = 355.0
+            self.detaileViewTop.constant        = 345.0
             /// 카드리스트가 다시 하단 위치 변경으로 카드 시작 위치값을 변경 합니다.
             self.payCardListView.setCardListPosition()            
             self.layoutIfNeeded()

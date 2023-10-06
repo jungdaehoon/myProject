@@ -28,7 +28,7 @@ enum BOTTOM_ACCOUNT_EVENT {
     /// 계좌 추가 이벤트 입니다.
     case add_account
     /// 계좌 선택 이벤트 입니다.
-    case account( account : String? )
+    case account( account : String?, bankName : String? )
 }
 
 
@@ -203,7 +203,7 @@ extension BottomAccountListView : UITableViewDelegate
                 self.viewModel.setUpdateMainAccount(account: accounts[indexPath.row]).sink { result in
                     
                 } receiveValue: { response in
-                    event(.account(account: NC.S(accounts[indexPath.row].acc_no)))
+                    event(.account(account: NC.S(accounts[indexPath.row]._masking_acc_no), bankName : NC.S(accounts[indexPath.row]._bank_nm) ))
                     /// 새로고침을 요청 합니다.
                     self.setDataDisplay()
                 }.store(in: &self.viewModel.cancellableSet)

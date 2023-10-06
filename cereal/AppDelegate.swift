@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date: 2023.04.06
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Slog("NSUUID().uuidString : \(NSUUID().uuidString)")
         /// 안티 디버깅여부를 체크 합니다.
         self.viewModel.setAntiDebuggingChecking()
         /// 시큐온 키패드 HotFix (23.04.10)

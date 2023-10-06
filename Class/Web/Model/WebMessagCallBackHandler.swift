@@ -107,6 +107,7 @@ class WebMessagCallBackHandler : NSObject  {
                         }
                     }
                 }
+                
                 /// 클라이언트 아이디 정보를 세팅 합니다.
                 GAData.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
                 /// 이벤트를 넘깁니다.
@@ -392,6 +393,7 @@ class WebMessagCallBackHandler : NSObject  {
      - Returns:False
     */
     func setSendGAEvent( _ body : [Any?] ){
+        
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks = body[0] as! [Any]
         /// 파라미터 정보가 있는 경우 입니다.
@@ -442,7 +444,7 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                 }
                 break
-            case .account( let account ):
+            case .account( let account, let _ ):
                 if let account = account {
                     /// 서버에 계좌 정보를 전달 합니다.
                     self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: account )
@@ -2035,7 +2037,7 @@ class WebMessagCallBackHandler : NSObject  {
                 let terms = [TERMS_INFO.init(title: "제로페이 서비스 이용약관", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z001"),
                              TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z002")]
                 BottomTermsView().setDisplay( target: controller, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
-                                             termsList: terms) { value in
+                                             termsList: terms, isCheckUI: true) { value in
                     /// 동의/취소 여부를 받습니다.
                     if value == .success
                     {

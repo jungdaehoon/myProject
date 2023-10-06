@@ -175,7 +175,7 @@ class CheckMnemonicViewController: UIViewController {
     
     @IBAction func seg_action(_ sender: Any) {
         if let seg = sender as? UISegmentedControl {
-            BaseViewModel.setGAEvent(page: "월렛 복구구문 기록",area: "\(seg.selectedSegmentIndex + 1)번째_복구단어" ,label: "단어선택")
+            //BaseViewModel.setGAEvent(page: "월렛 복구구문 기록",area: "\(seg.selectedSegmentIndex + 1)번째_복구단어" ,label: "단어선택")
         }
         
     }

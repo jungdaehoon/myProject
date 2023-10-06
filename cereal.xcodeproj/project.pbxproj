@@ -212,6 +212,10 @@
 		F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */; };
 		F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */; };
 		F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */; };
+		F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */; };
+		F27214B32ACFE381006B9FF7 /* HomePayModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F27214B22ACFE381006B9FF7 /* HomePayModeView.xib */; };
+		F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B42ACFF33F006B9FF7 /* homeLoop.json */; };
+		F27214B72ACFF340006B9FF7 /* homeStart.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B52ACFF340006B9FF7 /* homeStart.json */; };
 		F2C5E4CB2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */; };
 		F2C5E4CD2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */; };
 		F2C5E4CF2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */; };
@@ -459,6 +463,10 @@
 		F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppStartEventPopup.xib; sourceTree = "<group>"; };
 		F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventViewModel.swift; sourceTree = "<group>"; };
 		F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayOKMoneyResponse.swift; sourceTree = "<group>"; };
+		F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePayModeView.swift; sourceTree = "<group>"; };
+		F27214B22ACFE381006B9FF7 /* HomePayModeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePayModeView.xib; sourceTree = "<group>"; };
+		F27214B42ACFF33F006B9FF7 /* homeLoop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeLoop.json; sourceTree = "<group>"; };
+		F27214B52ACFF340006B9FF7 /* homeStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeStart.json; sourceTree = "<group>"; };
 		F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsAgreeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsCheckResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayMoneyOnOffResponse.swift; sourceTree = "<group>"; };
@@ -742,6 +750,8 @@
 				8D205E9529D1346E00F43C99 /* TabBarView.swift */,
 				8D205E9629D1346E00F43C99 /* TabBarView.xib */,
 				8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */,
+				F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */,
+				F27214B22ACFE381006B9FF7 /* HomePayModeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1270,6 +1280,8 @@
 		8DE325FD29D567BB006E3B69 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				F27214B42ACFF33F006B9FF7 /* homeLoop.json */,
+				F27214B52ACFF340006B9FF7 /* homeStart.json */,
 				8DCB189929F663DD000645D3 /* splash.json */,
 				8D91E27429E53ACA0015E5E7 /* tabbar_benefit.json */,
 				8D91E27629E53ACB0015E5E7 /* tabbar_financial.json */,
@@ -1527,6 +1539,8 @@
 				8D4A3F9D29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib in Resources */,
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
+				F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */,
+				F27214B32ACFE381006B9FF7 /* HomePayModeView.xib in Resources */,
 				8D205F1F29D1346F00F43C99 /* Assets.xcassets in Resources */,
 				8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */,
 				8D205F8A29D1346F00F43C99 /* CMAlertView.xib in Resources */,
@@ -1553,6 +1567,7 @@
 				8D205F4229D1346F00F43C99 /* TopUserInfoView.xib in Resources */,
 				8D205F2829D1346F00F43C99 /* PermissionInfoView.xib in Resources */,
 				8DE3105C2A01010600DF9653 /* BottomAccountListTableViewCell.xib in Resources */,
+				F27214B72ACFF340006B9FF7 /* homeStart.json in Resources */,
 				8D205F2129D1346F00F43C99 /* FullWebViewController.xib in Resources */,
 				8D91E27729E53ACB0015E5E7 /* tabbar_wallet.json in Resources */,
 				8D205F2C29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.xib in Resources */,
@@ -1669,6 +1684,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -1694,6 +1714,7 @@
 				8DBA445B29D428BA00A2E5C1 /* HybridOpenBankViewController.swift in Sources */,
 				8D205F7E29D1346F00F43C99 /* PedometerResponse.swift in Sources */,
 				8D205F7B29D1346F00F43C99 /* ReBankAuthResponse.swift in Sources */,
+				F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */,
 				F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */,
 				8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */,
 				8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */,

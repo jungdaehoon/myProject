@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -117,7 +117,7 @@
                     <rect key="frame" x="107" y="209" width="176" height="176"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohY-IH-v7V" userLabel="DetailView">
-                    <rect key="frame" x="0.0" y="461" width="390" height="403"/>
+                    <rect key="frame" x="0.0" y="451" width="390" height="413"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5h-8Q-JTb" userLabel="Top Line">
                             <rect key="frame" x="181" y="12" width="28" height="4"/>
@@ -412,10 +412,10 @@
                             </constraints>
                         </view>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-4K-PpH" userLabel="Code Full View">
-                            <rect key="frame" x="0.0" y="16" width="390" height="351"/>
+                            <rect key="frame" x="0.0" y="16" width="390" height="361"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fD3-5O-nly" customClass="OKZeroPayCodeFullView" customModule="cereal" customModuleProvider="target">
-                                    <rect key="frame" x="145" y="125.66666666666663" width="100" height="100"/>
+                                    <rect key="frame" x="145" y="130.66666666666663" width="100" height="100"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="Lv3-Uw-0Yq"/>
@@ -430,7 +430,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndA-ol-1US" customClass="OKZeroPayCardListView" customModule="cereal" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="298" width="390" height="105"/>
+                            <rect key="frame" x="0.0" y="298" width="390" height="115"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
@@ -468,7 +468,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="UQI-na-29L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0bN-KL-xzi"/>
-                <constraint firstItem="ohY-IH-v7V" firstAttribute="top" secondItem="UQI-na-29L" secondAttribute="bottom" constant="355" id="5Eh-Uy-fja"/>
+                <constraint firstItem="ohY-IH-v7V" firstAttribute="top" secondItem="UQI-na-29L" secondAttribute="bottom" constant="345" id="5Eh-Uy-fja"/>
                 <constraint firstItem="eFp-OA-TFR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8e6-xJ-jqQ"/>
                 <constraint firstAttribute="trailing" secondItem="ROE-ca-HMj" secondAttribute="trailing" id="FjP-A5-9Je"/>
                 <constraint firstItem="77O-Ie-5gL" firstAttribute="top" secondItem="eFp-OA-TFR" secondAttribute="bottom" constant="24" id="H7w-J4-602"/>
@@ -504,7 +504,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
