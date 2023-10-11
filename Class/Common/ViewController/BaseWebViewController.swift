@@ -491,16 +491,6 @@ extension BaseWebViewController: WKScriptMessageHandler {
             return
         }
         
-        // 쿠키 업데이트 메세지 이벤트 입니다.
-        if message.name == "\(SCRIPT_MESSAGE_HANDLER_TYPE.okpaygascriptCallbackHandler)"
-        {
-            Slog("\(SCRIPT_MESSAGE_HANDLER_TYPE.okpaygascriptCallbackHandler) : \(message.body)")
-            /// GA 이벤트를 넘깁니다.
-            do { try messageHandler?.didReceiveGAMessage(message: message) }
-            catch{}
-            return
-        }
-        
         /// hybridscript 메세지 이벤트를 넘깁니다.
         messageHandler?.didReceiveMessage(message: message)
     }

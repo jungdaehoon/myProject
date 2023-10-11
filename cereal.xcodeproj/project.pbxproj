@@ -213,7 +213,6 @@
 		F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */; };
 		F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */; };
 		F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */; };
-		F27214B32ACFE381006B9FF7 /* HomePayModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F27214B22ACFE381006B9FF7 /* HomePayModeView.xib */; };
 		F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B42ACFF33F006B9FF7 /* homeLoop.json */; };
 		F27214B72ACFF340006B9FF7 /* homeStart.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B52ACFF340006B9FF7 /* homeStart.json */; };
 		F2C5E4CB2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */; };
@@ -227,6 +226,7 @@
 		F2DEDB772A8CABCE003E502E /* UpdateMainAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */; };
 		F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */; };
 		F2F084322A7898AB005EC9CC /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */; };
+		F2FA95E12AD007BA00862C7F /* HomePayModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FA95E02AD007BA00862C7F /* HomePayModeView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -464,7 +464,6 @@
 		F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventViewModel.swift; sourceTree = "<group>"; };
 		F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayOKMoneyResponse.swift; sourceTree = "<group>"; };
 		F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePayModeView.swift; sourceTree = "<group>"; };
-		F27214B22ACFE381006B9FF7 /* HomePayModeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePayModeView.xib; sourceTree = "<group>"; };
 		F27214B42ACFF33F006B9FF7 /* homeLoop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeLoop.json; sourceTree = "<group>"; };
 		F27214B52ACFF340006B9FF7 /* homeStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeStart.json; sourceTree = "<group>"; };
 		F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsAgreeResponse.swift; sourceTree = "<group>"; };
@@ -478,6 +477,7 @@
 		F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainAccountResponse.swift; sourceTree = "<group>"; };
 		F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
+		F2FA95E02AD007BA00862C7F /* HomePayModeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePayModeView.xib; sourceTree = "<group>"; };
 		FD740F24DF294204F2C066E1 /* Pods_cereal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cereal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -751,7 +751,7 @@
 				8D205E9629D1346E00F43C99 /* TabBarView.xib */,
 				8D205E9429D1346E00F43C99 /* BaseTabBarView.swift */,
 				F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */,
-				F27214B22ACFE381006B9FF7 /* HomePayModeView.xib */,
+				F2FA95E02AD007BA00862C7F /* HomePayModeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1540,12 +1540,12 @@
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
 				F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */,
-				F27214B32ACFE381006B9FF7 /* HomePayModeView.xib in Resources */,
 				8D205F1F29D1346F00F43C99 /* Assets.xcassets in Resources */,
 				8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */,
 				8D205F8A29D1346F00F43C99 /* CMAlertView.xib in Resources */,
 				8D205F2029D1346F00F43C99 /* Color.xcassets in Resources */,
 				8D205F4B29D1346F00F43C99 /* QRorBarCodeGeneratorView.xib in Resources */,
+				F2FA95E12AD007BA00862C7F /* HomePayModeView.xib in Resources */,
 				8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */,
 				8DD916BA29FB54F800805A7E /* OKZeroPayCardView.xib in Resources */,
 				8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */,

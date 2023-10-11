@@ -1328,8 +1328,8 @@ class BaseViewModel : NSObject {
     
     
     /**
-     GA 트레킹을 활성화 합니다. ( J.D.H VER : 2.0.0 )
-     - Date: 2023.09.22
+     GA 트레킹을 활성화 합니다. ( J.D.H VER : 2.0.3 )
+     - Date: 2023.10.10
      - Parameters:
         - eventName : 이벤트 명 입니다.
         - page : 이벤트 페이지 명 입니다.
@@ -1347,7 +1347,7 @@ class BaseViewModel : NSObject {
         params.updateValue(area, forKey: "ep_click_area")
         params.updateValue(label, forKey: "ep_click_label")
         /// 클라이언트 아이디 정보를 세팅 합니다.
-        params.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
+        Analytics.setUserProperty(Analytics.appInstanceID(), forName: "up_cid")
         Analytics.logEvent(eventName, parameters:params)
     }
     
@@ -1495,7 +1495,7 @@ class BaseViewModel : NSObject {
                 Thread.sleep(forTimeInterval: 1.0)
                 /// 세션 체크를 대기 합니다.
                 if BaseViewModel.isSssionType == .wait { continue }
-                Slog("isAppSessionEnabled Ctn : \(enabledCtn)")
+                //Slog("isAppSessionEnabled Ctn : \(enabledCtn)")
                 /// 세션 체크를 강제 종료 합니다.
                 if BaseViewModel.isSssionType == .exitLogout {
                     break

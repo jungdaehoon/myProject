@@ -93,6 +93,8 @@ enum SCRIPT_MESSAGES : String
     case getDatePicker              = "getDatePicker"
     /// GA 이벤트 정보를 넘깁니다.
     case sendGAEvent                = "sendGAEvent"
+    /// GA4 이벤트 정보 입니다.
+    case GAHybrid                   = "GAHybrid"
     /// 네이티브 기본 상단 인디게이터 ( 상태바 ) 높이 값을 요청 합니다.
     case getStatusBarHeight         = "getStatusBarHeight"
     /// 복사 요청 입니다. ( UIPasteboard 에 데이터 복사 합니다. )

@@ -8,7 +8,7 @@
 import UIKit
 
 class HomePayModeView: UIView {
-<<<<<<< HEAD
+
     /// 시작 로띠 뷰어를 추가합니다.
     var startHome : LottieAniView?
     /// 반복 로띠 뷰어를 추가합니다.
@@ -26,7 +26,7 @@ class HomePayModeView: UIView {
         self.initHomePayModeView()
         /// 로띠 뷰어를 추가합니다.
         self.startHome = LottieAniView(frame: CGRect(origin: .zero, size: self.frame.size))
-        self.startHome!.setAnimationView(name: "homeStart", loop: false, animationSpeed: 2.0)
+        self.startHome!.setAnimationView(name: "homeStart", loop: false, animationSpeed: 1.0)
         self.addSubview(self.startHome!)
         
         /// 로띠 뷰어를 추가합니다.
@@ -62,9 +62,7 @@ class HomePayModeView: UIView {
         self.loopHome?.isHidden = true
     }
     
-=======
 
->>>>>>> b2d3cad4bfb3ac16f25ba2e81ca5398ffc42e2a1
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

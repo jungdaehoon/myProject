@@ -356,7 +356,10 @@ class TabBarView : UIView
                             if let agree = model,
                                agree.code == "0000"
                             {
-                                
+                                let viewController = OkPaymentViewController()
+                                viewController.modalPresentationStyle = .overFullScreen
+                                controller.pushController(viewController, animated: true, animatedType: .up)
+                                return
                             }
                         }.store(in: &BaseViewModel.shared.cancellableSet)
                     }
