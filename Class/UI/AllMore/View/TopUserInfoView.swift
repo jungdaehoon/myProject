@@ -88,6 +88,7 @@ class TopUserInfoView: UIView {
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "내정보관리")
         self.viewModel!.getAppMenuList(menuID: .ID_MYINFO).sink { url in
             self.setDisplayWebView(url)
         }.store(in: &self.viewModel!.cancellableSet)

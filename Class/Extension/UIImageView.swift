@@ -12,6 +12,19 @@ import Alamofire
 
 extension UIImageView {
     
+    func load(url: URL) {
+            DispatchQueue.global().async { [weak self] in
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self?.image = image
+                        }
+                    }
+                }
+            }
+        }
+    
+    
     /**
      이미지를 다운로드 하여 리턴 합니다.   ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.04
@@ -49,11 +62,13 @@ extension UIImageView {
                 }
                 else
                 {
+                    Slog("loadImage nil 1")
                     subject.send(nil)
                 }
             }
             else
             {
+                Slog("loadImage nil 2")
                 subject.send(nil)
             }
         }        

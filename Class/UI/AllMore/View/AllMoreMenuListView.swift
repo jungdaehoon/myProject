@@ -129,6 +129,7 @@ extension AllMoreMenuListView : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllMoreMenuListCell", for: indexPath) as! AllMoreMenuListCell
         let menuInfo : AllModeMenuListInfo = self.menus[indexPath.row]
+        cell.menuTypeTitle = NC.S(self.titleName.text)
         cell.setDisplay(menuInfo, viewModel: self.viewModel)
         cell.backgroundColor = .clear
         return cell

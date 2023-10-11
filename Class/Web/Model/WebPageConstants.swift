@@ -60,7 +60,7 @@ class WebPageConstants {
     /// 재로페이 상품권 환불웹뷰 입니다.
     static let URL_ZERO_PAY_PURCHASE_CANCEL     = baseURL + "/zeropay/giftcard/purchase/cancel.do"
     /// 재로페이 간편결제 약관동의 페이지 입니다.
-    static let URL_ZERO_PAY_AGREEMENT           = baseURL + "/popup/termsView.do"
+    static let URL_ZERO_PAY_AGREEMENT           = baseURL + "/popup/pedometerTermsView.do"
     /// 재로페이 간편결제 QRCode/BarCode 사용요청 전 거래 인증 체크용 키패드 웹뷰 입니다.
     static let URL_ZERO_PAY_QR_KEYPAD_SHOW      = baseURL + "/zeropay/qr/barcode"
     /// 재로페이 간편결제 QRCode 스캔 결제 요청 입니다.

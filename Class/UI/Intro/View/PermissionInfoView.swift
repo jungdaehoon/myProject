@@ -140,6 +140,7 @@ class PermissionInfoView: UIView {
             self.setAniClose( enabeld: false )
             break
         case 11:
+            BaseViewModel.setGAEvent(page: "인트로",area: "접근권한허용",label: "확인")
             /// 접근권한 확인 이벤트를 넘깁니다.
             self.setAniClose( enabeld: true)
             break

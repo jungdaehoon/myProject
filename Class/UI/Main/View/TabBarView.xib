@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,6 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarView" customModule="cereal" customModuleProvider="target">
             <connections>
+                <outlet property="homePayModeView" destination="OT7-W4-K3s" id="3sC-hO-jor"/>
                 <outlet property="itemHeight" destination="sqn-ub-DcC" id="EHH-ov-AgF"/>
                 <outlet property="itemWidth" destination="rfC-WF-oM5" id="7qE-0H-Ukz"/>
             </connections>
@@ -201,6 +203,14 @@
                                 <color key="titleColor" name="OKColor"/>
                             </state>
                         </button>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OT7-W4-K3s" customClass="HomePayModeView" customModule="cereal" customModuleProvider="target">
+                            <rect key="frame" x="3" y="1" width="64" height="64"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="MbS-AZ-c2z"/>
+                                <constraint firstAttribute="height" constant="64" id="llJ-Jr-FAK"/>
+                            </constraints>
+                        </view>
                         <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBL-if-n6g">
                             <rect key="frame" x="0.0" y="0.0" width="70" height="90"/>
                             <fontDescription key="fontDescription" name="NotoSansKR-Regular" family="Noto Sans KR" pointSize="13"/>
@@ -219,9 +229,11 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="eBL-if-n6g" secondAttribute="trailing" id="EfS-o3-n6B"/>
+                        <constraint firstItem="OT7-W4-K3s" firstAttribute="centerX" secondItem="aj3-W0-0ws" secondAttribute="centerX" id="KIJ-fl-MJa"/>
                         <constraint firstItem="jci-Cd-7f9" firstAttribute="centerX" secondItem="aj3-W0-0ws" secondAttribute="centerX" id="RHD-ea-B9P"/>
                         <constraint firstItem="eBL-if-n6g" firstAttribute="top" secondItem="aj3-W0-0ws" secondAttribute="top" id="TiI-wC-45k"/>
                         <constraint firstItem="eBL-if-n6g" firstAttribute="leading" secondItem="aj3-W0-0ws" secondAttribute="leading" id="Xeb-r4-VIX"/>
+                        <constraint firstItem="OT7-W4-K3s" firstAttribute="top" secondItem="aj3-W0-0ws" secondAttribute="top" constant="1" id="f3e-Vx-OuX"/>
                         <constraint firstItem="jci-Cd-7f9" firstAttribute="top" secondItem="aj3-W0-0ws" secondAttribute="top" constant="4" id="gxE-u6-EMc"/>
                         <constraint firstAttribute="bottom" secondItem="eBL-if-n6g" secondAttribute="bottom" id="nmi-4K-a0e"/>
                         <constraint firstItem="b1m-Lf-znA" firstAttribute="centerX" secondItem="aj3-W0-0ws" secondAttribute="centerX" id="wCt-vE-F1D"/>
@@ -421,5 +433,8 @@
         <namedColor name="OKColor">
             <color red="1" green="0.32549019607843138" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

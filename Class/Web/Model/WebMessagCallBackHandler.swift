@@ -15,14 +15,18 @@ import MobileCoreServices
 import ContactsUI
 import AddressBook
 import AddressBookUI
-
+import AdSupport
 
 /**
- GA Error 타입 입니다. . ( J.D.H VER : 2.0.0 )
- - Date: 2023.07.25
+ GA Error 타입 입니다. . ( J.D.H VER : 2.0.3 )
+ - Date: 2023.10.10
 */
 enum GAError : Error {
     case requiredType
+    case requiredTitle
+    case requiredEventName
+    case actionFieldError
+    case itemFieldError
 }
 
 
@@ -70,60 +74,6 @@ class WebMessagCallBackHandler : NSObject  {
      */
     init( webViewController : BaseWebViewController ) {}
 
-    
-    /**
-     웹 인터페이스 GA 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
-     - Description : okpaygascriptCallbackHandler WebAPP 인터페이스 정보를 받아 처리 합니다.
-     - Date: 2023.07.25
-     - Parameters:
-        - message : 스크립트 메세지 정보를 받습니다.
-     - Throws: False
-     - Returns:False
-     */
-    func didReceiveGAMessage(message: WKScriptMessage) throws {
-        /// GA 데이터를 체크 합니다.
-        if let data = (message.body as AnyObject).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false) {
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] else {
-                fatalError("\(Error.self)")
-            }
-            /// GA 전송할 데이터 입니다.
-            var GAData:[String:Any] = [:]
-            do {
-                /// json 정보 중에 type 정보를 체크 합니다.
-                guard let type = json["type"] as? String else { throw GAError.requiredType}
-                /// GA 데이터를 세팅 합니다.
-                for(key,value) in json
-                {
-                    if key == "title"
-                    {
-                        if let value = value as? String {
-                            GAData[AnalyticsParameterScreenName] = value
-                        }
-                    }
-                    else if key.contains("ep_") || key.contains("up_")
-                    {
-                        if let value = value as? String {
-                            GAData[key] = value
-                        }
-                    }
-                }
-                /// 클라이언트 아이디 정보를 세팅 합니다.
-                GAData.updateValue(BaseViewModel.GAClientID, forKey: "up_cid")
-                /// 이벤트를 넘깁니다.
-                Analytics.logEvent(type == "P" ? "screenview" : "event", parameters: GAData)
-                
-            } catch {
-                switch error
-                {
-                case GAError.requiredType:
-                    Slog("GA4 Error : type 값이 확인 부탁드립ㄴ디ㅏ.", category: .gaevent)
-                    break
-                default:break
-                }
-            }
-        }
-    }
-    
     
     /**
      웹 인터페이스 헨들러 정보를 받아 타입별 분기 처리 합니다. ( J.D.H VER : 2.0.0 )
@@ -258,6 +208,9 @@ class WebMessagCallBackHandler : NSObject  {
             case .sendGAEvent                :
                 self.setSendGAEvent( body )
                 break
+            case .GAHybrid:
+                self.setGAHybrid( body )
+                break
             /// 네이티브 기본 상단 인디게이터 ( 상태바 ) 높이 값을 요청 합니다.
             case .getStatusBarHeight         : break
             /// 복사 요청 입니다. ( UIPasteboard 에 데이터 복사 합니다. )
@@ -385,6 +338,173 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
+     GA4 이벤트를 받아 처리 합니다. ( J.D.H VER : 2.0.3 )
+    - Date: 2023.10.10
+    - Parameters:
+        - body: GA 업로드 데이터 입니다.
+    - Throws: False
+    - Returns:False
+    */
+    func setGAHybrid( _ body : [Any?] ){
+        /// 파라미터 정보가 있는 경우 입니다.
+        if let params = body[2] as? [Any],
+           let gaDic  = params[0] as? [String:Any] {
+            Slog("params : \(params)")
+            
+            /// GA 전송할 데이터 입니다.
+            var gaData:[String:Any] = [:]
+            do {
+                /// 화면이 름  정보를 가져 옵니다.
+                guard let screenName = gaDic["title"] as? String else { throw GAError.requiredTitle}
+                /// 데이터 전송 타입 정보를 가져 옵니다.
+                guard let eventType  = gaDic["type"] as? String else { throw GAError.requiredType}
+                
+                /// GA 데이터를 세팅 합니다.
+                for(key,value) in gaDic
+                {
+                    /// 맞춤 설정 이벤트 입니다.
+                    if key.contains("ep_")
+                    {
+                        if let value = value as? String {
+                            gaData[key] = value.prefix(100)
+                        }
+                    }
+                    /// 사용자 속성 및 사용자ID 설정 입니다.
+                    else if key.contains("up_"){
+                        if let value = value as? String {
+                            Analytics.setUserProperty(value, forName: key)
+                            if key == "up_uid"
+                            {
+                                Analytics.setUserID(value)
+                            }
+                        }
+                    }
+                    /// 거래 데이터 설정 입니다.
+                    else if key == "transaction"
+                    {
+                        if let value = value as? [String:Any] {
+                            gaData.merge(try self.convertAction(data: value)) { (_,new) in new }
+                        }
+                    }
+                    /// 상품 데이터 설정 입니다.
+                    else if key == "items"
+                    {
+                        if let value = value as? [Any] {
+                            gaData[key] = value
+                        }
+                    }
+                }
+                
+                /// ClientID 설정 입니다.
+                Analytics.setUserProperty(Analytics.appInstanceID(), forName: "up_cid")
+                /// 필수 데이터는 아님 추가 하지 않도록 합니다. ( 담당자 통화후 확인 진행함 )
+                //Analytics.setUserProperty(ASIdentifierManager.shared().advertisingIdentifier.uuidString, forName: "up_adid")
+                
+                if eventType == "P"
+                {
+                    gaData[AnalyticsParameterScreenName] = screenName
+                    Analytics.logEvent(AnalyticsEventScreenView, parameters: gaData)
+                }
+                else if gaData["items"] != nil
+                {
+                    var ecommerceData = gaData
+                    /// EcommerceStep 가져 옵니다.
+                    guard let eventName = gaDic["event_name"] as? String else { throw GAError.requiredEventName}
+                    if let ecommerceItem = ecommerceData["items"] as? [Any] {
+                        ecommerceData["items"] = try convertItem(items: ecommerceItem)
+                    }
+                    Analytics.logEvent(eventName, parameters: ecommerceData)
+                }
+                else
+                {
+                    /// EcommerceStep 가져 옵니다.
+                    guard let eventName = gaDic["event_name"] as? String else { throw GAError.requiredEventName}
+                    /// 이벤트를 넘깁니다.
+                    Analytics.logEvent(eventName, parameters: gaData)
+                }
+                
+            } catch {
+                switch error
+                {
+                case GAError.requiredType:
+                    Slog("GA4 Error : type 값이 확인 부탁드립니다.", category: .gaevent)
+                case GAError.requiredTitle:
+                    Slog("GA4 Error : title 값이 확인 부탁드립니다.", category: .gaevent)
+                case GAError.requiredEventName:
+                    Slog("GA4 Error : event_name 값이 확인 부탁드립니다.", category: .gaevent)
+                case GAError.actionFieldError:
+                    Slog("GA4 Error : 거래 데이터 확인 부탁드립니다.", category: .gaevent)
+                case GAError.itemFieldError:
+                    Slog("GA4 Error : 상품 데이터 확인 부탁드립니다.", category: .gaevent)
+                default:
+                    Slog("GA4 Interface Error", category: .gaevent)
+                }
+            }
+        }
+    }
+    
+    
+    /**
+     전자상거래 거래 데이터 형 변환 함수 정의 입니다. ( J.D.H VER : 2.0.3 )
+     - Date: 2023.10.10
+     - Parameters:
+        - items : 전자상거래 데이터 입니다.
+     - Throws: True
+     - Returns:
+     전자상거래 정리된 데이터를 리턴 합니다. ([Any])
+     */
+    private func convertAction( data: [String:Any] ) throws -> [String:Any] {
+        var setData = data
+        for (key,value) in setData
+        {
+            if let stringValue = value as? String,
+               ["tax","shipping","value"].contains(key) {
+                guard let doubleValue = Double(stringValue) else {
+                    throw GAError.actionFieldError
+                }
+                setData[key] = doubleValue
+            }
+        }
+        return setData
+    }
+    
+    
+    /**
+     전자상거래 상품 데이터 형 변환 함수 정의 입니다. ( J.D.H VER : 2.0.3 )
+     - Date: 2023.10.10
+     - Parameters:
+        - items : 전자상거래 데이터 입니다.
+     - Throws: True
+     - Returns:
+     전자상거래 정리된 데이터를 리턴 합니다. ([Any])
+     */
+    private func convertItem( items : [Any]) throws -> [Any] {
+        return try items.map { item -> Any in
+            guard var itemDict = item as? [String:Any] else { throw GAError.itemFieldError}
+            for (key,value) in itemDict
+            {
+                switch key {
+                case "price", "discount" :
+                    if let stringValue = value as? String {
+                        guard let doubleValue = Double(stringValue) else { throw GAError.itemFieldError}
+                        itemDict[key] = doubleValue
+                    }
+                case "index", "quantity":
+                    if let stringValue = value as? String {
+                        guard let intValue = Int(stringValue) else { throw GAError.itemFieldError}
+                        itemDict[key] = intValue
+                    }
+                default:
+                    break
+                }
+            }
+            return itemDict
+        }
+    }
+    
+    
+    
+    /**
      GA  Event 값을 받아 추가 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.20
      - Parameters:
@@ -443,7 +563,7 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                 }
                 break
-            case .account( let account ):
+            case .account( let account, let _ ):
                 if let account = account {
                     /// 서버에 계좌 정보를 전달 합니다.
                     self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: account )
@@ -2036,7 +2156,7 @@ class WebMessagCallBackHandler : NSObject  {
                 let terms = [TERMS_INFO.init(title: "제로페이 서비스 이용약관", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z001"),
                              TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z002")]
                 BottomTermsView().setDisplay( target: controller, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
-                                             termsList: terms) { value in
+                                             termsList: terms, isCheckUI: true) { value in
                     /// 동의/취소 여부를 받습니다.
                     if value == .success
                     {
@@ -2158,7 +2278,6 @@ extension WebMessagCallBackHandler{
                 }
             }
         }
-        
     }
     
     

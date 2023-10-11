@@ -60,30 +60,21 @@ class BottomAccountListTableViewCell: UITableViewCell {
             /// 계좌 정보 입니다.
             let account = accounts[indexPath.row]
             
+            Slog("UIImageView.loadImage file 0 : \(AlamofireAgent.baseURL + account._bank_r_image_url!)")
+            
             /// 뱅킹 이미지 입니다.
             if let url = URL(string: AlamofireAgent.baseURL + account._bank_r_image_url!) {
-                UIImageView.loadImage(from: url).sink { image in
-                    if let bankImg = image {
-                        self.bankIcon.image = bankImg
-                    }
-                    else
-                    {
-                        /// 뱅킹 기본 이미지 입니다.
-                        self.bankIcon.image = UIImage(named: "defaultBankLogo")
-                    }
-                }.store(in: &viewModel!.cancellableSet)
+                self.bankIcon.load(url: url)
             }
             else
             {
-                /// 뱅킹 기본 이미지 입니다.
                 self.bankIcon.image = UIImage(named: "defaultBankLogo")
             }
             
             /// 메인계좌 아이콘 입니다.
             self.mainAccountIcon.isHidden   = account._main_yn == "Y" ? false : true
             /// 선택 아이콘 기본 false 로 설정 합니다.
-            self.seletedIcon.isHidden       = false
-            if seleted { self.seletedIcon.isHidden = false }
+            self.seletedIcon.isHidden       = account._main_yn == "Y" ? false : true
             /// 계좌 제인증 여부를 체크 합니다.
             if viewModel!.getAccountReauth(account: account)
             {
@@ -99,7 +90,7 @@ class BottomAccountListTableViewCell: UITableViewCell {
                 self.reauthAccountView.isHidden = true
                 self.accountView.isHidden       = false
                 /// 은행 정보 입니다.
-                self.accountNum.text            = "\(account._acc_nm!) \(account._acc_no!)"
+                self.accountNum.text            = "\(account._bank_nm!) \(account._masking_acc_no!)"
                 /// 메인 계좌에 따른 폰트 정보 입니다.
                 self.accountNum.font            = UIFont(name: account._main_yn == "Y" ? "Pretendard-Medium" : "Pretendard-Regular", size: 16.0)
                 /// 메인 계좌에 따른 컬러 정보 입니다.

@@ -23,7 +23,8 @@ class TabBarView : UIView
     static var tabBackIndex             : Int   = 0
     /// 현 Tab 인덱스 입니다.
     static var tabSeletedIndex          : Int   = 0
-    
+    /// 홈 선택시 홈 탭바 영역 결제 뷰어로 변경용 입니다.
+    @IBOutlet weak var homePayModeView: HomePayModeView!
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -106,18 +107,32 @@ class TabBarView : UIView
                     {
                         /// 애니 효과 디스플레이로 디폴트 버튼을 히든 처리 합니다.
                         item.isHidden   = true
+                        /// 인덱스 확인 입니다.
+                        let index       = item.tag - 100
+                        
                         /// 디스플레이할 애니 이미지들을 선언 합니다.
                         let aniimages   = ["tabbar_wallet","tabbar_benefit","tabbar_home","tabbar_financial","tabbar_more"]
-                        /// 애니 뷰어를 추가합니다.
-                        let aniView     = LottieAniView(frame: item.frame)
-                        aniView.setAnimationView(name: aniimages[item.tag - 100], loop: false)
-                        aniView.play { success in
-                            /// 디폴트 버튼을 활성화 합니다.
-                            item.isHidden    = false
-                            /// 추가한 애니 뷰어를 삭제 합니다.
-                            aniView.removeFromSuperview()
+                        
+                        if index != 2
+                        {
+                            /// 애니 뷰어를 추가합니다.
+                            let aniView     = LottieAniView(frame: item.frame)
+                            aniView.setAnimationView(name: aniimages[item.tag - 100], loop: false)
+                            aniView.play { success in
+                                /// 디폴트 버튼을 활성화 합니다.
+                                item.isHidden    = false
+                                /// 추가한 애니 뷰어를 삭제 합니다.
+                                aniView.removeFromSuperview()
+                            }
+                            subViews.addSubview(aniView)
                         }
-                        subViews.addSubview(aniView)
+                        else
+                        {
+                            /// 디폴트 버튼을 활성화 합니다.
+                            item.isHidden    = false                            
+                        }
+                        
+                        
                         /// 디폴트 버튼을 활성화 여부를 설정 합니다.
                         item.isSelected  = enabled
                         item.isEnabled   = enabled
@@ -149,6 +164,16 @@ class TabBarView : UIView
             TabBarView.tabBackIndex             = TabBarView.tabSeletedIndex
             /// 현 탭 정보를 저장 합니다.
             TabBarView.tabSeletedIndex          = pageTag - 10
+            if TabBarView.tabSeletedIndex == 2
+            {
+                self.homePayModeView.isHidden = false
+                self.homePayModeView.setStartPayMode()
+            }
+            else
+            {
+                self.homePayModeView.isHidden = true
+                self.homePayModeView.setStopPayMode()
+            }
             Slog("TabBarView.tabBackIndex : \(TabBarView.tabBackIndex)")
             Slog("TabBarView.tabSeletedIndex : \(TabBarView.tabSeletedIndex)")
             self.setDefault()
@@ -283,12 +308,65 @@ class TabBarView : UIView
     
     //MARK: - 버튼 이벤트 입니다.
     @IBAction func btn_action(_ sender: Any) {
-        let btn : UIButton                  = sender as! UIButton
+        let btn : UIButton = sender as! UIButton
         Slog("Tabbar SelectedIndex : \(btn.tag - 10)")
+        let index   = btn.tag - 10
+        if index == 2,
+           self.homePayModeView.isHidden == false {
+            self.setPayEventDisplay()
+            return
+        }
+        
+        let gaevent = ["월렛","혜택","홈","금융","전체"]
+        BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: gaevent[index])
         /// 탭을 이동시키며 새로고침 합니다.
-        TabBarView.setReloadSeleted(pageIndex: btn.tag - 10)
+        TabBarView.setReloadSeleted(pageIndex: index)
     }
 
+    
+    
+    func setPayEventDisplay(){
+        BaseViewModel.shared.getZeroPayTermsCheck().sink { result in
+            
+        } receiveValue: { model in
+            /// 약관 동의 팝업을 오픈 합니다.
+            if let controller = TabBarView.tabbar!.viewControllers![2] as? HomeViewController{
+                if let check = model,
+                   let data = check._data {
+                    if data._didAgree!
+                    {
+                        let viewController = OkPaymentViewController()
+                        viewController.modalPresentationStyle = .overFullScreen
+                        controller.pushController(viewController, animated: true, animatedType: .up)
+                        return
+                    }
+                }
+
+                /// 약관 동의 팝업을 오픈 합니다.
+                let terms = [TERMS_INFO.init(title: "제로페이 서비스 이용약관", url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z001"),
+                             TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=Z002")]
+                BottomTermsView().setDisplay( target: controller, "제로페이 서비스를 이용하실려면\n이용약관에 동의해주세요",
+                                             termsList: terms, isCheckUI: true) { value in
+                    /// 동의/취소 여부를 받습니다.
+                    if value == .success
+                    {
+                        /// 제로페이 약관에 동의함을 저장 요청 합니다.
+                        BaseViewModel.shared.setZeroPayTermsAgree().sink { result in
+                        } receiveValue: { model in
+                            if let agree = model,
+                               agree.code == "0000"
+                            {
+                                let viewController = OkPaymentViewController()
+                                viewController.modalPresentationStyle = .overFullScreen
+                                controller.pushController(viewController, animated: true, animatedType: .up)
+                                return
+                            }
+                        }.store(in: &BaseViewModel.shared.cancellableSet)
+                    }
+                }
+            }
+        }.store(in: &BaseViewModel.shared.cancellableSet)
+    }
 }
 
 

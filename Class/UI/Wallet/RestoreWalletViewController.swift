@@ -70,13 +70,16 @@ class RestoreWalletViewController: UIViewController {
     
     
     @IBAction func onConfirm(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "월렛 복구 안내",area: "하단" ,label: "확인")
         self.clickConfirm()
     }
     
     @IBAction func onLostMnemonic(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "월렛 복구 안내",area: "복구구문" ,label: "복구구문을 잃어버리셨나요?")
         showConfirmLostMnemonic()
     }
     @IBAction func onClose(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "월렛 복구 안내",area: "상단" ,label: "뒤로가기")
         if let completion = self.completion { completion(nil) }
         self.popController(animated: true,animatedType: .down)
     }
@@ -188,6 +191,7 @@ extension RestoreWalletViewController : UITextViewDelegate {
         return true
     }
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        BaseViewModel.setGAEvent(page: "월렛 복구 안내",area: "복구구문" ,label: "입력하기")
         return true
     }
     func textViewDidBeginEditing(_ textView: UITextView) {

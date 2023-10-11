@@ -224,12 +224,14 @@ class LoginViewController: BaseViewController {
                 /// 업데이트 안내 팝업 입니다.
                 let alert = CMAlertView().setAlertView( detailObject: "OK pay가 처음인가요?" as AnyObject )
                 alert?.addAlertBtn(btnTitleText: "아니요", completion: { result in
+                    BaseViewModel.setGAEvent(page: "인트로",area: "OKpay가 처음인가요",label: "아니요")
                     /// 가이드뷰 활성화 여부 입니다.
                     self.guideViewEnabled = false
                     /// 가이드 뷰어를 종료 합니다.
                     self.guideView.setAniClose()
                 })
                 alert?.addAlertBtn(btnTitleText: "네", completion: { result in
+                    BaseViewModel.setGAEvent(page: "인트로",area: "OKpay가 처음인가요",label: "네")
                     self.guideView.setZeroPage()
                     /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
                     self.viewModel.getAppMenuList(menuID: .ID_MEM_INTRO).sink { url in
@@ -344,7 +346,7 @@ class LoginViewController: BaseViewController {
                                 /// 로그인 여부를 활성화 합니다.
                                 BaseViewModel.loginResponse!.islogin = true
                                 /// GA 이벤트 정보를 보냅니다.
-                                BaseViewModel.setGAEvent( eventName: "login", parameters: ["sign_up_method" : "P"] )
+                                //BaseViewModel.setGAEvent( eventName: "login", parameters: ["sign_up_method" : "P"] )
                                 /// FCM TOKEN 정보를 서버에 등록 합니다.
                                 let _ = self.viewModel.setFcmTokenRegister()
                                 /// 닉네임 변경 여부를 체크 합니다.
@@ -446,6 +448,7 @@ class LoginViewController: BaseViewController {
                     
                     /// 안내 팝업 오픈 합니다.
                     CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
+                        BaseViewModel.setGAEvent(page: "로그인",area: "본인인증",label: "확인")
                         self.viewModel.getAppMenuList(menuID: menu_id).sink { url in
                             self.view.setDisplayWebView(url + getParam, modalPresent: true, titleBarHidden: true)
                         }.store(in: &self.viewModel.cancellableSet)
@@ -507,15 +510,18 @@ class LoginViewController: BaseViewController {
         let value : LOGIN_BTN_ACTION = LOGIN_BTN_ACTION(rawValue: (sender as AnyObject).tag!)!
         switch value {
         case .close:
+            BaseViewModel.setGAEvent(page: "로그인",area: "상단",label: "닫기")
             /// 가이드 디스플레이로 넘어 갑니다.
             self.setGuideDisplay()
             break
         case .login:
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "로그인 진행")
             /// 로그인 요청 합니다.
             self.setLogin()
             break
-        case .autologin:
+        case .autologin:            
             self.autoLoginBtn.isSelected = !self.autoLoginBtn.isSelected
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: self.autoLoginBtn.isSelected ? "자동로그인_ON" : "자동로그인_OFF")
             if let custItem = SharedDefaults.getKeyChainCustItem()
             {
                 custItem.auto_login = self.autoLoginBtn.isSelected
@@ -523,26 +529,31 @@ class LoginViewController: BaseViewController {
             }
             break
         case .join:
+            BaseViewModel.setGAEvent(page: "로그인",area: "하단",label: "회원가입")
             self.viewModel.getAppMenuList(menuID: .ID_MEM_INTRO).sink { url in
                 self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .id_change:
+            BaseViewModel.setGAEvent(page: "로그인",area: "하단",label: "아이디 변경")
             self.viewModel.getAppMenuList(menuID: .ID_LOG_FIND_ID).sink { url in
                 self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .pw_change:
+            BaseViewModel.setGAEvent(page: "로그인",area: "하단",label: "비밀번호 찾기")
             self.viewModel.getAppMenuList(menuID: .ID_LOG_FIND_PW).sink { url in
                 self.view.setDisplayWebView(url,modalPresent: true,titleBarHidden: true)
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .pw_Clear:
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "\(NC.S(self.pwField.text))_지우기")
             self.pwField.text               = ""
             self.pwFieldClearBtn.isHidden   = true
             self.setLoginBtn()
             break
         case .id_Clear:
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "\(NC.S(self.idField.text))_지우기")
             self.idField.text               = ""
             self.idFieldClearBtn.isHidden   = true
             self.setLoginBtn()
@@ -596,9 +607,6 @@ extension LoginViewController : UITextFieldDelegate {
         {
             return false
         }
-        
-        
-        
         return true
     }
 }
@@ -745,8 +753,6 @@ extension LoginViewController : XKTextFieldDelegate{
         return true
     }
     
-    
-    
     func textFieldSessionTimeOut(_ textField: XKTextField!) {
         Slog("ABC textFieldSessionTimeOut ")
         textField.cancelKeypad();
@@ -755,6 +761,4 @@ extension LoginViewController : XKTextFieldDelegate{
             self.setResignFirstResponder()
         }
     }
-    
-    
 }

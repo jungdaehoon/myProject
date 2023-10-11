@@ -513,6 +513,7 @@ class PedometerViewController: BaseViewController {
     
     
     @IBAction func onTappedReward(_ sender: UIButton) {
+        BaseViewModel.setGAEvent(page: "도전!만보GO",area: "하단",label: "리워드받기")
         self.getReward()
     }
     
@@ -571,7 +572,8 @@ class PedometerViewController: BaseViewController {
     }
     
     @IBAction func onTappedClose(_ sender: UIBarButtonItem) {
-        self.popController(animated: true,animatedType: .down)        
+        BaseViewModel.setGAEvent(page: "도전!만보GO",area: "상단",label: "닫기")
+        self.popController(animated: true,animatedType: .down)
     }
     
     @IBAction func onTappedConfirm(_ sender: UIButton) {
@@ -691,6 +693,7 @@ class PedometerViewController: BaseViewController {
         if let response = self.viewModel.pedometerResponse,
            let data = response._data
         {
+            BaseViewModel.setGAEvent(page: "도전!만보GO",area: "하단배너",label: WebPageConstants.baseURL + NC.S(data._ban_url))
             /// 배너 페이지로 이동합니다.
             self.view.setDisplayWebView(WebPageConstants.baseURL + data._ban_url!, modalPresent: true, titleBarType: 2)
         }

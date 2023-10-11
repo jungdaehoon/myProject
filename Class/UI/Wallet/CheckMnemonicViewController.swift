@@ -60,7 +60,9 @@ class CheckMnemonicViewController: UIViewController {
     
 
     @IBAction func onConfirm(_ sender: Any) {
+        
         if (checkSelectOK()){
+            BaseViewModel.setGAEvent(page: "월렛 복구구문 기록",area: "하단" ,label: "확인")
             self.dismiss(animated: true, completion: {
                 self.delegate?.checkMnemonicResult(self, action: .close, info: nil)
             })
@@ -73,10 +75,12 @@ class CheckMnemonicViewController: UIViewController {
     }
     
     @IBAction func onCloseBtn(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "월렛 복구구문 기록",area: "상단" ,label: "뒤로가기")
         self.onPrev(sender)
     }
     
     @IBAction func onPrev(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "월렛 복구구문 기록",area: "하단" ,label: "이전")
         self.dismiss(animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -168,6 +172,15 @@ class CheckMnemonicViewController: UIViewController {
         }
 
     }
+    
+    @IBAction func seg_action(_ sender: Any) {
+        if let seg = sender as? UISegmentedControl {
+            //BaseViewModel.setGAEvent(page: "월렛 복구구문 기록",area: "\(seg.selectedSegmentIndex + 1)번째_복구단어" ,label: "단어선택")
+        }
+        
+    }
+    
+    
     // 컨트롤 셋팅
     func initControl() {
         if let custItem = SharedDefaults.getKeyChainCustItem()

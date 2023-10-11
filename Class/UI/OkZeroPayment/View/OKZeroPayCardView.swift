@@ -46,7 +46,7 @@ enum DISPLAY_TYPE : Int {
  제로페이 결제 가능 카드 뷰어 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.04.28
  */
-class OKZeroPayCardView: UIView {
+class OKZeroPayCardView: UIView{
     var viewModel : OKZeroViewModel = OKZeroViewModel()
     /// 배너 뷰어어 입니다.
     @IBOutlet weak var bannerView       : UIView!
@@ -108,7 +108,6 @@ class OKZeroPayCardView: UIView {
     init(){
         super.init(frame: UIScreen.main.bounds)
         commonInit()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -448,10 +447,17 @@ class OKZeroPayCardView: UIView {
                                         }
                                     }
                                     break
-                                case .account( let account ):
+                                case .account( let account, let bankNm ):
                                     if let account = account {
-                                        
-                                        /// 받은 계좌 정보로 서버에 카드 상세 정보를 요청 합니다.
+                                        if let okmoney = OKZeroViewModel.zeroPayOKMoneyResponse,
+                                           let data    = okmoney._data,
+                                           var mainAccount = data._mainAccount
+                                        {
+                                            mainAccount.lastAccountNo   = account.right(4)
+                                            mainAccount.bankName        = bankNm
+                                            OKZeroViewModel.zeroPayOKMoneyResponse!.data!.mainAccount = mainAccount
+                                            self.setDisplayView( displayType: self.displayType, colors: self.saveBgColors, model: OKZeroViewModel.zeroPayOKMoneyResponse)
+                                        }
                                     }
                                     break
                                 }
@@ -492,6 +498,4 @@ class OKZeroPayCardView: UIView {
             }
         }
     }
-    
-    
 }

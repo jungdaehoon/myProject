@@ -85,6 +85,7 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: "시작하기")
         self.completion!("EXIT")
     }
 }

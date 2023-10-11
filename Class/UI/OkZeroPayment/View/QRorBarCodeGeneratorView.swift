@@ -71,12 +71,14 @@ class QRorBarCodeGeneratorView: UIView {
         self.code       = code
         self.type       = codeType
         self.btnEvent   = btnEvent
+        
         switch codeType {
         case .barcode:
             if let image = self.generateBarcode128(code)
             {
+                if self.imageView.image != nil { self.imageView.image = nil }
                 Slog("setCodeDisplay self.frame.size : \(self.frame.size)")
-                self.imageView.image        = self.resize(image: image, size: self.frame.size)
+                self.imageView.image = self.resize(image: image, size: self.frame.size)
                 completion!(true)
             }
             break
@@ -85,6 +87,7 @@ class QRorBarCodeGeneratorView: UIView {
             self.imageView.backgroundColor   = .white
             if let image = self.generateQRCode(code)
             {
+                if self.imageView.image != nil { self.imageView.image = nil }
                 self.imageView.image = image
                 completion!(true)
             }

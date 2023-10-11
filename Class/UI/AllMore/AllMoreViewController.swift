@@ -191,13 +191,12 @@ class AllMoreViewController: BaseViewController {
             {
                 menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
             }
-            /*
+            
             /// 제로페이 QR 결제 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_QR)
             {
                 menus.append(self.viewModel.getMenuInfo(title: "제로페이 QR", menuType: .rightimg))
             }
-             */
              
             /// 제로페이 상품권 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_ZERO_GIFT)
@@ -377,6 +376,7 @@ class AllMoreViewController: BaseViewController {
     
     //MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        BaseViewModel.setGAEvent(page: "전체서비스",area: "상단",label: "설정")
         /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
         self.viewModel.getAppMenuList(menuID: .ID_SETTING).sink { url in
             self.view.setDisplayWebView(url)
