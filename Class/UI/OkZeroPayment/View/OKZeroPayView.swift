@@ -40,7 +40,7 @@ class OKZeroPayView: UIView {
     /// 바코드 인식 할 영역 입니다.
     var rectOfInterest                      : CGRect?
     /// 제로페이 결제 할 코드타입을 설정 합니다. ( QRCode 결제 , BarCode 결제 )
-    var zeroPayCodeType                     : ZEROPAY_CODE_TYPE = .qrcode
+    var zeroPayCodeType                     : ZEROPAY_CODE_TYPE = .barcode
     /// 타이머 활성화 중인지를 체크 합니다.
     var isTimer                             : Bool = false
     /// 카드 전체 화면 디스플레이 여부 입니다.
@@ -588,6 +588,7 @@ class OKZeroPayView: UIView {
             self.openFullCodeDisplay( codeType: .barcode, code : barCode )
         }
     
+        /*
         /// QRCode 를 제작 합니다.
         self.qrCodeGenerator.setCodeDisplay(.qrcode,code: NC.S(qrCode)) { success in
             if success
@@ -617,6 +618,7 @@ class OKZeroPayView: UIView {
         } btnEvent: { success in
             self.openFullCodeDisplay( codeType: .qrcode, code: qrCode )
         }
+         */
     }
     
     

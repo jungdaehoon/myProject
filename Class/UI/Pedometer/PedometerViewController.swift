@@ -179,6 +179,15 @@ class PedometerViewController: BaseViewController {
                 HealthKitManager.getTodaysSteps {   (steps) in
                     if steps == 0 {
                         DispatchQueue.main.async {
+                            self.mPeometerCount = Int(steps)
+                            //                        self.__setLayout()
+                            self.getWeekPedoMeter(callback: self.sendData)
+                            self.updateTime()
+                            //추후 보상들어가면 삭제
+                            self.getData()
+                        }
+                        /*
+                        DispatchQueue.main.async {
                             self.mIsAuthorized = false
                             /// 만보기 서비스 이용활성화를 위해 설정으로 이동 안내 팝업 오픈 입니다.
                             CMAlertView().setAlertView(detailObject: "만보기 서비스이용을 위해  \n 건강앱에 들어가셔서 데이터 접근 권한을 허용해주세요." as AnyObject, cancelText: "확인") { event in
@@ -186,6 +195,7 @@ class PedometerViewController: BaseViewController {
                                 self.popController(animated: true,animatedType: .down)
                             }
                         }
+                         */
                     } else {
                         DispatchQueue.main.async {
                             self.mPeometerCount = Int(steps)
@@ -693,7 +703,7 @@ class PedometerViewController: BaseViewController {
         if let response = self.viewModel.pedometerResponse,
            let data = response._data
         {
-            BaseViewModel.setGAEvent(page: "도전!만보GO",area: "하단배너",label: WebPageConstants.baseURL + NC.S(data._ban_url))
+            BaseViewModel.setGAEvent(page: "도전!만보GO",area: "하단배너",label: data._ban_detail_title!)
             /// 배너 페이지로 이동합니다.
             self.view.setDisplayWebView(WebPageConstants.baseURL + data._ban_url!, modalPresent: true, titleBarType: 2)
         }

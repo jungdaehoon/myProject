@@ -26,6 +26,8 @@ class TabBarView : UIView
     /// 홈 선택시 홈 탭바 영역 결제 뷰어로 변경용 입니다.
     @IBOutlet weak var homePayModeView: HomePayModeView!
     
+    
+    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -143,7 +145,6 @@ class TabBarView : UIView
                         item.isSelected  = enabled
                         //item.isEnabled   = enabled
                     }
-                    
                 }
             }
         }
@@ -324,7 +325,10 @@ class TabBarView : UIView
     }
 
     
-    
+    /**
+     결제 버튼 경우 제로페이 약관 동의 및 페이지 이동 입니다.. ( J.D.H VER : 2.0.3 )
+     - Date: 2023.10.06
+     */
     func setPayEventDisplay(){
         BaseViewModel.shared.getZeroPayTermsCheck().sink { result in
             

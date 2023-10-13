@@ -73,7 +73,7 @@ class LoadingView: UIView {
      - Throws: False
      - Returns:False
      */
-    func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow }), maxTime : CGFloat = 10.0 ) {
+    func show(_ base: UIView? = UIApplication.shared.windows.first(where: { $0.isKeyWindow }), maxTime : CGFloat = 20.0 ) {
         /// 로그인 중에 추가 로그인 요청을 하지 않습니다.
         if self.isLoading { return }
         if let base = base {
@@ -83,6 +83,7 @@ class LoadingView: UIView {
                                              target: self, selector: #selector(self.timerAction),
                                              userInfo: nil,
                                              repeats: false)
+                
                 self.aniView!.play()
                 base.addSubview(self)
             }

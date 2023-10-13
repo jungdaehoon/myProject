@@ -12,17 +12,24 @@ import Alamofire
 
 extension UIImageView {
     
+    /**
+     이미지를 다운로드 하여 리턴 합니다.   ( J.D.H VER : 2.0.3 )
+     - Date: 2023.10.06
+     - Parameters:
+        - url : 이미지 url 정보를 받습니다.
+     - DispatchQueue: True
+     */
     func load(url: URL) {
-            DispatchQueue.global().async { [weak self] in
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            self?.image = image
-                        }
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
                     }
                 }
             }
         }
+    }
     
     
     /**

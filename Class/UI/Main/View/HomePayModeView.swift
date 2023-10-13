@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ 탭바 결제 버튼 모드 뷰어 입니다.  ( J.D.H VER : 2.0.0 )
+ - Date: 2023.03.20
+ */
 class HomePayModeView: UIView {
 
     /// 시작 로띠 뷰어를 추가합니다.
@@ -47,28 +51,28 @@ class HomePayModeView: UIView {
     }
     
     
+    /**
+     홈 버튼 결제 타입 뷰어 시작 이미지 플레이  입니다.  ( J.D.H VER : 2.0.2 )
+     - Date: 2023.10.06
+     */
     func setStartPayMode(){
+        self.startHome!.isHidden = false
         /// 로띠 뷰어를 추가합니다.
         self.startHome!.play(){ value in
-            self.loopHome?.isHidden = false
+            self.startHome!.isHidden = true
+            self.loopHome!.isHidden  = false
             self.loopHome!.play()
         }
     }
     
     
+    /**
+     홈 버튼 결제 타입 뷰어 반복 중간 이미지 플레이  입니다.  ( J.D.H VER : 2.0.2 )
+     - Date: 2023.10.06
+     */
     func setStopPayMode() {
         self.startHome!.stop()
         self.loopHome!.stop()
         self.loopHome?.isHidden = true
     }
-    
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

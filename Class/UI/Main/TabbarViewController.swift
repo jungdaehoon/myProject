@@ -320,10 +320,8 @@ class TabbarViewController: UITabBarController {
                     
                 }
                 Slog("Ing Time : \(overTime)")
-                
             }
         }
-        
     }
 }
 
@@ -331,7 +329,6 @@ class TabbarViewController: UITabBarController {
 
 extension UITabBarController
 {
-    
     /**
      현 진행중인 안내 뷰어 를 전부 초기화 합니다. ( J.D.H VER : 2.0.0 )
      - Description: UIApplication.shared.windows 상에 추가된 UIView(BaseView) 타입의 모든 안내 팝업류는 전부 삭제 합니다.

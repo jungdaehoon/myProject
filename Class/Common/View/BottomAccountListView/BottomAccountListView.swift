@@ -163,7 +163,6 @@ class BottomAccountListView: BaseView {
                     } completion: { _ in
                         view.removeFromSuperview()
                     }
-                    
                 }
             })
         }

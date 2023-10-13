@@ -54,8 +54,12 @@ struct pedometer_data : Codable {
     var _ban_img            : String? { get { return  NC.S(ban_img) } }
     /// 배너 선택시 이동할 URL 입니다.
     var _ban_url            : String? { get { return  NC.S(ban_url) } }
+    /// 배너 타이틀 정보 입니다.
+    var _ban_detail_title   : String? { get { return  NC.S(ban_detail_title) } }
     
     
+    /// 배너 타이틀 정보 입니다.
+    var ban_detail_title    : String?
     /// 지금 포인트 입니다.
     var rcv_point           : Int?
     /// 전체 포인트 입니다.
