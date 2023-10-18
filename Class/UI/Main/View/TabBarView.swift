@@ -318,7 +318,7 @@ class TabBarView : UIView
         }
         
         let gaevent = ["월렛","혜택","홈","금융","전체"]
-        BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: gaevent[index])
+        BaseViewModel.setGAEvent(page: "공통",area: "하단바",label: gaevent[index])
         /// 탭을 이동시키며 새로고침 합니다.
         TabBarView.setReloadSeleted(pageIndex: index)
     }

@@ -48,8 +48,10 @@ class HomePayModeView: UIView {
     
     
     func setStartPayMode(){
+        self.startHome!.isHidden = false
         /// 로띠 뷰어를 추가합니다.
         self.startHome!.play(){ value in
+            self.loopHome!.isHidden  = false
             self.loopHome?.isHidden = false
             self.loopHome!.play()
         }

@@ -693,7 +693,7 @@ class PedometerViewController: BaseViewController {
         if let response = self.viewModel.pedometerResponse,
            let data = response._data
         {
-            BaseViewModel.setGAEvent(page: "도전!만보GO",area: "하단배너",label: WebPageConstants.baseURL + NC.S(data._ban_url))
+            BaseViewModel.setGAEvent(page: "도전!만보GO",area: "하단배너",label: WebPageConstants.baseURL + NC.S(data._ban_detail_title!))
             /// 배너 페이지로 이동합니다.
             self.view.setDisplayWebView(WebPageConstants.baseURL + data._ban_url!, modalPresent: true, titleBarType: 2)
         }

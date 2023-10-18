@@ -118,7 +118,7 @@ class OKZeroPayCodeFullView: UIView {
             /// 바코드 영역 뷰어를 디스플레이 합니다.
             self.barCodeView.isHidden               = false
             /// 라운드 라인 컬러를 활성화 컬러로 변경 합니다.
-            self.barCodeView.borderColor            = .OKColor
+            //self.barCodeView.borderColor            = .OKColor
             /// 바코드 타임 뷰어를 활성화 합니다.
             self.barCodeEnabledTimeView.isHidden    = false
             /// 바코드 타입으로 안내 문구를 변경 합니다.
@@ -147,7 +147,7 @@ class OKZeroPayCodeFullView: UIView {
             /// QRCode 영역 뷰어를 디스플레이 합니다.
             self.qrCodeView.isHidden                = false
             /// QRCode 영역 라운드 컬러를 활성화 합니다.
-            self.qrCodeView.borderColor             = .OKColor
+            //self.qrCodeView.borderColor             = .OKColor
             /// QRCode 사용가능 안내 문구를 디스플레이 합니다.
             self.qrCodeTypeInfoText.text            = "매장에 QR코드를 보여주세요"
             /// 전체 화면 디스플레이 값입니다.

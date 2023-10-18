@@ -89,6 +89,8 @@ enum FULL_PAGE_TYPE : String {
     case pg_type            = "PG"
     /// 제로페이 연동 타입 입니다.
     case zeropay_type       = "ZP"
+    /// 제로페이 연동 타입 입니다.
+    case lpoint_type       = "LPOINT"
     /// 오픈뱅킹 연동 타입 입니다.
     case openbank_type      = "OPENBANK"
     /// 인증용 보안키패드 연동 타입 입니다.
