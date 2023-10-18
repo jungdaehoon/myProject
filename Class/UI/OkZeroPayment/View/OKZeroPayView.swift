@@ -59,6 +59,10 @@ class OKZeroPayView: UIView {
     @IBOutlet weak var qrcodeLineImg        : UIImageView!
     /// 상세 정보 뷰어의 상단 포지션 입니다.
     @IBOutlet weak var detaileViewTop       : NSLayoutConstraint!
+    /// 결제 타입 뷰어 입니다.
+    @IBOutlet weak var payTypeView          : UIView!
+    /// 코드 타입 디스플레이 입니다.
+    @IBOutlet weak var codeDisplayView      : UIView!
     /// 결제 타입 선택시 선택여부 배경 입니다.
     @IBOutlet weak var payTypeBG            : UILabel!
     /// 결제 타입 배경 왼쪽 위치를 가집니다.
@@ -99,6 +103,7 @@ class OKZeroPayView: UIView {
     @IBOutlet weak var payCardListTop       : NSLayoutConstraint!
     /// 결제 가능한 카드 리스트 뷰어 입니다.
     @IBOutlet weak var payCardListView      : OKZeroPayCardListView!
+    var defaultBrightness : CGFloat = 1.0
     
     
     //MARK: - Init
@@ -121,6 +126,9 @@ class OKZeroPayView: UIView {
      */
     func initZeroPayView(){
         self.commonInit()
+        self.defaultBrightness = UIScreen.main.brightness
+        
+        
         /// 제로페이 공용 연결 합니다.
         OKZeroViewModel.zeroPayShared = OKZeroViewModel()
         /// 캡쳐 세션 사용 여부를 체크 합니다.
@@ -256,8 +264,7 @@ class OKZeroPayView: UIView {
         
         /// 초기 기본 바코드/QRCode 뷰어를 설정 합니다.
         self.setDefaultCodeView()
-        /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
-        self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
+        
         /// 카드 정보의 이벤트를 연결 합니다.
         self.payCardListView.setEvent { success in
             /// 카드 디스플레이 전체 화면 여부를 활성화 합니다.
@@ -286,6 +293,38 @@ class OKZeroPayView: UIView {
         } receiveValue: { model in
             if let money = model {
                 OKZeroViewModel.zeroPayOKMoneyResponse = money
+                if let data = money._data,
+                   let payType = data._codeShowType {
+                    switch payType {
+                        /// 바코드만 사용 가능 모드 입니다.
+                    case "0":
+                        self.payTypeView.isHidden   = true
+                        self.zeroPayCodeType        = .barcode
+                        break
+                        /// QR코드만 사용 가능 모드 입니다.
+                    case "1":
+                        self.payTypeView.isHidden   = true
+                        self.zeroPayCodeType        = .qrcode
+                        break
+                        /// 전체 사용 모드이며 바코드가 선택되는 모드 입니다.
+                    case "2":
+                        self.payTypeView.isHidden   = false
+                        self.zeroPayCodeType        = .barcode
+                        break
+                        /// 전체 사용 모드이며 QR코드가 선택되는 모드 입니다.
+                    case "3":
+                        self.payTypeView.isHidden   = false
+                        self.zeroPayCodeType        = .qrcode
+                        break
+                    default:
+                        break
+                    }
+                }
+                
+                /// 초기 기본 타입은 바코드 결제 타입으로 디스플레이 합니다.
+                self.setZeroPayCodeDisplay( type: self.zeroPayCodeType, animation: false )
+                /// 코드 화면 디스플레이. UI 입니다.
+                self.codeDisplayView.isHidden   = false
                 self.payCardListView.setCardDisplay( model: model )
                 return
             }
@@ -484,7 +523,7 @@ class OKZeroPayView: UIView {
      */
     func releaseCodeView(){
         /// 바코드 라운드 컬러를 활성화 컬러로 변경 합니다.
-        self.barCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
+        //self.barCodeView.borderColor             = UIColor(hex: 0xE5E5E5)
         /// 바코드 결제 비활성화 합니다.
         self.isBarCodePayEnabled                 = false
         
@@ -512,6 +551,11 @@ class OKZeroPayView: UIView {
             /// 전체 화면 코드 화면을 종료 합니다.
             self.closeFullCodeDisplay()
         }
+        /// 밝기를 0.8로 밝은 색으로 조정 합니다.
+        if self.defaultBrightness < 0.8
+        {
+            UIScreen.main.brightness = 0.8
+        }
     }
     
     
@@ -529,14 +573,14 @@ class OKZeroPayView: UIView {
             /// 바코드 타입으로 안내 문구를 변경 합니다.
             self.codeTypeInfoText.text          = "매장에 바코드를 보여주세요"
             /// 라운드 컬러를 활성화 컬러로 변경 합니다.
-            self.barCodeView.borderColor        = .OKColor
+            //self.barCodeView.borderColor        = .OKColor
         }
         else
         {
             /// 바코드 타입으로 안내 문구를 변경 합니다.
             self.codeTypeInfoText.text          = "매장에 QR코드를 보여주세요"
             /// 라운드 컬러를 비활성화 컬러로 변경 합니다.
-            self.qrCodeView.borderColor         = .OKColor
+            //self.qrCodeView.borderColor         = .OKColor
         }
         /// 코드생성 버튼 뷰어를 히든처리 합니다.
         self.codeCreationView.isHidden      = true
@@ -557,13 +601,13 @@ class OKZeroPayView: UIView {
      - Throws: False
      - Returns:False
      */
-    func setCodeCreationView( qrCode : String = "", barCode : String = "", maxTime : Int = 180 ){
+    func setCodeCreationView( qrCode : String = "", barCode : String = "", maxTime : Int = 180, completion : (( _ codeType : ZEROPAY_CODE_TYPE, _ code : String  ) -> Void)? = nil ){
         /// 바코드를 제작 합니다.
         self.barCodeGenerator.setCodeDisplay(.barcode, code: NC.S(barCode)) { success in
             if success
             {
                 /// 결제 뷰어를 활성화 합니다.
-                self.setPayViewEnabled(codeType: .barcode)
+                //self.setPayViewEnabled(codeType: .barcode)
                 /// 바코드 결제를 활성화 합니다.
                 self.isBarCodePayEnabled                 = true
                 /// 코드 이미지를 활성화 합니다.
@@ -581,7 +625,9 @@ class OKZeroPayView: UIView {
                 
                 /// 타입이 BARCODE 경우 전체 화면 모드를 디스플레이 합니다.
                 if self.zeroPayCodeType == .barcode {
-                    self.openFullCodeDisplay( codeType: .barcode, code : barCode )
+                    if let completion = completion {
+                        completion(self.zeroPayCodeType,barCode)
+                    }
                 }
             }
         } btnEvent: { success in
@@ -594,7 +640,7 @@ class OKZeroPayView: UIView {
             if success
             {
                 /// 결제 뷰어를 활성화 합니다.
-                self.setPayViewEnabled(codeType: .qrcode)
+                //self.setPayViewEnabled(codeType: .qrcode)
                 /// 코드 이미지를 활성화 합니다.
                 self.qrCodeGenerator.imageView.isHidden = false
                 /// QRCode 결제 활성화 입니다.
@@ -611,7 +657,9 @@ class OKZeroPayView: UIView {
                 }
                 /// 타입이 QRCODE 경우 전체 화면 모드를 디스플레이 합니다.
                 if self.zeroPayCodeType == .qrcode {
-                    self.openFullCodeDisplay( codeType: .qrcode, code : qrCode )
+                    if let completion = completion {
+                        completion(self.zeroPayCodeType,qrCode)
+                    }
                 }
                 
             }
@@ -840,7 +888,18 @@ class OKZeroPayView: UIView {
                                    maxValidTime.isValid
                                 {
                                     /// 결제할 코드생성을 디스플레이 합니다.
-                                    self.setCodeCreationView( qrCode: NC.S(qrcode), barCode: NC.S(barcode), maxTime: Int(maxValidTime)! )
+                                    self.setCodeCreationView( qrCode: NC.S(qrcode), barCode: NC.S(barcode), maxTime: Int(maxValidTime)! ) { codeType, code in
+                                        /// 밝기를 0.8로 밝은 색으로 조정 합니다.
+                                        if self.defaultBrightness < 0.8
+                                        {
+                                            UIScreen.main.brightness = 0.8
+                                        }
+                                        
+                                        /// 결제 뷰어를 활성화 합니다.
+                                        self.setPayViewEnabled(codeType: codeType)
+                                        /// 전체 코드 화면을 디스플레이 합니다.
+                                        self.openFullCodeDisplay( codeType: codeType, code : code )
+                                    }
                                 }
                                 break
                             default:break
@@ -879,6 +938,7 @@ class OKZeroPayView: UIView {
         /// 공용 선언된 것을 초기화 합니다.
         OKZeroViewModel.zeroPayShared           = nil
         OKZeroViewModel.zeroPayOKMoneyResponse  = nil
+        UIScreen.main.brightness = self.defaultBrightness
     }
     
 }

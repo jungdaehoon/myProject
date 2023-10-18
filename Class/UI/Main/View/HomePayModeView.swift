@@ -61,6 +61,7 @@ class HomePayModeView: UIView {
         self.startHome!.play(){ value in
             self.startHome!.isHidden = true
             self.loopHome!.isHidden  = false
+            self.loopHome?.isHidden = false
             self.loopHome!.play()
         }
     }

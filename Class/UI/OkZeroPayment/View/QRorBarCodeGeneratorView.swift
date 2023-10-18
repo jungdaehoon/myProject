@@ -141,7 +141,7 @@ class QRorBarCodeGeneratorView: UIView {
             let transform = CGAffineTransform(scaleX: scale, y: scale)
             
             if let output = filter.outputImage?.transformed(by: transform) {
-                return UIImage(ciImage: output,scale: 2.0, orientation: .down)
+                return UIImage(ciImage: output,scale: UIScreen.main.scale, orientation: .down)
             }
         }
         return nil

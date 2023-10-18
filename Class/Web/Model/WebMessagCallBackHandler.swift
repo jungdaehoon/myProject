@@ -1013,7 +1013,7 @@ class WebMessagCallBackHandler : NSObject  {
                     let pageType = FULL_PAGE_TYPE(rawValue: type) ?? .default_type
                     switch pageType {
                         /// PG카드, 제로페이, 인증 요청 입니다.
-                    case .pg_type,.zeropay_type,.auth_type:
+                    case .pg_type,.zeropay_type,.auth_type,.lpoint_type:
                         /// 컨트롤러 연결 되었는지를 체크 합니다.
                         if let controller = self.target {
                             let linkUrl         = WebPageConstants.baseURL + url

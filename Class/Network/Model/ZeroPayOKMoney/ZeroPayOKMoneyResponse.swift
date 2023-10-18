@@ -45,7 +45,11 @@ struct okmoneydata : Codable
     var _mainAccount     : mainaccount? { get { return mainAccount != nil ? mainAccount : nil } }
     /// 배너 정보를 받습니다.
     var _banner          : bannerInfo? { get { return banner != nil ? banner : nil } }
+    /// 결제타입 정보를 받습니다. ( 0 :barcode, 1:qrcode, 2: 전체 barcode 선택, 3:전체 qrcode 선택)
+    var _codeShowType    : String? { get { return NC.S(codeShowType) } }
     
+    /// 결제타입 정보를 받습니다. ( 0 :barcode, 1:qrcode, 2: 전체 barcode 선택, 3:전체 qrcode 선택)
+    var codeShowType    : String?
     /// Ok머니 잔액 정보 입니다.
     var balance         : Int?
     /// 잔액 숨김 여부 입니다.
