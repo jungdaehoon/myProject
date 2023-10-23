@@ -104,6 +104,8 @@ enum MENU_LIST : String  {
     case ID_ZERO_QR             = "ZERO_001"
     /// 제로페이 상품권 페이지 URL 입니다
     case ID_ZERO_GIFT           = "ZERO_002"
+    /// 엘포인트 페이지 URL 입니다
+    case ID_L_POINT             = "LPOINT_001"
     /// 투자 성향분석 페이지 URL 입니다.
     case ID_INV_ANA             = "INV_014_01"
     /// 친구추천 페이지 URL 입니다.
@@ -1348,6 +1350,8 @@ class BaseViewModel : NSObject {
         params.updateValue(label, forKey: "ep_click_label")
         /// 클라이언트 아이디 정보를 세팅 합니다.
         Analytics.setUserProperty(Analytics.appInstanceID(), forName: "up_cid")
+        /// 필수 데이터는 아님 추가 하지 않도록 합니다. ( 담당자 통화후 확인 진행함 ) (2023.10.20 광고식별자 추가 요청으로 추가 합니다.)
+        //Analytics.setUserProperty(ASIdentifierManager.shared().advertisingIdentifier.uuidString, forName: "up_adid")
         Analytics.logEvent(eventName, parameters:params)
     }
     

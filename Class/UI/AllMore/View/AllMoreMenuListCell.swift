@@ -200,6 +200,13 @@ class AllMoreMenuListCell: UITableViewCell {
                     }
                 }).store(in: &model.cancellableSet)
             }
+            if self.menuInfo!.title! == "L.POINT"
+            {
+                let qrScanner = QRCodeScannerViewController.init { value in
+                    
+                }
+                self.viewController.pushController(qrScanner, animated: true, animatedType: .up)
+            }
             if self.menuInfo!.title! == "거래내역"
             {
                 self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
