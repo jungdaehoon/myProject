@@ -202,10 +202,11 @@ class AllMoreMenuListCell: UITableViewCell {
             }
             if self.menuInfo!.title! == "L.POINT"
             {
-                let qrScanner = QRCodeScannerViewController.init { value in
-                    
-                }
-                self.viewController.pushController(qrScanner, animated: true, animatedType: .up)
+                self.setDisplayWebView( WebPageConstants.baseURL  + "/lpoint/agreement.do" , modalPresent: true )
+//                let qrScanner = QRCodeScannerViewController.init { value in
+//                    
+//                }
+//                self.viewController.pushController(qrScanner, animated: true, animatedType: .up)
             }
             if self.menuInfo!.title! == "거래내역"
             {

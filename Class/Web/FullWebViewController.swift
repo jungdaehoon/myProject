@@ -100,7 +100,7 @@ enum FULL_PAGE_TYPE : String {
     /// 인증 관련 페이지 입니다.
     case auth_type          = "AUTH"
     /// 외부 웹페이지 접근으로 내부 도메인을 사용하지 않습니다.
-    case outdside_type      = "OUTSIDE"
+    case outside_type       = "OUTSIDE"
     /// 90일 동안 비밀번호 변경 요청 없는 경우 페이지 진입 입니다.
     case PW90_NOT_CHANGE    = "PW90_NOT_CHANGE"
     /// 닉네임 변경 페이지 진입 입니다.

@@ -93,6 +93,7 @@ class ShowMnemonicViewController: UIViewController {
             vc.modalPresentationStyle       = .overFullScreen
             self.present(vc, animated: true, completion: nil)
         }else{
+            BaseViewModel.setGAEvent(page: "복구구문기록",area: "하단" ,label: "확인")
             onClose(sender)
         }
     }

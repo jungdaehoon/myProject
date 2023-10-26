@@ -2118,7 +2118,7 @@
 					"$(PROJECT_DIR)/Libs/XecureKeypad",
 					"$(PROJECT_DIR)/Libs/KakaoLink",
 				);
-				GA_DEBUG = NO;
+				GA_DEBUG = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://m.okaypay.co.kr/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;

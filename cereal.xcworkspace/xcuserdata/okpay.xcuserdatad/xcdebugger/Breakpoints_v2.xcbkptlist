@@ -266,8 +266,8 @@
             filePath = "Class/UI/AllMore/View/AllMoreMenuListCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "btn_action(_:)"
             landmarkType = "7">
          </BreakpointContent>

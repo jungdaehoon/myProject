@@ -1045,7 +1045,7 @@ class WebMessagCallBackHandler : NSObject  {
                         }
                         return
                         /// 외부 웹페이지 접근으로 내부 도메인을 사용하지 않습니다.
-                    case .outdside_type:
+                    case .outside_type:
                         if let controller = self.target {
                             /// 전체 화면 웹뷰를 오픈 합니다.
                             let viewController  = FullWebViewController.init( title: title, titleBarType: titleBarType, pageURL: url, closeScript: closeScript ) { cbType in
@@ -2305,8 +2305,10 @@ extension WebMessagCallBackHandler{
                 default:break
             }
             
-            
-            controller.completion!(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
+            if let completion = controller.completion {
+                completion(.scriptCall(collBackID: callback, message: NC.S(param) , controller: controller))
+            }
+           
             controller.removeWebView()
             /// 보안 키패드를 사용한 경우 입니다.
             if let secureKeyPadView =  self.secureKeyPadView {
