@@ -285,7 +285,7 @@ class PedometerViewController: BaseViewController {
         } receiveValue: { response in
             if response != nil
             {
-                self.ibLabelReward.text = "\(response!._data!._total_rcv_point!)P"
+                self.ibLabelReward.text = "\(response!._data!._total_rcv_point!)원"
                 self.__setLayout()
             }
         }.store(in: &self.viewModel.cancellableSet)
@@ -499,8 +499,8 @@ class PedometerViewController: BaseViewController {
             if response != nil
             {
                 let data                    = response!._data
-                self.ibLabelReward.text    = "\(data!._total_rcv_point!)P"
-                self.ibLabelPoint.text     = "\(data!._rcv_point!)P"
+                self.ibLabelReward.text    = "\(data!._total_rcv_point!)원"
+                self.ibLabelPoint.text     = "\(data!._rcv_point!)원"
                 self.__setLayout()
                 self.ibViewPopUp.isHidden  = false
                 self.showCoins()
@@ -547,7 +547,7 @@ class PedometerViewController: BaseViewController {
             self.ibViewSecond.borderWidth = 1
             self.ibImageViewWalking.image = UIImage(named: "completion")
             self.ibLabelStep.textColor = color
-            self.ibLabelPoint.text = "\(self.mPoint)" + "P"
+            self.ibLabelPoint.text = "\(self.mPoint)" + "원"
             self.ibProgressView.progressTintColor =  UIColor(red:124/255, green: 77/255, blue: 209/255, alpha: 1.0)
             
         }else {

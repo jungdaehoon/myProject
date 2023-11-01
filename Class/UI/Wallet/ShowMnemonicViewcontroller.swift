@@ -10,7 +10,6 @@ import Foundation
 
 protocol ShowMnemonicVcDelegate : AnyObject {
     func showMnemonicResult(  _ controller : ShowMnemonicViewController , action : DelegateButtonAction ,   info: Any?    ) -> Void
-    
 }
 
 class ShowMnemonicViewController: UIViewController {
@@ -27,9 +26,6 @@ class ShowMnemonicViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

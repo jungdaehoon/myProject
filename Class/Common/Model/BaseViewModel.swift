@@ -1348,8 +1348,20 @@ class BaseViewModel : NSObject {
         params.updateValue(page, forKey: "ep_click_page")
         params.updateValue(area, forKey: "ep_click_area")
         params.updateValue(label, forKey: "ep_click_label")
+        /// 로그인에 따른 로그인 정보를 넘깁니다.
+        if BaseViewModel.loginResponse!.islogin!
+        {
+            /// 유저 로그인 여부 입니다.
+            Analytics.setUserProperty("Y", forName: "up_login_yn")
+        }
+        else
+        {
+            /// 유저 비 로그인 여부 입니다.
+            Analytics.setUserProperty("N", forName: "up_login_yn")
+        }
         /// 클라이언트 아이디 정보를 세팅 합니다.
         Analytics.setUserProperty(Analytics.appInstanceID(), forName: "up_cid")
+        
         /// 필수 데이터는 아님 추가 하지 않도록 합니다. ( 담당자 통화후 확인 진행함 ) (2023.10.20 광고식별자 추가 요청으로 추가 합니다.)
         //Analytics.setUserProperty(ASIdentifierManager.shared().advertisingIdentifier.uuidString, forName: "up_adid")
         Analytics.logEvent(eventName, parameters:params)
@@ -1364,7 +1376,7 @@ class BaseViewModel : NSObject {
         - parameters : 이벤트 파라미터 정보들 입니다.
      - Throws: False
      - Returns:False
-     */
+     
     static func setGAEvent( eventName : String = "", parameters : [String:Any]? ){
         Slog("setGAEvent eventName : \(eventName)", category: .gaevent)
         if let params = parameters {
@@ -1376,7 +1388,7 @@ class BaseViewModel : NSObject {
             //Analytics.logEvent(eventName, parameters:["":""])
         }
     }
-    
+     */
     
     /**
      탈옥 방지 체크 합니다. ( J.D.H VER : 2.0.0 )

@@ -213,7 +213,7 @@ class PointItemView: UIView {
                     return
                 }
                 
-                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "연결계좌")
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "주계좌")
                 /// 연결 계좌 리스트로 이동 합니다.
                 self.setDisplayWebView( WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, pageType: .openbank_type, titleName: "", titleBarType: 2) { value in
                     /// 메인 계좌가 변경되는 경우 새로고침은 어떻게 할지 미정 입니다. 일단 새로고침 합니다.

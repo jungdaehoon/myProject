@@ -521,7 +521,7 @@ class WebMessagCallBackHandler : NSObject  {
             let gaEvent     = params[0] as! String //  이벤트명
             if let gaParams = Utils.toJSON(params[1] as! String) {
                 /// GA 이벤트 정보를 보냅니다.
-                BaseViewModel.setGAEvent( eventName: gaEvent, parameters: gaParams )
+                //BaseViewModel.setGAEvent( eventName: gaEvent, parameters: gaParams )
                 /// 서버에 GA 이벤트 정보를 전달 합니다.
                 self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: "success" )
             }

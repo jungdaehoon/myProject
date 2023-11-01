@@ -220,7 +220,7 @@ class IntroViewController: BaseViewController {
                                     /// 로그인 여부를 활성화 합니다.
                                     BaseViewModel.loginResponse!.islogin = true
                                     /// GA 이벤트 정보를 보냅니다.
-                                    BaseViewModel.setGAEvent( eventName: "login", parameters: ["sign_up_method" : "A"] )
+                                    //BaseViewModel.setGAEvent( eventName: "login", parameters: ["sign_up_method" : "A"] )
                                     /// FCM PUSH Token 정보를 업로드 합니다.
                                     self.viewModel.setFcmTokenRegister().sink { result in
                                         /// 로그인 정상처리로 메인 페이지로 이동합니다.
