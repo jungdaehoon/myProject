@@ -109,7 +109,8 @@ class OKZeroPayView: UIView {
     @IBOutlet weak var payCardListTop       : NSLayoutConstraint!
     /// 결제 가능한 카드 리스트 뷰어 입니다.
     @IBOutlet weak var payCardListView      : OKZeroPayCardListView!
-    var defaultBrightness : CGFloat = 1.0
+    /// 화면 밝기를 저장합니다.
+    var defaultBrightness                   : CGFloat = 1.0
     
     
     //MARK: - Init
@@ -291,6 +292,8 @@ class OKZeroPayView: UIView {
         OKZeroViewModel.zeroPayShared!.okZeroPayReload = true
         /// 코드 풀 디스플레이 뷰어에 제로페이 뷰어를 연결 합니다.
         self.codeFullDisplayView.zeroPayView = self
+        /// 최대 밝기를 1.0 변경 합니다.
+        UIScreen.main.brightness = 1.0
     }
     
     
@@ -584,11 +587,8 @@ class OKZeroPayView: UIView {
             /// 전체 화면 코드 화면을 종료 합니다.
             self.closeFullCodeDisplay()
         }
-        /// 밝기를 0.8로 밝은 색으로 조정 합니다.
-        if self.defaultBrightness < 0.8
-        {
-            UIScreen.main.brightness = 0.8
-        }
+        
+        
     }
     
     
@@ -936,16 +936,13 @@ class OKZeroPayView: UIView {
                                 {
                                     /// 결제할 코드생성을 디스플레이 합니다.
                                     self.setCodeCreationView( qrCode: NC.S(qrcode), barCode: NC.S(barcode), maxTime: Int(maxValidTime)! ) { codeType, code in
-                                        /// 밝기를 0.8로 밝은 색으로 조정 합니다.
-                                        if self.defaultBrightness < 0.8
-                                        {
-                                            UIScreen.main.brightness = 0.8
-                                        }
+                                        /// 최대 밝기를 1.0 변경 합니다.
+                                        //UIScreen.main.brightness = 1.0
                                         
                                         /// 결제 뷰어를 활성화 합니다.
                                         self.setPayViewEnabled(codeType: codeType)
                                         /// 전체 코드 화면을 디스플레이 합니다.
-                                        self.openFullCodeDisplay( codeType: codeType, code : code )
+                                        //self.openFullCodeDisplay( codeType: codeType, code : code )
                                     }
                                 }
                                 break

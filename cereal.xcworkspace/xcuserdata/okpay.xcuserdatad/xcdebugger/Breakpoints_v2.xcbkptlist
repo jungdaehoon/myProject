@@ -7,442 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "865D6B73-9960-4109-9B12-E85766549E77"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Web/Model/WebMessagCallBackHandler.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "638"
-            endingLineNumber = "638"
-            landmarkName = "setQRCodeReadDisplay(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "865D6B73-9960-4109-9B12-E85766549E77 - b9dbc556481559cb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #1 (Swift.Optional&lt;cereal.QRCODE_SCANNER_CB&gt;) -&gt; () in cereal.WebMessagCallBackHandler.setQRCodeReadDisplay(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "639"
-                  endingLineNumber = "639"
-                  offsetFromSymbolStart = "108">
-               </Location>
-               <Location
-                  uuid = "865D6B73-9960-4109-9B12-E85766549E77 - f1634a4df366aaa1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;cereal.QRCODE_SCANNER_CB&gt;) -&gt; () in cereal.WebMessagCallBackHandler.setQRCodeReadDisplay(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "637"
-                  endingLineNumber = "637"
-                  offsetFromSymbolStart = "244">
-               </Location>
-               <Location
-                  uuid = "865D6B73-9960-4109-9B12-E85766549E77 - f1634a4df366aac6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;cereal.QRCODE_SCANNER_CB&gt;) -&gt; () in cereal.WebMessagCallBackHandler.setQRCodeReadDisplay(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "638"
-                  endingLineNumber = "638"
-                  offsetFromSymbolStart = "244">
-               </Location>
-               <Location
-                  uuid = "865D6B73-9960-4109-9B12-E85766549E77 - f1634a4df366aae7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;cereal.QRCODE_SCANNER_CB&gt;) -&gt; () in cereal.WebMessagCallBackHandler.setQRCodeReadDisplay(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "639"
-                  endingLineNumber = "639"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F90A8721-352F-42C4-A221-028AF0167F40"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Web/Model/WebMessagCallBackHandler.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
-            landmarkName = "openZeropayQRScanner(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F90A8721-352F-42C4-A221-028AF0167F40 - f1634a4df366874b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;cereal.QRCODE_SCANNER_CB&gt;) -&gt; () in cereal.WebMessagCallBackHandler.openZeropayQRScanner(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "355"
-                  endingLineNumber = "355"
-                  offsetFromSymbolStart = "1176">
-               </Location>
-               <Location
-                  uuid = "F90A8721-352F-42C4-A221-028AF0167F40 - f1634a4df366874b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;cereal.QRCODE_SCANNER_CB&gt;) -&gt; () in cereal.WebMessagCallBackHandler.openZeropayQRScanner(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "355"
-                  endingLineNumber = "355"
-                  offsetFromSymbolStart = "800">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "94686864-258A-4480-95CB-64322380936A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Web/Model/WebMessagCallBackHandler.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
-            landmarkName = "setGAHybrid(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "94686864-258A-4480-95CB-64322380936A - 460f94acd6033165"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "419"
-                  endingLineNumber = "419"
-                  offsetFromSymbolStart = "2632">
-               </Location>
-               <Location
-                  uuid = "94686864-258A-4480-95CB-64322380936A - 460f94acd6033084"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "418"
-                  endingLineNumber = "418"
-                  offsetFromSymbolStart = "2500">
-               </Location>
-               <Location
-                  uuid = "94686864-258A-4480-95CB-64322380936A - 460f94acd6033165"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "419"
-                  endingLineNumber = "419"
-                  offsetFromSymbolStart = "2616">
-               </Location>
-               <Location
-                  uuid = "94686864-258A-4480-95CB-64322380936A - 61e77f7f8c04f92f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[1] = Dead&gt; of cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "419"
-                  endingLineNumber = "419"
-                  offsetFromSymbolStart = "3808">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4EE946AE-8865-4B36-8ADC-3D775EEA4617"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Web/Model/WebMessagCallBackHandler.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "setGAHybrid(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4EE946AE-8865-4B36-8ADC-3D775EEA4617 - 460f94acd6033100"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "422"
-                  endingLineNumber = "422"
-                  offsetFromSymbolStart = "2848">
-               </Location>
-               <Location
-                  uuid = "4EE946AE-8865-4B36-8ADC-3D775EEA4617 - 460f94acd60331e1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "423"
-                  endingLineNumber = "423"
-                  offsetFromSymbolStart = "2740">
-               </Location>
-               <Location
-                  uuid = "4EE946AE-8865-4B36-8ADC-3D775EEA4617 - 61e77f7f8c04f9ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[1] = Dead&gt; of cereal.WebMessagCallBackHandler.setGAHybrid(Swift.Array&lt;Swift.Optional&lt;Any&gt;&gt;) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/Model/WebMessagCallBackHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "423"
-                  endingLineNumber = "423"
-                  offsetFromSymbolStart = "2428">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9F36337E-B0D7-48DB-8A06-D0722CF2296C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Common/Model/BaseViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1362"
-            endingLineNumber = "1362"
-            landmarkName = "setGAEvent(eventName:page:area:label:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9F36337E-B0D7-48DB-8A06-D0722CF2296C - c93b065a61a30f95"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static cereal.BaseViewModel.setGAEvent(eventName: Swift.String, page: Swift.String, area: Swift.String, label: Swift.String) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1363"
-                  endingLineNumber = "1363"
-                  offsetFromSymbolStart = "2264">
-               </Location>
-               <Location
-                  uuid = "9F36337E-B0D7-48DB-8A06-D0722CF2296C - c93b065a61a30f95"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static cereal.BaseViewModel.setGAEvent(eventName: Swift.String, page: Swift.String, area: Swift.String, label: Swift.String) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1363"
-                  endingLineNumber = "1363"
-                  offsetFromSymbolStart = "2260">
-               </Location>
-               <Location
-                  uuid = "9F36337E-B0D7-48DB-8A06-D0722CF2296C - bfc87174263b4b68"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[4] = Dead&gt; of static cereal.BaseViewModel.setGAEvent(eventName: Swift.String, page: Swift.String, area: Swift.String, label: Swift.String) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1363"
-                  endingLineNumber = "1363"
-                  offsetFromSymbolStart = "960">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6C246CC9-82C2-4FCA-8F0B-BD8A9F463F40"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Class/Common/Model/BaseViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1375"
-            endingLineNumber = "1375"
-            landmarkName = "setGAEvent(eventName:page:area:label:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6C246CC9-82C2-4FCA-8F0B-BD8A9F463F40 - c93b065a61a30e29"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static cereal.BaseViewModel.setGAEvent(eventName: Swift.String, page: Swift.String, area: Swift.String, label: Swift.String) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1375"
-                  endingLineNumber = "1375"
-                  offsetFromSymbolStart = "2952">
-               </Location>
-               <Location
-                  uuid = "6C246CC9-82C2-4FCA-8F0B-BD8A9F463F40 - c93b065a61a30e29"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static cereal.BaseViewModel.setGAEvent(eventName: Swift.String, page: Swift.String, area: Swift.String, label: Swift.String) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1375"
-                  endingLineNumber = "1375"
-                  offsetFromSymbolStart = "2636">
-               </Location>
-               <Location
-                  uuid = "6C246CC9-82C2-4FCA-8F0B-BD8A9F463F40 - bfc87174263b4ad4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[4] = Dead&gt; of static cereal.BaseViewModel.setGAEvent(eventName: Swift.String, page: Swift.String, area: Swift.String, label: Swift.String) -&gt; ()"
-                  moduleName = "cereal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Common/Model/BaseViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1375"
-                  endingLineNumber = "1375"
-                  offsetFromSymbolStart = "968">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "41B707B8-AAB6-4F1A-9222-382604D8DA61"
+            uuid = "3FA4E48D-9E2E-4235-91BA-B99853F33C44"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
-            landmarkName = "setZeroPayDisplay(completion:)"
+            startingLineNumber = "974"
+            endingLineNumber = "974"
+            landmarkName = "setRelease()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "41B707B8-AAB6-4F1A-9222-382604D8DA61 - 4d917fa54de243d8"
+                  uuid = "3FA4E48D-9E2E-4235-91BA-B99853F33C44 - ce07ff40035902e5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;cereal.ZeroPayOKMoneyResponse&gt;) -&gt; () in cereal.OKZeroPayView.setZeroPayDisplay(completion: Swift.Optional&lt;(Swift.Bool) -&gt; ()&gt;) -&gt; ()"
+                  symbolName = "cereal.OKZeroPayView.setRelease() -&gt; ()"
                   moduleName = "cereal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "310"
-                  endingLineNumber = "310"
-                  offsetFromSymbolStart = "1616">
+                  startingLineNumber = "977"
+                  endingLineNumber = "977"
+                  offsetFromSymbolStart = "224">
                </Location>
                <Location
-                  uuid = "41B707B8-AAB6-4F1A-9222-382604D8DA61 - 4d917fa54de24212"
+                  uuid = "3FA4E48D-9E2E-4235-91BA-B99853F33C44 - ce07ff400359023a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;cereal.ZeroPayOKMoneyResponse&gt;) -&gt; () in cereal.OKZeroPayView.setZeroPayDisplay(completion: Swift.Optional&lt;(Swift.Bool) -&gt; ()&gt;) -&gt; ()"
+                  symbolName = "cereal.OKZeroPayView.setRelease() -&gt; ()"
                   moduleName = "cereal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "320"
-                  endingLineNumber = "320"
-                  offsetFromSymbolStart = "1316">
+                  startingLineNumber = "978"
+                  endingLineNumber = "978"
+                  offsetFromSymbolStart = "224">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8D1D545-5BC0-44E0-B69E-98AEE7E82A63"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/OkZeroPayment/OkPaymentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "setRelease()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

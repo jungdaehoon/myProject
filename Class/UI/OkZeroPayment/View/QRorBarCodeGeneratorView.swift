@@ -123,7 +123,6 @@ class QRorBarCodeGeneratorView: UIView {
     }
     
     
-    
     /**
      바코드 이미지 생성 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.13

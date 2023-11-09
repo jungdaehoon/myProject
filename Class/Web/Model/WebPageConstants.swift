@@ -79,6 +79,8 @@ class WebPageConstants {
     static let URL_NFT_COLLECTED_LIST           = baseURL + "/nft/own/ownNftCollectedList.do"
     /// 마켓 구매내역 페이지 입니다.
     static let URL_MARKET_HISTORY               = baseURL + "/myp/mypGifticonList.do?tab=myTab"
+    /// 엘포인트 시작 페이지 입니다.
+    static let URL_LPOINT_INTRO                 = baseURL + "/lpoint/intro.do"
         
     
     /**

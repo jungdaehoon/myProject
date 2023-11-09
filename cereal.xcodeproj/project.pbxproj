@@ -225,6 +225,8 @@
 		F2C5E4D32A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */; };
 		F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */; };
 		F2C9E20C2A83192F00A68593 /* GTM-5W6DTQWV.json in Resources */ = {isa = PBXBuildFile; fileRef = F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */; };
+		F2CA8EEF2B0C29C1008B137A /* ToastPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CA8EED2B0C29C1008B137A /* ToastPopup.xib */; };
+		F2CA8EF02B0C29C1008B137A /* ToastPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA8EEE2B0C29C1008B137A /* ToastPopup.swift */; };
 		F2D726B92A7CAE670073AB56 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D726B82A7CAE670073AB56 /* Data.swift */; };
 		F2DEDB772A8CABCE003E502E /* UpdateMainAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */; };
 		F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */; };
@@ -479,6 +481,8 @@
 		F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeStatusResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsResponse.swift; sourceTree = "<group>"; };
 		F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-5W6DTQWV.json"; sourceTree = "<group>"; };
+		F2CA8EED2B0C29C1008B137A /* ToastPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastPopup.xib; sourceTree = "<group>"; };
+		F2CA8EEE2B0C29C1008B137A /* ToastPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastPopup.swift; sourceTree = "<group>"; };
 		F2D726B82A7CAE670073AB56 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainAccountResponse.swift; sourceTree = "<group>"; };
 		F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -1014,6 +1018,7 @@
 		8D205EFE29D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F2CA8EEC2B0C29C1008B137A /* ToastPop */,
 				F22B63C62ADF64F000C24424 /* QRCodeScannerView */,
 				F243AAAD2A5E5E6700B42A4B /* AppStartEventPopup */,
 				8D1C97F22A01DEF900A4BA50 /* BottomBankListView */,
@@ -1430,6 +1435,15 @@
 			path = container;
 			sourceTree = "<group>";
 		};
+		F2CA8EEC2B0C29C1008B137A /* ToastPop */ = {
+			isa = PBXGroup;
+			children = (
+				F2CA8EED2B0C29C1008B137A /* ToastPopup.xib */,
+				F2CA8EEE2B0C29C1008B137A /* ToastPopup.swift */,
+			);
+			path = ToastPop;
+			sourceTree = "<group>";
+		};
 		F2F0842E2A7898AB005EC9CC /* PickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1587,6 +1601,7 @@
 				8D91D99C29DFCC1100B5D9AE /* loadingbar.json in Resources */,
 				8D91D99A29DFC6D000B5D9AE /* HttpErrorPop.xib in Resources */,
 				8DBA445829D41C7D00A2E5C1 /* LevelPopView.xib in Resources */,
+				F2CA8EEF2B0C29C1008B137A /* ToastPopup.xib in Resources */,
 				8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */,
 				8D205F2629D1346F00F43C99 /* Intro.storyboard in Resources */,
 				F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */,
@@ -1785,6 +1800,7 @@
 				F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */,
 				8D205F2529D1346F00F43C99 /* IntroViewController.swift in Sources */,
 				F2C5E4D32A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift in Sources */,
+				F2CA8EF02B0C29C1008B137A /* ToastPopup.swift in Sources */,
 				8DCB18A529F6641E000645D3 /* QRReaderViewController.swift in Sources */,
 				8D205F7A29D1346F00F43C99 /* AllMoreResponse.swift in Sources */,
 				8D205F2A29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.swift in Sources */,
