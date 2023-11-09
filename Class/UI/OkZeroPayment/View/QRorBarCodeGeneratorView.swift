@@ -111,7 +111,7 @@ class QRorBarCodeGeneratorView: UIView {
         let renderImage = render.image { context in
             if self.fullDisplay
             {
-                image.draw(in: CGRect(origin: CGPoint(x: -30.0, y: -35.0), size: CGSize(width: size.width + 60, height: size.height + 70)))
+                image.draw(in: CGRect(origin: CGPoint(x: -15.0, y: -25.0), size: CGSize(width: size.width + 30, height: size.height + 50)))
             }
             else
             {

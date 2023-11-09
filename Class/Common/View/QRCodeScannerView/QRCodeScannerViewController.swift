@@ -9,8 +9,6 @@ import UIKit
 import AVFoundation
 import Combine
 
-
-
 /**
  QRCode 스캔 뷰어 입니다  ( J.D.H VER : 2.0.4 )
  - Date: 2023.10.18
@@ -24,16 +22,32 @@ class QRCodeScannerViewController: UIViewController {
     @IBOutlet weak var previewView      : UIView!
     /// QRCode 스캔 영역 입니다.
     @IBOutlet weak var QRintersetView   : UIView!
+    @IBOutlet weak var titleName        : UILabel!
+    @IBOutlet weak var backBtn          : UIButton!
+    @IBOutlet weak var closeBtn         : UIButton!
+    @IBOutlet weak var subInfoText      : UILabel!
+    @IBOutlet weak var scannerView      : UIView!
+    
     /// 바코드를 인식할 프리브 영역 입니다.
     var previewLayer                    : AVCaptureVideoPreviewLayer?
     /// 바코드 인식 할 영역 입니다.
     var rectOfInterest                  : CGRect?
-    
-    
+    /// 타이틀 정보 입니다.
+    var titleStr                        : String    = "QR결제"
+    /// 중앙 안내 정보 입니다.
+    var subInfoStr                     : String    = "QR결제"
+    /// 상단바 버튼 뒤로가기 여부 입니다.
+    var isTitleBackBtn                  : Bool      = true
     // MARK: - 데이터 초기화 입니다.
-    init( completion : (( _ value : QRCODE_SCANNER_CB? ) -> Void )? = nil ) {
+    init( titleStr          : String = "QR결제",
+          subInfoStr        : String = "QR코드를 찍어 간편결제하세요",
+          isTitleBackBtn    : Bool = true,
+          completion        : (( _ value : QRCODE_SCANNER_CB? ) -> Void )? = nil ) {
         super.init(nibName: nil, bundle: nil)
-        self.completion = completion
+        self.titleStr       = titleStr
+        self.subInfoStr     = subInfoStr
+        self.isTitleBackBtn = isTitleBackBtn
+        self.completion     = completion
     }
     
 
@@ -50,6 +64,7 @@ class QRCodeScannerViewController: UIViewController {
             if let completion = self.completion {
                 completion(value)
             }
+            self.popController(animated: true)
         }).sink { result in
             
         } receiveValue: { metadataOutput in
@@ -65,11 +80,30 @@ class QRCodeScannerViewController: UIViewController {
         
     }
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /// 타이틀 명을 설정 합니다.
+        self.titleName.text     = self.titleStr
+        /// 중앙 상세 안내 문구 입니다.
+        self.subInfoText.text   = self.subInfoStr
+        /// 뒤로가기 버튼 활성화 여부 입니다.
+        if self.isTitleBackBtn
+        {
+            self.backBtn.isHidden  = false
+            self.closeBtn.isHidden = true
+        }
+        else
+        {
+            self.backBtn.isHidden  = true
+            self.closeBtn.isHidden = false
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
+    
     
     
     // MARK: - 지원 메서드 입니다.
@@ -86,7 +120,11 @@ class QRCodeScannerViewController: UIViewController {
         guard let captureSession    = self.viewModel.captureSession else {
             return
         }
-                
+         
+        var topPosition = self.scannerView.frame.origin.y
+        topPosition     += self.scannerView.frame.height/2
+        topPosition     -= self.QRintersetView.frame.height/2
+        
         let previewSize             = CGSize(width: UIScreen.main.bounds.size.width, height:  UIScreen.main.bounds.size.height)
         /// 프리뷰 총 영역을 설정 합니다.
         let previewLayer            = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -95,9 +133,8 @@ class QRCodeScannerViewController: UIViewController {
         
         Slog("titleView y : \(titleView.frame.origin.y)")
         Slog("titleView height : \(titleView.frame.size.height)")
-        let plusY = titleView.frame.origin.y + titleView.frame.size.height
         /// QR 코드를 인식할 박스 영역을 설정 합니다.
-        let rect                    = CGRect(x: previewSize.width/2 - self.QRintersetView.frame.size.width/2, y: self.QRintersetView.frame.origin.y + plusY,
+        let rect                    = CGRect(x: previewSize.width/2 - self.QRintersetView.frame.size.width/2, y: topPosition,
                                              width: self.QRintersetView.frame.size.width , height: self.QRintersetView.frame.size.height)
         /// 총 전체 화면에 검은 쉐도우를 추가하는 범위 입니다.
         let path                    = UIBezierPath(rect: previewLayer.frame)
@@ -128,6 +165,9 @@ class QRCodeScannerViewController: UIViewController {
     
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
+        if let completion = self.completion {
+            completion(.close)
+        }
         self.popController(animated: true)
     }
     

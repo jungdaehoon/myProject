@@ -22,8 +22,8 @@ enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
     case location       = 12
     /// 자주하는 질문 입니다.
     case faq            = 13
-    
 }
+
 
 /**
  제로페이 서비스 안내 뷰어 입니다. ( J.D.H VER : 2.0.0 )

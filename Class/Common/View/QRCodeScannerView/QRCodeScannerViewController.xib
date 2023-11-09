@@ -19,7 +19,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRCodeScannerViewController" customModule="cereal" customModuleProvider="target">
             <connections>
                 <outlet property="QRintersetView" destination="fQc-4Y-RtR" id="RqD-33-zkf"/>
+                <outlet property="backBtn" destination="KkI-UE-5ri" id="XnL-yQ-f7d"/>
+                <outlet property="closeBtn" destination="SRT-zq-b0C" id="cNw-1X-cg4"/>
                 <outlet property="previewView" destination="dqv-GW-chL" id="Xy3-wg-kJh"/>
+                <outlet property="scannerView" destination="ft1-Pq-yIw" id="RPi-zz-rvt"/>
+                <outlet property="subInfoText" destination="JcW-NV-nS7" id="UX3-ix-Tqo"/>
+                <outlet property="titleName" destination="SEq-Xc-WZd" id="Qqb-J4-vQ8"/>
                 <outlet property="titleView" destination="yEq-Sn-dDh" id="dY7-t1-vQm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,7 +41,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEq-Sn-dDh" userLabel="TitleView">
                     <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkI-UE-5ri">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkI-UE-5ri" userLabel="Back Button">
                             <rect key="frame" x="12" y="8" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="rDs-44-R6a"/>
@@ -54,11 +59,25 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRT-zq-b0C" userLabel="Close Button">
+                            <rect key="frame" x="323" y="8" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Ag5-vx-U3d"/>
+                                <constraint firstAttribute="width" constant="40" id="yPR-qk-DKg"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="qrscanner_close"/>
+                            <connections>
+                                <action selector="btn_action:" destination="-1" eventType="touchUpInside" id="gQr-gW-Pf5"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="SEq-Xc-WZd" firstAttribute="centerX" secondItem="yEq-Sn-dDh" secondAttribute="centerX" id="ABR-hw-U0M"/>
+                        <constraint firstItem="SRT-zq-b0C" firstAttribute="centerY" secondItem="yEq-Sn-dDh" secondAttribute="centerY" id="IdN-C9-OXZ"/>
                         <constraint firstItem="SEq-Xc-WZd" firstAttribute="centerY" secondItem="yEq-Sn-dDh" secondAttribute="centerY" id="MlH-bK-XTc"/>
+                        <constraint firstAttribute="trailing" secondItem="SRT-zq-b0C" secondAttribute="trailing" constant="12" id="RxA-zd-tpK"/>
                         <constraint firstItem="KkI-UE-5ri" firstAttribute="leading" secondItem="yEq-Sn-dDh" secondAttribute="leading" constant="12" id="lb1-Mz-GU3"/>
                         <constraint firstAttribute="height" constant="56" id="sfK-Tj-s9c"/>
                         <constraint firstItem="KkI-UE-5ri" firstAttribute="centerY" secondItem="yEq-Sn-dDh" secondAttribute="centerY" id="u8d-xI-urD"/>
@@ -121,5 +140,6 @@
     <resources>
         <image name="qrcode_box" width="284" height="284"/>
         <image name="qrscanner_back" width="40" height="40"/>
+        <image name="qrscanner_close" width="40" height="40"/>
     </resources>
 </document>

@@ -1348,16 +1348,37 @@ class BaseViewModel : NSObject {
         params.updateValue(page, forKey: "ep_click_page")
         params.updateValue(area, forKey: "ep_click_area")
         params.updateValue(label, forKey: "ep_click_label")
-        /// 로그인에 따른 로그인 정보를 넘깁니다.
-        if BaseViewModel.loginResponse!.islogin!
-        {
-            /// 유저 로그인 여부 입니다.
-            Analytics.setUserProperty("Y", forName: "up_login_yn")
+        
+        if  let login   = BaseViewModel.loginResponse,
+            let islogin = login.islogin {
+            /// 로그인에 따른 로그인 정보를 넘깁니다.
+            if islogin
+            {
+                /// 유저 로그인 여부 입니다.
+                Analytics.setUserProperty("Y", forName: "up_login_yn")
+            }
+            else
+            {                
+                /// 유저 비 로그인 여부 입니다.
+                Analytics.setUserProperty("N", forName: "up_login_yn")
+                /// 유저 고객번호 여부 입니다.
+                //Analytics.setUserProperty(nil, forName: "up_uid")
+                /// 유저 연력 여부 입니다.
+                //Analytics.setUserProperty(nil, forName: "up_age")
+                /// 유저 성별 로그인 여부 입니다.
+                //Analytics.setUserProperty(nil, forName: "up_gender")
+            }
         }
         else
         {
             /// 유저 비 로그인 여부 입니다.
             Analytics.setUserProperty("N", forName: "up_login_yn")
+            /// 유저 고객번호 여부 입니다.
+            //Analytics.setUserProperty(nil, forName: "up_uid")
+            /// 유저 연력 여부 입니다.
+            //Analytics.setUserProperty(nil, forName: "up_age")
+            /// 유저 성별 로그인 여부 입니다.
+            //Analytics.setUserProperty(nil, forName: "up_gender")
         }
         /// 클라이언트 아이디 정보를 세팅 합니다.
         Analytics.setUserProperty(Analytics.appInstanceID(), forName: "up_cid")

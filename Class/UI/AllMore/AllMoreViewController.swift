@@ -207,7 +207,7 @@ class AllMoreViewController: BaseViewController {
             /// 엘포인트 추가 합니다.
             //if self.viewModel.isAppMenuList(menuID: .ID_L_POINT)
             //{
-                //menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
+            menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
             //}
             
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)

@@ -198,9 +198,11 @@ class GuideInfoView: UIView {
                 /// 페이지 히든 처리 합니다.
                 self.cardView.isUserInteractionEnabled = false                
                 UIView.animate(withDuration: 0.3) {
-                    BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: "밀어넣기")
-                    /// 카드를 원위치 합니다.
-                    self.startView.alpha = 0.0
+                    if self.startView.alpha != 0.0
+                    {
+                        self.startView.alpha = 0.0
+                        BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: "밀어넣기")
+                    }
                     self.layoutIfNeeded()
                 }
             }
@@ -222,9 +224,8 @@ class GuideInfoView: UIView {
                 UIView.animate(withDuration: 0.3) {
                     self.layoutIfNeeded()
                     self.collectionView.reloadData()
-                    BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: "밀어넣기")
-                    /// 카드를 원위치 합니다.
                     self.startView.alpha = 0.0
+
                 }
                 return
             }

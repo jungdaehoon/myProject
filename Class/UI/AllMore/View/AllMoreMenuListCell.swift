@@ -533,6 +533,7 @@ extension AllMoreMenuListCell
             {
                 /// 결제 페이지로 이동 합니다.
                 case .paymeny:
+                    //self.setDisplayWebView( WebPageConstants.baseURL  + "/lpoint/agreement.do" , modalPresent: true )
                     let viewController = OkPaymentViewController()
                     viewController.modalPresentationStyle = .overFullScreen
                     self.viewController.pushController(viewController, animated: true, animatedType: .up)

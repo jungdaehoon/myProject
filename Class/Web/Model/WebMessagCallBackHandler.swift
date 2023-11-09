@@ -313,6 +313,10 @@ class WebMessagCallBackHandler : NSObject  {
             case .openZeropayQRAgreement     :
                 self.setZeroPayTermsViewDisplay()
                 break
+            /// 제로페이 QRCode 스캐너를 요청 합니다.
+            case .openZeropayQRScanner     :
+                self.openZeropayQRScanner( body )
+                break
             /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
             case .openZeropayQRIntro         :
                 self.setBottomZeroPayInfoView()
@@ -325,6 +329,43 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     // MARK: - 지원 메서드 입니다.
+    
+    /**
+     제로페이 QRCode 스캔 오픈 입니다. ( J.D.H VER : 2.0.0 )
+    - Date: 2023.11.08
+    - Parameters:
+        - body: GA 업로드 데이터 입니다.
+    - Throws: False
+    - Returns:False
+    */
+    func openZeropayQRScanner( _ body : [Any?] ){
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        if  let controller     = self.target {
+            let qrScanner = QRCodeScannerViewController.init { value in
+                switch value {
+                case .qr_success( let qrcode):
+                    var params : [String:Any] = [:]
+                    /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                    params.updateValue("true", forKey: "result")
+                    params.updateValue("\(qrcode!)", forKey: "data")
+                    do {
+                        if let script = try Utils.toJSONString(params)
+                        {
+                            self.setEvaluateJavaScript(callback: callBacks[0] as! String, message: script, isJson: true)
+                        }
+                    } catch { }
+                    break
+                default:
+                    break
+                }
+                
+            }
+            controller.pushController(qrScanner, animated: true, animatedType: .up)
+        }
+    }
+    
+    
     /**
      OKPay 카카오톡 채널로 이동 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.29
@@ -371,11 +412,15 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                     /// 사용자 속성 및 사용자ID 설정 입니다.
                     else if key.contains("up_"){
-                        if let value = value as? String {
-                            Analytics.setUserProperty(value, forName: key)
+                        if let value = value as? String,
+                           NC.S(value).count > 0 {
                             if key == "up_uid"
                             {
-                                Analytics.setUserID(value)
+                                Analytics.setUserID(NC.S(value))
+                            }
+                            else
+                            {
+                                Analytics.setUserProperty(NC.S(value), forName: key)
                             }
                         }
                     }
@@ -586,7 +631,27 @@ class WebMessagCallBackHandler : NSObject  {
     {
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks   = body[0] as! [Any]
-        if  let controller     = self.target,
+        if  let controller     = self.target{
+            let qrScanner = QRCodeScannerViewController.init( titleStr: "QR 코드 인식", subInfoStr: "", isTitleBackBtn: false ) { value in
+                switch value {
+                case .qr_success( let qrcode):
+                    if let qrAddr = qrcode {
+                        if qrAddr.hasPrefix("0x") && (qrAddr.count > 10)  {
+                            /// 콜백 데이터 정보를 요청 합니다.
+                            self.viewModel.getWalletJsonMsg(retStr: qrAddr).sink { message in
+                                /// 콜백으로 데이터를 리턴 합니다.
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
+                            }.store(in: &self.viewModel.cancellableSet)
+                        }
+                    }
+                    break
+                default:
+                    break
+                }
+            }
+            controller.pushController(qrScanner, animated: true, animatedType: .up)
+        }
+        /*
             let nextController = QRReaderViewController.instantiate(withStoryboard: "Wallet") {
             nextController.setInitData() { value in
                 if let qrAddr = value as? String {
@@ -598,7 +663,7 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }
             controller.pushController(nextController, animated: true, animatedType: .up)
-        }
+        */
     }
         
     
@@ -1322,6 +1387,7 @@ class WebMessagCallBackHandler : NSObject  {
         ]
         self.target!.present(avc, animated:true)
     }
+    
     
     var secureKeyPadView : SecureKeyPadView? = nil
     /**
@@ -2192,6 +2258,10 @@ class WebMessagCallBackHandler : NSObject  {
             {
                 /// 결제 페이지로 이동 합니다.
                 case .paymeny:
+//                    if let controller = self.target {
+//                        controller.view.setDisplayWebView( WebPageConstants.baseURL  + "/lpoint/agreement.do" , modalPresent: true )
+//                    }
+                    
                     if let controller = self.target {
                         let viewController = OkPaymentViewController()
                         viewController.modalPresentationStyle = .overFullScreen

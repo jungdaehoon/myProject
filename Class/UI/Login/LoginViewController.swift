@@ -230,8 +230,8 @@ class LoginViewController: BaseViewController {
                     /// 가이드 뷰어를 종료 합니다.
                     self.guideView.setAniClose()
                 })
-                alert?.addAlertBtn(btnTitleText: "네", completion: { result in
-                    BaseViewModel.setGAEvent(page: "인트로",area: "OKpay가 처음인가요",label: "네")
+                alert?.addAlertBtn(btnTitleText: "예", completion: { result in
+                    BaseViewModel.setGAEvent(page: "인트로",area: "OKpay가 처음인가요",label: "예")
                     self.guideView.setZeroPage()
                     /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
                     self.viewModel.getAppMenuList(menuID: .ID_MEM_INTRO).sink { url in
@@ -547,13 +547,13 @@ class LoginViewController: BaseViewController {
             }.store(in: &self.viewModel.cancellableSet)
             break
         case .pw_Clear:
-            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "\(NC.S(self.pwField.text))_지우기")
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "비밀번호_지우기")
             self.pwField.text               = ""
             self.pwFieldClearBtn.isHidden   = true
             self.setLoginBtn()
             break
         case .id_Clear:
-            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "\(NC.S(self.idField.text))_지우기")
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "아이디_지우기")
             self.idField.text               = ""
             self.idFieldClearBtn.isHidden   = true
             self.setLoginBtn()
@@ -571,6 +571,7 @@ extension LoginViewController : UITextFieldDelegate {
         /// 패스워드 타입인지를 체크 합니다.
         if textField == self.pwField
         {
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "비밀번호_입력")
             self.setResignFirstResponder()
             self.pwBottomLine.backgroundColor = .OKColor
             DispatchQueue.main.async {
@@ -581,6 +582,7 @@ extension LoginViewController : UITextFieldDelegate {
         }
         else if textField == self.idField
         {
+            BaseViewModel.setGAEvent(page: "로그인",area: "로그인정보",label: "아이디_입력")
             self.idBottomLine.backgroundColor = .OKColor
         }
         
