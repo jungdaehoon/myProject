@@ -54,6 +54,11 @@ struct allData: Codable {
     var _user_level             : Int? { get { return  NC.I(user_level) } }
     /// 유저 포인트 정보입니다.
     var _user_point             : Int? { get { return  NC.I(user_point) } }
+    /// 적림대기 정보 입니다.
+    var _standby_user_point     : Int? { get { return  NC.I(standby_user_point) } }
+    /// 총 포인트 정보 입니다.
+    var _total_user_point       : Int? { get { return  NC.I(total_user_point) } }
+    
     /// OK머니 잔액 정보 입니다.
     var _balance                : Int? { get { return  NC.I(balance) } }
     /// 어벤달 결제 건수 입니다.
@@ -119,6 +124,10 @@ struct allData: Codable {
     var user_level              : Int?
     /// OK포인트 정보 입니다.
     var user_point              : Int?
+    /// 적림대기 정보 입니다.
+    var standby_user_point      : Int?
+    /// 총 포인트 정보 입니다.
+    var total_user_point        : Int?
     /// 어번달 결제 건수 입니다.
     var current_month_pay_cnt   : Int?
     /// 어번달 결제 정보 입니다.

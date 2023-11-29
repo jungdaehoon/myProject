@@ -105,7 +105,9 @@ enum MENU_LIST : String  {
     /// 제로페이 상품권 페이지 URL 입니다
     case ID_ZERO_GIFT           = "ZERO_002"
     /// 엘포인트 페이지 URL 입니다
-    case ID_L_POINT             = "LPOINT_001"
+    case ID_L_POINT             = "LPOINT"
+    /// ATM 출금 페이지 URL 입니다
+    case ID_ATM_MONEY           = "ATM"
     /// 투자 성향분석 페이지 URL 입니다.
     case ID_INV_ANA             = "INV_014_01"
     /// 친구추천 페이지 URL 입니다.
@@ -704,8 +706,56 @@ class BaseViewModel : NSObject {
             subject.send(completion: .failure(error))
             return false
         } publisher: {
-            /// 만보게 약관 동의를 요청 합니다.
+            /// 제로페이 간편결제 약관동의 요청 합니다.
             return NetworkManager.requestZeroPayTermsAgree()
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     ATM 약관동의 여부 확인 입니다.  ( J.D.H VER : 2.0.7 )
+     - Date: 2023.11.28
+     - Returns:
+        약관동의 여부를 리턴 합니다. (AnyPublisher<AtmAgreementResponse?, ResponseError>)
+     */
+    func getATMAgreementCheck() -> AnyPublisher<AtmAgreementResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<AtmAgreementResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// ATM 약관 동의 여부를 체크 요청 합니다.
+            return NetworkManager.requestATMAgreeCheck()
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    
+    /**
+     ATM 약관동의 요청 입니다 입니다.  ( J.D.H VER : 2.0.7 )
+     - Date: 2023.07.05
+     - Parameters:False
+     - Throws: False
+     - Returns:
+        약관동의 요청 정상처리 여부를 받습니다. (AnyPublisher<ZeroPayTermsAgreeResponse?, ResponseError>)
+     */
+    func setATMInsertAgreement() -> AnyPublisher<AtmInsertAgreementResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<AtmInsertAgreementResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// ATM 약관동의 요청 입니다 입니다.
+            return NetworkManager.requestATMInsertAgreement()
         } completion: { model in
             // 앱 인터페이스 정상처리 여부를 넘깁니다.
             subject.send(model)

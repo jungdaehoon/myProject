@@ -415,9 +415,10 @@ extension OKZeroViewModel: AVCaptureMetadataOutputObjectsDelegate {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             /// QRCode 값을 체크를 중단 합니다.
             self.captureSession!.stopRunning()
+            Slog("OKZeroViewModel Value\n + \(self.qrCodeValue)\n")
             /// QRCode 정보를 넘깁니다.
             self.qrCodeValue = .qr_success(qrcode: stringValue)
-            Slog("OKZeroViewModel Value\n + \(self.qrCodeValue)\n")
+            
         }
     }
 }

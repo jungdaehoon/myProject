@@ -7,47 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3FA4E48D-9E2E-4235-91BA-B99853F33C44"
+            uuid = "734A3A2D-B6C0-430A-AAC3-A548A08C8010"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
+            filePath = "Class/Web/FullWebViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "974"
-            endingLineNumber = "974"
-            landmarkName = "setRelease()"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "btn_action(_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "3FA4E48D-9E2E-4235-91BA-B99853F33C44 - ce07ff40035902e5"
+                  uuid = "734A3A2D-B6C0-430A-AAC3-A548A08C8010 - 93db6e0182bdb8aa"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "cereal.OKZeroPayView.setRelease() -&gt; ()"
+                  symbolName = "cereal.FullWebViewController.btn_action(Any) -&gt; ()"
                   moduleName = "cereal"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/FullWebViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "977"
-                  endingLineNumber = "977"
-                  offsetFromSymbolStart = "224">
+                  startingLineNumber = "308"
+                  endingLineNumber = "308"
+                  offsetFromSymbolStart = "800">
                </Location>
                <Location
-                  uuid = "3FA4E48D-9E2E-4235-91BA-B99853F33C44 - ce07ff400359023a"
+                  uuid = "734A3A2D-B6C0-430A-AAC3-A548A08C8010 - 93db6e0182bdb8aa"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "cereal.OKZeroPayView.setRelease() -&gt; ()"
+                  symbolName = "cereal.FullWebViewController.btn_action(Any) -&gt; ()"
                   moduleName = "cereal"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/UI/OkZeroPayment/View/OKZeroPayView.swift"
+                  urlString = "file:///Users/okpay/Documents/GitHub/newCereal/Class/Web/FullWebViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "978"
-                  endingLineNumber = "978"
-                  offsetFromSymbolStart = "224">
+                  startingLineNumber = "308"
+                  endingLineNumber = "308"
+                  offsetFromSymbolStart = "1620">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -55,16 +55,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A8D1D545-5BC0-44E0-B69E-98AEE7E82A63"
+            uuid = "80ED0284-7904-4173-8A1C-EAA04C4E92F6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Class/UI/OkZeroPayment/OkPaymentViewController.swift"
+            filePath = "Class/Network/AlamofireAgent.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "setRelease()"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "defaultManager"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28D6ECD4-1CED-4F48-8721-40318EB795AF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Common/Model/BaseViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1472"
+            endingLineNumber = "1472"
+            landmarkName = "setSecureCheck()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4BB06CD1-F4CA-47F8-88CE-F1C067EA324E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/Common/ViewController/BaseWebViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "webView(_:didReceive:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC92B29A-D5B5-4A16-86C1-9B34F962E66C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Class/UI/Intro/IntroViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "setAppChecking()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

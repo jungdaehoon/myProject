@@ -153,6 +153,8 @@ enum SCRIPT_MESSAGES : String
     case openZeropayQRScanner       = "openZeropayQRScanner"
     /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
     case openZeropayQRIntro         = "openZeropayQRIntro"
+    /// ATM 약관동의 팝업 오픈 이벤트 입니다.
+    case openATMAgreement           = "openATMAgreement"
 }
 
 

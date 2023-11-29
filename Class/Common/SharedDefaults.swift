@@ -265,4 +265,20 @@ class SharedDefaults {
         let keyChainWrapper = SharedDefaults.default.keychainWrapper
         return keyChainWrapper.string(forKey: key) ?? ""
     }
+    
+    
+    /**
+     키체인에 데이터를 삭제 합니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.03.31
+     - Parameters:
+        - value : 추가할 데이터 입니다.
+        - key : 데이터 키 정보 입니다.
+     - Throws: False
+     - Returns:False
+     */
+    static func removeKeyChain( forKey key: String )
+    {
+        let keyChainWrapper = SharedDefaults.default.keychainWrapper
+        keyChainWrapper.removeObject(forKey: key)
+    }
 }

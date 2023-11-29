@@ -166,10 +166,19 @@ class TabbarViewController: UITabBarController {
                 /// 해당 URL 로 이동합니다.
                 if NC.S(url).isValid
                 {
-                    /// 진행중인 탭 인덱스를 초기화 합니다.
-                    self.setIngTabToRootController()
-                    /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(url))
+                    Slog("push url : \(NC.S(url))")
+                    /// 이동할 URL 정보가. 엘포인트 타입인지를 체크 합니다.
+                    if url.contains("/lpoint/")
+                    {
+                        self.setIngViewController(url: url)
+                    }
+                    else
+                    {
+                        /// 진행중인 탭 인덱스를 초기화 합니다.
+                        self.setIngTabToRootController()
+                        /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
+                        self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(url))
+                    }
                     /// PUSH 에서 받은 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.pushUrl = ""
                 }
@@ -347,6 +356,38 @@ extension UITabBarController
     
     
     /**
+     현 진행중인 페이지에서 url 페이지로 이동 합니다. ( J.D.H VER : 2.0.7 )
+     - Description: Lpoint 에서 사용으로 lPoint 페이지에서 PUSH 받을경우 "결제완료" 등 관련 페이지 이동시 현 페이지에서 전체화면 web 페이지를 오픈 하도록 합니다.
+     - Date: 2023.11.28
+     - Parameters:
+        - url: 페이지 이동 할 URL 정보 입니다.
+     - Returns:False
+     */
+    func setIngViewController( url : String? ){
+        /// 이전 진행중인 ViewController 을 초기화 합니다.
+        if let viewController = self.viewControllers![self.selectedIndex]  as? BaseViewController,
+           let pageUrl = url {
+            if let navigation = viewController.navigationController,
+               let contoller  = navigation.ingViewcontroller as? FullWebViewController {
+                if let webview  = contoller.webView,
+                   let url      = webview.url {
+                    Slog("url.absoluteString : \(url.absoluteString)")
+                    /// 현 페이지가 lpoint 페이지 인지를 체크 합니다.
+                    if url.absoluteString.contains("/lpoint/") {
+                        contoller.view.setDisplayWebView( WebPageConstants.getDomainURL(pageUrl) , modalPresent: true )
+                        return
+                    }
+                }
+            }
+            /// 진행중인 탭 인덱스를 초기화 합니다.
+            self.setIngTabToRootController()
+            /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
+            self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(pageUrl))
+        }
+    }
+    
+    
+    /**
      현 진행중인 페이지를 root 페이지로 초기화 합니다. ( J.D.H VER : 2.0.0 )
      - Description: Root 페이지 이동시 현 보여지는 페이지와 이전 연결되었던 모든 ViewController/UIView 페이지를 전부 삭제 후 Root 페이지로 이동 합니다.
      - Date: 2023.05.17
@@ -375,7 +416,10 @@ extension UITabBarController
         - completion    : 탭 이동후 추가한 URL 정보가 디스플레이 되면 호출 됩니다. ( 추가한 데이터가 있을 경우에만 사용 가능 합니다. )
      - Returns:False
      */
-    func setSelectedIndex( _ tabIndex : TAB_STATUS, seletedItem : Any? = nil, updateCookies : Bool = false, completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
+    func setSelectedIndex( _ tabIndex : TAB_STATUS,
+                           seletedItem : Any? = nil,
+                           updateCookies : Bool = false,
+                           completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
         /// 탭 이동시 아이템이 있을 경우 아이템 데이터 우선으로 처리 합니다.
         if let tabitem = seletedItem
         {

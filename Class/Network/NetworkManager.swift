@@ -460,4 +460,46 @@ class NetworkManager {
         let parameters = self.getDefaultParams(method: .get) as! String
         return AlamofireAgent.request(APIConstant.API_ZEROPAY_OkMONEY + "/\(parameters)", method :.get, parameters: nil)
     }
+    
+    
+    /**
+     ATM 약관 동의 여부를 체크 합니다.. ( J.D.H VER : 2.0.7 )
+     - API ID: /coocon/atmAgreeChk.do
+     - API 명: ATM 약관동의 여부 체크 입니다.
+     - Date: 2023.11.28
+     - Parameters:
+        - params : 파라미터 정보를 넘깁니다.
+     - Throws: False
+     - Returns:
+        약관동의 여부를 받습니다.  ( AnyPublisher<AtmAgreementResponse, ResponseError> )
+     */
+    static func requestATMAgreeCheck( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<AtmAgreementResponse, ResponseError> {
+        var updateParam : [String:Any] = [ "token": token ]
+        for (key,value) in params
+        {
+            updateParam.updateValue(value, forKey: key)
+        }
+        return AlamofireAgent.requestJson( APIConstant.API_COOCON_ATM_AGREEMENT, parameters: updateParam )
+    }
+    
+    
+    /**
+     ATM 약관동의 요청 입니다..( J.D.H VER : 2.0.7 )
+     - API ID: /coocon/insertAtmAgreement.do
+     - API 명: ATM 약관동의 요청 입니다.
+     - Date: 2023.11.28
+     - Parameters:
+        - params : 파라미터 정보를 넘깁니다.
+     - Throws: False
+     - Returns:
+        약관동의 정상 처리 여부를 받습니다.  ( AnyPublisher<AtmInsertAgreementResponse, ResponseError> )
+     */
+    static func requestATMInsertAgreement( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<AtmInsertAgreementResponse, ResponseError> {
+        var parameters: Parameters = [ "token": token ]
+        for (key,value) in params
+        {
+            parameters.updateValue(value, forKey: key)
+        }
+        return AlamofireAgent.request(APIConstant.API_COOCON_ATM_INSERT_AGREE, parameters: parameters)
+    }
 }

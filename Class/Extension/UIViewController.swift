@@ -74,6 +74,7 @@ extension UIViewController {
     func popController( animated: Bool, animatedType: AnimationType? = .down, completion: (( _ firstViewController : UIViewController? ) -> Void)? = nil) {
         if let navigation = self.navigationController {
             self.setRelease()
+            Slog("navigation.viewControllers: \(navigation.viewControllers.count)")
             navigation.popViewController(animated: animated, animatedType: .down) {
                 if let viewController = navigation.viewControllers.last
                 {

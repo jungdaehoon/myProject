@@ -55,7 +55,7 @@ class PointItemView: UIView {
             /// OK머니 정보입니다.
             self.okMoneyText.text   = "\(result._balance!.addComma())원"
             /// OK포인트 정보 입니다.
-            self.okPointText.text   = "\(result._user_point!.addComma())원"
+            self.okPointText.text   = "\(result._total_user_point!.addComma())원"
             /// NFT 보유 카운트 입니다.
             self.nftCount.text      = "\(result._own_nft_cnt!)개"
             

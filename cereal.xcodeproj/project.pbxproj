@@ -231,6 +231,8 @@
 		F2DEDB772A8CABCE003E502E /* UpdateMainAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */; };
 		F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */; };
 		F2F084322A7898AB005EC9CC /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */; };
+		F2F16D7A2B15C7DF00365978 /* AtmAgreementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F16D792B15C7DF00365978 /* AtmAgreementResponse.swift */; };
+		F2F16D7F2B15C96C00365978 /* AtmInsertAgreementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F16D7E2B15C96C00365978 /* AtmInsertAgreementResponse.swift */; };
 		F2FA95E12AD007BA00862C7F /* HomePayModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FA95E02AD007BA00862C7F /* HomePayModeView.xib */; };
 /* End PBXBuildFile section */
 
@@ -487,6 +489,8 @@
 		F2DEDB762A8CABCE003E502E /* UpdateMainAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainAccountResponse.swift; sourceTree = "<group>"; };
 		F2F0842F2A7898AB005EC9CC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F2F084302A7898AB005EC9CC /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
+		F2F16D792B15C7DF00365978 /* AtmAgreementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtmAgreementResponse.swift; sourceTree = "<group>"; };
+		F2F16D7E2B15C96C00365978 /* AtmInsertAgreementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtmInsertAgreementResponse.swift; sourceTree = "<group>"; };
 		F2FA95E02AD007BA00862C7F /* HomePayModeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePayModeView.xib; sourceTree = "<group>"; };
 		FD740F24DF294204F2C066E1 /* Pods_cereal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cereal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -934,6 +938,8 @@
 		8D205EE729D1346E00F43C99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F2F16D7B2B15C93F00365978 /* AtmInsertAgreement */,
+				F2F16D782B15C7B100365978 /* AtmAgreement */,
 				F25323CC2A564C9E005267E2 /* ZeroPayOKMoney */,
 				F2C5E4C72A55385A005660F1 /* ZeroPayQRCodeStatus */,
 				F2C5E4C42A55342A005660F1 /* ZeroPayQRBarCode */,
@@ -1453,6 +1459,22 @@
 			path = PickerView;
 			sourceTree = "<group>";
 		};
+		F2F16D782B15C7B100365978 /* AtmAgreement */ = {
+			isa = PBXGroup;
+			children = (
+				F2F16D792B15C7DF00365978 /* AtmAgreementResponse.swift */,
+			);
+			path = AtmAgreement;
+			sourceTree = "<group>";
+		};
+		F2F16D7B2B15C93F00365978 /* AtmInsertAgreement */ = {
+			isa = PBXGroup;
+			children = (
+				F2F16D7E2B15C96C00365978 /* AtmInsertAgreementResponse.swift */,
+			);
+			path = AtmInsertAgreement;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1754,6 +1776,7 @@
 				8D205F2729D1346F00F43C99 /* IntroModel.swift in Sources */,
 				8DBA445B29D428BA00A2E5C1 /* HybridOpenBankViewController.swift in Sources */,
 				8D205F7E29D1346F00F43C99 /* PedometerResponse.swift in Sources */,
+				F2F16D7A2B15C7DF00365978 /* AtmAgreementResponse.swift in Sources */,
 				8D205F7B29D1346F00F43C99 /* ReBankAuthResponse.swift in Sources */,
 				F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */,
 				F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */,
@@ -1854,6 +1877,7 @@
 				8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */,
 				8D205F3729D1346F00F43C99 /* AllMoreModel.swift in Sources */,
 				8D205F8429D1346F00F43C99 /* KeyChainCustItem.swift in Sources */,
+				F2F16D7F2B15C96C00365978 /* AtmInsertAgreementResponse.swift in Sources */,
 				F22B63CD2ADF699100C24424 /* QRCodeScannerViewModel.swift in Sources */,
 				8D205F3F29D1346F00F43C99 /* AllMoreMenuListView.swift in Sources */,
 				8D205F4729D1346F00F43C99 /* PedometerViewController.swift in Sources */,

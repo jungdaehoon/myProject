@@ -121,7 +121,6 @@ class WalletViewModel : BaseViewModel {
                 }
                 
                 let privateKey = try twalletAddressKeyStore?.UNSAFE_getPrivateKeyData(password: walletPass, account: wa)
-                
                 Slog("import: mnemonics  = \(mnemonics)", category: .wallet)
                 Slog("import: password  = \(walletPass)", category: .wallet)
                 Slog("import: twalletAddressKeyStore?.addresses  = \(twalletAddressKeyStore?.addresses)", category: .wallet)

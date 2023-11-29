@@ -47,8 +47,7 @@ enum AlamofireAgent {
         else
         {
             return Alamofire.SessionManager(configuration: urlSessionConfiguration())
-        }
-        
+        }        
     }()
     
     

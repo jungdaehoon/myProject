@@ -81,6 +81,10 @@ class WebPageConstants {
     static let URL_MARKET_HISTORY               = baseURL + "/myp/mypGifticonList.do?tab=myTab"
     /// 엘포인트 시작 페이지 입니다.
     static let URL_LPOINT_INTRO                 = baseURL + "/lpoint/intro.do"
+    /// 제로페이 시작 페이지 입니다.
+    static let URL_ZEROPAY_INTRO                = baseURL + "/zeropay/web/index.do"
+    ///  ATM 시작 페이지 입니다.
+    static let URL_ATM_INTRO                    = baseURL + "/coocon/atmMain.do"
         
     
     /**

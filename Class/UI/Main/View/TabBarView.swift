@@ -339,9 +339,7 @@ class TabBarView : UIView
                    let data = check._data {
                     if data._didAgree!
                     {
-                        let viewController = OkPaymentViewController()
-                        viewController.modalPresentationStyle = .overFullScreen
-                        controller.pushController(viewController, animated: true, animatedType: .up)
+                        controller.view.self.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
                         return
                     }
                 }
@@ -360,9 +358,7 @@ class TabBarView : UIView
                             if let agree = model,
                                agree.code == "0000"
                             {
-                                let viewController = OkPaymentViewController()
-                                viewController.modalPresentationStyle = .overFullScreen
-                                controller.pushController(viewController, animated: true, animatedType: .up)
+                                controller.view.self.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
                                 return
                             }
                         }.store(in: &BaseViewModel.shared.cancellableSet)

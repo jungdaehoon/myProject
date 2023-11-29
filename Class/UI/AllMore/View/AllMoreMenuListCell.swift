@@ -162,6 +162,14 @@ class AllMoreMenuListCell: UITableViewCell {
                 self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
             }
             
+            if self.menuInfo!.title! == "총 적립대기"
+            {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: NC.S(self.menuInfo!.title))
+                /// 결제 페이지는 추후 개발 후 연동 예정 입니다.
+                self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
+            }
+            
+            
             if self.menuInfo!.title! == "OK마켓"
             {
                 BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
@@ -200,14 +208,17 @@ class AllMoreMenuListCell: UITableViewCell {
                     }
                 }).store(in: &model.cancellableSet)
             }
+            
             if self.menuInfo!.title! == "L.POINT"
             {
-                self.setDisplayWebView( WebPageConstants.baseURL  + "/lpoint/agreement.do" , modalPresent: true )
-//                let qrScanner = QRCodeScannerViewController.init { value in
-//                    
-//                }
-//                self.viewController.pushController(qrScanner, animated: true, animatedType: .up)
+                self.setDisplayWebView( WebPageConstants.URL_LPOINT_INTRO , modalPresent: true, pageType: .lpoint_type )
             }
+            
+            if self.menuInfo!.title! == "ATM 머니 출금"
+            {
+                self.getATMAgreementCheck()
+            }
+            
             if self.menuInfo!.title! == "거래내역"
             {
                 self.setDisplayWebView(WebPageConstants.URL_ACCOUNT_TRANSFER_LIST)
@@ -468,16 +479,52 @@ extension AllMoreMenuListCell
                 
             }
         }
-        
+    }
+    
+    
+    /**
+     ATM 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.7 )
+     - Date: 2023.11.28
+     */
+    func getATMAgreementCheck(){
+        /// ATM 약관 동의 체크 입니다.
+        self.viewModel!.getATMAgreementCheck().sink { result in
+        } receiveValue: { model in
+            if let model = model,
+               let check = model._atmAgreeChk {
+                if check
+                {
+                    self.setDisplayWebView( WebPageConstants.URL_ATM_INTRO , modalPresent: true, pageType: .atm_type )
+                    return
+                }
+            }
+            
+            /// 약관 동의 팝업을 오픈 합니다.
+            let terms = [TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?terms_cd=atm001")]
+            BottomTermsView().setDisplay( target: self.viewController, "ATM 머니 출금 서비스를\n이용하기 위해서는 약관동의가 필요해요",
+                                         termsList: terms, isCheckUI: true) { value in
+                /// 동의/취소 여부를 받습니다.
+                if value == .success
+                {
+                    /// 제로페이 약관에 동의함을 저장 요청 합니다.
+                    self.viewModel!.setATMInsertAgreement().sink { result in
+                    } receiveValue: { model in
+                        if let agree = model,
+                           agree.code == "0000"
+                        {
+                            /// ATM 이동 할 스크립트 호출 입니다.
+                            self.setDisplayWebView( WebPageConstants.URL_ATM_INTRO , modalPresent: true, pageType: .atm_type )
+                        }
+                    }.store(in: &self.viewModel!.cancellableSet)
+                }
+            }
+        }.store(in: &self.viewModel!.cancellableSet)
     }
     
     
     /**
      제로페이 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.03.16
-     - Parameters:False
-     - Throws: False
-     - Returns:False
      */
     func setZeroPayTermsViewDisplay()
     {
@@ -521,9 +568,6 @@ extension AllMoreMenuListCell
     /**
      제로페이 결제 이동 하단 팝업뷰를 오픈 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.05
-     - Parameters:False
-     - Throws: False
-     - Returns:False
      */
     func setBottomZeroPayInfoView()
     {
@@ -533,10 +577,7 @@ extension AllMoreMenuListCell
             {
                 /// 결제 페이지로 이동 합니다.
                 case .paymeny:
-                    //self.setDisplayWebView( WebPageConstants.baseURL  + "/lpoint/agreement.do" , modalPresent: true )
-                    let viewController = OkPaymentViewController()
-                    viewController.modalPresentationStyle = .overFullScreen
-                    self.viewController.pushController(viewController, animated: true, animatedType: .up)
+                self.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
                     break
                     /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
                 case .location:

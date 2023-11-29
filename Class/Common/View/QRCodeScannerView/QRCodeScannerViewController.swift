@@ -12,32 +12,42 @@ import Combine
 /**
  QRCode 스캔 뷰어 입니다  ( J.D.H VER : 2.0.4 )
  - Date: 2023.10.18
+ - Description : OKPay 에서 공통으로 QRCode 스캔을 지원하는 페이지 입니다. ( 지갑,제로페이상품권,제로페이 간편결제 )
  */
 class QRCodeScannerViewController: UIViewController {
 
-    var viewModel : QRCodeScannerViewModel = QRCodeScannerViewModel()
+    /// 스캔 모델 입니다.
+    var viewModel  : QRCodeScannerViewModel = QRCodeScannerViewModel()
+    /// 스켄 이벤트 정보를 리턴 합니다.
     var completion : (( _ value : QRCODE_SCANNER_CB? ) -> Void )? = nil
-    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var titleView        : UIView!
     /// 전체 프리뷰 뷰 영역 입니다.
     @IBOutlet weak var previewView      : UIView!
     /// QRCode 스캔 영역 입니다.
     @IBOutlet weak var QRintersetView   : UIView!
+    /// 페이지 타입별 상단 타이틀 명 입니다.
     @IBOutlet weak var titleName        : UILabel!
+    /// 페이지 타입별 뒤로가기 버튼 입니다.
     @IBOutlet weak var backBtn          : UIButton!
+    /// 페이지 타입별 종료 버튼 입니다.
     @IBOutlet weak var closeBtn         : UIButton!
+    /// QRCode 스캔 부분 상세 설명 입니다.
     @IBOutlet weak var subInfoText      : UILabel!
+    /// 스켄 영역 뷰어 입니다.
     @IBOutlet weak var scannerView      : UIView!
-    
     /// 바코드를 인식할 프리브 영역 입니다.
     var previewLayer                    : AVCaptureVideoPreviewLayer?
     /// 바코드 인식 할 영역 입니다.
     var rectOfInterest                  : CGRect?
     /// 타이틀 정보 입니다.
-    var titleStr                        : String    = "QR결제"
+    var titleStr                        : String    = ""
     /// 중앙 안내 정보 입니다.
-    var subInfoStr                     : String    = "QR결제"
+    var subInfoStr                      : String    = ""
     /// 상단바 버튼 뒤로가기 여부 입니다.
     var isTitleBackBtn                  : Bool      = true
+    
+    
+    
     // MARK: - 데이터 초기화 입니다.
     init( titleStr          : String = "QR결제",
           subInfoStr        : String = "QR코드를 찍어 간편결제하세요",
@@ -56,28 +66,26 @@ class QRCodeScannerViewController: UIViewController {
     }
     
     
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         /// 캡쳐 세션 사용 여부를 체크 합니다.
-        self.viewModel.isAVCaptureSession( completion: { value in
+        self.viewModel.isAVCaptureSession { value in
             if let completion = self.completion {
                 completion(value)
             }
             self.popController(animated: true)
-        }).sink { result in
-            
-        } receiveValue: { metadataOutput in
+        }.sink { output in
             /// 캡쳐 세션 사용가능 합니다.
-            if metadataOutput != nil
+            if output != nil
             {
                 DispatchQueue.main.async {
                     /// QRCode 를 인식할 카메라 프리뷰 화면을 설정 합니다.
-                    self.setPreviewLayer(metadataOutput)
+                    self.setPreviewLayer(output)
                 }
             }
         }.store(in: &self.viewModel.cancellableSet)
-        
     }
 
     
@@ -100,6 +108,7 @@ class QRCodeScannerViewController: UIViewController {
         }
     }
 
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -109,7 +118,7 @@ class QRCodeScannerViewController: UIViewController {
     // MARK: - 지원 메서드 입니다.
     /**
      프리뷰 화면과 캡쳐할 영역 설정 합니다. ( J.D.H VER : 2.0.3 )
-     - Date: 2023.03.13
+     - Date: 2023.10.13
      - Parameters:
         - captureMetadataOutPut : 캡쳐할 메타데이터 output 정보 입니다.
      - Throws: False
@@ -153,11 +162,13 @@ class QRCodeScannerViewController: UIViewController {
         self.previewView.layer.addSublayer(previewLayer)
         self.previewLayer           = previewLayer
         
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             /// QRCode 스켄을 진행 합니다.
             captureSession.startRunning()
-            /// QRCode 캡쳐 할 데이터 영역을 설정 합니다.
-            captureMetadataOutPut!.rectOfInterest = self.previewLayer!.metadataOutputRectConverted(fromLayerRect: self.QRintersetView.frame)
+            DispatchQueue.main.async {
+                /// QRCode 캡쳐 할 데이터 영역을 설정 합니다.
+                captureMetadataOutPut!.rectOfInterest = self.previewLayer!.metadataOutputRectConverted(fromLayerRect: self.QRintersetView.frame)
+            }
         }
     }
     
@@ -170,16 +181,4 @@ class QRCodeScannerViewController: UIViewController {
         }
         self.popController(animated: true)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

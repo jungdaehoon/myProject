@@ -154,6 +154,7 @@ class AllMoreViewController: BaseViewController {
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "0원", menuType: .rightimg))
             menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "0원", menuType: .null))
+            menus.append(self.viewModel.getMenuInfo(title: "총 적립대기", subTitle: "0원", menuType: .null))
             self.monthInfo!.setDisplay(menus: menus)
             self.stackView.addArrangedSubview(self.monthInfo!)
         }
@@ -163,6 +164,7 @@ class AllMoreViewController: BaseViewController {
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "\(result._current_month_pay_amt!.addComma())원", menuType: .rightimg))
             menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "\(result._current_month_save_amt!.addComma())원", menuType: .null))
+            menus.append(self.viewModel.getMenuInfo(title: "총 적립대기", subTitle: "\(result._standby_user_point!.addComma())원", menuType: .null))
             
             /// 화면 다시 디스플레이 요청 합니다.
             self.monthInfo!.reloadDisplay(menus, viewModel: self.viewModel)
@@ -206,17 +208,24 @@ class AllMoreViewController: BaseViewController {
             
             /// 엘포인트 추가 합니다.
             //if self.viewModel.isAppMenuList(menuID: .ID_L_POINT)
-            //{
-            //menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
-            //}
+            do{
+                menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
+            }
             
-            self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
+            /// ATM 머니 출금 추가 입니다.
+            //if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
+            do {
+                menus.append(self.viewModel.getMenuInfo(title: "ATM 머니 출금", menuType: .rightimg))
+            }
+                        
+            self.payServiceInfo!.setDisplay(titleName: "금융서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
         }
         else
         {
             self.payServiceInfo!.setDisplay(self.viewModel)
         }
+        
         /*
         /// MY OK머니 영역 뷰어를 추가 합니다.
         if self.myOKMoneyInfo == nil
