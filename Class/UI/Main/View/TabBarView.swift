@@ -339,7 +339,10 @@ class TabBarView : UIView
                    let data = check._data {
                     if data._didAgree!
                     {
-                        controller.view.self.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
+                        /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                        BaseViewModel.shared.getAppMenuList(menuID: .ID_ZERO_QR).sink { url in
+                            controller.view.setDisplayWebView( url , modalPresent: true, pageType: .zeropay_type )
+                        }.store(in: &BaseViewModel.shared.cancellableSet)
                         return
                     }
                 }
@@ -358,7 +361,10 @@ class TabBarView : UIView
                             if let agree = model,
                                agree.code == "0000"
                             {
-                                controller.view.self.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
+                                /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                                BaseViewModel.shared.getAppMenuList(menuID: .ID_ZERO_QR).sink { url in
+                                    controller.view.setDisplayWebView( url , modalPresent: true, pageType: .zeropay_type )
+                                }.store(in: &BaseViewModel.shared.cancellableSet)
                                 return
                             }
                         }.store(in: &BaseViewModel.shared.cancellableSet)

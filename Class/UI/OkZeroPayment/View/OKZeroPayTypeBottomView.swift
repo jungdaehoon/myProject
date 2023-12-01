@@ -10,8 +10,8 @@ import UIKit
 
 
 /**
- 제로페이 페이지 버튼 타입 입니다. ( J.D.H VER : 2.0.0 )
- - Date: 2023.05.03
+ 제로페이 페이지 버튼 타입 입니다. ( J.D.H VER : 2.0.7 )
+ - Date: 2023.11.30
 */
 enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
     /// 페이지 종료 입니다.
@@ -22,6 +22,8 @@ enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
     case location       = 12
     /// 자주하는 질문 입니다.
     case faq            = 13
+    /// 상품권 페이지 이동 입니다.
+    case gift           = 14
 }
 
 
@@ -31,11 +33,21 @@ enum ZEROPAY_TYPE_BOTTOM_BTN : Int {
  */
 class OKZeroPayTypeBottomView: BaseView {
 
+    @IBOutlet weak var bottomPopupHeight: NSLayoutConstraint!
+    var bottomPopupMaxHeight          : CGFloat = 360
+    /// 하단 팝업 뷰어 최대 높이 입니다.
+    var safeBottomMaxHeight           : CGFloat = 376
+    /// 제로페이 상품권 리스트 활성화 입니다.
+    var giftEnabled                   : Bool = true
+    /// 상품권 구매 버튼 높이 입니다.
+    @IBOutlet weak var giftViewHeight : NSLayoutConstraint!
     /// 타입 선택시 이벤트 입니다.
-    var btnEvent                    : (( _ event : ZEROPAY_TYPE_BOTTOM_BTN ) -> Void)? = nil
-    @IBOutlet weak var intoView     : UIView!
+    var btnEvent                      : (( _ event : ZEROPAY_TYPE_BOTTOM_BTN ) -> Void)? = nil
+    /// 하단
+    @IBOutlet weak var intoView       : UIView!
     /// 최하단 위치 포지션 입니다.
-    @IBOutlet weak var safeBottom: NSLayoutConstraint!
+    @IBOutlet weak var safeBottom     : NSLayoutConstraint!
+    
     
     
     //MARK: - Init
@@ -59,14 +71,24 @@ class OKZeroPayTypeBottomView: BaseView {
      - Throws: False
      - Returns:False
      */
-    func setDisplay( completion : (( _ event : ZEROPAY_TYPE_BOTTOM_BTN ) -> Void)? = nil ) {
-        self.btnEvent = completion
+    func setDisplay( giftEnabled : Bool = true,
+                     completion : (( _ event : ZEROPAY_TYPE_BOTTOM_BTN ) -> Void)? = nil ) {
+        self.giftEnabled = giftEnabled
+        /// 상품권 이동 버튼을 히든 처리 합니다.
+        if self.giftEnabled == false
+        {
+            self.giftViewHeight.constant    = 0
+            self.bottomPopupHeight.constant = 324
+            self.safeBottomMaxHeight        -= 56
+        }
+        
+        self.btnEvent    = completion
         self.show()
     }
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 2.0.0 )
+     뷰어를 윈도우 최상단 뷰어에 디스플레이 합니다.   ( J.D.H VER : 2.0.7 )
      - Date: 2023.05.03
      - Parameters:False
      - Throws: False
@@ -91,7 +113,7 @@ class OKZeroPayTypeBottomView: BaseView {
     
     
     /**
-     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 2.0.0 )
+     뷰어를 윈도우 최상단 뷰어에서 삭제 합니다.   ( J.D.H VER : 2.0.7 )
      - Date: 2023.05.03
      - Parameters:False
      - Throws: False
@@ -106,7 +128,7 @@ class OKZeroPayTypeBottomView: BaseView {
                     let view = $0 as! OKZeroPayTypeBottomView
                     /// 바코드 결제 위치로 선택 배경을 이동합니다.
                     UIView.animate(withDuration:0.3, delay: 0.1,usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) { [self] in
-                        self.safeBottom.constant -= 320
+                        self.safeBottom.constant -= self.safeBottomMaxHeight
                         self.alpha = 0.0
                         self.layoutIfNeeded()
                     } completion: { _ in

@@ -207,14 +207,14 @@ class AllMoreViewController: BaseViewController {
             }
             
             /// 엘포인트 추가 합니다.
-            //if self.viewModel.isAppMenuList(menuID: .ID_L_POINT)
-            do{
+            if self.viewModel.isAppMenuList(menuID: .ID_L_POINT)
+            {
                 menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
             }
             
             /// ATM 머니 출금 추가 입니다.
-            //if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
-            do {
+            if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
+            {
                 menus.append(self.viewModel.getMenuInfo(title: "ATM 머니 출금", menuType: .rightimg))
             }
                         

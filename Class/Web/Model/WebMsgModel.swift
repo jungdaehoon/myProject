@@ -155,6 +155,8 @@ enum SCRIPT_MESSAGES : String
     case openZeropayQRIntro         = "openZeropayQRIntro"
     /// ATM 약관동의 팝업 오픈 이벤트 입니다.
     case openATMAgreement           = "openATMAgreement"
+    /// ATM 페이지 오픈 이벤트 입니다.
+    case openATM                    = "openATM"
 }
 
 
@@ -327,6 +329,32 @@ class WebMsgModel : BaseViewModel {
             return ""
         }
         return ""
+    }
+    
+    
+    /**
+     제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.07.05
+     - Parameters:
+        - qrcode : 스캔한 qrcode 정보 입니다.
+     - Throws: False
+     - Returns:
+        ( S : 정지, A : 사용가능 ) 정상 여부를 받습니다. (AnyPublisher<ZeroPayQRCodeStatusResponse?, ResponseError>)
+     */
+    func getQRCodeZeroPayStatus( qrcode : String ) -> AnyPublisher<ZeroPayQRCodeStatusResponse?, ResponseError>
+    {
+        let subject             = PassthroughSubject<ZeroPayQRCodeStatusResponse?,ResponseError>()
+        requst() { error in
+            subject.send(completion: .failure(error))
+            return false
+        } publisher: {
+            /// 스캔한 QRCode  정상여부를 체크  요청 합니다.
+            return NetworkManager.requestZeroPayQRCodeCheck(qrcode: qrcode)
+        } completion: { model in
+            // 앱 인터페이스 정상처리 여부를 넘깁니다.
+            subject.send(model)
+        }
+        return subject.eraseToAnyPublisher()
     }
     
 }

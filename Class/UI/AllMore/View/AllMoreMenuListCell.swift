@@ -169,7 +169,6 @@ class AllMoreMenuListCell: UITableViewCell {
                 self.setDisplayWebView(WebPageConstants.URL_TOTAL_PAY_LIST)
             }
             
-            
             if self.menuInfo!.title! == "OK마켓"
             {
                 BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
@@ -211,11 +210,17 @@ class AllMoreMenuListCell: UITableViewCell {
             
             if self.menuInfo!.title! == "L.POINT"
             {
-                self.setDisplayWebView( WebPageConstants.URL_LPOINT_INTRO , modalPresent: true, pageType: .lpoint_type )
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
+                /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                self.viewModel!.getAppMenuList(menuID: .ID_L_POINT).sink { url in
+                    /// ATM 이동 할 스크립트 호출 입니다.
+                    self.setDisplayWebView( url , modalPresent: true, pageType: .lpoint_type )
+                }.store(in: &self.viewModel!.cancellableSet)
             }
             
             if self.menuInfo!.title! == "ATM 머니 출금"
             {
+                BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
                 self.getATMAgreementCheck()
             }
             
@@ -494,7 +499,11 @@ extension AllMoreMenuListCell
                let check = model._atmAgreeChk {
                 if check
                 {
-                    self.setDisplayWebView( WebPageConstants.URL_ATM_INTRO , modalPresent: true, pageType: .atm_type )
+                    /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                    self.viewModel!.getAppMenuList(menuID: .ID_ATM_MONEY).sink { url in
+                        /// ATM 이동 할 스크립트 호출 입니다.
+                        self.setDisplayWebView( url , modalPresent: true, pageType: .atm_type )
+                    }.store(in: &self.viewModel!.cancellableSet)
                     return
                 }
             }
@@ -512,8 +521,11 @@ extension AllMoreMenuListCell
                         if let agree = model,
                            agree.code == "0000"
                         {
-                            /// ATM 이동 할 스크립트 호출 입니다.
-                            self.setDisplayWebView( WebPageConstants.URL_ATM_INTRO , modalPresent: true, pageType: .atm_type )
+                            /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                            self.viewModel!.getAppMenuList(menuID: .ID_ATM_MONEY).sink { url in
+                                /// ATM 이동 할 스크립트 호출 입니다.
+                                self.setDisplayWebView( url , modalPresent: true, pageType: .atm_type )
+                            }.store(in: &self.viewModel!.cancellableSet)
                         }
                     }.store(in: &self.viewModel!.cancellableSet)
                 }
@@ -560,7 +572,6 @@ extension AllMoreMenuListCell
                     }.store(in: &self.viewModel!.cancellableSet)
                 }
             }
-            
         }.store(in: &self.viewModel!.cancellableSet)
     }
     
@@ -572,14 +583,35 @@ extension AllMoreMenuListCell
     func setBottomZeroPayInfoView()
     {
         /// 제로페이 선택 안내 팝업 디스플레이 합니다.
-        OKZeroPayTypeBottomView().setDisplay { event in
+        OKZeroPayTypeBottomView().setDisplay( giftEnabled: false ) { event in
             switch event
             {
                 /// 결제 페이지로 이동 합니다.
                 case .paymeny:
-                self.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
+                    /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                    BaseViewModel.shared.getAppMenuList(menuID: .ID_ZERO_QR).sink { url in
+                        self.setDisplayWebView( url , modalPresent: true, pageType: .zeropay_type )
+                    }.store(in: &BaseViewModel.shared.cancellableSet)
                     break
-                    /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
+                /// 제로페이 상품권 구매하기 이동 합니다.
+                case .gift:
+                    /// 제로페이 상품권 URL 정보를 가져 옵니다.
+                    BaseViewModel.shared.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
+                        if url.isValid
+                        {
+                            self.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true) { value in
+                                switch value
+                                {
+                                case .zeroPayClose:
+                                    TabBarView.setReloadSeleted(pageIndex: 4)
+                                    break
+                                default:break
+                                }
+                            }
+                        }
+                    }).store(in: &BaseViewModel.shared.cancellableSet)
+                    break
+                /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
                 case .location:
                     /// 위치 측의 여부를 체크 합니다.
                     BaseViewModel.shared.isLocationAuthorization().sink { success in
