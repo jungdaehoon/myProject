@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date: 2023.04.06
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Slog("NSUUID().uuidString : \(NSUUID().uuidString)")
         /// 안티 디버깅여부를 체크 합니다.
         self.viewModel.setAntiDebuggingChecking()
         /// 시큐온 키패드 HotFix (23.04.10)
@@ -118,6 +117,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     SharedDefaults.setKeyChainCustItem(custItem)
                 }
             }
+        }
+    }
+    
+    
+    /**
+     스크린샷 방지 UI 입니다. ( J.D.H VER : 2.0.7 )
+     - Date: 2023.12.06
+     */
+    func applicationWindowsScreenshot(){
+        if let window = self.window {
+            window.backgroundColor = .white
+            let point = CGPoint(x: UIScreen.main.bounds.size.width/2 - 200/2, y: UIScreen.main.bounds.size.height/2 - 80/2)
+            let image = UIImageView(image: UIImage(named: "guide_logo"))
+            image.frame = CGRect(origin: point, size: CGSize(width: 200, height: 80))
+            window.addSubview(image)
         }
     }
 }

@@ -36,7 +36,7 @@ class IntroViewController: BaseViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(animated)        
         /// 안티디버깅이 확인시 인트로를 진행하지 않습니다.
         if BaseViewModel.isAntiDebugging{ return }
         /// 네트워크가 사용 가능한지 여부를 체크 합니다.
@@ -276,6 +276,7 @@ class IntroViewController: BaseViewController {
                 BaseViewModel.shared.isAppSessionEnabled()
             }
             self.aniView!.stop()
+            
             /// 현 페이지를 탭바 컨트롤로 변경 합니다.
             self.replaceController(viewController: controller, animated: false) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {

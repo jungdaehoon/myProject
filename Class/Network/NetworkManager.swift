@@ -441,7 +441,7 @@ class NetworkManager {
         QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayQRCodeStatusResponse, ResponseError> )
      */
     static func requestZeroPayQRCodeCheck( qrcode : String ) -> AnyPublisher<ZeroPayQRCodeStatusResponse, ResponseError> {
-        return AlamofireAgent.request(APIConstant.API_ZEROPAY_ENCOED_QRCODE_CHECK + "/\(qrcode)", method :.get, parameters: nil)
+        return AlamofireAgent.request(APIConstant.API_ZEROPAY_ENCOED_QRCODE_CHECK + "?qrCode=\(qrcode)", method :.get, parameters: nil)
     }
     
     

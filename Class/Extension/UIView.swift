@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-
+private var field = UITextField()
 extension UIView {
     func commonInit() {
         guard let xibName = NSStringFromClass(self.classForCoder).components(separatedBy: ".").last else { return }
@@ -318,7 +318,32 @@ extension UIView {
         layer.addSublayer(gradient)
     }
     
+    /**
+     스크린샷 방지 설정 입니다. ( J.D.H VER : 2.0.7 )
+     - Description : 스크린 샷을 방지 하기위해 UITextField 를 isSecureTextEntry=true 값으로 설정 하여 화면에 추가 합니다.
+     - Date: 2023.12.06
+     */
+    func makeSecure() {
+        DispatchQueue.main.async {
+            field = UITextField()
+            field.tag = 98765412
+            field.isSecureTextEntry = true
+            self.addSubview(field)
+            field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            self.layer.superlayer?.addSublayer(field.layer)
+            field.layer.sublayers?.first?.addSublayer(self.layer)
+        }
+    }
     
+    
+    func removeMakeSecure( completion : (( _ success : Bool ) -> Void)? = nil ){
+        DispatchQueue.main.async {
+            field.isSecureTextEntry = false
+            completion!(true)
+        }
+        
+    }
 }
 
 @IBDesignable

@@ -91,6 +91,8 @@ class QRCodeScannerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         /// 타이틀 명을 설정 합니다.
         self.titleName.text     = self.titleStr
         /// 중앙 상세 안내 문구 입니다.
@@ -111,6 +113,8 @@ class QRCodeScannerViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        Slog("setView.fra : \(self.QRintersetView.frame)")
+        Slog("setView.fra : \(self.QRintersetView.frame)")
     }
     
     
@@ -130,9 +134,9 @@ class QRCodeScannerViewController: UIViewController {
             return
         }
          
-        var topPosition = self.scannerView.frame.origin.y
-        topPosition     += self.scannerView.frame.height/2
-        topPosition     -= self.QRintersetView.frame.height/2
+        var topPosition             = self.scannerView.frame.origin.y
+        topPosition                 += self.scannerView.frame.height/2
+        topPosition                 -= self.QRintersetView.frame.height/2
         
         let previewSize             = CGSize(width: UIScreen.main.bounds.size.width, height:  UIScreen.main.bounds.size.height)
         /// 프리뷰 총 영역을 설정 합니다.
@@ -143,12 +147,14 @@ class QRCodeScannerViewController: UIViewController {
         Slog("titleView y : \(titleView.frame.origin.y)")
         Slog("titleView height : \(titleView.frame.size.height)")
         /// QR 코드를 인식할 박스 영역을 설정 합니다.
-        let rect                    = CGRect(x: previewSize.width/2 - self.QRintersetView.frame.size.width/2, y: topPosition,
-                                             width: self.QRintersetView.frame.size.width , height: self.QRintersetView.frame.size.height)
+        let outputRect               = CGRect(x: previewSize.width/2 - self.QRintersetView.frame.size.width/2,
+                                             y: topPosition,
+                                             width: self.QRintersetView.frame.size.width,
+                                             height: self.QRintersetView.frame.size.height)
         /// 총 전체 화면에 검은 쉐도우를 추가하는 범위 입니다.
         let path                    = UIBezierPath(rect: previewLayer.frame)
         /// 총 쉐도우에 QR코드만 인식할 박스 영역을 설정 합니다.
-        let cp                      = UIBezierPath(roundedRect: rect, cornerRadius: 16)
+        let cp                      = UIBezierPath(roundedRect: outputRect, cornerRadius: 16)
         path.append(cp)
         path.usesEvenOddFillRule    = true
         
@@ -161,13 +167,16 @@ class QRCodeScannerViewController: UIViewController {
         previewLayer.addSublayer(maskLayer)
         self.previewView.layer.addSublayer(previewLayer)
         self.previewLayer           = previewLayer
-        
+        Slog("previewLayer.frame : \(previewLayer.frame)")
+        Slog("previewSize : \(previewSize)")
+        Slog("self.cgPath.boundingBox : \(path.cgPath.boundingBox)")
+        Slog("self.QRintersetView.frame : \(self.QRintersetView.frame)")
         DispatchQueue.global(qos: .background).async {
             /// QRCode 스켄을 진행 합니다.
             captureSession.startRunning()
             DispatchQueue.main.async {
                 /// QRCode 캡쳐 할 데이터 영역을 설정 합니다.
-                captureMetadataOutPut!.rectOfInterest = self.previewLayer!.metadataOutputRectConverted(fromLayerRect: self.QRintersetView.frame)
+                captureMetadataOutPut!.rectOfInterest = self.previewLayer!.metadataOutputRectConverted(fromLayerRect: outputRect)
             }
         }
     }

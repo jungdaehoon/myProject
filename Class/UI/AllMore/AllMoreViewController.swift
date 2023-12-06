@@ -36,6 +36,8 @@ class AllMoreViewController: BaseViewController {
     var cashReceiptInfo             : AllMoreMenuListView?
     /// 결제 서비스 입니다.
     var payServiceInfo              : AllMoreMenuListView?
+    /// 출금 서비스 입니다.
+    var atmServiceInfo              : AllMoreMenuListView?
     /// 마이 OK머니 입니다.
     var myOKMoneyInfo               : AllMoreMenuListView?
     /// 마이 OK머니 입니다.
@@ -211,20 +213,39 @@ class AllMoreViewController: BaseViewController {
             {
                 menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
             }
-            
-            /// ATM 머니 출금 추가 입니다.
-            if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
-            {
-                menus.append(self.viewModel.getMenuInfo(title: "ATM 머니 출금", menuType: .rightimg))
-            }
-                        
-            self.payServiceInfo!.setDisplay(titleName: "금융서비스", menus: menus)
+        
+            self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
         }
         else
         {
             self.payServiceInfo!.setDisplay(self.viewModel)
         }
+        
+        
+        /// ATM 머니 출금 추가 입니다.
+        if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
+        {
+            /// 결제서비스 영역 뷰어를 추가합니다.
+            if self.atmServiceInfo  == nil
+            {
+                self.atmServiceInfo                             = AllMoreMenuListView.instanceFromNib()
+                var menus : [AllModeMenuListInfo]               = []
+                /// ATM 머니 출금 추가 입니다.
+                if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
+                {
+                    menus.append(self.viewModel.getMenuInfo(title: "ATM 머니 출금", menuType: .rightimg))
+                }
+                self.atmServiceInfo!.setDisplay(titleName: "출금서비스", menus: menus)
+                self.stackView.addArrangedSubview(self.atmServiceInfo!)
+            }
+            else
+            {
+                self.atmServiceInfo!.setDisplay(self.viewModel)
+            }
+        }
+        
+        
         
         /*
         /// MY OK머니 영역 뷰어를 추가 합니다.

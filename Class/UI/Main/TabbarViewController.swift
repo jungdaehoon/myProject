@@ -167,8 +167,9 @@ class TabbarViewController: UITabBarController {
                 if NC.S(url).isValid
                 {
                     Slog("push url : \(NC.S(url))")
-                    /// 이동할 URL 정보가. 엘포인트 타입인지를 체크 합니다.
-                    if url.contains("/lpoint/")
+                    /// 이동할 URL 정보가. 엘포인트 or 제로페이 타입인지를 체크 합니다.
+                    if url.contains("/lpoint/") ||
+                        url.contains("/zeropay/")
                     {
                         self.setIngViewController(url: url)
                     }
@@ -200,6 +201,8 @@ class TabbarViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Slog("TabbarViewController viewDidAppear")
+        /// 스크린샷 방지를 위해 설정 합니다.
+        //self.view.makeSecure()
     }
 
     
@@ -252,9 +255,12 @@ class TabbarViewController: UITabBarController {
      - Returns:False
      */
     func setDisplayLogin( animation : Bool = false, gudieViewEnabled : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
-        let viewController              = LoginViewController.init( completion: completion )
-        viewController.guideViewEnabled = gudieViewEnabled
-        self.pushController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)        
+        self.view.removeMakeSecure() { success in
+            let viewController              = LoginViewController.init( completion: completion )
+            viewController.guideViewEnabled = gudieViewEnabled
+            self.pushController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)
+        }
+        
     }
     
     
@@ -272,9 +278,8 @@ class TabbarViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationBackground), name: UIScene.willDeactivateNotification, object: nil)
     }
     
+
     
-    
-    // MARK: - NotificationCenter
     /**
      앱 백그라운드 이동하는 경우 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.04
@@ -357,7 +362,7 @@ extension UITabBarController
     
     /**
      현 진행중인 페이지에서 url 페이지로 이동 합니다. ( J.D.H VER : 2.0.7 )
-     - Description: Lpoint 에서 사용으로 lPoint 페이지에서 PUSH 받을경우 "결제완료" 등 관련 페이지 이동시 현 페이지에서 전체화면 web 페이지를 오픈 하도록 합니다.
+     - Description: Lpoint or zeropay 에서 사용으로 lPoint 페이지에서 PUSH 받을경우 "결제완료" 등 관련 페이지 이동시 현 페이지에서 전체화면 web 페이지를 오픈 하도록 합니다.
      - Date: 2023.11.28
      - Parameters:
         - url: 페이지 이동 할 URL 정보 입니다.
@@ -372,8 +377,9 @@ extension UITabBarController
                 if let webview  = contoller.webView,
                    let url      = webview.url {
                     Slog("url.absoluteString : \(url.absoluteString)")
-                    /// 현 페이지가 lpoint 페이지 인지를 체크 합니다.
-                    if url.absoluteString.contains("/lpoint/") {
+                    /// 현 페이지가 lpoint or zeropay 페이지 인지를 체크 합니다.
+                    if url.absoluteString.contains("/lpoint/") ||
+                        url.absoluteString.contains("/zeropay/") {
                         contoller.view.setDisplayWebView( WebPageConstants.getDomainURL(pageUrl) , modalPresent: true )
                         return
                     }
