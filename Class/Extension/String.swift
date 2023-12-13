@@ -737,6 +737,12 @@ extension String {
     }
     
     
+    func utf8EncodedString() -> String {
+        let data = self.data(using: .nonLossyASCII)
+        return String(data: data!, encoding: .utf8) ?? ""
+    }
+    
+    
     var insertComma: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal // 소수점이 있는 경우 처리
@@ -775,8 +781,7 @@ extension String {
                     if NSLocale.current.languageCode == "vi"
                     {
                         dot = ","
-                    }
-                    
+                    }                    
                     return (numberFormatter.string(from: NSNumber(value: doubleValue)) ?? numberString) + "\(dot)\(numberArray[1])"
                 }
             }

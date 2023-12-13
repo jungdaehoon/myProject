@@ -89,6 +89,9 @@ class AllMoreMenuListCell: UITableViewCell {
             case .rightimg:
                 self.rightImage.isHidden    = false
                 self.rightSubText.isHidden  = true
+            case .null:
+                self.rightImage.isHidden    = true
+                self.rightSubText.isHidden  = true
             default:break
         }
         

@@ -193,7 +193,7 @@ class AllMoreViewController: BaseViewController {
             /// OK마켓 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_GIFTYCON)
             {
-                menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
+                menus.append(self.viewModel.getMenuInfo(title: "OK마켓", menuType: .rightimg ))
             }
             
             /// 제로페이 QR 결제 정보를 체크 합니다.

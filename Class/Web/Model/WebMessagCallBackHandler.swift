@@ -367,9 +367,8 @@ class WebMessagCallBackHandler : NSObject  {
                         } catch { }
                         break
                     case .qr_success( let qrcode):
-                        let encoderQrcode = NC.S(qrcode).data (using: .utf8)!.base64EncodedString()
                         /// 스캔한 QRCode 정상여부를 체크 합니다.
-                        self.viewModel.getQRCodeZeroPayStatus(qrcode: NC.S(encoderQrcode)).sink { result in
+                        self.viewModel.getQRCodeZeroPayStatus(qrcode: NC.S(qrcode)).sink { result in
                             //self.viewModel.captureSession!.startRunning()
                         } receiveValue: { model in
                             if let qrStatus = model,
@@ -381,7 +380,7 @@ class WebMessagCallBackHandler : NSObject  {
                                     var params : [String:Any] = [:]
                                     /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
                                     params.updateValue("Y", forKey: "result")
-                                    params.updateValue(NC.S(encoderQrcode), forKey: "qrCode")
+                                    params.updateValue(NC.S(qrcode), forKey: "qrCode")
                                     do {
                                         if let script = try Utils.toJSONString(params)
                                         {
@@ -2384,6 +2383,10 @@ class WebMessagCallBackHandler : NSObject  {
                     {
                         /// 제로페이 약관에 동의함을 저장 요청 합니다.
                         self.viewModel.setZeroPayTermsAgree().sink { result in
+                            if pageType == "zero_pay"
+                            {
+                                self.setEvaluateJavaScript(callback: NC.S(callbacks[0]), message: NC.S("N"))
+                            }
                         } receiveValue: { model in
                             if let agree = model,
                                agree.code == "0000"
@@ -2395,6 +2398,13 @@ class WebMessagCallBackHandler : NSObject  {
                                 }
                                 /// 제로페이 이동전 하단 팝업 오픈 합니다.
                                 self.setBottomZeroPayInfoView()
+                            }
+                            else
+                            {
+                                if pageType == "zero_pay"
+                                {
+                                    self.setEvaluateJavaScript(callback: NC.S(callbacks[0]), message: NC.S("N"))
+                                }
                             }
                         }.store(in: &self.viewModel.cancellableSet)
                     }

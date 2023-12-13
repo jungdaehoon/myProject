@@ -170,8 +170,6 @@ class GuideInfoView: UIView {
     }
     
     
-
-    
     // MARK: - UIPanGestureRecognizer
     @objc func gestureRecognizer(_ gesture : UIPanGestureRecognizer){
         let positions      : CGPoint = gesture.location(in: gesture.view)
@@ -200,6 +198,7 @@ class GuideInfoView: UIView {
                 UIView.animate(withDuration: 0.3) {
                     if self.startView.alpha != 0.0
                     {
+                        Slog("밀어넣기!!!!")
                         self.startView.alpha = 0.0
                         BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: "밀어넣기")
                     }
@@ -251,13 +250,11 @@ class GuideInfoView: UIView {
     }
     
     
-    
     // MARK: - 버튼 액션 입니다.
     @IBAction func btn_action(_ sender: Any) {
         BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: "건너뛰기")
         /// 가이드에서 앱 시작하기로 넘어감을 넘깁니다.
         self.completion!(true)
-        
     }
 }
 
@@ -294,7 +291,7 @@ extension GuideInfoView : UIScrollViewDelegate
         /// 현 위치 정보를 디스플레이 합니다.
         let page                        = Int(targetContentOffset.pointee.x / self.frame.width)
         self.pageControl.currentPage    = page
-        var gaNames:[String] = ["간편한 송금","간편결제","앱테크","NFT 세상"]
+        let gaNames:[String] = ["간편한 송금","간편결제","앱테크","NFT 세상"]
         BaseViewModel.setGAEvent(page: "인트로",area: "앱소개",label: gaNames[self.pageControl.currentPage])
     }
 }

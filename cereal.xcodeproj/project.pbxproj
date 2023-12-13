@@ -2151,7 +2151,7 @@
 				CODE_SIGN_ENTITLEMENTS = cereal/cereal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CONSOLE_OS_LOG = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UR9BW3835D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2190,7 +2190,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "OK pay";
