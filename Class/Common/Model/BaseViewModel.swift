@@ -937,6 +937,7 @@ class BaseViewModel : NSObject {
                     return
                 case let .failure(error):
                     self.appShield.error         = error
+                    Slog("self.appShield.error :\(self.appShield.error!.localizedDescription)")
                     if (error).code / 100 == 11 {
                         self.appShield.error_msg = "네트워크에 연결할 수 없습니다. 잠시 후 다시 시도해주세요."
                     } else {

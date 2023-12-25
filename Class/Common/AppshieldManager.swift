@@ -43,13 +43,12 @@ class AppshieldManager
                 /*---------------------------------------------------------------------------*
                  * 1차 무결성 검증 수행
                  *---------------------------------------------------------------------------*/
-                let aAppiron = BSAppIron.getInstance()
+                let aAppiron   = BSAppIron.getInstance()
                 aAppIronResult = try aAppiron?.authenticateApp(withUrl: AppshieldManager.APPIRON_AUTHCHECK_URL, timeout: 30)
-            
                 completion(.success(aAppIronResult!))
             } catch {
                 aError = error;
-                
+                Slog("aError : \(aError!.localizedDescription)")
                 completion(.failure(aError! as NSError))
             }
        

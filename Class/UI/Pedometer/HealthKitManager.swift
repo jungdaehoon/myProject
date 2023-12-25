@@ -18,10 +18,7 @@ class HealthKitManager {
     var mPeometerCount: Int = 0
     
     private init()
-    {
- 
-    
-    }
+    {}
     
     
     static func authStatus() -> String

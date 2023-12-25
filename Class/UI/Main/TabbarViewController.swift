@@ -69,6 +69,9 @@ class TabbarViewController: UITabBarController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        /// 저전력으로 및 스크린 타임을 제외 합니다. ( 필요시 사용 예정 )
+        //UIApplication.shared.isIdleTimerDisabled = true
+        /// 탭바 뷰 연결 입니다.
         TabBarView.tabbar = self
         /// 기본 쉐도우 라인을 초기화 합니다.
         UITabBar.clearShadow()
@@ -331,7 +334,6 @@ class TabbarViewController: UITabBarController {
                     BaseViewModel.ingSessionSaveTimer    = 0
                     /// 세션 체크를 다시 시작 합니다.
                     BaseViewModel.isSssionType           = .start
-                    
                 }
                 Slog("Ing Time : \(overTime)")
             }

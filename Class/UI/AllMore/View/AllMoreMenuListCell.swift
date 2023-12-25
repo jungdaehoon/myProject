@@ -214,11 +214,15 @@ class AllMoreMenuListCell: UITableViewCell {
             if self.menuInfo!.title! == "L.POINT"
             {
                 BaseViewModel.setGAEvent(page: "전체서비스",area: self.menuTypeTitle ,label: NC.S(self.menuInfo!.title))
+                /// ATM 이동 할 스크립트 호출 입니다.
+                //self.setDisplayWebView( WebPageConstants.URL_LPOINT_INTRO , modalPresent: true, pageType: .lpoint_type )
+                
                 /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
                 self.viewModel!.getAppMenuList(menuID: .ID_L_POINT).sink { url in
                     /// ATM 이동 할 스크립트 호출 입니다.
                     self.setDisplayWebView( url , modalPresent: true, pageType: .lpoint_type )
                 }.store(in: &self.viewModel!.cancellableSet)
+                
             }
             
             if self.menuInfo!.title! == "ATM 머니 출금"

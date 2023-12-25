@@ -146,7 +146,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
-        /*
         if notification.request.content.userInfo.count > 0
         {
             let userInfo = notification.request.content.userInfo
@@ -155,27 +154,26 @@ extension AppDelegate : UNUserNotificationCenterDelegate
             self.viewModel.isAppEnabled(inAppStartType: .push_type).sink(receiveValue: { isApp in
                 if let url = userInfo["url"] as? String {
                     Slog("OPEN PUSH URL : \(url)",category: .push )
-                    /// 앱 활성화 상태인 경우 입니다.
-                    if isApp
-                    {
-                        /// PUSH 받은.URL 정보로 페이지 이동 하도록 합니다.
-                        BaseViewModel.shared.pushUrl     = url
+                    /// 이동할 URL 정보가. 엘포인트 or 제로페이 타입인지를 체크 합니다.
+                    if url.contains("/lpoint/") ||
+                        url.contains("/zeropay/") {
+                        /// 앱 활성화 상태인 경우 입니다.
+                        if isApp
+                        {
+                            /// PUSH 받은.URL 정보로 페이지 이동 하도록 합니다.
+                            BaseViewModel.shared.pushUrl     = url
+                            completionHandler([.sound,.badge])
+                            return
+                        }
                     }
-                    else
-                    {
-                        /// 앱 활성화후 사용하도록 PUSH 에서 받은 URL 정보를 저장 합니다.
-                        BaseViewModel.shared.savePushUrl = url
-                    }
+                    completionHandler([.alert,.sound,.badge])
                 }
             }).store(in: &self.viewModel.cancellableSet)
-            completionHandler([.sound,.badge])
         }
         else
         {
             completionHandler([.alert,.sound,.badge])
         }
-         */
-        completionHandler([.alert,.sound,.badge])
     }
     
     
