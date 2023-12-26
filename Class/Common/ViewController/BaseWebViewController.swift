@@ -94,8 +94,11 @@ class BaseWebViewController: UIViewController {
             {
                 contentController.add(self, name: scriptmsg.rawValue)
             }
-            self.messageHandler!.config.userContentController       = contentController
-            self.messageHandler!.config.applicationNameForUserAgent = "/GA_iOS_WK"
+            self.messageHandler!.config.userContentController                    = contentController
+            self.messageHandler!.config.applicationNameForUserAgent              = "/GA_iOS_WK"
+            self.messageHandler!.config.allowsInlineMediaPlayback                = true
+            self.messageHandler!.config.mediaTypesRequiringUserActionForPlayback = []
+            
             self.webView                                            = WKWebView(frame: self.view.frame, configuration: self.messageHandler!.config)
             self.webView!.uiDelegate                                = self
             self.webView!.navigationDelegate                        = self

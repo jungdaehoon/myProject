@@ -132,7 +132,7 @@ class WebMessagCallBackHandler : NSObject  {
                 break
                 /// 현 페이지 종료 입니다.
             case .cancelPopup                :
-                self.setTargetDismiss()
+                self.setCancelPopup()
                 break
                 /// 현 페이지에서 파라미터 정보 가져오기 입니다. (페이지 진입시 받은 데이터 정보를 다시 넘기는 용도 인듯.... )
             case .recieveParam               :
@@ -311,11 +311,23 @@ class WebMessagCallBackHandler : NSObject  {
                 break
             /// 제로페이 약관동의 팝업 오픈 이벤트 입니다.
             case .openZeropayQRAgreement     :
-                self.setZeroPayTermsViewDisplay()
+                self.setZeroPayTermsViewDisplay( body )
+                break
+            /// 제로페이 QRCode 스캐너를 요청 합니다.
+            case .openZeropayQRScanner      :
+                self.openZeropayQRScanner( body )
                 break
             /// 제로페이 하단 이동 안내 팝업 오픈 입니다.
-            case .openZeropayQRIntro         :
+            case .openZeropayQRIntro        :
                 self.setBottomZeroPayInfoView()
+                break
+            /// ATM 약관동의 팝업 오픈 입니다.
+            case .openATMAgreement           :
+                self.getATMAgreementCheck()
+                break
+            /// ATM 페이지 오픈 입니다.
+            case . openATM                   :
+                self.setOpenATM()
                 break
             default: break
             }
@@ -325,6 +337,92 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     // MARK: - 지원 메서드 입니다.
+    
+    /**
+     제로페이 QRCode 스캔 오픈 입니다. ( J.D.H VER : 2.0.0 )
+    - Date: 2023.11.08
+    - Parameters:
+        - body: GA 업로드 데이터 입니다.
+    - Throws: False
+    - Returns:False
+    */
+    func openZeropayQRScanner( _ body : [Any?] ){
+        /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
+        let callBacks   = body[0] as! [Any]
+        if  let controller     = self.target {
+            let qrScanner = QRCodeScannerViewController.init { value in
+                
+                switch value {
+                    /// QRCdoe 읽기 실패 입니다.
+                    case .qr_fail,.cb_fail,.close :
+                        var params : [String:Any] = [:]
+                        /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                        params.updateValue("N", forKey: "result")
+                        params.updateValue("", forKey: "qrCode")
+                        do {
+                            if let script = try Utils.toJSONString(params)
+                            {
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String, message: script, isJson: true)
+                            }
+                        } catch { }
+                        break
+                    case .qr_success( let qrcode):
+                        /// 스캔한 QRCode 정상여부를 체크 합니다.
+                        self.viewModel.getQRCodeZeroPayStatus(qrcode: NC.S(qrcode)).sink { result in
+                            //self.viewModel.captureSession!.startRunning()
+                        } receiveValue: { model in
+                            if let qrStatus = model,
+                               let data = qrStatus._data {
+                                var msg = ""
+                                /// 정상 여부에 따라 분기 처리합니다.
+                                if data._status == "A"
+                                {
+                                    var params : [String:Any] = [:]
+                                    /// QRCode 스캔 실패로 아래 정보를 설정 합니다.
+                                    params.updateValue("Y", forKey: "result")
+                                    params.updateValue(NC.S(qrcode), forKey: "qrCode")
+                                    do {
+                                        if let script = try Utils.toJSONString(params)
+                                        {
+                                            self.setEvaluateJavaScript(callback: callBacks[0] as! String, message: script, isJson: true)
+                                        }
+                                    } catch { }
+                                    return
+                                }
+                                /// 정지된 QRCode 입니다.
+                                else if data._status == "S"
+                                {
+                                    msg = "결제가 불가한 코드입니다.\n(정지된 가맹정 QR코드)"
+                                }
+                                /// 존재하지 않는 QRCode 입니다.
+                                else if data._status == "N"
+                                {
+                                    msg = "결제가 불가한 코드입니다.\n(존재하지 않는 QR코드)"
+                                }
+                                /// 변동형 QRCode 입니다.
+                                else if data._status == "V"
+                                {
+                                    msg = "결제가 불가한 코드입니다.\n(변동형 MPM QR코드)"
+                                }
+                                /// 상황 별 안내 팝업 오픈 합니다.
+                                CMAlertView().setAlertView(detailObject: msg as AnyObject, cancelText: "확인") { event in
+                                }
+                                
+                            }
+                        }.store(in: &self.viewModel.cancellableSet)
+                    
+                        
+                        break
+                default:
+                    break
+                }
+                
+            }
+            controller.pushController(qrScanner, animated: true, animatedType: .up)
+        }
+    }
+    
+    
     /**
      OKPay 카카오톡 채널로 이동 합니다. ( J.D.H VER : 2.0.0 )
     - Date: 2023.06.29
@@ -371,11 +469,15 @@ class WebMessagCallBackHandler : NSObject  {
                     }
                     /// 사용자 속성 및 사용자ID 설정 입니다.
                     else if key.contains("up_"){
-                        if let value = value as? String {
-                            Analytics.setUserProperty(value, forName: key)
+                        if let value = value as? String,
+                           NC.S(value).count > 0 {
                             if key == "up_uid"
                             {
-                                Analytics.setUserID(value)
+                                Analytics.setUserID(NC.S(value))
+                            }
+                            else
+                            {
+                                Analytics.setUserProperty(NC.S(value), forName: key)
                             }
                         }
                     }
@@ -586,7 +688,27 @@ class WebMessagCallBackHandler : NSObject  {
     {
         /// 전체 팝업 종료시 리턴할 콜백 메서드들 입니다.
         let callBacks   = body[0] as! [Any]
-        if  let controller     = self.target,
+        if  let controller     = self.target{
+            let qrScanner = QRCodeScannerViewController.init( titleStr: "QR 코드 인식", subInfoStr: "", isTitleBackBtn: false ) { value in
+                switch value {
+                case .qr_success( let qrcode):
+                    if let qrAddr = qrcode {
+                        if qrAddr.hasPrefix("0x") && (qrAddr.count > 10)  {
+                            /// 콜백 데이터 정보를 요청 합니다.
+                            self.viewModel.getWalletJsonMsg(retStr: qrAddr).sink { message in
+                                /// 콜백으로 데이터를 리턴 합니다.
+                                self.setEvaluateJavaScript(callback: callBacks[0] as! String , message: message, isJson: true)
+                            }.store(in: &self.viewModel.cancellableSet)
+                        }
+                    }
+                    break
+                default:
+                    break
+                }
+            }
+            controller.pushController(qrScanner, animated: true, animatedType: .up)
+        }
+        /*
             let nextController = QRReaderViewController.instantiate(withStoryboard: "Wallet") {
             nextController.setInitData() { value in
                 if let qrAddr = value as? String {
@@ -598,7 +720,7 @@ class WebMessagCallBackHandler : NSObject  {
                 }
             }
             controller.pushController(nextController, animated: true, animatedType: .up)
-        }
+        */
     }
         
     
@@ -1067,6 +1189,18 @@ class WebMessagCallBackHandler : NSObject  {
                             controller.pushController(viewController, animated: true, animatedType: .up)
                         }
                         return
+                        /// 메인 계좌 변경 페이지 진입 타입 입니다.
+                    case .mainAccount_change_type:
+                        if let controller = self.target {
+                            let linkUrl         = WebPageConstants.baseURL + url
+                            /// 전체 화면 오픈뱅킹 페이지 오픈 합니다.
+                            let viewController  = FullWebViewController.init( pageType: .mainAccount_change_type, title: title, titleBarType: titleBarType, pageURL: linkUrl, closeScript: closeScript ) { cbType in
+                                /// 앱웹으로 콜백을 요청 합니다.
+                                self.setFullWebCB( callHybridPopupCB:callHPCB, webCBType: cbType)
+                            }
+                            controller.pushController(viewController, animated: true, animatedType: .up)
+                        }
+                        return
                     default:
                         break
                     }
@@ -1322,6 +1456,7 @@ class WebMessagCallBackHandler : NSObject  {
         ]
         self.target!.present(avc, animated:true)
     }
+    
     
     var secureKeyPadView : SecureKeyPadView? = nil
     /**
@@ -1715,9 +1850,21 @@ class WebMessagCallBackHandler : NSObject  {
      */
     func setPreference( _ body : [Any?] ){
         let params          = body[2] as! [String?]
-        if params.count > 1
+        if params.count > 2
         {
-            SharedDefaults.setKeyChain( NC.S(params[1]) , forKey: NC.S(params[0]) )
+            if let value = params[1] {
+                SharedDefaults.setKeyChain( NC.S(params[1]) , forKey: NC.S(params[0]) )
+            }
+            else
+            {
+                SharedDefaults.removeKeyChain(forKey: NC.S(params[0]))
+            }
+        }
+        else
+        {
+            if let key = params[0] {
+                SharedDefaults.removeKeyChain(forKey: key)
+            }
         }
     }
     
@@ -2130,14 +2277,83 @@ class WebMessagCallBackHandler : NSObject  {
     
     
     /**
-     제로페이 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.0 )
-     - Date: 2023.03.16
-     - Parameters:False
-     - Throws: False
-     - Returns:False
+     ATM  페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.7 )
+     - Date: 2023.11.29
      */
-    func setZeroPayTermsViewDisplay()
+    func setOpenATM(){
+        if let controller = self.target {
+            /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+            self.viewModel.getAppMenuList(menuID: .ID_ATM_MONEY).sink { url in
+                /// ATM 이동 할 스크립트 호출 입니다.
+                controller.view.setDisplayWebView( url , modalPresent: true, pageType: .atm_type )
+            }.store(in: &self.viewModel.cancellableSet)
+        }
+    }
+    
+    
+    /**
+     ATM 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.7 )
+     - Date: 2023.11.28
+     */
+    func getATMAgreementCheck(){
+        /// 제로페이 약관 동의 체크 입니다.
+        self.viewModel.getATMAgreementCheck().sink { result in
+        } receiveValue: { model in
+            if let model = model,
+               let check = model._atmAgreeChk {
+                if check
+                {
+                    if let controller = self.target {
+                        /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                        self.viewModel.getAppMenuList(menuID: .ID_ATM_MONEY).sink { url in
+                            /// ATM 이동 할 스크립트 호출 입니다.
+                            controller.view.setDisplayWebView( url , modalPresent: true, pageType: .atm_type )
+                        }.store(in: &self.viewModel.cancellableSet)
+                    }
+                    return
+                }
+            }
+            
+            /// 약관 동의 팝업을 오픈 합니다.
+            if let controller = self.target {
+                /// 약관 동의 팝업을 오픈 합니다.
+                let terms = [TERMS_INFO.init(title: "개인정보 수집, 이용 동의",url: WebPageConstants.URL_ZERO_PAY_AGREEMENT + "?atm=001")]
+                BottomTermsView().setDisplay( target: controller, "ATM 머니 출금 서비스를\n이용하기 위해서는 약관동의가 필요해요",
+                                             termsList: terms, isCheckUI: true) { value in
+                    /// 동의/취소 여부를 받습니다.
+                    if value == .success
+                    {
+                        /// ATM 약관에 동의함을 저장 요청 합니다.
+                        self.viewModel.setATMInsertAgreement().sink { result in
+                        } receiveValue: { model in
+                            if let agree = model,
+                               agree.code == "0000"
+                            {
+                                /// ATM 이동 할 스크립트 호출 입니다.
+                                self.viewModel.getAppMenuList(menuID: .ID_ATM_MONEY).sink { url in
+                                    /// ATM 이동 할 스크립트 호출 입니다.
+                                    controller.view.setDisplayWebView( url , modalPresent: true, pageType: .atm_type )
+                                }.store(in: &self.viewModel.cancellableSet)
+                            }
+                        }.store(in: &self.viewModel.cancellableSet)
+                    }
+                }
+            }
+            
+        }.store(in: &self.viewModel.cancellableSet)
+    }
+    
+    
+    /**
+     제로페이 약관동의 페이지를 디스플레이 합니다. ( J.D.H VER : 2.0.7 )
+     - Date: 2023.11.30
+     */
+    func setZeroPayTermsViewDisplay( _ body : [Any?] )
     {
+        let callbacks               = body[0] as! [String?]
+        let params                  = body[2] as! [String?]
+        let pageType                = NC.S(params[0])
+        
         /// 제로페이 약관 동의 체크 입니다.
         self.viewModel.getZeroPayTermsCheck().sink { result in
         } receiveValue: { model in
@@ -2145,6 +2361,11 @@ class WebMessagCallBackHandler : NSObject  {
                let data = check._data {
                 if data._didAgree!
                 {
+                    if pageType == "zero_pay"
+                    {
+                        self.setEvaluateJavaScript(callback: NC.S(callbacks[0]), message: NC.S("Y"))
+                        return
+                    }
                     /// 제로페이 이동전 하단 팝업 오픈 합니다.
                     self.setBottomZeroPayInfoView()
                     return
@@ -2162,12 +2383,28 @@ class WebMessagCallBackHandler : NSObject  {
                     {
                         /// 제로페이 약관에 동의함을 저장 요청 합니다.
                         self.viewModel.setZeroPayTermsAgree().sink { result in
+                            if pageType == "zero_pay"
+                            {
+                                self.setEvaluateJavaScript(callback: NC.S(callbacks[0]), message: NC.S("N"))
+                            }
                         } receiveValue: { model in
                             if let agree = model,
                                agree.code == "0000"
                             {
+                                if pageType == "zero_pay"
+                                {
+                                    self.setEvaluateJavaScript(callback: NC.S(callbacks[0]), message: NC.S("Y"))
+                                    return
+                                }
                                 /// 제로페이 이동전 하단 팝업 오픈 합니다.
                                 self.setBottomZeroPayInfoView()
+                            }
+                            else
+                            {
+                                if pageType == "zero_pay"
+                                {
+                                    self.setEvaluateJavaScript(callback: NC.S(callbacks[0]), message: NC.S("N"))
+                                }
                             }
                         }.store(in: &self.viewModel.cancellableSet)
                     }
@@ -2180,9 +2417,6 @@ class WebMessagCallBackHandler : NSObject  {
     /**
      제로페이 결제 이동 하단 팝업뷰를 오픈 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.07.05
-     - Parameters:False
-     - Throws: False
-     - Returns:False
      */
     func setBottomZeroPayInfoView()
     {
@@ -2193,10 +2427,31 @@ class WebMessagCallBackHandler : NSObject  {
                 /// 결제 페이지로 이동 합니다.
                 case .paymeny:
                     if let controller = self.target {
-                        let viewController = OkPaymentViewController()
-                        viewController.modalPresentationStyle = .overFullScreen
-                        controller.pushController(viewController, animated: true, animatedType: .up)
+                        /// 설정 URL 정보를 가져와 해당 페이지로 이동합니다.
+                        self.viewModel.getAppMenuList(menuID: .ID_ZERO_QR).sink { url in
+                            controller.view.setDisplayWebView( WebPageConstants.URL_ZEROPAY_INTRO , modalPresent: true, pageType: .zeropay_type )
+                        }.store(in: &self.viewModel.cancellableSet)
                     }
+                    break
+                /// 제로페이 상품권 구매하기 이동 합니다.
+                case .gift:
+                    /// 제로페이 상품권 URL 정보를 가져 옵니다.
+                    BaseViewModel.shared.getAppMenuList(menuID: .ID_ZERO_GIFT).sink(receiveValue: { url in
+                        if url.isValid
+                        {
+                            if let controller = self.target {
+                                controller.view.setDisplayWebView( url, modalPresent: true, pageType: .zeropay_type , titleBarHidden: true) { value in
+                                    switch value
+                                    {
+                                    case .zeroPayClose:
+                                        TabBarView.setReloadSeleted(pageIndex: 4)
+                                        break
+                                    default:break
+                                    }
+                                }
+                            }
+                        }
+                    }).store(in: &BaseViewModel.shared.cancellableSet)
                     break
                     /// 제로페이 가맹점 검색 네이버 지도 페이지로 이동합니다.
                 case .location:
@@ -2278,6 +2533,32 @@ extension WebMessagCallBackHandler{
                 }
             }
         }
+    }
+    
+    
+    /**
+     페이지 종료 처리 입니다. ( J.D.H VER : 2.0.0 )
+     - Date: 2023.03.28
+     */
+    func setCancelPopup(){
+        /// root 페이지가  HomeViewController 기본 페이지이면 home 로 이동 합니다.
+        if let controller = self.target {
+            if controller is HomeViewController
+            {
+                /// 0번째 페이지로 이동 후 홈으로 이동 합니다.
+                controller.popToRootController(animated: true, animatedType: .down) { firstViewController in
+                    /// 탭바가 연결되었다면 메인 페이지로 이동 합니다.
+                    if let tabbar = TabBarView.tabbar {
+                        /// 진행중인 안내 뷰어를 전부 히든 처리 합니다.
+                        tabbar.setCommonViewRemove()
+                        /// 메인 탭 이동하면서 메인 페이지를 디스플레이 합니다.
+                        tabbar.setSelectedIndex(.home, seletedItem: WebPageConstants.URL_MAIN, updateCookies: true)
+                    }
+                }
+                return
+            }
+        }
+        self.setTargetDismiss()
     }
     
     

@@ -48,7 +48,8 @@ extension UINavigationController : UINavigationControllerExtension {
     
     /// 루트 뷰어를 가집니다.
     var rootViewController: UIViewController? { return viewControllers.first }
-    
+    /// 현 진행중인 뷰어를가집니다.
+    var ingViewcontroller : UIViewController? { return viewControllers.last }
     /**
      내비게이션 컨트롤로 push 이동시 타입을 받아 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.12

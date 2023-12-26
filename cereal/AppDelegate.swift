@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      - Date: 2023.04.06
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Slog("NSUUID().uuidString : \(NSUUID().uuidString)")
         /// 안티 디버깅여부를 체크 합니다.
         self.viewModel.setAntiDebuggingChecking()
         /// 시큐온 키패드 HotFix (23.04.10)
@@ -120,6 +119,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    
+    /**
+     스크린샷 방지 UI 입니다. ( J.D.H VER : 2.0.7 )
+     - Date: 2023.12.06
+     */
+    func applicationWindowsScreenshot(){
+        if let window = self.window {
+            window.backgroundColor = .white
+            let point = CGPoint(x: UIScreen.main.bounds.size.width/2 - 200/2, y: UIScreen.main.bounds.size.height/2 - 80/2)
+            let image = UIImageView(image: UIImage(named: "guide_logo"))
+            image.frame = CGRect(origin: point, size: CGSize(width: 200, height: 80))
+            window.addSubview(image)
+        }
+    }
 }
 
 
@@ -132,7 +146,34 @@ extension AppDelegate : UNUserNotificationCenterDelegate
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
-        completionHandler([.alert,.sound,.badge])
+        if notification.request.content.userInfo.count > 0
+        {
+            let userInfo = notification.request.content.userInfo
+            Slog("OPEN PUSH  : \(userInfo)",category: .push )
+            /// 앱이 현 활성화 상태인지를 체크 합니다.
+            self.viewModel.isAppEnabled(inAppStartType: .push_type).sink(receiveValue: { isApp in
+                if let url = userInfo["url"] as? String {
+                    Slog("OPEN PUSH URL : \(url)",category: .push )
+                    /// 이동할 URL 정보가. 엘포인트 or 제로페이 타입인지를 체크 합니다.
+                    if url.contains("/lpoint/") ||
+                        url.contains("/zeropay/") {
+                        /// 앱 활성화 상태인 경우 입니다.
+                        if isApp
+                        {
+                            /// PUSH 받은.URL 정보로 페이지 이동 하도록 합니다.
+                            BaseViewModel.shared.pushUrl     = url
+                            completionHandler([.sound,.badge])
+                            return
+                        }
+                    }
+                    completionHandler([.alert,.sound,.badge])
+                }
+            }).store(in: &self.viewModel.cancellableSet)
+        }
+        else
+        {
+            completionHandler([.alert,.sound,.badge])
+        }
     }
     
     

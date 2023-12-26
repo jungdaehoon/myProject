@@ -56,6 +56,12 @@ class APIConstant {
     static let API_ZEROPAY_MONEY_ONOFF  = "/mem/updateBalanceView.do"
     /// 제로페이 간편결제 (고정형)MPM 스캔한 QRCode 정상여부 체크 입니다.
     static let API_ZEROPAY_QRCODE_CHECK = "/api/v1/zeropay/qr"
+    /// 제로페이 간편결제 (고정형)MPM 스캔한 QRCode 정상여부 체크 입니다.
+    static let API_ZEROPAY_ENCOED_QRCODE_CHECK = "/api/v2/zeropay/qr"
     /// 제로페이 간편결제 메인화면 OK머니 잔액 조회 입니다.
     static let API_ZEROPAY_OkMONEY      = "/api/v1/zeropay/qr/main"
+    /// ATM 약관동의 여부 체크 입니다.
+    static let API_COOCON_ATM_AGREEMENT = "/coocon/atmAgreeChk.do"
+    /// ATM 약관동의 요청 입니다.
+    static let API_COOCON_ATM_INSERT_AGREE = "/coocon/insertAtmAgreement.do"
 }

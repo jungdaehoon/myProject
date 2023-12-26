@@ -87,12 +87,16 @@ enum FULL_PAGE_TYPE : String {
     case db_type            = "DB"
     /// PG 결제 연동 타입 입니다.
     case pg_type            = "PG"
+    /// ATM 연동 타입 입니다.
+    case atm_type           = "ATM"
     /// 제로페이 연동 타입 입니다.
     case zeropay_type       = "ZP"
-    /// 제로페이 연동 타입 입니다.
-    case lpoint_type       = "LPOINT"
+    /// 엘포인트 연동 타입 입니다.
+    case lpoint_type        = "LPOINT"
     /// 오픈뱅킹 연동 타입 입니다.
     case openbank_type      = "OPENBANK"
+    /// 메인 계좌 연동 타입 입니다.
+    case mainAccount_change_type   = "MAIN_ACCOUNT_CHANGE"
     /// 인증용 보안키패드 연동 타입 입니다.
     case auth_keypad        = "AUTH_KEY_PAD"
     /// 제로페이 인증용 보안키패드 연동 타입 입니다.
@@ -290,7 +294,7 @@ class FullWebViewController: BaseViewController {
             }
         }
     }
-    
+
     
     
     // MARK: - 버튼 액션 입니다.
@@ -411,7 +415,7 @@ extension FullWebViewController {
     
     
     /**
-     제로페이 WebApp 스키마를 처리 합니다. ( J.D.H VER : 2.0.0 )
+     제로페이 상품권 WebApp 스키마를 처리 합니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.25
      - Parameters:
         - url : URL 정보 입니다.
@@ -565,8 +569,8 @@ extension FullWebViewController {
                     self.viewModel.isCameraAuthorization().sink { value in
                         if value
                         {
-                            OKZeroPayQRCaptureView(params: params) { qrCodeCB in
-                                switch qrCodeCB
+                            let qrScanner = QRCodeScannerViewController.init ( subInfoStr: "" ){ value in
+                                switch value
                                 {
                                     /// QRCdoe 읽기 실패 입니다.
                                     case .qr_fail,.cb_fail,.close :
@@ -621,7 +625,8 @@ extension FullWebViewController {
                                     default:break
                                 }
                                 return
-                            }.show()
+                            }
+                            self.pushController(qrScanner, animated: true, animatedType: .up)
                         }
                         else
                         {

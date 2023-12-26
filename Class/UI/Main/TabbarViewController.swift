@@ -69,6 +69,9 @@ class TabbarViewController: UITabBarController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        /// 저전력으로 및 스크린 타임을 제외 합니다. ( 필요시 사용 예정 )
+        //UIApplication.shared.isIdleTimerDisabled = true
+        /// 탭바 뷰 연결 입니다.
         TabBarView.tabbar = self
         /// 기본 쉐도우 라인을 초기화 합니다.
         UITabBar.clearShadow()
@@ -166,10 +169,20 @@ class TabbarViewController: UITabBarController {
                 /// 해당 URL 로 이동합니다.
                 if NC.S(url).isValid
                 {
-                    /// 진행중인 탭 인덱스를 초기화 합니다.
-                    self.setIngTabToRootController()
-                    /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
-                    self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(url))
+                    Slog("push url : \(NC.S(url))")
+                    /// 이동할 URL 정보가. 엘포인트 or 제로페이 타입인지를 체크 합니다.
+                    if url.contains("/lpoint/") ||
+                        url.contains("/zeropay/")
+                    {
+                        self.setIngViewController(url: url)
+                    }
+                    else
+                    {
+                        /// 진행중인 탭 인덱스를 초기화 합니다.
+                        self.setIngTabToRootController()
+                        /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
+                        self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(url))
+                    }
                     /// PUSH 에서 받은 연결 정보를 초기화 합니다.
                     BaseViewModel.shared.pushUrl = ""
                 }
@@ -191,6 +204,8 @@ class TabbarViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Slog("TabbarViewController viewDidAppear")
+        /// 스크린샷 방지를 위해 설정 합니다.
+        //self.view.makeSecure()
     }
 
     
@@ -243,9 +258,12 @@ class TabbarViewController: UITabBarController {
      - Returns:False
      */
     func setDisplayLogin( animation : Bool = false, gudieViewEnabled : Bool = false, completion : (( _ success : Bool ) -> Void )? = nil, puchCompletion: @escaping () -> Void ){
-        let viewController              = LoginViewController.init( completion: completion )
-        viewController.guideViewEnabled = gudieViewEnabled
-        self.pushController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)        
+        self.view.removeMakeSecure() { success in
+            let viewController              = LoginViewController.init( completion: completion )
+            viewController.guideViewEnabled = gudieViewEnabled
+            self.pushController(viewController, animated: animation, animatedType: .up, completion: puchCompletion)
+        }
+        
     }
     
     
@@ -263,9 +281,8 @@ class TabbarViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationBackground), name: UIScene.willDeactivateNotification, object: nil)
     }
     
+
     
-    
-    // MARK: - NotificationCenter
     /**
      앱 백그라운드 이동하는 경우 입니다. ( J.D.H VER : 2.0.0 )
      - Date: 2023.04.04
@@ -317,7 +334,6 @@ class TabbarViewController: UITabBarController {
                     BaseViewModel.ingSessionSaveTimer    = 0
                     /// 세션 체크를 다시 시작 합니다.
                     BaseViewModel.isSssionType           = .start
-                    
                 }
                 Slog("Ing Time : \(overTime)")
             }
@@ -342,6 +358,39 @@ extension UITabBarController
             _ = base!.subviews.map({
                 if $0 is BaseView { $0.removeFromSuperview() }
             })
+        }
+    }
+    
+    
+    /**
+     현 진행중인 페이지에서 url 페이지로 이동 합니다. ( J.D.H VER : 2.0.7 )
+     - Description: Lpoint or zeropay 에서 사용으로 lPoint 페이지에서 PUSH 받을경우 "결제완료" 등 관련 페이지 이동시 현 페이지에서 전체화면 web 페이지를 오픈 하도록 합니다.
+     - Date: 2023.11.28
+     - Parameters:
+        - url: 페이지 이동 할 URL 정보 입니다.
+     - Returns:False
+     */
+    func setIngViewController( url : String? ){
+        /// 이전 진행중인 ViewController 을 초기화 합니다.
+        if let viewController = self.viewControllers![self.selectedIndex]  as? BaseViewController,
+           let pageUrl = url {
+            if let navigation = viewController.navigationController,
+               let contoller  = navigation.ingViewcontroller as? FullWebViewController {
+                if let webview  = contoller.webView,
+                   let url      = webview.url {
+                    Slog("url.absoluteString : \(url.absoluteString)")
+                    /// 현 페이지가 lpoint or zeropay 페이지 인지를 체크 합니다.
+                    if url.absoluteString.contains("/lpoint/") ||
+                        url.absoluteString.contains("/zeropay/") {
+                        contoller.view.setDisplayWebView( WebPageConstants.getDomainURL(pageUrl) , modalPresent: true )
+                        return
+                    }
+                }
+            }
+            /// 진행중인 탭 인덱스를 초기화 합니다.
+            self.setIngTabToRootController()
+            /// 탭 화면을 홈으로 이동하며  PUSH 연동 페이지로 이동합니다.
+            self.setSelectedIndex( .home, seletedItem: WebPageConstants.getDomainURL(pageUrl))
         }
     }
     
@@ -375,7 +424,10 @@ extension UITabBarController
         - completion    : 탭 이동후 추가한 URL 정보가 디스플레이 되면 호출 됩니다. ( 추가한 데이터가 있을 경우에만 사용 가능 합니다. )
      - Returns:False
      */
-    func setSelectedIndex( _ tabIndex : TAB_STATUS, seletedItem : Any? = nil, updateCookies : Bool = false, completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
+    func setSelectedIndex( _ tabIndex : TAB_STATUS,
+                           seletedItem : Any? = nil,
+                           updateCookies : Bool = false,
+                           completion : (( _ controller : BaseViewController ) -> Void )? = nil ){
         /// 탭 이동시 아이템이 있을 경우 아이템 데이터 우선으로 처리 합니다.
         if let tabitem = seletedItem
         {

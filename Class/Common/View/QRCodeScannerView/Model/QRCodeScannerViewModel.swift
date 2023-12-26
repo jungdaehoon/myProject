@@ -10,9 +10,8 @@ import Foundation
 import Combine
 
 
-
 /**
- 전체 웹 종료 콜백 입니다.  ( J.D.H VER : 2.0.0 )
+ QRCode 스켄  콜백 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.10.18
 */
 enum QRCODE_SCANNER_CB : Equatable {
@@ -35,6 +34,7 @@ enum QRCODE_SCANNER_CB : Equatable {
 /**
  QRCode 스캔 관련 모델 입니다. ( J.D.H VER : 2.0.0 )
  - Date: 2023.10.18
+ - Description : QRCode 스캔에 필요한 데이터를 처리 및 초기화 하며, 스켄시 정보를 처리 하여 뷰어로 리턴 합니다.
 */
 class QRCodeScannerViewModel : BaseViewModel
 {
@@ -42,7 +42,6 @@ class QRCodeScannerViewModel : BaseViewModel
     var captureSession  : AVCaptureSession?
     /// 스캔 타입 리턴 입니다.
     var completion      : (( _ value : QRCODE_SCANNER_CB ) -> Void)? = nil
-    
     
     
     /**

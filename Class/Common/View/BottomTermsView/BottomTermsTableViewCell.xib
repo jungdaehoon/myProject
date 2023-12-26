@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -65,6 +65,9 @@
                         <subviews>
                             <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0X-nx-mVg" userLabel="Check Box">
                                 <rect key="frame" x="0.0" y="8" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="ASw-03-unZ"/>
+                                </constraints>
                                 <state key="normal" image="login_check_off"/>
                                 <state key="selected" image="login_check_on"/>
                                 <connections>
@@ -72,26 +75,26 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제로페이 서비스 이용 약관" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iw-5k-not">
-                                <rect key="frame" x="67" y="10" width="144" height="17"/>
+                                <rect key="frame" x="66.333333333333314" y="11" width="144" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3Q-uu-IGj">
-                                <rect key="frame" x="63" y="0.0" width="257" height="32"/>
+                                <rect key="frame" x="62.333333333333343" y="0.0" width="257.66666666666663" height="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="btn_action:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1Cd-xU-WEW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myj-He-UPB">
-                                <rect key="frame" x="28" y="10" width="35" height="17"/>
+                                <rect key="frame" x="28.000000000000004" y="11" width="34.333333333333343" height="17"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
                                 <color key="textColor" name="OKColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="allMore_16ArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="7R4-cL-X8B">
-                                <rect key="frame" x="213" y="11" width="16" height="16"/>
+                                <rect key="frame" x="304" y="11" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="hUZ-cq-mBh"/>
                                     <constraint firstAttribute="width" constant="16" id="nY8-vk-euK"/>
@@ -102,16 +105,16 @@
                         <constraints>
                             <constraint firstItem="K3Q-uu-IGj" firstAttribute="leading" secondItem="Myj-He-UPB" secondAttribute="trailing" id="2oU-Xn-eQt"/>
                             <constraint firstAttribute="bottom" secondItem="7R4-cL-X8B" secondAttribute="bottom" constant="5" id="3NC-xY-Q0D"/>
-                            <constraint firstItem="0iw-5k-not" firstAttribute="leading" secondItem="Myj-He-UPB" secondAttribute="trailing" constant="4" id="BzV-6k-wzV"/>
-                            <constraint firstAttribute="bottom" secondItem="Myj-He-UPB" secondAttribute="bottom" constant="5" id="CD9-dk-yvX"/>
+                            <constraint firstAttribute="bottom" secondItem="Myj-He-UPB" secondAttribute="bottom" constant="4" id="CD9-dk-yvX"/>
                             <constraint firstItem="K3Q-uu-IGj" firstAttribute="top" secondItem="9ah-ps-BWV" secondAttribute="top" id="Iww-7i-bwI"/>
+                            <constraint firstItem="7R4-cL-X8B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0iw-5k-not" secondAttribute="trailing" constant="15" id="MEP-QB-gli"/>
                             <constraint firstItem="Myj-He-UPB" firstAttribute="leading" secondItem="O0X-nx-mVg" secondAttribute="trailing" constant="4" id="WqC-Cv-f3m"/>
                             <constraint firstAttribute="bottom" secondItem="O0X-nx-mVg" secondAttribute="bottom" id="Ztt-pc-gPW"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7R4-cL-X8B" secondAttribute="trailing" constant="91" id="fvO-sI-0x7"/>
+                            <constraint firstAttribute="trailing" secondItem="7R4-cL-X8B" secondAttribute="trailing" id="fvO-sI-0x7"/>
                             <constraint firstAttribute="trailing" secondItem="K3Q-uu-IGj" secondAttribute="trailing" id="gKv-Y4-8X8"/>
                             <constraint firstAttribute="bottom" secondItem="K3Q-uu-IGj" secondAttribute="bottom" id="p9b-fS-BsF"/>
-                            <constraint firstItem="7R4-cL-X8B" firstAttribute="leading" secondItem="0iw-5k-not" secondAttribute="trailing" constant="2" id="qsg-bq-tgI"/>
-                            <constraint firstAttribute="bottom" secondItem="0iw-5k-not" secondAttribute="bottom" constant="5" id="xL5-eG-ZBh"/>
+                            <constraint firstItem="0iw-5k-not" firstAttribute="leading" secondItem="Myj-He-UPB" secondAttribute="trailing" constant="4" id="rZB-0z-qTq"/>
+                            <constraint firstAttribute="bottom" secondItem="0iw-5k-not" secondAttribute="bottom" constant="4" id="xL5-eG-ZBh"/>
                             <constraint firstItem="O0X-nx-mVg" firstAttribute="leading" secondItem="9ah-ps-BWV" secondAttribute="leading" id="zS6-Gy-J2e"/>
                         </constraints>
                     </view>

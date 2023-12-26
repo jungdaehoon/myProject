@@ -36,6 +36,8 @@ class AllMoreViewController: BaseViewController {
     var cashReceiptInfo             : AllMoreMenuListView?
     /// 결제 서비스 입니다.
     var payServiceInfo              : AllMoreMenuListView?
+    /// 출금 서비스 입니다.
+    var atmServiceInfo              : AllMoreMenuListView?
     /// 마이 OK머니 입니다.
     var myOKMoneyInfo               : AllMoreMenuListView?
     /// 마이 OK머니 입니다.
@@ -154,6 +156,7 @@ class AllMoreViewController: BaseViewController {
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "0원", menuType: .rightimg))
             menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "0원", menuType: .null))
+            menus.append(self.viewModel.getMenuInfo(title: "총 적립대기", subTitle: "0원", menuType: .null))
             self.monthInfo!.setDisplay(menus: menus)
             self.stackView.addArrangedSubview(self.monthInfo!)
         }
@@ -163,6 +166,7 @@ class AllMoreViewController: BaseViewController {
             var menus : [AllModeMenuListInfo]               = []
             menus.append(self.viewModel.getMenuInfo(title: "이번달 결제", subTitle: "\(result._current_month_pay_amt!.addComma())원", menuType: .rightimg))
             menus.append(self.viewModel.getMenuInfo(title: "이번달 적립", subTitle: "\(result._current_month_save_amt!.addComma())원", menuType: .null))
+            menus.append(self.viewModel.getMenuInfo(title: "총 적립대기", subTitle: "\(result._standby_user_point!.addComma())원", menuType: .null))
             
             /// 화면 다시 디스플레이 요청 합니다.
             self.monthInfo!.reloadDisplay(menus, viewModel: self.viewModel)
@@ -189,7 +193,7 @@ class AllMoreViewController: BaseViewController {
             /// OK마켓 정보를 체크 합니다.
             if self.viewModel.isAppMenuList(menuID: .ID_GIFTYCON)
             {
-                menus.append(self.viewModel.getMenuInfo(title: "OK마켓" ))
+                menus.append(self.viewModel.getMenuInfo(title: "OK마켓", menuType: .rightimg ))
             }
             
             /// 제로페이 QR 결제 정보를 체크 합니다.
@@ -205,11 +209,11 @@ class AllMoreViewController: BaseViewController {
             }
             
             /// 엘포인트 추가 합니다.
-            //if self.viewModel.isAppMenuList(menuID: .ID_L_POINT)
-            //{
-                //menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
-            //}
-            
+            if self.viewModel.isAppMenuList(menuID: .ID_L_POINT)
+            {
+                menus.append(self.viewModel.getMenuInfo(title: "L.POINT", menuType: .rightimg))
+            }
+        
             self.payServiceInfo!.setDisplay(titleName: "결제서비스", menus: menus)
             self.stackView.addArrangedSubview(self.payServiceInfo!)
         }
@@ -217,6 +221,32 @@ class AllMoreViewController: BaseViewController {
         {
             self.payServiceInfo!.setDisplay(self.viewModel)
         }
+        
+        
+        /// ATM 머니 출금 추가 입니다.
+        if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
+        {
+            /// 결제서비스 영역 뷰어를 추가합니다.
+            if self.atmServiceInfo  == nil
+            {
+                self.atmServiceInfo                             = AllMoreMenuListView.instanceFromNib()
+                var menus : [AllModeMenuListInfo]               = []
+                /// ATM 머니 출금 추가 입니다.
+                if self.viewModel.isAppMenuList(menuID: .ID_ATM_MONEY)
+                {
+                    menus.append(self.viewModel.getMenuInfo(title: "ATM 머니 출금", menuType: .rightimg))
+                }
+                self.atmServiceInfo!.setDisplay(titleName: "출금서비스", menus: menus)
+                self.stackView.addArrangedSubview(self.atmServiceInfo!)
+            }
+            else
+            {
+                self.atmServiceInfo!.setDisplay(self.viewModel)
+            }
+        }
+        
+        
+        
         /*
         /// MY OK머니 영역 뷰어를 추가 합니다.
         if self.myOKMoneyInfo == nil

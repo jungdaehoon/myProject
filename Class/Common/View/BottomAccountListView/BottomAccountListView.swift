@@ -202,6 +202,7 @@ extension BottomAccountListView : UITableViewDelegate
                 self.viewModel.setUpdateMainAccount(account: accounts[indexPath.row]).sink { result in
                     
                 } receiveValue: { response in
+                    ToastPopup.shared.show(text:"연결계좌를 변경하였습니다.")
                     event(.account(account: NC.S(accounts[indexPath.row]._masking_acc_no), bankName : NC.S(accounts[indexPath.row]._bank_nm) ))
                     /// 새로고침을 요청 합니다.
                     self.setDataDisplay()

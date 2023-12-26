@@ -50,13 +50,11 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
             self.titleText.text     = "언제 어디서나"
             self.titleSubText.text  = "간편한 송금"
             self.subInfoText.text   = "더 안전한 블록체인 기반 PAY!"
-            
             break
         case 1:
             self.titleText.text     = "혜택 쌓이는"
             self.titleSubText.text  = "간편결제"
             self.subInfoText.text   = "쓰면 쓸수록 쌓이는 혜택!"
-            
             break
         case 2:
             self.titleText.text     = "달달하고 짭짤한"

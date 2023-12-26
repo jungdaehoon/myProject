@@ -8,6 +8,8 @@
 import UIKit
 import WebKit
 
+
+
 /**
  홈 페이지 입니다.  ( J.D.H VER : 2.0.0 )
  - Date: 2023.03.21
@@ -23,7 +25,8 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// 웹뷰를 초기화 합니다.
-        self.initWebView( self.displayWebView, target: self )
+        self.initWebView( self.displayWebView, target: self )        
+        //self.displayWebView.makeSecure()
     }
     
 
@@ -81,6 +84,6 @@ class HomeViewController: BaseViewController {
         if BaseViewModel.isLogin()
         {
             self.loadTabPageURL(WebPageConstants.URL_MAIN)
-        }                
+        }
     }
 }
