@@ -74,12 +74,6 @@
 		8D205F4629D1346F00F43C99 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EAF29D1346E00F43C99 /* HealthKitManager.swift */; };
 		8D205F4729D1346F00F43C99 /* PedometerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB029D1346E00F43C99 /* PedometerViewController.swift */; };
 		8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB329D1346E00F43C99 /* OKZeroViewModel.swift */; };
-		8D205F4929D1346F00F43C99 /* OKZeroPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB529D1346E00F43C99 /* OKZeroPayView.swift */; };
-		8D205F4B29D1346F00F43C99 /* QRorBarCodeGeneratorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EB729D1346E00F43C99 /* QRorBarCodeGeneratorView.xib */; };
-		8D205F4C29D1346F00F43C99 /* OKZeroPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EB829D1346E00F43C99 /* OKZeroPayView.xib */; };
-		8D205F4D29D1346F00F43C99 /* QRorBarCodeGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EB929D1346E00F43C99 /* QRorBarCodeGeneratorView.swift */; };
-		8D205F4F29D1346F00F43C99 /* OkPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */; };
-		8D205F5029D1346F00F43C99 /* OkPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */; };
 		8D205F5329D1346F00F43C99 /* FinanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC129D1346E00F43C99 /* FinanceViewController.swift */; };
 		8D205F5429D1346F00F43C99 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D205EC329D1346E00F43C99 /* LoginViewController.xib */; };
 		8D205F5529D1346F00F43C99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205EC429D1346E00F43C99 /* LoginViewController.swift */; };
@@ -139,11 +133,7 @@
 		8D48BB3229D2CC9F00CC4D62 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D48BB2F29D2CC9E00CC4D62 /* KakaoMessageTemplate.framework */; };
 		8D48BB3829D2D6B300CC4D62 /* SecureKeyPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D48BB3729D2D6B300CC4D62 /* SecureKeyPadView.swift */; };
 		8D48BB3A29D2D6B900CC4D62 /* SecureKeyPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D48BB3929D2D6B900CC4D62 /* SecureKeyPadView.xib */; };
-		8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4A3F9A29F9F8A20080B268 /* OKZeroPayCodeFullView.swift */; };
-		8D4A3F9D29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */; };
 		8D51442429D54AE70019943D /* LottieAniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51442329D54AE70019943D /* LottieAniView.swift */; };
-		8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */; };
-		8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */; };
 		8D55D56929E660F6009C43BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D55D56829E660F6009C43BF /* GoogleService-Info.plist */; };
 		8D55D56C29E691EF009C43BF /* FcmPushUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55D56B29E691EF009C43BF /* FcmPushUpdateResponse.swift */; };
 		8D8E6FCE2A287E1B007455BD /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E6FCD2A287E1B007455BD /* WalletViewController.swift */; };
@@ -180,10 +170,6 @@
 		8DD6B6C029EE8F0B00E3C68E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */; };
 		8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */; };
 		8DD6B6C329EE900900E3C68E /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B6C229EE900900E3C68E /* PickerView.swift */; };
-		8DD916B829FB54EF00805A7E /* OKZeroPayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */; };
-		8DD916BA29FB54F800805A7E /* OKZeroPayCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */; };
-		8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD916BB29FB569D00805A7E /* OKZeroPayCardListView.swift */; };
-		8DD916BE29FB56A300805A7E /* OKZeroPayCardListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */; };
 		8DDC3DE429D151DC003C4F8F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDC3DE329D151CF003C4F8F /* libc++.tbd */; };
 		8DDC3DE929D15FA6003C4F8F /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC3DE829D15FA6003C4F8F /* LoginModel.swift */; };
 		8DDC3DEB29D161D3003C4F8F /* AppshieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC3DEA29D161D3003C4F8F /* AppshieldManager.swift */; };
@@ -214,14 +200,11 @@
 		F243AAAF2A5E5E8F00B42A4B /* AppStartEventPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */; };
 		F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */; };
 		F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */; };
-		F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */; };
 		F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */; };
 		F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B42ACFF33F006B9FF7 /* homeLoop.json */; };
 		F27214B72ACFF340006B9FF7 /* homeStart.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B52ACFF340006B9FF7 /* homeStart.json */; };
 		F2C5E4CB2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */; };
 		F2C5E4CD2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */; };
-		F2C5E4CF2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */; };
-		F2C5E4D12A554070005660F1 /* ZeroPayQRBarCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */; };
 		F2C5E4D32A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */; };
 		F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */; };
 		F2C9E20C2A83192F00A68593 /* GTM-5W6DTQWV.json in Resources */ = {isa = PBXBuildFile; fileRef = F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */; };
@@ -328,12 +311,6 @@
 		8D205EAF29D1346E00F43C99 /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		8D205EB029D1346E00F43C99 /* PedometerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerViewController.swift; sourceTree = "<group>"; };
 		8D205EB329D1346E00F43C99 /* OKZeroViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroViewModel.swift; sourceTree = "<group>"; };
-		8D205EB529D1346E00F43C99 /* OKZeroPayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroPayView.swift; sourceTree = "<group>"; };
-		8D205EB729D1346E00F43C99 /* QRorBarCodeGeneratorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRorBarCodeGeneratorView.xib; sourceTree = "<group>"; };
-		8D205EB829D1346E00F43C99 /* OKZeroPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OKZeroPayView.xib; sourceTree = "<group>"; };
-		8D205EB929D1346E00F43C99 /* QRorBarCodeGeneratorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRorBarCodeGeneratorView.swift; sourceTree = "<group>"; };
-		8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OkPaymentViewController.xib; sourceTree = "<group>"; };
-		8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkPaymentViewController.swift; sourceTree = "<group>"; };
 		8D205EC129D1346E00F43C99 /* FinanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceViewController.swift; sourceTree = "<group>"; };
 		8D205EC329D1346E00F43C99 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		8D205EC429D1346E00F43C99 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -394,11 +371,7 @@
 		8D48BB2F29D2CC9E00CC4D62 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		8D48BB3729D2D6B300CC4D62 /* SecureKeyPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureKeyPadView.swift; sourceTree = "<group>"; };
 		8D48BB3929D2D6B900CC4D62 /* SecureKeyPadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecureKeyPadView.xib; sourceTree = "<group>"; };
-		8D4A3F9A29F9F8A20080B268 /* OKZeroPayCodeFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayCodeFullView.swift; sourceTree = "<group>"; };
-		8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayCodeFullView.xib; sourceTree = "<group>"; };
 		8D51442329D54AE70019943D /* LottieAniView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAniView.swift; sourceTree = "<group>"; };
-		8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OKZeroPayQRCaptureView.swift; sourceTree = "<group>"; };
-		8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OKZeroPayQRCaptureView.xib; sourceTree = "<group>"; };
 		8D55D56829E660F6009C43BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D55D56B29E691EF009C43BF /* FcmPushUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmPushUpdateResponse.swift; sourceTree = "<group>"; };
 		8D8E6FCD2A287E1B007455BD /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -435,10 +408,6 @@
 		8DD6B6BE29EE8F0B00E3C68E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		8DD6B6BF29EE8F0B00E3C68E /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
 		8DD6B6C229EE900900E3C68E /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
-		8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayCardView.swift; sourceTree = "<group>"; };
-		8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayCardView.xib; sourceTree = "<group>"; };
-		8DD916BB29FB569D00805A7E /* OKZeroPayCardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKZeroPayCardListView.swift; sourceTree = "<group>"; };
-		8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKZeroPayCardListView.xib; sourceTree = "<group>"; };
 		8DDC3DE029D1503A003C4F8F /* cereal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cereal-Bridging-Header.h"; sourceTree = "<group>"; };
 		8DDC3DE329D151CF003C4F8F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8DDC3DE829D15FA6003C4F8F /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -472,14 +441,11 @@
 		F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventPopup.swift; sourceTree = "<group>"; };
 		F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppStartEventPopup.xib; sourceTree = "<group>"; };
 		F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventViewModel.swift; sourceTree = "<group>"; };
-		F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayOKMoneyResponse.swift; sourceTree = "<group>"; };
 		F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePayModeView.swift; sourceTree = "<group>"; };
 		F27214B42ACFF33F006B9FF7 /* homeLoop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeLoop.json; sourceTree = "<group>"; };
 		F27214B52ACFF340006B9FF7 /* homeStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeStart.json; sourceTree = "<group>"; };
 		F2C5E4CA2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsAgreeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayTermsCheckResponse.swift; sourceTree = "<group>"; };
-		F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayMoneyOnOffResponse.swift; sourceTree = "<group>"; };
-		F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRBarCodeResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D22A5540AC005660F1 /* ZeroPayQRCodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPayQRCodeStatusResponse.swift; sourceTree = "<group>"; };
 		F2C5E4D72A5557E8005660F1 /* AccountsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsResponse.swift; sourceTree = "<group>"; };
 		F2C9E20B2A83192F00A68593 /* GTM-5W6DTQWV.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-5W6DTQWV.json"; sourceTree = "<group>"; };
@@ -831,8 +797,6 @@
 			children = (
 				8D205EB229D1346E00F43C99 /* Model */,
 				8D205EB429D1346E00F43C99 /* View */,
-				8D205EBC29D1346E00F43C99 /* OkPaymentViewController.swift */,
-				8D205EBB29D1346E00F43C99 /* OkPaymentViewController.xib */,
 			);
 			path = OkZeroPayment;
 			sourceTree = "<group>";
@@ -848,18 +812,6 @@
 		8D205EB429D1346E00F43C99 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D205EB529D1346E00F43C99 /* OKZeroPayView.swift */,
-				8D205EB829D1346E00F43C99 /* OKZeroPayView.xib */,
-				8D205EB929D1346E00F43C99 /* QRorBarCodeGeneratorView.swift */,
-				8D205EB729D1346E00F43C99 /* QRorBarCodeGeneratorView.xib */,
-				8D4A3F9A29F9F8A20080B268 /* OKZeroPayCodeFullView.swift */,
-				8D4A3F9C29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib */,
-				8D55D55D29E63C98009C43BF /* OKZeroPayQRCaptureView.swift */,
-				8D55D55E29E63C98009C43BF /* OKZeroPayQRCaptureView.xib */,
-				8DD916BB29FB569D00805A7E /* OKZeroPayCardListView.swift */,
-				8DD916BD29FB56A300805A7E /* OKZeroPayCardListView.xib */,
-				8DD916B729FB54EF00805A7E /* OKZeroPayCardView.swift */,
-				8DD916B929FB54F800805A7E /* OKZeroPayCardView.xib */,
 				8D1C97FB2A02381D00A4BA50 /* OKZeroPayTypeBottomView.swift */,
 				8D1C97FD2A02382300A4BA50 /* OKZeroPayTypeBottomView.xib */,
 			);
@@ -940,10 +892,7 @@
 			children = (
 				F2F16D7B2B15C93F00365978 /* AtmInsertAgreement */,
 				F2F16D782B15C7B100365978 /* AtmAgreement */,
-				F25323CC2A564C9E005267E2 /* ZeroPayOKMoney */,
 				F2C5E4C72A55385A005660F1 /* ZeroPayQRCodeStatus */,
-				F2C5E4C42A55342A005660F1 /* ZeroPayQRBarCode */,
-				F2C5E4C12A553282005660F1 /* ZeroPayMoneyOnOff */,
 				F2C5E4BE2A5530C8005660F1 /* ZeroPayTermsCheck */,
 				F20F2BD72A55297B00D5FCEC /* ZeroPayTermsAgree */,
 				F2C5E4D42A555746005660F1 /* Accounts */,
@@ -1377,36 +1326,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F25323CC2A564C9E005267E2 /* ZeroPayOKMoney */ = {
-			isa = PBXGroup;
-			children = (
-				F25323CD2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift */,
-			);
-			path = ZeroPayOKMoney;
-			sourceTree = "<group>";
-		};
 		F2C5E4BE2A5530C8005660F1 /* ZeroPayTermsCheck */ = {
 			isa = PBXGroup;
 			children = (
 				F2C5E4CC2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift */,
 			);
 			path = ZeroPayTermsCheck;
-			sourceTree = "<group>";
-		};
-		F2C5E4C12A553282005660F1 /* ZeroPayMoneyOnOff */ = {
-			isa = PBXGroup;
-			children = (
-				F2C5E4CE2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift */,
-			);
-			path = ZeroPayMoneyOnOff;
-			sourceTree = "<group>";
-		};
-		F2C5E4C42A55342A005660F1 /* ZeroPayQRBarCode */ = {
-			isa = PBXGroup;
-			children = (
-				F2C5E4D02A554070005660F1 /* ZeroPayQRBarCodeResponse.swift */,
-			);
-			path = ZeroPayQRBarCode;
 			sourceTree = "<group>";
 		};
 		F2C5E4C72A55385A005660F1 /* ZeroPayQRCodeStatus */ = {
@@ -1591,13 +1516,10 @@
 				8DE3260329D567C8006E3B69 /* guide_ani_3.json in Resources */,
 				8D205F1B29D1346F00F43C99 /* NanumSquareRoundOTF-ExtraBold.otf in Resources */,
 				8D48BB3A29D2D6B900CC4D62 /* SecureKeyPadView.xib in Resources */,
-				8D205F4F29D1346F00F43C99 /* OkPaymentViewController.xib in Resources */,
-				8D205F4C29D1346F00F43C99 /* OKZeroPayView.xib in Resources */,
 				8D205E4029D133FB00F43C99 /* LaunchScreen.storyboard in Resources */,
 				8DFB9D2329DD35EC004E5021 /* LoadingView.xib in Resources */,
 				8D9D924A29F7B9F900F42B8D /* GuideInfoView.xib in Resources */,
 				8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */,
-				8D4A3F9D29F9F8AA0080B268 /* OKZeroPayCodeFullView.xib in Resources */,
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
 				F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */,
@@ -1605,10 +1527,8 @@
 				8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */,
 				8D205F8A29D1346F00F43C99 /* CMAlertView.xib in Resources */,
 				8D205F2029D1346F00F43C99 /* Color.xcassets in Resources */,
-				8D205F4B29D1346F00F43C99 /* QRorBarCodeGeneratorView.xib in Resources */,
 				F2FA95E12AD007BA00862C7F /* HomePayModeView.xib in Resources */,
 				8DD6B6C129EE8F0B00E3C68E /* DatePickerView.xib in Resources */,
-				8DD916BA29FB54F800805A7E /* OKZeroPayCardView.xib in Resources */,
 				8D91E27B29E53ACB0015E5E7 /* tabbar_financial.json in Resources */,
 				8D205F1429D1346F00F43C99 /* Pretendard-Thin.otf in Resources */,
 				8D1C97FA2A01EA0300A4BA50 /* BottomBankListCollectionViewCell.xib in Resources */,
@@ -1624,7 +1544,6 @@
 				8D91D99A29DFC6D000B5D9AE /* HttpErrorPop.xib in Resources */,
 				8DBA445829D41C7D00A2E5C1 /* LevelPopView.xib in Resources */,
 				F2CA8EEF2B0C29C1008B137A /* ToastPopup.xib in Resources */,
-				8D55D56029E63C98009C43BF /* OKZeroPayQRCaptureView.xib in Resources */,
 				8D205F2629D1346F00F43C99 /* Intro.storyboard in Resources */,
 				F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */,
 				8D205F4229D1346F00F43C99 /* TopUserInfoView.xib in Resources */,
@@ -1653,7 +1572,6 @@
 				8DE3260729D567C8006E3B69 /* guide_ani_2.json in Resources */,
 				F2C9E20C2A83192F00A68593 /* GTM-5W6DTQWV.json in Resources */,
 				8D205F1129D1346F00F43C99 /* Pretendard-Light.otf in Resources */,
-				8DD916BE29FB56A300805A7E /* OKZeroPayCardListView.xib in Resources */,
 				8D205F0F29D1346F00F43C99 /* Pretendard-Black.otf in Resources */,
 				8D205F1A29D1346F00F43C99 /* NanumSquareRoundR.ttf in Resources */,
 				8D205F1329D1346F00F43C99 /* Pretendard-Bold.otf in Resources */,
@@ -1781,8 +1699,6 @@
 				F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */,
 				F2C5E4D82A5557E8005660F1 /* AccountsResponse.swift in Sources */,
 				8DA48C9F29E911B3007712C6 /* BenefitViewController.swift in Sources */,
-				8D4A3F9B29F9F8A20080B268 /* OKZeroPayCodeFullView.swift in Sources */,
-				8DD916BC29FB569D00805A7E /* OKZeroPayCardListView.swift in Sources */,
 				8D205F4829D1346F00F43C99 /* OKZeroViewModel.swift in Sources */,
 				8D205F7929D1346F00F43C99 /* InsertPedometerTermsResponse.swift in Sources */,
 				F243AAAF2A5E5E8F00B42A4B /* AppStartEventPopup.swift in Sources */,
@@ -1810,12 +1726,10 @@
 				8D205F4629D1346F00F43C99 /* HealthKitManager.swift in Sources */,
 				8D205F8029D1346F00F43C99 /* LoginResponse.swift in Sources */,
 				8DF117A129E7996300D7A095 /* NavigationControllerAnimated.swift in Sources */,
-				8DD916B829FB54EF00805A7E /* OKZeroPayCardView.swift in Sources */,
 				8D205F6C29D1346F00F43C99 /* UINavigationController.swift in Sources */,
 				8D205F3029D1346F00F43C99 /* BaseTabBarView.swift in Sources */,
 				F2C5E4CD2A553FF3005660F1 /* ZeroPayTermsCheckResponse.swift in Sources */,
 				8D205F7229D1346F00F43C99 /* APIConstant.swift in Sources */,
-				F25323CE2A564CC2005267E2 /* ZeroPayOKMoneyResponse.swift in Sources */,
 				8D205F2329D1346F00F43C99 /* HomeViewController.swift in Sources */,
 				8D205F6329D1346F00F43C99 /* URL.swift in Sources */,
 				8D205F6129D1346F00F43C99 /* Int.swift in Sources */,
@@ -1828,13 +1742,11 @@
 				8D205F7A29D1346F00F43C99 /* AllMoreResponse.swift in Sources */,
 				8D205F2A29D1346F00F43C99 /* GuideInfoViewCollectionViewCell.swift in Sources */,
 				8DBA445629D41C7600A2E5C1 /* LevelPopView.swift in Sources */,
-				8D205F4D29D1346F00F43C99 /* QRorBarCodeGeneratorView.swift in Sources */,
 				8D205F5E29D1346F00F43C99 /* Encodable.swift in Sources */,
 				8D55D56C29E691EF009C43BF /* FcmPushUpdateResponse.swift in Sources */,
 				8D205F2429D1346F00F43C99 /* RemittanceViewController.swift in Sources */,
 				8D48BB3829D2D6B300CC4D62 /* SecureKeyPadView.swift in Sources */,
 				8D205E3429D133FA00F43C99 /* AppDelegate.swift in Sources */,
-				F2C5E4CF2A55402B005660F1 /* ZeroPayMoneyOnOffResponse.swift in Sources */,
 				8D205F5B29D1346F00F43C99 /* WKWebView.swift in Sources */,
 				8DDC3DEB29D161D3003C4F8F /* AppshieldManager.swift in Sources */,
 				8D205F6629D1346F00F43C99 /* UIViewController.swift in Sources */,
@@ -1863,16 +1775,13 @@
 				8D205F4529D1346F00F43C99 /* AES256Util.swift in Sources */,
 				8D8E6FCE2A287E1B007455BD /* WalletViewController.swift in Sources */,
 				8D205F3C29D1346F00F43C99 /* AllMoreMenuListCell.swift in Sources */,
-				F2C5E4D12A554070005660F1 /* ZeroPayQRBarCodeResponse.swift in Sources */,
 				F2C5E4CB2A553FC1005660F1 /* ZeroPayTermsAgreeResponse.swift in Sources */,
-				8D205F4929D1346F00F43C99 /* OKZeroPayView.swift in Sources */,
 				8D205F8929D1346F00F43C99 /* CMAlertView.swift in Sources */,
 				8D205F6F29D1346F00F43C99 /* WebPageConstants.swift in Sources */,
 				8D205F2229D1346F00F43C99 /* FullWebViewController.swift in Sources */,
 				8D17C9582A14BDD4001CB173 /* BaseView.swift in Sources */,
 				8D205F5C29D1346F00F43C99 /* NSObject.swift in Sources */,
 				8D205F3E29D1346F00F43C99 /* TopUserInfoView.swift in Sources */,
-				8D55D55F29E63C98009C43BF /* OKZeroPayQRCaptureView.swift in Sources */,
 				8DE3105B2A01010600DF9653 /* BottomAccountListTableViewCell.swift in Sources */,
 				8D205F5A29D1346F00F43C99 /* UIColor.swift in Sources */,
 				8D205F3729D1346F00F43C99 /* AllMoreModel.swift in Sources */,
@@ -1890,7 +1799,6 @@
 				8D205F8329D1346F00F43C99 /* BaseViewModel.swift in Sources */,
 				8D205F3629D1346F00F43C99 /* AllMoreViewController.swift in Sources */,
 				8D205F7829D1346F00F43C99 /* PedometerTermsAgreeResponse.swift in Sources */,
-				8D205F5029D1346F00F43C99 /* OkPaymentViewController.swift in Sources */,
 				F2F084312A7898AB005EC9CC /* DatePickerViewController.swift in Sources */,
 				8D205F6429D1346F00F43C99 /* String.swift in Sources */,
 				8DAAF57D29ED1550000FE02E /* ServiceErrorPop.swift in Sources */,
@@ -2094,7 +2002,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://dm.mycereal.co.kr:8443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "OK pay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "NFT 발행 및 QR코드 스캔을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2161,11 +2069,11 @@
 					"$(PROJECT_DIR)/Libs/XecureKeypad",
 					"$(PROJECT_DIR)/Libs/KakaoLink",
 				);
-				GA_DEBUG = YES;
+				GA_DEBUG = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://m.okaypay.co.kr/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "OK pay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "NFT 발행 및 QR코드 스캔을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";
@@ -2193,7 +2101,7 @@
 					"$(PROJECT_DIR)/Libs/ProtectMobile",
 					"$(PROJECT_DIR)/Libs/SecureManager",
 				);
-				MARKETING_VERSION = 2.0.8;
+				MARKETING_VERSION = 2.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apro.oligo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_NAME = "OK pay";
@@ -2372,7 +2280,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HOST_SERVER_URL = "https://staged.mycereal.co.kr:9443/matcs";
 				INFOPLIST_FILE = cereal/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "OK pay 개발";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "NFT 발행 및 QR코드 스캔을 위해 접근이 필요합니다.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "전화번호 송금 서비스 이용을 위해 권한이 필요합니다.\n위해 접근이 필요합니다.\n설정에서 이를 구성할 수 있습니다.";

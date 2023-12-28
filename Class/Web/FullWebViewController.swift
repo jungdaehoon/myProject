@@ -590,7 +590,6 @@ extension FullWebViewController {
                                             }catch{
                                                 Slog("QrCode toJSONString Error")
                                             }
-                                            OKZeroPayQRCaptureView().hide()
                                         }
                                     /// QRCode 정보를 넘깁니다
                                     case .qr_success(let qrcode) :
@@ -611,7 +610,6 @@ extension FullWebViewController {
                                             }catch{
                                                 Slog("QrCode toJSONString Error")
                                             }
-                                            OKZeroPayQRCaptureView().hide()
                                         }
                                         break
                                     /// QRCode 인증 정상처리 후 받은 스크립트를 넘깁니다.
@@ -620,7 +618,6 @@ extension FullWebViewController {
                                         DispatchQueue.main.async {
                                             self.webView!.evaluateJavaScript(NC.S(scricpt)) { ( anyData , error) in
                                             }
-                                            OKZeroPayQRCaptureView().hide()
                                         }
                                     default:break
                                 }

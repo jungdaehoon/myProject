@@ -100,7 +100,15 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Cafe24Syongsyong-v2.0.otf</string>
+		<string>Pretendard-Black.otf</string>
+		<string>Pretendard-Bold.otf</string>
+		<string>Pretendard-ExtraBold.otf</string>
+		<string>Pretendard-ExtraLight.otf</string>
+		<string>Pretendard-Light.otf</string>
+		<string>Pretendard-Medium.otf</string>
+		<string>Pretendard-Regular.otf</string>
+		<string>Pretendard-SemiBold.otf</string>
+		<string>Pretendard-Thin.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

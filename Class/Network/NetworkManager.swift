@@ -391,45 +391,6 @@ class NetworkManager {
     
     
     /**
-     제로페이 간편결제 카드 머니 정보 숨김/보기 입니다 ( J.D.H VER : 2.0.0 )
-     - API ID: /all/updateBalanceView.do
-     - API 명: 카드 머니 정보 숨김/보기 정보 업데이트 입니다.
-     - Date: 2023.07.05
-     - Parameters:
-        - params : 파라미터 정보를 넘깁니다.
-     - Throws: False
-     - Returns:
-        정상 처리 여부를 받습니다.  ( AnyPublisher<ZeroPayMoneyOnOffResponse, ResponseError> )
-     */
-    static func requestZeroPayMoneyOnOff( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayMoneyOnOffResponse, ResponseError> {
-        var updateParam : [String:Any] = [ "token": token ]
-        for (key,value) in params
-        {
-            updateParam.updateValue(value, forKey: key)
-        }
-        return AlamofireAgent.requestJson( APIConstant.API_ZEROPAY_MONEY_ONOFF, parameters: updateParam )
-    }
-    
-    
-    /**
-     제로페이 간편결제 QR/BarCode 정보를 요청 합니다. ( J.D.H VER : 2.0.0 )
-     - API ID: /api/v1/zeropay/qr/code
-     - API 명: 간편결제 사용될 코드 정보를 요청 합니다.
-     - Date: 2023.07.05
-     - Parameters:
-        - params : token , user_no 정보를 받습니다.
-     - Throws: False
-     - Returns:
-        QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> )
-     */
-    static func requestZeroPayQRBarCode( token : String = NetworkManager.getToken(), params : [String : Any] = [:] ) -> AnyPublisher<ZeroPayQRBarCodeResponse, ResponseError> {
-        /// 기본 파라미터 정보를 설정 합니다.
-        let parameters = self.getDefaultParams(method: .get) as! String
-        return AlamofireAgent.request(APIConstant.API_ZEROPAY_QR_BARCODE + "/\(parameters)", method :.get, parameters: nil)
-    }
-    
-    
-    /**
      제로페이 간편결제 스캔된 QRCode 정보를 정상여부 체크 합니다. ( J.D.H VER : 2.0.0 )
      - API ID: /api/v1/zeropay/qr
      - API 명: MPM 고정형 QR코드 정상여부 인식 입니다.  ( S : 정지, A : 사용가능, N :  존재하지 않는 QR코드 )
@@ -444,25 +405,8 @@ class NetworkManager {
         //return AlamofireAgent.request(APIConstant.API_ZEROPAY_ENCOED_QRCODE_CHECK + "?qrCode=\(qrcode)", method :.get, parameters: nil)
         return AlamofireAgent.request(APIConstant.API_ZEROPAY_ENCOED_QRCODE_CHECK + "?qrCode=\(qrcode)", method :.get, parameters: nil)
     }
-    
-    
-    /**
-     해당 사용자의 OK머니 잔액,잔액 숨김여부,메인계좌 정보를 요청합니다.( J.D.H VER : 2.0.0 )
-     - API ID: /api/v1/okmoney
-     - API 명:   OK머니 정보 조회 입니다.
-     - Date: 2023.07.06
-     - Parameters:False
-     - Throws: False
-     - Returns:
-        QR/BarCode 정보를 받습니다.  ( AnyPublisher<ZeroPayOKMoneyResponse, ResponseError> )
-     */
-    static func requestZeroPayOKMoney() -> AnyPublisher<ZeroPayOKMoneyResponse, ResponseError> {
-        /// 기본 파라미터 정보를 설정 합니다.
-        let parameters = self.getDefaultParams(method: .get) as! String
-        return AlamofireAgent.request(APIConstant.API_ZEROPAY_OkMONEY + "/\(parameters)", method :.get, parameters: nil)
-    }
-    
-    
+
+   
     /**
      ATM 약관 동의 여부를 체크 합니다.. ( J.D.H VER : 2.0.7 )
      - API ID: /coocon/atmAgreeChk.do
