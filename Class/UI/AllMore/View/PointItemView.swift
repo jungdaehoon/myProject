@@ -51,6 +51,9 @@ class PointItemView: UIView {
     {
         /// 모델 정보를 연결 합니다.
         self.viewModel = model
+        /// 폰트 정보를 적용 합니다.
+        self.nftCount.font      = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
+        self.bankingNumber.font = UIFont(name: "Pretendard-SemiBold", size: 16.0)!
         if let result = self.viewModel!.allModeResponse!.result {
             /// OK머니 정보입니다.
             self.okMoneyText.text   = "\(result._balance!.addComma())원"
@@ -58,7 +61,6 @@ class PointItemView: UIView {
             self.okPointText.text   = "\(result._total_user_point!.addComma())원"
             /// NFT 보유 카운트 입니다.
             self.nftCount.text      = "\(result._own_nft_cnt!)개"
-            
             /// 계좌 정보가 없는 경우입니다.
             if result._acc_no!.isEmpty
             {
@@ -215,7 +217,7 @@ class PointItemView: UIView {
                 
                 BaseViewModel.setGAEvent(page: "전체서비스",area: "내정보",label: "주계좌")
                 /// 연결 계좌 리스트로 이동 합니다.
-                self.setDisplayWebView( WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, pageType: .openbank_type, titleName: "", titleBarType: 2) { value in
+                self.setDisplayWebView( WebPageConstants.URL_MY_ACCOUNT_LIST, modalPresent: true, pageType: .openbank_type, titleName: "주계좌 관리", titleBarType: 2) { value in
                     /// 메인 계좌가 변경되는 경우 새로고침은 어떻게 할지 미정 입니다. 일단 새로고침 합니다.
                     TabBarView.setReloadSeleted(pageIndex: 4)
                 }

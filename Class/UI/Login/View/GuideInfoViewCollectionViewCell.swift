@@ -45,10 +45,11 @@ class GuideInfoViewCollectionViewCell: UICollectionViewCell {
     {
         self.completion             = completion
         self.bottomView.isHidden    = true
+        self.titleSubText.font      = UIFont(name: "Pretendard-SemiBold", size: 32.0)!
         switch index {
         case 0:
             self.titleText.text     = "언제 어디서나"
-            self.titleSubText.text  = "간편한 송금"
+            self.titleSubText.text  = "간편한 송금"            
             self.subInfoText.text   = "더 안전한 블록체인 기반 PAY!"
             break
         case 1:

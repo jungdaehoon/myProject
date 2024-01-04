@@ -326,7 +326,7 @@ class WebMessagCallBackHandler : NSObject  {
                 self.getATMAgreementCheck()
                 break
             /// ATM 페이지 오픈 입니다.
-            case . openATM                   :
+            case .openATM                   :
                 self.setOpenATM()
                 break
             default: break

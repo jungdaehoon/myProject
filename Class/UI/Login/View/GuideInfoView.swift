@@ -33,7 +33,8 @@ class GuideInfoView: UIView {
     /// 카드 움직이는 위치 정보를 가집니다.
     var cardIngPostionY                         : CGFloat!
     
-    
+    /// 타이틀 문구 입니다.
+    @IBOutlet weak var titleName                : UILabel!
     /// 디스플레이 하는 전체 화면 입니다.
     @IBOutlet weak var displayView              : UIView!
     /// 디스플레이 전체 화면의 상단 포인트 입니다.
@@ -79,6 +80,8 @@ class GuideInfoView: UIView {
         
         let gestrue = UIPanGestureRecognizer.init(target: self, action: #selector(self.gestureRecognizer(_ :)))
         self.bottomView.addGestureRecognizer(gestrue)
+        /// 타이틀 폰트 적용 입니다.
+        self.titleName.font = UIFont(name: "Pretendard-SemiBold", size: 32.0)!
     }
     
     

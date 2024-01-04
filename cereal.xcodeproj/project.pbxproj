@@ -20,7 +20,6 @@
 		8D205E4B29D133FC00F43C99 /* cerealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E4A29D133FC00F43C99 /* cerealTests.swift */; };
 		8D205E5529D133FC00F43C99 /* cerealUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E5429D133FC00F43C99 /* cerealUITests.swift */; };
 		8D205E5729D133FC00F43C99 /* cerealUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D205E5629D133FC00F43C99 /* cerealUITestsLaunchTests.swift */; };
-		8D205F0E29D1346F00F43C99 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E6529D1346E00F43C99 /* Pretendard-Regular.otf */; };
 		8D205F0F29D1346F00F43C99 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E6629D1346E00F43C99 /* Pretendard-Black.otf */; };
 		8D205F1029D1346F00F43C99 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E6729D1346E00F43C99 /* Pretendard-Medium.otf */; };
 		8D205F1129D1346F00F43C99 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D205E6829D1346E00F43C99 /* Pretendard-Light.otf */; };
@@ -200,6 +199,7 @@
 		F243AAAF2A5E5E8F00B42A4B /* AppStartEventPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */; };
 		F243AAB12A5E5E9900B42A4B /* AppStartEventPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */; };
 		F243AAB42A5E6E3F00B42A4B /* AppStartEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */; };
+		F261B1EF2B462B04008A9B28 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F261B1EE2B462B04008A9B28 /* Pretendard-Regular.otf */; };
 		F27214B12ACFE37A006B9FF7 /* HomePayModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */; };
 		F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B42ACFF33F006B9FF7 /* homeLoop.json */; };
 		F27214B72ACFF340006B9FF7 /* homeStart.json in Resources */ = {isa = PBXBuildFile; fileRef = F27214B52ACFF340006B9FF7 /* homeStart.json */; };
@@ -257,7 +257,6 @@
 		8D205E5029D133FC00F43C99 /* cerealUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cerealUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D205E5429D133FC00F43C99 /* cerealUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cerealUITests.swift; sourceTree = "<group>"; };
 		8D205E5629D133FC00F43C99 /* cerealUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cerealUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8D205E6529D1346E00F43C99 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		8D205E6629D1346E00F43C99 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		8D205E6729D1346E00F43C99 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		8D205E6829D1346E00F43C99 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -441,6 +440,7 @@
 		F243AAAE2A5E5E8F00B42A4B /* AppStartEventPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventPopup.swift; sourceTree = "<group>"; };
 		F243AAB02A5E5E9900B42A4B /* AppStartEventPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppStartEventPopup.xib; sourceTree = "<group>"; };
 		F243AAB32A5E6E3F00B42A4B /* AppStartEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartEventViewModel.swift; sourceTree = "<group>"; };
+		F261B1EE2B462B04008A9B28 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		F27214B02ACFE37A006B9FF7 /* HomePayModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePayModeView.swift; sourceTree = "<group>"; };
 		F27214B42ACFF33F006B9FF7 /* homeLoop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeLoop.json; sourceTree = "<group>"; };
 		F27214B52ACFF340006B9FF7 /* homeStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homeStart.json; sourceTree = "<group>"; };
@@ -611,7 +611,7 @@
 		8D205E6429D1346E00F43C99 /* Pretendard */ = {
 			isa = PBXGroup;
 			children = (
-				8D205E6529D1346E00F43C99 /* Pretendard-Regular.otf */,
+				F261B1EE2B462B04008A9B28 /* Pretendard-Regular.otf */,
 				8D205E6629D1346E00F43C99 /* Pretendard-Black.otf */,
 				8D205E6729D1346E00F43C99 /* Pretendard-Medium.otf */,
 				8D205E6829D1346E00F43C99 /* Pretendard-Light.otf */,
@@ -1522,6 +1522,7 @@
 				8DCB18A329F6641E000645D3 /* Wallet.storyboard in Resources */,
 				8D91E27829E53ACB0015E5E7 /* tabbar_more.json in Resources */,
 				8D205F4329D1346F00F43C99 /* AllMoreMenuListView.xib in Resources */,
+				F261B1EF2B462B04008A9B28 /* Pretendard-Regular.otf in Resources */,
 				F27214B62ACFF340006B9FF7 /* homeLoop.json in Resources */,
 				8D205F1F29D1346F00F43C99 /* Assets.xcassets in Resources */,
 				8DAAF57C29ED1550000FE02E /* ServiceErrorPop.xib in Resources */,
@@ -1535,7 +1536,6 @@
 				8D55D56929E660F6009C43BF /* GoogleService-Info.plist in Resources */,
 				8D205F2F29D1346F00F43C99 /* Main.storyboard in Resources */,
 				8D205F1E29D1346F00F43C99 /* NanumSquareRoundEB.ttf in Resources */,
-				8D205F0E29D1346F00F43C99 /* Pretendard-Regular.otf in Resources */,
 				8D205F1629D1346F00F43C99 /* Pretendard-SemiBold.otf in Resources */,
 				F22B63CA2ADF65E100C24424 /* QRCodeScannerViewController.xib in Resources */,
 				8D91E27929E53ACB0015E5E7 /* tabbar_benefit.json in Resources */,

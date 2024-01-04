@@ -78,7 +78,7 @@ class AllMoreMenuListCell: UITableViewCell {
         self.viewModel = viewModel
         /// 타이틀 정보를 추가 디스플레이 합니다.
         self.titleName.text = menuInfo.title
-        
+        self.titleName.font = UIFont(name: "Pretendard-Medium", size: 16.0)!
         switch menuInfo.menuType
         {
             /// 문구를 디스플레이 합니다.
@@ -146,7 +146,7 @@ class AllMoreMenuListCell: UITableViewCell {
                 self.titleName.attributedText = attributedString                
             }
         }
-
+        
         /// 현 메뉴정보를 넘깁니다.
         self.menuInfo = menuInfo
         /// 선택시 하이라이트 배경입니다.

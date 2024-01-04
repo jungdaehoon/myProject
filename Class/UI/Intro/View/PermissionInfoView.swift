@@ -21,7 +21,8 @@ class PermissionInfoView: UIView {
     @IBOutlet weak var titleText        : UILabel!
     /// 이벤트를 넘깁니다.
     var completion                      : (( _ value : Bool ) -> Void )? = nil
-    
+    /// 안내 메인 뷰어 입니다.
+    @IBOutlet weak var mainInfoView     : UIView!
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -45,17 +46,33 @@ class PermissionInfoView: UIView {
         /// Xib 연결 합니다.
         self.commonInit()
         
-        let attributedString = NSMutableAttributedString(string: "OK pay를 이용하시려면\n접근권한을 꼭 허용해주세요", attributes: [
+        let attributedString = NSMutableAttributedString(string: "접근권한을 꼭 허용해주세요", attributes: [
           .font: UIFont(name: "Pretendard-SemiBold", size: 20.0)!,
           .foregroundColor: UIColor(white: 34.0 / 255.0, alpha: 1.0)
         ])
-        attributedString.addAttribute(.foregroundColor, value: UIColor.OKColor, range: NSRange(location: 23, length: 2))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.OKColor, range: NSRange(location: 8, length: 2))
         
         self.titleText.attributedText   = attributedString
         self.infoViewTop.constant       = UIScreen.main.bounds.size.height
         self.infoView.alpha             = 0.0
+        self.setTextCheck()
     }
     
+    
+    func setTextCheck(){
+        self.mainInfoView.subviews.forEach { infoView in
+            if infoView.tag == 10
+            {
+                infoView.subviews.forEach { itemView in
+                    if itemView is UILabel,
+                       itemView.tag == 10,
+                       let label = itemView as? UILabel {
+                        label.font = UIFont(name: "Pretendard-Regular", size: 16.0)
+                    }
+                }
+            }
+        }
+    }
            
     /**
      애니 효과로 디스플레이 합니다.  ( J.D.H VER : 2.0.0 )
